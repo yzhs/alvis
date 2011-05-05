@@ -72,8 +72,8 @@ public class PseudoCodeGraph extends Datatype {
 		}
 		for (GraphicalRepresentationEdge conn : allgConnections) {
 			edges.add(new PseudoCodeEdge(this.getVertexFromGraphic((conn)
-					.getSource()), this.getVertexFromGraphic((conn)
-					.getDestination()), (conn)));
+					.getSourceVertex()), this.getVertexFromGraphic((conn)
+					.getDestinationVertex()), (conn)));
 		}
 	}
 

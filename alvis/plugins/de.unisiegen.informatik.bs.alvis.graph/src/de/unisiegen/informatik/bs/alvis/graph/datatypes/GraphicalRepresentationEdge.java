@@ -15,13 +15,13 @@ public interface GraphicalRepresentationEdge extends GraphicalRepresentation {
 	 * 
 	 * @return source node
 	 */
-	GraphicalRepresentationVertex getSource();
+	GraphicalRepresentationVertex getSourceVertex();
 
 	/**
 	 * Edge connects two Nodes, getDestination returnst second of them
 	 * 
 	 * @return destination node
 	 */
-	GraphicalRepresentationVertex getDestination();
+	GraphicalRepresentationVertex getDestinationVertex();
 
 }
