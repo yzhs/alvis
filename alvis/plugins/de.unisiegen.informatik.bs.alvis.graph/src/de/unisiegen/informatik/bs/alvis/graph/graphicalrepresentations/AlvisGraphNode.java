@@ -17,11 +17,11 @@ public class AlvisGraphNode extends GraphNode implements
 		GraphicalRepresentationVertex {
 
 	public static final String START = "start";
-	public static final Color S_COLOR = new Color(null, 0, 255, 0);
+	public static final Color S_COLOR = AlvisColor.green.color();
 	public static final String END = "end";
 	public static final Color E_COLOR = new Color(null, 255, 0, 0);
-	public static final Color DEFAULT_COLOR = new Color(null, 216, 228, 248);
-	public static final Color RENAME_COLOR = new Color(null, 255, 255, 255);
+	public static final Color DEFAULT_COLOR = AlvisColor.gray.color();
+	public static final Color RENAME_COLOR = AlvisColor.white.color();
 
 	private String myText;
 	private int depth;
@@ -261,14 +261,12 @@ public class AlvisGraphNode extends GraphNode implements
 
 	@Override
 	public String getColorText() {
-		// TODO Auto-generated method stub
-		return null;
+		return AlvisColor.getAlvisColor(getBackgroundColor());
 	}
 
 	@Override
 	public void setColor(String color) {
-		// TODO Auto-generated method stub
-		
+		setBackgroundColor(AlvisColor.getAlvisColor(color).color());
 	}
 
 	@Override
