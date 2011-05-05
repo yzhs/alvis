@@ -224,4 +224,13 @@
          </enabledWhen>
       </handler>
    </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            default="false"
+            extensions=".graph"
+            id="de.unisiegen.informatik.bs.alvis.graph.grapheditor"
+            name="Graph Editor">
+      </editor>
+   </extension>
 </plugin>
