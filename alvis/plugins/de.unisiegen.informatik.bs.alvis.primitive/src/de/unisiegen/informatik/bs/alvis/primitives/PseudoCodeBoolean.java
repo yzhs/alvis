@@ -111,6 +111,7 @@ public class PseudoCodeBoolean extends Datatype {
 					.set(((Boolean) this.commandsforGr.get(0).pop())
 							.booleanValue());
 		}
+		this.commandsforGr.get(0).clear();
 	}
 
 	@Override
