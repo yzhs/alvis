@@ -1,11 +1,10 @@
 package de.unisiegen.informatik.bs.alvis.graph.datatypes;
 
-import datatypes.Datatype;
-import datatypes.GraphicalRepresentation;
-import datatypes.GraphicalRepresentationVertex;
-import datatypes.PseudoCodeInteger;
-import datatypes.PseudoCodeList;
-import datatypes.PseudoCodeString;
+import de.unisiegen.informatik.bs.alvis.primitives.Datatype;
+import de.unisiegen.informatik.bs.alvis.primitives.GraphicalRepresentation;
+import de.unisiegen.informatik.bs.alvis.primitives.PseudoCodeInteger;
+import de.unisiegen.informatik.bs.alvis.primitives.PseudoCodeList;
+import de.unisiegen.informatik.bs.alvis.primitives.PseudoCodeString;
 
 /**
  * @author Dominik Dingel

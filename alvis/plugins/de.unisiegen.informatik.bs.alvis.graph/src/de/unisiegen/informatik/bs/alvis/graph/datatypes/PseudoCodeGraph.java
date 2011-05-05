@@ -5,12 +5,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-import datatypes.Datatype;
-import datatypes.GraphicalRepresentationEdge;
-import datatypes.GraphicalRepresentationGraph;
-import datatypes.GraphicalRepresentationVertex;
-import datatypes.PseudoCodeList;
-import datatypes.PseudoCodeVertex;
+import de.unisiegen.informatik.bs.alvis.primitives.Datatype;
+import de.unisiegen.informatik.bs.alvis.primitives.PseudoCodeList;
 
 public class PseudoCodeGraph extends Datatype {
 	protected static final String TYPENAME = "Graph";
@@ -56,9 +52,9 @@ public class PseudoCodeGraph extends Datatype {
 	}
 
 	public PseudoCodeGraph(GraphicalRepresentationGraph gr) {
-		
+
 	}
-	
+
 	/**
 	 * Creates new Graph from HashSet GraphicalRepresentation of Nodes and
 	 * Vertices

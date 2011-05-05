@@ -1,9 +1,9 @@
 package de.unisiegen.informatik.bs.alvis.graph.datatypes;
 
-import datatypes.Datatype;
-import datatypes.GraphicalRepresentationEdge;
-import datatypes.PseudoCodeBoolean;
-import datatypes.PseudoCodeVertex;
+import de.unisiegen.informatik.bs.alvis.primitives.Datatype;
+import de.unisiegen.informatik.bs.alvis.primitives.PseudoCodeBoolean;
+
+
 
 /**
  * 
