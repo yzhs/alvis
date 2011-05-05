@@ -51,17 +51,7 @@ public class PseudoCodeVertex extends Datatype {
 		this.color = color;
 		for (GraphicalRepresentation v : allGr) {
 			((GraphicalRepresentationVertex) v).setColor(color.getLiteralValue());
-		}/*
-		 * if (graphicalRepresentation != null) { toChange = null; if
-		 * (color.equals("white")) { toChange = new Color(null, 255, 255, 255);
-		 * } if (color.equals("grey")) { toChange = new Color(null, 150, 150,
-		 * 150); } Runnable run = new Runnable() { public void run() {
-		 * Animation.markBegin();
-		 * graphicalRepresentation.setBackgroundColor(toChange);
-		 * graphicalRepresentation.setBorderColor(new Color(null, 0, 0, 0));
-		 * Animation.run(1); } };
-		 * graphicalRepresentation.getDisplay().asyncExec(run); }
-		 */
+		}
 	}
 
 	public void addEdge(PseudoCodeEdge toAdd, PseudoCodeVertex adjacent) {
