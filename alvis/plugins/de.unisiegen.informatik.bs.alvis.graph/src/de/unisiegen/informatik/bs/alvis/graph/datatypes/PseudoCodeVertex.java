@@ -1,5 +1,8 @@
 package de.unisiegen.informatik.bs.alvis.graph.datatypes;
 
+import java.util.ArrayList;
+import java.util.Stack;
+
 import de.unisiegen.informatik.bs.alvis.primitives.Datatype;
 import de.unisiegen.informatik.bs.alvis.primitives.GraphicalRepresentation;
 import de.unisiegen.informatik.bs.alvis.primitives.PseudoCodeInteger;
@@ -49,11 +52,17 @@ public class PseudoCodeVertex extends Datatype {
 
 	private void setColor(PseudoCodeString color) {
 		this.color = color;
-		for (GraphicalRepresentation v : allGr) {
-			((GraphicalRepresentationVertex) v).setColor(color.getLiteralValue());
+		if(this.isInBatchRun) {
+			commandsforGr.get(0).push(color);
+		}
+		else {
+			for (GraphicalRepresentation v : allGr) {
+				((GraphicalRepresentationVertex) v).setColor(color
+						.getLiteralValue());
+			}
 		}
 	}
-
+	
 	public void addEdge(PseudoCodeEdge toAdd, PseudoCodeVertex adjacent) {
 		this.edges.add(toAdd);
 		this.adjacants.add(adjacent);
@@ -67,6 +76,8 @@ public class PseudoCodeVertex extends Datatype {
 		this.parentId = (PseudoCodeVertex) PseudoCodeVertex.localNull;
 		this.color = new PseudoCodeString(graphical.getColorText());
 		this.label = new PseudoCodeString(graphical.getLabel());
+		commandsforGr = new ArrayList<Stack<Object>>();
+		commandsforGr.add(new Stack<Object>());
 	}
 
 	public PseudoCodeVertex() {
@@ -76,6 +87,8 @@ public class PseudoCodeVertex extends Datatype {
 		this.color = new PseudoCodeString("");
 		this.parentId = (PseudoCodeVertex) PseudoCodeVertex.localNull;
 		this.label = new PseudoCodeString("");
+		commandsforGr = new ArrayList<Stack<Object>>();
+		commandsforGr.add(new Stack<Object>());
 	}
 
 	@Override
@@ -106,22 +119,22 @@ public class PseudoCodeVertex extends Datatype {
 
 	@Override
 	public Datatype get(String memberName) {
-		if(memberName.equals("color")) {
+		if (memberName.equals("color")) {
 			return this.getColor();
 		}
-		if(memberName.equals("distance")) {
+		if (memberName.equals("distance")) {
 			return this.getDistance();
 		}
-		if(memberName.equals("pi")) {
+		if (memberName.equals("pi")) {
 			return this.getParentID();
 		}
-		if(memberName.equals("adj")) {
+		if (memberName.equals("adj")) {
 			return this.getAdjacents();
 		}
-		if(memberName.equals("label")) {
+		if (memberName.equals("label")) {
 			return this.getLabel();
 		}
-		
+
 		return null;
 	}
 
@@ -143,8 +156,20 @@ public class PseudoCodeVertex extends Datatype {
 
 	@Override
 	public boolean equals(Datatype toCheckAgainst) {
-		// TODO Auto-generated method stub
+		if (((PseudoCodeVertex) toCheckAgainst).label.equals(this.label)) {
+			return true;
+		}
 		return false;
 	}
-	
+
+	@Override
+	protected void runDelayedCommands() {
+		for (GraphicalRepresentation gr : allGr) {
+			((GraphicalRepresentationVertex) gr)
+					.setColor(((PseudoCodeString) this.commandsforGr.get(0)
+							.pop()).getLiteralValue());
+		}
+		this.commandsforGr.get(0).clear();
+	}
+
 }
