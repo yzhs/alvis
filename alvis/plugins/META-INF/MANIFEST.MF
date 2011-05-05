@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Graph
+Bundle-SymbolicName: de.unisiegen.informatik.bs.alvis.graph;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: de.unisiegen.informatik.bs.alvis.graph.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.ui;bundle-version="3.6.2"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Import-Package: de.unisiegen.informatik.bs.alvis,
+ de.unisiegen.informatik.bs.alvis.editors
