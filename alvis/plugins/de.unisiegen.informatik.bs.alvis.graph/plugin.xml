@@ -227,8 +227,9 @@
    <extension
          point="org.eclipse.ui.editors">
       <editor
+            class="de.unisiegen.informatik.bs.alvis.graph.editors.GraphEditor"
             default="false"
-            extensions=".graph"
+            extensions="graph"
             id="de.unisiegen.informatik.bs.alvis.graph.grapheditor"
             name="Graph Editor">
       </editor>
