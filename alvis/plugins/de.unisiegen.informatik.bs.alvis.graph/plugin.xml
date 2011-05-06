@@ -112,6 +112,11 @@
             id="de.unisiegen.informatik.bs.alvis.graph.deleteall"
             name="%command.name.deleteall">
       </command>
+      <command
+            defaultHandler="de.unisiegen.informatik.bs.alvis.graph.newwizards.showNewGraphWizard"
+            id="de.unisiegen.informatik.bs.alvis.commands.showNewGraphWizard"
+            name="New Graph">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.handlers">
@@ -228,10 +233,34 @@
          point="org.eclipse.ui.editors">
       <editor
             class="de.unisiegen.informatik.bs.alvis.graph.editors.GraphEditor"
-            default="false"
+            default="true"
             extensions="graph"
+            icon="icons/extension/ext_graph.png"
             id="de.unisiegen.informatik.bs.alvis.graph.grapheditor"
             name="Graph Editor">
       </editor>
+   </extension>
+   <extension
+         point="de.unisiegen.informatik.bs.alvis.runvisualizer">
+      <RunVisualizer
+            class="de.unisiegen.informatik.bs.alvis.graph.run.RunVisualizer">
+      </RunVisualizer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            id="de.unisiegen.informatik.bs.alvis.graph.category"
+            name="Graph">
+      </category>
+      <wizard
+            category="de.unisiegen.informatik.bs.alvis.graph.category"
+            class="de.unisiegen.informatik.bs.alvis.graph.newwizards.NewGraphWizard"
+            finalPerspective="de.unisiegen.informatik.bs.alvis.perspective"
+            icon="icons/extension/ext_graph.png"
+            id="de.unisiegen.informatik.bs.alvis.wizard.graph"
+            name="%newWizards.newGraph"
+            preferredPerspectives="de.unisiegen.informatik.bs.alvis.perspective"
+            project="false">
+      </wizard>
    </extension>
 </plugin>

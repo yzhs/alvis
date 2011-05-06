@@ -6,8 +6,11 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -57,9 +60,6 @@ import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGrap
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraphNode;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSave;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSerialize;
-import de.unisiegen.informatik.bs.alvis.tools.IO;
-
-
 
 public class GraphEditor extends EditorPart implements PropertyChangeListener {
 
@@ -104,21 +104,19 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 
 		myGraph = new AlvisGraph(parent, SWT.NONE);
 //
-//		// Get the absolute Path to the InstanceLocation
-//		// String root = Platform.getInstanceLocation().getURL().getPath();
-//		// Get the path to the file
-//		if (myInput instanceof FileEditorInput) {
-//			FileEditorInput fileInput = (FileEditorInput) myInput;
-//			myInputFilePath = fileInput.getPath().toString();
-//			AlvisSerialize seri = (AlvisSerialize) IO
-//					.deserialize(myInputFilePath);
-//			if (seri != null)
-//				new AlvisSave(myGraph, seri);
-//		}
-//
-//		rename = false;
-//
-//		doSave(null);
+		// Get the absolute Path to the InstanceLocation
+		// String root = Platform.getInstanceLocation().getURL().getPath();
+		// Get the path to the file
+		if (myInput instanceof FileEditorInput) {
+			FileEditorInput fileInput = (FileEditorInput) myInput;
+			myInputFilePath = fileInput.getPath().toString();
+			AlvisSerialize seri = (AlvisSerialize)deserialize(myInputFilePath);
+			if (seri != null)
+				new AlvisSave(myGraph, seri);
+		}
+		rename = false;
+
+		doSave(null);
 
 		// filePath = filePath.replace("\\", "/");
 		// filePath = filePath.replaceFirst("/", "");
@@ -168,7 +166,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 	 * checks if the current state of the graph equals the state of the doc
 	 */
 	private void checkDirty() {
-		if (!((AlvisSerialize) IO.deserialize(myInputFilePath)).equals(myGraph
+		if (!((AlvisSerialize) deserialize(myInputFilePath)).equals(myGraph
 				.getAdmin().serialize())) {
 			setDirty(true);
 		}
@@ -221,20 +219,20 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 	 * Save the current state of myGraph to the file in myInput
 	 */
 	public void doSave(IProgressMonitor monitor) {
-//		if (myInputFilePath == null)
-//			myInputFilePath = ((FileEditorInput) myInput).getPath().toString();
-//		XStream xstream = new XStream(new DomDriver());
-//		BufferedOutputStream fos;
-//		try {
-//			AlvisSerialize seri = myGraph.getAdmin().serialize();
-//			fos = new BufferedOutputStream(
-//					new FileOutputStream(myInputFilePath));
-//			fos.write(xstream.toXML(seri).getBytes());
-//			fos.close();
-//		} catch (IOException e1) {
-//			e1.printStackTrace();
-//		}
-//		setDirty(false);
+		if (myInputFilePath == null)
+			myInputFilePath = ((FileEditorInput) myInput).getPath().toString();
+		XStream xstream = new XStream(new DomDriver());
+		BufferedOutputStream fos;
+		try {
+			AlvisSerialize seri = myGraph.getAdmin().serialize();
+			fos = new BufferedOutputStream(
+					new FileOutputStream(myInputFilePath));
+			fos.write(xstream.toXML(seri).getBytes());
+			fos.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		setDirty(false);
 	}
 
 	/**
@@ -984,4 +982,28 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 //		}
 //	}
 
+	public static Object deserialize(String filename) {
+		long filesize = new File(filename).length();
+		Object seri = null;
+		if(filesize > 7) {// TODO this is not so cool check it (SIMON)
+		
+			BufferedInputStream fis = null;
+			XStream xstream = new XStream(new DomDriver());
+		
+			try {
+				fis = new BufferedInputStream(new FileInputStream(filename));
+							
+				seri = xstream.fromXML(new BufferedInputStream(
+							new FileInputStream(filename)));
+				fis.close();
+								
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}	
+		}
+		return seri;
+	}
+	
 }
