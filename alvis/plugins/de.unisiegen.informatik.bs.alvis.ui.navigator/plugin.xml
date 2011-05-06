@@ -8,7 +8,7 @@
             allowMultiple="false"
             class="de.unisiegen.informatik.bs.alvis.ui.navigator.views.Navigator"
             icon="icons/view/navigator.png"
-            id="de.unisiegen.informatik.bs.alvis.ui.navigator.view.navigator"
+            id="de.unisiegen.informatik.bs.alvis.ui.navigator.views.navigator"
             name="%navigator.view.navigator">
       </view>
    </extension>
@@ -56,10 +56,10 @@
    <extension
          point="org.eclipse.ui.navigator.viewer">
       <viewer
-            viewerId="de.unisiegen.informatik.bs.alvis.ui.navigator.view.navigatorr">
+            viewerId="de.unisiegen.informatik.bs.alvis.ui.navigator.views.navigator">
       </viewer>
       <viewerContentBinding
-            viewerId="de.unisiegen.informatik.bs.alvis.ui.navigator.view.navigator">
+            viewerId="de.unisiegen.informatik.bs.alvis.ui.navigator.views.navigator">
          <includes>
             <contentExtension
                   pattern="org.eclipse.ui.navigator.resourceContent">
@@ -73,7 +73,7 @@
          </includes>
       </viewerContentBinding>
       <viewerActionBinding
-            viewerId="de.unisiegen.informatik.bs.alvis.ui.navigator.view.navigator">
+            viewerId="de.unisiegen.informatik.bs.alvis.ui.navigator.views.navigator">
          <includes>
             <actionExtension
                   pattern="org.eclipse.ui.navigator.resources.*">

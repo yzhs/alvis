@@ -13,7 +13,7 @@ import org.eclipse.ui.navigator.CommonViewer;
  *
  */
 public class Navigator extends CommonNavigator {
-	public static final String ID = "de.unisiegen.informatik.bs.alvis.views.navigator";
+	public static final String ID = "de.unisiegen.informatik.bs.alvis.ui.navigator.views.navigator";
 
 	public CommonViewer getCommonViewer() {
 		return super.getCommonViewer();

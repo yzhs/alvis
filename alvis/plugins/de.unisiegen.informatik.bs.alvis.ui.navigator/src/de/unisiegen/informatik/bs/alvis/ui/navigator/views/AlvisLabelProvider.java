@@ -15,7 +15,8 @@ import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.ui.navigator.IDescriptionProvider;
 
-import de.unisiegen.informatik.bs.alvis.Activator;
+import de.unisiegen.informatik.bs.alvis.ui.navigator.Activator;
+
 
 /**
  * @author Eduard Boos
