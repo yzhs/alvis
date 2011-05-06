@@ -3,6 +3,7 @@
  */
 package de.unisiegen.informatik.bs.alvis.inputoutput;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.FileDialog;
 
 /**
@@ -12,8 +13,13 @@ import org.eclipse.swt.widgets.FileDialog;
  */
 public class Dialogs {
 
-	public void getFileChooser() {
-//		FileDialog dialog = new FileDialog (shell, SWT.SAVE);
+	public final int SAVE = SWT.SAVE;
+	public final int OPEN = SWT.OPEN;
+	
+	public void showImageSaver() {
+//		FileDialog dialog = new FileDialog (
+//				Activator.getDefault().getWorkbench().getActiveWorkbenchWindow().getShell(), 
+//				SWT.SAVE);
 //		String [] filterNames = new String [] {"Image Files", "All Files (*)"};
 //		String [] filterExtensions = new String [] {"*.gif;*.png;*.xpm;*.jpg;*.jpeg;*.tiff", "*"};
 //		String filterPath = "/";
