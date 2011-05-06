@@ -46,7 +46,7 @@ public enum AlvisColor {
 	 * returns name of given color, 'colorful' if not listed in enum
 	 * 
 	 * @param color
-	 *            the color the name
+	 *            the color to name
 	 * @return name of given color, 'colorful' if not listed in enum
 	 */
 	public static String getAlvisColor(Color color) {

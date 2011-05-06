@@ -2,6 +2,7 @@ package de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations;
 
 import java.util.ArrayList;
 
+import org.eclipse.draw2d.Animation;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.zest.core.widgets.GraphNode;
@@ -266,7 +267,9 @@ public class AlvisGraphNode extends GraphNode implements
 
 	@Override
 	public void setColor(String color) {
+		Animation.markBegin();
 		setBackgroundColor(AlvisColor.getAlvisColor(color).color());
+		Animation.run(0);
 	}
 
 	@Override
