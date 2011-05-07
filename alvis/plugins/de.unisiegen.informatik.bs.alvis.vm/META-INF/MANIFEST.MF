@@ -5,6 +5,7 @@ Bundle-SymbolicName: de.unisiegen.informatik.bs.alvis.vm
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: de.unisiegen.informatik.bs.alvis.vm.Activator
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ de.unisiegen.informatik.bs.alvis.primitive;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
