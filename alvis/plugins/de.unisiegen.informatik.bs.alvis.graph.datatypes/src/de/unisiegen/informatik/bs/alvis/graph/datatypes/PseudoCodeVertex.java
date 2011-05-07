@@ -3,7 +3,7 @@ package de.unisiegen.informatik.bs.alvis.graph.datatypes;
 import java.util.ArrayList;
 import java.util.Stack;
 
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.Datatype;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeInteger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeList;
@@ -13,7 +13,7 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeString;
  * @author Dominik Dingel
  */
 
-public class PseudoCodeVertex extends Datatype {
+public class PseudoCodeVertex extends PseudoCodeObject {
 	protected static final String TYPENAME = "Vertex";
 
 	private PseudoCodeList<PseudoCodeEdge> edges;
@@ -97,7 +97,7 @@ public class PseudoCodeVertex extends Datatype {
 	}
 
 	@Override
-	public Datatype set(String memberName, Datatype value) {
+	public PseudoCodeObject set(String memberName, PseudoCodeObject value) {
 		if (memberName.equals("color")) {
 			this.setColor((PseudoCodeString) value);
 		}
@@ -118,7 +118,7 @@ public class PseudoCodeVertex extends Datatype {
 	}
 
 	@Override
-	public Datatype get(String memberName) {
+	public PseudoCodeObject get(String memberName) {
 		if (memberName.equals("color")) {
 			return this.getColor();
 		}
@@ -138,7 +138,7 @@ public class PseudoCodeVertex extends Datatype {
 		return null;
 	}
 
-	private Datatype getLabel() {
+	private PseudoCodeObject getLabel() {
 		return label;
 	}
 
@@ -155,7 +155,7 @@ public class PseudoCodeVertex extends Datatype {
 	}
 
 	@Override
-	public boolean equals(Datatype toCheckAgainst) {
+	public boolean equals(PseudoCodeObject toCheckAgainst) {
 		if (((PseudoCodeVertex) toCheckAgainst).label.equals(this.label)) {
 			return true;
 		}

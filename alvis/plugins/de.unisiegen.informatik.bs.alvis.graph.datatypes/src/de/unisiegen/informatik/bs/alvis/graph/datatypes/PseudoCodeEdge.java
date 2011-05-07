@@ -1,6 +1,6 @@
 package de.unisiegen.informatik.bs.alvis.graph.datatypes;
 
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.Datatype;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeBoolean;
 
 
@@ -13,7 +13,7 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeBoolean;
  * 
  */
 
-public class PseudoCodeEdge extends Datatype {
+public class PseudoCodeEdge extends PseudoCodeObject {
 
 	protected static final String TYPENAME = "Edge";
 
@@ -89,13 +89,13 @@ public class PseudoCodeEdge extends Datatype {
 	}
 
 	@Override
-	public Datatype set(String memberName, Datatype value) {
+	public PseudoCodeObject set(String memberName, PseudoCodeObject value) {
 		// TODO check possible member access
 		return null;
 	}
 
 	@Override
-	public boolean equals(Datatype toCheckAgainst) {
+	public boolean equals(PseudoCodeObject toCheckAgainst) {
 		if (((PseudoCodeEdge) toCheckAgainst).v1.equals(this.v1)
 				&& ((PseudoCodeEdge) toCheckAgainst).v2.equals(this.v2)
 				&& ((PseudoCodeEdge) toCheckAgainst).isDirected

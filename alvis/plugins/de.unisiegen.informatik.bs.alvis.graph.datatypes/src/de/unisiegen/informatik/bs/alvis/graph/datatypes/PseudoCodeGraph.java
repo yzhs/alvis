@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.Datatype;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeList;
 
-public class PseudoCodeGraph extends Datatype {
+public class PseudoCodeGraph extends PseudoCodeObject {
 	protected static final String TYPENAME = "Graph";
 	private PseudoCodeList<PseudoCodeEdge> edges;
 	private PseudoCodeList<PseudoCodeVertex> vertices;
@@ -119,13 +119,13 @@ public class PseudoCodeGraph extends Datatype {
 	}
 
 	@Override
-	public Datatype set(String memberName, Datatype value) {
+	public PseudoCodeObject set(String memberName, PseudoCodeObject value) {
 		// TODO check possible member access
 		return null;
 	}
 
 	@Override
-	public Datatype get(String memberName) {
+	public PseudoCodeObject get(String memberName) {
 		// TODO check possible member access
 		if (memberName.equals("vertices")) {
 			return vertices;
@@ -134,14 +134,14 @@ public class PseudoCodeGraph extends Datatype {
 	}
 
 	@Override
-	public Map<String, ? extends Datatype> getMembers() {
-		Map<String, Datatype> result = new HashMap<String, Datatype>();
+	public Map<String, ? extends PseudoCodeObject> getMembers() {
+		Map<String, PseudoCodeObject> result = new HashMap<String, PseudoCodeObject>();
 		result.put("vertices", this.vertices);
 		return result;
 	}
 
 	@Override
-	public boolean equals(Datatype toCheckAgainst) {
+	public boolean equals(PseudoCodeObject toCheckAgainst) {
 		// TODO Auto-generated method stub
 		return false;
 	}
