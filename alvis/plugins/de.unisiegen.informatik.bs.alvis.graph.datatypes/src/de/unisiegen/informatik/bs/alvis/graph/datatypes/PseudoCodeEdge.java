@@ -1,7 +1,7 @@
 package de.unisiegen.informatik.bs.alvis.graph.datatypes;
 
-import de.unisiegen.informatik.bs.alvis.primitives.Datatype;
-import de.unisiegen.informatik.bs.alvis.primitives.PseudoCodeBoolean;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.Datatype;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeBoolean;
 
 
 

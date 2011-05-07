@@ -3,11 +3,11 @@ package de.unisiegen.informatik.bs.alvis.graph.datatypes;
 import java.util.ArrayList;
 import java.util.Stack;
 
-import de.unisiegen.informatik.bs.alvis.primitives.Datatype;
-import de.unisiegen.informatik.bs.alvis.primitives.GraphicalRepresentation;
-import de.unisiegen.informatik.bs.alvis.primitives.PseudoCodeInteger;
-import de.unisiegen.informatik.bs.alvis.primitives.PseudoCodeList;
-import de.unisiegen.informatik.bs.alvis.primitives.PseudoCodeString;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.Datatype;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeInteger;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeList;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeString;
 
 /**
  * @author Dominik Dingel

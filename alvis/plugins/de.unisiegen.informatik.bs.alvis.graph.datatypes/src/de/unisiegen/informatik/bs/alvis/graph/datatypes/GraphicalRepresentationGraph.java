@@ -2,7 +2,7 @@ package de.unisiegen.informatik.bs.alvis.graph.datatypes;
 
 import java.util.ArrayList;
 
-import de.unisiegen.informatik.bs.alvis.primitives.GraphicalRepresentation;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
 
 /**
  * 

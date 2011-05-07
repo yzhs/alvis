@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-import de.unisiegen.informatik.bs.alvis.primitives.Datatype;
-import de.unisiegen.informatik.bs.alvis.primitives.PseudoCodeList;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.Datatype;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeList;
 
 public class PseudoCodeGraph extends Datatype {
 	protected static final String TYPENAME = "Graph";

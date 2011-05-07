@@ -1,6 +1,6 @@
 package de.unisiegen.informatik.bs.alvis.graph.datatypes;
 
-import de.unisiegen.informatik.bs.alvis.primitives.*;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
 
 /**
  * GraphicalRepresentation of Edge, should be implemented by every Edge
