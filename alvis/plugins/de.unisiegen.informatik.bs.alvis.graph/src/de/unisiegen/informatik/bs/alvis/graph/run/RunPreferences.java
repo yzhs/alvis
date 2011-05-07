@@ -7,7 +7,7 @@ import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IRunPreferences;
 import de.unisiegen.informatik.bs.alvis.graph.editors.GraphEditor;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSave;
-import de.unisiegen.informatik.bs.alvis.primitives.Datatype;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
 /**
  * @author simon
  *
@@ -16,7 +16,7 @@ public class RunPreferences implements IRunPreferences {
 
 	String myInputFilePath;
 	
-	public Datatype[] getRunPreferences(String inputFilePath) {
+	public PseudoCodeObject[] getRunPreferences(String inputFilePath) {
 		
 		// Bug the user to choose what this plugin want.
 		StartEndNodeDialog dialog = new StartEndNodeDialog(
