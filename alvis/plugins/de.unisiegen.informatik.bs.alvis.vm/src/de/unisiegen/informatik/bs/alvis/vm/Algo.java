@@ -2,16 +2,16 @@ package de.unisiegen.informatik.bs.alvis.vm;
 
 import java.util.ArrayList;
 
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.Datatype;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
 import de.unisiegen.informatik.bs.alvis.vm.AbstractAlgo;
 
 public class Algo extends AbstractAlgo {
-	public Algo(ArrayList<Datatype> parameters) {
+	public Algo(ArrayList<PseudoCodeObject> parameters) {
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public ArrayList<Datatype> getRunningRef() {
+	public ArrayList<PseudoCodeObject> getRunningRef() {
 		// TODO Auto-generated method stub
 		return null;
 	}

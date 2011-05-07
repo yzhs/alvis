@@ -3,7 +3,7 @@ package de.unisiegen.informatik.bs.alvis.vm;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.Datatype;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.SortableCollection;
 
 /**
@@ -32,7 +32,7 @@ public class VirtualMachine {
 	private ArrayList<Integer> dpCounter;
 	private int bpIndex;
 	private int dpIndex;
-	private ArrayList<Datatype> parameters;
+	private ArrayList<PseudoCodeObject> parameters;
 	private AbstractAlgo algoToRun;
 	private Class<AbstractAlgo> algoClass;
 	private BPListener bplisten;
@@ -69,7 +69,7 @@ public class VirtualMachine {
 		stateIndex = 0;
 		bpCounter = new ArrayList<Integer>();
 		dpCounter = new ArrayList<Integer>();
-		parameters = new ArrayList<Datatype>();
+		parameters = new ArrayList<PseudoCodeObject>();
 		bplisten = null;
 		dplisten = null;
 	}
@@ -300,7 +300,7 @@ public class VirtualMachine {
 	 * 
 	 * @return Reference on all Variables
 	 */
-	public ArrayList<Datatype> getRunningRef() {
+	public ArrayList<PseudoCodeObject> getRunningRef() {
 		while (!algoToRun.onBreak) {
 			try {
 				Thread.sleep(100);
@@ -320,7 +320,7 @@ public class VirtualMachine {
 		this.bplisten = bplisten;
 	}
 
-	public void addParameter(Datatype para) {
+	public void addParameter(PseudoCodeObject para) {
 		parameters.add(para);
 	}
 

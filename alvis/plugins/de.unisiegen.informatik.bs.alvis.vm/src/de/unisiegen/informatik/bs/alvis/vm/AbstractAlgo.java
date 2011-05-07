@@ -2,7 +2,7 @@ package de.unisiegen.informatik.bs.alvis.vm;
 
 import java.util.ArrayList;
 
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.Datatype;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
 
 public abstract class AbstractAlgo extends Thread {
 	protected BPListener bplisten;
@@ -32,7 +32,7 @@ public abstract class AbstractAlgo extends Thread {
 		}
 	}
 
-	abstract public ArrayList<Datatype> getRunningRef();
+	abstract public ArrayList<PseudoCodeObject> getRunningRef();
 
 	abstract public void run();
 
