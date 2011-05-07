@@ -7,3 +7,4 @@ Bundle-Activator: de.unisiegen.informatik.bs.alvis.primitive.datatypes.Activator
 Require-Bundle: org.eclipse.core.runtime
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: de.unisiegen.informatik.bs.alvis.primitive.datatypes
