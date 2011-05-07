@@ -1,5 +1,6 @@
 package de.unisiegen.informatik.bs.alvis.vm;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.Datatype;
@@ -7,16 +8,18 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.SortableCollection;
 
 /**
  * 
- * @author Dominik Dingel
- * manages the algo and is responsible for the run
- *
+ * @author Dominik Dingel manages the algo and is responsible for the run
+ * 
+ *         take care, could be multiple times run (singleton pattern works not
+ *         that fine with multiple classloaders)
+ * 
  */
 
 public class VirtualMachine {
 
 	// singleton pattern
 	private static VirtualMachine instance = new VirtualMachine();
-	
+
 	/**
 	 * @return local Virtual Machine instance
 	 */
@@ -31,11 +34,35 @@ public class VirtualMachine {
 	private int dpIndex;
 	private ArrayList<Datatype> parameters;
 	private AbstractAlgo algoToRun;
+	private Class<AbstractAlgo> algoClass;
 	private BPListener bplisten;
 	private DPListener dplisten;
 	private int stateIndex;
 
+	/**
+	 * sets AlgoClass from which to instanciate, located by the modified
+	 * classloader, provied by sebastian
+	 * 
+	 * @param algo
+	 * @return success
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public boolean setAlgoClassToRun(Class algo) {
+		if (algo == null) {
+			return false;
+		}
+		if (!algo.getSuperclass().equals(AbstractAlgo.class)) {
+			return false;
+		}
+		algoClass = algo;
+		return true;
+	}
+
+	/**
+	 * private Method to create virtual Machine instance
+	 */
 	private VirtualMachine() {
+		algoClass = null;
 		states = new ArrayList<State>();
 		bpIndex = 0;
 		dpIndex = 0;
@@ -67,9 +94,19 @@ public class VirtualMachine {
 		if (algoToRun != null && algoToRun.isAlive()) {
 			return;
 		}
-		// here should happen magically the classloader stuff
-		algoToRun = new Algo(parameters);
-		
+		try {
+			algoToRun = (AbstractAlgo) algoClass.getConstructors()[0].newInstance(parameters);
+		} catch (IllegalArgumentException e1) {
+			e1.printStackTrace();
+		} catch (InstantiationException e1) {
+			e1.printStackTrace();
+		} catch (IllegalAccessException e1) {
+			e1.printStackTrace();
+		} catch (InvocationTargetException e1) {
+			e1.printStackTrace();
+		}
+		//algoToRun = new Algo(parameters);
+
 		// Breakpoint listener
 		algoToRun.addBPListener(new BPListener() {
 			public void onBreakPoint(int BPNr) {
@@ -89,11 +126,10 @@ public class VirtualMachine {
 		// nothing happens on Decision Point
 		algoToRun.addDPListener(new DPListener() {
 
-
 			@Override
 			public void onDecisionPoint(int DPNr, SortableCollection toSort) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		algoToRun.start();
@@ -105,7 +141,17 @@ public class VirtualMachine {
 	public void startDefaultRun() {
 		states.add(new State(null, bpIndex, dpIndex, false));
 		stateIndex = 0;
-		algoToRun = new Algo(parameters);
+		try {
+			algoToRun = (AbstractAlgo) algoClass.getConstructors()[0].newInstance(parameters);
+		} catch (IllegalArgumentException e1) {
+			e1.printStackTrace();
+		} catch (InstantiationException e1) {
+			e1.printStackTrace();
+		} catch (IllegalAccessException e1) {
+			e1.printStackTrace();
+		} catch (InvocationTargetException e1) {
+			e1.printStackTrace();
+		}
 		algoToRun.addBPListener(new BPListener() {
 			public void onBreakPoint(int BPNr) {
 				// this is a new Breakpoint
@@ -155,7 +201,17 @@ public class VirtualMachine {
 		// other value would also be totally useless
 		if (stateIndex > 1) {
 			this.resetState();
-			algoToRun = new Algo(parameters);
+			try {
+				algoToRun = (AbstractAlgo) algoClass.getConstructors()[0].newInstance(parameters);
+			} catch (IllegalArgumentException e1) {
+				e1.printStackTrace();
+			} catch (InstantiationException e1) {
+				e1.printStackTrace();
+			} catch (IllegalAccessException e1) {
+				e1.printStackTrace();
+			} catch (InvocationTargetException e1) {
+				e1.printStackTrace();
+			}
 			algoToRun.addBPListener(new BPListener() {
 				// saving the state where we want to end
 				int curSI = stateIndex - 1;
@@ -200,7 +256,7 @@ public class VirtualMachine {
 								states.add(new State(null, bpIndex, dpIndex,
 										false));
 								stateIndex++;
-								if(bplisten != null) {
+								if (bplisten != null) {
 									bplisten.onBreakPoint(BPNr);
 								}
 							}
@@ -233,7 +289,7 @@ public class VirtualMachine {
 	 * @return if Algo Thread is still alive = running
 	 */
 	public boolean isDone() {
-		if(algoToRun == null) {
+		if (algoToRun == null) {
 			return false;
 		}
 		return !algoToRun.isAlive();
