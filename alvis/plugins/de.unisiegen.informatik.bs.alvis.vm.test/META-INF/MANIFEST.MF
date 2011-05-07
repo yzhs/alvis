@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: VirtualMachine.Test
+Bundle-SymbolicName: de.unisiegen.informatik.bs.alvis.vm.test
+Bundle-Version: 1.0.0.qualifier
+Fragment-Host: de.unisiegen.informatik.bs.alvis.vm;bundle-version="1.0.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
