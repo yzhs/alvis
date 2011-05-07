@@ -11,4 +11,4 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.zest.layouts;bundle-version="1.1.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Export-Package: de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations
+Export-Package: de.unisiegen.informatik.bs.alvis.graph.datatypes
