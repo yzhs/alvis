@@ -233,6 +233,9 @@ public class VirtualMachine {
 	 * @return if Algo Thread is still alive = running
 	 */
 	public boolean isDone() {
+		if(algoToRun == null) {
+			return false;
+		}
 		return !algoToRun.isAlive();
 	}
 
