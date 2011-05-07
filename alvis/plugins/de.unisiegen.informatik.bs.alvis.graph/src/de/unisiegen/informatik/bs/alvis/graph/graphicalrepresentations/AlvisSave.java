@@ -1,13 +1,9 @@
 package de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations;
 
 import java.awt.Point;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
-import org.eclipse.swt.graphics.Image;
-
-import de.unisiegen.informatik.bs.alvis.editors.GraphEditor;
 
 /**
  * 
@@ -84,16 +80,16 @@ public class AlvisSave {
 			int id = seri.getNodeId()[i];
 			int style = seri.getNodeStyle()[i];
 			String text = seri.getNodeText()[i];
-			Image image;
-			try {
-				String myText = (text.equals("") ? "" + id : text);
-				image = GraphEditor.makeGraphImage(myText);
-			} catch (IOException ioe) {
-				image = null;
-			}
+//			Image image; TODO auskommentiert (von Simon)
+//			try {
+//				String myText = (text.equals("") ? "" + id : text);
+//				image = GraphEditor.makeGraphImage(myText);
+//			} catch (IOException ioe) {
+//				image = null;
+//			}
 			Point point = new Point(seri.getNodeX()[i], seri.getNodeY()[i]);
 
-			AlvisGraphNode gn = new AlvisGraphNode(graph, style, "", image, id);
+			AlvisGraphNode gn = new AlvisGraphNode(graph, style, text, null, id);
 			addNode(gn, point);
 			gn.setLocation(point.x, point.y);
 

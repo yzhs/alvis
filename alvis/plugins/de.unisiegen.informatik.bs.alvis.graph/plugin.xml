@@ -275,4 +275,10 @@
             project="false">
       </wizard>
    </extension>
+   <extension
+         point="de.unisiegen.informatik.bs.alvis.extensions.runpreferences">
+      <RunPreferences
+            class="de.unisiegen.informatik.bs.alvis.graph.run.RunPreferences">
+      </RunPreferences>
+   </extension>
 </plugin>

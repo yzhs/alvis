@@ -55,11 +55,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.editors.ImageCache;
-import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraph;
-import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraphConnection;
-import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraphNode;
-import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSave;
-import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSerialize;
+import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.*;
 
 public class GraphEditor extends EditorPart implements PropertyChangeListener {
 

@@ -1,20 +1,16 @@
 package de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations;
 
 import java.awt.Point;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
 
 import org.eclipse.draw2d.Animation;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.zest.core.widgets.Graph;
 import org.eclipse.zest.core.widgets.ZestStyles;
 
-import de.unisiegen.informatik.bs.alvis.editors.GraphEditor;
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.GraphicalRepresentationEdge;
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.GraphicalRepresentationGraph;
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.GraphicalRepresentationVertex;
@@ -65,16 +61,17 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph{
 	 */
 	public AlvisGraphNode makeGraphNode(int style, String name) {
 
-		Image image;
+//		Image image;
 		if (name.equals(""))
 			name = "" + getAdmin().getId();
-		try { // to make an image
-			image = GraphEditor.makeGraphImage(name);
-		} catch (IOException e1) { // if it did not work...
-			image = null;
-		}
+//		try { // to make an image
+//			image = GraphEditor.makeGraphImage(name);
+			// TODO no image anymore just bigger text
+//		} catch (IOException e1) { // if it did not work...
+//			image = null;
+//		}
 
-		final AlvisGraphNode gn = new AlvisGraphNode(this, style, "", image);
+		final AlvisGraphNode gn = new AlvisGraphNode(this, style, name, null);
 
 		double factor = Math.pow(zoomFactor, zoomCounter);
 
