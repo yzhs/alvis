@@ -73,6 +73,18 @@
             </command>
          </toolbar>
       </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:common.new.menu?after=additions">
+         <command
+               commandId="de.unisiegen.informatik.bs.alvis.commands.showNewGraphWizard"
+               hoverIcon="icons/extension/ext_graph.png"
+               icon="icons/extension/ext_graph.png"
+               label="Graph File"
+               style="push"
+               tooltip="creates a new File with the extension .graph">
+         </command>
+      </menuContribution>
    </extension>
    <extension
          point="org.eclipse.ui.commands">

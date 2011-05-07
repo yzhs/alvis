@@ -61,7 +61,7 @@ public class AlvisLabelProvider extends WorkbenchLabelProvider implements
 			if (src.exists() && data.exists()) {
 				input = ImageDescriptor.createFromURL(FileLocator.find(
 						Activator.getDefault().getBundle(), new Path(
-								"icons/projects/alvis_project.png"), null));
+								"icons/navigator/alvis_project.png"), null));
 			}
 		}
 		return super.decorateImage(input, element);
