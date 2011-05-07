@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class PseudoCodeVoid extends Datatype {
+public class PseudoCodeVoid extends PseudoCodeObject {
 	protected static final String TYPENAME = "Void";
 	
 	@Override
@@ -28,33 +28,33 @@ public class PseudoCodeVoid extends Datatype {
 	}
 
 	@Override
-	public Datatype set(String memberName, Datatype value) {
+	public PseudoCodeObject set(String memberName, PseudoCodeObject value) {
 		// Nothing to set
 		return null;
 	}
 
 	@Override
-	public Datatype get(String memberName) {
+	public PseudoCodeObject get(String memberName) {
 		// Nothing to get
 		return null;
 	}
 
 	@Override
-	public Map<String, ? extends Datatype> getMembers() {
+	public Map<String, ? extends PseudoCodeObject> getMembers() {
 		// no members, so return empty Map
-		Map<String, Datatype> result = new HashMap<String, Datatype>();
+		Map<String, PseudoCodeObject> result = new HashMap<String, PseudoCodeObject>();
 		return result;
 	}
 
 	@Override
-	public Map<List<String>, List<Datatype>> getMethods() {
+	public Map<List<String>, List<PseudoCodeObject>> getMethods() {
 		// no methods, so return empty Map
-		Map<List<String>, List<Datatype>> result = new HashMap<List<String>, List<Datatype>>();
+		Map<List<String>, List<PseudoCodeObject>> result = new HashMap<List<String>, List<PseudoCodeObject>>();
 		return result;
 	}
 
 	@Override
-	public boolean equals(Datatype toCheckAgainst) {
+	public boolean equals(PseudoCodeObject toCheckAgainst) {
 		// TODO Auto-generated method stub
 		return false;
 	}

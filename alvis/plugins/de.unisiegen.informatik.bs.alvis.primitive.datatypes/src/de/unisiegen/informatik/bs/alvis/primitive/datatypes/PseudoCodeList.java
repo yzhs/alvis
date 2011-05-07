@@ -3,7 +3,8 @@ package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class PseudoCodeList<E> extends Datatype implements SortableCollection, Iterable<E> {
+public class PseudoCodeList<E> extends PseudoCodeObject implements SortableCollection, Iterable<E> {
+	protected static final String TYPENAME = "List";
 	private ArrayList<E> items;
 
 	public void setItems(ArrayList<E> items) {
@@ -49,13 +50,13 @@ public class PseudoCodeList<E> extends Datatype implements SortableCollection, I
 	}
 
 	@Override
-	public Datatype set(String memberName, Datatype value) {
+	public PseudoCodeObject set(String memberName, PseudoCodeObject value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean equals(Datatype toCheckAgainst) {
+	public boolean equals(PseudoCodeObject toCheckAgainst) {
 		// TODO Auto-generated method stub
 		return false;
 	}

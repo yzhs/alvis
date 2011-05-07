@@ -10,7 +10,7 @@ import java.util.Stack;
  * 
  */
 
-public class PseudoCodeBoolean extends Datatype {
+public class PseudoCodeBoolean extends PseudoCodeObject {
 	protected static final String TYPENAME = "Boolean";
 
 	private boolean value;
@@ -97,7 +97,7 @@ public class PseudoCodeBoolean extends Datatype {
 	}
 
 	@Override
-	public Datatype set(String memberName, Datatype value) {
+	public PseudoCodeObject set(String memberName, PseudoCodeObject value) {
 		if (memberName.isEmpty()) {
 			this.setValue((PseudoCodeBoolean) value);
 		}
@@ -115,7 +115,7 @@ public class PseudoCodeBoolean extends Datatype {
 	}
 
 	@Override
-	public boolean equals(Datatype toCheckAgainst) {
+	public boolean equals(PseudoCodeObject toCheckAgainst) {
 		if(((PseudoCodeBoolean) toCheckAgainst).getLiteralValue() == this.value) {
 			return true;
 		}

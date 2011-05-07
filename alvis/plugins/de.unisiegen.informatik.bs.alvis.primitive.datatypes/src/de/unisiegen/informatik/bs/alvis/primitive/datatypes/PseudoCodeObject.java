@@ -16,11 +16,11 @@ import java.util.Stack;
  * 
  */
 
-public abstract class Datatype {
+public abstract class PseudoCodeObject {
 
 	public final static String TYPENAME = "Datatype";
-	public static Datatype localInfty;
-	public static Datatype localNull;
+	public static PseudoCodeObject localInfty;
+	public static PseudoCodeObject localNull;
 
 	protected List<GraphicalRepresentation> allGr;
 
@@ -30,7 +30,7 @@ public abstract class Datatype {
 	/**
 	 * Constructor
 	 */
-	public Datatype() {
+	public PseudoCodeObject() {
 		allGr = new ArrayList<GraphicalRepresentation>();
 		isInBatchRun = false;
 	}
@@ -125,7 +125,7 @@ public abstract class Datatype {
 	 * useful for constructs like v = u.distance + 1;          
 	 *  
 	 */
-	public abstract Datatype set(String memberName, Datatype value);
+	public abstract PseudoCodeObject set(String memberName, PseudoCodeObject value);
 
 	/**
 	 * Generic get-method used for the compiler
@@ -134,7 +134,7 @@ public abstract class Datatype {
 	 *            to get if empty returns itself
 	 * @return value
 	 */
-	public Datatype get(String memberName) {
+	public PseudoCodeObject get(String memberName) {
 		if (memberName.isEmpty()) {
 			return this;
 		}
@@ -146,7 +146,7 @@ public abstract class Datatype {
 	 * 
 	 * @return Datatype specific infty Representation
 	 */
-	public Datatype getInfty() {
+	public PseudoCodeObject getInfty() {
 		return localInfty;
 	}
 
@@ -155,7 +155,7 @@ public abstract class Datatype {
 	 * 
 	 * @return Datatype specific null Representation
 	 */
-	public Datatype getNull() {
+	public PseudoCodeObject getNull() {
 		return localNull;
 	}
 
@@ -166,8 +166,8 @@ public abstract class Datatype {
 	 * 
 	 * @return a map contains the Membername and the Datatype Reference
 	 */
-	public Map<String, ? extends Datatype> getMembers() {
-		Map<String, Datatype> result = new HashMap<String, Datatype>();
+	public Map<String, ? extends PseudoCodeObject> getMembers() {
+		Map<String, PseudoCodeObject> result = new HashMap<String, PseudoCodeObject>();
 		return result;
 	}
 
@@ -181,8 +181,8 @@ public abstract class Datatype {
 	 *         datatype is ALWAYS the return Datatype, can be Void, everything
 	 *         else will be parameters
 	 */
-	public Map<List<String>, List<Datatype>> getMethods() {
-		Map<List<String>, List<Datatype>> result = new HashMap<List<String>, List<Datatype>>();
+	public Map<List<String>, List<PseudoCodeObject>> getMethods() {
+		Map<List<String>, List<PseudoCodeObject>> result = new HashMap<List<String>, List<PseudoCodeObject>>();
 		return result;
 	}
 	
@@ -191,5 +191,5 @@ public abstract class Datatype {
 	 * @param toCheckAgainst 
 	 * @return boolean if the object to checkAgainst is equals the current object
 	 */
-	public abstract boolean equals(Datatype toCheckAgainst);
+	public abstract boolean equals(PseudoCodeObject toCheckAgainst);
 }

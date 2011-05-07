@@ -9,7 +9,7 @@ package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
  * 
  */
 
-public class PseudoCodeString extends Datatype {
+public class PseudoCodeString extends PseudoCodeObject {
 	protected static final String TYPENAME = "String";
 
 	private String value;
@@ -52,7 +52,7 @@ public class PseudoCodeString extends Datatype {
 	}
 
 	@Override
-	public Datatype set(String memberName, Datatype value) {
+	public PseudoCodeObject set(String memberName, PseudoCodeObject value) {
 		if (memberName.isEmpty()) {
 			this.setValue((PseudoCodeString) value);
 		}
@@ -60,7 +60,7 @@ public class PseudoCodeString extends Datatype {
 	}
 
 	@Override
-	public boolean equals(Datatype toCheckAgainst) {
+	public boolean equals(PseudoCodeObject toCheckAgainst) {
 		if(((PseudoCodeString) toCheckAgainst).value.equals(value)) {
 			return true;
 		}

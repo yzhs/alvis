@@ -8,7 +8,7 @@ package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
  * 
  */
 
-public class PseudoCodeInteger extends Datatype {
+public class PseudoCodeInteger extends PseudoCodeObject {
 	protected static final String TYPENAME = "Integer";
 
 	private int value;
@@ -44,7 +44,7 @@ public class PseudoCodeInteger extends Datatype {
 	}
 
 	@Override
-	public Datatype set(String memberName, Datatype valueToGetFrom) {
+	public PseudoCodeObject set(String memberName, PseudoCodeObject valueToGetFrom) {
 		if (memberName.isEmpty()) {
 			this.setValue((PseudoCodeInteger) valueToGetFrom);
 		}
@@ -56,7 +56,7 @@ public class PseudoCodeInteger extends Datatype {
 	}
 
 	@Override
-	public boolean equals(Datatype toCheckAgainst) {
+	public boolean equals(PseudoCodeObject toCheckAgainst) {
 		// TODO Auto-generated method stub
 		return false;
 	}
