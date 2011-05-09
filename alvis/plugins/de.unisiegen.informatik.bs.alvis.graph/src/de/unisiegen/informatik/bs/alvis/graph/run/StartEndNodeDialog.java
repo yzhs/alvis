@@ -18,6 +18,7 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
+import de.unisiegen.informatik.bs.alvis.graph.Activator;
 import de.unisiegen.informatik.bs.alvis.graph.editors.GraphEditor;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraph;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraphNode;
@@ -88,6 +89,7 @@ public class StartEndNodeDialog extends Dialog {
 				}
 				myGraph.setEndNode(node);
 				setStartNode(node);
+				refreshGraphicalRepresentations();
 				myGraph.resetMarking();
 			}
 			
@@ -102,7 +104,16 @@ public class StartEndNodeDialog extends Dialog {
 				}
 				myGraph.setStartNode(node);
 				setEndNode(node);
+				refreshGraphicalRepresentations();
 				myGraph.resetMarking();
+			}
+			
+			protected void refreshGraphicalRepresentations() {
+				Activator.getDefault().getTempGephicalRepresentations().clear();
+				if(startNode != null)
+					Activator.getDefault().getTempGephicalRepresentations().add(startNode);
+				if(endNode != null)
+					Activator.getDefault().getTempGephicalRepresentations().add(endNode);
 			}
 			
 			public void mouseDoubleClick(MouseEvent e) {
@@ -131,17 +142,6 @@ public class StartEndNodeDialog extends Dialog {
 		pageControl.setLayoutData(new GridData(GridData.FILL_BOTH));
 		return pageControl;
 	}
-	
-	public GraphicalRepresentation[] getPrefereces() {
-		GraphicalRepresentation[] nodes = null;
-
-		nodes[0] = (GraphicalRepresentation)startNode;
-		nodes[1] = (GraphicalRepresentation)endNode;
-
-		return nodes;
-	}
-	
-
 	
 	public void setStartNode(AlvisGraphNode startNode) {
 		this.startNode = startNode;

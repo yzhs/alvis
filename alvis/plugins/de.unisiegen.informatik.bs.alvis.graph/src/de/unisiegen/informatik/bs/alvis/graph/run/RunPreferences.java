@@ -3,14 +3,11 @@
  */
 package de.unisiegen.informatik.bs.alvis.graph.run;
 
-import de.unisiegen.informatik.bs.alvis.Activator;
+import java.util.ArrayList;
+
+import de.unisiegen.informatik.bs.alvis.graph.Activator;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IRunPreferences;
-import de.unisiegen.informatik.bs.alvis.graph.datatypes.GraphicalRepresentationVertex;
-import de.unisiegen.informatik.bs.alvis.graph.editors.GraphEditor;
-import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSave;
-import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSerialize;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
 /**
  * @author simon
  *
@@ -19,7 +16,7 @@ public class RunPreferences implements IRunPreferences {
 
 	String myInputFilePath;
 	
-	public GraphicalRepresentation[] getRunPreferences(String inputFilePath) {
+	public ArrayList<GraphicalRepresentation> getRunPreferences(String inputFilePath) {
 		myInputFilePath = inputFilePath;
 
 		// TODO Abfangen, wenn wir mit myInputFilePath nix tun können.
@@ -28,7 +25,9 @@ public class RunPreferences implements IRunPreferences {
 				Activator.getDefault().getWorkbench()
 					.getActiveWorkbenchWindow().getShell(), myInputFilePath);
 
-		dialog.open();
-		return dialog.getPrefereces();
+		if(dialog.open() == StartEndNodeDialog.OK)
+			return Activator.getDefault().getTempGephicalRepresentations();
+		else 
+			return null;
 	}
 }
