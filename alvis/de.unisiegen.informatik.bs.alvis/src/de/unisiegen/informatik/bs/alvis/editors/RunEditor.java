@@ -293,6 +293,9 @@ public class RunEditor extends EditorPart {
 		grpRun.setText("Run Settings");
 		grpRun.setLayout(new FillLayout(SWT.HORIZONTAL));
 		
+		/*
+		 * This section asks the plugins for parameters to add to the run. 
+		 */
 		graphicalRepresentations = new ArrayList<GraphicalRepresentation>();
 		Button btnSetPreferences = new Button(grpRun, SWT.NONE);
 		btnSetPreferences.addListener(SWT.Selection, new Listener () {
@@ -318,7 +321,7 @@ public class RunEditor extends EditorPart {
 			                    IRunPreferences myRunPreferences = (IRunPreferences)element.
 			                    	createExecutableExtension("class");
 			                    //	* Save the IRunVisualizer
-			                    GraphicalRepresentation[] returnedGraphReps = 
+			                    ArrayList<GraphicalRepresentation> returnedGraphReps = 
 			                    	myRunPreferences.getRunPreferences(
 			                    			Platform.getInstanceLocation()
 			                    				.getURL().getPath() + 
@@ -339,6 +342,8 @@ public class RunEditor extends EditorPart {
 			
 		});
 		btnSetPreferences.setText("Set Preferences");
+		
+		// END OF PARAMETER ADDING
 		
 		Button btnCheckButton = new Button(grpRun, SWT.CHECK);
 		btnCheckButton.setSelection(true);
