@@ -1,0 +1,212 @@
+/**
+ * Configuration Class written for the AlgortihmEditor
+ */
+package de.unisiegen.informatik.bs.alvis.editors;
+
+import java.util.ArrayList;
+import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.TextAttribute;
+import org.eclipse.jface.text.contentassist.ContentAssistant;
+import org.eclipse.jface.text.contentassist.IContentAssistant;
+import org.eclipse.jface.text.presentation.IPresentationReconciler;
+import org.eclipse.jface.text.presentation.PresentationReconciler;
+import org.eclipse.jface.text.rules.DefaultDamagerRepairer;
+import org.eclipse.jface.text.rules.IRule;
+import org.eclipse.jface.text.rules.IToken;
+import org.eclipse.jface.text.rules.ITokenScanner;
+import org.eclipse.jface.text.rules.IWhitespaceDetector;
+import org.eclipse.jface.text.rules.IWordDetector;
+import org.eclipse.jface.text.rules.RuleBasedScanner;
+import org.eclipse.jface.text.rules.Token;
+import org.eclipse.jface.text.rules.WhitespaceRule;
+import org.eclipse.jface.text.rules.WordRule;
+import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.jface.text.source.SourceViewerConfiguration;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.PlatformUI;
+
+/**
+ * 
+ * @author Eduard Boos
+ * 
+ */
+public class AlgorithmEditorSourceViewerConfiguration extends
+		SourceViewerConfiguration {
+
+	private ArrayList<String> wordsToHighlight = new ArrayList<String>();
+
+	private Color highlightColor = PlatformUI.getWorkbench().getDisplay()
+			.getSystemColor(SWT.COLOR_BLACK);
+	private IWordDetector wordDetector;
+	private IWhitespaceDetector whitespaceDetector;
+	private Token defaultToken = new Token(new TextAttribute(Display
+			.getCurrent().getSystemColor(SWT.COLOR_BLACK), null, SWT.NORMAL));
+
+	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
+
+		ContentAssistant assistant = new ContentAssistant();
+		assistant
+				.setDocumentPartitioning(getConfiguredDocumentPartitioning(sourceViewer));
+		assistant.setContentAssistProcessor(
+				new AlgorithmEditorCompletionProcessor(),
+				IDocument.DEFAULT_CONTENT_TYPE);
+		assistant.enableAutoActivation(true);
+		assistant.setAutoActivationDelay(500);
+		assistant
+				.setProposalPopupOrientation(IContentAssistant.PROPOSAL_OVERLAY);
+		assistant
+				.setContextInformationPopupOrientation(IContentAssistant.CONTEXT_INFO_ABOVE);
+		assistant.setContextInformationPopupBackground(new Color(PlatformUI
+				.getWorkbench().getDisplay(), 205, 205, 0));
+		assistant.setInformationControlCreator(getInformationControlCreator(sourceViewer));
+
+		return assistant;
+	}
+
+	public IPresentationReconciler getPresentationReconciler(
+			ISourceViewer sourceViewer) {
+		PresentationReconciler reconciler = new PresentationReconciler();
+		DefaultDamagerRepairer dr = new DefaultDamagerRepairer(getScanner());
+		reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
+		reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
+		return reconciler;
+	}
+
+	/**
+	 * Will create a sourceViewerConfiguration where the wordToHighlight will be
+	 * highlighted with the highlightColor
+	 * 
+	 * @param highlightColor
+	 *            the Color for the highlighting
+	 * @param wordsToHighlight
+	 *            the words to highlight
+	 */
+	public AlgorithmEditorSourceViewerConfiguration(Color highlightColor,
+			ArrayList<String> wordsToHighlight) {
+		this.wordsToHighlight = wordsToHighlight;
+		this.highlightColor = highlightColor;
+	}
+
+	/**
+	 * This method helps to create a color, cause it can be hard to do so if not
+	 * often worked with SWT
+	 * 
+	 * @param red
+	 *            the red instance for the color to create(0-255)
+	 * @param green
+	 *            the green instance for the color to create(0-255)
+	 * @param blue
+	 *            the blue instance for the color to create(0-255)
+	 * @return the Color from the RGB values given by the parameter
+	 */
+	public static Color createColor(int red, int green, int blue) {
+		return new Color(Display.getCurrent(), new RGB(red, green, blue));
+	}
+
+	/**
+	 * Create an Token from the Color given, bold if boolean bold is true.
+	 * 
+	 * @param red
+	 *            the red instance for the color to create(0-255)
+	 * @param green
+	 *            the green instance for the color to create(0-255)
+	 * @param blue
+	 *            the blue instance for the color to create(0-255)
+	 * @param bold
+	 *            true if text should be bold
+	 * @return the result Token given by the parameters.
+	 */
+	public static Token createToken(int red, int green, int blue, boolean bold) {
+		Color color = createColor(red, green, blue);
+		if (bold) {
+			return new Token(new TextAttribute(color, null, SWT.BOLD));
+		} else {
+			return new Token(new TextAttribute(color, null, SWT.NORMAL));
+		}
+	}
+
+	/**
+	 * Retrieves the word detector.
+	 * 
+	 * @return The word detector
+	 */
+	protected IWordDetector getWordDetector() {
+		if (wordDetector == null) {
+			wordDetector = new IWordDetector() {
+
+				public boolean isWordPart(char character) {
+					return Character.isJavaIdentifierPart(character);
+				}
+
+				public boolean isWordStart(char character) {
+					return Character.isJavaIdentifierStart(character);
+				}
+
+			};
+		}
+		return wordDetector;
+	}
+
+	/**
+	 * Returns the whitespace detector. Whitespaces are blanks, tabs and new
+	 * lines.
+	 * 
+	 * @return WhitespaceDetector-instance
+	 */
+	protected IWhitespaceDetector getWhitespaceDetector() {
+		if (whitespaceDetector == null)
+			whitespaceDetector = new IWhitespaceDetector() {
+
+				@Override
+				public boolean isWhitespace(char c) {
+					return (c == ' ' || c == '\t' || c == '\n' || c == '\r');
+
+				}
+
+			};
+		return whitespaceDetector;
+	}
+
+	private ITokenScanner getScanner() {
+		RuleBasedScanner scanner = new RuleBasedScanner();
+		/** get the Rules for Syntax highlighting */
+		scanner.setRules(getRules());
+		/** set default token to black not bold */
+		IToken def = new Token(new TextAttribute(Display.getCurrent()
+				.getSystemColor(SWT.COLOR_BLACK), null, SWT.NORMAL));
+		scanner.setDefaultReturnToken(def);
+
+		return scanner;
+	}
+
+	/**
+	 * Returns the Highlighting rules
+	 * 
+	 * @return the Array containing all IRules needed for highlighting
+	 */
+	private IRule[] getRules() {
+		ArrayList<IRule> rules = new ArrayList<IRule>();
+		/** adding all words to highlight */
+		rules.add(new WhitespaceRule(getWhitespaceDetector()));
+		WordRule wordRule = new WordRule(getWordDetector(), defaultToken, false);
+		for (String word : wordsToHighlight) {
+			if (word != null && !word.equals("")) {
+				wordRule.addWord(word, new Token(new TextAttribute(
+						highlightColor, null, SWT.BOLD)));
+			}
+		}
+		rules.add(wordRule);
+		return rules.toArray(new IRule[rules.size()]);
+	}
+
+	public ArrayList<String> getWordsToHighlight() {
+		return wordsToHighlight;
+	}
+
+	public void setWordsToHighlight(ArrayList<String> wordsToHighlight) {
+		this.wordsToHighlight = wordsToHighlight;
+	}
+}
