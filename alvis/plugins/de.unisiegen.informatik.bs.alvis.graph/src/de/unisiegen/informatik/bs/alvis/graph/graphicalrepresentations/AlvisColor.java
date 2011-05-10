@@ -29,7 +29,8 @@ public enum AlvisColor {
 	 * returns the enum according to the name, white if nothing found
 	 * 
 	 * @param name
-	 *            the name of the enum that is to be found
+	 *            the name of the enum that is to be found, spelling is case
+	 *            insensitive
 	 * @return the enum according to the name, white if nothing found
 	 */
 	public static AlvisColor getAlvisColor(String name) {
