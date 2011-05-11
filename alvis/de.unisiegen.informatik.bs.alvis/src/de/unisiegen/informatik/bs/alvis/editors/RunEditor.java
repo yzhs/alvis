@@ -35,9 +35,11 @@ import org.eclipse.ui.part.FileEditorInput;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
+import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.commands.RunCompile;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IRunPreferences;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
 import de.unisiegen.informatik.bs.alvis.tools.IO;
 import de.unisiegen.informatik.bs.alvis.virtualmachine.Run;
 import org.eclipse.swt.widgets.ExpandBar;
@@ -148,7 +150,7 @@ public class RunEditor extends EditorPart {
 	
 	// TODO diese Arraylist wird durch den button Preferences mit datentypen für 
 	// die VM gefüllt. nachschauen, was damit passieren kann.
-	private ArrayList<GraphicalRepresentation> graphicalRepresentations;
+	private ArrayList<PseudoCodeObject> pseudoCodeObjects;
 	public void createPartControl(Composite parent) {
 		
 		composite_1 = new Composite(parent, SWT.NONE);
@@ -296,7 +298,7 @@ public class RunEditor extends EditorPart {
 		/*
 		 * This section asks the plugins for parameters to add to the run. 
 		 */
-		graphicalRepresentations = new ArrayList<GraphicalRepresentation>();
+		pseudoCodeObjects = new ArrayList<PseudoCodeObject>();
 		Button btnSetPreferences = new Button(grpRun, SWT.NONE);
 		btnSetPreferences.addListener(SWT.Selection, new Listener () {
 
@@ -320,15 +322,16 @@ public class RunEditor extends EditorPart {
 			                    IConfigurationElement element = elements[j];
 			                    IRunPreferences myRunPreferences = (IRunPreferences)element.
 			                    	createExecutableExtension("class");
-			                    //	* Save the IRunVisualizer
-			                    ArrayList<GraphicalRepresentation> returnedGraphReps = 
+			                    
+			                    // Get the PseudoCodeObjects the user choosed as Parameters
+			                    ArrayList<PseudoCodeObject> returnedPseudoCodeObjects = 
 			                    	myRunPreferences.getRunPreferences(
 			                    			Platform.getInstanceLocation()
 			                    				.getURL().getPath() + 
 			                    				myExampleFile.getText());
-			                    
-			                    for(GraphicalRepresentation rep : returnedGraphReps) {
-			                    	graphicalRepresentations.add(rep);
+			                    // Add all PseudoCodeObjects to the Run.
+			                    for(PseudoCodeObject pseudo : returnedPseudoCodeObjects) {
+			                    	Activator.getDefault().getPseudoCodeList().add(pseudo);
 			                    }
 			                }
 			                catch (CoreException e)

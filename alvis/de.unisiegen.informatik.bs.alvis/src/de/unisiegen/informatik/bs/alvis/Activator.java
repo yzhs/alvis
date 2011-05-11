@@ -1,17 +1,18 @@
 package de.unisiegen.informatik.bs.alvis;
 
+import java.util.ArrayList;
+
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import de.unisiegen.informatik.bs.alvis.datatypes.Graph;
-
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
 import de.unisiegen.informatik.bs.alvis.virtualmachine.AlvisGraph;
 import de.unisiegen.informatik.bs.alvis.virtualmachine.AlvisGraphNode;
 import de.unisiegen.informatik.bs.alvis.virtualmachine.Run;
-import de.unisiegen.informatik.bs.alvis.virtualmachine.VirtualMachine;
-
+import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
 /* Ein paar Notizen
  * 
  * Der Ordner in dem der Workspace liegt auf dem System:
@@ -75,11 +76,24 @@ public class Activator extends AbstractUIPlugin {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
 	
+
+
 	/**
 	 * Attributes for a run.
 	 */
 	private Run activeRun;
 	private AlvisGraph runGraph; // TODO RAUS DAMIT
+	
+	
+	
+	private PseudoCodeObject runObject;
+	public void setRunObject(PseudoCodeObject runObject) {
+		this.runObject = runObject;
+	}
+
+	public PseudoCodeObject getRunObject() {
+		return runObject;
+	}
 	
 	public void setActiveRun(Run activeRun) {
 		this.activeRun = activeRun;
@@ -87,6 +101,16 @@ public class Activator extends AbstractUIPlugin {
 	
 	public Run getActiveRun() {
 		return this.activeRun;
+	}
+	
+	private ArrayList<PseudoCodeObject> pseudoCodeList = new ArrayList<PseudoCodeObject>();
+
+	public void setPseudoCodeList(ArrayList<PseudoCodeObject> pseudoCodeList) {
+		this.pseudoCodeList = pseudoCodeList;
+	}
+
+	public ArrayList<PseudoCodeObject> getPseudoCodeList() {
+		return pseudoCodeList;
 	}
 	
 	private VirtualMachine vm;
@@ -98,22 +122,27 @@ public class Activator extends AbstractUIPlugin {
 		// Hier muss das plugin nach datentypen gefragt werden
 		// aus dem primitiv
 		// typename
-		Graph gr = new Graph(this.runGraph.getAllNodesG(), 
-				this.runGraph.getAllConnectionsG());
-		vm.addParameter(gr);
-
-		if(this.runGraph.getStartNode() != null)
-			vm.addParameter(gr.getVertexFromGraphic(
-					this.runGraph.getStartNode()));
-		else {
-			for(AlvisGraphNode node : this.runGraph.getAllNodes()) {
-				vm.addParameter(gr.getVertexFromGraphic(node));
-				break;
-			}
+//		Graph gr = new Graph(this.runGraph.getAllNodesG(), 
+//				this.runGraph.getAllConnectionsG());
+		vm.addParameter(runObject);
+		for(PseudoCodeObject pseudoObj : pseudoCodeList) {
+			// Currently there are two objects in there
+			// startnode and end node
+			vm.addParameter(pseudoObj);
 		}
-		if(this.runGraph.getEndNode() != null) {
-			vm.addParameter(gr.getVertexFromGraphic(this.runGraph.getEndNode()));
-		}
+		
+//		if(this.runGraph.getStartNode() != null)
+//			vm.addParameter(gr.getVertexFromGraphic(
+//					this.runGraph.getStartNode()));
+//		else {
+//			for(AlvisGraphNode node : this.runGraph.getAllNodes()) {
+//				vm.addParameter(gr.getVertexFromGraphic(node));
+//				break;
+//			}
+//		}
+//		if(this.runGraph.getEndNode() != null) {
+//			vm.addParameter(gr.getVertexFromGraphic(this.runGraph.getEndNode()));
+//		}
 
 		vm.startDefaultRun();
 	}

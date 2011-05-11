@@ -34,13 +34,12 @@ import de.unisiegen.informatik.bs.alvis.virtualmachine.IRunVisualizer;
 public class RunGraph extends ViewPart {
 	
 	ArrayList<IRunVisualizer> myRunVisualizers = new ArrayList<IRunVisualizer>();
-	private IRunGraph runGraph;
 
 	private Composite myParent;
 	private String myInputFilePath;
 
 	public static final String ID = 
-		"de.unisiegen.informatik.bs.alvis.views.run.graph"; // todo change id
+		"de.unisiegen.informatik.bs.alvis.views.run.graph"; // TODO change id
 	
 	private AlvisGraph myGraph;
 	public void createPartControl(Composite parent) {
@@ -48,12 +47,6 @@ public class RunGraph extends ViewPart {
 		try {
 		myInputFilePath = Platform.getInstanceLocation().getURL().getPath() +
 			Activator.getDefault().getActiveRun().getExampleFile();
-//		AlvisSerialize seri = (AlvisSerialize)IO.deserialize(myInputFilePath);
-//		myGraph = new AlvisGraph(parent, SWT.NONE);
-//
-//		new AlvisSave(myGraph, seri);
-//		Activator.getDefault().setRunGraph(getGraph());
-
 		}
 		catch(NullPointerException e) {
 			System.out.println(e.getMessage());
@@ -61,24 +54,13 @@ public class RunGraph extends ViewPart {
 
 		activateExtensions();
 		handExampleToExtensions();
-		greetExtensions();
 	}
 
 
 	public AlvisGraph getGraph() {
-//		return runGraph.getGraph();
 		return myGraph;
 	}
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.ui.part.WorkbenchPart#setFocus()
-	 */
-	@Override
-	public void setFocus() {
-		// TODO Auto-generated method stub
-
-	}
-	
 	/**
 	 * Activate the Extensions and save the instances of IRunVisualizer.
 	 */
@@ -100,7 +82,7 @@ public class RunGraph extends ViewPart {
                     IConfigurationElement element = elements[j];
                     IRunVisualizer runvizual = (IRunVisualizer)element.
                     	createExecutableExtension("class");
-                    //	* Save the IRunVisualizer
+                    //	Save the found IRunVisualizer in a list
                     myRunVisualizers.add(runvizual);
                 }
                 catch (CoreException e)
@@ -111,17 +93,22 @@ public class RunGraph extends ViewPart {
         }
 	}
 	
+	/**
+	 * Calls all IRunVisualizer and hand down the myParent and the myInputFilePath
+	 */
 	private void handExampleToExtensions() {
+		// For all registered extensions
 		for(IRunVisualizer runviz : myRunVisualizers) {
+			// Call the method and if the extension returns false then
+			// the extension does not know about the type in myInputFilePath...
 			if(!runviz.addVisualizing(myParent, myInputFilePath))
+				// ... and we delete it.
 				myRunVisualizers.remove(runviz);
 		}
 	}
 	
-	private void greetExtensions() {
-		for(IRunVisualizer runviz : myRunVisualizers) {
-			runviz.addVisualizing(null, null);
-		}
+	
+	/* Methods we do not use */
+	public void setFocus() {
 	}
-
 }

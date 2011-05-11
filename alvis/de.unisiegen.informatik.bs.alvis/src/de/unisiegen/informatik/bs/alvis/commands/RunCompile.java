@@ -21,7 +21,7 @@ public class RunCompile extends AbstractHandler{
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		
-		// Before the magic we have to save everything.
+		// Save all Editors
 		Workbench.
 		getInstance().
 		getActiveWorkbenchWindow().
@@ -32,8 +32,7 @@ public class RunCompile extends AbstractHandler{
 		
 		
 		try {
-			// What to run? get the input
-
+			// What to run? get the input (filepath)
 			input = 
 				Workbench.
 				getInstance().
@@ -46,6 +45,7 @@ public class RunCompile extends AbstractHandler{
 			
 		}
 
+		//instanciate a new Run object
 		Run seri = null;
 		
 		// Check if the input is a FileEditorInput
@@ -57,20 +57,23 @@ public class RunCompile extends AbstractHandler{
 				// get the path in system
 				String systemPath =
 					fileInput.getPath().toString();
+				// and deserialize the saved run to seri
 				seri = (Run)IO.deserialize(systemPath);	
 			}
 			else {
+				// ask for run settings
 				seri = getUsersRun();
 			}
 			
 		} else {
+			// ask for run settings
 			seri = getUsersRun();
 		}
 
-
-		
 		if(seri != null) {
+			// Set the ActiveRun field in the Activater to seri
 			Activator.getDefault().setActiveRun(seri);
+			// Then activate command SwitchToRunPerspective
 			new SwitchToRunPerspective().execute(event);
 		} else {
 			return null;

@@ -1,6 +1,9 @@
 package de.unisiegen.informatik.bs.alvis.virtualmachine;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
 
 /**
  * A Run object contains informations about which Algorithm should be run on
@@ -13,7 +16,6 @@ public class Run implements Serializable {
 
 	private String algorithmFile = "";
 	private String exampleFile = "";
-	
 	/**
 	 * Run information tupel
 	 * @param algorithmFile
