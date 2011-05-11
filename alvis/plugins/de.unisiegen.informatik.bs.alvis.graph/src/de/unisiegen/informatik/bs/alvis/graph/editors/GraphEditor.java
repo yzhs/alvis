@@ -14,12 +14,14 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Timestamp;
 
 import javax.imageio.ImageIO;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.draw2d.Animation;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
@@ -40,9 +42,12 @@ import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
@@ -99,14 +104,14 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 	private void createGraph(Composite parent, IEditorInput input) {
 
 		myGraph = new AlvisGraph(parent, SWT.NONE);
-//
+		//
 		// Get the absolute Path to the InstanceLocation
 		// String root = Platform.getInstanceLocation().getURL().getPath();
 		// Get the path to the file
 		if (myInput instanceof FileEditorInput) {
 			FileEditorInput fileInput = (FileEditorInput) myInput;
 			myInputFilePath = fileInput.getPath().toString();
-			AlvisSerialize seri = (AlvisSerialize)deserialize(myInputFilePath);
+			AlvisSerialize seri = (AlvisSerialize) deserialize(myInputFilePath);
 			if (seri != null)
 				new AlvisSave(myGraph, seri);
 		}
@@ -662,15 +667,35 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 		screenshot = new Image(Display.getCurrent(), width, height);
 		gc.copyArea(screenshot, 0, 0);
 
-		String dir = "";
+		FileDialog saveDialog = new FileDialog(myGraph.getShell(), SWT.SAVE);
+		saveDialog.setFilterNames(new String[] { "PNG (*.png)",
+				Messages.getLabel("Graph_allFiles") });
+		saveDialog.setFilterExtensions(new String[] { "*.png", "*.*" });
 		try {
-			dir = FileLocator.getBundleFile(Activator.getDefault().getBundle())
-					.getAbsolutePath();
-		} catch (IOException e1) {
-			e1.printStackTrace();
+			saveDialog.setFilterPath(FileLocator.getBundleFile(
+					Activator.getDefault().getBundle()).getAbsolutePath());
+		} catch (IOException e) {
 		}
-		String name = dir + System.getProperty("file.separator") + "temp"
-				+ System.getProperty("file.separator") + "screenshot" + ".png";
+
+		saveDialog.setFileName("alvisGraph" + System.currentTimeMillis()
+				+ ".png");
+
+		myGraph.redraw();
+		String name = saveDialog.open();
+
+		if (name == null)
+			return; // saving canceled
+		
+		if (new File(name).exists()) {
+	          // The file already exists; asks for confirmation
+	          MessageBox mb = new MessageBox(saveDialog.getParent(), SWT.ICON_WARNING
+	              | SWT.YES | SWT.NO);
+	          mb.setMessage(name + Messages.getLabel("Graph_ImgAlreadyExists"));
+
+	          if(mb.open() != SWT.YES)
+	        	  return;//do not overwrite
+		}
+
 		ImageLoader loader = new ImageLoader();
 		loader.data = new ImageData[] { screenshot.getImageData() };
 		loader.save(name, SWT.IMAGE_PNG);
@@ -698,13 +723,8 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 	protected void clickEndNode(AlvisGraphNode node, MouseEvent e) {
 		if (node == myGraph.getStartNode())
 			myGraph.setStartNode(null);
-		if (node == null) {
-			return; // instead of new node
-			// node = myGraph.makeGraphNode(SWT.NONE,
-			// "n" + myGraph.getCount(), image1);
-			// node.setLocation(e.x - node.getSize().width / 2, e.y
-			// - node.getSize().height / 2);
-		}
+		if (node == null)
+			return;
 		if (myGraph.getEndNode() != null) {
 			myGraph.getEndNode().unmarkAsStartOrEndNode();
 		}
@@ -759,6 +779,8 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 
 			gn.setLocation(e.x - gn.getSize().width / 2, e.y
 					- gn.getSize().height / 2);
+
+			// TODO change font size -> create new font
 
 			// the graph might be changed
 			checkDirty();
@@ -888,7 +910,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 		myGraph.loadNodes();
 	}
 
-//	IGraphEditor editorExtension;
+	// IGraphEditor editorExtension;
 
 	// public void doSave(final IProgressMonitor monitor) {
 	// editorExtension.doSave(monitor);
@@ -942,64 +964,64 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 	@Override
 	public void propertyChange(PropertyChangeEvent arg0) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
-//	/************************
-//	 * THE EDITOR EXTENSION *
-//	 ************************/
-//
-//	/**
-//	 * This method activates the editor that is in the plugin
-//	 */
-//	private void activateEditorExtension(Composite parent) {
-//		IConfigurationElement[] config = Platform
-//				.getExtensionRegistry()
-//				.getConfigurationElementsFor(
-//						"de.unisiegen.informatik.bs.alvis.editors.extensions.graph");
-//		try {
-//			for (IConfigurationElement e : config) {
-//				final Object o = e.createExecutableExtension("class");
-//				final Composite par = parent;
-//				if (o instanceof IGraphEditor) {
-//					editorExtension = (IGraphEditor) o;
-//					editorExtension.createEditor(par, getEditorInput());
-//				}
-//			}
-//		} catch (CoreException ex) {
-//			System.out.println(ex.getMessage());
-//		}
-//	}
-//
-//	@Override
-//	public void propertyChange(PropertyChangeEvent arg0) {
-//		if (arg0.getNewValue() instanceof Integer) {
-//			firePropertyChange(IEditorPart.PROP_DIRTY);
-//		}
-//	}
+	// /************************
+	// * THE EDITOR EXTENSION *
+	// ************************/
+	//
+	// /**
+	// * This method activates the editor that is in the plugin
+	// */
+	// private void activateEditorExtension(Composite parent) {
+	// IConfigurationElement[] config = Platform
+	// .getExtensionRegistry()
+	// .getConfigurationElementsFor(
+	// "de.unisiegen.informatik.bs.alvis.editors.extensions.graph");
+	// try {
+	// for (IConfigurationElement e : config) {
+	// final Object o = e.createExecutableExtension("class");
+	// final Composite par = parent;
+	// if (o instanceof IGraphEditor) {
+	// editorExtension = (IGraphEditor) o;
+	// editorExtension.createEditor(par, getEditorInput());
+	// }
+	// }
+	// } catch (CoreException ex) {
+	// System.out.println(ex.getMessage());
+	// }
+	// }
+	//
+	// @Override
+	// public void propertyChange(PropertyChangeEvent arg0) {
+	// if (arg0.getNewValue() instanceof Integer) {
+	// firePropertyChange(IEditorPart.PROP_DIRTY);
+	// }
+	// }
 
 	public static Object deserialize(String filename) {
 		long filesize = new File(filename).length();
 		Object seri = null;
-		if(filesize > 7) {// TODO this is not so cool check it (SIMON)
-		
+		if (filesize > 7) {// TODO this is not so cool check it (SIMON)
+
 			BufferedInputStream fis = null;
 			XStream xstream = new XStream(new DomDriver());
-		
+
 			try {
 				fis = new BufferedInputStream(new FileInputStream(filename));
-							
+
 				seri = xstream.fromXML(new BufferedInputStream(
-							new FileInputStream(filename)));
+						new FileInputStream(filename)));
 				fis.close();
-								
+
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
-			}	
+			}
 		}
 		return seri;
 	}
-	
+
 }

@@ -65,8 +65,6 @@ public class AlvisGraphConnection extends GraphConnection implements
 
 		super(graph, style, node1, node2);
 
-		setText("Test");// TODO just for testing
-
 		if (id == -1) {
 			this.id = graph.requestId();
 		} else {
