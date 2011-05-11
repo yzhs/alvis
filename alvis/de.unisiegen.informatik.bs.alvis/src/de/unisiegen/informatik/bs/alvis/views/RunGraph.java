@@ -18,9 +18,6 @@ import org.eclipse.ui.part.ViewPart;
 import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.IRunVisualizer;
 import de.unisiegen.informatik.bs.alvis.tools.IO;
-import de.unisiegen.informatik.bs.alvis.virtualmachine.AlvisGraph;
-import de.unisiegen.informatik.bs.alvis.virtualmachine.AlvisSave;
-import de.unisiegen.informatik.bs.alvis.virtualmachine.AlvisSerialize;
 
 /**
  * @author simon
@@ -41,7 +38,6 @@ public class RunGraph extends ViewPart {
 	public static final String ID = 
 		"de.unisiegen.informatik.bs.alvis.views.run.graph"; // TODO change id
 	
-	private AlvisGraph myGraph;
 	public void createPartControl(Composite parent) {
 		myParent = parent;
 		try {
@@ -57,9 +53,6 @@ public class RunGraph extends ViewPart {
 	}
 
 
-	public AlvisGraph getGraph() {
-		return myGraph;
-	}
 
 	/**
 	 * Activate the Extensions and save the instances of IRunVisualizer.

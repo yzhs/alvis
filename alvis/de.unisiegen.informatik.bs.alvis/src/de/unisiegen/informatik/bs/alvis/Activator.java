@@ -7,7 +7,6 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
-import de.unisiegen.informatik.bs.alvis.virtualmachine.AlvisGraph;
 import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
 //import de.unisiegen.informatik.bs.alvis.vm
 /* Ein paar Notizen
