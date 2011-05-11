@@ -5,7 +5,9 @@ import junit.framework.Assert;
 import org.testng.annotations.Test;
 
 import resources.FirstAlgo;
+import resources.SecondAlgo;
 
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeInteger;
 import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
 
 /**
@@ -40,5 +42,11 @@ public class VirtualMachineTest {
 		vm.startAutoRun();
 	}
 	
+	@Test
+	public void getStartTypes() {
+		VirtualMachine vm = VirtualMachine.getInstance();
+		vm.setAlgoClassToRun(SecondAlgo.class);
+		Assert.assertEquals(((PseudoCodeInteger) vm.getStartParameters().get(0)).getTypeName(), "Integer");
+	}
 	
 }

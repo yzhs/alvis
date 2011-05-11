@@ -15,9 +15,12 @@ public class FirstAlgo extends AbstractAlgo {
 		return null;
 	}
 
+	public static ArrayList<PseudoCodeObject> getStartParameters() {
+		return new ArrayList<PseudoCodeObject>();
+	}
+	
 	@Override
 	public void run() {
 		
 	}
-
 }

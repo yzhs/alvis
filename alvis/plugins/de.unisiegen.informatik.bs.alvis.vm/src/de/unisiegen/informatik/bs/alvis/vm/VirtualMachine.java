@@ -1,6 +1,7 @@
 package de.unisiegen.informatik.bs.alvis.vm;
 
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
@@ -95,7 +96,8 @@ public class VirtualMachine {
 			return;
 		}
 		try {
-			algoToRun = (AbstractAlgo) algoClass.getConstructors()[0].newInstance(parameters);
+			algoToRun = (AbstractAlgo) algoClass.getConstructors()[0]
+					.newInstance(parameters);
 		} catch (IllegalArgumentException e1) {
 			e1.printStackTrace();
 		} catch (InstantiationException e1) {
@@ -105,7 +107,7 @@ public class VirtualMachine {
 		} catch (InvocationTargetException e1) {
 			e1.printStackTrace();
 		}
-		//algoToRun = new Algo(parameters);
+		// algoToRun = new Algo(parameters);
 
 		// Breakpoint listener
 		algoToRun.addBPListener(new BPListener() {
@@ -128,8 +130,6 @@ public class VirtualMachine {
 
 			@Override
 			public void onDecisionPoint(int DPNr, SortableCollection toSort) {
-				// TODO Auto-generated method stub
-
 			}
 		});
 		algoToRun.start();
@@ -142,7 +142,8 @@ public class VirtualMachine {
 		states.add(new State(null, bpIndex, dpIndex, false));
 		stateIndex = 0;
 		try {
-			algoToRun = (AbstractAlgo) algoClass.getConstructors()[0].newInstance(parameters);
+			algoToRun = (AbstractAlgo) algoClass.getConstructors()[0]
+					.newInstance(parameters);
 		} catch (IllegalArgumentException e1) {
 			e1.printStackTrace();
 		} catch (InstantiationException e1) {
@@ -187,6 +188,9 @@ public class VirtualMachine {
 		algoToRun.start();
 	}
 
+	/**
+	 * 
+	 */
 	public void stepForward() {
 		if (algoToRun.isAlive()) {
 			synchronized (algoToRun) {
@@ -196,13 +200,18 @@ public class VirtualMachine {
 		}
 	}
 
+	/**
+	 * stepping backwards, will set new breakpoint and restart the algo from
+	 * beginning
+	 */
 	public void stepBackward() {
 		// if i'm 1, the next status would be zero, the beginning state every
 		// other value would also be totally useless
 		if (stateIndex > 1) {
 			this.resetState();
 			try {
-				algoToRun = (AbstractAlgo) algoClass.getConstructors()[0].newInstance(parameters);
+				algoToRun = (AbstractAlgo) algoClass.getConstructors()[0]
+						.newInstance(parameters);
 			} catch (IllegalArgumentException e1) {
 				e1.printStackTrace();
 			} catch (InstantiationException e1) {
@@ -305,25 +314,39 @@ public class VirtualMachine {
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		return this.algoToRun.getRunningRef();
 	}
 
+	/**
+	 * 
+	 * @param dplisten
+	 */
 	public void addDPListener(DPListener dplisten) {
 		this.dplisten = dplisten;
 	}
 
+	/**
+	 * 
+	 * @param bplisten
+	 */
 	public void addBPListener(BPListener bplisten) {
 		this.bplisten = bplisten;
 	}
 
+	/**
+	 * 
+	 * @param para
+	 */
 	public void addParameter(PseudoCodeObject para) {
 		parameters.add(para);
 	}
 
+	/**
+	 * 
+	 */
 	public void removeOldParameters() {
 		this.parameters.clear();
 	}
@@ -335,8 +358,35 @@ public class VirtualMachine {
 		try {
 			algoToRun.join();
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * 
+	 * @return the ArrayList with dummy object, representing the types needed
+	 *         for the Algo to start
+	 */
+	@SuppressWarnings("unchecked")
+	public ArrayList<PseudoCodeObject> getStartParameters() {
+		if (this.algoClass != null) {
+			Method[] meths = algoClass.getMethods();
+			for (Method m : meths) {
+				if (m.getName().equals("getStartParameters")) {
+					try {
+						return ((ArrayList<PseudoCodeObject>) m.invoke(null,
+								(Object[]) null));
+					} catch (IllegalArgumentException e) {
+						e.printStackTrace();
+					} catch (IllegalAccessException e) {
+						e.printStackTrace();
+					} catch (InvocationTargetException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		return null;
+	}
+
 }

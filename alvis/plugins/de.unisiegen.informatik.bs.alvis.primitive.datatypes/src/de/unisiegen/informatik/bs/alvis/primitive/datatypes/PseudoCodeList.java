@@ -61,4 +61,9 @@ public class PseudoCodeList<E> extends PseudoCodeObject implements SortableColle
 		return false;
 	}
 
+	@Override
+	public String getTypeName() {
+		return PseudoCodeList.TYPENAME;
+	}
+
 }

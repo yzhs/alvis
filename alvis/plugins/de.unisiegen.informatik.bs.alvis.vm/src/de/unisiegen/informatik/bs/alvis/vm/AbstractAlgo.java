@@ -8,7 +8,11 @@ public abstract class AbstractAlgo extends Thread {
 	protected BPListener bplisten;
 	protected DPListener dplisten;
 	public boolean onBreak;
-
+	
+	public static ArrayList<PseudoCodeObject> getStartParameters() {
+		return null;
+	}
+	
 	public void addBPListener(BPListener wantToListen) {
 		bplisten = wantToListen;
 	}

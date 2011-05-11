@@ -172,4 +172,9 @@ public class PseudoCodeVertex extends PseudoCodeObject {
 		this.commandsforGr.get(0).clear();
 	}
 
+	@Override
+	public String getTypeName() {
+		return PseudoCodeVertex.TYPENAME;
+	}
+
 }

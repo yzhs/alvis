@@ -101,4 +101,9 @@ public class PseudoCodeQueue extends PseudoCodeObject {
 		
 		return result;
 	}
+
+	@Override
+	public String getTypeName() {
+		return PseudoCodeQueue.TYPENAME;
+	}
 }

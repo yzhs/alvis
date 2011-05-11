@@ -105,4 +105,9 @@ public class PseudoCodeEdge extends PseudoCodeObject {
 
 		return false;
 	}
+
+	@Override
+	public String getTypeName() {
+		return PseudoCodeEdge.TYPENAME;
+	}
 }

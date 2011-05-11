@@ -122,4 +122,9 @@ public class PseudoCodeBoolean extends PseudoCodeObject {
 		return false;
 	}
 
+	@Override
+	public String getTypeName() {
+		return PseudoCodeBoolean.TYPENAME;
+	}
+
 }

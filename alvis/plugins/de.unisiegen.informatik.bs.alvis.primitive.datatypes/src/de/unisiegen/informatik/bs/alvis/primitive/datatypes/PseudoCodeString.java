@@ -67,4 +67,9 @@ public class PseudoCodeString extends PseudoCodeObject {
 		return false;
 	}
 
+	@Override
+	public String getTypeName() {
+		return PseudoCodeString.TYPENAME;
+	}
+
 }

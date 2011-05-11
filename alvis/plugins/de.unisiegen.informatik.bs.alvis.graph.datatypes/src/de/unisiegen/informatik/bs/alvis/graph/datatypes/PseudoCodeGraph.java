@@ -145,4 +145,9 @@ public class PseudoCodeGraph extends PseudoCodeObject {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	public String getTypeName() {
+		return PseudoCodeGraph.TYPENAME;
+	}
 }

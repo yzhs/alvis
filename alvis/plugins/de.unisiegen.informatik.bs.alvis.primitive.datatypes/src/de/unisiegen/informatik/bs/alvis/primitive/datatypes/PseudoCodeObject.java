@@ -18,15 +18,34 @@ import java.util.Stack;
 
 public abstract class PseudoCodeObject {
 
-	public final static String TYPENAME = "Datatype";
-	public static PseudoCodeObject localInfty;
-	public static PseudoCodeObject localNull;
+	public final static String TYPENAME = "Object";
+	protected static PseudoCodeObject localInfty;
+	protected static PseudoCodeObject localNull;
 
 	protected List<GraphicalRepresentation> allGr;
 
 	protected boolean isInBatchRun;
 	protected List<Stack<Object>> commandsforGr;
-
+	
+	/**
+	 * if not initialized will set localNull and localInfty
+	 * @return null object
+	 */
+	public static PseudoCodeObject getNull() {
+		// will be from PCObject always be null
+		return localNull; 
+	}
+	
+	/**
+	 * if not initialized will set localInfty and localNull
+	 * @return null object
+	 */
+	public static PseudoCodeObject getInfty() {
+		// will be from PCObject always be null
+		return localInfty;
+	}
+	
+	
 	/**
 	 * Constructor
 	 */
@@ -51,8 +70,8 @@ public abstract class PseudoCodeObject {
 	}
 
 	/**
-	 * Will run commands saved in stacks
-	 * have to be override, otherwise nothing will happen
+	 * Will run commands saved in stacks have to be override, otherwise nothing
+	 * will happen
 	 */
 	protected void runDelayedCommands() {
 		// do nothing
@@ -99,21 +118,8 @@ public abstract class PseudoCodeObject {
 	 * 
 	 * @return the used Pseudocode Typename
 	 */
-	public String getTypeName() {
-		try {
-			return (String) this.getClass().getField("TYPENAME").get(TYPENAME);
-		} catch (IllegalArgumentException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (NoSuchFieldException e) {
-			e.printStackTrace();
-		}
-		return "";
-	}
-
+	public abstract String getTypeName();
+	
 	/**
 	 * Generic set-method used for the compiler
 	 * 
@@ -121,11 +127,12 @@ public abstract class PseudoCodeObject {
 	 *            to set
 	 * @param value
 	 *            value to set
-	 * @return result of set-method (+) could return summed up value
-	 * useful for constructs like v = u.distance + 1;          
-	 *  
+	 * @return result of set-method (+) could return summed up value useful for
+	 *         constructs like v = u.distance + 1;
+	 * 
 	 */
-	public abstract PseudoCodeObject set(String memberName, PseudoCodeObject value);
+	public abstract PseudoCodeObject set(String memberName,
+			PseudoCodeObject value);
 
 	/**
 	 * Generic get-method used for the compiler
@@ -139,24 +146,6 @@ public abstract class PseudoCodeObject {
 			return this;
 		}
 		return null;
-	}
-
-	/**
-	 * Returns the infty Representation used for the compiler
-	 * 
-	 * @return Datatype specific infty Representation
-	 */
-	public PseudoCodeObject getInfty() {
-		return localInfty;
-	}
-
-	/**
-	 * Returns the null Representation used for the compiler
-	 * 
-	 * @return Datatype specific null Representation
-	 */
-	public PseudoCodeObject getNull() {
-		return localNull;
 	}
 
 	/**
@@ -185,11 +174,12 @@ public abstract class PseudoCodeObject {
 		Map<List<String>, List<PseudoCodeObject>> result = new HashMap<List<String>, List<PseudoCodeObject>>();
 		return result;
 	}
-	
+
 	/**
 	 * 
-	 * @param toCheckAgainst 
-	 * @return boolean if the object to checkAgainst is equals the current object
+	 * @param toCheckAgainst
+	 * @return boolean if the object to checkAgainst is equals the current
+	 *         object
 	 */
 	public abstract boolean equals(PseudoCodeObject toCheckAgainst);
 }

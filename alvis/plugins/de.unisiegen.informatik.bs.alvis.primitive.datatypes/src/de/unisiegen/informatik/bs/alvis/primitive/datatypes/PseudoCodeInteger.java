@@ -10,9 +10,26 @@ package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
 
 public class PseudoCodeInteger extends PseudoCodeObject {
 	protected static final String TYPENAME = "Integer";
-
+	
+	protected static PseudoCodeInteger localNull;
+	protected static PseudoCodeInteger localInfty;
+	
 	private int value;
 
+	public static PseudoCodeInteger getNull() {
+		if(localNull == null) {
+			localNull = new PseudoCodeInteger(Integer.MAX_VALUE-1);
+		}
+		return localNull;
+	}
+	
+	public static PseudoCodeInteger getInfty() {
+		if(localInfty == null) {
+			localInfty = new PseudoCodeInteger(Integer.MAX_VALUE);
+		}
+		return localInfty;
+	}
+	
 	/**
 	 * Create new PCInteger from literal
 	 * 
@@ -59,5 +76,10 @@ public class PseudoCodeInteger extends PseudoCodeObject {
 	public boolean equals(PseudoCodeObject toCheckAgainst) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public String getTypeName() {
+		return PseudoCodeInteger.TYPENAME;
 	}
 }
