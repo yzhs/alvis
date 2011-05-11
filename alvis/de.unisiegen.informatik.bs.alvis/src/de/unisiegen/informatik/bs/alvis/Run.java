@@ -1,4 +1,4 @@
-package de.unisiegen.informatik.bs.alvis.virtualmachine;
+package de.unisiegen.informatik.bs.alvis;
 
 import java.io.Serializable;
 import java.util.ArrayList;

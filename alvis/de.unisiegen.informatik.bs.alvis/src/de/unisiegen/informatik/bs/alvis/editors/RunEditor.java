@@ -36,12 +36,12 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
+import de.unisiegen.informatik.bs.alvis.Run;
 import de.unisiegen.informatik.bs.alvis.commands.RunCompile;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IRunPreferences;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
 import de.unisiegen.informatik.bs.alvis.tools.IO;
-import de.unisiegen.informatik.bs.alvis.virtualmachine.Run;
 import org.eclipse.swt.widgets.ExpandBar;
 import org.eclipse.swt.widgets.ExpandItem;
 import org.eclipse.swt.layout.FillLayout;

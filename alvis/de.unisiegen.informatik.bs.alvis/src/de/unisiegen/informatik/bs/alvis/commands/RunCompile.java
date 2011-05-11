@@ -13,8 +13,8 @@ import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.ui.part.FileEditorInput;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
+import de.unisiegen.informatik.bs.alvis.Run;
 import de.unisiegen.informatik.bs.alvis.tools.IO;
-import de.unisiegen.informatik.bs.alvis.virtualmachine.Run;
 
 @SuppressWarnings("restriction")
 public class RunCompile extends AbstractHandler{

@@ -6,13 +6,10 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
-import de.unisiegen.informatik.bs.alvis.datatypes.Graph;
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
 import de.unisiegen.informatik.bs.alvis.virtualmachine.AlvisGraph;
-import de.unisiegen.informatik.bs.alvis.virtualmachine.AlvisGraphNode;
-import de.unisiegen.informatik.bs.alvis.virtualmachine.Run;
 import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
+//import de.unisiegen.informatik.bs.alvis.vm
 /* Ein paar Notizen
  * 
  * Der Ordner in dem der Workspace liegt auf dem System:
@@ -82,7 +79,6 @@ public class Activator extends AbstractUIPlugin {
 	 * Attributes for a run.
 	 */
 	private Run activeRun;
-	private AlvisGraph runGraph; // TODO RAUS DAMIT
 	
 	
 	
@@ -145,14 +141,6 @@ public class Activator extends AbstractUIPlugin {
 //		}
 
 		vm.startDefaultRun();
-	}
-
-	public void setRunGraph(AlvisGraph runGraph) {
-		this.runGraph = runGraph;
-	}
-
-	public AlvisGraph getRunGraph() {
-		return runGraph;
 	}
 
 	public void runNext() {

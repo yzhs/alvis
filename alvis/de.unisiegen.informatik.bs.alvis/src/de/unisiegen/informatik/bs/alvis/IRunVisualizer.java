@@ -1,4 +1,4 @@
-package de.unisiegen.informatik.bs.alvis.virtualmachine;
+package de.unisiegen.informatik.bs.alvis;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;

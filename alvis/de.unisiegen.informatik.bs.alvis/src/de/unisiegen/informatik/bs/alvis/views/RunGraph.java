@@ -16,11 +16,11 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
+import de.unisiegen.informatik.bs.alvis.IRunVisualizer;
 import de.unisiegen.informatik.bs.alvis.tools.IO;
 import de.unisiegen.informatik.bs.alvis.virtualmachine.AlvisGraph;
 import de.unisiegen.informatik.bs.alvis.virtualmachine.AlvisSave;
 import de.unisiegen.informatik.bs.alvis.virtualmachine.AlvisSerialize;
-import de.unisiegen.informatik.bs.alvis.virtualmachine.IRunVisualizer;
 
 /**
  * @author simon
