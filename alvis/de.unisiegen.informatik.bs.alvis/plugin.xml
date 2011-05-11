@@ -90,14 +90,6 @@
    <extension
          point="org.eclipse.ui.editors">
       <editor
-            class="de.unisiegen.informatik.bs.alvis.editors.GraphEditor"
-            default="false"
-            extensions="graph2"
-            icon="icons/extension/ext_graph.png"
-            id="de.unisiegen.informatik.bs.alvis.editors.grapheditor"
-            name="%editor.graph">
-      </editor>
-      <editor
             class="de.unisiegen.informatik.bs.alvis.editors.AlgorithmEditor"
             contributorClass="de.unisiegen.informatik.bs.alvis.editors.AlgorithmEditorContributor"
             default="true"
