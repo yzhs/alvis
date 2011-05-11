@@ -64,13 +64,13 @@ import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.*;
 
 public class GraphEditor extends EditorPart implements PropertyChangeListener {
 
-	private static final int MODUS_STANDARD = 0;// cursor
-	private static final int MODUS_MOVE = 1;// hand
-	private static final int MODUS_NODE = 110;// SWT -> n
-	private static final int MODUS_CONNECTION = 99;// SWT -> c
-	private static final int MODUS_START = 115;// SWT -> s
-	private static final int MODUS_END = 101;// SWT -> e
-	private static final int MODUS_DELETE = SWT.DEL;// SWT -> delete
+	public static final int MODUS_STANDARD = 0;// cursor
+	public static final int MODUS_MOVE = 1;// hand
+	public static final int MODUS_NODE = 110;// SWT -> n
+	public static final int MODUS_CONNECTION = 99;// SWT -> c
+	public static final int MODUS_START = 115;// SWT -> s
+	public static final int MODUS_END = 101;// SWT -> e
+	public static final int MODUS_DELETE = SWT.DEL;// SWT -> delete
 	private int pressed;
 
 	Image screenshot;
@@ -627,6 +627,16 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 	}
 
 	/**
+	 * Set the modus
+	 * @param modus
+	 */
+	public void setModus(int modus) {
+		myGraph.resetMarking();
+		pressed = modus;
+		setGraphModus();
+	}
+	
+	/**
 	 * Connects two nodes
 	 * 
 	 * @param node
@@ -853,7 +863,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 		checkDirty();
 	}
 
-	protected void clearGraph() {
+	public void clearGraph() {
 		myGraph.resetContent();
 		// the graph might be changed
 		checkDirty();

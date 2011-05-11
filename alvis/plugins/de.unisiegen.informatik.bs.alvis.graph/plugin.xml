@@ -44,7 +44,7 @@
                   tooltip="%command.tooltip.changelayout">
             </command>
             <command
-                  commandId="de.unisiegen.informatik.bs.alvis.graph.commands.zoomout"
+                  commandId="de.unisiegen.informatik.bs.alvis.graph.commands.zoomin"
                   icon="icons/graph/graph_zoom_in.png"
                   label="%command.label.zoomin"
                   style="push"
