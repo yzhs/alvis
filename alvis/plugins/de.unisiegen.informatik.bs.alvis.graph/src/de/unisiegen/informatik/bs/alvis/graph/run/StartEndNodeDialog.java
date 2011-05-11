@@ -19,6 +19,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
 import de.unisiegen.informatik.bs.alvis.graph.Activator;
+import de.unisiegen.informatik.bs.alvis.graph.datatypes.PseudoCodeGraph;
 import de.unisiegen.informatik.bs.alvis.graph.editors.GraphEditor;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraph;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraphNode;
@@ -35,8 +36,6 @@ public class StartEndNodeDialog extends Dialog {
 	protected StartEndNodeDialog(Shell parentShell) {
 		super(parentShell);
 	       Composite composite = (Composite) super.createDialogArea(parentShell);
-	       Button but = new Button(composite,0);
-	       but.setText("Hallo ich bin James");
 	}
 
 	public StartEndNodeDialog(Shell shell, String myInputFilePath) {
@@ -109,11 +108,15 @@ public class StartEndNodeDialog extends Dialog {
 			}
 			
 			protected void refreshGraphicalRepresentations() {
-				Activator.getDefault().getTempGephicalRepresentations().clear();
+				
+				// TODO make this a static function!!!
+				PseudoCodeGraph pseudoGraph = new PseudoCodeGraph();
+				
+				Activator.getDefault().getTempPseudoCodeObjects().clear();
 				if(startNode != null)
-					Activator.getDefault().getTempGephicalRepresentations().add(startNode);
+					Activator.getDefault().getTempPseudoCodeObjects().add(pseudoGraph.getVertexFromGraphic(startNode));
 				if(endNode != null)
-					Activator.getDefault().getTempGephicalRepresentations().add(endNode);
+					Activator.getDefault().getTempPseudoCodeObjects().add(pseudoGraph.getVertexFromGraphic(endNode));
 			}
 			
 			public void mouseDoubleClick(MouseEvent e) {

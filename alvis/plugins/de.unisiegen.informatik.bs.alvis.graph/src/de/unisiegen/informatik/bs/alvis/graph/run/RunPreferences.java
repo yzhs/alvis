@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import de.unisiegen.informatik.bs.alvis.graph.Activator;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IRunPreferences;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
 /**
  * @author simon
  *
@@ -16,7 +17,7 @@ public class RunPreferences implements IRunPreferences {
 
 	String myInputFilePath;
 	
-	public ArrayList<GraphicalRepresentation> getRunPreferences(String inputFilePath) {
+	public ArrayList<PseudoCodeObject> getRunPreferences(String inputFilePath) {
 		myInputFilePath = inputFilePath;
 
 		// TODO Abfangen, wenn wir mit myInputFilePath nix tun können.
@@ -26,7 +27,7 @@ public class RunPreferences implements IRunPreferences {
 					.getActiveWorkbenchWindow().getShell(), myInputFilePath);
 
 		if(dialog.open() == StartEndNodeDialog.OK)
-			return Activator.getDefault().getTempGephicalRepresentations();
+			return Activator.getDefault().getTempPseudoCodeObjects();
 		else 
 			return null;
 	}

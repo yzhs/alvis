@@ -16,10 +16,19 @@ import org.eclipse.ui.IEditorInput;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
+import de.unisiegen.informatik.bs.alvis.Activator;
+import de.unisiegen.informatik.bs.alvis.graph.datatypes.PseudoCodeEdge;
+import de.unisiegen.informatik.bs.alvis.graph.datatypes.PseudoCodeGraph;
+import de.unisiegen.informatik.bs.alvis.graph.datatypes.PseudoCodeVertex;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraph;
+import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraphConnection;
+import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraphNode;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSave;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSerialize;
 import de.unisiegen.informatik.bs.alvis.virtualmachine.IRunVisualizer;
+import de.unisiegen.informatik.bs.alvis.virtualmachine.VirtualMachine;
+
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeList;
 
 /**
  * @author simon
@@ -45,15 +54,48 @@ public class RunVisualizer implements IRunVisualizer {
 		myInputFilePath = inputFilePath;
 		
 		// Check if input is for this plugin
-		if(createGraph()) {
+		if(!createGraph()) {
+			return false;
+		}
+		else {
+			/* Plug the myGraph Object to the Alvis Activator
+			 * For that we have to convert the Graph and all its containing
+			 * to Objects of the PseudoCode kind.
+			 */
 			
+			PseudoCodeGraph codeGraph = new PseudoCodeGraph();
+			
+			// Make a list that contains Nodes
+			PseudoCodeList<PseudoCodeVertex> pseudoCodeVertexList =
+				new PseudoCodeList<PseudoCodeVertex>();
+			
+			for(AlvisGraphNode node : myGraph.getAllNodes()) {
+				pseudoCodeVertexList.add(codeGraph.getVertexFromGraphic(node));
+			}
+			
+			// Make a list that contains Edges
+			PseudoCodeList<PseudoCodeEdge> pseudoCodeEdgeList =
+				new PseudoCodeList<PseudoCodeEdge>();
+			
+			for(AlvisGraphConnection connecton : myGraph.getAllConnections()) {
+				// TODO Dingel soll diese Methode überprüfen.
+			}
+			
+			// Give the lists to the graph.
+			codeGraph = new PseudoCodeGraph(
+					pseudoCodeVertexList,
+					pseudoCodeEdgeList
+					);
+
+
+			Activator.getDefault().setRunObject(codeGraph);
 		}
 		
 		return true;
 	}
 
 	/** 
-	 * Tries to cast the input to the recomment input of this plugin
+	 * Tries to cast the input to the recommend input of this plug-in
 	 * @return true if success
 	 */
 	private boolean createGraph() {
@@ -64,7 +106,7 @@ public class RunVisualizer implements IRunVisualizer {
 			new AlvisSave(myGraph, seri);
 			success = true;
 		} catch(ClassCastException e) {
-			
+			return false;
 		}
 		return success;
 	}
