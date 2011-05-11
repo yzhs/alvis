@@ -17,6 +17,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
+import de.unisiegen.informatik.bs.alvis.IRunVisualizer;
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.PseudoCodeEdge;
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.PseudoCodeGraph;
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.PseudoCodeVertex;
@@ -25,8 +26,7 @@ import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGrap
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraphNode;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSave;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSerialize;
-import de.unisiegen.informatik.bs.alvis.virtualmachine.IRunVisualizer;
-import de.unisiegen.informatik.bs.alvis.virtualmachine.VirtualMachine;
+
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeList;
 
