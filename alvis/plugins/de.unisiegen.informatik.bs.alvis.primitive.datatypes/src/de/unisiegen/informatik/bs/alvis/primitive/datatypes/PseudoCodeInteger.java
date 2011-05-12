@@ -74,12 +74,63 @@ public class PseudoCodeInteger extends PseudoCodeObject {
 
 	@Override
 	public boolean equals(PseudoCodeObject toCheckAgainst) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			return ((PseudoCodeInteger)toCheckAgainst).getLiteralValue() == this.value;
+		} catch (ClassCastException e) {
+			return false;
+		}
 	}
 
 	@Override
 	public String getTypeName() {
 		return PseudoCodeInteger.TYPENAME;
+	}
+
+	public PseudoCodeInteger add(PseudoCodeInteger other) {
+		return new PseudoCodeInteger(this.getLiteralValue() + other.getLiteralValue());
+	}
+
+	public PseudoCodeInteger sub(PseudoCodeInteger other) {
+		return new PseudoCodeInteger(this.getLiteralValue() - other.getLiteralValue());
+	}
+
+	public PseudoCodeInteger mul(PseudoCodeInteger other) {
+		return new PseudoCodeInteger(this.getLiteralValue() * other.getLiteralValue());
+	}
+
+	public PseudoCodeInteger div(PseudoCodeInteger other) {
+		return new PseudoCodeInteger(this.getLiteralValue() / other.getLiteralValue());
+	}
+
+	public PseudoCodeInteger mod(PseudoCodeInteger other) {
+		return new PseudoCodeInteger(this.getLiteralValue() % other.getLiteralValue());
+	}
+
+	public PseudoCodeBoolean equal(PseudoCodeInteger other) {
+		return new PseudoCodeBoolean(this.getLiteralValue() == other.getLiteralValue());
+	}
+
+	public PseudoCodeBoolean notEqual(PseudoCodeInteger other) {
+		return this.equal(other).not();
+	}
+
+	public PseudoCodeBoolean less(PseudoCodeInteger other) {
+		return new PseudoCodeBoolean(this.getLiteralValue() < other.getLiteralValue());
+	}
+
+	public PseudoCodeBoolean greater(PseudoCodeInteger other) {
+		return new PseudoCodeBoolean(this.getLiteralValue() > other.getLiteralValue());
+	}
+
+	public PseudoCodeBoolean lessOrEqual(PseudoCodeInteger other) {
+		return new PseudoCodeBoolean(this.getLiteralValue() <= other.getLiteralValue());
+	}
+
+	public PseudoCodeBoolean greaterOrEqual(PseudoCodeInteger other) {
+		return new PseudoCodeBoolean(this.getLiteralValue() >= other.getLiteralValue());
+	}
+
+	public PseudoCodeInteger negate() {
+		return new PseudoCodeInteger(-this.getLiteralValue());
 	}
 }

@@ -61,10 +61,11 @@ public class PseudoCodeString extends PseudoCodeObject {
 
 	@Override
 	public boolean equals(PseudoCodeObject toCheckAgainst) {
-		if(((PseudoCodeString) toCheckAgainst).value.equals(value)) {
-			return true;
+		try {
+		return ((PseudoCodeString) toCheckAgainst).value.equals(value);
+		} catch (ClassCastException e) {
+			return false;
 		}
-		return false;
 	}
 
 	@Override
@@ -72,4 +73,15 @@ public class PseudoCodeString extends PseudoCodeObject {
 		return PseudoCodeString.TYPENAME;
 	}
 
+	public PseudoCodeString add(PseudoCodeString other) {
+		return new PseudoCodeString(this.getLiteralValue() + other.getLiteralValue());
+	}
+
+	public PseudoCodeBoolean equal(PseudoCodeString other) {
+		return new PseudoCodeBoolean(this.equals(other));
+	}
+
+	public PseudoCodeBoolean notEqual(PseudoCodeString other) {
+		return this.equal(other).not();
+	}
 }

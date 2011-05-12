@@ -55,8 +55,13 @@ public class PseudoCodeVoid extends PseudoCodeObject {
 
 	@Override
 	public boolean equals(PseudoCodeObject toCheckAgainst) {
-		// TODO Auto-generated method stub
-		return false;
+		try {
+			@SuppressWarnings("unused")
+			PseudoCodeVoid x = (PseudoCodeVoid) toCheckAgainst;
+			return true;
+		} catch (ClassCastException e) {
+			return false;
+		}
 	}
 
 }

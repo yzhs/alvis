@@ -116,10 +116,11 @@ public class PseudoCodeBoolean extends PseudoCodeObject {
 
 	@Override
 	public boolean equals(PseudoCodeObject toCheckAgainst) {
-		if(((PseudoCodeBoolean) toCheckAgainst).getLiteralValue() == this.value) {
-			return true;
+		try {
+			return ((PseudoCodeBoolean) toCheckAgainst).getLiteralValue() == this.value;
+		} catch (ClassCastException e) {
+			return false;
 		}
-		return false;
 	}
 
 	@Override
@@ -127,4 +128,19 @@ public class PseudoCodeBoolean extends PseudoCodeObject {
 		return PseudoCodeBoolean.TYPENAME;
 	}
 
+	public PseudoCodeBoolean and(PseudoCodeBoolean other) {
+		return new PseudoCodeBoolean(this.getLiteralValue() && other.getLiteralValue());
+	}
+	public PseudoCodeBoolean or(PseudoCodeBoolean other) {
+		return new PseudoCodeBoolean(this.getLiteralValue() || other.getLiteralValue());
+	}
+	public PseudoCodeBoolean not() {
+		return new PseudoCodeBoolean(!this.getLiteralValue());
+	}
+	public PseudoCodeBoolean equal(PseudoCodeBoolean other) {
+		return new PseudoCodeBoolean(this.getLiteralValue() == other.getLiteralValue());
+	}
+	public PseudoCodeBoolean notEqual(PseudoCodeBoolean other) {
+		return this.equal(other).not();
+	}
 }
