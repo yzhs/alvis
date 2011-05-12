@@ -13,13 +13,13 @@ import java.util.HashMap;
  */
 public class AlvisSerialize {
 
-	int[] nodeId, nodeX, nodeY;
-	String[] nodeText;
-	int startId, endId;
-	int globalId;
-	int zoomCounter;
+	private int[] nodeId, nodeX, nodeY;
+	private String[] nodeText;
+	private int startId, endId;
+	private int globalId;
+	private int zoomCounter;
 
-	int[] conId, conStyle, conNode1, conNode2, conColor;
+	private int[] conId, conStyle, conNode1, conNode2, conColor;
 
 	/**
 	 * the constructor
@@ -122,5 +122,9 @@ public class AlvisSerialize {
 
 	public int[] getConColor() {
 		return conColor;
+	}
+
+	public int getZoomCounter() {
+		return zoomCounter;
 	}
 }

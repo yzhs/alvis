@@ -76,6 +76,7 @@ public class AlvisSave {
 		graph.admin = this;
 
 		this.globalId = seri.getGlobalId();
+		this.zoomCounter = seri.getZoomCounter();
 
 		int fontSize = 4 + (int) (6 * Math.pow(2, zoomCounter));
 		int gcFontSize = Math.min(48, fontSize);

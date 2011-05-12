@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import de.unisiegen.informatik.bs.alvis.graph.Activator;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IRunPreferences;
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
 /**
  * @author simon

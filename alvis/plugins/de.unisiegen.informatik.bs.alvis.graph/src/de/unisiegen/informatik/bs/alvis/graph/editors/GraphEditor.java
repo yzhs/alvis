@@ -14,14 +14,12 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Timestamp;
 
 import javax.imageio.ImageIO;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.draw2d.Animation;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
@@ -47,7 +45,6 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
@@ -628,6 +625,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 
 	/**
 	 * Set the modus
+	 * 
 	 * @param modus
 	 */
 	public void setModus(int modus) {
@@ -635,7 +633,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 		pressed = modus;
 		setGraphModus();
 	}
-	
+
 	/**
 	 * Connects two nodes
 	 * 
@@ -863,9 +861,14 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 	}
 
 	public void clearGraph() {
-		myGraph.resetContent();
-		// the graph might be changed
-		checkDirty();
+		MessageBox sure = new MessageBox(myGraph.getShell(), SWT.ICON_WARNING
+				| SWT.YES | SWT.NO);
+		sure.setMessage(Messages.getLabel("Graph_ResetAll"));
+
+		if (sure.open() == SWT.YES) {
+			myGraph.resetContent();
+			checkDirty();
+		}
 	}
 
 	protected void removeHighlightedNode() {

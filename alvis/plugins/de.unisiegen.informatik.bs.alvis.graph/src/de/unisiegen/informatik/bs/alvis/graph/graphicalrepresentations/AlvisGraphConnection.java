@@ -1,7 +1,6 @@
 package de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 import org.eclipse.zest.core.widgets.GraphConnection;
 

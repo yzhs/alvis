@@ -26,7 +26,6 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	private double middleX, middleY, radiusX, radiusY, angle;
 	private int middleFactor, widthPerGraph, heightPerLevel, midWidth;
 	private int[] levelWidth, levelPos;
-	private int tagNo;
 	private double zoomFactor;
 
 	/**
@@ -43,7 +42,6 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 
 		admin = new AlvisSave();
 		middleFactor = 0;
-		tagNo = 0;
 		zoomFactor = 1.4;
 	}
 
@@ -60,7 +58,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 
 		// Image image;
 		if (name.equals(""))
-			name = "" + getAdmin().getId();
+			name = Integer.toString(getAdmin().getId());
 		// try { // to make an image
 		// image = GraphEditor.makeGraphImage(name);
 		// TODO no image anymore just bigger text
@@ -93,16 +91,14 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	/**
 	 * creates and saves new alvis graph connection in allConnections
 	 * 
-	 * @param connectionLayout
-	 *            the connection layout
 	 * @param node1
 	 *            the source node
 	 * @param node2
 	 *            the drain node
 	 * @return new alvis graph connection
 	 */
-	public AlvisGraphConnection makeGraphConnection(int connectionLayout,
-			AlvisGraphNode node1, AlvisGraphNode node2) {
+	public AlvisGraphConnection makeGraphConnection(AlvisGraphNode node1,
+			AlvisGraphNode node2) {
 
 		if (node1.equals(node2)) {
 			// no self connection
@@ -114,7 +110,9 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 			return null;
 		} else {
 			AlvisGraphConnection result = new AlvisGraphConnection(this,
-					connectionLayout, node1, node2);
+					ZestStyles.CONNECTIONS_DOT, node1, node2);
+			result.setLineWidth((getZoomCounter() <= 0) ? 1 : (int) Math.pow(
+					zoomFactor, getZoomCounter() + 1));
 			admin.addConnection(result);
 			return result;
 		}
@@ -421,8 +419,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		if (getConnectNode() == null) {
 			setConnectNode(gn);
 		} else {
-			makeGraphConnection(ZestStyles.CONNECTIONS_DOT, getConnectNode(),
-					gn);
+			makeGraphConnection(getConnectNode(), gn);
 			resetMarking();
 		}
 	}
@@ -574,19 +571,19 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 
 		if (depth <= 0)
 			return; // anchor
-		if (depth > 6)
-			depth = 6; // too big to draw
+		if (depth > 7)
+			depth = 7; // too big to draw
 		if (width > 3)
 			width = 3; // too big to draw
 
-		AlvisGraphNode gn = makeGraphNode("" + tagNo++);
+		AlvisGraphNode gn = makeGraphNode("");
 		if (parent == null) {
 			if (getStartNode() != null) {
 				getStartNode().unmarkAsStartOrEndNode();
 			}
 			setStartNode(gn);
 		} else
-			makeGraphConnection(ZestStyles.CONNECTIONS_DOT, gn, parent);
+			makeGraphConnection(gn, parent);
 
 		for (int i = 0; i < myRandom(width); i++) {
 			createTree(depth - 1, width, gn);
@@ -651,6 +648,8 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 			if (getZoomCounter() <= -2)
 				return; // too far zoomed out already
 			decreaseZoomCounter();
+			mouseX = -mouseX;
+			mouseY = -mouseY;
 			myZoomFactor = 1.0 / zoomFactor;
 		}
 
@@ -659,7 +658,6 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		Font gnFont = new Font(null, "gn", fontSize, 1);
 		Font gcFont = new Font(null, "gc", gcFontSize, 1);
 
-		int conWidth = (getZoomCounter() <= 0) ? 1 : Integer.MAX_VALUE;
 		Animation.markBegin();
 		int minX = Integer.MAX_VALUE, minY = Integer.MAX_VALUE;
 		for (AlvisGraphNode gn : getAllNodes()) {
@@ -669,22 +667,17 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 			minX = Math.min(minX, gn.getLocation().x);
 			minY = Math.min(minY, gn.getLocation().y);
 		}
+
 		for (AlvisGraphNode gn : getAllNodes()) {
-			gn.setLocation(gn.getLocation().x - minX + 20 - mouseX,
-					gn.getLocation().y - minY + 20 - mouseY);
+			gn.setLocation(gn.getLocation().x - minX + 20
+					- (mouseX * myZoomFactor - mouseX), gn.getLocation().y
+					- minY + 20 - (mouseY * myZoomFactor - mouseY));
 		}
 
-		if (zoomIn) {
-			for (AlvisGraphConnection gc : getAllConnections()) {
-				gc.setFont(gcFont);
-				gc.setLineWidth(Math.min(conWidth,
-						(int) (1.5 * getZoomCounter())));
-			}
-		} else {
-			for (AlvisGraphConnection gc : getAllConnections()) {
-				gc.setFont(gcFont);
-				gc.setLineWidth(Math.max(1, (int) (1.5 * getZoomCounter())));
-			}
+		for (AlvisGraphConnection gc : getAllConnections()) {
+			gc.setFont(gcFont);
+			gc.setLineWidth((getZoomCounter() <= 0) ? 1 : (int) Math.pow(
+					zoomFactor, getZoomCounter() + 2));
 		}
 		Animation.run(200);
 	}
