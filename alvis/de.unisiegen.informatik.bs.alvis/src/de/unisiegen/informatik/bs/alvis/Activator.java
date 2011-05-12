@@ -8,7 +8,6 @@ import org.osgi.framework.BundleContext;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
 import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
-//import de.unisiegen.informatik.bs.alvis.vm
 /* Ein paar Notizen
  * 
  * Der Ordner in dem der Workspace liegt auf dem System:

@@ -43,7 +43,6 @@ Frank Weiler
       </win>
    </launcher>
 
-
    <vm>
    </vm>
 
@@ -58,7 +57,11 @@ Frank Weiler
       <plugin id="com.ibm.icu"/>
       <plugin id="de.unisiegen.informatik.bs.alvis"/>
       <plugin id="de.unisiegen.informatik.bs.alvis.graph"/>
+      <plugin id="de.unisiegen.informatik.bs.alvis.graph.datatypes"/>
       <plugin id="de.unisiegen.informatik.bs.alvis.primitive"/>
+      <plugin id="de.unisiegen.informatik.bs.alvis.primitive.datatypes"/>
+      <plugin id="de.unisiegen.informatik.bs.alvis.ui.navigator"/>
+      <plugin id="de.unisiegen.informatik.bs.alvis.vm"/>
       <plugin id="org.eclipse.compare"/>
       <plugin id="org.eclipse.compare.core"/>
       <plugin id="org.eclipse.core.commands"/>
@@ -69,11 +72,9 @@ Frank Weiler
       <plugin id="org.eclipse.core.expressions"/>
       <plugin id="org.eclipse.core.filebuffers"/>
       <plugin id="org.eclipse.core.filesystem"/>
-      <plugin id="org.eclipse.core.filesystem.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.core.filesystem.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.core.jobs"/>
       <plugin id="org.eclipse.core.resources"/>
-      <plugin id="org.eclipse.core.resources.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.core.runtime"/>
       <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
       <plugin id="org.eclipse.draw2d"/>
@@ -93,7 +94,6 @@ Frank Weiler
       <plugin id="org.eclipse.equinox.preferences"/>
       <plugin id="org.eclipse.equinox.registry"/>
       <plugin id="org.eclipse.equinox.security"/>
-      <plugin id="org.eclipse.equinox.security.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.help"/>
       <plugin id="org.eclipse.jface"/>
       <plugin id="org.eclipse.jface.databinding"/>
@@ -103,7 +103,6 @@ Frank Weiler
       <plugin id="org.eclipse.osgi"/>
       <plugin id="org.eclipse.osgi.services"/>
       <plugin id="org.eclipse.swt"/>
-      <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.swt.win32.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.team.core"/>
       <plugin id="org.eclipse.team.ui"/>
