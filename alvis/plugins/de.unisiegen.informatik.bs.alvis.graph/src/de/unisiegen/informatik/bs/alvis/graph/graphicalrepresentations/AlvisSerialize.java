@@ -13,21 +13,32 @@ import java.util.HashMap;
  */
 public class AlvisSerialize {
 
-	int[] nodeId, nodeX, nodeY, nodeStyle;
+	int[] nodeId, nodeX, nodeY;
 	String[] nodeText;
 	int startId, endId;
 	int globalId;
+	int zoomCounter;
 
 	int[] conId, conStyle, conNode1, conNode2, conColor;
 
+	/**
+	 * the constructor
+	 * 
+	 * @param remPos map of nodes 
+	 * @param allConnections list of connections
+	 * @param startNode start node of graph, null of none
+	 * @param endNode  end node of graph, null of none
+	 * @param globalId the id counter
+	 * @param zoomCounter to remember how far graph is zoomed
+	 */
 	public AlvisSerialize(HashMap<AlvisGraphNode, Point> remPos,
 			ArrayList<AlvisGraphConnection> allConnections,
-			AlvisGraphNode startNode, AlvisGraphNode endNode, int globalId) {
+			AlvisGraphNode startNode, AlvisGraphNode endNode, int globalId,
+			int zoomCounter) {
 
 		nodeId = new int[remPos.size()];
 		nodeX = new int[remPos.size()];
 		nodeY = new int[remPos.size()];
-		nodeStyle = new int[remPos.size()];
 		nodeText = new String[remPos.size()];
 
 		conId = new int[allConnections.size()];
@@ -37,17 +48,16 @@ public class AlvisSerialize {
 		conColor = new int[allConnections.size()];
 
 		int i = 0;
-		for (AlvisGraphNode gn : remPos.keySet()){
+		for (AlvisGraphNode gn : remPos.keySet()) {
 			nodeId[i] = gn.getId();
 			nodeX[i] = gn.getLocation().x;
 			nodeY[i] = gn.getLocation().y;
-			nodeStyle[i] = gn.getStyle();
 			nodeText[i] = gn.getMyText();
 			i++;
 		}
-		
-		i=0;
-		for (AlvisGraphConnection gc : allConnections){
+
+		i = 0;
+		for (AlvisGraphConnection gc : allConnections) {
 			conId[i] = gc.getId();
 			conStyle[i] = gc.getStyle();
 			conNode1[i] = gc.getFirstNode().getId();
@@ -55,13 +65,14 @@ public class AlvisSerialize {
 			conColor[i] = gc.getConnectionColor();
 			i++;
 		}
-		
+
 		if (startNode != null)
 			startId = startNode.getId();
 		if (endNode != null)
 			endId = endNode.getId();
-		
+
 		this.globalId = globalId;
+		this.zoomCounter = zoomCounter;
 
 	}
 
@@ -75,10 +86,6 @@ public class AlvisSerialize {
 
 	public int[] getNodeY() {
 		return nodeY;
-	}
-
-	public int[] getNodeStyle() {
-		return nodeStyle;
 	}
 
 	public String[] getNodeText() {
@@ -108,12 +115,12 @@ public class AlvisSerialize {
 	public int[] getConNode2() {
 		return conNode2;
 	}
-	
-	public int getGlobalId(){
+
+	public int getGlobalId() {
 		return globalId;
 	}
-	
-	public int[] getConColor(){
+
+	public int[] getConColor() {
 		return conColor;
 	}
 }

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
+import org.eclipse.swt.graphics.Font;
+
 /**
  * 
  * class for saving alvis graph details
@@ -34,8 +36,8 @@ public class AlvisSave {
 	 * used for building connections
 	 */
 	private AlvisGraphNode connectNode;
-	private AlvisGraphNode currentNode;
-	private AlvisGraphConnection currentConn;
+
+	private int zoomCounter;
 
 	/**
 	 * the constructor
@@ -50,11 +52,10 @@ public class AlvisSave {
 		startNode = null;
 		endNode = null;
 		connectNode = null;
-		currentNode = null;
-		currentConn = null;
 		limiter = 0.8;
 		globalId = 0;
 		connectionColor = 1;
+		zoomCounter = 1;
 		circles = new ArrayList<ArrayList<AlvisGraphNode>>();
 		trees = new ArrayList<ArrayList<AlvisGraphNode>>();
 
@@ -76,22 +77,27 @@ public class AlvisSave {
 
 		this.globalId = seri.getGlobalId();
 
+		int fontSize = 4 + (int) (6 * Math.pow(2, zoomCounter));
+		int gcFontSize = Math.min(48, fontSize);
+		Font gnFont = new Font(null, "gn", fontSize, 1);
+		Font gcFont = new Font(null, "gc", gcFontSize, 1);
+
 		for (int i = 0; i < seri.getNodeId().length; i++) {
 			int id = seri.getNodeId()[i];
-			int style = seri.getNodeStyle()[i];
 			String text = seri.getNodeText()[i];
-//			Image image; TODO auskommentiert (von Simon)
-//			try {
-//				String myText = (text.equals("") ? "" + id : text);
-//				image = GraphEditor.makeGraphImage(myText);
-//			} catch (IOException ioe) {
-//				image = null;
-//			}
+			// Image image;
+			// try {
+			// String myText = (text.equals("") ? "" + id : text);
+			// image = GraphEditor.makeGraphImage(myText);
+			// } catch (IOException ioe) {
+			// image = null;
+			// }
 			Point point = new Point(seri.getNodeX()[i], seri.getNodeY()[i]);
 
-			AlvisGraphNode gn = new AlvisGraphNode(graph, style, text, null, id);
+			AlvisGraphNode gn = new AlvisGraphNode(graph, text, null, id);
 			addNode(gn, point);
 			gn.setLocation(point.x, point.y);
+			gn.setFont(gnFont);
 
 			if (id == seri.getStartId()) {
 				startNode = gn;
@@ -112,6 +118,7 @@ public class AlvisSave {
 			AlvisGraphConnection gc = new AlvisGraphConnection(graph, style,
 					node1, node2, id);
 			gc.setConnectionColor(seri.getConColor()[i]);
+			gc.setFont(gcFont);
 			addConnection(gc);
 		}
 
@@ -148,6 +155,18 @@ public class AlvisSave {
 		trees.clear();
 		connectionColor = 1;
 
+	}
+	
+	protected void increaseZoomCounter(){
+		zoomCounter++;
+	}
+	
+	protected void decreaseZoomCounter(){
+		zoomCounter--;
+	}
+	
+	protected int getZoomCounter(){
+		return zoomCounter;
 	}
 
 	public void setStartNode(AlvisGraphNode startNode) {
@@ -308,12 +327,20 @@ public class AlvisSave {
 
 		dolly.limiter = this.getLimiter();
 		dolly.globalId = this.globalId;
+		dolly.zoomCounter = this.zoomCounter;
+		
+		int fontSize = 4 + (int) (6 * Math.pow(2, zoomCounter));
+		int gcFontSize = Math.min(48, fontSize);
+		Font gnFont = new Font(null, "gn", fontSize, 1);
+		Font gcFont = new Font(null, "gc", gcFontSize, 1);
 
 		// add graph nodes to dolly:
 		AlvisGraphNode newGn;
 		for (AlvisGraphNode gn : this.getAllNodes()) {
-			newGn = new AlvisGraphNode(parent, gn.getStyle(), gn.getText(),
-					gn.getImage(), gn.getId());
+			newGn = new AlvisGraphNode(parent, gn.getText(), gn.getImage(),
+					gn.getId());
+			newGn.setFont(gnFont);
+
 			dolly.addNode(newGn, new Point(gn.getLocation().x,
 					gn.getLocation().y));
 
@@ -345,6 +372,7 @@ public class AlvisSave {
 				if (n1 != null && n2 != null) {
 					newGc = new AlvisGraphConnection(parent, gc.getStyle(), n1,
 							n2, gc.getId());
+					newGc.setFont(gcFont);
 					dolly.addConnection(newGc);
 					break;
 				}
@@ -356,7 +384,7 @@ public class AlvisSave {
 
 	public AlvisSerialize serialize() {
 		AlvisSerialize seri = new AlvisSerialize(remPos, allConnections,
-				startNode, endNode, globalId);
+				startNode, endNode, globalId, zoomCounter);
 		return seri;
 	}
 
@@ -376,21 +404,5 @@ public class AlvisSave {
 	public AlvisGraphNode getConnectNode() {
 		return connectNode;
 	}
-
-	public void setCurrentNode(AlvisGraphNode currentNode) {
-		this.currentNode = currentNode;
-	}
-
-	public AlvisGraphNode getCurrentNode() {
-		return currentNode;
-	}
-
-	public void setCurrentConnection(AlvisGraphConnection currentConn) {
-		this.currentConn = currentConn;
-	}
-
-	public AlvisGraphConnection getCurrentConn() {
-		return currentConn;
-	}
-
+	
 }

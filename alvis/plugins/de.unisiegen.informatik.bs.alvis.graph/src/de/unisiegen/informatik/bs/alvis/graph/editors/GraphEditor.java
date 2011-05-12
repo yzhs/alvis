@@ -557,9 +557,9 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 			@Override
 			public void mouseScrolled(MouseEvent e) {
 				if (e.count < 0) { // mouse wheel down
-					myGraph.zoomOut(e.x, e.y);
+					myGraph.zoom(e.x, e.y, false);
 				} else { // mouse wheel up
-					myGraph.zoomIn(e.x, e.y);
+					myGraph.zoom(e.x, e.y, true);
 				}
 			}
 		});
@@ -695,15 +695,15 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 
 		if (name == null)
 			return; // saving canceled
-		
-		if (new File(name).exists()) {
-	          // The file already exists; asks for confirmation
-	          MessageBox mb = new MessageBox(saveDialog.getParent(), SWT.ICON_WARNING
-	              | SWT.YES | SWT.NO);
-	          mb.setMessage(name + Messages.getLabel("Graph_ImgAlreadyExists"));
 
-	          if(mb.open() != SWT.YES)
-	        	  return;//do not overwrite
+		if (new File(name).exists()) {
+			// The file already exists; asks for confirmation
+			MessageBox mb = new MessageBox(saveDialog.getParent(),
+					SWT.ICON_WARNING | SWT.YES | SWT.NO);
+			mb.setMessage(name + Messages.getLabel("Graph_ImgAlreadyExists"));
+
+			if (mb.open() != SWT.YES)
+				return;// do not overwrite
 		}
 
 		ImageLoader loader = new ImageLoader();
@@ -716,7 +716,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 
 	protected void clickRemove(AlvisGraphConnection con, MouseEvent e) {
 		if (con != null) {
-			myGraph.removeHighlightedConnection(con);
+			myGraph.removeHighlightedConnection();
 			// the graph might be changed
 			checkDirty();
 		}
@@ -784,8 +784,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 		if (areaClear) {
 			AlvisGraphNode gn;
 
-			gn = myGraph.makeGraphNode(SWT.NONE, ""
-					+ myGraph.getAdmin().getId());
+			gn = myGraph.makeGraphNode("" + myGraph.getAdmin().getId());
 
 			gn.setLocation(e.x - gn.getSize().width / 2, e.y
 					- gn.getSize().height / 2);

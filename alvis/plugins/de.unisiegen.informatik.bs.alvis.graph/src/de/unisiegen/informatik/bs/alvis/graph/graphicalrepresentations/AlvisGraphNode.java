@@ -6,6 +6,7 @@ import org.eclipse.draw2d.Animation;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.zest.core.widgets.GraphNode;
+import org.eclipse.zest.layouts.LayoutStyles;
 
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.GraphicalRepresentationVertex;
 
@@ -39,15 +40,13 @@ public class AlvisGraphNode extends GraphNode implements
 	 * 
 	 * @param graphModel
 	 *            the graph
-	 * @param style
-	 *            the style
 	 * @param text
 	 *            the text shown in the node
 	 * @param image
 	 *            the image shown in the node, NULL if no image
 	 */
-	public AlvisGraphNode(AlvisGraph graph, int style, String text, Image image) {
-		this(graph, style, text, image, -1);
+	public AlvisGraphNode(AlvisGraph graph, String text, Image image) {
+		this(graph, text, image, -1);
 	}
 
 	/**
@@ -55,8 +54,6 @@ public class AlvisGraphNode extends GraphNode implements
 	 * 
 	 * @param graphModel
 	 *            the graph
-	 * @param style
-	 *            the style
 	 * @param text
 	 *            the text shown in the node
 	 * @param image
@@ -64,10 +61,9 @@ public class AlvisGraphNode extends GraphNode implements
 	 * @param id
 	 *            the id
 	 */
-	public AlvisGraphNode(AlvisGraph graph, int style, String text,
-			Image image, int id) {
+	public AlvisGraphNode(AlvisGraph graph, String text, Image image, int id) {
 
-		super(graph, style, text, image, null);
+		super(graph, LayoutStyles.ENFORCE_BOUNDS, text, image, null);
 		this.graph = graph;
 		depth = 0;
 		myText = text;
@@ -116,8 +112,7 @@ public class AlvisGraphNode extends GraphNode implements
 	 *            the connection color of the sub graph
 	 * @param notOverWriteColor
 	 *            the connection color not to overwrite to find new sub trees
-	 *            and keep found circles intact ;
-	 *            -1 if nothing to overwrite
+	 *            and keep found circles intact ; -1 if nothing to overwrite
 	 * @param subGraph
 	 *            the sub graph to fill
 	 */
@@ -257,7 +252,7 @@ public class AlvisGraphNode extends GraphNode implements
 	}
 
 	public void setMyText(String myText) {
-		this.myText= myText;
+		this.myText = myText;
 	}
 
 	@Override
@@ -274,7 +269,7 @@ public class AlvisGraphNode extends GraphNode implements
 
 	@Override
 	public String getLabel() {
-		if (getText().equals("")){
+		if (getText().equals("")) {
 			return Integer.toString(getId());
 		}
 		return getText();
@@ -282,7 +277,7 @@ public class AlvisGraphNode extends GraphNode implements
 
 	@Override
 	public void setLabel(String label) {
-		setText(label);		
+		setText(label);
 	}
 
 }
