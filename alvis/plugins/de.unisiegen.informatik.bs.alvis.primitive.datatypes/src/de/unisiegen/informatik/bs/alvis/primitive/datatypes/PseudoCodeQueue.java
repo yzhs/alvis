@@ -12,15 +12,15 @@ import java.util.Map;
  * 
  */
 
-public class PseudoCodeQueue extends PseudoCodeObject {
+public class PseudoCodeQueue<T extends PseudoCodeObject> extends PseudoCodeObject {
 	protected static final String TYPENAME = "Queue";
-	private ArrayList<Object> objects;
+	private ArrayList<T> objects;
 
 	/**
 	 * create empty Queue
 	 */
 	public PseudoCodeQueue() {
-		objects = new ArrayList<Object>();
+		objects = new ArrayList<T>();
 	}
 
 	/**
@@ -28,7 +28,7 @@ public class PseudoCodeQueue extends PseudoCodeObject {
 	 * @param enqueue
 	 *            obj
 	 */
-	public void enqueue(Object obj) {
+	public void enqueue(T obj) {
 		objects.add(obj);
 	}
 
@@ -48,8 +48,8 @@ public class PseudoCodeQueue extends PseudoCodeObject {
 	 * 
 	 * @return boolean value if is empty
 	 */
-	public boolean isEmpty() {
-		return this.objects.isEmpty();
+	public PseudoCodeBoolean isEmpty() {
+		return new PseudoCodeBoolean(this.objects.isEmpty());
 	}
 
 	@Override
@@ -79,7 +79,7 @@ public class PseudoCodeQueue extends PseudoCodeObject {
 		namesEnq.add("enqueue");
 		ArrayList<PseudoCodeObject> dataEnq = new ArrayList<PseudoCodeObject>();
 		dataEnq.add(PseudoCodeVoid.localNull);
-		dataEnq.add(PseudoCodeObject.localNull);
+		dataEnq.add(T.localNull);
 		
 		result.put(namesEnq, dataEnq);
 		
@@ -87,7 +87,7 @@ public class PseudoCodeQueue extends PseudoCodeObject {
 		namesDeq.add("dequeue");
 		namesDeq.add("dequeue");
 		ArrayList<PseudoCodeObject> dataDeq = new ArrayList<PseudoCodeObject>();
-		dataDeq.add(PseudoCodeObject.localNull);
+		dataDeq.add(T.localNull);
 		
 		result.put(namesDeq, dataDeq);
 		
@@ -104,6 +104,10 @@ public class PseudoCodeQueue extends PseudoCodeObject {
 
 	@Override
 	public String getTypeName() {
-		return PseudoCodeQueue.TYPENAME;
+		String result = PseudoCodeQueue.TYPENAME;
+		result.concat("<");
+		result.concat(T.localNull.getTypeName());
+		result.concat(">");
+		return result;
 	}
 }
