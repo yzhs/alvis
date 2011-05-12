@@ -36,7 +36,7 @@ public class PseudoCodeQueue<T extends PseudoCodeObject> extends PseudoCodeObjec
 	 * 
 	 * @return first item from the queue
 	 */
-	public Object dequeue() {
+	public T dequeue() {
 		if (objects.isEmpty()) {
 			return null;
 		} else {
