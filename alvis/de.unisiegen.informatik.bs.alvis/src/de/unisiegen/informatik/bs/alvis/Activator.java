@@ -6,6 +6,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
+import de.unisiegen.informatik.bs.alvis.editors.AlgorithmPartitionScanner;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
 import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
 /* Ein paar Notizen
@@ -23,9 +24,13 @@ public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "de.unisiegen.informatik.bs.alvis"; //$NON-NLS-1$
+	/** Naming convention of partitioning */
+	public static final String ALGORITHM_PARTITIONING = "___algorithm__partitioning____";
 
 	// The shared instance
 	private static Activator plugin;
+	
+	private AlgorithmPartitionScanner fPartitionsScanner;
 	
 	/**
 	 * The constructor
@@ -97,6 +102,20 @@ public class Activator extends AbstractUIPlugin {
 		return this.activeRun;
 	}
 	
+	/**
+	 * @return the AlgorithmPartition Scannner used for the Editor
+	 */
+	public AlgorithmPartitionScanner getAlgorithmPartitionScanner() {
+		if (fPartitionsScanner==null)
+		{
+			fPartitionsScanner = new AlgorithmPartitionScanner();
+			return fPartitionsScanner;
+		}
+		return fPartitionsScanner;
+	}
+
+
+
 	private ArrayList<PseudoCodeObject> pseudoCodeList = new ArrayList<PseudoCodeObject>();
 
 	public void setPseudoCodeList(ArrayList<PseudoCodeObject> pseudoCodeList) {

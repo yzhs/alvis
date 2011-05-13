@@ -28,6 +28,8 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.PlatformUI;
 
+import de.unisiegen.informatik.bs.alvis.Activator;
+
 /**
  * 
  * @author Eduard Boos
@@ -61,7 +63,8 @@ public class AlgorithmEditorSourceViewerConfiguration extends
 				.setContextInformationPopupOrientation(IContentAssistant.CONTEXT_INFO_ABOVE);
 		assistant.setContextInformationPopupBackground(new Color(PlatformUI
 				.getWorkbench().getDisplay(), 205, 205, 0));
-		assistant.setInformationControlCreator(getInformationControlCreator(sourceViewer));
+		assistant
+				.setInformationControlCreator(getInformationControlCreator(sourceViewer));
 
 		return assistant;
 	}
@@ -73,6 +76,18 @@ public class AlgorithmEditorSourceViewerConfiguration extends
 		reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
 		reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
 		return reconciler;
+	}
+
+
+	public String getConfiguredDocumentPartitioning(ISourceViewer sourceViewer) {
+		return Activator.ALGORITHM_PARTITIONING;
+	}
+
+	public String[] getConfiguredContentTypes(ISourceViewer sourceViewer) {
+		return new String[] { IDocument.DEFAULT_CONTENT_TYPE,
+				AlgorithmPartitionScanner.MULTILINE_COMMENT,
+				AlgorithmPartitionScanner.SINGLELINE_COMMENT,
+				AlgorithmPartitionScanner.BEGIN_END };
 	}
 
 	/**
