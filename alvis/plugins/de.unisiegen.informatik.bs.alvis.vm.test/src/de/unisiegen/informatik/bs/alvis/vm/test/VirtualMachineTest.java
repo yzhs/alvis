@@ -6,47 +6,79 @@ import org.testng.annotations.Test;
 
 import resources.FirstAlgo;
 import resources.SecondAlgo;
+import resources.ThreadAlgo;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeInteger;
+import de.unisiegen.informatik.bs.alvis.vm.BPListener;
 import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
 
 /**
  * 
  * @author Dominik Dingel
- *
+ * 
  */
 
 public class VirtualMachineTest {
 	@Test
 	public void checkDoneBeforeInit() {
 		VirtualMachine vm = VirtualMachine.getInstance();
-		Assert.assertEquals(vm.isDone(), false);
+		Assert.assertEquals(vm.isAlive(), false);
 	}
-	
+
 	@Test
 	public void loadAlgoClassTrue() {
 		VirtualMachine vm = VirtualMachine.getInstance();
-		Assert.assertEquals(vm.setAlgoClassToRun(FirstAlgo.class), true);
+		Assert.assertEquals(true, vm.setAlgoClassToRun(FirstAlgo.class));
 	}
-	
+
 	@Test
 	public void loadAlgoClassFalse() {
 		VirtualMachine vm = VirtualMachine.getInstance();
 		Assert.assertEquals(vm.setAlgoClassToRun(null), false);
 	}
-	
+
 	@Test
 	public void loadAlgoAndStartConstructor() {
 		VirtualMachine vm = VirtualMachine.getInstance();
 		vm.setAlgoClassToRun(FirstAlgo.class);
 		vm.startAutoRun();
 	}
-	
+
 	@Test
 	public void getStartTypes() {
 		VirtualMachine vm = VirtualMachine.getInstance();
 		vm.setAlgoClassToRun(SecondAlgo.class);
-		Assert.assertEquals(((PseudoCodeInteger) vm.getStartParameters().get(0)).getTypeName(), "Integer");
+		Assert.assertEquals(
+				((PseudoCodeInteger) vm.getStartParameters().get(0))
+						.getTypeName(), "Integer");
 	}
-	
+
+	@Test
+	public void runThread() {
+		VirtualMachine vm = VirtualMachine.getInstance();
+		Object lock = new Object();
+		vm.setAlgoClassToRun(ThreadAlgo.class);
+		vm.addBPListener(new BPListener() {
+			@Override
+			public void onBreakPoint(int BreakPointNumber) {
+				System.out.println(VirtualMachine.getInstance().getRunningRef()
+						.get(0).toString());
+			}
+		});
+		vm.startDefaultRun();
+		while (true) {
+			synchronized (lock) {
+				try {
+					lock.wait(1000);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				vm.stepForward();
+				if(!vm.isAlive()) {
+					Assert.assertEquals(4, ((PseudoCodeInteger) vm.getRunningRef().get(0)).getLiteralValue());
+					return;
+				}
+			}
+		}
+	}
 }

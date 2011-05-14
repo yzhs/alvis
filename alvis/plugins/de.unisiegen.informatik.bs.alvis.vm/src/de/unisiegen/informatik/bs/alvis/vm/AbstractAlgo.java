@@ -1,43 +1,56 @@
 package de.unisiegen.informatik.bs.alvis.vm;
 
+/**
+ * @ author Sebastian Schmitz, Dominik Dingel
+ */
 import java.util.ArrayList;
-
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
 
-public abstract class AbstractAlgo extends Thread {
-	protected BPListener bplisten;
-	protected DPListener dplisten;
-	public boolean onBreak;
-	
-	public static ArrayList<PseudoCodeObject> getStartParameters() {
-		return null;
-	}
-	
-	public void addBPListener(BPListener wantToListen) {
-		bplisten = wantToListen;
-	}
+public interface AbstractAlgo extends Runnable {
 
-	public void addDPListener(DPListener wantToListen) {
-		dplisten = wantToListen;
-	}
+	/**
+	 * 
+	 * @return Reference of all Variables, holded by the algo
+	 */
+	public ArrayList<PseudoCodeObject> getVariableReferences();
 
-	protected void reachedBreakPoint(int BPNr) {
-		onBreak = true;
-		bplisten.onBreakPoint(BPNr);
+	/**
+	 * 
+	 * @return Null Objects for all Datatypes the algo expects for the
+	 *         setParameters Call
+	 */
+	public ArrayList<PseudoCodeObject> getParameterTypes();
 
-		synchronized (this) {
-			while (onBreak) {
-				try {
-					wait();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
+	/**
+	 * 
+	 * @param paras
+	 *            are the Startparameters of the algo, have to passed like
+	 *            specified in getParameterTypes
+	 */
+	public void setParameters(ArrayList<PseudoCodeObject> paras);
 
-	abstract public ArrayList<PseudoCodeObject> getRunningRef();
+	/**
+	 * 
+	 * @param wantToListen
+	 *            Breakpoint listener, will be informed in case of an Breakpoint
+	 *            event, currently only one Listener can be active at the same
+	 *            time, could be delete with passing a null Object as BPListener
+	 */
+	public void addBPListener(BPListener wantToListen);
 
-	abstract public void run();
+	/**
+	 * 
+	 * @param wantToListen
+	 *            Decision Point listener, will be informed in case of an
+	 *            Decision Point event, currently only one Listener can be
+	 *            active at the same time, could be delete with passing a null
+	 *            Object as DPListener
+	 */
+	public void addDPListener(DPListener wantToListen);
+
+	/**
+	 * set own Break Field, should be used in context with Thread.notify
+	 */
+	public void stopBreak();
 
 }

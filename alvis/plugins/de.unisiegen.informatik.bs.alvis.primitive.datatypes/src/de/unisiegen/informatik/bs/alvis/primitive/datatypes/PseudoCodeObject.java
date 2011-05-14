@@ -170,6 +170,7 @@ public abstract class PseudoCodeObject {
 	 *         datatype is ALWAYS the return Datatype, can be Void, everything
 	 *         else will be parameters
 	 */
+	// TODO change return value
 	public Map<List<String>, List<PseudoCodeObject>> getMethods() {
 		Map<List<String>, List<PseudoCodeObject>> result = new HashMap<List<String>, List<PseudoCodeObject>>();
 		return result;

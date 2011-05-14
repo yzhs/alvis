@@ -12,7 +12,7 @@ public class State {
 			boolean isDecisionPoint) {
 		this.decisionPoint = isDecisionPoint;
 		if (toHold != null) {
-			//this.holding = (SortableCollection) toHold.fullCopy();
+			//this.holding = (SortableCollection) toHold.fullCopy();   
 		} else {
 			this.holding = null;
 		}

@@ -34,6 +34,7 @@ public class VirtualMachine {
 	private int bpIndex;
 	private int dpIndex;
 	private ArrayList<PseudoCodeObject> parameters;
+	private Thread algoThread;
 	private AbstractAlgo algoToRun;
 	private Class<AbstractAlgo> algoClass;
 	private BPListener bplisten;
@@ -49,14 +50,15 @@ public class VirtualMachine {
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public boolean setAlgoClassToRun(Class algo) {
-		if (algo == null) {
-			return false;
+		if (algo != null) {
+			for (Class i : algo.getInterfaces()) {
+				if (i.equals(AbstractAlgo.class)) {
+					algoClass = algo;
+					return true;
+				}
+			}
 		}
-		if (!algo.getSuperclass().equals(AbstractAlgo.class)) {
-			return false;
-		}
-		algoClass = algo;
-		return true;
+		return false;
 	}
 
 	/**
@@ -76,6 +78,29 @@ public class VirtualMachine {
 	}
 
 	/**
+	 * private helper function to create algo Object from class object
+	 */
+	private void createAlgoFromClass() {
+		if (algoToRun != null && algoThread.isAlive()) {
+			return;
+		}
+		try {
+			algoToRun = (AbstractAlgo) algoClass.getConstructors()[0]
+					.newInstance();
+			algoThread = new Thread(algoToRun);
+			algoToRun.setParameters(parameters);
+		} catch (IllegalArgumentException e1) {
+			e1.printStackTrace();
+		} catch (InstantiationException e1) {
+			e1.printStackTrace();
+		} catch (IllegalAccessException e1) {
+			e1.printStackTrace();
+		} catch (InvocationTargetException e1) {
+			e1.printStackTrace();
+		}
+	}
+
+	/**
 	 * reset all states
 	 */
 	public void resetState() {
@@ -91,23 +116,7 @@ public class VirtualMachine {
 	 * the current memory layout
 	 */
 	public void startAutoRun() {
-		// TODO think about advanced thread security
-		if (algoToRun != null && algoToRun.isAlive()) {
-			return;
-		}
-		try {
-			algoToRun = (AbstractAlgo) algoClass.getConstructors()[0]
-					.newInstance(parameters);
-		} catch (IllegalArgumentException e1) {
-			e1.printStackTrace();
-		} catch (InstantiationException e1) {
-			e1.printStackTrace();
-		} catch (IllegalAccessException e1) {
-			e1.printStackTrace();
-		} catch (InvocationTargetException e1) {
-			e1.printStackTrace();
-		}
-		// algoToRun = new Algo(parameters);
+		this.createAlgoFromClass();
 
 		// Breakpoint listener
 		algoToRun.addBPListener(new BPListener() {
@@ -119,9 +128,9 @@ public class VirtualMachine {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				synchronized (algoToRun) {
-					algoToRun.onBreak = false;
-					algoToRun.notify();
+				synchronized (algoThread) {
+					algoToRun.stopBreak();
+					algoThread.notify();
 				}
 			}
 		});
@@ -132,7 +141,7 @@ public class VirtualMachine {
 			public void onDecisionPoint(int DPNr, SortableCollection toSort) {
 			}
 		});
-		algoToRun.start();
+		algoThread.start();
 	}
 
 	/**
@@ -141,18 +150,8 @@ public class VirtualMachine {
 	public void startDefaultRun() {
 		states.add(new State(null, bpIndex, dpIndex, false));
 		stateIndex = 0;
-		try {
-			algoToRun = (AbstractAlgo) algoClass.getConstructors()[0]
-					.newInstance(parameters);
-		} catch (IllegalArgumentException e1) {
-			e1.printStackTrace();
-		} catch (InstantiationException e1) {
-			e1.printStackTrace();
-		} catch (IllegalAccessException e1) {
-			e1.printStackTrace();
-		} catch (InvocationTargetException e1) {
-			e1.printStackTrace();
-		}
+		this.createAlgoFromClass();
+
 		algoToRun.addBPListener(new BPListener() {
 			public void onBreakPoint(int BPNr) {
 				// this is a new Breakpoint
@@ -185,17 +184,17 @@ public class VirtualMachine {
 				}
 			}
 		});
-		algoToRun.start();
+		algoThread.start();
 	}
 
 	/**
 	 * 
 	 */
 	public void stepForward() {
-		if (algoToRun.isAlive()) {
-			synchronized (algoToRun) {
-				algoToRun.onBreak = false;
-				algoToRun.notify();
+		if (algoThread.isAlive()) {
+			synchronized (algoThread) {
+				algoToRun.stopBreak();
+				algoThread.notify();
 			}
 		}
 	}
@@ -271,9 +270,9 @@ public class VirtualMachine {
 							}
 						});
 					} else {
-						synchronized (algoToRun) {
-							algoToRun.onBreak = false;
-							algoToRun.notify();
+						synchronized (algoThread) {
+							algoToRun.stopBreak();
+							algoThread.notify();
 						}
 					}
 				}
@@ -288,7 +287,7 @@ public class VirtualMachine {
 			});
 			stateIndex = 0;
 			this.states.clear();
-			algoToRun.start();
+			algoThread.start();
 		} else {
 			this.startDefaultRun();
 		}
@@ -297,27 +296,20 @@ public class VirtualMachine {
 	/**
 	 * @return if Algo Thread is still alive = running
 	 */
-	public boolean isDone() {
+	public boolean isAlive() {
 		if (algoToRun == null) {
 			return false;
 		}
-		return !algoToRun.isAlive();
+		return algoThread.isAlive();
 	}
 
 	/**
-	 * only usable if thread is in breakpoint, otherwise will wait, till it is
+	 * only usable if thread is in breakpoint
 	 * 
 	 * @return Reference on all Variables
 	 */
 	public ArrayList<PseudoCodeObject> getRunningRef() {
-		while (!algoToRun.onBreak) {
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
-		return this.algoToRun.getRunningRef();
+		return algoToRun.getVariableReferences();
 	}
 
 	/**
@@ -356,7 +348,7 @@ public class VirtualMachine {
 	 */
 	public void waitForAlgo() {
 		try {
-			algoToRun.join();
+			algoThread.join();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -369,19 +361,22 @@ public class VirtualMachine {
 	 */
 	@SuppressWarnings("unchecked")
 	public ArrayList<PseudoCodeObject> getStartParameters() {
-		if (this.algoClass != null) {
-			Method[] meths = algoClass.getMethods();
-			for (Method m : meths) {
-				if (m.getName().equals("getStartParameters")) {
-					try {
-						return ((ArrayList<PseudoCodeObject>) m.invoke(null,
-								(Object[]) null));
-					} catch (IllegalArgumentException e) {
-						e.printStackTrace();
-					} catch (IllegalAccessException e) {
-						e.printStackTrace();
-					} catch (InvocationTargetException e) {
-						e.printStackTrace();
+		if (algoClass != null) {
+			this.createAlgoFromClass();
+			if (algoToRun != null) {
+				Method[] meths = algoClass.getMethods();
+				for (Method m : meths) {
+					if (m.getName().equals("getParameterTypes")) {
+						try {
+							return ((ArrayList<PseudoCodeObject>) m.invoke(
+									algoToRun, (Object[]) null));
+						} catch (IllegalArgumentException e) {
+							e.printStackTrace();
+						} catch (IllegalAccessException e) {
+							e.printStackTrace();
+						} catch (InvocationTargetException e) {
+							e.printStackTrace();
+						}
 					}
 				}
 			}
