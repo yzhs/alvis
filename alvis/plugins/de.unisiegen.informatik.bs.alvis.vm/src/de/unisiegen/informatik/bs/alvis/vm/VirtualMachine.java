@@ -208,18 +208,7 @@ public class VirtualMachine {
 		// other value would also be totally useless
 		if (stateIndex > 1) {
 			this.resetState();
-			try {
-				algoToRun = (AbstractAlgo) algoClass.getConstructors()[0]
-						.newInstance(parameters);
-			} catch (IllegalArgumentException e1) {
-				e1.printStackTrace();
-			} catch (InstantiationException e1) {
-				e1.printStackTrace();
-			} catch (IllegalAccessException e1) {
-				e1.printStackTrace();
-			} catch (InvocationTargetException e1) {
-				e1.printStackTrace();
-			}
+			this.createAlgoFromClass();
 			algoToRun.addBPListener(new BPListener() {
 				// saving the state where we want to end
 				int curSI = stateIndex - 1;
@@ -351,6 +340,22 @@ public class VirtualMachine {
 			algoThread.join();
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * will wait till the algo reach breakpoint or is terminated
+	 */
+	public void waitForBreakPoint() {
+		while (algoThread.getState().compareTo(Thread.State.TIMED_WAITING) != 0
+				&& algoThread.getState().compareTo(Thread.State.WAITING) != 0) {
+			synchronized (this) {
+				try {
+					this.wait(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 
