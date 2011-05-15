@@ -5,7 +5,8 @@ package de.unisiegen.informatik.bs.alvis.editors;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.Iterator;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.ITypedRegion;
@@ -21,6 +22,7 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditor;
 
@@ -37,6 +39,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor {
 	private ProjectionSupport projectionSupport;
 	private Annotation[] oldAnnotations;
 	private ArrayList<Position> fPositions = new ArrayList<Position>();
+	private ArrayList<Position> oldList = new ArrayList<Position>();
 
 	/**
 	 * 
@@ -89,11 +92,18 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor {
 				getOverviewRuler(), isOverviewRulerVisible(), styles);
 
 		// ensure decoration support has been created and configured.
-		getSourceViewerDecorationSupport(viewer);
+		getSourceViewerDecorationSupport(viewer).install(getPreferenceStore());
+		// getSourceViewerDecorationSupport(viewer).
 
 		return viewer;
 	}
 
+	/**
+	 * this method is temporary for update the folding structure until the
+	 * compiler frontend is created
+	 * 
+	 * @param positions
+	 */
 	public void updateFoldingStructure(ArrayList<Position> positions) {
 		Annotation[] annotations = new Annotation[positions.size()];
 
@@ -102,7 +112,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor {
 		HashMap<ProjectionAnnotation, Position> newAnnotations = new HashMap<ProjectionAnnotation, Position>();
 
 		for (int i = 0; i < positions.size(); i++) {
-			ProjectionAnnotation annotation = new ProjectionAnnotation();
+			ProjectionAnnotation annotation = new ProjectionAnnotation(true);
 
 			newAnnotations.put(annotation, positions.get(i));
 
@@ -116,14 +126,18 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor {
 
 	@Override
 	public void doSave(IProgressMonitor progressMonitor) {
-		// TODO Auto-generated method stub
 		super.doSave(progressMonitor);
+		// TODO rethink the calling of these two methods, to better "timings"
 		calculatePositions();
+		markErrors();
 
 	}
 
+	/**
+	 * this method is temporary until the compiler frontend is created, it will
+	 * calculate and add the ProjectionsAnnotations for the folding feature
+	 */
 	protected void calculatePositions() {
-		fPositions.clear();
 		final AlgorithmEditor editor = this;
 		try {
 			ITypedRegion[] partitions = getSourceViewer().getDocument()
@@ -134,19 +148,61 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor {
 						AlgorithmPartitionScanner.MULTILINE_COMMENT)
 						|| region.getType().equals(
 								AlgorithmPartitionScanner.BEGIN_END)) {
-					fPositions.add(new org.eclipse.jface.text.Position(region
-							.getOffset(), region.getLength()+1));
+					if (fPositions.contains(region)) {
 
+					} else {
+
+						@SuppressWarnings("unchecked")
+						Iterator<Annotation> iter = annotationModel
+								.getAnnotationIterator();
+						while (iter.hasNext()) {
+							Annotation currAnnotation = iter.next();
+							if (currAnnotation.getType().equals(
+									ProjectionAnnotation.TYPE))
+								;
+							{
+								// this is how to get the information, whether
+								// folding area is collapsed(folded).
+								((ProjectionAnnotation) currAnnotation)
+										.isCollapsed();
+							}
+						}
+						fPositions.add(new Position(region.getOffset(), region
+								.getLength() + 1));
+						oldList.add(new Position(region.getOffset(), region
+								.getLength() + 1));
+
+					}
 				}
 			}
 		} catch (BadLocationException e) {
 		}
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
-				editor.updateFoldingStructure(fPositions);
+				editor.updateFoldingStructure(oldList);
 			}
 
 		});
 	}
 
+	/**
+	 * This method will delegate the call to AlgorithmErrorMarker and mark the
+	 * file/document opened by the editor
+	 */
+	public void markErrors() {
+		AlgorithmErrorMarker errorMarker = new AlgorithmErrorMarker(
+				getInputFile(), getSourceViewer().getDocument());
+		errorMarker.markErrors();
+	}
+
+	/**
+	 * return the input File for the Editor
+	 * 
+	 * @return the IFile representing the input File for the Editor
+	 */
+	protected IFile getInputFile() {
+		IFileEditorInput fileEditorInput = (IFileEditorInput) getEditorInput();
+		IFile file = fileEditorInput.getFile();
+		return file;
+	}
 }

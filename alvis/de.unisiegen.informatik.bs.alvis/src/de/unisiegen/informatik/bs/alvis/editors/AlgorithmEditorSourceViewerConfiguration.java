@@ -47,6 +47,22 @@ public class AlgorithmEditorSourceViewerConfiguration extends
 	private Token defaultToken = new Token(new TextAttribute(Display
 			.getCurrent().getSystemColor(SWT.COLOR_BLACK), null, SWT.NORMAL));
 
+	/**
+	 * Will create a sourceViewerConfiguration where the wordToHighlight will be
+	 * highlighted with the highlightColor
+	 * 
+	 * @param highlightColor
+	 *            the Color for the highlighting
+	 * @param wordsToHighlight
+	 *            the words to highlight
+	 */
+	public AlgorithmEditorSourceViewerConfiguration(Color highlightColor,
+			ArrayList<String> wordsToHighlight) {
+		super();
+		this.wordsToHighlight = wordsToHighlight;
+		this.highlightColor = highlightColor;
+	}
+
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
 
 		ContentAssistant assistant = new ContentAssistant();
@@ -88,21 +104,6 @@ public class AlgorithmEditorSourceViewerConfiguration extends
 				AlgorithmPartitionScanner.MULTILINE_COMMENT,
 				AlgorithmPartitionScanner.SINGLELINE_COMMENT,
 				AlgorithmPartitionScanner.BEGIN_END };
-	}
-
-	/**
-	 * Will create a sourceViewerConfiguration where the wordToHighlight will be
-	 * highlighted with the highlightColor
-	 * 
-	 * @param highlightColor
-	 *            the Color for the highlighting
-	 * @param wordsToHighlight
-	 *            the words to highlight
-	 */
-	public AlgorithmEditorSourceViewerConfiguration(Color highlightColor,
-			ArrayList<String> wordsToHighlight) {
-		this.wordsToHighlight = wordsToHighlight;
-		this.highlightColor = highlightColor;
 	}
 
 	/**
