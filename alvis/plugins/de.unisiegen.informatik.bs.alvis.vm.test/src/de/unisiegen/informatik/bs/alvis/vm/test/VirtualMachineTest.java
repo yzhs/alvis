@@ -87,7 +87,7 @@ public class VirtualMachineTest {
 	public void runThreadWithBPBackwards() {
 		VirtualMachine vm = VirtualMachine.getInstance();
 		Object lock = new Object();
-		vm.setAlgoClassToRun(ThreadAlgo.class);
+		vm.setAlgoClassToRun(vm.getAlgo());
 		vm.addBPListener(new BPListener() {
 			@Override
 			public void onBreakPoint(int BreakPointNumber) {
