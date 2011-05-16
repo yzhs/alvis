@@ -82,5 +82,4 @@ public class ThreadAlgo implements AbstractAlgo {
 			this.notify();
 		}
 	}
-
 }

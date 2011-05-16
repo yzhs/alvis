@@ -212,18 +212,18 @@ public final class DynaCode {
 	 * @param resource
 	 * @return the resource stream, or null if resource not found
 	 */
-	public InputStream getResourceAsStream(String resource) {
-		try {
-
-			SourceDir src = locateResource(resource);
-			return src == null ? null : new FileInputStream(new File(
-					src.srcDir, resource));
-
-		} catch (FileNotFoundException e) {
-			// should not happen
-			return null;
-		}
-	}
+//	public InputStream getResourceAsStream(String resource) {
+//		try {
+//
+//			SourceDir src = locateResource(resource);
+//			return src == null ? null : new FileInputStream(new File(
+//					src.srcDir, resource));
+//
+//		} catch (FileNotFoundException e) {
+//			// should not happen
+//			return null;
+//		}
+//	}
 
 	/**
 	 * Create a proxy instance that implements the specified access interface

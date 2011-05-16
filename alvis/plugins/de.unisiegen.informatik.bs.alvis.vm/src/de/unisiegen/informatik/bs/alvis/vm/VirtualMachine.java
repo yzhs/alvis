@@ -36,7 +36,7 @@ public class VirtualMachine {
 	public static VirtualMachine getInstance() {
 		return instance;
 	}
-
+	
 	private ArrayList<State> states;
 	private ArrayList<Integer> bpCounter;
 	private ArrayList<Integer> dpCounter;
@@ -58,7 +58,7 @@ public class VirtualMachine {
 	 * @return success
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public boolean setAlgoClassToRun(Class algo) {
+	private boolean setAlgoClassToRun(Class algo) {
 		if (algo != null) {
 			for (Class i : algo.getInterfaces()) {
 				if (i.equals(AbstractAlgo.class)) {
@@ -398,16 +398,25 @@ public class VirtualMachine {
 		return null;
 	}
 	@SuppressWarnings({ "rawtypes"})
-	public static Class getAlgo(String fileName){
+	private Class getClassObj(String fileName){
+		if(fileName.equals("")) {
+			return null;
+		}
 		DynaCode dynacode = new DynaCode();
-		dynacode.addSourceDir(new File(instance.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()));
-		System.out.println(instance.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString());
+		dynacode.addSourceDir(new File("src"));
 		try {
 			return dynacode.loadClass(fileName);
 		} catch (ClassNotFoundException e) {
-			System.out.println("YOU HAVE LOST THE MATCH!"+ e.getMessage());
+			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public boolean classCompileAndLoad(String fileName) {
+		this.algoClass = null;
+		this.algoThread = null;
+		this.algoToRun = null;
+		return this.setAlgoClassToRun(getClassObj(fileName));
 	}
 
 }
