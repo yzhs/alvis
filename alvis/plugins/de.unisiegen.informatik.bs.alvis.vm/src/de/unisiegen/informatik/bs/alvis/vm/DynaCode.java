@@ -1,14 +1,7 @@
 package de.unisiegen.informatik.bs.alvis.vm;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -16,6 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+/**
+ * Class which handles the class path in order to be able to compile Java Code at runtime
+ * 
+ * @author Sebastian Schmitz
+ */
 
 public final class DynaCode {
 	
@@ -37,7 +35,6 @@ public final class DynaCode {
 		this(extractClasspath(parentClassLoader), parentClassLoader);
 
 	}
-
 	/**
 	 * @param compileClasspath
 	 *            used to compile dynamic classes
@@ -48,14 +45,12 @@ public final class DynaCode {
 	public DynaCode(String compileClasspath, ClassLoader parentClassLoader) {
 		this.compileClasspath = compileClasspath;
 		this.parentClassLoader = parentClassLoader;
-		System.out.println(parentClassLoader.toString());
 		this.compileClasspath = this.compileClasspath.concat(":" +
 									this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+"src/:"+
 									this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+":"+
 									this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+"vm/:"+
 									this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+"vm/src/:"
 								);
-		System.out.println("compileClasspath: " + this.compileClasspath);
 	}
 
 	/**
@@ -67,9 +62,7 @@ public final class DynaCode {
 	 */
 	public boolean addSourceDir(File srcDir) {
 		try {
-			System.out.println("srcDir Pre: " +  srcDir.toString());
 			srcDir = srcDir.getCanonicalFile();
-			System.out.println("srcDir After: " +  srcDir.toString());
 			
 		} catch (IOException e) {
 			// ignore
@@ -94,7 +87,6 @@ public final class DynaCode {
 
 		return true;
 	}
-	
 
 	/**
 	 * Returns the up-to-date dynamic class by name.
@@ -170,66 +162,9 @@ public final class DynaCode {
 		src.recreateClassLoader();
 	}
 
-	/**
-	 * Get a resource from added source directories.
-	 * 
-	 * @param resource
-	 * @return the resource URL, or null if resource not found
+	/** 
+	 * Class to handle the directories relevant for compiling
 	 */
-	public URL getResource(String resource) {
-		try {
-
-			SourceDir src = locateResource(resource);
-			return src == null ? null : new File(src.srcDir, resource).toURL();
-
-		} catch (MalformedURLException e) {
-			// should not happen
-			return null;
-		}
-	}
-
-	/**
-	 * Get a resource stream from added source directories.
-	 * 
-	 * @param resource
-	 * @return the resource stream, or null if resource not found
-	 */
-//	public InputStream getResourceAsStream(String resource) {
-//		try {
-//
-//			SourceDir src = locateResource(resource);
-//			return src == null ? null : new FileInputStream(new File(
-//					src.srcDir, resource));
-//
-//		} catch (FileNotFoundException e) {
-//			// should not happen
-//			return null;
-//		}
-//	}
-
-	/**
-	 * Create a proxy instance that implements the specified access interface
-	 * and delegates incoming invocations to the specified dynamic
-	 * implementation. The dynamic implementation may change at run-time, and
-	 * the proxy will always delegates to the up-to-date implementation.
-	 * 
-	 * @param interfaceClass
-	 *            the access interface
-	 * @param implClassName
-	 *            the backend dynamic implementation
-	 * @return
-	 * @throws RuntimeException
-	 *             if an instance cannot be created, because of class not found
-	 *             for example
-	 */
-	public Object newProxyInstance(Class interfaceClass, String implClassName)
-			throws RuntimeException {
-		MyInvocationHandler handler = new MyInvocationHandler(
-				implClassName);
-		return Proxy.newProxyInstance(interfaceClass.getClassLoader(),
-				new Class[] { interfaceClass }, handler);
-	}
-
 	private class SourceDir {
 		File srcDir;
 
@@ -244,13 +179,10 @@ public final class DynaCode {
 
 			String subdir = srcDir.getAbsolutePath().replace(':', '_').replace(
 					'/', '_').replace('\\', '_');
-			this.binDir = new File(System.getProperty("java.io.tmpdir"),
-					"dynacode/" + subdir);
+			this.binDir = new File(System.getProperty("java.io.tmpdir"), subdir);
 			this.binDir.mkdirs();
 
 			// prepare compiler
-			System.out.println("In SourceDir: " + binDir.getAbsolutePath());
-			System.out.println("binDir: " + binDir);
 			this.javac = new Javac(compileClasspath, binDir.getAbsolutePath());
 			
 			// class loader
@@ -259,7 +191,7 @@ public final class DynaCode {
 		
 		void recreateClassLoader() {
 			try {
-				classLoader = new URLClassLoader(new URL[] { binDir.toURL() },
+				classLoader = new URLClassLoader(new URL[] { binDir.toURI().toURL() },
 						parentClassLoader);
 			} catch (MalformedURLException e) {
 				// should not happen
@@ -328,55 +260,6 @@ public final class DynaCode {
 			info("Init " + clazz);
 		}
 	}
-
-	private class MyInvocationHandler implements InvocationHandler {
-
-		String backendClassName;
-
-		Object backend;
-
-		MyInvocationHandler(String className) {
-			backendClassName = className;
-
-			try {
-				Class clz = loadClass(backendClassName);
-				backend = newDynaCodeInstance(clz);
-
-			} catch (ClassNotFoundException e) {
-				throw new RuntimeException(e);
-			}
-		}
-
-		public Object invoke(Object proxy, Method method, Object[] args)
-				throws Throwable {
-
-			// check if class has been updated
-			Class clz = loadClass(backendClassName);
-			if (backend.getClass() != clz) {
-				backend = newDynaCodeInstance(clz);
-			}
-
-			try {
-				// invoke on backend
-				return method.invoke(backend, args);
-
-			} catch (InvocationTargetException e) {
-				throw e.getTargetException();
-			}
-		}
-
-		private Object newDynaCodeInstance(Class clz) {
-			try {
-				return clz.newInstance();
-			} catch (Exception e) {
-				throw new RuntimeException(
-						"Failed to new instance of DynaCode class "
-								+ clz.getName(), e);
-			}
-		}
-
-	}
-
 	/**
 	 * Extracts a classpath string from a given class loader. Recognizes only
 	 * URLClassLoader.
@@ -403,7 +286,7 @@ public final class DynaCode {
 	 * Log a message.
 	 */
 	private static void info(String msg) {
-		System.out.println("[DynaCode] " + msg);
+		// System.out.println("[DynaCode] " + msg);
 	}
 
 }

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * A wrapper to ease the use of com.sun.tools.javac.Main.
  * 
- * @author liyang
+ * @author Sebastian Schmitz
  */
 public final class Javac {
 
@@ -48,6 +48,12 @@ public final class Javac {
 		return (resultCode == 0) ? null : err.toString();
 	}
 
+	/**
+	 * Prepare the paths for compiling
+	 * 
+	 * @param srcFiles
+	 * @return String describing error if something went wrong
+	 */
 	public String compile(File srcFiles[]) {
 		String paths[] = new String[srcFiles.length];
 		for (int i = 0; i < paths.length; i++) {
@@ -93,62 +99,6 @@ public final class Javac {
 		}
 
 		return (String[]) args.toArray(new String[args.size()]);
-	}
-
-	public String getBootclasspath() {
-		return bootclasspath;
-	}
-
-	public void setBootclasspath(String bootclasspath) {
-		this.bootclasspath = bootclasspath;
-	}
-
-	public String getClasspath() {
-		return classpath;
-	}
-
-	public void setClasspath(String classpath) {
-		this.classpath = classpath;
-	}
-
-	public String getEncoding() {
-		return encoding;
-	}
-
-	public void setEncoding(String encoding) {
-		this.encoding = encoding;
-	}
-
-	public String getExtdirs() {
-		return extdirs;
-	}
-
-	public void setExtdirs(String extdirs) {
-		this.extdirs = extdirs;
-	}
-
-	public String getOutputdir() {
-		return outputdir;
-	}
-
-	public void setOutputdir(String outputdir) {
-		this.outputdir = outputdir;
-	}
-
-	public String getSourcepath() {
-		return sourcepath;
-	}
-
-	public void setSourcepath(String sourcepath) {
-		this.sourcepath = sourcepath;
-	}
-
-	public String getTarget() {
-		return target;
-	}
-
-	public void setTarget(String target) {
-		this.target = target;
 	}
 
 }
