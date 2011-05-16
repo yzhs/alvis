@@ -397,14 +397,15 @@ public class VirtualMachine {
 		}
 		return null;
 	}
-	@SuppressWarnings({ "rawtypes", "unused" })
-	public static Class getAlgo(){
+	@SuppressWarnings({ "rawtypes"})
+	public static Class getAlgo(String fileName){
 		DynaCode dynacode = new DynaCode();
-		dynacode.addSourceDir(new File(dynacode.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()));
+		dynacode.addSourceDir(new File(instance.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()));
+		System.out.println(instance.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString());
 		try {
-			return dynacode.loadClass("test.resources.FirstAlgo");
+			return dynacode.loadClass(fileName);
 		} catch (ClassNotFoundException e) {
-			System.out.println("YOU HAVE LOST THE MATCH!");
+			System.out.println("YOU HAVE LOST THE MATCH!"+ e.getMessage());
 		}
 		return null;
 	}
