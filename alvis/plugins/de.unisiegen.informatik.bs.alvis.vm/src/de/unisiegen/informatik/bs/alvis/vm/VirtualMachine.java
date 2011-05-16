@@ -14,6 +14,13 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.SortableCollection;
  *         take care, could be multiple times run (singleton pattern works not
  *         that fine with multiple classloaders)
  * 
+ *         TODO work with Jan a working system to use it with multiple Thread
+ *         algos
+ *         
+ *         TODO cleanup API
+ * 
+ * 
+ * 
  */
 
 public class VirtualMachine {
@@ -81,9 +88,6 @@ public class VirtualMachine {
 	 * private helper function to create algo Object from class object
 	 */
 	private void createAlgoFromClass() {
-		if (algoToRun != null && algoThread.isAlive()) {
-			return;
-		}
 		try {
 			algoToRun = (AbstractAlgo) algoClass.getConstructors()[0]
 					.newInstance();
@@ -312,6 +316,7 @@ public class VirtualMachine {
 	/**
 	 * 
 	 * @param bplisten
+	 *            to listen for
 	 */
 	public void addBPListener(BPListener bplisten) {
 		this.bplisten = bplisten;
@@ -320,13 +325,14 @@ public class VirtualMachine {
 	/**
 	 * 
 	 * @param para
+	 *            adding Parameter to the algo
 	 */
 	public void addParameter(PseudoCodeObject para) {
 		parameters.add(para);
 	}
 
 	/**
-	 * 
+	 * Passed Parameters to Algo will be cleared
 	 */
 	public void removeOldParameters() {
 		this.parameters.clear();
@@ -348,7 +354,8 @@ public class VirtualMachine {
 	 */
 	public void waitForBreakPoint() {
 		while (algoThread.getState().compareTo(Thread.State.TIMED_WAITING) != 0
-				&& algoThread.getState().compareTo(Thread.State.WAITING) != 0) {
+				&& algoThread.getState().compareTo(Thread.State.WAITING) != 0
+				&& algoThread.getState().compareTo(Thread.State.TERMINATED) != 0) {
 			synchronized (this) {
 				try {
 					this.wait(100);

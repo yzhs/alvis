@@ -54,6 +54,36 @@ public class VirtualMachineTest {
 	}
 
 	@Test
+	public void runThreadWithBPBackwardsOnTermination() {
+		VirtualMachine vm = VirtualMachine.getInstance();
+		Object lock = new Object();
+		vm.setAlgoClassToRun(ThreadAlgo.class);
+		vm.addBPListener(new BPListener() {
+			@Override
+			public void onBreakPoint(int BreakPointNumber) {
+			}
+		});
+		vm.startDefaultRun();
+		boolean toRun = true;
+		while (toRun) {
+			synchronized (lock) {
+				try {
+					lock.wait(10);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				vm.stepForward();
+				if(!vm.isAlive()) {
+					toRun = false;
+				}
+			}
+		}
+		vm.waitForBreakPoint();
+		Assert.assertEquals(4, ((PseudoCodeInteger) vm.getRunningRef().get(0)).getLiteralValue());
+	
+	}
+	
+	@Test
 	public void runThreadWithBPBackwards() {
 		VirtualMachine vm = VirtualMachine.getInstance();
 		Object lock = new Object();
