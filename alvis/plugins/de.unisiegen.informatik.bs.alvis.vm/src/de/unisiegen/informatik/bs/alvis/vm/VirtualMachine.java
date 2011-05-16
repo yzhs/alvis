@@ -1,8 +1,10 @@
 package de.unisiegen.informatik.bs.alvis.vm;
 
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.SortableCollection;
@@ -392,6 +394,17 @@ public class VirtualMachine {
 					}
 				}
 			}
+		}
+		return null;
+	}
+	@SuppressWarnings({ "rawtypes", "unused" })
+	public static Class getAlgo(){
+		DynaCode dynacode = new DynaCode();
+		dynacode.addSourceDir(new File(dynacode.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()));
+		try {
+			return dynacode.loadClass("test.resources.FirstAlgo");
+		} catch (ClassNotFoundException e) {
+			System.out.println("YOU HAVE LOST THE MATCH!");
 		}
 		return null;
 	}
