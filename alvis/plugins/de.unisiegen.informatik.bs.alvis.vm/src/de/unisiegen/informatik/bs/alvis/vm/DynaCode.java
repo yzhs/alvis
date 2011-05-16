@@ -49,30 +49,12 @@ public final class DynaCode {
 		this.compileClasspath = compileClasspath;
 		this.parentClassLoader = parentClassLoader;
 		System.out.println(parentClassLoader.toString());
-		this.compileClasspath = this.compileClasspath.concat(":"+":/home/basti/plugins/org.eclipse.draw2d_3.6.1.v20100913-2020.jar:" +
-								"/home/basti/plugins/org.eclipse.swt.gtk.linux.x86_3.6.1.v3655c.jar:" +
-								"/home/basti/plugins/org.eclipse.zest.core_1.2.0.v20101209-2020.jar:"+
-								//"/home/basti/Programmierung/eclipse_java3/alviscopy/src/:" +
-								"/home/basti/Studium/2010_11 WS/Softwaretechnik I/eclipse/plugins/:" +
-								//"/home/basti/Programmierung/eclipse_java3/alviscopy/vm/:" +
-								//"/home/basti/Programmierung/eclipse_java3/alviscopy/vm/src/:" +
-								//"/home/basti/Programmierung/eclipse_java3/alviscopy/:" +
-								this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+"src/:"+
-								this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+":"+
-								this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+"vm/:"+
-								this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+"vm/src/:"+
-								"/home/basti/Programmierung/runtime-alvis.product/bin/:" +
-								"/home/basti/Programmierung/runtime-alvis.product/:" +
-								"/usr/lib/jvm/java-6-sun-1.6.0.24/jre/lib/ext/localedata.jar:" +
-								"/usr/lib/jvm/java-6-sun-1.6.0.24/jre/lib/ext/sunjce_provider.jar:" +
-								"/usr/lib/jvm/java-6-sun-1.6.0.24/jre/lib/ext/sunpkcs11.jar:" +
-								"/usr/lib/jvm/java-6-sun-1.6.0.24/jre/lib/ext/dnsns.jar"+
-								"/home/basti/Downloads/eclipse/:"+
-								"/home/basti/Downloads/eclipse/plugins"
+		this.compileClasspath = this.compileClasspath.concat(":" +
+									this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+"src/:"+
+									this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+":"+
+									this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+"vm/:"+
+									this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+"vm/src/:"
 								);
-		this.compileClasspath = this.compileClasspath.concat(
-				System.getProperty("path.separator")+this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+ "vm/src"
-				);
 		System.out.println("compileClasspath: " + this.compileClasspath);
 	}
 
