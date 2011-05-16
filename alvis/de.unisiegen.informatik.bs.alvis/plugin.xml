@@ -91,20 +91,12 @@
          point="org.eclipse.ui.editors">
       <editor
             class="de.unisiegen.informatik.bs.alvis.editors.AlgorithmEditor"
-            contributorClass="de.unisiegen.informatik.bs.alvis.editors.AlgorithmEditorContributor"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
             default="true"
             extensions="algo"
             icon="icons/extension/ext_algo.png"
             id="de.unisiegen.informatik.bs.alvis.editors.AlgorithmEditor"
             name="%editor.name">
-      </editor>
-      <editor
-            class="de.unisiegen.informatik.bs.alvis.editors.XMLEditor"
-            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
-            extensions="xml"
-            icon="icons/extension/ext_xml.png"
-            id="de.unisiegen.informatik.bs.alvis.editors.XMLEditor"
-            name="%editor.name.0">
       </editor>
       <editor
             class="de.unisiegen.informatik.bs.alvis.editors.RunEditor"

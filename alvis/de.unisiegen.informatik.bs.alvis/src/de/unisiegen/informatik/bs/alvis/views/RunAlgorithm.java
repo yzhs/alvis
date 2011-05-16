@@ -67,28 +67,30 @@ public class RunAlgorithm extends ViewPart {
 		
 		initText();
 
-		text.addVerifyKeyListener(new VerifyKeyListener() {
-			public void verifyKey(VerifyEvent event) {
-				// If the content assist window is opened and the user hits the return key
-				// do not make a line-break!
-				if(event.keyCode == 13 && AutoCompletion.getContentProposalAdapter().isProposalPopupOpen())
-				{
-					event.doit = false;
-				}
-
-				//TODO erst changeAlgorithmAction machen, wenn der angenommen worden ist.
-			}
-		});
+//TODO @Simon this part of code is not needed anymore?
+//		text.addVerifyKeyListener(new VerifyKeyListener() {
+//			public void verifyKey(VerifyEvent event) {
+//				// If the content assist window is opened and the user hits the return key
+//				// do not make a line-break!
+//				if(event.keyCode == 13 && AutoCompletion.getContentProposalAdapter().isProposalPopupOpen())
+//				{
+//					event.doit = false;
+//				}
+//
+//				//TODO erst changeAlgorithmAction machen, wenn der angenommen worden ist.
+//			}
+//		});
 		
 		// Content Assist
 		text.addVerifyListener(new VerifyListener() {
 			public void verifyText(VerifyEvent event) {
 				
+				//TODO @Simon this part of code is not needed anymore?
 				// Submit the change of the algorithm only if the CompletionWindow is not open
-				if(!AutoCompletion.getContentProposalAdapter().isProposalPopupOpen()) {
-//					new ChangeAlgorithmAction(text.getText()).run();
-					myAlgorithm.setAlgorithm(text.getText());
-				}
+//				if(!AutoCompletion.getContentProposalAdapter().isProposalPopupOpen()) {
+////					new ChangeAlgorithmAction(text.getText()).run();
+//					myAlgorithm.setAlgorithm(text.getText());
+//				}
 				
 				// Only expand when text is inserted.
 				if (event.end - event.start == 0) {
@@ -220,22 +222,23 @@ public class RunAlgorithm extends ViewPart {
 		/*
 		 * Begin autoCompletion
 		 */
-		ArrayList<String> completeTokens = new ArrayList<String>();
-		for(Token token : lexer.getIdentifier()) {
-			if(!completeTokens.contains(token.getText())) {
-				completeTokens.add(token.getText());
-			}
-		}
-		for(Token token : lexer.getKeywords()) {
-			if(!completeTokens.contains(token.getText())) {
-				completeTokens.add(token.getText());
-			}
-		}
-		myAlgorithm.setCompleteTokens(completeTokens);
-		AutoCompletion.setCompletion(text, myAlgorithm.getCompleteTokens());
-		for(String string : myAlgorithm.getCompleteTokens()) {
-//			System.out.print(" " + string);
-		}
+		//TODO @Simon this part of code is not needed anymore?
+//		ArrayList<String> completeTokens = new ArrayList<String>();
+//		for(Token token : lexer.getIdentifier()) {
+//			if(!completeTokens.contains(token.getText())) {
+//				completeTokens.add(token.getText());
+//			}
+//		}
+//		for(Token token : lexer.getKeywords()) {
+//			if(!completeTokens.contains(token.getText())) {
+//				completeTokens.add(token.getText());
+//			}
+//		}
+//		myAlgorithm.setCompleteTokens(completeTokens);
+//		AutoCompletion.setCompletion(text, myAlgorithm.getCompleteTokens());
+//		for(String string : myAlgorithm.getCompleteTokens()) {
+////			System.out.print(" " + string);
+//		}
 		// End autoCompletion
 		
 		/*

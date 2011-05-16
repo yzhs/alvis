@@ -13,7 +13,7 @@ import org.eclipse.jface.text.presentation.IPresentationRepairer;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.swt.custom.StyleRange;
 
-public class XMLNonRuleBasedDamagerRepairer
+public class NonRuleBasedDamagerRepairer
 	implements IPresentationDamager, IPresentationRepairer {
 
 	/** The document this object works on */
@@ -24,7 +24,7 @@ public class XMLNonRuleBasedDamagerRepairer
 	/**
 	 * Constructor for NonRuleBasedDamagerRepairer.
 	 */
-	public XMLNonRuleBasedDamagerRepairer(TextAttribute defaultTextAttribute) {
+	public NonRuleBasedDamagerRepairer(TextAttribute defaultTextAttribute) {
 		Assert.isNotNull(defaultTextAttribute);
 
 		fDefaultTextAttribute = defaultTextAttribute;

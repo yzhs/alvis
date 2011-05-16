@@ -1,9 +1,10 @@
 /**
- * Configuration Class written for the AlgortihmEditor
+ * 
  */
 package de.unisiegen.informatik.bs.alvis.editors;
 
 import java.util.ArrayList;
+
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
@@ -31,6 +32,8 @@ import org.eclipse.ui.PlatformUI;
 import de.unisiegen.informatik.bs.alvis.Activator;
 
 /**
+ * AlgorithmEditor Configuration Class is used to set up e.g. highlighting,
+ * content assist and document portioning
  * 
  * @author Eduard Boos
  * 
@@ -63,6 +66,7 @@ public class AlgorithmEditorSourceViewerConfiguration extends
 		this.highlightColor = highlightColor;
 	}
 
+	@Override
 	public IContentAssistant getContentAssistant(ISourceViewer sourceViewer) {
 
 		ContentAssistant assistant = new ContentAssistant();
@@ -85,20 +89,39 @@ public class AlgorithmEditorSourceViewerConfiguration extends
 		return assistant;
 	}
 
+	@Override
 	public IPresentationReconciler getPresentationReconciler(
 			ISourceViewer sourceViewer) {
+
 		PresentationReconciler reconciler = new PresentationReconciler();
 		DefaultDamagerRepairer dr = new DefaultDamagerRepairer(getScanner());
 		reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
 		reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
+
+		/** setting color for the Multiline_comment parts */
+		NonRuleBasedDamagerRepairer ndr = new NonRuleBasedDamagerRepairer(
+				new TextAttribute(createColor(63, 95, 191)));
+		reconciler
+				.setDamager(ndr, AlgorithmPartitionScanner.MULTILINE_COMMENT);
+		reconciler.setRepairer(ndr,
+				AlgorithmPartitionScanner.MULTILINE_COMMENT);
+		
+		/** setting color for the Singleline_comment parts */
+		ndr = new NonRuleBasedDamagerRepairer(new TextAttribute(createColor(63,
+				127, 95)));
+		reconciler.setDamager(ndr, AlgorithmPartitionScanner.SINGLELINE_COMMENT);
+		reconciler
+				.setRepairer(ndr, AlgorithmPartitionScanner.SINGLELINE_COMMENT);
+
 		return reconciler;
 	}
 
-
+	@Override
 	public String getConfiguredDocumentPartitioning(ISourceViewer sourceViewer) {
 		return Activator.ALGORITHM_PARTITIONING;
 	}
 
+	@Override
 	public String[] getConfiguredContentTypes(ISourceViewer sourceViewer) {
 		return new String[] { IDocument.DEFAULT_CONTENT_TYPE,
 				AlgorithmPartitionScanner.MULTILINE_COMMENT,
@@ -186,6 +209,21 @@ public class AlgorithmEditorSourceViewerConfiguration extends
 		return whitespaceDetector;
 	}
 
+	/**
+	 * @return the wordsToHighlight
+	 */
+	public ArrayList<String> getWordsToHighlight() {
+		return wordsToHighlight;
+	}
+
+	/**
+	 * @param wordsToHighlight
+	 *            the wordsToHighlight to set
+	 */
+	public void setWordsToHighlight(ArrayList<String> wordsToHighlight) {
+		this.wordsToHighlight = wordsToHighlight;
+	}
+
 	private ITokenScanner getScanner() {
 		RuleBasedScanner scanner = new RuleBasedScanner();
 		/** get the Rules for Syntax highlighting */
@@ -216,13 +254,5 @@ public class AlgorithmEditorSourceViewerConfiguration extends
 		}
 		rules.add(wordRule);
 		return rules.toArray(new IRule[rules.size()]);
-	}
-
-	public ArrayList<String> getWordsToHighlight() {
-		return wordsToHighlight;
-	}
-
-	public void setWordsToHighlight(ArrayList<String> wordsToHighlight) {
-		this.wordsToHighlight = wordsToHighlight;
 	}
 }

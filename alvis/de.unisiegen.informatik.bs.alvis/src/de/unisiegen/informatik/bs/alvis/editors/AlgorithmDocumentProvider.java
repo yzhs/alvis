@@ -12,6 +12,7 @@ import org.eclipse.ui.editors.text.FileDocumentProvider;
 import de.unisiegen.informatik.bs.alvis.Activator;
 
 /**
+ * Custom Document provider for the AlgorithmEditor to which custom document partitions and extends @FileDocumentProvider
  * @author Eduard Boos
  * 
  */

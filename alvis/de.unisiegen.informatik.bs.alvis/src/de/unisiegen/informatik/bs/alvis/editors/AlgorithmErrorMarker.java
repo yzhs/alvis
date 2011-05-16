@@ -1,5 +1,5 @@
 /**
- * This class is for marking the given Document and File with Errors that occurs parsing the document.
+ *
  */
 package de.unisiegen.informatik.bs.alvis.editors;
 
@@ -14,6 +14,7 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 
 /**
+ * This class is for marking the given Document and File with Errors that occurs parsing the document.
  * @author Eduard Boos
  * 
  */

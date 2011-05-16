@@ -13,6 +13,10 @@ import org.eclipse.jface.text.rules.RuleBasedPartitionScanner;
 import org.eclipse.jface.text.rules.Token;
 
 /**
+ * Partition Scanner used to Partition the document into Parts where it can be
+ * e.g. displayed differently based on the part you are displaying. For example
+ * you do not want to highlight Keywords in comment parts.
+ * 
  * @author Eduard Boos
  * 
  */

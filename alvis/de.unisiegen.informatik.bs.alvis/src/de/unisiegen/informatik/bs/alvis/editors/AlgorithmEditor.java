@@ -87,15 +87,22 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor {
 	@Override
 	protected ISourceViewer createSourceViewer(Composite parent,
 			IVerticalRuler ruler, int styles) {
-		// super.createSourceViewer(parent, ruler, styles);
 		ISourceViewer viewer = new ProjectionViewer(parent, ruler,
 				getOverviewRuler(), isOverviewRulerVisible(), styles);
 
 		// ensure decoration support has been created and configured.
 		getSourceViewerDecorationSupport(viewer).install(getPreferenceStore());
-		// getSourceViewerDecorationSupport(viewer).
 
 		return viewer;
+	}
+
+	@Override
+	public void doSave(IProgressMonitor progressMonitor) {
+		super.doSave(progressMonitor);
+		// TODO rethink the calling of these two methods, to better "timings"
+		calculatePositions();
+		markErrors();
+	
 	}
 
 	/**
@@ -122,15 +129,6 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor {
 		annotationModel.modifyAnnotations(oldAnnotations, newAnnotations, null);
 
 		oldAnnotations = annotations;
-	}
-
-	@Override
-	public void doSave(IProgressMonitor progressMonitor) {
-		super.doSave(progressMonitor);
-		// TODO rethink the calling of these two methods, to better "timings"
-		calculatePositions();
-		markErrors();
-
 	}
 
 	/**
@@ -189,7 +187,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor {
 	 * This method will delegate the call to AlgorithmErrorMarker and mark the
 	 * file/document opened by the editor
 	 */
-	public void markErrors() {
+	protected void markErrors() {
 		AlgorithmErrorMarker errorMarker = new AlgorithmErrorMarker(
 				getInputFile(), getSourceViewer().getDocument());
 		errorMarker.markErrors();

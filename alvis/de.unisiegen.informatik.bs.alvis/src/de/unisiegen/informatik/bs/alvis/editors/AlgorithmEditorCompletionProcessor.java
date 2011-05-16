@@ -1,5 +1,5 @@
 /**
- * Provides the Content Assist(autocompletion) functionality for the Algorithmeditor
+ * 
  */
 package de.unisiegen.informatik.bs.alvis.editors;
 
@@ -18,7 +18,7 @@ import org.eclipse.jface.text.contentassist.IContextInformationPresenter;
 import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 
 /**
- * 
+ * Provides Content Assist(autocompletion) functionality for the Algorithmeditor
  * @author Eduard Boos
  * 
  */
