@@ -22,7 +22,6 @@ import de.unisiegen.informatik.bs.alvis.graph.editors.GraphEditor;
 public class ChangeLayout extends AbstractHandler {
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		//TODO Pr�fen, ob dies der Richtige Activator ist.
 		IEditorPart editor = Activator.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 //		Try to cast the active editor to GraphEditor.
 		try {
