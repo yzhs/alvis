@@ -377,7 +377,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	 */
 	public AlvisGraphConnection getHighlightedConnection() {
 
-		if (!getSelection().isEmpty()) {
+		if (getSelection().size() == 1) {
 			try {
 				AlvisGraphConnection result = (AlvisGraphConnection) getSelection()
 						.get(0);
@@ -395,7 +395,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	 */
 	public AlvisGraphNode getHighlightedNode() {
 
-		if (!getSelection().isEmpty()) {
+		if (getSelection().size() == 1) {
 			try {
 				AlvisGraphNode result = (AlvisGraphNode) getSelection().get(0);
 				return result;
@@ -601,6 +601,31 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		int result = ((int) (Math.random() * 1000)) % (2 * width - 1);
 		result += 1;
 		return result;
+	}
+
+	/**
+	 * creates circle which has given amount of nodes
+	 * 
+	 * @param amountOfNodes
+	 *            the amount of nodes in circle
+	 */
+	public void createCircle(int amountOfNodes) {
+
+		if (amountOfNodes > 300)
+			amountOfNodes = 300; // too many
+		if (amountOfNodes < 3)
+			amountOfNodes = 3; // too few
+
+		AlvisGraphNode start = makeGraphNode("");
+		AlvisGraphNode one = start, two = null;
+
+		for (int i = 1; i < amountOfNodes; i++) {
+			two = makeGraphNode("");
+			makeGraphConnection(one, two);
+			one = two;
+		}
+		makeGraphConnection(one, start);
+
 	}
 
 	/**

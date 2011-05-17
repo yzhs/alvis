@@ -26,6 +26,8 @@ import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseWheelListener;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
@@ -37,6 +39,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
@@ -78,6 +81,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 			bDelete, bZoomIn, bZoomOut;
 	public static Button bAutoFill, bChangeLayout, bDeleteAll, bScreenShot;
 	public static Button bSave;
+	public static Combo cAutoFill;
 	public static Text tDepth, tWidth;
 	public static Label lDepth, lWidth;
 	public AlvisGraph myGraph;
@@ -86,6 +90,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 	private static IEditorInput myInput;
 	private String myInputFilePath;
 	private boolean rename;
+	private int treeOrCircle;
 	AlvisGraphNode actNode;
 	AlvisGraphConnection actCon;
 
@@ -240,13 +245,14 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 		myParent = parent;
 		myInput = input;
 		oldCursor = myParent.getCursor();
+		treeOrCircle = 0;
 
 		RowLayout rowLayout = new RowLayout();
 		rowLayout.type = SWT.VERTICAL;
 		parent.setLayout(new GridLayout(1, false));
 
 		Group graphGroup = new Group(parent, SWT.NONE);
-		graphGroup.setText(Messages.Graph_button_graph);
+		graphGroup.setText(Messages.getLabel("editor"));
 		graphGroup.setLayout(new FillLayout());
 
 		GridData gdGraph = new GridData();
@@ -265,7 +271,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 		setGraphModus();
 
 		Group tools = new Group(parent, SWT.NONE);
-		tools.setText(Messages.Graph_group_tools);
+		tools.setText(Messages.getLabel("group_tools"));
 		tools.setLayout(new GridLayout(8, false));
 
 		GridData gdTools = new GridData();
@@ -281,63 +287,68 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 
 		bHand = new Button(tools, SWT.NONE);
 		bHand.setImage(ImageCache.getImage("icons/editor/graph_move.png")); //$NON-NLS-1$
-		bHand.setToolTipText(Messages.Graph_button_move);
+		bHand.setToolTipText(Messages.getLabel("button_move"));
 
 		bNode = new Button(tools, SWT.NONE);
 		bNode.setImage(ImageCache.getImage("icons/editor/graph_add.png")); //$NON-NLS-1$
-		bNode.setToolTipText(Messages.Graph_button_add);
+		bNode.setToolTipText(Messages.getLabel("button_add"));
 
 		bConnection = new Button(tools, SWT.NONE);
 		bConnection.setImage(ImageCache
 				.getImage("icons/editor/graph_connection.png")); //$NON-NLS-1$
-		bConnection.setToolTipText(Messages.Graph_button_connection);
+		bConnection.setToolTipText(Messages.getLabel("button_connection"));
 
 		bStartNode = new Button(tools, SWT.NONE);
 		bStartNode.setImage(ImageCache
 				.getImage("icons/editor/graph_startnode.png")); //$NON-NLS-1$
-		bStartNode.setToolTipText(Messages.Graph_button_startnode);
+		bStartNode.setToolTipText(Messages.getLabel("button_startnode"));
 
 		bEndNode = new Button(tools, SWT.NONE);
 		bEndNode.setImage(ImageCache.getImage("icons/editor/graph_endnode.png")); //$NON-NLS-1$
-		bEndNode.setToolTipText(Messages.Graph_button_endnode);
+		bEndNode.setToolTipText(Messages.getLabel("button_endnode"));
 
 		bDelete = new Button(tools, SWT.NONE);
 		bDelete.setImage(ImageCache.getImage("icons/editor/graph_delete.png"));
-		bDelete.setToolTipText(Messages.Graph_button_deletenode);
+		bDelete.setToolTipText(Messages.getLabel("button_deletenode"));
 
 		Group autofill = new Group(parent, SWT.NONE);
-		autofill.setText(Messages.Graph_button_autofill);
-		autofill.setLayout(new GridLayout(8, false));
+		autofill.setText(Messages.getLabel("button_autofill"));
+		autofill.setLayout(new GridLayout(9, false));
 
 		GridData gdAutoFill = new GridData();
 		gdAutoFill.horizontalAlignment = SWT.FILL;
 		gdAutoFill.grabExcessHorizontalSpace = true;
 		autofill.setLayoutData(gdAutoFill);
 
+		cAutoFill = new Combo(autofill, SWT.READ_ONLY);
+		cAutoFill.add(Messages.getLabel("makeCircle"), 1);
+		cAutoFill.add(Messages.getLabel("makeTree"), 2);
+		cAutoFill.select(0);
+
 		lDepth = new Label(autofill, SWT.NONE);
-		lDepth.setText(Messages.Graph_button_depth);
+		lDepth.setText(Messages.getLabel("button_depth"));
 		tDepth = new Text(autofill, SWT.NONE);
 		tDepth.setText("4"); //$NON-NLS-1$
 		tDepth.setSize(100, 20);
 
 		lWidth = new Label(autofill, SWT.NONE);
-		lWidth.setText(Messages.Graph_button_width);
+		lWidth.setText(Messages.getLabel("button_width"));
 
 		tWidth = new Text(autofill, SWT.NONE);
 		tWidth.setText("2"); //$NON-NLS-1$
 		tWidth.setSize(100, 20);
 
 		bAutoFill = new Button(autofill, SWT.NONE);
-		bAutoFill.setText(Messages.Graph_button_ok);
+		bAutoFill.setText(Messages.getLabel("button_ok"));
 
 		bChangeLayout = new Button(autofill, SWT.NONE);
-		bChangeLayout.setText(Messages.Graph_button_change_layout);
+		bChangeLayout.setText(Messages.getLabel("button_change_layout"));
 
 		bDeleteAll = new Button(autofill, SWT.NONE);
-		bDeleteAll.setText(Messages.Graph_button_delete_all);
+		bDeleteAll.setText(Messages.getLabel("button_delete_all"));
 
 		bScreenShot = new Button(autofill, SWT.NONE);
-		bScreenShot.setText(Messages.getLabel("Graph_screenshot"));
+		bScreenShot.setText(Messages.getLabel("screenshot"));
 
 		setListeners();
 
@@ -621,6 +632,43 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 			}
 		});
 
+		cAutoFill.addSelectionListener(new SelectionListener() {
+
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if (e.text.equals(Messages.getLabel("makeCircle"))) {
+					lDepth.setText(Messages.getLabel("circleAmount"));
+					tDepth.setText("10");
+					tDepth.setSize(100, 20);
+
+					lWidth.setText("");
+					tWidth.setText("");
+					tWidth.setEnabled(false);
+					tWidth.setSize(100, 20);
+
+					treeOrCircle = 2;
+				} else if (e.text.equals(Messages.getLabel("makeTree"))) {
+
+					lDepth.setText(Messages.getLabel("button_depth"));
+					tDepth.setText("4");
+					tDepth.setSize(100, 20);
+
+					lWidth.setText(Messages.getLabel("button_width"));
+					tWidth.setEnabled(true);
+					tWidth.setText("2");
+					tWidth.setSize(100, 20);
+
+					treeOrCircle = 1;
+				}
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
 	}
 
 	/**
@@ -677,7 +725,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 
 		FileDialog saveDialog = new FileDialog(myGraph.getShell(), SWT.SAVE);
 		saveDialog.setFilterNames(new String[] { "PNG (*.png)",
-				Messages.getLabel("Graph_allFiles") });
+				Messages.getLabel("allFiles") });
 		saveDialog.setFilterExtensions(new String[] { "*.png", "*.*" });
 		try {
 			saveDialog.setFilterPath(FileLocator.getBundleFile(
@@ -698,7 +746,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 			// The file already exists; asks for confirmation
 			MessageBox mb = new MessageBox(saveDialog.getParent(),
 					SWT.ICON_WARNING | SWT.YES | SWT.NO);
-			mb.setMessage(name + Messages.getLabel("Graph_ImgAlreadyExists"));
+			mb.setMessage(name + Messages.getLabel("imgAlreadyExists"));
 
 			if (mb.open() != SWT.YES)
 				return;// do not overwrite
@@ -787,8 +835,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 			gn.setLocation(e.x - gn.getSize().width / 2, e.y
 					- gn.getSize().height / 2);
 
-			// TODO change font size -> create new font
-
 			// the graph might be changed
 			checkDirty();
 		}
@@ -839,21 +885,28 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 	}
 
 	protected void autoFill() {
-
 		int depth, width;
-		try {
-			depth = Integer.parseInt(tDepth.getText());
-		} catch (NumberFormatException nfe) {
-			depth = 4;
-		}
-		try {
-			width = Integer.parseInt(tWidth.getText());
-		} catch (NumberFormatException nfe) {
-			width = 2;
-		}
+		if (treeOrCircle == 1) {
+			try {
+				depth = Integer.parseInt(tDepth.getText());
+			} catch (NumberFormatException nfe) {
+				depth = 4;
+			}
+			try {
+				width = Integer.parseInt(tWidth.getText());
+			} catch (NumberFormatException nfe) {
+				width = 2;
+			}
 
-		myGraph.createTree(depth, width, null);
-
+			myGraph.createTree(depth, width, null);
+		} else if (treeOrCircle == 2) {
+			try {
+				depth = Integer.parseInt(tDepth.getText());
+			} catch (NumberFormatException nfe) {
+				depth = 4;
+			}
+			myGraph.createCircle(depth);
+		}
 		setLayoutManager();
 
 		// the graph might be changed
@@ -863,7 +916,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 	public void clearGraph() {
 		MessageBox sure = new MessageBox(myGraph.getShell(), SWT.ICON_WARNING
 				| SWT.YES | SWT.NO);
-		sure.setMessage(Messages.getLabel("Graph_ResetAll"));
+		sure.setMessage(Messages.getLabel("resetAll"));
 
 		if (sure.open() == SWT.YES) {
 			myGraph.resetContent();
