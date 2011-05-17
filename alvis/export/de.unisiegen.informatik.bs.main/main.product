@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<product name="mainalvis" id="de.unisiegen.informatik.bs.main.product2" application="de.unisiegen.informatik.bs.main.application" version="1.0.0" useFeatures="true" includeLaunchers="true">
+
+
+   <configIni use="default">
+   </configIni>
+
+   <launcherArgs>
+      <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
+   </launcherArgs>
+
+   <windowImages i16="/de.unisiegen.informatik.bs.main/alivs16.png" i32="/de.unisiegen.informatik.bs.main/alivs32.png" i48="/de.unisiegen.informatik.bs.main/alivs48.png" i64="/de.unisiegen.informatik.bs.main/alivs64.png" i128="/de.unisiegen.informatik.bs.main/alivs128.png"/>
+
+   <splash
+      location="de.unisiegen.informatik.bs.main"
+      startupProgressRect="0,243,440,10" />
+   <launcher name="alvis.exe">
+      <solaris/>
+      <win useIco="false">
+         <bmp
+            winSmallHigh="/de.unisiegen.informatik.bs.main/16-32.bmp"
+            winMediumHigh="/de.unisiegen.informatik.bs.main/32-32.bmp"
+            winLargeHigh="/de.unisiegen.informatik.bs.main/48-32.bmp"/>
+      </win>
+   </launcher>
+
+
+   <vm>
+   </vm>
+
+   <plugins>
+      <plugin id="de.unisiegen.informatik.bs.main"/>
+   </plugins>
+
+   <features>
+      <feature id="de.unisiegen.informatik.bs.main.app"/>
+   </features>
+
+
+</product>
