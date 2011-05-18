@@ -71,22 +71,20 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 	public static final int MODUS_START = 115;// SWT -> s
 	public static final int MODUS_END = 101;// SWT -> e
 	public static final int MODUS_DELETE = SWT.DEL;// SWT -> delete
+	public static final int CTRL = SWT.CTRL;// SWT -> ctrl
 	private int pressed;
 
 	Image screenshot;
 
-	// private Image image1 = Display.getDefault().getSystemImage(
-	// SWT.ICON_INFORMATION);
-	public static Button bNode, bConnection, bStartNode, bEndNode, bHand,
-			bDelete, bZoomIn, bZoomOut;
-	public static Button bAutoFill, bChangeLayout, bDeleteAll, bScreenShot;
-	public static Button bSave;
-	public static Combo cAutoFill;
-	public static Text tDepth, tWidth;
-	public static Label lDepth, lWidth;
+	private Button bNode, bConnection, bStartNode, bEndNode, bHand, bDelete,
+			bZoomIn, bZoomOut;
+	private Button bAutoFill, bChangeLayout, bDeleteAll, bScreenShot;
+	private Combo cAutoFill;
+	private Text tDepth, tWidth;
+	private Label lDepth, lWidth;
 	public AlvisGraph myGraph;
-	public static Composite myParent;
-	public static Cursor oldCursor;
+	private Composite myParent;
+	private Cursor oldCursor;
 	private static IEditorInput myInput;
 	private String myInputFilePath;
 	private boolean rename;
@@ -268,7 +266,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 		createGraph(graphGroup, myInput);
 
 		pressed = MODUS_STANDARD;
-		setGraphModus();
+		setGraphModus(MODUS_STANDARD);
 
 		Group tools = new Group(parent, SWT.NONE);
 		tools.setText(Messages.getLabel("group_tools"));
@@ -321,22 +319,22 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 		autofill.setLayoutData(gdAutoFill);
 
 		cAutoFill = new Combo(autofill, SWT.READ_ONLY);
-		cAutoFill.add(Messages.getLabel("makeCircle"), 1);
-		cAutoFill.add(Messages.getLabel("makeTree"), 2);
+		cAutoFill.add(Messages.getLabel("makeTree"));
+		cAutoFill.add(Messages.getLabel("makeCircle"));
 		cAutoFill.select(0);
 
 		lDepth = new Label(autofill, SWT.NONE);
 		lDepth.setText(Messages.getLabel("button_depth"));
 		tDepth = new Text(autofill, SWT.NONE);
-		tDepth.setText("4"); //$NON-NLS-1$
-		tDepth.setSize(100, 20);
+		tDepth.setText("4");
+		tDepth.pack();
 
 		lWidth = new Label(autofill, SWT.NONE);
 		lWidth.setText(Messages.getLabel("button_width"));
 
 		tWidth = new Text(autofill, SWT.NONE);
-		tWidth.setText("2"); //$NON-NLS-1$
-		tWidth.setSize(100, 20);
+		tWidth.setText("2");
+		tWidth.pack();
 
 		bAutoFill = new Button(autofill, SWT.NONE);
 		bAutoFill.setText(Messages.getLabel("button_ok"));
@@ -349,6 +347,8 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 
 		bScreenShot = new Button(autofill, SWT.NONE);
 		bScreenShot.setText(Messages.getLabel("screenshot"));
+
+		autofill.pack();
 
 		setListeners();
 
@@ -459,12 +459,17 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 				if (!rename) { // default key actions
 					if (e.keyCode == pressed) {
 						pressed = MODUS_STANDARD;
-						setGraphModus();
-					} else if (pressed == SWT.CTRL && e.keyCode == SWT.DEL) {
-						clearGraph();
+						setGraphModus(MODUS_STANDARD);
+					} else if (e.keyCode == MODUS_DELETE) {
+						if (pressed == CTRL) {
+							clearGraph();
+						} else {
+							removeHighlightedNode();
+							removeHighlightedConnection();
+						}
 					} else {
 						pressed = e.keyCode;
-						setGraphModus();
+						setGraphModus(pressed);
 					}
 				} else { // rename
 					if (e.keyCode == 27) { // escape
@@ -502,6 +507,9 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
+				if (pressed == CTRL){
+					pressed = MODUS_STANDARD;
+				}
 			}
 		});
 
@@ -545,7 +553,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 				} else if (event.widget.equals(bScreenShot)) {
 					graphToImg();
 				}
-				setGraphModus();
+				setGraphModus(pressed);
 
 			}
 		};
@@ -564,10 +572,12 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 		myGraph.addMouseWheelListener(new MouseWheelListener() {
 			@Override
 			public void mouseScrolled(MouseEvent e) {
-				if (e.count < 0) { // mouse wheel down
-					myGraph.zoom(e.x, e.y, false);
-				} else { // mouse wheel up
-					myGraph.zoom(e.x, e.y, true);
+				if (pressed == CTRL) {
+					if (e.count < 0) { // mouse wheel down
+						myGraph.zoom(e.x, e.y, false);
+					} else { // mouse wheel up
+						myGraph.zoom(e.x, e.y, true);
+					}
 				}
 			}
 		});
@@ -583,18 +593,20 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 
 					if (pressed == MODUS_MOVE) {
 						pressed = MODUS_STANDARD;
-						setGraphModus();
+						setGraphModus(pressed);
 					} else if (pressed == MODUS_NODE) {
-						clickNewNode(actNode, e);
+						if (actNode == null) {
+							clickNewNode(e.x, e.y);
+						}
 					} else if (pressed == MODUS_START) {
-						clickStartNode(actNode, e);
+						clickStartNode(actNode);
 					} else if (pressed == MODUS_END) {
-						clickEndNode(actNode, e);
+						clickEndNode(actNode);
 					} else if (pressed == MODUS_DELETE) {
-						clickRemove(actNode, e);
-						clickRemove(actCon, e);
+						clickRemove(actNode);
+						clickRemove(actCon);
 					} else if (pressed == MODUS_CONNECTION) {
-						clickNewConnection(actNode, e);
+						clickNewConnection(actNode);
 					}
 				} else {
 
@@ -606,7 +618,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 				if (pressed == MODUS_STANDARD
 						&& !myGraph.getSelection().isEmpty()) {
 					pressed = MODUS_MOVE;
-					setGraphModus();
+					setGraphModus(pressed);
 				}
 			}
 
@@ -636,30 +648,29 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				if (e.text.equals(Messages.getLabel("makeCircle"))) {
-					lDepth.setText(Messages.getLabel("circleAmount"));
-					tDepth.setText("10");
-					tDepth.setSize(100, 20);
 
-					lWidth.setText("");
-					tWidth.setText("");
-					tWidth.setEnabled(false);
-					tWidth.setSize(100, 20);
-
-					treeOrCircle = 2;
-				} else if (e.text.equals(Messages.getLabel("makeTree"))) {
-
+				treeOrCircle = cAutoFill.getSelectionIndex();
+				if (treeOrCircle == 0) { // tree
 					lDepth.setText(Messages.getLabel("button_depth"));
+					lDepth.pack();
 					tDepth.setText("4");
-					tDepth.setSize(100, 20);
 
 					lWidth.setText(Messages.getLabel("button_width"));
+					lWidth.pack();
 					tWidth.setEnabled(true);
 					tWidth.setText("2");
-					tWidth.setSize(100, 20);
+				} else if (treeOrCircle == 1) { // circle
+					lDepth.setText(Messages.getLabel("circleAmount"));
+					lDepth.pack();
+					tDepth.setText("10");
 
-					treeOrCircle = 1;
+					lWidth.setText("");
+					lWidth.setSize(0, 0);
+					tWidth.setText("");
+					tWidth.setSize(0, 0);
+					tWidth.setEnabled(false);
 				}
+				tWidth.getParent().pack();
 			}
 
 			@Override
@@ -679,7 +690,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 	public void setModus(int modus) {
 		myGraph.resetMarking();
 		pressed = modus;
-		setGraphModus();
+		setGraphModus(pressed);
 	}
 
 	/**
@@ -688,7 +699,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 	 * @param node
 	 * @param e
 	 */
-	protected void clickNewConnection(AlvisGraphNode node, MouseEvent e) {
+	protected void clickNewConnection(AlvisGraphNode node) {
 		myGraph.markToBeConnected(node);
 		// the graph might be changed
 		checkDirty();
@@ -700,14 +711,14 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 	 * @param node
 	 * @param e
 	 */
-	protected void clickRemove(AlvisGraphNode node, MouseEvent e) {
+	protected void clickRemove(AlvisGraphNode node) {
 		if (node != null) {
 			myGraph.removeHighlightedNode();
 			// the graph might be changed
 			checkDirty();
 		}
 		pressed = MODUS_MOVE;
-		setGraphModus();
+		setGraphModus(pressed);
 	}
 
 	/**
@@ -760,23 +771,28 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 		gc.dispose();
 	}
 
-	protected void clickRemove(AlvisGraphConnection con, MouseEvent e) {
+	/**
+	 * removes connection
+	 * 
+	 * @param con
+	 */
+	protected void clickRemove(AlvisGraphConnection con) {
 		if (con != null) {
 			myGraph.removeHighlightedConnection();
 			// the graph might be changed
 			checkDirty();
 		}
 		pressed = MODUS_MOVE;
-		setGraphModus();
+		setGraphModus(pressed);
 	}
 
 	/**
-	 * sets the endnode of the graph
+	 * sets the end node of the graph
 	 * 
 	 * @param node
-	 * @param e
+	 *            the node to be the end node
 	 */
-	protected void clickEndNode(AlvisGraphNode node, MouseEvent e) {
+	protected void clickEndNode(AlvisGraphNode node) {
 		if (node == myGraph.getStartNode())
 			myGraph.setStartNode(null);
 		if (node == null)
@@ -787,7 +803,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 		myGraph.setEndNode(node);
 		myGraph.resetMarking();
 		pressed = MODUS_STANDARD;
-		setGraphModus();
+		setGraphModus(pressed);
 		// the graph might be changed
 		checkDirty();
 	}
@@ -796,9 +812,9 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 	 * Sets the start node of the graph
 	 * 
 	 * @param node
-	 * @param e
+	 *            the node to be the start node
 	 */
-	protected void clickStartNode(AlvisGraphNode node, MouseEvent e) {
+	protected void clickStartNode(AlvisGraphNode node) {
 		if (node == null)
 			return;
 
@@ -810,7 +826,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 		myGraph.setStartNode(node);
 		myGraph.resetMarking();
 		pressed = MODUS_STANDARD;
-		setGraphModus();
+		setGraphModus(pressed);
 		setLayoutManager();
 
 		// the graph might be changed
@@ -820,30 +836,26 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 	/**
 	 * Adds a new node to the graph
 	 * 
-	 * @param node
-	 * @param e
+	 * @param x
+	 *            the x coordinate
+	 * @param y
+	 *            the y coordinate
 	 */
-	protected void clickNewNode(AlvisGraphNode node, MouseEvent e) {
+	protected void clickNewNode(int x, int y) {
+		AlvisGraphNode gn = myGraph.makeGraphNode(""
+				+ myGraph.getAdmin().getId());
 
-		// NEW NODE
-		boolean areaClear = (node == null);
-		if (areaClear) {
-			AlvisGraphNode gn;
+		gn.setLocation(x - gn.getSize().width / 2, y - gn.getSize().height / 2);
 
-			gn = myGraph.makeGraphNode("" + myGraph.getAdmin().getId());
-
-			gn.setLocation(e.x - gn.getSize().width / 2, e.y
-					- gn.getSize().height / 2);
-
-			// the graph might be changed
-			checkDirty();
-		}
+		// the graph might be changed
+		checkDirty();
 	}
 
 	/**
 	 * Set modus that is activated to users mouse click changes mouse icon
+	 * @param pressed key to decide which cursor will be chosen
 	 */
-	private void setGraphModus() {
+	private void setGraphModus(int pressed) {
 		Cursor cursor = oldCursor;
 		cursor = new Cursor(Display.getCurrent(),
 				loadImageData("icons/editor/graph_move.png"), 8, 8);
@@ -879,14 +891,13 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 			myGraph.setCursor(cursor);
 			break;
 		default:
-			pressed = MODUS_STANDARD;
 			myGraph.setCursor(cursor);
 		}
 	}
 
 	protected void autoFill() {
 		int depth, width;
-		if (treeOrCircle == 1) {
+		if (treeOrCircle == 0) {
 			try {
 				depth = Integer.parseInt(tDepth.getText());
 			} catch (NumberFormatException nfe) {
@@ -899,7 +910,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 			}
 
 			myGraph.createTree(depth, width, null);
-		} else if (treeOrCircle == 2) {
+		} else if (treeOrCircle == 1) {
 			try {
 				depth = Integer.parseInt(tDepth.getText());
 			} catch (NumberFormatException nfe) {
@@ -926,6 +937,10 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 
 	protected void removeHighlightedNode() {
 		myGraph.removeHighlightedNode();
+	}
+
+	protected void removeHighlightedConnection() {
+		myGraph.removeHighlightedConnection();
 	}
 
 	// private String[] understandTNodes(Text t) {

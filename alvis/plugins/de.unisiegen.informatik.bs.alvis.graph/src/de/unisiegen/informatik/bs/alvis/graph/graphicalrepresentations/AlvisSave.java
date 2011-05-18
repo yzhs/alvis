@@ -199,12 +199,6 @@ public class AlvisSave {
 	}
 
 	public boolean removeConnection(AlvisGraphConnection connection) {
-		if (connection.getFirstNode().getConnections().size() == 1) {
-			connection.getFirstNode().setConnectionColor(0);
-		}
-		if (connection.getSecondNode().getConnections().size() == 1) {
-			connection.getSecondNode().setConnectionColor(0);
-		}
 		return allConnections.remove(connection);
 	}
 

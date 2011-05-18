@@ -456,12 +456,11 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 
 		this.setSelection(null);
 
-		for (int i = getAllConnections().size() - 1; i >= 0; i--) {
-			if (getAllConnections().get(i).getFirstNode().equals(node)
-					|| getAllConnections().get(i).getSecondNode().equals(node)) {
-				getAllConnections().get(i).dispose();
-				removeConnection(i);
-			}
+		for (int i = node.getConnections().size() - 1; i >= 0; i--) {
+			AlvisGraphConnection gc = node.getConnections().get(i);
+			gc.getNextNode(node).getConnections().remove(gc);
+			removeConnection(gc);
+			gc.dispose();
 		}
 
 		removeNode(node);
@@ -673,8 +672,6 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 			if (getZoomCounter() <= -2)
 				return; // too far zoomed out already
 			decreaseZoomCounter();
-			mouseX = -mouseX;
-			mouseY = -mouseY;
 			myZoomFactor = 1.0 / zoomFactor;
 		}
 
@@ -686,17 +683,13 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		Animation.markBegin();
 		int minX = Integer.MAX_VALUE, minY = Integer.MAX_VALUE;
 		for (AlvisGraphNode gn : getAllNodes()) {
-			gn.setLocation(gn.getLocation().x * myZoomFactor,
-					gn.getLocation().y * myZoomFactor);
+			int x = gn.getLocation().x;
+			int y = gn.getLocation().y;
+			gn.setLocation((x - mouseX) * myZoomFactor + mouseX,
+					(y - mouseY) * myZoomFactor + mouseY);
 			gn.setFont(gnFont);
-			minX = Math.min(minX, gn.getLocation().x);
-			minY = Math.min(minY, gn.getLocation().y);
-		}
-
-		for (AlvisGraphNode gn : getAllNodes()) {
-			gn.setLocation(gn.getLocation().x - minX + 20
-					- (mouseX * myZoomFactor - mouseX), gn.getLocation().y
-					- minY + 20 - (mouseY * myZoomFactor - mouseY));
+			minX = Math.min(minX,x);
+			minY = Math.min(minY, y);
 		}
 
 		for (AlvisGraphConnection gc : getAllConnections()) {
@@ -751,8 +744,8 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		admin.removeConnection(i);
 	}
 
-	private void removeConnection(AlvisGraphConnection gcC) {
-		admin.removeConnection(gcC);
+	private boolean removeConnection(AlvisGraphConnection gcC) {
+		return admin.removeConnection(gcC);
 	}
 
 	public void setStartNode(AlvisGraphNode startNode) {
