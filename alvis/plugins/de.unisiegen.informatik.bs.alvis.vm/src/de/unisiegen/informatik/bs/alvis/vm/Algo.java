@@ -2,7 +2,7 @@ package de.unisiegen.informatik.bs.alvis.vm;
 
 import java.util.ArrayList;
 
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.vm.AbstractAlgo;
 
 public class Algo implements AbstractAlgo {
@@ -83,8 +83,7 @@ public class Algo implements AbstractAlgo {
 	 * dynamic code
 	 */
 	@Override
-	public ArrayList<PseudoCodeObject> getVariableReferences() {
-		// TODO Auto-generated method stub
+	public ArrayList<PCObject> getVariableReferences() {
 		return null;
 	}
 
@@ -92,8 +91,7 @@ public class Algo implements AbstractAlgo {
 	 * dynamic code
 	 */
 	@Override
-	public ArrayList<PseudoCodeObject> getParameterTypes() {
-		// TODO Auto-generated method stub
+	public ArrayList<PCObject> getParameterTypes() {
 		return null;
 	}
 
@@ -101,9 +99,7 @@ public class Algo implements AbstractAlgo {
 	 * dynamic code
 	 */
 	@Override
-	public void setParameters(ArrayList<PseudoCodeObject> paras) {
-		// TODO Auto-generated method stub
-
+	public void setParameters(ArrayList<PCObject> paras) {
 	}
 
 	/**
@@ -151,7 +147,6 @@ public class Algo implements AbstractAlgo {
 	 */
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 	}
 
 	/**

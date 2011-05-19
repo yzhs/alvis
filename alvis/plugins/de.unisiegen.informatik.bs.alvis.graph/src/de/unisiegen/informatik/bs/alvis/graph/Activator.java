@@ -6,7 +6,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -56,10 +56,10 @@ public class Activator extends AbstractUIPlugin {
 	/* ********************************
 	 * Run 
 	 */
-	private ArrayList<PseudoCodeObject> tempPseudoCodeObjects = 
-		new ArrayList<PseudoCodeObject>();
+	private ArrayList<PCObject> tempPseudoCodeObjects = 
+		new ArrayList<PCObject>();
 
-	public ArrayList<PseudoCodeObject> getTempPseudoCodeObjects() {
+	public ArrayList<PCObject> getTempPseudoCodeObjects() {
 		return tempPseudoCodeObjects;
 	}
 

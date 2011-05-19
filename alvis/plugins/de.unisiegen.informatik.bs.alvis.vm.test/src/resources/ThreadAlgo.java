@@ -2,28 +2,28 @@ package resources;
 
 import java.util.ArrayList;
 
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeInteger;
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.vm.AbstractAlgo;
 import de.unisiegen.informatik.bs.alvis.vm.BPListener;
 import de.unisiegen.informatik.bs.alvis.vm.DPListener;
 
 public class ThreadAlgo implements AbstractAlgo {
 
-	private PseudoCodeInteger counter;
+	private PCInteger counter;
 	private boolean onBreak;
 	private BPListener bplisten;
 
 	@Override
 	public void run() {
-		counter = new PseudoCodeInteger(0);
+		counter = new PCInteger(0);
 		this.reachedBreakPoint(1);
-		counter = counter.add(new PseudoCodeInteger(1));
+		counter = counter.add(new PCInteger(1));
 		this.reachedBreakPoint(1);
-		counter = counter.add(new PseudoCodeInteger(1));
+		counter = counter.add(new PCInteger(1));
 		this.reachedBreakPoint(2);
-		counter = counter.add(new PseudoCodeInteger(1));
-		counter = counter.add(new PseudoCodeInteger(1));
+		counter = counter.add(new PCInteger(1));
+		counter = counter.add(new PCInteger(1));
 		this.reachedBreakPoint(3);
 	}
 
@@ -51,19 +51,19 @@ public class ThreadAlgo implements AbstractAlgo {
 	}
 
 	@Override
-	public ArrayList<PseudoCodeObject> getVariableReferences() {
-		ArrayList<PseudoCodeObject> result = new ArrayList<PseudoCodeObject>();
+	public ArrayList<PCObject> getVariableReferences() {
+		ArrayList<PCObject> result = new ArrayList<PCObject>();
 		result.add(counter);
 		return result;
 	}
 
 	@Override
-	public ArrayList<PseudoCodeObject> getParameterTypes() {
+	public ArrayList<PCObject> getParameterTypes() {
 		return null;
 	}
 
 	@Override
-	public void setParameters(ArrayList<PseudoCodeObject> paras) {
+	public void setParameters(ArrayList<PCObject> paras) {
 	}
 
 	@Override

@@ -3,7 +3,7 @@ package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class PseudoCodeList<E> extends PseudoCodeObject implements SortableCollection, Iterable<E> {
+public class PCList<E> extends PCObject implements SortableCollection, Iterable<E> {
 	protected static final String TYPENAME = "List";
 	private ArrayList<E> items;
 
@@ -15,7 +15,7 @@ public class PseudoCodeList<E> extends PseudoCodeObject implements SortableColle
 		return this.items;
 	}
 
-	public PseudoCodeList() {
+	public PCList() {
 		items = new ArrayList<E>();
 	}
 
@@ -36,7 +36,7 @@ public class PseudoCodeList<E> extends PseudoCodeObject implements SortableColle
 	}
 
 	public Iterator<E> iterator() {
-		PseudoCodeListIterator<E> it = new PseudoCodeListIterator<E>(this);
+		PCListIterator<E> it = new PCListIterator<E>(this);
 		return it;
 	}	
 	
@@ -50,20 +50,29 @@ public class PseudoCodeList<E> extends PseudoCodeObject implements SortableColle
 	}
 
 	@Override
-	public PseudoCodeObject set(String memberName, PseudoCodeObject value) {
+	public PCObject set(String memberName, PCObject value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean equals(PseudoCodeObject toCheckAgainst) {
+	public boolean equals(PCObject toCheckAgainst) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public String getTypeName() {
-		return PseudoCodeList.TYPENAME;
+		return PCList.TYPENAME;
+	}
+
+	@Override
+	public void sortOn(SortableCollection toSortFrom) {
+	}
+
+	@Override
+	public SortableCollection storeInformation() {
+		return null;
 	}
 
 }

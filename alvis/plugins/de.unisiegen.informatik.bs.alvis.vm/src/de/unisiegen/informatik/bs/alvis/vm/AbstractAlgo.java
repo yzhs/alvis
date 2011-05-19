@@ -4,7 +4,7 @@ package de.unisiegen.informatik.bs.alvis.vm;
  * @ author Sebastian Schmitz, Dominik Dingel
  */
 import java.util.ArrayList;
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
 public interface AbstractAlgo extends Runnable {
 
@@ -12,14 +12,14 @@ public interface AbstractAlgo extends Runnable {
 	 * 
 	 * @return Reference of all Variables, holded by the algo
 	 */
-	public ArrayList<PseudoCodeObject> getVariableReferences();
+	public ArrayList<PCObject> getVariableReferences();
 
 	/**
 	 * 
 	 * @return Null Objects for all Datatypes the algo expects for the
 	 *         setParameters Call
 	 */
-	public ArrayList<PseudoCodeObject> getParameterTypes();
+	public ArrayList<PCObject> getParameterTypes();
 
 	/**
 	 * 
@@ -27,7 +27,7 @@ public interface AbstractAlgo extends Runnable {
 	 *            are the Startparameters of the algo, have to passed like
 	 *            specified in getParameterTypes
 	 */
-	public void setParameters(ArrayList<PseudoCodeObject> paras);
+	public void setParameters(ArrayList<PCObject> paras);
 
 	/**
 	 * 

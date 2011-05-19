@@ -16,11 +16,11 @@ import java.util.Stack;
  * 
  */
 
-public abstract class PseudoCodeObject {
+public abstract class PCObject {
 
 	public final static String TYPENAME = "Object";
-	protected static PseudoCodeObject localInfty;
-	protected static PseudoCodeObject localNull;
+	protected static PCObject localInfty;
+	protected static PCObject localNull;
 
 	protected List<GraphicalRepresentation> allGr;
 
@@ -31,7 +31,7 @@ public abstract class PseudoCodeObject {
 	 * if not initialized will set localNull and localInfty
 	 * @return null object
 	 */
-	public static PseudoCodeObject getNull() {
+	public static PCObject getNull() {
 		// will be from PCObject always be null
 		return localNull; 
 	}
@@ -40,7 +40,7 @@ public abstract class PseudoCodeObject {
 	 * if not initialized will set localInfty and localNull
 	 * @return null object
 	 */
-	public static PseudoCodeObject getInfty() {
+	public static PCObject getInfty() {
 		// will be from PCObject always be null
 		return localInfty;
 	}
@@ -49,7 +49,7 @@ public abstract class PseudoCodeObject {
 	/**
 	 * Constructor
 	 */
-	public PseudoCodeObject() {
+	public PCObject() {
 		allGr = new ArrayList<GraphicalRepresentation>();
 		isInBatchRun = false;
 	}
@@ -131,8 +131,8 @@ public abstract class PseudoCodeObject {
 	 *         constructs like v = u.distance + 1;
 	 * 
 	 */
-	public abstract PseudoCodeObject set(String memberName,
-			PseudoCodeObject value);
+	public abstract PCObject set(String memberName,
+			PCObject value);
 
 	/**
 	 * Generic get-method used for the compiler
@@ -141,7 +141,7 @@ public abstract class PseudoCodeObject {
 	 *            to get if empty returns itself
 	 * @return value
 	 */
-	public PseudoCodeObject get(String memberName) {
+	public PCObject get(String memberName) {
 		if (memberName.isEmpty()) {
 			return this;
 		}
@@ -155,8 +155,8 @@ public abstract class PseudoCodeObject {
 	 * 
 	 * @return a map contains the Membername and the Datatype Reference
 	 */
-	public Map<String, ? extends PseudoCodeObject> getMembers() {
-		Map<String, PseudoCodeObject> result = new HashMap<String, PseudoCodeObject>();
+	public Map<String, ? extends PCObject> getMembers() {
+		Map<String, PCObject> result = new HashMap<String, PCObject>();
 		return result;
 	}
 
@@ -171,8 +171,8 @@ public abstract class PseudoCodeObject {
 	 *         else will be parameters
 	 */
 	// TODO change return value
-	public Map<List<String>, List<PseudoCodeObject>> getMethods() {
-		Map<List<String>, List<PseudoCodeObject>> result = new HashMap<List<String>, List<PseudoCodeObject>>();
+	public Map<List<String>, List<PCObject>> getMethods() {
+		Map<List<String>, List<PCObject>> result = new HashMap<List<String>, List<PCObject>>();
 		return result;
 	}
 
@@ -182,5 +182,5 @@ public abstract class PseudoCodeObject {
 	 * @return boolean if the object to checkAgainst is equals the current
 	 *         object
 	 */
-	public abstract boolean equals(PseudoCodeObject toCheckAgainst);
+	public abstract boolean equals(PCObject toCheckAgainst);
 }

@@ -6,7 +6,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.SortableCollection;
 
 /**
@@ -42,7 +42,7 @@ public class VirtualMachine {
 	private ArrayList<Integer> dpCounter;
 	private int bpIndex;
 	private int dpIndex;
-	private ArrayList<PseudoCodeObject> parameters;
+	private ArrayList<PCObject> parameters;
 	private Thread algoThread;
 	private AbstractAlgo algoToRun;
 	private Class<AbstractAlgo> algoClass;
@@ -81,7 +81,7 @@ public class VirtualMachine {
 		stateIndex = 0;
 		bpCounter = new ArrayList<Integer>();
 		dpCounter = new ArrayList<Integer>();
-		parameters = new ArrayList<PseudoCodeObject>();
+		parameters = new ArrayList<PCObject>();
 		bplisten = null;
 		dplisten = null;
 	}
@@ -303,7 +303,7 @@ public class VirtualMachine {
 	 * 
 	 * @return Reference on all Variables
 	 */
-	public ArrayList<PseudoCodeObject> getRunningRef() {
+	public ArrayList<PCObject> getRunningRef() {
 		return algoToRun.getVariableReferences();
 	}
 
@@ -329,7 +329,7 @@ public class VirtualMachine {
 	 * @param para
 	 *            adding Parameter to the algo
 	 */
-	public void addParameter(PseudoCodeObject para) {
+	public void addParameter(PCObject para) {
 		parameters.add(para);
 	}
 
@@ -374,7 +374,7 @@ public class VirtualMachine {
 	 *         for the Algo to start
 	 */
 	@SuppressWarnings("unchecked")
-	public ArrayList<PseudoCodeObject> getStartParameters() {
+	public ArrayList<PCObject> getStartParameters() {
 		if (algoClass != null) {
 			this.createAlgoFromClass();
 			if (algoToRun != null) {
@@ -382,7 +382,7 @@ public class VirtualMachine {
 				for (Method m : meths) {
 					if (m.getName().equals("getParameterTypes")) {
 						try {
-							return ((ArrayList<PseudoCodeObject>) m.invoke(
+							return ((ArrayList<PCObject>) m.invoke(
 									algoToRun, (Object[]) null));
 						} catch (IllegalArgumentException e) {
 							e.printStackTrace();

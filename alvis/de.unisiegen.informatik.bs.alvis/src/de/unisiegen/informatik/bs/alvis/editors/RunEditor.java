@@ -40,7 +40,7 @@ import de.unisiegen.informatik.bs.alvis.Run;
 import de.unisiegen.informatik.bs.alvis.commands.RunCompile;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IRunPreferences;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.tools.IO;
 import org.eclipse.swt.widgets.ExpandBar;
 import org.eclipse.swt.widgets.ExpandItem;
@@ -150,7 +150,7 @@ public class RunEditor extends EditorPart {
 	
 	// TODO diese Arraylist wird durch den button Preferences mit datentypen für 
 	// die VM gefüllt. nachschauen, was damit passieren kann.
-	private ArrayList<PseudoCodeObject> pseudoCodeObjects;
+	private ArrayList<PCObject> pseudoCodeObjects;
 	public void createPartControl(Composite parent) {
 		
 		composite_1 = new Composite(parent, SWT.NONE);
@@ -298,7 +298,7 @@ public class RunEditor extends EditorPart {
 		/*
 		 * This section asks the plugins for parameters to add to the run. 
 		 */
-		pseudoCodeObjects = new ArrayList<PseudoCodeObject>();
+		pseudoCodeObjects = new ArrayList<PCObject>();
 		Button btnSetPreferences = new Button(grpRun, SWT.NONE);
 		btnSetPreferences.addListener(SWT.Selection, new Listener () {
 
@@ -324,13 +324,13 @@ public class RunEditor extends EditorPart {
 			                    	createExecutableExtension("class");
 			                    
 			                    // Get the PseudoCodeObjects the user choosed as Parameters
-			                    ArrayList<PseudoCodeObject> returnedPseudoCodeObjects = 
+			                    ArrayList<PCObject> returnedPseudoCodeObjects = 
 			                    	myRunPreferences.getRunPreferences(
 			                    			Platform.getInstanceLocation()
 			                    				.getURL().getPath() + 
 			                    				myExampleFile.getText());
 			                    // Add all PseudoCodeObjects to the Run.
-			                    for(PseudoCodeObject pseudo : returnedPseudoCodeObjects) {
+			                    for(PCObject pseudo : returnedPseudoCodeObjects) {
 			                    	Activator.getDefault().getPseudoCodeList().add(pseudo);
 			                    }
 			                }

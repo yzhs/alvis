@@ -3,7 +3,7 @@ package de.unisiegen.informatik.bs.alvis;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
 /**
  * A Run object contains informations about which Algorithm should be run on

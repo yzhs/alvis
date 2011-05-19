@@ -12,14 +12,14 @@ import java.util.Map;
  * 
  */
 
-public class PseudoCodeQueue<T extends PseudoCodeObject> extends PseudoCodeObject {
+public class PCQueue<T extends PCObject> extends PCObject {
 	protected static final String TYPENAME = "Queue";
 	private ArrayList<T> objects;
 
 	/**
 	 * create empty Queue
 	 */
-	public PseudoCodeQueue() {
+	public PCQueue() {
 		objects = new ArrayList<T>();
 	}
 
@@ -48,8 +48,8 @@ public class PseudoCodeQueue<T extends PseudoCodeObject> extends PseudoCodeObjec
 	 * 
 	 * @return boolean value if is empty
 	 */
-	public PseudoCodeBoolean isEmpty() {
-		return new PseudoCodeBoolean(this.objects.isEmpty());
+	public PCBoolean isEmpty() {
+		return new PCBoolean(this.objects.isEmpty());
 	}
 
 	@Override
@@ -59,26 +59,26 @@ public class PseudoCodeQueue<T extends PseudoCodeObject> extends PseudoCodeObjec
 	}
 
 	@Override
-	public PseudoCodeObject set(String memberName, PseudoCodeObject value) {
+	public PCObject set(String memberName, PCObject value) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean equals(PseudoCodeObject toCheckAgainst) {
+	public boolean equals(PCObject toCheckAgainst) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 	
 	@Override
-	public Map<List<String>, List<PseudoCodeObject>> getMethods() {
-		Map<List<String>, List<PseudoCodeObject>> result = new HashMap<List<String>, List<PseudoCodeObject>>();
+	public Map<List<String>, List<PCObject>> getMethods() {
+		Map<List<String>, List<PCObject>> result = new HashMap<List<String>, List<PCObject>>();
 		
 		ArrayList<String> namesEnq = new ArrayList<String>();
 		namesEnq.add("enqueue");
 		namesEnq.add("enqueue");
-		ArrayList<PseudoCodeObject> dataEnq = new ArrayList<PseudoCodeObject>();
-		dataEnq.add(PseudoCodeVoid.localNull);
+		ArrayList<PCObject> dataEnq = new ArrayList<PCObject>();
+		dataEnq.add(PCVoid.localNull);
 		dataEnq.add(T.localNull);
 		
 		result.put(namesEnq, dataEnq);
@@ -86,7 +86,7 @@ public class PseudoCodeQueue<T extends PseudoCodeObject> extends PseudoCodeObjec
 		ArrayList<String> namesDeq = new ArrayList<String>();
 		namesDeq.add("dequeue");
 		namesDeq.add("dequeue");
-		ArrayList<PseudoCodeObject> dataDeq = new ArrayList<PseudoCodeObject>();
+		ArrayList<PCObject> dataDeq = new ArrayList<PCObject>();
 		dataDeq.add(T.localNull);
 		
 		result.put(namesDeq, dataDeq);
@@ -94,8 +94,8 @@ public class PseudoCodeQueue<T extends PseudoCodeObject> extends PseudoCodeObjec
 		ArrayList<String> nameIsEmp = new ArrayList<String>();
 		nameIsEmp.add("isEmpty");
 		nameIsEmp.add("isEmpty");
-		ArrayList<PseudoCodeObject> dataIsEmp = new ArrayList<PseudoCodeObject>();
-		dataIsEmp.add(PseudoCodeBoolean.localNull);
+		ArrayList<PCObject> dataIsEmp = new ArrayList<PCObject>();
+		dataIsEmp.add(PCBoolean.localNull);
 		
 		result.put(nameIsEmp, dataIsEmp);
 		
@@ -104,7 +104,7 @@ public class PseudoCodeQueue<T extends PseudoCodeObject> extends PseudoCodeObjec
 
 	@Override
 	public String getTypeName() {
-		String result = PseudoCodeQueue.TYPENAME;
+		String result = PCQueue.TYPENAME;
 		result.concat("<");
 		result.concat(T.localNull.getTypeName());
 		result.concat(">");

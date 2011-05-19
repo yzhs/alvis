@@ -27,7 +27,7 @@ import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSave
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSerialize;
 
 
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeList;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCList;
 
 /**
  * @author simon
@@ -65,16 +65,16 @@ public class RunVisualizer implements IRunVisualizer {
 			PseudoCodeGraph codeGraph = new PseudoCodeGraph();
 			
 			// Make a list that contains Nodes
-			PseudoCodeList<PseudoCodeVertex> pseudoCodeVertexList =
-				new PseudoCodeList<PseudoCodeVertex>();
+			PCList<PseudoCodeVertex> pseudoCodeVertexList =
+				new PCList<PseudoCodeVertex>();
 			
 			for(AlvisGraphNode node : myGraph.getAllNodes()) {
 				pseudoCodeVertexList.add(codeGraph.getVertexFromGraphic(node));
 			}
 			
 			// Make a list that contains Edges
-			PseudoCodeList<PseudoCodeEdge> pseudoCodeEdgeList =
-				new PseudoCodeList<PseudoCodeEdge>();
+			PCList<PseudoCodeEdge> pseudoCodeEdgeList =
+				new PCList<PseudoCodeEdge>();
 			
 			for(AlvisGraphConnection connecton : myGraph.getAllConnections()) {
 				// TODO Dingel soll diese Methode überprüfen.

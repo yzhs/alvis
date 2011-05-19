@@ -7,7 +7,7 @@ package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
  *
  */
 
-public interface GraphicalRepresentationBoolean extends GraphicalRepresentation {
+public interface GRBoolean extends GraphicalRepresentation {
 	/**
 	 *
 	 * @return current State

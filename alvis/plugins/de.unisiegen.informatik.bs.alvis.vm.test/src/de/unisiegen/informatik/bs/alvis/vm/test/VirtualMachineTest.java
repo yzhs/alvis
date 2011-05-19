@@ -10,7 +10,7 @@ import junit.framework.Assert;
 
 import org.testng.annotations.Test;
 
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeInteger;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
 import de.unisiegen.informatik.bs.alvis.vm.BPListener;
 import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
 
@@ -51,7 +51,7 @@ public class VirtualMachineTest {
 		VirtualMachine vm = VirtualMachine.getInstance();
 		vm.classCompileAndLoad("resources.SecondAlgo");
 		Assert.assertEquals(
-				((PseudoCodeInteger) vm.getStartParameters().get(0))
+				((PCInteger) vm.getStartParameters().get(0))
 						.getTypeName(), "Integer");
 	}
 
@@ -81,7 +81,7 @@ public class VirtualMachineTest {
 			}
 		}
 		vm.waitForBreakPoint();
-		Assert.assertEquals(4, ((PseudoCodeInteger) vm.getRunningRef().get(0))
+		Assert.assertEquals(4, ((PCInteger) vm.getRunningRef().get(0))
 				.getLiteralValue());
 
 	}
@@ -113,7 +113,7 @@ public class VirtualMachineTest {
 		}
 		vm.stepBackward();
 		vm.waitForBreakPoint();
-		Assert.assertEquals(2, ((PseudoCodeInteger) vm.getRunningRef().get(0))
+		Assert.assertEquals(2, ((PCInteger) vm.getRunningRef().get(0))
 				.getLiteralValue());
 	}
 
@@ -137,7 +137,7 @@ public class VirtualMachineTest {
 				}
 				vm.stepForward();
 				if (!vm.isAlive()) {
-					Assert.assertEquals(4, ((PseudoCodeInteger) vm
+					Assert.assertEquals(4, ((PCInteger) vm
 							.getRunningRef().get(0)).getLiteralValue());
 					return;
 				}
@@ -214,7 +214,7 @@ public class VirtualMachineTest {
 			output.delete();
 		}
 
-		Assert.assertEquals(4, ((PseudoCodeInteger) vm.getRunningRef().get(0))
+		Assert.assertEquals(4, ((PCInteger) vm.getRunningRef().get(0))
 				.getLiteralValue());
 
 	}
@@ -289,7 +289,7 @@ public class VirtualMachineTest {
 			output.delete();
 		}
 
-		Assert.assertEquals(7, ((PseudoCodeInteger) vm.getRunningRef().get(0))
+		Assert.assertEquals(7, ((PCInteger) vm.getRunningRef().get(0))
 				.getLiteralValue());
 	}
 }

@@ -10,7 +10,7 @@ import java.util.Stack;
  * 
  */
 
-public class PseudoCodeBoolean extends PseudoCodeObject {
+public class PCBoolean extends PCObject {
 	protected static final String TYPENAME = "Boolean";
 
 	private boolean value;
@@ -20,7 +20,7 @@ public class PseudoCodeBoolean extends PseudoCodeObject {
 	 * 
 	 * @param literal
 	 */
-	public PseudoCodeBoolean(boolean literal) {
+	public PCBoolean(boolean literal) {
 		commandsforGr = new ArrayList<Stack<Object>>();
 		commandsforGr.add(new Stack<Object>());
 		this.setLiteralValue(literal);
@@ -31,7 +31,7 @@ public class PseudoCodeBoolean extends PseudoCodeObject {
 	 * 
 	 * @param toSetFrom
 	 */
-	public PseudoCodeBoolean(PseudoCodeBoolean toSetFrom) {
+	public PCBoolean(PCBoolean toSetFrom) {
 		commandsforGr = new ArrayList<Stack<Object>>();
 		commandsforGr.add(new Stack<Object>());
 		this.setValue(toSetFrom);
@@ -42,11 +42,11 @@ public class PseudoCodeBoolean extends PseudoCodeObject {
 	 * 
 	 * @param gr
 	 */
-	public PseudoCodeBoolean(GraphicalRepresentation gr) {
+	public PCBoolean(GraphicalRepresentation gr) {
 		commandsforGr = new ArrayList<Stack<Object>>();
 		commandsforGr.add(new Stack<Object>());
 		allGr.add(gr);
-		value = ((GraphicalRepresentationBoolean) gr).isSet();
+		value = ((GRBoolean) gr).isSet();
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class PseudoCodeBoolean extends PseudoCodeObject {
 			commandsforGr.get(0).push(Boolean.valueOf(value));
 		} else {
 			for (GraphicalRepresentation gr : allGr) {
-				((GraphicalRepresentationBoolean) gr).set(this.value);
+				((GRBoolean) gr).set(this.value);
 			}
 		}
 	}
@@ -80,7 +80,7 @@ public class PseudoCodeBoolean extends PseudoCodeObject {
 	 * @param value
 	 *            to set
 	 */
-	public void setValue(PseudoCodeBoolean value) {
+	public void setValue(PCBoolean value) {
 		this.setLiteralValue(value.getLiteralValue());
 	}
 
@@ -97,9 +97,9 @@ public class PseudoCodeBoolean extends PseudoCodeObject {
 	}
 
 	@Override
-	public PseudoCodeObject set(String memberName, PseudoCodeObject value) {
+	public PCObject set(String memberName, PCObject value) {
 		if (memberName.isEmpty()) {
-			this.setValue((PseudoCodeBoolean) value);
+			this.setValue((PCBoolean) value);
 		}
 		return null;
 	}
@@ -107,7 +107,7 @@ public class PseudoCodeBoolean extends PseudoCodeObject {
 	@Override
 	protected void runDelayedCommands() {
 		for (GraphicalRepresentation gr : allGr) {
-			((GraphicalRepresentationBoolean) gr)
+			((GRBoolean) gr)
 					.set(((Boolean) this.commandsforGr.get(0).pop())
 							.booleanValue());
 		}
@@ -115,9 +115,9 @@ public class PseudoCodeBoolean extends PseudoCodeObject {
 	}
 
 	@Override
-	public boolean equals(PseudoCodeObject toCheckAgainst) {
+	public boolean equals(PCObject toCheckAgainst) {
 		try {
-			return ((PseudoCodeBoolean) toCheckAgainst).getLiteralValue() == this.value;
+			return ((PCBoolean) toCheckAgainst).getLiteralValue() == this.value;
 		} catch (ClassCastException e) {
 			return false;
 		}
@@ -125,22 +125,22 @@ public class PseudoCodeBoolean extends PseudoCodeObject {
 
 	@Override
 	public String getTypeName() {
-		return PseudoCodeBoolean.TYPENAME;
+		return PCBoolean.TYPENAME;
 	}
 
-	public PseudoCodeBoolean and(PseudoCodeBoolean other) {
-		return new PseudoCodeBoolean(this.getLiteralValue() && other.getLiteralValue());
+	public PCBoolean and(PCBoolean other) {
+		return new PCBoolean(this.getLiteralValue() && other.getLiteralValue());
 	}
-	public PseudoCodeBoolean or(PseudoCodeBoolean other) {
-		return new PseudoCodeBoolean(this.getLiteralValue() || other.getLiteralValue());
+	public PCBoolean or(PCBoolean other) {
+		return new PCBoolean(this.getLiteralValue() || other.getLiteralValue());
 	}
-	public PseudoCodeBoolean not() {
-		return new PseudoCodeBoolean(!this.getLiteralValue());
+	public PCBoolean not() {
+		return new PCBoolean(!this.getLiteralValue());
 	}
-	public PseudoCodeBoolean equal(PseudoCodeBoolean other) {
-		return new PseudoCodeBoolean(this.getLiteralValue() == other.getLiteralValue());
+	public PCBoolean equal(PCBoolean other) {
+		return new PCBoolean(this.getLiteralValue() == other.getLiteralValue());
 	}
-	public PseudoCodeBoolean notEqual(PseudoCodeBoolean other) {
+	public PCBoolean notEqual(PCBoolean other) {
 		return this.equal(other).not();
 	}
 }

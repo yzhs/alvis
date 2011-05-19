@@ -7,7 +7,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import de.unisiegen.informatik.bs.alvis.editors.AlgorithmPartitionScanner;
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
 /* Ein paar Notizen
  * 
@@ -85,12 +85,12 @@ public class Activator extends AbstractUIPlugin {
 	
 	
 	
-	private PseudoCodeObject runObject;
-	public void setRunObject(PseudoCodeObject runObject) {
+	private PCObject runObject;
+	public void setRunObject(PCObject runObject) {
 		this.runObject = runObject;
 	}
 
-	public PseudoCodeObject getRunObject() {
+	public PCObject getRunObject() {
 		return runObject;
 	}
 	
@@ -116,13 +116,13 @@ public class Activator extends AbstractUIPlugin {
 
 
 
-	private ArrayList<PseudoCodeObject> pseudoCodeList = new ArrayList<PseudoCodeObject>();
+	private ArrayList<PCObject> pseudoCodeList = new ArrayList<PCObject>();
 
-	public void setPseudoCodeList(ArrayList<PseudoCodeObject> pseudoCodeList) {
+	public void setPseudoCodeList(ArrayList<PCObject> pseudoCodeList) {
 		this.pseudoCodeList = pseudoCodeList;
 	}
 
-	public ArrayList<PseudoCodeObject> getPseudoCodeList() {
+	public ArrayList<PCObject> getPseudoCodeList() {
 		return pseudoCodeList;
 	}
 	
@@ -138,7 +138,7 @@ public class Activator extends AbstractUIPlugin {
 //		Graph gr = new Graph(this.runGraph.getAllNodesG(), 
 //				this.runGraph.getAllConnectionsG());
 		vm.addParameter(runObject);
-		for(PseudoCodeObject pseudoObj : pseudoCodeList) {
+		for(PCObject pseudoObj : pseudoCodeList) {
 			// Currently there are two objects in there
 			// startnode and end node
 			vm.addParameter(pseudoObj);

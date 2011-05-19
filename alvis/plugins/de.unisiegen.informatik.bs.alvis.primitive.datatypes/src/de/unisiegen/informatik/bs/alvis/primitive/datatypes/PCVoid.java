@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class PseudoCodeVoid extends PseudoCodeObject {
+public class PCVoid extends PCObject {
 	protected static final String TYPENAME = "Void";
 	
 	@Override
@@ -24,40 +24,40 @@ public class PseudoCodeVoid extends PseudoCodeObject {
 
 	@Override
 	public String getTypeName() {
-		return PseudoCodeVoid.TYPENAME;
+		return PCVoid.TYPENAME;
 	}
 
 	@Override
-	public PseudoCodeObject set(String memberName, PseudoCodeObject value) {
+	public PCObject set(String memberName, PCObject value) {
 		// Nothing to set
 		return null;
 	}
 
 	@Override
-	public PseudoCodeObject get(String memberName) {
+	public PCObject get(String memberName) {
 		// Nothing to get
 		return null;
 	}
 
 	@Override
-	public Map<String, ? extends PseudoCodeObject> getMembers() {
+	public Map<String, ? extends PCObject> getMembers() {
 		// no members, so return empty Map
-		Map<String, PseudoCodeObject> result = new HashMap<String, PseudoCodeObject>();
+		Map<String, PCObject> result = new HashMap<String, PCObject>();
 		return result;
 	}
 
 	@Override
-	public Map<List<String>, List<PseudoCodeObject>> getMethods() {
+	public Map<List<String>, List<PCObject>> getMethods() {
 		// no methods, so return empty Map
-		Map<List<String>, List<PseudoCodeObject>> result = new HashMap<List<String>, List<PseudoCodeObject>>();
+		Map<List<String>, List<PCObject>> result = new HashMap<List<String>, List<PCObject>>();
 		return result;
 	}
 
 	@Override
-	public boolean equals(PseudoCodeObject toCheckAgainst) {
+	public boolean equals(PCObject toCheckAgainst) {
 		try {
 			@SuppressWarnings("unused")
-			PseudoCodeVoid x = (PseudoCodeVoid) toCheckAgainst;
+			PCVoid x = (PCVoid) toCheckAgainst;
 			return true;
 		} catch (ClassCastException e) {
 			return false;

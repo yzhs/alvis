@@ -12,7 +12,6 @@ public class State {
 			boolean isDecisionPoint) {
 		this.decisionPoint = isDecisionPoint;
 		if (toHold != null) {
-			//this.holding = (SortableCollection) toHold.fullCopy();   
 		} else {
 			this.holding = null;
 		}
@@ -21,11 +20,7 @@ public class State {
 	}
 
 	public boolean isDecisionPoint() {
-		if (this.decisionPoint) {
-			return true;
-		} else {
-			return false;
-		}
+		return this.decisionPoint;
 	}
 
 	public SortableCollection getData() {

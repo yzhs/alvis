@@ -9,7 +9,7 @@ package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
  * 
  */
 
-public class PseudoCodeString extends PseudoCodeObject {
+public class PCString extends PCObject {
 	protected static final String TYPENAME = "String";
 
 	private String value;
@@ -18,7 +18,7 @@ public class PseudoCodeString extends PseudoCodeObject {
 	 * 
 	 * @param literal to create String from
 	 */
-	public PseudoCodeString(String literal) {
+	public PCString(String literal) {
 		value = literal;
 	}
 
@@ -42,7 +42,7 @@ public class PseudoCodeString extends PseudoCodeObject {
 	 * 
 	 * @param value set from another PC String
 	 */
-	public void setValue(PseudoCodeString value) {
+	public void setValue(PCString value) {
 		this.value = value.getLiteralValue();
 	}
 
@@ -52,17 +52,17 @@ public class PseudoCodeString extends PseudoCodeObject {
 	}
 
 	@Override
-	public PseudoCodeObject set(String memberName, PseudoCodeObject value) {
+	public PCObject set(String memberName, PCObject value) {
 		if (memberName.isEmpty()) {
-			this.setValue((PseudoCodeString) value);
+			this.setValue((PCString) value);
 		}
 		return null;
 	}
 
 	@Override
-	public boolean equals(PseudoCodeObject toCheckAgainst) {
+	public boolean equals(PCObject toCheckAgainst) {
 		try {
-		return ((PseudoCodeString) toCheckAgainst).value.equals(value);
+		return ((PCString) toCheckAgainst).value.equals(value);
 		} catch (ClassCastException e) {
 			return false;
 		}
@@ -70,18 +70,18 @@ public class PseudoCodeString extends PseudoCodeObject {
 
 	@Override
 	public String getTypeName() {
-		return PseudoCodeString.TYPENAME;
+		return PCString.TYPENAME;
 	}
 
-	public PseudoCodeString add(PseudoCodeString other) {
-		return new PseudoCodeString(this.getLiteralValue() + other.getLiteralValue());
+	public PCString add(PCString other) {
+		return new PCString(this.getLiteralValue() + other.getLiteralValue());
 	}
 
-	public PseudoCodeBoolean equal(PseudoCodeString other) {
-		return new PseudoCodeBoolean(this.equals(other));
+	public PCBoolean equal(PCString other) {
+		return new PCBoolean(this.equals(other));
 	}
 
-	public PseudoCodeBoolean notEqual(PseudoCodeString other) {
+	public PCBoolean notEqual(PCString other) {
 		return this.equal(other).not();
 	}
 }

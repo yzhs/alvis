@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import de.unisiegen.informatik.bs.alvis.graph.Activator;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IRunPreferences;
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 /**
  * @author simon
  *
@@ -16,7 +16,7 @@ public class RunPreferences implements IRunPreferences {
 
 	String myInputFilePath;
 	
-	public ArrayList<PseudoCodeObject> getRunPreferences(String inputFilePath) {
+	public ArrayList<PCObject> getRunPreferences(String inputFilePath) {
 		myInputFilePath = inputFilePath;
 
 		// TODO Abfangen, wenn wir mit myInputFilePath nix tun können.

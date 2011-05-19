@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeList;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCList;
 
-public class PseudoCodeGraph extends PseudoCodeObject {
+public class PseudoCodeGraph extends PCObject {
 	protected static final String TYPENAME = "Graph";
-	private PseudoCodeList<PseudoCodeEdge> edges;
-	private PseudoCodeList<PseudoCodeVertex> vertices;
+	private PCList<PseudoCodeEdge> edges;
+	private PCList<PseudoCodeVertex> vertices;
 
 	/**
 	 * Creates new Graph from PseudoCodeLists
@@ -19,8 +19,8 @@ public class PseudoCodeGraph extends PseudoCodeObject {
 	 * @param vertices
 	 * @param edges
 	 */
-	public PseudoCodeGraph(PseudoCodeList<PseudoCodeVertex> vertices,
-			PseudoCodeList<PseudoCodeEdge> edges) {
+	public PseudoCodeGraph(PCList<PseudoCodeVertex> vertices,
+			PCList<PseudoCodeEdge> edges) {
 		this.edges = edges;
 		this.vertices = vertices;
 	}
@@ -33,8 +33,8 @@ public class PseudoCodeGraph extends PseudoCodeObject {
 	 */
 	public PseudoCodeGraph(ArrayList<PseudoCodeVertex> tmpvertices,
 			ArrayList<PseudoCodeEdge> tmpedges) {
-		edges = new PseudoCodeList<PseudoCodeEdge>();
-		vertices = new PseudoCodeList<PseudoCodeVertex>();
+		edges = new PCList<PseudoCodeEdge>();
+		vertices = new PCList<PseudoCodeVertex>();
 		for (PseudoCodeVertex vert : tmpvertices) {
 			vertices.add(vert);
 		}
@@ -47,8 +47,8 @@ public class PseudoCodeGraph extends PseudoCodeObject {
 	 * Creates new empty Graph
 	 */
 	public PseudoCodeGraph() {
-		edges = new PseudoCodeList<PseudoCodeEdge>();
-		vertices = new PseudoCodeList<PseudoCodeVertex>();
+		edges = new PCList<PseudoCodeEdge>();
+		vertices = new PCList<PseudoCodeVertex>();
 	}
 
 	public PseudoCodeGraph(GraphicalRepresentationGraph gr) {
@@ -65,8 +65,8 @@ public class PseudoCodeGraph extends PseudoCodeObject {
 	public PseudoCodeGraph(HashSet<GraphicalRepresentationVertex> allgNodes,
 			HashSet<GraphicalRepresentationEdge> allgConnections) {
 
-		edges = new PseudoCodeList<PseudoCodeEdge>();
-		vertices = new PseudoCodeList<PseudoCodeVertex>();
+		edges = new PCList<PseudoCodeEdge>();
+		vertices = new PCList<PseudoCodeVertex>();
 		for (GraphicalRepresentationVertex node : allgNodes) {
 			vertices.add(new PseudoCodeVertex(node));
 		}
@@ -100,7 +100,7 @@ public class PseudoCodeGraph extends PseudoCodeObject {
 	 * 
 	 * @return the saved vertices as PseudoCodeList
 	 */
-	public PseudoCodeList<PseudoCodeVertex> getVertices() {
+	public PCList<PseudoCodeVertex> getVertices() {
 		return this.vertices;
 	}
 
@@ -108,7 +108,7 @@ public class PseudoCodeGraph extends PseudoCodeObject {
 	 * 
 	 * @return the saved edges as PseudoCode
 	 */
-	public PseudoCodeList<PseudoCodeEdge> getEdges() {
+	public PCList<PseudoCodeEdge> getEdges() {
 		return this.edges;
 	}
 
@@ -119,13 +119,13 @@ public class PseudoCodeGraph extends PseudoCodeObject {
 	}
 
 	@Override
-	public PseudoCodeObject set(String memberName, PseudoCodeObject value) {
+	public PCObject set(String memberName, PCObject value) {
 		// TODO check possible member access
 		return null;
 	}
 
 	@Override
-	public PseudoCodeObject get(String memberName) {
+	public PCObject get(String memberName) {
 		// TODO check possible member access
 		if (memberName.equals("vertices")) {
 			return vertices;
@@ -134,14 +134,14 @@ public class PseudoCodeGraph extends PseudoCodeObject {
 	}
 
 	@Override
-	public Map<String, ? extends PseudoCodeObject> getMembers() {
-		Map<String, PseudoCodeObject> result = new HashMap<String, PseudoCodeObject>();
+	public Map<String, ? extends PCObject> getMembers() {
+		Map<String, PCObject> result = new HashMap<String, PCObject>();
 		result.put("vertices", this.vertices);
 		return result;
 	}
 
 	@Override
-	public boolean equals(PseudoCodeObject toCheckAgainst) {
+	public boolean equals(PCObject toCheckAgainst) {
 		// TODO Auto-generated method stub
 		return false;
 	}

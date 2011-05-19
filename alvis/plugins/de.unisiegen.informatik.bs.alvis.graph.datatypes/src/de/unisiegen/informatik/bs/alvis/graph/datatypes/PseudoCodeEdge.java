@@ -1,7 +1,7 @@
 package de.unisiegen.informatik.bs.alvis.graph.datatypes;
 
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeBoolean;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
 
 
 
@@ -13,14 +13,14 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeBoolean;
  * 
  */
 
-public class PseudoCodeEdge extends PseudoCodeObject {
+public class PseudoCodeEdge extends PCObject {
 
 	protected static final String TYPENAME = "Edge";
 
 	// the used members
 	private PseudoCodeVertex v1;
 	private PseudoCodeVertex v2;
-	private PseudoCodeBoolean isDirected;
+	private PCBoolean isDirected;
 
 	/**
 	 * Constructor to create new Edge (not directed)
@@ -47,7 +47,7 @@ public class PseudoCodeEdge extends PseudoCodeObject {
 	public PseudoCodeEdge(PseudoCodeVertex v1, PseudoCodeVertex v2) {
 		this.v1 = v1;
 		this.v2 = v2;
-		isDirected = new PseudoCodeBoolean(false);
+		isDirected = new PCBoolean(false);
 		notifyVertices();
 	}
 
@@ -62,7 +62,7 @@ public class PseudoCodeEdge extends PseudoCodeObject {
 			boolean isDirected) {
 		this.v1 = v1;
 		this.v2 = v2;
-		this.isDirected = new PseudoCodeBoolean(false);
+		this.isDirected = new PCBoolean(false);
 		notifyVertices();
 	}
 
@@ -89,13 +89,13 @@ public class PseudoCodeEdge extends PseudoCodeObject {
 	}
 
 	@Override
-	public PseudoCodeObject set(String memberName, PseudoCodeObject value) {
+	public PCObject set(String memberName, PCObject value) {
 		// TODO check possible member access
 		return null;
 	}
 
 	@Override
-	public boolean equals(PseudoCodeObject toCheckAgainst) {
+	public boolean equals(PCObject toCheckAgainst) {
 		if (((PseudoCodeEdge) toCheckAgainst).v1.equals(this.v1)
 				&& ((PseudoCodeEdge) toCheckAgainst).v2.equals(this.v2)
 				&& ((PseudoCodeEdge) toCheckAgainst).isDirected

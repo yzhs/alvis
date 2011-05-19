@@ -1,7 +1,7 @@
 package resources;
 import java.util.ArrayList;
 
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PseudoCodeObject;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.vm.AbstractAlgo;
 import de.unisiegen.informatik.bs.alvis.vm.BPListener;
 import de.unisiegen.informatik.bs.alvis.vm.DPListener;
@@ -15,17 +15,17 @@ public class FirstAlgo implements AbstractAlgo {
 	}
 
 	@Override
-	public ArrayList<PseudoCodeObject> getVariableReferences() {
+	public ArrayList<PCObject> getVariableReferences() {
 		return null;
 	}
 
 	@Override
-	public ArrayList<PseudoCodeObject> getParameterTypes() {
-		return new ArrayList<PseudoCodeObject>();
+	public ArrayList<PCObject> getParameterTypes() {
+		return new ArrayList<PCObject>();
 	}
 
 	@Override
-	public void setParameters(ArrayList<PseudoCodeObject> paras) {
+	public void setParameters(ArrayList<PCObject> paras) {
 	}
 
 	@Override

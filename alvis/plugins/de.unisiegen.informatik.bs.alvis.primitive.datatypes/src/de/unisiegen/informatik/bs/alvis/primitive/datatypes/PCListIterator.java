@@ -2,11 +2,11 @@ package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
 
 import java.util.Iterator;
 
-public class PseudoCodeListIterator<E> implements Iterator<E> {
-	private PseudoCodeList<E> parent;
+public class PCListIterator<E> implements Iterator<E> {
+	private PCList<E> parent;
 	private int index;
 	
-	public PseudoCodeListIterator(PseudoCodeList<E> parent) {
+	public PCListIterator(PCList<E> parent) {
 		this.parent = parent;
 		this.index = -1;
 	}
