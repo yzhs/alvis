@@ -1,0 +1,3 @@
+instructions.configure=\
+  addRepository(type:0,location:http${#58}//alvis.bs.informatik.uni-siegen.de/update//);\
+  addRepository(type:1,location:http${#58}//alvis.bs.informatik.uni-siegen.de/update//);

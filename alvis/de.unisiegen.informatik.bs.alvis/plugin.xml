@@ -52,10 +52,10 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="de.unisiegen.informatik.bs.alvis.application"
-            name="alvis">
+            name="%product.name">
          <property
                name="appName"
-               value="alvis">
+               value="%product.name">
          </property>
          <property
                name="preferenceCustomization"
@@ -71,7 +71,7 @@
          </property>
          <property
                name="windowImages"
-               value="alivs16.png,alvis32.png,alvis48.png,alvis64.png,alvis128.png">
+               value="alvis16.png,alvis32.png,alvis48.png,alvis64.png,alvis128.png">
          </property>
          <property
                name="startupForegroundColor"
@@ -106,8 +106,18 @@
             name="Run Editor">
       </editor>
    </extension>
-   <extension
+      <extension
          point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu">
+         <menu
+               label="Install">
+                       <command commandId="org.eclipselabs.p2.rcpupdate.install" style="push"/>
+        <command commandId="org.eclipselabs.p2.rcpupdate.update" style="push"/>
+         </menu>
+      </menuContribution>
+   </extension>
+   <extension point="org.eclipse.ui.menus">
       <menuContribution
             allPopups="false"
             locationURI="popup:common.new.menu?after=additions">
