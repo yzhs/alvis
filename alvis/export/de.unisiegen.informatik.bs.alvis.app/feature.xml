@@ -4,7 +4,7 @@
       label="Alvis Main Program"
       version="1.0.0.qualifier">
 
-   <description url="http://http://alvis.bs.informatik.uni-siegen.de/">
+   <description url="http://alvis.bs.informatik.uni-siegen.de/">
       This is the main program, it is required for all other plugins.
    </description>
 
@@ -19,6 +19,14 @@
    <url>
       <discovery label="Alvis Project Website" url="http://alvis.bs.informatik.uni-siegen.de/"/>
    </url>
+
+   <includes
+         id="org.eclipse.rcp"
+         version="0.0.0"/>
+
+   <includes
+         id="org.eclipselabs.p2.rcpupdate"
+         version="0.0.0"/>
 
    <plugin
          id="de.unisiegen.informatik.bs.alvis"
