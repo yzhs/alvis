@@ -106,17 +106,6 @@
             name="Run Editor">
       </editor>
    </extension>
-      <extension
-         point="org.eclipse.ui.menus">
-      <menuContribution
-            locationURI="menu:org.eclipse.ui.main.menu">
-         <menu
-               label="Install">
-                       <command commandId="org.eclipselabs.p2.rcpupdate.install" style="push"/>
-        <command commandId="org.eclipselabs.p2.rcpupdate.update" style="push"/>
-         </menu>
-      </menuContribution>
-   </extension>
    <extension point="org.eclipse.ui.menus">
       <menuContribution
             allPopups="false"
@@ -294,13 +283,6 @@
             </command>
          </menu>
          <menu
-               label="%menu.run">
-            <command
-                  commandId="org.eclipse.ui.file.exit"
-                  label="%command.label">
-            </command>
-         </menu>
-         <menu
                label="%menu.window">
             <command
                   commandId="org.eclipse.ui.views.showView"
@@ -356,22 +338,16 @@
          <menu
                label="%menu.help">
             <command
-                  commandId="org.eclipse.ui.file.exit"
-                  label="%command.label">
-            </command>
-            <command
                   commandId="org.eclipse.ui.help.aboutAction"
                   label="%help.about"
                   style="push">
             </command>
             <command
-                  commandId="org.eclipse.ui.help.installationDialog"
-                  label="%help.install"
+                  commandId="org.eclipselabs.p2.rcpupdate.update"
                   style="push">
             </command>
             <command
-                  commandId="org.eclipse.ui.update.findAndInstallUpdates"
-                  label="%help.findandinstallupdates"
+                  commandId="org.eclipselabs.p2.rcpupdate.install"
                   style="push">
             </command>
             <command

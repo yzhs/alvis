@@ -29,9 +29,25 @@ Frank Weiler
    <windowImages i16="alvis16.png" i32="alvis32.png" i48="alvis48.png" i64="alvis64.png" i128="alvis128.png"/>
 
    <splash
+      location="de.unisiegen.informatik.bs.alvis"
       startupProgressRect="0,243,450,10"
       startupMessageRect="15,220,400,20"
       startupForegroundColor="000000" />
+   <launcher>
+      <solaris/>
+      <win useIco="false">
+         <bmp
+            winSmallHigh="/de.unisiegen.informatik.bs.alvis/16-32.bmp"
+            winMediumHigh="/de.unisiegen.informatik.bs.alvis/32-32.bmp"
+            winLargeHigh="/de.unisiegen.informatik.bs.alvis/48-32.bmp"/>
+      </win>
+   </launcher>
+
+
+   <vm>
+   </vm>
+
+
    <plugins>
       <plugin id="com.ibm.icu"/>
       <plugin id="de.unisiegen.informatik.bs.alvis"/>
