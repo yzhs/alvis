@@ -67,7 +67,7 @@
          </property>
          <property
                name="aboutText"
-               value="A project by Simon Meurer&#x0A;Version 1 by:&#x0A;Jan Bauerdick&#x0A;Colin Benner&#x0A;Eduard Boos&#x0A;Dominik Dingel&#x0A;Simon Groth&#x0A;Sebastian Schmitz&#x0A;Tobias Schueler&#x0A;Frank Weiler">
+               value="A project by Simon Meurer&#x0A;Version 1.0.0 by:&#x0A;Jan Bauerdick&#x0A;Colin Benner&#x0A;Eduard Boos&#x0A;Dominik Dingel&#x0A;Simon Groth&#x0A;Sebastian Schmitz&#x0A;Tobias Schueler&#x0A;Frank Weiler">
          </property>
          <property
                name="windowImages"
