@@ -18,7 +18,7 @@ public interface GraphicalRepresentationEdge extends GraphicalRepresentation {
 	GraphicalRepresentationVertex getSourceVertex();
 
 	/**
-	 * Edge connects two Nodes, getDestination returnst second of them
+	 * Edge connects two Nodes, getDestination returns second of them
 	 * 
 	 * @return destination node
 	 */
