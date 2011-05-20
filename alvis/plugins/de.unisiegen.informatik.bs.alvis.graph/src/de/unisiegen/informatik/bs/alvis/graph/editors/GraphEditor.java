@@ -85,7 +85,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 	public AlvisGraph myGraph;
 	private Composite myParent;
 	private Cursor oldCursor;
-	private static IEditorInput myInput;
+	private IEditorInput myInput;
 	private String myInputFilePath;
 	private boolean rename;
 	private int treeOrCircle;
@@ -109,8 +109,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 		// String root = Platform.getInstanceLocation().getURL().getPath();
 		// Get the path to the file
 		if (myInput instanceof FileEditorInput) {
-			FileEditorInput fileInput = (FileEditorInput) myInput;
-			myInputFilePath = fileInput.getPath().toString();
 			AlvisSerialize seri = (AlvisSerialize) deserialize(myInputFilePath);
 			if (seri != null)
 				new AlvisSave(myGraph, seri);
@@ -171,37 +169,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 				.getAdmin().serialize())) {
 			setDirty(true);
 		}
-		//
-		// long filesize = new File(myInputFilePath).length();
-		//
-		// if (filesize > 7) {// TODO this is not so cool check it (SIMON)
-		//
-		// BufferedInputStream fis = null;
-		// XStream xstream = new XStream(new DomDriver());
-		//
-		// try {
-		// fis = new BufferedInputStream(new FileInputStream(
-		// myInputFilePath));
-		//
-		// AlvisSerialize seri = (AlvisSerialize) xstream
-		// .fromXML(new BufferedInputStream(new FileInputStream(
-		// myInputFilePath)));
-		// fis.close();
-		//
-		// if (!seri.equals(myGraph.getAdmin().serialize())) {
-		// dirty = true;
-		// }
-		// } catch (FileNotFoundException e) {
-		// e.printStackTrace();
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
-		//
-		// }
-		//
-		// if (dirty != this.dirty) {
-		// setDirty(dirty);
-		// }
 	}
 
 	/**
@@ -1010,7 +977,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 
 	}
 
-	@Override
 	public void init(IEditorSite site, IEditorInput input)
 			throws PartInitException {
 		setSite(site);
@@ -1018,8 +984,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 		setPartName(input.getName());
 		myInput = input;
 		myInputFilePath = ((FileEditorInput) input).getPath().toString();
-		// TODO Backinto plugin
-
 	}
 
 	// public boolean isDirty() {
