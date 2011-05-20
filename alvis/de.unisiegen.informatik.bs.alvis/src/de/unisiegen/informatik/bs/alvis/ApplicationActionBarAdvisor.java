@@ -2,6 +2,7 @@ package de.unisiegen.informatik.bs.alvis;
 
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.actions.ActionFactory;
+import org.eclipse.ui.actions.ActionFactory.IWorkbenchAction;
 import org.eclipse.ui.application.ActionBarAdvisor;
 import org.eclipse.ui.application.IActionBarConfigurer;
 
@@ -25,6 +26,27 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 	// for all editors
 	protected void makeActions(final IWorkbenchWindow window) {
 		register(ActionFactory.SAVE.create(window));
+		
+		
+		/** START registering Actions, to be working with the Navigator */
+		
+		/** register delete Action */
+		IWorkbenchAction action = ActionFactory.DELETE.create(window);
+		register(action);
+		/** register copy Action */
+		action = ActionFactory.COPY.create(window);
+		register(action);
+		/** register paste Action */
+		action = ActionFactory.PASTE.create(window);
+		register(action);
+		/** register cut Action */
+		action = ActionFactory.CUT.create(window);
+		register(action);
+		/** register new Action */
+		action = ActionFactory.NEW.create(window);
+		register(action);
+		
+		/** END registering Actions */
 	}
 
 }
