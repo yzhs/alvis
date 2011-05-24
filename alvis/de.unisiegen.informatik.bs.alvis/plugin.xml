@@ -5,6 +5,7 @@
    <extension-point id="de.unisiegen.informatik.bs.alvis.views.extensions.graph" name="Graph Run View" schema="schema/de.unisiegen.informatik.bs.alvis.views.extensions.graph.exsd"/>
    <extension-point id="de.unisiegen.informatik.bs.alvis.extensions.runpreferences" name="RunPreferences" schema="schema/de.unisiegen.informatik.bs.alvis.extensions.runpreferences.exsd"/>
    <extension-point id="de.unisiegen.informatik.bs.alvis.runvisualizer" name="RunVisualizer" schema="schema/de.unisiegen.informatik.bs.alvis.runvisualizer.exsd"/>
+   <extension-point id="de.unisiegen.informatik.bs.alvis.export" name="Exporter" schema="schema/de.unisiegen.informatik.bs.alvis.export.exsd"/>
 
    <extension
          id="application"
