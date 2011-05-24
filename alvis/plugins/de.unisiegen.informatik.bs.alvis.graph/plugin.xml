@@ -281,4 +281,7 @@
             class="de.unisiegen.informatik.bs.alvis.graph.run.RunPreferences">
       </RunPreferences>
    </extension>
+   <extension
+         point="de.unisiegen.informatik.bs.alvis.export">
+   </extension>
 </plugin>

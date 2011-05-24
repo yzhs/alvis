@@ -60,9 +60,11 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.editors.ImageCache;
+import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.*;
 
-public class GraphEditor extends EditorPart implements PropertyChangeListener {
+public class GraphEditor extends EditorPart implements PropertyChangeListener,
+		IExportItem {
 
 	public static final int MODUS_STANDARD = 0;// cursor
 	public static final int MODUS_MOVE = 1;// hand
@@ -74,8 +76,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 	public static final int CTRL = SWT.CTRL;// SWT -> ctrl
 	private int pressed;
 
-	Image screenshot;
-
 	private Button bNode, bConnection, bStartNode, bEndNode, bHand, bDelete,
 			bZoomIn, bZoomOut;
 	private Button bAutoFill, bChangeLayout, bDeleteAll, bScreenShot;
@@ -85,7 +85,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 	public AlvisGraph myGraph;
 	private Composite myParent;
 	private Cursor oldCursor;
-	private IEditorInput myInput;
+	private static IEditorInput myInput;
 	private String myInputFilePath;
 	private boolean rename;
 	private int treeOrCircle;
@@ -109,6 +109,8 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 		// String root = Platform.getInstanceLocation().getURL().getPath();
 		// Get the path to the file
 		if (myInput instanceof FileEditorInput) {
+			FileEditorInput fileInput = (FileEditorInput) myInput;
+			myInputFilePath = fileInput.getPath().toString();
 			AlvisSerialize seri = (AlvisSerialize) deserialize(myInputFilePath);
 			if (seri != null)
 				new AlvisSave(myGraph, seri);
@@ -125,7 +127,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 
 		// long filesize = new File(myInputFilePath).length();
 		//
-		// if (filesize > 7) {// TODO this is not so cool check it (SIMON)
+		// if (filesize > 7) {//  this is not so cool check it (SIMON)
 		//
 		// BufferedInputStream fis = null;
 		// XStream xstream = new XStream(new DomDriver());
@@ -169,6 +171,37 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 				.getAdmin().serialize())) {
 			setDirty(true);
 		}
+		//
+		// long filesize = new File(myInputFilePath).length();
+		//
+		// if (filesize > 7) {//  this is not so cool check it (SIMON)
+		//
+		// BufferedInputStream fis = null;
+		// XStream xstream = new XStream(new DomDriver());
+		//
+		// try {
+		// fis = new BufferedInputStream(new FileInputStream(
+		// myInputFilePath));
+		//
+		// AlvisSerialize seri = (AlvisSerialize) xstream
+		// .fromXML(new BufferedInputStream(new FileInputStream(
+		// myInputFilePath)));
+		// fis.close();
+		//
+		// if (!seri.equals(myGraph.getAdmin().serialize())) {
+		// dirty = true;
+		// }
+		// } catch (FileNotFoundException e) {
+		// e.printStackTrace();
+		// } catch (IOException e) {
+		// e.printStackTrace();
+		// }
+		//
+		// }
+		//
+		// if (dirty != this.dirty) {
+		// setDirty(dirty);
+		// }
 	}
 
 	/**
@@ -474,7 +507,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 
 			@Override
 			public void keyReleased(KeyEvent e) {
-				if (pressed == CTRL){
+				if (pressed == CTRL) {
 					pressed = MODUS_STANDARD;
 				}
 			}
@@ -518,7 +551,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 				} else if (event.widget.equals(bDeleteAll)) {
 					clearGraph();
 				} else if (event.widget.equals(bScreenShot)) {
-					graphToImg();
+					saveScreenshotToImg();
 				}
 				setGraphModus(pressed);
 
@@ -642,8 +675,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 
 			@Override
 			public void widgetDefaultSelected(SelectionEvent e) {
-				// TODO Auto-generated method stub
-
 			}
 		});
 
@@ -688,11 +719,22 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 		setGraphModus(pressed);
 	}
 
+	@Override
+	public String getSourceCode() {
+		//no source code in this plug in
+		return null;
+	}
+
 	/**
-	 * captures current graphical representation from mygraph and saves it as
-	 * image (png)
+	 * captures current graphical representation from the graph editor and
+	 * returns it
+	 * 
+	 * @return screenshot the screenshot to create the the export file with
+	 *         (e.g.)
 	 */
-	public void graphToImg() {
+	@Override
+	public Image getImage() {
+		Image screenshot;
 		int width = myGraph.getSize().x;
 		int height = myGraph.getSize().y;
 		GC gc = new GC(myGraph.getGraphModel());
@@ -701,6 +743,18 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 		screenshot = new Image(Display.getCurrent(), width, height);
 		gc.copyArea(screenshot, 0, 0);
 
+		gc.dispose();
+		myGraph.redraw();
+
+		return screenshot;
+	}
+
+	/**
+	 * calls file chooser to set location for saving a screenshot of the graph
+	 * editor to a *.png file
+	 * 
+	 */
+	private void saveScreenshotToImg() {
 		FileDialog saveDialog = new FileDialog(myGraph.getShell(), SWT.SAVE);
 		saveDialog.setFilterNames(new String[] { "PNG (*.png)",
 				Messages.getLabel("allFiles") });
@@ -714,19 +768,17 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 		saveDialog.setFileName("alvisGraph" + System.currentTimeMillis()
 				+ ".png");
 
-		myGraph.redraw();
-		String name = saveDialog.open();
+		Image screenshot = getImage();
 
+		String name = saveDialog.open();
 		if (name == null)
 			return; // saving canceled
-
 		if (new File(name).exists()) {
 			// The file already exists; asks for confirmation
 			MessageBox mb = new MessageBox(saveDialog.getParent(),
 					SWT.ICON_WARNING | SWT.YES | SWT.NO);
 			mb.setMessage(name + Messages.getLabel("imgAlreadyExists"));
-
-			if (mb.open() != SWT.YES)
+			if (mb.open() == SWT.NO)
 				return;// do not overwrite
 		}
 
@@ -735,7 +787,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 		loader.save(name, SWT.IMAGE_PNG);
 
 		screenshot.dispose();
-		gc.dispose();
 	}
 
 	/**
@@ -820,7 +871,9 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 
 	/**
 	 * Set modus that is activated to users mouse click changes mouse icon
-	 * @param pressed key to decide which cursor will be chosen
+	 * 
+	 * @param pressed
+	 *            key to decide which cursor will be chosen
 	 */
 	private void setGraphModus(int pressed) {
 		Cursor cursor = oldCursor;
@@ -977,6 +1030,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 
 	}
 
+	@Override
 	public void init(IEditorSite site, IEditorInput input)
 			throws PartInitException {
 		setSite(site);
@@ -984,6 +1038,8 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 		setPartName(input.getName());
 		myInput = input;
 		myInputFilePath = ((FileEditorInput) input).getPath().toString();
+		// TODO Backinto plugin
+
 	}
 
 	// public boolean isDirty() {
@@ -1007,8 +1063,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 
 	@Override
 	public void propertyChange(PropertyChangeEvent arg0) {
-		// TODO Auto-generated method stub
-
 	}
 
 	// /************************
@@ -1067,5 +1121,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener {
 		}
 		return seri;
 	}
+
+	
 
 }
