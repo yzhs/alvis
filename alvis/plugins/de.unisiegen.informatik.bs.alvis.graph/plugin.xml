@@ -283,5 +283,8 @@
    </extension>
    <extension
          point="de.unisiegen.informatik.bs.alvis.export">
+      <export
+            class="de.unisiegen.informatik.bs.alvis.graph.editors.GraphEditor">
+      </export>
    </extension>
 </plugin>
