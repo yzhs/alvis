@@ -62,10 +62,12 @@ Frank Weiler
       <plugin id="de.unisiegen.informatik.bs.alvis.inputoutput"/>
       <plugin id="de.unisiegen.informatik.bs.alvis.primitive"/>
       <plugin id="de.unisiegen.informatik.bs.alvis.primitive.datatypes"/>
-      <plugin id="de.unisiegen.informatik.bs.alvis.tools.svn"/>
+      <plugin id="de.unisiegen.informatik.bs.alvis.tools.svn" fragment=""/>
       <plugin id="de.unisiegen.informatik.bs.alvis.ui.navigator"/>
       <plugin id="de.unisiegen.informatik.bs.alvis.vm"/>
       <plugin id="de.unisiegen.informatik.bs.alvis.vm.test" fragment="true"/>
+      <plugin id="javax.servlet"/>
+      <plugin id="org.eclipse.ant.core"/>
       <plugin id="org.eclipse.compare"/>
       <plugin id="org.eclipse.compare.core"/>
       <plugin id="org.eclipse.core.commands"/>
@@ -79,10 +81,14 @@ Frank Weiler
       <plugin id="org.eclipse.core.filesystem.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.core.filesystem.win32.x86_64" fragment="true"/>
       <plugin id="org.eclipse.core.jobs"/>
+      <plugin id="org.eclipse.core.net"/>
+      <plugin id="org.eclipse.core.net.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.core.resources"/>
       <plugin id="org.eclipse.core.resources.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.core.runtime"/>
+      <plugin id="org.eclipse.core.runtime.compatibility.auth"/>
       <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
+      <plugin id="org.eclipse.core.variables"/>
       <plugin id="org.eclipse.draw2d"/>
       <plugin id="org.eclipse.ecf"/>
       <plugin id="org.eclipse.ecf.filetransfer"/>
@@ -92,6 +98,7 @@ Frank Weiler
       <plugin id="org.eclipse.ecf.ssl" fragment="true"/>
       <plugin id="org.eclipse.equinox.app"/>
       <plugin id="org.eclipse.equinox.common"/>
+      <plugin id="org.eclipse.equinox.concurrent"/>
       <plugin id="org.eclipse.equinox.p2.core"/>
       <plugin id="org.eclipse.equinox.p2.engine"/>
       <plugin id="org.eclipse.equinox.p2.metadata"/>
@@ -126,8 +133,8 @@ Frank Weiler
       <plugin id="org.eclipse.ui.win32" fragment="true"/>
       <plugin id="org.eclipse.ui.workbench"/>
       <plugin id="org.eclipse.ui.workbench.texteditor"/>
-      <plugin id="org.eclipse.zest.core" fragment=""/>
-      <plugin id="org.eclipse.zest.layouts" fragment=""/>
+      <plugin id="org.eclipse.zest.core"/>
+      <plugin id="org.eclipse.zest.layouts"/>
    </plugins>
 
 

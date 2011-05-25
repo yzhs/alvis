@@ -17,6 +17,9 @@
          </appinfo>
       </annotation>
       <complexType>
+         <choice>
+            <element ref="export"/>
+         </choice>
          <attribute name="point" type="string" use="required">
             <annotation>
                <documentation>
@@ -38,6 +41,21 @@
                </documentation>
                <appinfo>
                   <meta.attribute translatable="true"/>
+               </appinfo>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
+   <element name="export">
+      <complexType>
+         <attribute name="class" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+               <appinfo>
+                  <meta.attribute kind="java" basedOn=":de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem"/>
                </appinfo>
             </annotation>
          </attribute>

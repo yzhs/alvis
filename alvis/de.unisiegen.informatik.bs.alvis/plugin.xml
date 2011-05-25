@@ -176,7 +176,7 @@
                   style="push">
             </command>
             <command
-                  commandId="org.eclipse.ui.file.export"
+                  commandId="de.unisiegen.informatik.bs.alvis.commands.ExportTo"
                   label="%file.export"
                   style="push">
             </command>
@@ -459,6 +459,11 @@
       <command
             id="de.unisiegen.informatik.bs.alvis.commands.SwitchToRunPerspective"
             name="SwitchToRunPerspective">
+      </command>
+      <command
+            defaultHandler="de.unisiegen.informatik.bs.alvis.commands.ExportTo"
+            id="de.unisiegen.informatik.bs.alvis.commands.ExportTo"
+            name="ExportTo">
       </command>
    </extension>
    <extension

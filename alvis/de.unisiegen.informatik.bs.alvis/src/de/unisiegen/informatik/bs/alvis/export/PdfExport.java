@@ -16,6 +16,7 @@ import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
 
+import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 
 //TODO replace static strings with dynamic, language-specific files
@@ -42,13 +43,18 @@ public class PdfExport extends Document {
 	/**
 	 * the constructor creates export PDF file, opens file dialog to ask where
 	 * to save the file
+	 * 
+	 * @throws DocumentException
 	 */
 	public PdfExport() throws DocumentException {
+
+		open();
 
 		addMetaData();
 		addTitlePage();
 		addContent();
 
+		close();
 	}
 
 	/**
@@ -84,44 +90,51 @@ public class PdfExport extends Document {
 	}
 
 	private void addContent() {
-
-		IExtensionRegistry registry = Platform.getExtensionRegistry();
-		IExtensionPoint extensionPoint = registry
-				.getExtensionPoint("de.unisiegen.informatik.bs.alvis.export");
-		IExtension[] extensions = extensionPoint.getExtensions();
-
-		for (int i = 0; i < extensions.length; i++) {
-
-			IConfigurationElement[] elements = extensions[i]
-					.getConfigurationElements();
-			for (IConfigurationElement element : elements) {
-
-				try {
-					IExportItem myExportItem = (IExportItem) element
-							.createExecutableExtension("class");
-
-					// add all export items to the export file:
-					String sourceCode = myExportItem.getSourceCode();
-					if (sourceCode != null) {
-						addSourceCode(sourceCode);
-					}
-					Image image = myExportItem.getImage();
-					if (image != null) {
-						addImage(image);
-					}
-				} catch (CoreException e) {
-					e.printStackTrace();
-				}
-
-			}
-
-		}
+		// GET THE ACTIVE EDITOR
+		IExportItem activeEditor = (IExportItem)Activator.getDefault().getWorkbench().getActiveWorkbenchWindow().
+			getActivePage().getActiveEditor();
+		addSourceCode(activeEditor.getSourceCode());
+		addImage(activeEditor.getImage());
+		
+//		// PROBLEM NULLPOINTEREXCEOTION weil der die Instanz des IExportItem 
+//		// neu erzeugt und nicht den aktiven Graph nimmt.
+//		IExtensionRegistry registry = Platform.getExtensionRegistry();
+//		IExtensionPoint extensionPoint = registry
+//				.getExtensionPoint("de.unisiegen.informatik.bs.alvis.export");
+//
+//		for (IExtension extension : extensionPoint.getExtensions()) {
+//
+//			IConfigurationElement[] elements = extension
+//					.getConfigurationElements();
+//			
+//			for (IConfigurationElement element : elements) {
+//
+//				try {
+//					IExportItem myExportItem = (IExportItem) element
+//							.createExecutableExtension("class");
+//
+//					// add all export items to the export file:
+//					String sourceCode = myExportItem.getSourceCode();
+//					if (sourceCode != null) {
+//						addSourceCode(sourceCode);
+//					}
+//					Image image = myExportItem.getImage();
+//					if (image != null) {
+//						addImage(image);
+//					}
+//				} catch (CoreException e) {
+//					e.printStackTrace();
+//				}
+//
+//			}
+//
+//		}
 
 	}
 
 	private void addImage(Image image) {
 		// TODO Auto-generated method stub
-		System.out.println("image added (PdfExport)");//TODO weg
+		System.out.println("image added (PdfExport)");// TODO weg
 
 	}
 
