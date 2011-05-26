@@ -245,6 +245,8 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		oldCursor = myParent.getCursor();
 		treeOrCircle = 0;
 
+		Activator.getDefault().registerExport(this);
+		
 		RowLayout rowLayout = new RowLayout();
 		rowLayout.type = SWT.VERTICAL;
 		parent.setLayout(new GridLayout(1, false));
