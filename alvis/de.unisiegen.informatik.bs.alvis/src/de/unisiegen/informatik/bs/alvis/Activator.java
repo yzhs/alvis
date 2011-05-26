@@ -7,6 +7,8 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import de.unisiegen.informatik.bs.alvis.editors.AlgorithmPartitionScanner;
+import de.unisiegen.informatik.bs.alvis.export.Export;
+import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
 /* Ein paar Notizen
@@ -31,6 +33,8 @@ public class Activator extends AbstractUIPlugin {
 	private static Activator plugin;
 	
 	private AlgorithmPartitionScanner fPartitionsScanner;
+	
+	private Export myExport = new Export();
 	
 	/**
 	 * The constructor
@@ -167,4 +171,13 @@ public class Activator extends AbstractUIPlugin {
 	public void runBack() {
 		vm.stepBackward();
 	}
+
+	public void registerExport(IExportItem item) {
+		myExport.register(item);
+	}
+	
+	public ArrayList<IExportItem> getExportItems() {
+		return myExport.getExportItems();
+	}
+	
 }

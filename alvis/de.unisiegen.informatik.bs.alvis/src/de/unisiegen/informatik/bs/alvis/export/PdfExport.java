@@ -1,14 +1,21 @@
 package de.unisiegen.informatik.bs.alvis.export;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.IPerspectiveDescriptor;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.IWorkingSet;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
@@ -90,56 +97,69 @@ public class PdfExport extends Document {
 	}
 
 	private void addContent() {
-		// GET THE ACTIVE EDITOR
-		IExportItem activeEditor = (IExportItem)Activator.getDefault().getWorkbench().getActiveWorkbenchWindow().
-			getActivePage().getActiveEditor();
-		addSourceCode(activeEditor.getSourceCode());
-		addImage(activeEditor.getImage());
-		
-//		// PROBLEM NULLPOINTEREXCEOTION weil der die Instanz des IExportItem 
-//		// neu erzeugt und nicht den aktiven Graph nimmt.
-//		IExtensionRegistry registry = Platform.getExtensionRegistry();
-//		IExtensionPoint extensionPoint = registry
-//				.getExtensionPoint("de.unisiegen.informatik.bs.alvis.export");
-//
-//		for (IExtension extension : extensionPoint.getExtensions()) {
-//
-//			IConfigurationElement[] elements = extension
-//					.getConfigurationElements();
-//			
-//			for (IConfigurationElement element : elements) {
-//
-//				try {
-//					IExportItem myExportItem = (IExportItem) element
-//							.createExecutableExtension("class");
-//
-//					// add all export items to the export file:
-//					String sourceCode = myExportItem.getSourceCode();
-//					if (sourceCode != null) {
-//						addSourceCode(sourceCode);
-//					}
-//					Image image = myExportItem.getImage();
-//					if (image != null) {
-//						addImage(image);
-//					}
-//				} catch (CoreException e) {
-//					e.printStackTrace();
-//				}
-//
-//			}
-//
-//		}
+
+		ArrayList<IExportItem> exportItems = Activator.getDefault()
+				.getExportItems();
+
+		for (IExportItem exportItem : exportItems) {
+			addSourceCode(exportItem.getSourceCode());
+			addImage(exportItem.getImage());
+		}
+
+		// // GET THE ACTIVE EDITOR
+		// IExportItem activeEditor = (IExportItem) Activator.getDefault()
+		// .getWorkbench().getActiveWorkbenchWindow().getActivePage()
+		// .getActiveEditor();
+		// addSourceCode(activeEditor.getSourceCode());
+		// addImage(activeEditor.getImage());
+		//
+		// // PROBLEM NULLPOINTEREXCEOTION weil der die Instanz des IExportItem
+		// // neu erzeugt und nicht den aktiven Graph nimmt.
+		// IExtensionRegistry registry = Platform.getExtensionRegistry();
+		// IExtensionPoint extensionPoint = registry
+		// .getExtensionPoint("de.unisiegen.informatik.bs.alvis.export");
+		//
+		// for (IExtension extension : extensionPoint.getExtensions()) {
+		//
+		// IConfigurationElement[] elements = extension
+		// .getConfigurationElements();
+		//
+		// for (IConfigurationElement element : elements) {
+		//
+		// try {
+		// IExportItem myExportItem = (IExportItem) element
+		// .createExecutableExtension("class");
+		//
+		// // add all export items to the export file:
+		// String sourceCode = myExportItem.getSourceCode();
+		// addSourceCode(sourceCode);
+		// Image image = myExportItem.getImage();
+		// addImage(image);
+		// } catch (CoreException e) {
+		// e.printStackTrace();
+		// }
+		//
+		// }
+		//
+		// }
 
 	}
 
 	private void addImage(Image image) {
-		// TODO Auto-generated method stub
-		System.out.println("image added (PdfExport)");// TODO weg
+		if (image == null)
+			return;
+		System.out.println("image added (PdfExport)");// TODO weg, richtig
+														// implementieren
 
 	}
 
 	private void addSourceCode(String sourceCode) {
-		// TODO Auto-generated method stub
+		if (sourceCode == null)
+			return;
+		System.out.println("source code added (PdfExport)\n" + sourceCode);// TODO
+																			// weg,
+																			// richtig
+																			// implementieren
 
 	}
 

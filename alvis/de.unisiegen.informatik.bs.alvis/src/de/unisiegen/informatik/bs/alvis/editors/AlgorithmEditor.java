@@ -19,6 +19,7 @@ import org.eclipse.jface.text.source.projection.ProjectionAnnotationModel;
 import org.eclipse.jface.text.source.projection.ProjectionSupport;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -26,11 +27,14 @@ import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditor;
 
+import de.unisiegen.informatik.bs.alvis.Activator;
+import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
+
 /**
  * @author Eduard Boos
  * 
  */
-public class AlgorithmEditor extends AbstractDecoratedTextEditor {
+public class AlgorithmEditor extends AbstractDecoratedTextEditor implements IExportItem {
 
 	/**
 	 * 
@@ -45,6 +49,9 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor {
 	 * 
 	 */
 	public AlgorithmEditor() {
+		
+		Activator.getDefault().registerExport(this);
+		
 		PlatformUI.getWorkbench().getDisplay();
 		Color highlightColor = new Color(Display.getCurrent(), new RGB(111, 33,
 				152));
@@ -202,5 +209,17 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor {
 		IFileEditorInput fileEditorInput = (IFileEditorInput) getEditorInput();
 		IFile file = fileEditorInput.getFile();
 		return file;
+	}
+
+	@Override
+	public String getSourceCode() {
+		// TODO Auto-generated method stub
+		return "this is source code from the algorithm editor";
+	}
+
+	@Override
+	public Image getImage() {
+		// no image in this editor
+		return null;
 	}
 }
