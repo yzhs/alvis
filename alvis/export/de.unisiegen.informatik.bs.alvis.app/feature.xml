@@ -2,7 +2,7 @@
 <feature
       id="de.unisiegen.informatik.bs.alvis.app"
       label="Alvis Main Program"
-      version="1.0.0.qualifier">
+      version="1.0.2">
 
    <description url="http://alvis.bs.informatik.uni-siegen.de/">
       This is the main program, it is required for all other plugins.
@@ -17,6 +17,7 @@
    </license>
 
    <url>
+      <update label="Alvis Update" url="file:/D:/workspace/UpdateSite/"/>
       <discovery label="Alvis Project Website" url="http://alvis.bs.informatik.uni-siegen.de/"/>
    </url>
 

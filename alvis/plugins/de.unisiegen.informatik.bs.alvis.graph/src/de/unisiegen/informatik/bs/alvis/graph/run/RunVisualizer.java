@@ -16,7 +16,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
-import de.unisiegen.informatik.bs.alvis.IRunVisualizer;
+import de.unisiegen.informatik.bs.alvis.extensionpoints.IRunVisualizer;
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.PseudoCodeEdge;
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.PseudoCodeGraph;
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.PseudoCodeVertex;

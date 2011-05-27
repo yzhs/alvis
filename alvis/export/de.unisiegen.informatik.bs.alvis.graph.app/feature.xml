@@ -16,6 +16,10 @@
       [Enter License Description here.]
    </license>
 
+   <url>
+      <update label="Alvis Update" url="http://alvis.bs.informatik.uni-siegen.de/update/"/>
+   </url>
+
    <plugin
          id="de.unisiegen.informatik.bs.alvis.graph"
          download-size="0"
