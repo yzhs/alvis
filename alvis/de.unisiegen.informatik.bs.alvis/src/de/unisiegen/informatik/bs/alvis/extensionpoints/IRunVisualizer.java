@@ -1,4 +1,4 @@
-package de.unisiegen.informatik.bs.alvis;
+package de.unisiegen.informatik.bs.alvis.extensionpoints;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;

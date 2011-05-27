@@ -55,7 +55,7 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":de.unisiegen.informatik.bs.alvis.virtualmachine.IRunVisualizer"/>
+                  <meta.attribute kind="java" basedOn=":de.unisiegen.informatik.bs.alvis.extensionpoints.IRunVisualizer"/>
                </appinfo>
             </annotation>
          </attribute>
