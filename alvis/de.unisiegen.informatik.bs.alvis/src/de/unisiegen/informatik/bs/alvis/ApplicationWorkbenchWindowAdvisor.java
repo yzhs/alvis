@@ -29,6 +29,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		configurer.setInitialSize(new Point(screen.width, screen.height));
 		configurer.setShowCoolBar(true);
 		configurer.setShowStatusLine(false);
+		configurer.setShowMenuBar(true);
 		configurer.setTitle("Alvis");
 	}
 	
