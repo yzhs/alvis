@@ -236,7 +236,7 @@ public class PdfExport extends Document {
 		for (int i = 0; i < amount; i++) {
 			paragraph.add(new Paragraph(" "));
 		}
-	}
+	} 
 	
 	/**
 	 * @author Sebastian Schmitz
