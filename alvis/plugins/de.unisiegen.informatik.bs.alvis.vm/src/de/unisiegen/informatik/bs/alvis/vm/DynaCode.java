@@ -22,10 +22,10 @@ public final class DynaCode {
 
 	private ClassLoader parentClassLoader;
 
-	private ArrayList sourceDirs = new ArrayList();
+	private ArrayList<SourceDir> sourceDirs = new ArrayList<SourceDir>();
 
 	// class name => LoadedClass
-	private HashMap loadedClasses = new HashMap();
+	private HashMap<String, LoadedClass> loadedClasses = new HashMap<String, LoadedClass>();
 
 	public DynaCode() {
 		this(Thread.currentThread().getContextClassLoader());
@@ -96,6 +96,7 @@ public final class DynaCode {
 	 * @throws ClassNotFoundException
 	 *             if source file not found or compilation error
 	 */
+	@SuppressWarnings("unchecked")
 	public Class<AbstractAlgo> loadClass(String className) throws ClassNotFoundException {
 
 		LoadedClass loadedClass = null;
@@ -149,7 +150,7 @@ public final class DynaCode {
 	private void unload(SourceDir src) {
 		// clear loaded classes
 		synchronized (loadedClasses) {
-			for (Iterator iter = loadedClasses.values().iterator(); iter
+			for (Iterator<LoadedClass> iter = loadedClasses.values().iterator(); iter
 					.hasNext();) {
 				LoadedClass loadedClass = (LoadedClass) iter.next();
 				if (loadedClass.srcDir == src) {
@@ -209,6 +210,7 @@ public final class DynaCode {
 
 		File binFile;
 
+		@SuppressWarnings("rawtypes")
 		Class clazz;
 
 		long lastModified;

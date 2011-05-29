@@ -63,7 +63,7 @@ public final class Javac {
 	}
 
 	private String[] buildJavacArgs(String srcFiles[]) {
-		ArrayList args = new ArrayList();
+		ArrayList<String> args = new ArrayList<String>();
 
 		if (classpath != null) {
 			args.add("-classpath");
