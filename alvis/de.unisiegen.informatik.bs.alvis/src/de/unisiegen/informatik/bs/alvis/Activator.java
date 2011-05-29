@@ -132,22 +132,23 @@ public class Activator extends AbstractUIPlugin {
 	
 	private VirtualMachine vm;
 	public void runStart() {
+		ArrayList<PCObject> paras = new ArrayList<PCObject>();
 		vm = VirtualMachine.getInstance();
-		vm.removeOldParameters();
-		vm.resetState();
+		vm.clear();
 		
 		// Hier muss das plugin nach datentypen gefragt werden
 		// aus dem primitiv
 		// typename
 //		Graph gr = new Graph(this.runGraph.getAllNodesG(), 
 //				this.runGraph.getAllConnectionsG());
-		vm.addParameter(runObject);
+
+		paras.add(runObject);
 		for(PCObject pseudoObj : pseudoCodeList) {
 			// Currently there are two objects in there
 			// startnode and end node
-			vm.addParameter(pseudoObj);
+			paras.add(pseudoObj);
 		}
-		
+		vm.setParameter("algo", paras);
 //		if(this.runGraph.getStartNode() != null)
 //			vm.addParameter(gr.getVertexFromGraphic(
 //					this.runGraph.getStartNode()));
@@ -161,15 +162,15 @@ public class Activator extends AbstractUIPlugin {
 //			vm.addParameter(gr.getVertexFromGraphic(this.runGraph.getEndNode()));
 //		}
 
-		vm.startDefaultRun();
+		vm.startAlgos();
 	}
 
 	public void runNext() {
-		vm.stepForward();
+		vm.stepAlgoBackward("algo");
 	}
 
 	public void runBack() {
-		vm.stepBackward();
+		vm.stepAlgoForward();
 	}
 
 	public void registerExport(IExportItem item) {

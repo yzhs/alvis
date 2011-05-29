@@ -13,7 +13,7 @@ public class ThreadAlgo implements AbstractAlgo {
 	private PCInteger counter;
 	private boolean onBreak;
 	private BPListener bplisten;
-
+	
 	@Override
 	public void run() {
 		counter = new PCInteger(0);
@@ -59,7 +59,9 @@ public class ThreadAlgo implements AbstractAlgo {
 
 	@Override
 	public ArrayList<PCObject> getParameterTypes() {
-		return null;
+		ArrayList<PCObject> result = new ArrayList<PCObject>();
+		result.add(PCInteger.getNull());
+		return result;
 	}
 
 	@Override

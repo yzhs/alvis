@@ -1,13 +1,9 @@
 package de.unisiegen.informatik.bs.alvis.vm;
 
-import java.io.File;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
-
+import java.util.HashMap;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.SortableCollection;
 
 /**
  * 
@@ -15,13 +11,8 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.SortableCollection;
  * 
  *         take care, could be multiple times run (singleton pattern works not
  *         that fine with multiple classloaders)
- * 
- *         TODO work with Jan a working system to use it with multiple Thread
- *         algos
  *         
- *         TODO cleanup API
- * 
- * 
+ *         TODO DP Points
  * 
  */
 
@@ -30,394 +21,252 @@ public class VirtualMachine {
 	// singleton pattern
 	private static VirtualMachine instance = new VirtualMachine();
 
+	// containg algos and threads
+	private HashMap<String, AlgoThread> algos;
+
 	/**
 	 * @return local Virtual Machine instance
 	 */
 	public static VirtualMachine getInstance() {
 		return instance;
 	}
-	
-	private ArrayList<State> states;
-	private ArrayList<Integer> bpCounter;
-	private ArrayList<Integer> dpCounter;
-	private int bpIndex;
-	private int dpIndex;
-	private ArrayList<PCObject> parameters;
-	private Thread algoThread;
-	private AbstractAlgo algoToRun;
-	private Class<AbstractAlgo> algoClass;
-	private BPListener bplisten;
-	private DPListener dplisten;
-	private int stateIndex;
-
-	/**
-	 * sets AlgoClass from which to instanciate, located by the modified
-	 * classloader, provied by sebastian
-	 * 
-	 * @param algo
-	 * @return success
-	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	private boolean setAlgoClassToRun(Class algo) {
-		if (algo != null) {
-			for (Class i : algo.getInterfaces()) {
-				if (i.equals(AbstractAlgo.class)) {
-					algoClass = algo;
-					return true;
-				}
-			}
-		}
-		return false;
-	}
 
 	/**
 	 * private Method to create virtual Machine instance
 	 */
 	private VirtualMachine() {
-		algoClass = null;
-		states = new ArrayList<State>();
-		bpIndex = 0;
-		dpIndex = 0;
-		stateIndex = 0;
-		bpCounter = new ArrayList<Integer>();
-		dpCounter = new ArrayList<Integer>();
-		parameters = new ArrayList<PCObject>();
-		bplisten = null;
-		dplisten = null;
+		algos = new HashMap<String, AlgoThread>();
 	}
 
 	/**
-	 * private helper function to create algo Object from class object
-	 */
-	private void createAlgoFromClass() {
-		try {
-			algoToRun = (AbstractAlgo) algoClass.getConstructors()[0]
-					.newInstance();
-			algoThread = new Thread(algoToRun);
-			algoToRun.setParameters(parameters);
-		} catch (IllegalArgumentException e1) {
-			e1.printStackTrace();
-		} catch (InstantiationException e1) {
-			e1.printStackTrace();
-		} catch (IllegalAccessException e1) {
-			e1.printStackTrace();
-		} catch (InvocationTargetException e1) {
-			e1.printStackTrace();
-		}
-	}
-
-	/**
-	 * reset all states
-	 */
-	public void resetState() {
-		bpCounter.clear();
-		dpCounter.clear();
-		bpIndex = 0;
-		dpIndex = 0;
-	}
-
-	/**
-	 * let the vm start and run the Algorithm every breakpoint will pause 1 sec.
-	 * one decisionpoints will nothing happen, so the order highly depends on
-	 * the current memory layout
-	 */
-	public void startAutoRun() {
-		this.createAlgoFromClass();
-
-		// Breakpoint listener
-		algoToRun.addBPListener(new BPListener() {
-			public void onBreakPoint(int BPNr) {
-				try {
-					// TODO configurable Time for breakpoint sleep, currently 2
-					// sec.
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				synchronized (algoThread) {
-					algoToRun.stopBreak();
-					algoThread.notify();
-				}
-			}
-		});
-		// nothing happens on Decision Point
-		algoToRun.addDPListener(new DPListener() {
-
-			@Override
-			public void onDecisionPoint(int DPNr, SortableCollection toSort) {
-			}
-		});
-		algoThread.start();
-	}
-
-	/**
-	 * let the algo run, every breakpoint will be a new state created
-	 */
-	public void startDefaultRun() {
-		states.add(new State(null, bpIndex, dpIndex, false));
-		stateIndex = 0;
-		this.createAlgoFromClass();
-
-		algoToRun.addBPListener(new BPListener() {
-			public void onBreakPoint(int BPNr) {
-				// this is a new Breakpoint
-				if (bpIndex < BPNr) {
-					bpCounter.add(new Integer(1));
-					bpIndex++;
-				}
-
-				// revisiting the actual Breakpoint (inner loop)
-				// or traveling through nested loops
-				else {
-					bpIndex = BPNr;
-					int tmp = bpCounter.get(bpIndex - 1).intValue();
-					tmp++;
-					bpCounter.set(bpIndex - 1, new Integer(tmp));
-				}
-				states.add(new State(null, bpIndex, dpIndex, false));
-				stateIndex++;
-
-				if (bplisten != null) {
-					bplisten.onBreakPoint(BPNr);
-				}
-			}
-		});
-		// on decision Point ask anyone who has registered
-		algoToRun.addDPListener(new DPListener() {
-			public void onDecisionPoint(int DPNr, SortableCollection toSort) {
-				if (dplisten != null) {
-					dplisten.onDecisionPoint(DPNr, toSort);
-				}
-			}
-		});
-		algoThread.start();
-	}
-
-	/**
+	 * Thread State access
 	 * 
+	 * @param key
+	 *            of algo to identify
+	 * @return thread status
 	 */
-	public void stepForward() {
-		if (algoThread.isAlive()) {
-			synchronized (algoThread) {
-				algoToRun.stopBreak();
-				algoThread.notify();
-			}
-		}
-	}
-
-	/**
-	 * stepping backwards, will set new breakpoint and restart the algo from
-	 * beginning
-	 */
-	public void stepBackward() {
-		// if i'm 1, the next status would be zero, the beginning state every
-		// other value would also be totally useless
-		if (stateIndex > 1) {
-			this.resetState();
-			this.createAlgoFromClass();
-			algoToRun.addBPListener(new BPListener() {
-				// saving the state where we want to end
-				int curSI = stateIndex - 1;
-
-				public void onBreakPoint(int BPNr) {
-					// this is a new Breakpoint
-					if (bpIndex < BPNr) {
-						bpCounter.add(new Integer(1));
-						bpIndex++;
-					}
-					// revisiting the actual Breakpoint (inner loop)
-					// or traveling through nested loops
-					else {
-						bpIndex = BPNr;
-						int tmp = bpCounter.get(bpIndex - 1).intValue();
-						tmp++;
-						bpCounter.set(bpIndex - 1, new Integer(tmp));
-					}
-					states.add(new State(null, bpIndex, dpIndex, false));
-					stateIndex++;
-					// we reached our goal
-					if (stateIndex == curSI) {
-						// overwrite breakpoint listener to restore previous
-						// behaviour
-						algoToRun.addBPListener(new BPListener() {
-							public void onBreakPoint(int BPNr) {
-								// this is a new Breakpoint
-								if (bpIndex < BPNr) {
-									bpCounter.add(new Integer(1));
-									bpIndex++;
-								}
-								// revisiting the actual Breakpoint (inner loop)
-								// or traveling through nested loops
-								else {
-									bpIndex = BPNr;
-									int tmp = bpCounter.get(bpIndex - 1)
-											.intValue();
-									tmp++;
-									bpCounter
-											.set(bpIndex - 1, new Integer(tmp));
-								}
-								states.add(new State(null, bpIndex, dpIndex,
-										false));
-								stateIndex++;
-								if (bplisten != null) {
-									bplisten.onBreakPoint(BPNr);
-								}
-							}
-						});
-					} else {
-						synchronized (algoThread) {
-							algoToRun.stopBreak();
-							algoThread.notify();
-						}
-					}
-				}
-			});
-
-			algoToRun.addDPListener(new DPListener() {
-				public void onDecisionPoint(int DPNr, SortableCollection toSort) {
-					if (dplisten != null) {
-						dplisten.onDecisionPoint(DPNr, toSort);
-					}
-				}
-			});
-			stateIndex = 0;
-			this.states.clear();
-			algoThread.start();
-		} else {
-			this.startDefaultRun();
-		}
-	}
-
-	/**
-	 * @return if Algo Thread is still alive = running
-	 */
-	public boolean isAlive() {
-		if (algoToRun == null) {
-			return false;
-		}
-		return algoThread.isAlive();
-	}
-
-	/**
-	 * only usable if thread is in breakpoint
-	 * 
-	 * @return Reference on all Variables
-	 */
-	public ArrayList<PCObject> getRunningRef() {
-		return algoToRun.getVariableReferences();
-	}
-
-	/**
-	 * 
-	 * @param dplisten
-	 */
-	public void addDPListener(DPListener dplisten) {
-		this.dplisten = dplisten;
-	}
-
-	/**
-	 * 
-	 * @param bplisten
-	 *            to listen for
-	 */
-	public void addBPListener(BPListener bplisten) {
-		this.bplisten = bplisten;
-	}
-
-	/**
-	 * 
-	 * @param para
-	 *            adding Parameter to the algo
-	 */
-	public void addParameter(PCObject para) {
-		parameters.add(para);
-	}
-
-	/**
-	 * Passed Parameters to Algo will be cleared
-	 */
-	public void removeOldParameters() {
-		this.parameters.clear();
-	}
-
-	/**
-	 * let the current thread join the vm thread
-	 */
-	public void waitForAlgo() {
-		try {
-			algoThread.join();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * will wait till the algo reach breakpoint or is terminated
-	 */
-	public void waitForBreakPoint() {
-		while (algoThread.getState().compareTo(Thread.State.TIMED_WAITING) != 0
-				&& algoThread.getState().compareTo(Thread.State.WAITING) != 0
-				&& algoThread.getState().compareTo(Thread.State.TERMINATED) != 0) {
-			synchronized (this) {
-				try {
-					this.wait(100);
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-
-	/**
-	 * 
-	 * @return the ArrayList with dummy object, representing the types needed
-	 *         for the Algo to start
-	 */
-	@SuppressWarnings("unchecked")
-	public ArrayList<PCObject> getStartParameters() {
-		if (algoClass != null) {
-			this.createAlgoFromClass();
-			if (algoToRun != null) {
-				Method[] meths = algoClass.getMethods();
-				for (Method m : meths) {
-					if (m.getName().equals("getParameterTypes")) {
-						try {
-							return ((ArrayList<PCObject>) m.invoke(
-									algoToRun, (Object[]) null));
-						} catch (IllegalArgumentException e) {
-							e.printStackTrace();
-						} catch (IllegalAccessException e) {
-							e.printStackTrace();
-						} catch (InvocationTargetException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-			}
-		}
-		return null;
-	}
-	@SuppressWarnings({ "rawtypes"})
-	private Class getClassObj(String fileName){
-		if(fileName.equals("")) {
-			return null;
-		}
-		DynaCode dynacode = new DynaCode();
-		dynacode.addSourceDir(new File("src"));
-		try {
-			return dynacode.loadClass(fileName);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		return null;
+	public Thread.State getThreadState(String key) {
+		return algos.get(key).getCurrentThreadState();
 	}
 	
-	public boolean classCompileAndLoad(String fileName) {
-		this.algoClass = null;
-		this.algoThread = null;
-		this.algoToRun = null;
-		return this.setAlgoClassToRun(getClassObj(fileName));
+	/**
+	 * Is any Thread currently running
+	 * @return
+	 */
+	public boolean runningThreads() {
+		boolean result = false;
+		for(AlgoThread algo : algos.values()) {
+			result = algo.isAlive() || result;
+		}
+		return result;
 	}
 
+	/**
+	 * Method to get needed Parametertypes
+	 * 
+	 * @param key
+	 * @return PCObject ArrayList to determine the types, for editor and view
+	 */
+	public ArrayList<PCObject> getParametersTypesAlgo(String key) {
+		return algos.get(key).getParameterTypes();
+	}
+
+	/**
+	 * Adds a new Algo to the VM, would also replace a currently existing one
+	 * 
+	 * @param key
+	 * @param fileName
+	 * @return boolean with success
+	 */
+	public boolean addAlgoToVM(String key, String fileName) {
+		AlgoThread tmp;
+		try {
+			tmp = new AlgoThread(fileName);
+		} catch (ClassNotFoundException e) {
+			// TODO possible case for the logger?
+			//e.printStackTrace();
+			return false;
+		}
+		algos.put(key, tmp);
+		return true;
+	}
+
+	/**
+	 * Adding a BPListener to a specified algo
+	 * 
+	 * @param algo
+	 * @param listener
+	 */
+	public void addBPListener(String algo, BPListener listener) {
+		algos.get(algo).addBPListener(listener);
+	}
+
+	/**
+	 * Adding a BPListener to all loaded algos
+	 * 
+	 * @param listener
+	 */
+	public void addBPListener(BPListener listener) {
+		for (AlgoThread algo : algos.values()) {
+			algo.addBPListener(listener);
+		}
+	}
+
+	/**
+	 * Remove listener from algo
+	 * 
+	 * @param algo
+	 * @param listener
+	 */
+	public void removeBPListener(String algo, BPListener listener) {
+		algos.get(algo).removeBPListener(listener);
+	}
+
+	/**
+	 * Remove alll listener of a given string including the string itself
+	 * 
+	 * @param algo
+	 */
+	public void removeAllBPListener(String algo) {
+		algos.get(algo).removeBPListeners();
+	}
+
+	/**
+	 * Remove this listener from all algos
+	 * 
+	 * @param listener
+	 */
+	public void removeAllBPListener(BPListener listener) {
+		for (AlgoThread algo : algos.values()) {
+			algo.removeBPListener(listener);
+		}
+	}
+
+	/**
+	 * Removes all listener from all algos
+	 */
+	public void removeAllBPListener() {
+		for (AlgoThread algo : algos.values()) {
+			algo.removeBPListeners();
+		}
+	}
+
+	/**
+	 * adds a parameter to an algo, the references can also point to the same
+	 * object to realise mutliple algos connected to one resource
+	 * 
+	 * @param key
+	 * @param para
+	 */
+	public void setParameter(String key, ArrayList<PCObject> para) {
+		algos.get(key).setParameters(para);
+	}
+
+	/**
+	 * deletes a parameter set of an algo
+	 * 
+	 * @param key
+	 */
+	public void deleteParameter(String key) {
+		algos.get(key).deleteParamters();
+	}
+
+	/**
+	 * start all algos
+	 */
+	public void startAlgos() {
+		for (AlgoThread algo : algos.values()) {
+			algo.startAlgo();
+		}
+	}
+
+	/**
+	 * will wait for all algos
+	 */
+	public void waitForAlgos() {
+		for (AlgoThread algo : algos.values()) {
+			algo.waitAlgoFinished();
+		}
+	}
+
+	/**
+	 * stop all algos threads, is done by recreating threads, so invalidating
+	 * holding thread references
+	 */
+	public void stopAlgos() {
+		for (AlgoThread algo : algos.values()) {
+			algo.startAlgo();
+		}
+	}
+
+	/**
+	 * let all algos step one step forward, even threads not in breakpoints will
+	 * be called, they should be do nothing in that case
+	 */
+	public void stepAlgoForward() {
+		for (AlgoThread algo : algos.values()) {
+			algo.stepForward();
+		}
+	}
+
+	/**
+	 * let the with key specified algo step one step forward
+	 * 
+	 * @param key
+	 *            of algo
+	 */
+	public void stepAlgoForward(String key) {
+		algos.get(key).stepForward();
+	}
+
+	/**
+	 * returns References from Thread, identified from key
+	 * 
+	 * @param key
+	 * @return
+	 */
+	public ArrayList<PCObject> getRunningReferences(String key) {
+		return algos.get(key).returnReferences();
+	}
+
+	/**
+	 * From all Threads the references
+	 * 
+	 * @return a ArrayList of all ArrayLists containing the specific PC Objects
+	 */
+	public ArrayList<ArrayList<PCObject>> getRunningReferences() {
+		ArrayList<ArrayList<PCObject>> result = new ArrayList<ArrayList<PCObject>>();
+		for (AlgoThread algo : algos.values()) {
+			result.add(algo.returnReferences());
+		}
+		return result;
+	}
+
+	/**
+	 * let the algo step backwards, only useful in single thread environment
+	 * 
+	 * @param key
+	 */
+	public void stepAlgoBackward(String key) {
+		algos.get(key).stepBackward();
+	}
+
+	/**
+	 * lets wait for breakpoints, will wait till every! thread reached a breakpoint
+	 */
+	public void waitForBreakPoint() {
+		for(AlgoThread algo : algos.values()) {
+			if(algo.isAlive()) {
+				algo.waitForBreakpoint();
+			}
+		}
+	}
+	
+	/**
+	 * removes all refernces to algos and threads, to clean up
+	 */
+	public void clear() {
+		algos.clear();
+	}
 
 }

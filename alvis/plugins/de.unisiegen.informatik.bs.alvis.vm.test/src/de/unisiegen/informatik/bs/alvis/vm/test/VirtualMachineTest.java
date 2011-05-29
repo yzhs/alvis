@@ -5,12 +5,14 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import junit.framework.Assert;
 
 import org.testng.annotations.Test;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.vm.BPListener;
 import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
 
@@ -24,48 +26,48 @@ public class VirtualMachineTest {
 	@Test
 	public void checkDoneBeforeInit() {
 		VirtualMachine vm = VirtualMachine.getInstance();
-		Assert.assertEquals(vm.isAlive(), false);
+		Assert.assertEquals(vm.runningThreads(), false);
 	}
 
 	@Test
 	public void loadAlgoClassTrue() {
 		VirtualMachine vm = VirtualMachine.getInstance();
-		Assert.assertEquals(true, vm.classCompileAndLoad("resources.FirstAlgo"));
+		Assert.assertEquals(true, vm.addAlgoToVM("algo", "resources.FirstAlgo"));
 	}
 
 	@Test
 	public void loadAlgoClassFalse() {
 		VirtualMachine vm = VirtualMachine.getInstance();
-		Assert.assertEquals(vm.classCompileAndLoad(""), false);
+		Assert.assertEquals(false, vm.addAlgoToVM("algo", ""));
 	}
 
 	@Test
 	public void loadAlgoAndStartConstructor() {
 		VirtualMachine vm = VirtualMachine.getInstance();
-		vm.classCompileAndLoad("resources.FirstAlgo");
-		vm.startAutoRun();
+		vm.addAlgoToVM("algo", "resources.FirstAlgo");
 	}
 
 	@Test
 	public void getStartTypes() {
 		VirtualMachine vm = VirtualMachine.getInstance();
-		vm.classCompileAndLoad("resources.SecondAlgo");
-		Assert.assertEquals(
-				((PCInteger) vm.getStartParameters().get(0))
-						.getTypeName(), "Integer");
+		vm.addAlgoToVM("algo", "resources.ThreadAlgo");
+		Assert.assertEquals("Integer",
+				((PCInteger) vm.getParametersTypesAlgo("algo").get(0))
+						.getTypeName());
 	}
 
 	@Test
 	public void runThreadWithBPBackwardsOnTermination() {
 		VirtualMachine vm = VirtualMachine.getInstance();
 		Object lock = new Object();
-		vm.classCompileAndLoad("resources.ThreadAlgo");
+		vm.addAlgoToVM("algo", "resources.ThreadAlgo");
 		vm.addBPListener(new BPListener() {
 			@Override
 			public void onBreakPoint(int BreakPointNumber) {
 			}
 		});
-		vm.startDefaultRun();
+		vm.setParameter("algo", new ArrayList<PCObject>());
+		vm.startAlgos();
 		boolean toRun = true;
 		while (toRun) {
 			synchronized (lock) {
@@ -74,15 +76,15 @@ public class VirtualMachineTest {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				vm.stepForward();
-				if (!vm.isAlive()) {
+				vm.stepAlgoForward();
+				if (!vm.runningThreads()) {
 					toRun = false;
 				}
 			}
 		}
 		vm.waitForBreakPoint();
-		Assert.assertEquals(4, ((PCInteger) vm.getRunningRef().get(0))
-				.getLiteralValue());
+		Assert.assertEquals(4,
+				((PCInteger) vm.getRunningReferences("algo").get(0)).getLiteralValue());
 
 	}
 
@@ -90,13 +92,14 @@ public class VirtualMachineTest {
 	public void runThreadWithBPBackwards() {
 		VirtualMachine vm = VirtualMachine.getInstance();
 		Object lock = new Object();
-		vm.classCompileAndLoad("resources.ThreadAlgo");
+		vm.addAlgoToVM("algo", "resources.ThreadAlgo");
 		vm.addBPListener(new BPListener() {
 			@Override
 			public void onBreakPoint(int BreakPointNumber) {
 			}
 		});
-		vm.startDefaultRun();
+		vm.setParameter("algo", new ArrayList<PCObject>());
+		vm.startAlgos();
 		boolean toRun = true;
 		while (toRun) {
 			synchronized (lock) {
@@ -105,29 +108,30 @@ public class VirtualMachineTest {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				vm.stepForward();
-				if (!vm.isAlive()) {
+				vm.stepAlgoForward();
+				if (!vm.runningThreads()) {
 					toRun = false;
 				}
 			}
 		}
-		vm.stepBackward();
+		vm.stepAlgoBackward("algo");
 		vm.waitForBreakPoint();
-		Assert.assertEquals(2, ((PCInteger) vm.getRunningRef().get(0))
-				.getLiteralValue());
+		Assert.assertEquals(2,
+				((PCInteger) vm.getRunningReferences("algo").get(0)).getLiteralValue());
 	}
 
 	@Test
 	public void runThreadWithBP() {
 		VirtualMachine vm = VirtualMachine.getInstance();
 		Object lock = new Object();
-		vm.classCompileAndLoad("resources.ThreadAlgo");
+		vm.addAlgoToVM("algo", "resources.ThreadAlgo");
 		vm.addBPListener(new BPListener() {
 			@Override
 			public void onBreakPoint(int BreakPointNumber) {
 			}
 		});
-		vm.startDefaultRun();
+		vm.setParameter("algo", new ArrayList<PCObject>());
+		vm.startAlgos();
 		while (true) {
 			synchronized (lock) {
 				try {
@@ -135,10 +139,11 @@ public class VirtualMachineTest {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				vm.stepForward();
-				if (!vm.isAlive()) {
-					Assert.assertEquals(4, ((PCInteger) vm
-							.getRunningRef().get(0)).getLiteralValue());
+				vm.stepAlgoForward();
+				if (!vm.runningThreads()) {
+					Assert.assertEquals(4,
+							((PCInteger) vm.getRunningReferences("algo").get(0))
+									.getLiteralValue());
 					return;
 				}
 			}
@@ -186,13 +191,14 @@ public class VirtualMachineTest {
 
 		VirtualMachine vm = VirtualMachine.getInstance();
 		Object lock = new Object();
-		vm.classCompileAndLoad("resources." + fileName);
+		vm.addAlgoToVM("algo", "resources."+ fileName);
 		vm.addBPListener(new BPListener() {
 			@Override
 			public void onBreakPoint(int BreakPointNumber) {
 			}
 		});
-		vm.startDefaultRun();
+		vm.setParameter("algo", new ArrayList<PCObject>());
+		vm.startAlgos();
 		boolean toRun = true;
 		while (toRun) {
 			synchronized (lock) {
@@ -201,8 +207,8 @@ public class VirtualMachineTest {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				vm.stepForward();
-				if (!vm.isAlive()) {
+				vm.stepAlgoForward();
+				if (!vm.runningThreads()) {
 					toRun = false;
 				}
 			}
@@ -214,8 +220,8 @@ public class VirtualMachineTest {
 			output.delete();
 		}
 
-		Assert.assertEquals(4, ((PCInteger) vm.getRunningRef().get(0))
-				.getLiteralValue());
+		Assert.assertEquals(4,
+				((PCInteger) vm.getRunningReferences("algo").get(0)).getLiteralValue());
 
 	}
 
@@ -261,13 +267,14 @@ public class VirtualMachineTest {
 
 		VirtualMachine vm = VirtualMachine.getInstance();
 		Object lock = new Object();
-		vm.classCompileAndLoad("resources." + fileName);
+		vm.addAlgoToVM("algo", "resources."+ fileName);
 		vm.addBPListener(new BPListener() {
 			@Override
 			public void onBreakPoint(int BreakPointNumber) {
 			}
 		});
-		vm.startDefaultRun();
+		vm.setParameter("algo", new ArrayList<PCObject>());
+		vm.startAlgos();
 		boolean toRun = true;
 		while (toRun) {
 			synchronized (lock) {
@@ -276,8 +283,8 @@ public class VirtualMachineTest {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				vm.stepForward();
-				if (!vm.isAlive()) {
+				vm.stepAlgoForward();
+				if (!vm.runningThreads()) {
 					toRun = false;
 				}
 			}
@@ -289,7 +296,7 @@ public class VirtualMachineTest {
 			output.delete();
 		}
 
-		Assert.assertEquals(7, ((PCInteger) vm.getRunningRef().get(0))
-				.getLiteralValue());
+		Assert.assertEquals(7,
+				((PCInteger) vm.getRunningReferences("algo").get(0)).getLiteralValue());
 	}
 }

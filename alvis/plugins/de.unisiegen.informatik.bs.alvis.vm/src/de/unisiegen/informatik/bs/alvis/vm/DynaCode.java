@@ -96,7 +96,7 @@ public final class DynaCode {
 	 * @throws ClassNotFoundException
 	 *             if source file not found or compilation error
 	 */
-	public Class loadClass(String className) throws ClassNotFoundException {
+	public Class<AbstractAlgo> loadClass(String className) throws ClassNotFoundException {
 
 		LoadedClass loadedClass = null;
 		synchronized (loadedClasses) {
