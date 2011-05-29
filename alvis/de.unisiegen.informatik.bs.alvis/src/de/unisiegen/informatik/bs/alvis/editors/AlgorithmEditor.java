@@ -51,6 +51,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements IExp
 	public AlgorithmEditor() {
 		
 		Activator.getDefault().registerExport(this);
+//		Activator.getDefault().getWorkbench().getEditorRegistry().
 		
 		PlatformUI.getWorkbench().getDisplay();
 		Color highlightColor = new Color(Display.getCurrent(), new RGB(111, 33,

@@ -1,27 +1,24 @@
 package de.unisiegen.informatik.bs.alvis.export;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IExtension;
-import org.eclipse.core.runtime.IExtensionPoint;
-import org.eclipse.core.runtime.IExtensionRegistry;
-import org.eclipse.core.runtime.Platform;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.ui.IPerspectiveDescriptor;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.IWorkbenchWindow;
-import org.eclipse.ui.IWorkingSet;
+import org.eclipse.swt.graphics.ImageData;
+import org.eclipse.swt.graphics.ImageLoader;
 
+import com.itextpdf.text.BadElementException;
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
@@ -47,6 +44,9 @@ public class PdfExport extends Document {
 	private static Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12,
 			Font.BOLD);
 
+	private static String FILE = "C:/Users/bearer/Desktop/" + "MyAlvisExport"
+			+ ".pdf";
+
 	/**
 	 * the constructor creates export PDF file, opens file dialog to ask where
 	 * to save the file
@@ -55,13 +55,21 @@ public class PdfExport extends Document {
 	 */
 	public PdfExport() throws DocumentException {
 
-		open();
+		try {
 
-		addMetaData();
-		addTitlePage();
-		addContent();
+			PdfWriter.getInstance(this, new FileOutputStream(FILE));
+			open();
 
-		close();
+			addMetaData();
+			addTitle();
+			addContent();
+
+			close();
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
@@ -80,7 +88,7 @@ public class PdfExport extends Document {
 	 * 
 	 * @throws DocumentException
 	 */
-	private void addTitlePage() throws DocumentException {
+	private void addTitle() throws DocumentException {
 		Paragraph title = new Paragraph();
 		addEmptyLine(title, 1);
 
@@ -96,14 +104,18 @@ public class PdfExport extends Document {
 		newPage();
 	}
 
-	private void addContent() {
+	private void addContent() throws DocumentException {
 
 		ArrayList<IExportItem> exportItems = Activator.getDefault()
 				.getExportItems();
 
 		for (IExportItem exportItem : exportItems) {
 			addSourceCode(exportItem.getSourceCode());
-			addImage(exportItem.getImage());
+			try {
+				addImage(exportItem.getImage());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 		// // GET THE ACTIVE EDITOR
@@ -145,21 +157,62 @@ public class PdfExport extends Document {
 
 	}
 
-	private void addImage(Image image) {
-		if (image == null)
-			return;
-		System.out.println("image added (PdfExport)");// TODO weg, richtig
-														// implementieren
-
-	}
-
-	private void addSourceCode(String sourceCode) {
+	/**
+	 * adds organized, structured, highlighted source code to pdf file
+	 * 
+	 * @param sourceCode
+	 *            the source code as string including html tags for highlighting
+	 *            etc
+	 * @throws DocumentException
+	 *             will be thrown when new paragraph could not have been added
+	 */
+	private void addSourceCode(String sourceCode) throws DocumentException {
 		if (sourceCode == null)
 			return;
-		System.out.println("source code added (PdfExport)\n" + sourceCode);// TODO
-																			// weg,
-																			// richtig
-																			// implementieren
+
+		Paragraph paragraph = new Paragraph("source code", subFont);
+		add(paragraph);
+		paragraph.add("1 this\n2 is\n3 a\n4 source\n5 code\n6 dummy");
+		
+	}
+
+	/**
+	 * adds image to pdf file
+	 * 
+	 * @param image
+	 *            the image which will be parsed to a pdf-valid format
+	 * @throws DocumentException
+	 *             will be thrown when new paragraph could not have been added
+	 */
+	private void addImage(Image image) throws DocumentException {
+		if (image == null)
+			return;
+
+		String path = "C:/Users/bearer/Desktop/" + "tmpAlvisImage" + ".png";
+		com.itextpdf.text.Image pdfImage;
+
+		Paragraph paragraph = new Paragraph("image", subFont);
+		add(paragraph);
+
+		ImageLoader loader = new ImageLoader();
+		loader.data = new ImageData[] { image.getImageData() };
+		loader.save(path, SWT.IMAGE_PNG);
+
+		addEmptyLine(paragraph, 2);
+		try {
+			pdfImage = com.itextpdf.text.Image.getInstance(path);
+			float height, width;
+			width = Math.min(530, pdfImage.getScaledWidth());
+			height = pdfImage.getScaledHeight() / pdfImage.getScaledWidth()
+					* width;
+			pdfImage.scaleAbsolute(width, height);
+			paragraph.add(pdfImage);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		addEmptyLine(paragraph, 2);
+
+		image.dispose();
 
 	}
 
@@ -171,7 +224,7 @@ public class PdfExport extends Document {
 	 * @param amount
 	 *            the amount of empty lines
 	 */
-	private static void addEmptyLine(Paragraph paragraph, int amount) {
+	private void addEmptyLine(Paragraph paragraph, int amount) {
 		for (int i = 0; i < amount; i++) {
 			paragraph.add(new Paragraph(" "));
 		}
