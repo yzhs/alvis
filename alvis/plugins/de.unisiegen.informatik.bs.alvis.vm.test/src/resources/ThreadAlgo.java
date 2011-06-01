@@ -17,13 +17,19 @@ public class ThreadAlgo implements AbstractAlgo {
 	@Override
 	public void run() {
 		counter = new PCInteger(0);
+		System.out.println("hallo1");
 		this.reachedBreakPoint(1);
 		counter = counter.add(new PCInteger(1));
+		System.out.println("hallo1:2");
 		this.reachedBreakPoint(1);
 		counter = counter.add(new PCInteger(1));
+
+		System.out.println("hallo2");
 		this.reachedBreakPoint(2);
 		counter = counter.add(new PCInteger(1));
 		counter = counter.add(new PCInteger(1));
+
+		System.out.println("hallo3");
 		this.reachedBreakPoint(3);
 	}
 

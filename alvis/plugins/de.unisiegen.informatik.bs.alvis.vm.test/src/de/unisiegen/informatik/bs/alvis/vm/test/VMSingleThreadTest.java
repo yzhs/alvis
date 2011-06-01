@@ -22,7 +22,7 @@ import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
  * 
  */
 
-public class VirtualMachineTest {
+public class VMSingleThreadTest {
 	@Test
 	public void checkDoneBeforeInit() {
 		VirtualMachine vm = VirtualMachine.getInstance();
@@ -120,6 +120,95 @@ public class VirtualMachineTest {
 				((PCInteger) vm.getRunningReferences("algo").get(0)).getLiteralValue());
 	}
 
+	@Test
+	public void runThreadWithBPBackwardsError() {
+		VirtualMachine vm = VirtualMachine.getInstance();
+		Object lock = new Object();
+		vm.addAlgoToVM("algo", "resources.ThreadAlgo");
+		vm.addBPListener(new BPListener() {
+			@Override
+			public void onBreakPoint(int BreakPointNumber) {
+			}
+		});
+		vm.setParameter("algo", new ArrayList<PCObject>());
+		vm.startAlgos();
+		boolean toRun = true;
+		while (toRun) {
+			synchronized (lock) {
+				try {
+					lock.wait(10);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				vm.stepAlgoForward();
+				if (!vm.runningThreads()) {
+					toRun = false;
+				}
+			}
+		}
+		vm.stepAlgoBackward("algo");
+		vm.waitForBreakPoint();
+		// now at 2:2
+		
+		vm.stepAlgoBackward("algo");
+		vm.waitForBreakPoint();
+		// now at 2:1
+		
+		vm.stepAlgoBackward("algo");
+		vm.waitForBreakPoint();
+		// now at 1
+		
+		vm.stepAlgoBackward("algo");
+		vm.waitForBreakPoint();
+		// still at 1
+		
+		Assert.assertEquals(0,
+				((PCInteger) vm.getRunningReferences("algo").get(0)).getLiteralValue());
+	}
+	
+	@Test
+	public void runThreadWithBPBackwardsTillBeginning() {
+		VirtualMachine vm = VirtualMachine.getInstance();
+		Object lock = new Object();
+		vm.addAlgoToVM("algo", "resources.ThreadAlgo");
+		vm.addBPListener(new BPListener() {
+			@Override
+			public void onBreakPoint(int BreakPointNumber) {
+			}
+		});
+		vm.setParameter("algo", new ArrayList<PCObject>());
+		vm.startAlgos();
+		boolean toRun = true;
+		while (toRun) {
+			synchronized (lock) {
+				try {
+					lock.wait(10);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				vm.stepAlgoForward();
+				if (!vm.runningThreads()) {
+					toRun = false;
+				}
+			}
+		}
+		vm.stepAlgoBackward("algo");
+		vm.waitForBreakPoint();
+		// now at 2:2
+		
+		vm.stepAlgoBackward("algo");
+		vm.waitForBreakPoint();
+		// now at 2:1
+		
+		vm.stepAlgoBackward("algo");
+		vm.waitForBreakPoint();
+		// now at 1
+		
+		Assert.assertEquals(0,
+				((PCInteger) vm.getRunningReferences("algo").get(0)).getLiteralValue());
+	}
+
+	
 	@Test
 	public void runThreadWithBP() {
 		VirtualMachine vm = VirtualMachine.getInstance();

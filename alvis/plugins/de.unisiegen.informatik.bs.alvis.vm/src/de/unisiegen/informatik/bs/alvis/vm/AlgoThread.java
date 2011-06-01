@@ -38,12 +38,13 @@ public class AlgoThread {
 	// Saving to a Line Number a counter how often we hit this
 	private HashMap<Integer, Integer> lineCounter;
 
-	// last LineCounter, comes handy when stepping backwards
+	// last LineCounter, comes handy when stepping backwards, sometimes
+	// containing computed values instead of realworld
 	private HashMap<Integer, Integer> lastCounter;
-	
+
 	// helper to decide if we are currently on break, or moving backwards
 	private boolean onBreak;
-	
+
 	/**
 	 * Creates new AlgoThread, will directly load the fileName, create the Class
 	 * Inst and the Thread Object
@@ -170,11 +171,7 @@ public class AlgoThread {
 			/**
 			 * BPNr = Line number
 			 */
-			@SuppressWarnings("unchecked")
 			public void onBreakPoint(int BPNr) {
-				// save our linecouter for stepping backwards
-				lastCounter = (HashMap<Integer, Integer>) lineCounter.clone();
-				// this is a already reached Breakpoint
 				if (lineCounter.containsKey(new Integer(BPNr))) {
 					int tmp = lineCounter.get(new Integer(BPNr)).intValue();
 					tmp++;
@@ -231,7 +228,7 @@ public class AlgoThread {
 	 * blocking call to wait for breakpoint event
 	 */
 	public void waitForBreakpoint() {
- 		while (onBreak == false && algoThread.isAlive()) {
+		while (onBreak == false && algoThread.isAlive()) {
 			synchronized (this) {
 				try {
 					this.wait(100);
@@ -254,9 +251,20 @@ public class AlgoThread {
 	/**
 	 * let the algo restart, and running till the previous Breakpoint
 	 */
+	@SuppressWarnings("unchecked")
 	public void stepBackward() {
+		HashMap<Integer, Integer> tmp = new HashMap<Integer, Integer>();
+		tmp.put(new Integer(0), new Integer(1));
+		// we are already on the first step, there is no way we can step more
+		// backwards
+		if (diff(lineCounter, tmp) < 1)
+			return;
+
 		this.createThread();
+		lastCounter = (HashMap<Integer, Integer>) lineCounter.clone();
+		reduce(lastCounter);
 		lineCounter.clear();
+		// lineCounter.clear();
 		onBreak = false;
 		algoInst.addBPListener(new BPListener() {
 			public void onBreakPoint(int BPNr) {
@@ -273,14 +281,11 @@ public class AlgoThread {
 				}
 
 				// reached the previous state, great, so we are done
-				if (lineCounter.equals(lastCounter)) {
+				if (diff(lineCounter, lastCounter) == 0) {
+					reduce(lastCounter);
 					onBreak = true;
 					algoInst.addBPListener(new BPListener() {
-						@SuppressWarnings("unchecked")
 						public void onBreakPoint(int BPNr) {
-							lastCounter = (HashMap<Integer, Integer>) lineCounter
-									.clone();
-							// this is a already reached Breakpoint
 							if (lineCounter.containsKey(new Integer(BPNr))) {
 								int tmp = lineCounter.get(new Integer(BPNr))
 										.intValue();
@@ -308,6 +313,46 @@ public class AlgoThread {
 			}
 		});
 		algoThread.start();
+	}
+
+	/**
+	 * Helper function calculation from to HashMaps the difference, needed for
+	 * Breakpoint counting
+	 * 
+	 * @param first
+	 *            HashMap
+	 * @param second
+	 *            HashMap
+	 * @return Sum(first) - Sum(second)
+	 */
+	private int diff(HashMap<Integer, Integer> first,
+			HashMap<Integer, Integer> second) {
+		int sum_first = 0;
+		int sum_second = 0;
+		for (Integer it : first.values()) {
+			sum_first += it.intValue();
+		}
+		for (Integer it : second.values()) {
+			sum_second += it.intValue();
+		}
+		return sum_first - sum_second;
+	}
+
+	/**
+	 * Helper function to reduce from lastCounter one Breakpoint
+	 * 
+	 * @param arg
+	 */
+	private void reduce(HashMap<Integer, Integer> arg) {
+		// lastCounter is already empty, nothing to do here
+		if (arg.isEmpty())
+			return;
+
+		int tmp = 0;
+		tmp = arg.get(arg.keySet().toArray()[0]).intValue();
+		tmp -= 1;
+		arg.put((Integer) arg.keySet().toArray()[0], new Integer(tmp));
+
 	}
 
 	/**
