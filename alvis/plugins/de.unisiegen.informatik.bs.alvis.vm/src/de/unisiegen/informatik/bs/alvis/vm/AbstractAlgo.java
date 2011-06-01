@@ -52,5 +52,9 @@ public interface AbstractAlgo extends Runnable {
 	 * set own Break Field, should be used in context with Thread.notify
 	 */
 	public void stopBreak();
-
+	
+	/**
+	 * lock handled on all threads
+	 */
+	public void setLock(Object toLockOn);
 }

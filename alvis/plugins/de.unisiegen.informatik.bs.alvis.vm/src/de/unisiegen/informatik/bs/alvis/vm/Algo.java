@@ -7,6 +7,8 @@ import de.unisiegen.informatik.bs.alvis.vm.AbstractAlgo;
 
 public class Algo implements AbstractAlgo {
 
+	
+	private Object lock;
 	private BPListener bplisten;
 	@SuppressWarnings("unused")
 	private DPListener dplisten;
@@ -88,5 +90,10 @@ public class Algo implements AbstractAlgo {
 	@Override
 	public void stopBreak() {
 		onBreak = false;
+	}
+
+	@Override
+	public void setLock(Object toLockOn) {
+		lock = toLockOn;
 	}
 }

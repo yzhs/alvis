@@ -18,6 +18,9 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
  */
 
 public class AlgoThread {
+	// shared object across all threads to sync run
+	private Object lock;
+	
 	// BreakPointlisteners, to be identified in case of Breakpoint
 	private ArrayList<BPListener> bpListeners;
 
@@ -51,13 +54,14 @@ public class AlgoThread {
 	 * 
 	 * @param key
 	 * @param fileName
+	 * @param toLockOn
 	 */
-	public AlgoThread(String fileName) throws ClassNotFoundException {
+	public AlgoThread(String fileName, Object toLockOn) throws ClassNotFoundException {
 		bpListeners = new ArrayList<BPListener>();
 		lineCounter = new HashMap<Integer, Integer>();
 		lastCounter = new HashMap<Integer, Integer>();
 		parameters = null;
-
+		lock = toLockOn;
 		loadAlgo(fileName);
 		createThread();
 	}
@@ -135,6 +139,7 @@ public class AlgoThread {
 		try {
 			algoInst = (AbstractAlgo) algoClass.getConstructors()[0]
 					.newInstance();
+			algoInst.setLock(lock);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {

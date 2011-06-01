@@ -18,6 +18,9 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
 public class VirtualMachine {
 
+	// shared object across all threads to sync run
+	private Object lock;
+	
 	// singleton pattern
 	private static VirtualMachine instance = new VirtualMachine();
 
@@ -81,7 +84,7 @@ public class VirtualMachine {
 	public boolean addAlgoToVM(String key, String fileName) {
 		AlgoThread tmp;
 		try {
-			tmp = new AlgoThread(fileName);
+			tmp = new AlgoThread(fileName, lock);
 		} catch (ClassNotFoundException e) {
 			// TODO possible case for the logger?
 			//e.printStackTrace();
