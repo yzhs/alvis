@@ -20,13 +20,13 @@ public class SecondAlgoMVM implements AbstractAlgo {
 	@Override
 	public void run() {
 		this.reachedBreakPoint(1);
-		counter = counter.add(new PCInteger(1));
+		counter.inc();
 		this.reachedBreakPoint(2);
-		counter = counter.add(new PCInteger(1));
+		counter.inc();
 		this.reachedBreakPoint(3);
-		counter = counter.add(new PCInteger(1));
+		counter.inc();
 		this.reachedBreakPoint(4);
-		counter = counter.add(new PCInteger(1));
+		counter.inc();
 		this.reachedBreakPoint(5);
 
 	}

@@ -42,7 +42,11 @@ public class VMMultiThreadTest {
 		System.out.println(tmp);
 		System.out.println(vm.getRunningReferences("first").get(0));
 		vm.stepAlgoForward("second");
+		System.out.println(vm.getRunningReferences("second").get(0));
 		System.out.println(vm.getRunningReferences("first").get(0));
+//		vm.stepAlgoForward("first");
+//		System.out.println(vm.getRunningReferences("second").get(0));
+		
 		
 	}
 }
