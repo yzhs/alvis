@@ -3,7 +3,7 @@
 <schema targetNamespace="de.unisiegen.informatik.bs.alvis" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appinfo>
-         <meta.schema plugin="de.unisiegen.informatik.bs.alvis" id="de.unisiegen.informatik.bs.alvis.editors.extensions.graph" name="%Extension_Graph"/>
+         <meta.schema plugin="de.unisiegen.informatik.bs.alvis" id="de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist" name="Datatypelist"/>
       </appinfo>
       <documentation>
          [Enter description of this extension point.]
@@ -18,7 +18,7 @@
       </annotation>
       <complexType>
          <choice>
-            <element ref="graphEditor"/>
+            <element ref="DatatypeList"/>
          </choice>
          <attribute name="point" type="string" use="required">
             <annotation>
@@ -47,7 +47,7 @@
       </complexType>
    </element>
 
-   <element name="graphEditor">
+   <element name="DatatypeList">
       <complexType>
          <attribute name="class" type="string" use="required">
             <annotation>
@@ -55,22 +55,8 @@
                   
                </documentation>
                <appinfo>
-                  <meta.attribute kind="java" basedOn=":de.unisiegen.informatik.bs.alvis.editors.IGraphEditor"/>
+                  <meta.attribute kind="java" basedOn=":de.unisiegen.informatik.bs.alvis.extensionpoints.IDatatypeList"/>
                </appinfo>
-            </annotation>
-         </attribute>
-         <attribute name="datatype" type="string" use="required">
-            <annotation>
-               <documentation>
-                  
-               </documentation>
-            </annotation>
-         </attribute>
-         <attribute name="new_attribute" type="string">
-            <annotation>
-               <documentation>
-                  
-               </documentation>
             </annotation>
          </attribute>
       </complexType>
