@@ -42,7 +42,6 @@ public class FirstAlgoMVM implements AbstractAlgo {
 	public ArrayList<PCObject> getVariableReferences() {
 		ArrayList<PCObject> tmp = new ArrayList<PCObject>();
 		tmp.add(counter);
-		System.out.println(tmp.size());
 		return tmp;
 	}
 
