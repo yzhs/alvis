@@ -19,7 +19,7 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 public class VirtualMachine {
 
 	// shared object across all threads to sync run
-	private Object lock;
+	private Object lock = new Object();
 	
 	// singleton pattern
 	private static VirtualMachine instance = new VirtualMachine();
