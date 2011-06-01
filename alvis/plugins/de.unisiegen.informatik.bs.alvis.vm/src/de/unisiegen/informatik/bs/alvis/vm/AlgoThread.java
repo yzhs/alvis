@@ -4,6 +4,7 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.locks.Lock;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
@@ -19,8 +20,8 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
 public class AlgoThread {
 	// shared object across all threads to sync run
-	private Object lock;
-	
+	private Lock lock;
+
 	// BreakPointlisteners, to be identified in case of Breakpoint
 	private ArrayList<BPListener> bpListeners;
 
@@ -56,11 +57,13 @@ public class AlgoThread {
 	 * @param fileName
 	 * @param toLockOn
 	 */
-	public AlgoThread(String fileName, Object toLockOn) throws ClassNotFoundException {
+	public AlgoThread(String fileName, Lock toLockOn)
+			throws ClassNotFoundException {
 		bpListeners = new ArrayList<BPListener>();
 		lineCounter = new HashMap<Integer, Integer>();
 		lastCounter = new HashMap<Integer, Integer>();
 		parameters = null;
+		onBreak = false;
 		lock = toLockOn;
 		loadAlgo(fileName);
 		createThread();
@@ -235,8 +238,8 @@ public class AlgoThread {
 	 * blocking call to wait for breakpoint event
 	 */
 	public void waitForBreakpoint() {
-		while (onBreak == false && algoThread.isAlive()) {
-			synchronized (this) {
+		synchronized (this) {
+			while (onBreak == false) {
 				try {
 					this.wait(100);
 				} catch (InterruptedException e) {

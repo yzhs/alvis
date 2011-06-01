@@ -4,6 +4,8 @@ package de.unisiegen.informatik.bs.alvis.vm;
  * @ author Sebastian Schmitz, Dominik Dingel
  */
 import java.util.ArrayList;
+import java.util.concurrent.locks.Lock;
+
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
 public interface AbstractAlgo extends Runnable {
@@ -56,5 +58,5 @@ public interface AbstractAlgo extends Runnable {
 	/**
 	 * lock handled on all threads
 	 */
-	public void setLock(Object toLockOn);
+	public void setLock(Lock toLockOn);
 }

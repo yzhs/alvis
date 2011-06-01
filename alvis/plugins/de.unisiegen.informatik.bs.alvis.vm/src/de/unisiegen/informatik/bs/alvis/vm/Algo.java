@@ -1,6 +1,7 @@
 package de.unisiegen.informatik.bs.alvis.vm;
 
 import java.util.ArrayList;
+import java.util.concurrent.locks.Lock;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.vm.AbstractAlgo;
@@ -8,7 +9,6 @@ import de.unisiegen.informatik.bs.alvis.vm.AbstractAlgo;
 public class Algo implements AbstractAlgo {
 
 	
-	private Object lock;
 	private BPListener bplisten;
 	@SuppressWarnings("unused")
 	private DPListener dplisten;
@@ -93,7 +93,6 @@ public class Algo implements AbstractAlgo {
 	}
 
 	@Override
-	public void setLock(Object toLockOn) {
-		lock = toLockOn;
+	public void setLock(Lock toLockOn) {
 	}
 }

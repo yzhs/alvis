@@ -2,6 +2,8 @@ package de.unisiegen.informatik.bs.alvis.vm.test;
 
 import java.util.ArrayList;
 
+import junit.framework.Assert;
+
 import org.testng.annotations.Test;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
@@ -11,7 +13,7 @@ import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
 
 /**
  * 
- * @author 
+ * @author Dominik Dingel
  * 
  */
 
@@ -21,7 +23,7 @@ public class VMMultiThreadTest {
 		VirtualMachine vm = VirtualMachine.getInstance();
 		vm.addAlgoToVM("first", "resources.FirstAlgoMVM");
 		vm.addAlgoToVM("second", "resources.SecondAlgoMVM");
-		
+
 		PCInteger tmp = new PCInteger(0);
 		ArrayList<PCObject> tmpl = new ArrayList<PCObject>();
 		tmpl.add(tmp);
@@ -29,24 +31,72 @@ public class VMMultiThreadTest {
 		vm.addBPListener(new BPListener() {
 			@Override
 			public void onBreakPoint(int BreakPointNumber) {
-				System.out.println(VirtualMachine.getInstance().getThreadState("first") + " " + VirtualMachine.getInstance().getThreadState("second"));
+				if (VirtualMachine.getInstance().getThreadState("first")
+						.equals(Thread.State.TIMED_WAITING)
+						|| VirtualMachine.getInstance().getThreadState("first")
+								.equals(Thread.State.NEW)) {
+					Assert.assertEquals(
+							true,
+							VirtualMachine.getInstance()
+									.getThreadState("first")
+									.equals(Thread.State.TIMED_WAITING)
+									|| VirtualMachine.getInstance()
+											.getThreadState("first")
+											.equals(Thread.State.NEW));
+					Assert.assertEquals(
+							true,
+							VirtualMachine.getInstance()
+									.getThreadState("second")
+									.equals(Thread.State.RUNNABLE));
+
+				} else {
+					Assert.assertEquals(
+							true,
+							VirtualMachine.getInstance()
+									.getThreadState("first")
+									.equals(Thread.State.RUNNABLE));
+					Assert.assertEquals(
+							true,
+							VirtualMachine.getInstance()
+									.getThreadState("second")
+									.equals(Thread.State.TIMED_WAITING));
+				}
 			}
 		});
 
 		vm.setParameter("first", tmpl);
 		vm.setParameter("second", tmpl);
 		vm.startAlgos();
-
 		vm.waitForBreakPoint();
 
-		System.out.println(vm.getRunningReferences("first").get(0));
+		Assert.assertEquals(true,
+				vm.getThreadState("first").equals(Thread.State.TIMED_WAITING));
+		Assert.assertEquals(true,
+				vm.getThreadState("second").equals(Thread.State.TIMED_WAITING));
+
 		vm.stepAlgoForward("second");
 		vm.waitForBreakPoint();
-		System.out.println(vm.getRunningReferences("second").get(0));
+
+		Assert.assertEquals(true,
+				vm.getThreadState("first").equals(Thread.State.TIMED_WAITING));
+		Assert.assertEquals(true,
+				vm.getThreadState("second").equals(Thread.State.TIMED_WAITING));
+
 		vm.stepAlgoForward("first");
 		vm.waitForBreakPoint();
-		System.out.println(vm.getRunningReferences("second").get(0));
-		
-		
+
+		Assert.assertEquals(true,
+				vm.getThreadState("first").equals(Thread.State.TIMED_WAITING));
+		Assert.assertEquals(true,
+				vm.getThreadState("second").equals(Thread.State.TIMED_WAITING));
+
+		vm.stepAlgoForward("second");
+		vm.waitForBreakPoint();
+
+		Assert.assertEquals(true,
+				vm.getThreadState("first").equals(Thread.State.TIMED_WAITING));
+		Assert.assertEquals(true,
+				vm.getThreadState("second").equals(Thread.State.TIMED_WAITING));
+
 	}
 }

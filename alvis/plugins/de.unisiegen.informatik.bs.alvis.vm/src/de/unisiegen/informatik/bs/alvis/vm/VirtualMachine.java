@@ -2,6 +2,8 @@ package de.unisiegen.informatik.bs.alvis.vm;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
@@ -11,7 +13,7 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
  * 
  *         take care, could be multiple times run (singleton pattern works not
  *         that fine with multiple classloaders)
- *         
+ * 
  *         TODO DP Points
  * 
  */
@@ -19,8 +21,8 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 public class VirtualMachine {
 
 	// shared object across all threads to sync run
-	private Object lock = new Object();
-	
+	private Lock lock = new ReentrantLock();
+
 	// singleton pattern
 	private static VirtualMachine instance = new VirtualMachine();
 
@@ -51,14 +53,15 @@ public class VirtualMachine {
 	public Thread.State getThreadState(String key) {
 		return algos.get(key).getCurrentThreadState();
 	}
-	
+
 	/**
 	 * Is any Thread currently running
+	 * 
 	 * @return
 	 */
 	public boolean runningThreads() {
 		boolean result = false;
-		for(AlgoThread algo : algos.values()) {
+		for (AlgoThread algo : algos.values()) {
 			result = algo.isAlive() || result;
 		}
 		return result;
@@ -87,7 +90,7 @@ public class VirtualMachine {
 			tmp = new AlgoThread(fileName, lock);
 		} catch (ClassNotFoundException e) {
 			// TODO possible case for the logger?
-			//e.printStackTrace();
+			// e.printStackTrace();
 			return false;
 		}
 		algos.put(key, tmp);
@@ -255,16 +258,26 @@ public class VirtualMachine {
 	}
 
 	/**
-	 * lets wait for breakpoints, will wait till every! thread reached a breakpoint
+	 * lets wait for breakpoints, will wait till every! thread reached a
+	 * breakpoint
 	 */
 	public void waitForBreakPoint() {
-		for(AlgoThread algo : algos.values()) {
-			if(algo.isAlive()) {
-				algo.waitForBreakpoint();
-			}
+		boolean everyoneDone = true;
+		for (AlgoThread algo : algos.values()) {
+			algo.waitForBreakpoint();
+			everyoneDone = everyoneDone
+					&& (algo.getCurrentThreadState().equals(
+							Thread.State.TIMED_WAITING)
+							|| algo.getCurrentThreadState().equals(
+									Thread.State.TERMINATED) || algo
+							.getCurrentThreadState().equals(
+									Thread.State.WAITING));
+		}
+		if (everyoneDone == false) {
+			waitForBreakPoint();
 		}
 	}
-	
+
 	/**
 	 * removes all refernces to algos and threads, to clean up
 	 */

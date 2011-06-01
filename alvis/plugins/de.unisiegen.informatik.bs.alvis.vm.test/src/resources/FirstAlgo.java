@@ -1,5 +1,6 @@
 package resources;
 import java.util.ArrayList;
+import java.util.concurrent.locks.Lock;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.vm.AbstractAlgo;
@@ -41,6 +42,6 @@ public class FirstAlgo implements AbstractAlgo {
 	}
 	
 	@Override
-	public void setLock(Object toLockOn) {
+	public void setLock(Lock toLockOn) {
 	}
 }

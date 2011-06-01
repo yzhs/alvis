@@ -16,11 +16,11 @@ public class PCInteger extends PCObject {
 	
 	private int value;
 
-	public void inc() {
+	synchronized public void inc() {
 		value++;
 	}
 	
-	public void dec() {
+	synchronized public void dec() {
 		value--;
 	}
 	

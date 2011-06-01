@@ -1,6 +1,7 @@
 package resources;
 
 import java.util.ArrayList;
+import java.util.concurrent.locks.Lock;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
@@ -10,7 +11,7 @@ import de.unisiegen.informatik.bs.alvis.vm.DPListener;
 
 public class SecondAlgoMVM implements AbstractAlgo {
 
-	private Object lock;
+	private Lock lock;
 	private PCInteger counter;
 	private boolean onBreak;
 	private BPListener bplisten;
@@ -22,22 +23,18 @@ public class SecondAlgoMVM implements AbstractAlgo {
 	@Override
 	public void run() {
 		this.reachedBreakPoint(1);
-		synchronized (lock) {
+		lock.lock();
 			counter.inc();
-		}
+		lock.unlock();
 		this.reachedBreakPoint(2);
-		synchronized (lock) {
+		lock.lock();
 			counter.inc();
-		}
+		lock.unlock();
 		this.reachedBreakPoint(3);
-		synchronized (lock) {
+		lock.lock();
 			counter.inc();
-		}
+		lock.unlock();
 		this.reachedBreakPoint(4);
-		synchronized (lock) {
-			counter.inc();
-		}
-		this.reachedBreakPoint(5);
 
 	}
 
@@ -69,8 +66,8 @@ public class SecondAlgoMVM implements AbstractAlgo {
 
 	@Override
 	public void stopBreak() {
-		onBreak = false;
 		synchronized (this) {
+			onBreak = false;
 			this.notify();
 		}
 	}
@@ -83,14 +80,14 @@ public class SecondAlgoMVM implements AbstractAlgo {
 	 *            current thread
 	 */
 	private void reachedBreakPoint(int BPNr) {
-		onBreak = true;
 		if (bplisten != null) {
 			bplisten.onBreakPoint(BPNr);
 		}
 		synchronized (this) {
+			onBreak = true;
 			while (onBreak) {
 				try {
-					wait();
+					wait(100);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -99,7 +96,7 @@ public class SecondAlgoMVM implements AbstractAlgo {
 	}
 
 	@Override
-	public void setLock(Object toLockOn) {
+	public void setLock(Lock toLockOn) {
 		lock = toLockOn;
 		
 	}

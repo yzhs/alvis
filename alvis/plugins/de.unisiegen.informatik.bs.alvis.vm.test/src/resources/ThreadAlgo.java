@@ -1,6 +1,7 @@
 package resources;
 
 import java.util.ArrayList;
+import java.util.concurrent.locks.Lock;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
@@ -87,6 +88,6 @@ public class ThreadAlgo implements AbstractAlgo {
 	}
 	
 	@Override
-	public void setLock(Object toLockOn) {
+	public void setLock(Lock toLockOn) {
 	}
 }
