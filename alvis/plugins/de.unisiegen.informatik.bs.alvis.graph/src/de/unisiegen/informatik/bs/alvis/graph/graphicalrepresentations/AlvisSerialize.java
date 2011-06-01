@@ -31,9 +31,12 @@ public class AlvisSerialize {
 	 * @param globalId the id counter
 	 * @param zoomCounter to remember how far graph is zoomed
 	 */
-	public AlvisSerialize(HashMap<AlvisGraphNode, Point> remPos,
+	public AlvisSerialize(
+			HashMap<AlvisGraphNode, Point> remPos,
 			ArrayList<AlvisGraphConnection> allConnections,
-			AlvisGraphNode startNode, AlvisGraphNode endNode, int globalId,
+			AlvisGraphNode startNode, 
+			AlvisGraphNode endNode, 
+			int globalId,
 			int zoomCounter) {
 
 		nodeId = new int[remPos.size()];

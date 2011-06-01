@@ -108,8 +108,6 @@ public class StartEndNodeDialog extends Dialog {
 			}
 			
 			protected void refreshGraphicalRepresentations() {
-				
-				// TODO make this a static function!!!
 				PseudoCodeGraph pseudoGraph = new PseudoCodeGraph();
 				
 				Activator.getDefault().getTempPseudoCodeObjects().clear();

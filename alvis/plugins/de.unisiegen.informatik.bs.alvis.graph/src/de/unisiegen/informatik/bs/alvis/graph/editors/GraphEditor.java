@@ -104,7 +104,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	private void createGraph(Composite parent, IEditorInput input) {
 
 		myGraph = new AlvisGraph(parent, SWT.NONE);
-		//
 		// Get the absolute Path to the InstanceLocation
 		// String root = Platform.getInstanceLocation().getURL().getPath();
 		// Get the path to the file
@@ -118,38 +117,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		rename = false;
 
 		doSave(null);
-
-		// filePath = filePath.replace("\\", "/");
-		// filePath = filePath.replaceFirst("/", "");
-		// root = root.replaceFirst("/", "");
-		// myInputFilePath = root+filePath;
-		// myInputFilePath = myInputFilePath.replace("/", SEP);
-
-		// long filesize = new File(myInputFilePath).length();
-		//
-		// if (filesize > 7) {//  this is not so cool check it (SIMON)
-		//
-		// BufferedInputStream fis = null;
-		// XStream xstream = new XStream(new DomDriver());
-		//
-		// try {
-		// fis = new BufferedInputStream(new FileInputStream(
-		// myInputFilePath));
-		//
-		// AlvisSerialize seri = (AlvisSerialize) xstream
-		// .fromXML(new BufferedInputStream(new FileInputStream(
-		// myInputFilePath)));
-		// fis.close();
-		// } catch (FileNotFoundException e) {
-		// e.printStackTrace();
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
-		//
-		// } else {
-		// doSave(null);
-		// }
-
 	}
 
 	private boolean dirty = false;
@@ -171,37 +138,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 				.getAdmin().serialize())) {
 			setDirty(true);
 		}
-		//
-		// long filesize = new File(myInputFilePath).length();
-		//
-		// if (filesize > 7) {//  this is not so cool check it (SIMON)
-		//
-		// BufferedInputStream fis = null;
-		// XStream xstream = new XStream(new DomDriver());
-		//
-		// try {
-		// fis = new BufferedInputStream(new FileInputStream(
-		// myInputFilePath));
-		//
-		// AlvisSerialize seri = (AlvisSerialize) xstream
-		// .fromXML(new BufferedInputStream(new FileInputStream(
-		// myInputFilePath)));
-		// fis.close();
-		//
-		// if (!seri.equals(myGraph.getAdmin().serialize())) {
-		// dirty = true;
-		// }
-		// } catch (FileNotFoundException e) {
-		// e.printStackTrace();
-		// } catch (IOException e) {
-		// e.printStackTrace();
-		// }
-		//
-		// }
-		//
-		// if (dirty != this.dirty) {
-		// setDirty(dirty);
-		// }
 	}
 
 	/**
@@ -361,10 +297,8 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	 * TEST
 	 */
 	public void createPartControl(Composite parent) {
-
 		myParent = parent;
 		createEditor(myParent, myInput);
-
 	}
 
 	private ImageData loadImageData(String filename) {

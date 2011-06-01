@@ -251,6 +251,14 @@
             id="de.unisiegen.informatik.bs.alvis.graph.grapheditor"
             name="Graph Editor">
       </editor>
+      <editor
+            class="GraphEditorAdjacencyMatrix"
+            default="false"
+            extensions="graph"
+            icon="icons/extension/ext_graph.png"
+            id="de.unisiegen.informatik.bs.alvis.graph.grapheditormatrix"
+            name="Graph Editor Adjacency Matrix">
+      </editor>
    </extension>
    <extension
          point="de.unisiegen.informatik.bs.alvis.runvisualizer">
@@ -286,5 +294,11 @@
       <export
             class="de.unisiegen.informatik.bs.alvis.graph.editors.GraphEditor">
       </export>
+   </extension>
+   <extension
+         point="de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist">
+      <DatatypeList
+            class="de.unisiegen.informatik.bs.alvis.graph.datatypes.DatatypeList">
+      </DatatypeList>
    </extension>
 </plugin>
