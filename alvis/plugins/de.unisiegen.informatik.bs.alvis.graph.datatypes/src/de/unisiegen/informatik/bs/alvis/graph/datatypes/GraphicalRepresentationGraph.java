@@ -18,6 +18,17 @@ public interface GraphicalRepresentationGraph extends GraphicalRepresentation {
 	public ArrayList<GraphicalRepresentationVertex> getVertex();
 
 	/**
+	 * @param vertToSet
+	 */
+	public void setVertex(ArrayList<GraphicalRepresentationVertex> vertToSet);
+	
+	/**
+	 * 
+	 * @param edgeToSet
+	 */
+	public void setEdges(ArrayList<GraphicalRepresentationEdge> edgeToSet);
+	
+	/**
 	 * 
 	 * @return a List of the Edges from the graph
 	 */

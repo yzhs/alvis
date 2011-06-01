@@ -838,4 +838,14 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		return admin.getZoomCounter();
 	}
 
+	@Override
+	public void setVertex(ArrayList<GraphicalRepresentationVertex> vertToSet) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void setEdges(ArrayList<GraphicalRepresentationEdge> edgeToSet) {
+		// TODO Auto-generated method stub
+	}
+
 }
