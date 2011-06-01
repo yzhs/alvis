@@ -57,6 +57,7 @@ public class AlgoThread {
 		lineCounter = new HashMap<Integer, Integer>();
 		lastCounter = new HashMap<Integer, Integer>();
 		parameters = null;
+
 		loadAlgo(fileName);
 		createThread();
 	}
@@ -67,6 +68,7 @@ public class AlgoThread {
 	 * @param paras
 	 */
 	public void setParameters(ArrayList<PCObject> paras) {
+		algoInst.setParameters(paras);
 		parameters = paras;
 	}
 
@@ -264,7 +266,6 @@ public class AlgoThread {
 		lastCounter = (HashMap<Integer, Integer>) lineCounter.clone();
 		reduce(lastCounter);
 		lineCounter.clear();
-		// lineCounter.clear();
 		onBreak = false;
 		algoInst.addBPListener(new BPListener() {
 			public void onBreakPoint(int BPNr) {
