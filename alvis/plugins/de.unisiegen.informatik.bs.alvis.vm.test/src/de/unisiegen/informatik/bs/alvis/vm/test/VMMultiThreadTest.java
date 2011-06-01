@@ -29,7 +29,7 @@ public class VMMultiThreadTest {
 		vm.addBPListener(new BPListener() {
 			@Override
 			public void onBreakPoint(int BreakPointNumber) {
-				System.out.println(VirtualMachine.getInstance().getThreadState("first") + "" + VirtualMachine.getInstance().getThreadState("second"));
+				System.out.println(VirtualMachine.getInstance().getThreadState("first") + " " + VirtualMachine.getInstance().getThreadState("second"));
 			}
 		});
 
@@ -39,13 +39,13 @@ public class VMMultiThreadTest {
 
 		vm.waitForBreakPoint();
 
-		System.out.println(tmp);
 		System.out.println(vm.getRunningReferences("first").get(0));
 		vm.stepAlgoForward("second");
+		vm.waitForBreakPoint();
 		System.out.println(vm.getRunningReferences("second").get(0));
-		System.out.println(vm.getRunningReferences("first").get(0));
-//		vm.stepAlgoForward("first");
-//		System.out.println(vm.getRunningReferences("second").get(0));
+		vm.stepAlgoForward("first");
+		vm.waitForBreakPoint();
+		System.out.println(vm.getRunningReferences("second").get(0));
 		
 		
 	}

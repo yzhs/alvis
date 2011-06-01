@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCList;
 
@@ -51,6 +52,7 @@ public class PseudoCodeGraph extends PCObject {
 		vertices = new PCList<PseudoCodeVertex>();
 	}
 
+	// TODO DUMMY Constructor
 	public PseudoCodeGraph(GraphicalRepresentationGraph gr) {
 
 	}
@@ -149,5 +151,14 @@ public class PseudoCodeGraph extends PCObject {
 	@Override
 	public String getTypeName() {
 		return PseudoCodeGraph.TYPENAME;
+	}
+	
+	@Override
+	public void updateGR(GraphicalRepresentation gr) {
+		ArrayList<GraphicalRepresentationVertex> vlist = new ArrayList<GraphicalRepresentationVertex>();
+		//for()
+		//((GraphicalRepresentationGraph) gr).setVertices(vlist);
+		//((GraphicalRepresentationGraph) gr).setEdges(null);
+		
 	}
 }

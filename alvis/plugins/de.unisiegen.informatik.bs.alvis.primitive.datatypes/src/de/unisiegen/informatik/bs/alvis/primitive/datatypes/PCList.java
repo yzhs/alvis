@@ -3,10 +3,20 @@ package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * 
+ * @author Dominik Dingel
+ *
+ * @param <E> Typ Parameter of the stored objects
+ */
 public class PCList<E> extends PCObject implements SortableCollection, Iterable<E> {
 	protected static final String TYPENAME = "List";
 	private ArrayList<E> items;
 
+	/**
+	 * 
+	 * @param items
+	 */
 	public void setItems(ArrayList<E> items) {
 		this.items = items;
 	}

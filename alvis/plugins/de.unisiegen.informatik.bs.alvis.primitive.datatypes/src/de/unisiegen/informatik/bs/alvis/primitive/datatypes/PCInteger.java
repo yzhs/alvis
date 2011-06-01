@@ -16,6 +16,15 @@ public class PCInteger extends PCObject {
 	
 	private int value;
 
+	public void inc() {
+		value++;
+	}
+	
+	public void dec() {
+		value--;
+	}
+	
+	
 	public static PCInteger getNull() {
 		if(localNull == null) {
 			localNull = new PCInteger(Integer.MAX_VALUE-1);

@@ -23,5 +23,4 @@ public interface GraphicalRepresentationEdge extends GraphicalRepresentation {
 	 * @return destination node
 	 */
 	GraphicalRepresentationVertex getDestinationVertex();
-
 }

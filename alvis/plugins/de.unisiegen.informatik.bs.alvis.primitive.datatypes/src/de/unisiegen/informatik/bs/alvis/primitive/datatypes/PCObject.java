@@ -93,8 +93,17 @@ public abstract class PCObject {
 	 */
 	public void addGraphicalRepresentation(GraphicalRepresentation gr) {
 		allGr.add(gr);
+		updateGR(gr);
 	}
 
+	/**
+	 * Will update graphical representation after maybe adding it to the pc object
+	 * 
+	 */
+	protected void updateGR(GraphicalRepresentation gr) {
+		// do nothing
+	}
+	
 	/**
 	 * String representation for the Console
 	 * 

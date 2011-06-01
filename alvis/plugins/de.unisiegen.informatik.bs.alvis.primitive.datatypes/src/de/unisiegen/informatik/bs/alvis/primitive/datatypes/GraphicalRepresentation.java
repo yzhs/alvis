@@ -8,5 +8,4 @@ package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
  */
 
 public interface GraphicalRepresentation {
-
 }

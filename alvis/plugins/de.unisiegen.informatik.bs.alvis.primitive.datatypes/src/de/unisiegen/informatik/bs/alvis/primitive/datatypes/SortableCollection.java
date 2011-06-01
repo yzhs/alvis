@@ -7,7 +7,7 @@ package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
  *         a Decision Point where the order of a Dataset is important
  * 
  */
-public interface SortableCollection extends Specifiable {
+public interface SortableCollection {
 
 	/**
 	 * shuffles the List to generated a complete random result

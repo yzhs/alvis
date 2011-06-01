@@ -20,7 +20,7 @@ public interface GraphicalRepresentationGraph extends GraphicalRepresentation {
 	/**
 	 * @param vertToSet
 	 */
-	public void setVertex(ArrayList<GraphicalRepresentationVertex> vertToSet);
+	public void setVertices(ArrayList<GraphicalRepresentationVertex> vertToSet);
 	
 	/**
 	 * 

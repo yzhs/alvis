@@ -839,7 +839,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	}
 
 	@Override
-	public void setVertex(ArrayList<GraphicalRepresentationVertex> vertToSet) {
+	public void setVertices(ArrayList<GraphicalRepresentationVertex> vertToSet) {
 		// TODO Auto-generated method stub
 	}
 
@@ -847,5 +847,4 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	public void setEdges(ArrayList<GraphicalRepresentationEdge> edgeToSet) {
 		// TODO Auto-generated method stub
 	}
-
 }
