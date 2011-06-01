@@ -34,7 +34,7 @@ public class SecondAlgoMVM implements AbstractAlgo {
 	@Override
 	public ArrayList<PCObject> getVariableReferences() {
 		ArrayList<PCObject> tmp = new ArrayList<PCObject>();
-		tmp.add(counter);
+			tmp.add(counter);
 		return tmp;
 	}
 

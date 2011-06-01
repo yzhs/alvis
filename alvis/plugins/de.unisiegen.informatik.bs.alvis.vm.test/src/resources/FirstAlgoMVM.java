@@ -17,7 +17,6 @@ public class FirstAlgoMVM implements AbstractAlgo {
 	
 	@Override
 	public void run() {
-		this.reachedBreakPoint(1);
 		counter = counter.add(new PCInteger(1));
 		this.reachedBreakPoint(2);
 		counter = counter.add(new PCInteger(1));
