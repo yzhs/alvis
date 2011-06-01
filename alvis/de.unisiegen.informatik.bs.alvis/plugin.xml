@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension-point id="de.unisiegen.informatik.bs.alvis.editors.extensions.graph" name="%Extension_Graph" schema="schema/de.unisiegen.informatik.bs.alvis.editors.extensions.graph.exsd"/>
-   <extension-point id="de.unisiegen.informatik.bs.alvis.views.extensions.graph" name="Graph Run View" schema="schema/de.unisiegen.informatik.bs.alvis.views.extensions.graph.exsd"/>
    <extension-point id="de.unisiegen.informatik.bs.alvis.extensions.runpreferences" name="RunPreferences" schema="schema/de.unisiegen.informatik.bs.alvis.extensions.runpreferences.exsd"/>
    <extension-point id="de.unisiegen.informatik.bs.alvis.runvisualizer" name="RunVisualizer" schema="schema/de.unisiegen.informatik.bs.alvis.runvisualizer.exsd"/>
    <extension-point id="de.unisiegen.informatik.bs.alvis.export" name="Exporter" schema="schema/de.unisiegen.informatik.bs.alvis.export.exsd"/>
+   <extension-point id="de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist" name="DatatypeList" schema="schema/de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist.exsd"/>
 
    <extension
          id="application"
@@ -53,10 +52,10 @@
          point="org.eclipse.core.runtime.products">
       <product
             application="de.unisiegen.informatik.bs.alvis.application"
-            name="%product.name">
+            name="Alvis Main Program">
          <property
                name="appName"
-               value="%product.name">
+               value="Alvis Main Program">
          </property>
          <property
                name="preferenceCustomization"
