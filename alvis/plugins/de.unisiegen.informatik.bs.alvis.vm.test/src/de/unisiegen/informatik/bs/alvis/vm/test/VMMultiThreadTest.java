@@ -27,11 +27,11 @@ public class VMMultiThreadTest {
 	public void counter() {
 		VirtualMachine vm = VirtualMachine.getInstance();
 		vm.addAlgoToVM("first", "resources.FirstAlgoMVM");
-		//vm.addAlgoToVM("second", "resources.SecondAlgoMVM");
-		
+		vm.addAlgoToVM("second", "resources.SecondAlgoMVM");
 		PCInteger tmp = new PCInteger(0);
 		ArrayList<PCObject> tmpl = new ArrayList<PCObject>();
 		tmpl.add(tmp);
+
 		vm.addBPListener(new BPListener() {
 			@Override
 			public void onBreakPoint(int BreakPointNumber) {
@@ -40,12 +40,12 @@ public class VMMultiThreadTest {
 		});
 		
 		vm.setParameter("first", tmpl);
-		//vm.setParameter("second", tmpl);
-		
+		vm.setParameter("second", tmpl);
 		vm.startAlgos();
-		//vm.waitForBreakPoint();
+
+		vm.waitForBreakPoint();
 		
-		System.out.println(vm.getRunningReferences("first").get(0));
+		System.out.println(vm.getRunningReferences("first"));
 		//vm.stepAlgoForward("second");
 		//System.out.println(vm.getRunningReferences("first").get(0));
 		

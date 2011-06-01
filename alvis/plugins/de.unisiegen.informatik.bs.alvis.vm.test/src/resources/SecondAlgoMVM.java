@@ -14,6 +14,11 @@ public class SecondAlgoMVM implements AbstractAlgo {
 	private BPListener bplisten;
 	
 	public SecondAlgoMVM() {
+		
+	}
+	
+	@Override
+	public void run() {
 		this.reachedBreakPoint(1);
 		counter = counter.add(new PCInteger(1));
 		this.reachedBreakPoint(2);
@@ -23,15 +28,14 @@ public class SecondAlgoMVM implements AbstractAlgo {
 		this.reachedBreakPoint(4);
 		counter = counter.add(new PCInteger(1));
 		this.reachedBreakPoint(5);
-	}
-	
-	@Override
-	public void run() {
+
 	}
 
 	@Override
 	public ArrayList<PCObject> getVariableReferences() {
-		return null;
+		ArrayList<PCObject> tmp = new ArrayList<PCObject>();
+		tmp.add(counter);
+		return tmp;
 	}
 
 	@Override
@@ -46,6 +50,7 @@ public class SecondAlgoMVM implements AbstractAlgo {
 
 	@Override
 	public void addBPListener(BPListener wantToListen) {
+		bplisten = wantToListen;
 	}
 
 	@Override
@@ -54,6 +59,10 @@ public class SecondAlgoMVM implements AbstractAlgo {
 
 	@Override
 	public void stopBreak() {
+		onBreak = false;
+		synchronized (this) {
+			this.notify();
+		}
 	}
 	/**
 	 * static code
@@ -78,3 +87,4 @@ public class SecondAlgoMVM implements AbstractAlgo {
 		}
 	}
 }
+
