@@ -85,4 +85,8 @@ public class ThreadAlgo implements AbstractAlgo {
 			this.notify();
 		}
 	}
+	
+	@Override
+	public void setLock(Object toLockOn) {
+	}
 }

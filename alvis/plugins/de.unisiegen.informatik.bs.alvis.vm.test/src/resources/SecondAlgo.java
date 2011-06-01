@@ -44,4 +44,7 @@ public class SecondAlgo implements AbstractAlgo {
 	@Override
 	public void stopBreak() {
 	}
+	@Override
+	public void setLock(Object toLockOn) {
+	}
 }
