@@ -1,4 +1,5 @@
 package resources;
+
 import java.util.ArrayList;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
@@ -9,28 +10,39 @@ import de.unisiegen.informatik.bs.alvis.vm.DPListener;
 
 public class FirstAlgoMVM implements AbstractAlgo {
 
+	private Object lock;
 	private PCInteger counter;
 	private boolean onBreak;
 	private BPListener bplisten;
-	
-	public FirstAlgoMVM() {}
-	
+
+	public FirstAlgoMVM() {
+	}
+
 	@Override
 	public void run() {
-		counter.inc();
+		synchronized (lock) {
+			counter.inc();
+		}
 		this.reachedBreakPoint(2);
-		counter.inc();
+		synchronized (lock) {
+			counter.inc();
+		}
 		this.reachedBreakPoint(3);
-		counter.inc();
+		synchronized (lock) {
+			counter.inc();
+		}
 		this.reachedBreakPoint(4);
-		counter.inc();
+		synchronized (lock) {
+			counter.inc();
+		}
 		this.reachedBreakPoint(5);
 	}
 
 	@Override
 	public ArrayList<PCObject> getVariableReferences() {
 		ArrayList<PCObject> tmp = new ArrayList<PCObject>();
-			tmp.add(counter);
+		tmp.add(counter);
+		System.out.println(tmp.size());
 		return tmp;
 	}
 
@@ -60,6 +72,7 @@ public class FirstAlgoMVM implements AbstractAlgo {
 			this.notify();
 		}
 	}
+
 	/**
 	 * static code
 	 * 
@@ -81,5 +94,11 @@ public class FirstAlgoMVM implements AbstractAlgo {
 				}
 			}
 		}
+	}
+
+	@Override
+	public void setLock(Object toLockOn) {
+		lock = toLockOn;
+		
 	}
 }
