@@ -1,6 +1,5 @@
 package de.unisiegen.informatik.bs.alvis.export;
 
-import java.awt.Canvas;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -9,23 +8,22 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
+import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.swt.widgets.Shell;
 
 import com.itextpdf.text.Anchor;
-import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chapter;
-import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.html.simpleparser.HTMLWorker;
-import com.itextpdf.text.pdf.ColumnText;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
@@ -43,17 +41,10 @@ public class PdfExport extends Document {
 			Font.BOLD);
 	private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
 			Font.BOLD);
-	private static Font colorfont = new Font(Font.FontFamily.COURIER, 12,
-			Font.ITALIC, BaseColor.BLUE);
-	private static Font blackFont = new Font(Font.FontFamily.TIMES_ROMAN, 12,
-			Font.NORMAL);
 	private static Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 16,
 			Font.BOLD);
 	private static Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12,
 			Font.BOLD);
-	// TODO Relativ zum System machen!
-	private static String FILE = "C:/Users/bearer/Desktop/" + "MyAlvisExport"
-			+ ".pdf";
 
 	private PdfWriter writer;
 	private Anchor anchor;
@@ -68,9 +59,13 @@ public class PdfExport extends Document {
 	 */
 	public PdfExport() throws DocumentException {
 
+		FileDialog saveDialog = MyFileDialog.getExportDialog();
+
+		String path = MyFileDialog.open(saveDialog);
+
 		try {
 
-			writer = PdfWriter.getInstance(this, new FileOutputStream(FILE));
+			writer = PdfWriter.getInstance(this, new FileOutputStream(path));
 			open();
 
 			addMetaData();
@@ -202,13 +197,21 @@ public class PdfExport extends Document {
 		if (sourceCode == null)
 			return null;
 
-		// TODO Absoluten Pfad durch Pfad relativ zum Projekt ersetzen!
-		System.out.println(this.getClass().getProtectionDomain()
-				.getCodeSource().getLocation().getFile().toString());// TODO weg
-																		// damit
 		String file = "";
+		// TODO Absoluten Pfad durch Pfad relativ zum Projekt ersetzen!
 		try {
-			file = readFile("C:/Users/bearer/runtime-de.unisiegen.informatik.bs.alvis.product/asd/src/algorithm.algo");
+			String path = "C:/Users/bearer";
+			path += "/runtime-de.unisiegen.informatik.bs.alvis.product";
+			path += "/asd/src/algorithm.algo";
+			
+			file = readFile(path);
+			String myfile = FileLocator.getBundleFile(
+					Activator.getDefault().getBundle()).getAbsolutePath();
+
+			System.out.println("file: " + path);// TODO weg
+			System.out.println("\nmyfile: " + myfile);// TODO weg
+			System.out.println("\nsource code: " + sourceCode);// TODO weg
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -216,30 +219,15 @@ public class PdfExport extends Document {
 
 		Paragraph paragraph = new Paragraph("source code:\n", subFont);
 
-		ArrayList<Element> bodyText = new ArrayList<Element>();
-
+		ArrayList<Element> bodyText;
 		try {
 			bodyText = (ArrayList<Element>) HTMLWorker.parseToList(
 					new StringReader(file), null);
+			paragraph.addAll(bodyText);
 		} catch (IOException e) {
-			e.printStackTrace();
+			paragraph.add("however, no source code was added here");
 		}
 
-//		ColumnText text = new ColumnText(writer.getDirectContent());
-//		for (Element element : bodyText) {
-//			text.addElement(element);
-//		}
-
-		paragraph.addAll(bodyText);
-		
-		// String[] lines = file.split("<br>\n");
-		//
-		// for (int i = 0; i < lines.length; i++) {
-		//
-		// // paragraph.add(new Chunk(content, font))
-		//
-		// paragraph.add(new Paragraph("" + (i + 1) + ": " + lines[i]));
-		// }
 		return paragraph;
 
 	}
@@ -257,7 +245,7 @@ public class PdfExport extends Document {
 		if (image == null)
 			return null;
 
-		String path = "C:/Users/bearer/Desktop/" + "tmpAlvisImage" + ".png";
+		String path = "tmpAlvisImage" + ".png";
 		com.itextpdf.text.Image pdfImage;
 
 		Paragraph paragraph = new Paragraph("image", subFont);
@@ -354,9 +342,9 @@ public class PdfExport extends Document {
 	 */
 	private String highlightString(String stringToHighight) {
 
-		stringToHighight = stringToHighight.replaceAll("<", "\060");
-		stringToHighight = stringToHighight.replaceAll(">", "\062");
-		
+		stringToHighight = stringToHighight.replaceAll("<", "&#060");
+		stringToHighight = stringToHighight.replaceAll(">", "&#062");
+
 		ArrayList<String> tokenList = new ArrayList<String>();
 		tokenList.add("end");
 		tokenList.add("begin");
