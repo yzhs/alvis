@@ -252,7 +252,7 @@
             name="Graph Editor">
       </editor>
       <editor
-            class="GraphEditorAdjacencyMatrix"
+            class="de.unisiegen.informatik.bs.alvis.graph.editors.GraphEditorAdjacencyMatrix"
             default="false"
             extensions="graph"
             icon="icons/extension/ext_graph.png"
