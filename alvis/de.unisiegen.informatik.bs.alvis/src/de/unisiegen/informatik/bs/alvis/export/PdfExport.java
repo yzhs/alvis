@@ -1,9 +1,11 @@
 package de.unisiegen.informatik.bs.alvis.export;
 
+import java.awt.Canvas;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -12,11 +14,18 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
 
+import com.itextpdf.text.Anchor;
 import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chapter;
+import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.html.simpleparser.HTMLWorker;
+import com.itextpdf.text.pdf.ColumnText;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
@@ -46,6 +55,11 @@ public class PdfExport extends Document {
 	private static String FILE = "C:/Users/bearer/Desktop/" + "MyAlvisExport"
 			+ ".pdf";
 
+	private PdfWriter writer;
+	private Anchor anchor;
+	private Chapter chapter;
+	private Paragraph paragraph;
+
 	/**
 	 * the constructor creates export PDF file, opens file dialog to ask where
 	 * to save the file
@@ -56,7 +70,7 @@ public class PdfExport extends Document {
 
 		try {
 
-			PdfWriter.getInstance(this, new FileOutputStream(FILE));
+			writer = PdfWriter.getInstance(this, new FileOutputStream(FILE));
 			open();
 
 			addMetaData();
@@ -100,22 +114,38 @@ public class PdfExport extends Document {
 				smallBold));
 
 		add(title);
-		newPage();
+
 	}
 
 	private void addContent() throws DocumentException {
 
+		anchor = new Anchor("anchor", catFont);
+		anchor.setName("anchor");
+
 		ArrayList<IExportItem> exportItems = Activator.getDefault()
 				.getExportItems();
 
+		// adding all source code parts:
+		chapter = new Chapter(new Paragraph(anchor), 1);
 		for (IExportItem exportItem : exportItems) {
-			addSourceCode(exportItem.getSourceCode());
-			try {
-				addImage(exportItem.getImage());
-			} catch (Exception e) {
-				e.printStackTrace();
+			String sourceCode = exportItem.getSourceCode();
+			if (sourceCode != null) {
+				paragraph = toParagraph(sourceCode);
+				chapter.add(paragraph);
 			}
 		}
+		add(chapter);
+
+		// adding all images:
+		chapter = new Chapter(new Paragraph(anchor), 2);
+		for (IExportItem exportItem : exportItems) {
+			Image image = exportItem.getImage();
+			if (image != null) {
+				paragraph = toParagraph(image);
+				chapter.add(paragraph);
+			}
+		}
+		add(chapter);
 
 		// // GET THE ACTIVE EDITOR
 		// IExportItem activeEditor = (IExportItem) Activator.getDefault()
@@ -157,50 +187,80 @@ public class PdfExport extends Document {
 	}
 
 	/**
-	 *  adds organized, structured, highlighted source code to pdf file
+	 * adds organized, structured, highlighted source code to new paragraph and
+	 * returns it
+	 * 
 	 * @author Sebastian Schmitz & Frank Weiler
 	 * @param sourceCode
-	 * 		the source code as string including html tags for highlighting
+	 *            the source code as string including html tags for highlighting
 	 *            etc
-	 *  @throws DocumentException
-	 *             will be thrown when new paragraph could not have been added
-	 */
-	private void addSourceCode(String sourceCode) throws DocumentException {
-		if (sourceCode == null)
-			return;
-		// TODO Absoluten Pfad durch Pfad relativ zum Projekt ersetzen!
-		System.out.println(this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString());
-		String file ="";
-		try {
-			file = readFile("/home/basti/Programmierung/runtime-de.unisiegen.informatik.bs.alvis.product/labertest/src/algorithm.algo");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		System.out.println("readFile: "+ file);
-		file = putFormattedHTMLStringToHTMLCode(highlightString(file));
-		
-		Paragraph paragraph = new Paragraph("source code", subFont);
-		add(paragraph);
-		paragraph.add("1 this\n2 is\n3 a\n4 source\n5 code\n6 dummy");
-}
-
-	/**
-	 * adds image to pdf file
-	 * 
-	 * @param image
-	 *            the image which will be parsed to a pdf-valid format
+	 * @return a paragraph including the source code
 	 * @throws DocumentException
 	 *             will be thrown when new paragraph could not have been added
 	 */
-	private void addImage(Image image) throws DocumentException {
+	private Paragraph toParagraph(String sourceCode) throws DocumentException {
+		if (sourceCode == null)
+			return null;
+
+		// TODO Absoluten Pfad durch Pfad relativ zum Projekt ersetzen!
+		System.out.println(this.getClass().getProtectionDomain()
+				.getCodeSource().getLocation().getFile().toString());// TODO weg
+																		// damit
+		String file = "";
+		try {
+			file = readFile("C:/Users/bearer/runtime-de.unisiegen.informatik.bs.alvis.product/asd/src/algorithm.algo");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		file = putFormattedHTMLStringToHTMLCode(highlightString(file));
+
+		Paragraph paragraph = new Paragraph("source code:\n", subFont);
+
+		ArrayList<Element> bodyText = new ArrayList<Element>();
+
+		try {
+			bodyText = (ArrayList<Element>) HTMLWorker.parseToList(
+					new StringReader(file), null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+//		ColumnText text = new ColumnText(writer.getDirectContent());
+//		for (Element element : bodyText) {
+//			text.addElement(element);
+//		}
+
+		paragraph.addAll(bodyText);
+		
+		// String[] lines = file.split("<br>\n");
+		//
+		// for (int i = 0; i < lines.length; i++) {
+		//
+		// // paragraph.add(new Chunk(content, font))
+		//
+		// paragraph.add(new Paragraph("" + (i + 1) + ": " + lines[i]));
+		// }
+		return paragraph;
+
+	}
+
+	/**
+	 * adds image to new paragraph and returns it
+	 * 
+	 * @param image
+	 *            the image which will be parsed to a pdf-valid format
+	 * @return paragraph a paragraph including the image
+	 * @throws DocumentException
+	 *             will be thrown when new paragraph could not have been added
+	 */
+	private Paragraph toParagraph(Image image) throws DocumentException {
 		if (image == null)
-			return;
+			return null;
 
 		String path = "C:/Users/bearer/Desktop/" + "tmpAlvisImage" + ".png";
 		com.itextpdf.text.Image pdfImage;
 
 		Paragraph paragraph = new Paragraph("image", subFont);
-		add(paragraph);
 
 		ImageLoader loader = new ImageLoader();
 		loader.data = new ImageData[] { image.getImageData() };
@@ -217,10 +277,12 @@ public class PdfExport extends Document {
 			paragraph.add(pdfImage);
 		} catch (Exception e) {
 			e.printStackTrace();
+			System.err.println("error at adding image");
 		}
 		addEmptyLine(paragraph, 2);
 
 		image.dispose();
+		return paragraph;
 
 	}
 
@@ -236,55 +298,65 @@ public class PdfExport extends Document {
 		for (int i = 0; i < amount; i++) {
 			paragraph.add(new Paragraph(" "));
 		}
-	} 
-	
+	}
+
 	/**
-	 * @author Sebastian Schmitz
-	 * returns formatted content of the selected .algo file as string
+	 * @author Sebastian Schmitz returns formatted content of the selected .algo
+	 *         file as string
 	 * @param pathToFile
-	 * @return 
-	 * @throws IOException  
+	 * @return
+	 * @throws IOException
 	 */
-	private String readFile(String pathToFile) throws IOException{
+	private String readFile(String pathToFile) throws IOException {
 		FileInputStream in = new FileInputStream(pathToFile);
 		String content = "";
 		int b = in.read();
-		while (b!= -1){
+		while (b != -1) {
 			content = content.concat((Character.toString((char) b)));
 			b = in.read();
 		}
 		in.close();
 		return content;
 	}
-	
+
 	/**
-	 * @author Sebastian Schmitz
-	 * Embed the highlighted Text in a HTML file
+	 * @author Sebastian Schmitz Embed the highlighted Text in a HTML file
 	 * @param string
 	 * @return String representing a completed HTML file
 	 */
 	private String putFormattedHTMLStringToHTMLCode(String string) {
-		String HTMLCode = "";
-		HTMLCode += ""+"<html> "+'\n';
-		HTMLCode += ""+'\t'+ "<head>" + '\n';
-		HTMLCode += ""+'\t'+ '\t' + "<title> Source Code generated by Alvis Version X </title>" + '\n';// TODO: Versionsnummer!
-		HTMLCode += ""+'\t'+ "</head>" + '\n';
-		HTMLCode += ""+'\t'+ "<body>" + '\n';
-		HTMLCode += ""+'\t'+ '\t' + "<pre>" + '\n';
-		HTMLCode += ""+string;
-		HTMLCode += ""+'\t'+ '\t' + "</pre>" + '\n';
-		HTMLCode += ""+'\t'+ "</body>" + '\n';
-		HTMLCode += ""+"</html> "+'\n';
+
+		String HTMLCode = string.replaceAll("\n", "<br>\n");
+
+		// String HTMLCode = "";
+		// HTMLCode += "" + "<html> " + '\n';
+		// HTMLCode += "" + '\t' + "<head>" + '\n';
+		// HTMLCode += "" + '\t' + '\t'
+		// + "<title> Source Code generated by Alvis Version X </title>"
+		// + '\n';// TODO: Versionsnummer!
+		// HTMLCode += "" + '\t' + "</head>" + '\n';
+		// HTMLCode += "" + '\t' + "<body>" + '\n';
+		// HTMLCode += "" + '\t' + '\t' + "<pre>" + '\n';
+		// HTMLCode += "" + string;
+		// HTMLCode += "" + '\t' + '\t' + "</pre>" + '\n';
+		// HTMLCode += "" + '\t' + "</body>" + '\n';
+		// HTMLCode += "" + "</html> " + '\n';
+
 		return HTMLCode;
-	    
+
 	}
-	
+
 	/**
 	 * accepts string and returns it with tokens highlighted using HTML tags
+	 * 
 	 * @param stringToHighight
 	 * @return highlighted String
 	 */
-	private String highlightString(String stringToHighight){
+	private String highlightString(String stringToHighight) {
+
+		stringToHighight = stringToHighight.replaceAll("<", "\060");
+		stringToHighight = stringToHighight.replaceAll(">", "\062");
+		
 		ArrayList<String> tokenList = new ArrayList<String>();
 		tokenList.add("end");
 		tokenList.add("begin");
@@ -294,18 +366,21 @@ public class PdfExport extends Document {
 		tokenList.add("in");
 		tokenList.add("infty");
 		tokenList.add("null");
-		// TODO Diese Liste unbedingt mit der aus der Grammatik erzeugten Tokenlist ersetzen!
+		// TODO Diese Liste unbedingt mit der aus der Grammatik erzeugten
+		// Tokenlist ersetzen!
 		String temp = "";
-		String toReturn = ""+'\t'+'\t';
+		String toReturn = "" + '\t' + '\t';
 		// Read the String charwise
-		for(int i = 0; i < stringToHighight.length(); i++){
-			if(stringToHighight.charAt(i) != '\t' && stringToHighight.charAt(i) != '\n' && stringToHighight.charAt(i) != ' '){
+		for (int i = 0; i < stringToHighight.length(); i++) {
+			if (stringToHighight.charAt(i) != '\t'
+					&& stringToHighight.charAt(i) != '\n'
+					&& stringToHighight.charAt(i) != '\r'
+					&& stringToHighight.charAt(i) != ' ') {
 				// read the next word
 				temp += stringToHighight.charAt(i);
-			}
-			else {
+			} else {
 				// if the word is complete, check if it is a token
-				if(tokenList.contains(temp)){
+				if (tokenList.contains(temp)) {
 					// if so, surround it with a color tag
 					temp = "<font color=\"#FF00FF\">" + temp + "</font>";
 				}
@@ -314,11 +389,12 @@ public class PdfExport extends Document {
 				// write the current whitespace
 				toReturn += stringToHighight.charAt(i);
 			}
-			// reestablish indendation in the HTML file, not visible in the export
-			if ( stringToHighight.charAt(i) == '\n' &&  stringToHighight.charAt(i+1) != -1)
-				toReturn += "" + '\t' +'\t';
+			// reestablish indendation in the HTML file, not visible in the
+			// export
+			if (stringToHighight.charAt(i) == '\n')
+				toReturn += "" + '\t' + '\t';
 		}
 		return toReturn;
 	}
- 
+
 }
