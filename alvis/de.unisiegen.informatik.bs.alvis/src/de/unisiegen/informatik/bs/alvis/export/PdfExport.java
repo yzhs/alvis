@@ -386,7 +386,8 @@ public class PdfExport extends Document{
 		// Tokenlist ersetzen!
 		String temp = "";
 		int indentationCounter = 0;
-		String toReturn ="<p style=\"padding-left:" + indentationCounter * 40 + "px; margin: 0;\">"; 
+		int indentationDepth = 40; 
+		String toReturn ="<p style=\"padding-left:" + indentationCounter * indentationDepth + "px; margin: 0;\">"; 
 		
 		// Read the String charwise
 		for (int i = 0; i < stringToHighight.length(); i++) {
@@ -400,8 +401,11 @@ public class PdfExport extends Document{
 				// if the token begins a new indented block => increase the indentation counter...
 				if (temp.equals("begin"))
 					indentationCounter++;
-				else if (temp.equals("end")) // ... if it ends one => decrease it
+				else if (temp.equals("end")){ // ... if it ends one => decrease it
 					indentationCounter--;
+					temp = "<p style=\"padding-left:" + indentationCounter * indentationDepth + "px; margin: 0px; margin-bottom: -12pt;\"><font color=\"#FF00FF\">" + temp + "</font></p>";
+				}	
+
 				// if the word is complete, check if it is a token
 				if (tokenList.contains(temp)) {
 					// if so, surround it with a color tag
@@ -411,7 +415,7 @@ public class PdfExport extends Document{
 				temp = "";
 				if (stringToHighight.charAt(i) == '\n' || stringToHighight.charAt(i) == '\r'){
 					toReturn += "</p>";
-					toReturn += "<p style=\"padding-left:" + indentationCounter * 50 + "px; margin: 0;\">";
+					toReturn += "<p style=\"padding-left:" + indentationCounter * indentationDepth + "px; margin: 0;\">";
 				}
 				else if (stringToHighight.charAt(i) != '\t'){
 					// write the current whitespace
