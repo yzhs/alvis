@@ -1,11 +1,13 @@
 package de.unisiegen.informatik.bs.alvis.commands;
 
+import java.io.IOException;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 
-import com.itextpdf.text.DocumentException;
 
+import com.itextpdf.text.DocumentException;
 import de.unisiegen.informatik.bs.alvis.export.PdfExport;
 
 public class ExportTo extends AbstractHandler {
@@ -15,6 +17,8 @@ public class ExportTo extends AbstractHandler {
 		try {
 			PdfExport pdf = new PdfExport();
 		} catch (DocumentException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		return null;

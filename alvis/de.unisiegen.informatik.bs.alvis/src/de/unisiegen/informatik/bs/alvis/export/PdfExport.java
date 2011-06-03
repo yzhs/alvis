@@ -1,9 +1,12 @@
 package de.unisiegen.informatik.bs.alvis.export;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,15 +19,18 @@ import org.eclipse.swt.graphics.ImageLoader;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Shell;
 
-import com.itextpdf.text.Anchor;
-import com.itextpdf.text.Chapter;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.html.simpleparser.HTMLWorker;
+import com.itextpdf.text.html.simpleparser.StyleSheet;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Chapter;
+import com.itextpdf.text.Anchor;
+import com.itextpdf.text.Font;
+
+
 
 import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
@@ -35,7 +41,7 @@ import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
  * 
  * @author Frank Weiler
  */
-public class PdfExport extends Document {
+public class PdfExport extends Document{
 
 	private static Font titleFont = new Font(Font.FontFamily.TIMES_ROMAN, 32,
 			Font.BOLD);
@@ -46,7 +52,6 @@ public class PdfExport extends Document {
 	private static Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12,
 			Font.BOLD);
 
-	private PdfWriter writer;
 	private Anchor anchor;
 	private Chapter chapter;
 	private Paragraph paragraph;
@@ -57,20 +62,34 @@ public class PdfExport extends Document {
 	 * 
 	 * @throws DocumentException
 	 */
-	public PdfExport() throws DocumentException {
+	public PdfExport() throws DocumentException,IOException {
 
 		FileDialog saveDialog = MyFileDialog.getExportDialog();
 
 		String path = MyFileDialog.open(saveDialog);
-
 		try {
 
-			writer = PdfWriter.getInstance(this, new FileOutputStream(path));
+			PdfWriter.getInstance(this, new FileOutputStream(path));
 			open();
 
 			addMetaData();
 			addTitle();
 			addContent();
+			
+			
+			ArrayList bodyText;
+			StyleSheet styles = new StyleSheet();
+			styles.loadTagStyle("ol", "leading", "16,0");
+			
+			
+			bodyText = (ArrayList) HTMLWorker.parseToList(new StringReader
+																(highlightString
+																		(readFile // TODO: Hier Pfad ändern!
+																				("/home/basti/Programmierung/runtime-build.product/peter/src/algorithm.algo")
+																		)
+																), styles);	
+			for(int k = 0; k < bodyText.size(); k++)
+				add((Element) bodyText.get(k));
 
 			close();
 
@@ -198,11 +217,12 @@ public class PdfExport extends Document {
 			return null;
 
 		String file = "";
+		String path = "";
 		// TODO Absoluten Pfad durch Pfad relativ zum Projekt ersetzen!
 		try {
-			String path = "C:/Users/bearer";
-			path += "/runtime-de.unisiegen.informatik.bs.alvis.product";
-			path += "/asd/src/algorithm.algo";
+			path = "/home/basti/Programmierung";
+			path += "/runtime-build.product";
+			path += "/peter/src/algorithm.algo";
 			
 			file = readFile(path);
 			String myfile = FileLocator.getBundleFile(
@@ -215,15 +235,26 @@ public class PdfExport extends Document {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		file = putFormattedHTMLStringToHTMLCode(highlightString(file));
+		//file = putFormattedHTMLStringToHTMLCode(highlightString(file));
+		file = highlightString(file);
+		
+		System.out.println(file); // TODO weg damit!
 
-		Paragraph paragraph = new Paragraph("source code:\n", subFont);
+		Paragraph paragraph = new Paragraph();
 
-		ArrayList<Element> bodyText;
+		
+		
+		
+		//ArrayList<Element> bodyText;
+		ArrayList bodyText;
+		StyleSheet styles = new StyleSheet();
+		styles.loadTagStyle("ol", "leading", "16,0");
 		try {
-			bodyText = (ArrayList<Element>) HTMLWorker.parseToList(
-					new StringReader(file), null);
-			paragraph.addAll(bodyText);
+				bodyText =  (ArrayList) HTMLWorker.parseToList(new StringReader(file), styles);
+				
+			for(int k = 0; k < bodyText.size(); k++)
+				paragraph.add((Element) bodyText.get(k));
+//			paragraph.addAll(bodyText);
 		} catch (IOException e) {
 			paragraph.add("however, no source code was added here");
 		}
@@ -357,7 +388,9 @@ public class PdfExport extends Document {
 		// TODO Diese Liste unbedingt mit der aus der Grammatik erzeugten
 		// Tokenlist ersetzen!
 		String temp = "";
-		String toReturn = "" + '\t' + '\t';
+		int indentationCounter = 0;
+		String toReturn ="<p style=\"padding-left:" + indentationCounter * 40 + "px; margin: 0;\">"; 
+		
 		// Read the String charwise
 		for (int i = 0; i < stringToHighight.length(); i++) {
 			if (stringToHighight.charAt(i) != '\t'
@@ -367,6 +400,11 @@ public class PdfExport extends Document {
 				// read the next word
 				temp += stringToHighight.charAt(i);
 			} else {
+				// if the token begins a new indented block => increase the indentation counter...
+				if (temp.equals("begin"))
+					indentationCounter++;
+				else if (temp.equals("end")) // ... if it ends one => decrease it
+					indentationCounter--;
 				// if the word is complete, check if it is a token
 				if (tokenList.contains(temp)) {
 					// if so, surround it with a color tag
@@ -374,14 +412,18 @@ public class PdfExport extends Document {
 				}
 				toReturn += temp;
 				temp = "";
-				// write the current whitespace
-				toReturn += stringToHighight.charAt(i);
+				if (stringToHighight.charAt(i) == '\n' || stringToHighight.charAt(i) == '\r'){
+					toReturn += "</p>";
+					toReturn += "<p style=\"padding-left:" + indentationCounter * 50 + "px; margin: 0;\">";
+				}
+				else if (stringToHighight.charAt(i) != '\t'){
+					// write the current whitespace
+					toReturn += stringToHighight.charAt(i);
+				}
 			}
-			// reestablish indendation in the HTML file, not visible in the
-			// export
-			if (stringToHighight.charAt(i) == '\n')
-				toReturn += "" + '\t' + '\t';
+			
 		}
+		toReturn += "</p>";
 		return toReturn;
 	}
 
