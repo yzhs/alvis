@@ -10,6 +10,7 @@ import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
+import de.unisiegen.informatik.bs.alvis.editors.Messages;
 
 //TODO replace static strings with dynamic, language-specific files
 /**
@@ -28,8 +29,8 @@ public class MyFileDialog {
 	public static FileDialog getExportDialog() {
 		Shell shell = new Shell();
 		FileDialog dialog = new FileDialog(shell, SWT.SAVE);
-		dialog.setText("save export");
-		dialog.setFilterNames(new String[] { "PDF (*.pdf)", "allFiles" });
+		dialog.setText(Messages.getLabel("saveExport"));
+		dialog.setFilterNames(new String[] { "PDF (*.pdf)", Messages.getLabel("allFiles") });
 		dialog.setFilterExtensions(new String[] { "*.pdf", "*.*" });
 		try {
 			dialog.setFilterPath(FileLocator.getBundleFile(
@@ -37,7 +38,7 @@ public class MyFileDialog {
 		} catch (IOException e) {
 		}
 
-		dialog.setFileName("alvisExport" + System.currentTimeMillis() + ".pdf");
+		dialog.setFileName(Messages.getLabel("alvisExport_") + ((System.currentTimeMillis()/1000)%100000) + ".pdf");
 
 		return dialog;
 	}
@@ -56,7 +57,7 @@ public class MyFileDialog {
 		if (new File(path).exists()) {
 			MessageBox mb = new MessageBox(dialog.getParent(), SWT.ICON_WARNING
 					| SWT.YES | SWT.NO);
-			mb.setMessage(path + "already exists");
+			mb.setMessage(path + Messages.getLabel("alreadyExists"));
 			if (mb.open() == SWT.NO) {
 				return open(dialog);
 			}
