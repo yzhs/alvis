@@ -12,11 +12,14 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.jface.text.IDocument;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
 import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.ui.internal.Workbench;
+import org.eclipse.ui.texteditor.AbstractTextEditor;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -75,22 +78,8 @@ public class PdfExport extends Document{
 			addMetaData();
 			addTitle();
 			addContent();
+			addContentOutsideParagraph();
 			
-			
-			ArrayList bodyText;
-			StyleSheet styles = new StyleSheet();
-			styles.loadTagStyle("ol", "leading", "16,0");
-			
-			
-			bodyText = (ArrayList) HTMLWorker.parseToList(new StringReader
-																(highlightString
-																		(readFile // TODO: Hier Pfad ändern!
-																				("/home/basti/Programmierung/runtime-build.product/peter/src/algorithm.algo")
-																		)
-																), styles);	
-			for(int k = 0; k < bodyText.size(); k++)
-				add((Element) bodyText.get(k));
-
 			close();
 
 		} catch (NullPointerException npe) {
@@ -215,45 +204,46 @@ public class PdfExport extends Document{
 	private Paragraph toParagraph(String sourceCode) throws DocumentException {
 		if (sourceCode == null)
 			return null;
-
-		String file = "";
-		String path = "";
-		// TODO Absoluten Pfad durch Pfad relativ zum Projekt ersetzen!
-		try {
-			path = "/home/basti/Programmierung";
-			path += "/runtime-build.product";
-			path += "/peter/src/algorithm.algo";
-
-			file = readFile(path);
-			String myfile = FileLocator.getBundleFile(
-					Activator.getDefault().getBundle()).getAbsolutePath();
-
-			System.out.println("file: " + path);// TODO weg
-			System.out.println("\nmyfile: " + myfile);// TODO weg
-			System.out.println("\nsource code: " + sourceCode);// TODO weg
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		String content = getContentFromActiveEditor();
+//		String file = "";
+//		String path = "";
+//		// TODO Absoluten Pfad durch Pfad relativ zum Projekt ersetzen!
+//		try {
+//			path = "/home/basti/Programmierung";
+//			path += "/runtime-build.product";
+//			path += "/peter/src/algorithm.algo";
+//
+//			file = readFile(path);
+//			String myfile = FileLocator.getBundleFile(
+//					Activator.getDefault().getBundle()).getAbsolutePath();			
+//			System.out.println("file: " + path);// TODO weg
+//			System.out.println("\nmyfile: " + myfile);// TODO weg
+//			System.out.println("\nsource code: " + sourceCode);// TODO weg
+//
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 		//file = putFormattedHTMLStringToHTMLCode(highlightString(file));
-		file = highlightString(file);
 		
-		System.out.println(file); // TODO weg damit!
-
 		Paragraph paragraph = new Paragraph(Messages.getLabel("sourceCode") + ":\n", subFont);
-
-		//ArrayList<Element> bodyText;
-		ArrayList bodyText;
-		StyleSheet styles = new StyleSheet();
-		styles.loadTagStyle("ol", "leading", "16,0");
-		try {
-				bodyText =  (ArrayList) HTMLWorker.parseToList(new StringReader(file), styles);
-				
-			for(int k = 0; k < bodyText.size(); k++)
-				paragraph.add((Element) bodyText.get(k));
-//			paragraph.addAll(bodyText);
-		} catch (IOException e) {
-			paragraph.add(Messages.getLabel("noSourceCodeAdded"));
+		
+		if(content != null){
+			content = highlightString(content);
+			
+			System.out.println(content); // TODO weg damit!
+			//ArrayList<Element> bodyText;
+			ArrayList bodyText;
+			StyleSheet styles = new StyleSheet();
+			styles.loadTagStyle("ol", "leading", "16,0");
+			try {
+					bodyText =  (ArrayList) HTMLWorker.parseToList(new StringReader(content), styles);
+					
+				for(int k = 0; k < bodyText.size(); k++)
+					paragraph.add((Element) bodyText.get(k));
+	//			paragraph.addAll(bodyText);
+			} catch (IOException e) {
+				paragraph.add(Messages.getLabel("noSourceCodeAdded"));
+			}
 		}
 
 		return paragraph;
@@ -426,6 +416,51 @@ public class PdfExport extends Document{
 		}
 		toReturn += "</p>";
 		return toReturn;
+	}
+	
+	/**
+	 * @author Sebastian Schmitz
+	 * This method adds the content from the active editor to the document.
+	 * The content added is not inside of a paragraph, let's hope we can find a fix for that.
+	 * @throws IOException
+	 * @throws DocumentException
+	 */
+	private void addContentOutsideParagraph() throws IOException, DocumentException {
+		ArrayList bodyText;
+		StyleSheet styles = new StyleSheet();
+		styles.loadTagStyle("ol", "leading", "16,0");
+		String pseudoCode = getContentFromActiveEditor();
+		
+		if(pseudoCode != null){
+			bodyText = (ArrayList) HTMLWorker.parseToList(new StringReader
+																(highlightString
+																		(pseudoCode
+																)), styles);	
+			for(int k = 0; k < bodyText.size(); k++)
+				add((Element) bodyText.get(k));
+		}
+		else{
+			// TODO: Possible usage site for our logger?
+			System.out.println("ERROR: The content retrieved from the editor was empty!");
+		}
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	private String getContentFromActiveEditor(){
+		AbstractTextEditor part = (AbstractTextEditor) Workbench.getInstance()
+        								.getActiveWorkbenchWindow().getActivePage().getActiveEditor()
+        								.getAdapter(AbstractTextEditor.class);
+	
+		if (part != null) {
+		    IDocument document = part.getDocumentProvider().getDocument(
+		    							part.getEditorInput());
+	
+		    return document.get();
+		}
+		return null;
 	}
 
 }
