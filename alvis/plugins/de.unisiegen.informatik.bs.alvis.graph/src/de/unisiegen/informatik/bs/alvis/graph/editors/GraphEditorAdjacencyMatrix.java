@@ -85,26 +85,37 @@ public class GraphEditorAdjacencyMatrix extends EditorPart implements
 		myParent = parent;
 		parent.setLayout(new FillLayout(SWT.HORIZONTAL));
 
+		// new TableViewer
 		TableViewer tableViewer = new TableViewer(myParent, SWT.BORDER | SWT.FULL_SELECTION);
 		table = tableViewer.getTable();
+		// Settings 
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
 		
 		// ArrayContentProvider can be used, because matrix is a java collection
 		tableViewer.setContentProvider(ArrayContentProvider.getInstance());
 		
+		// The width of the colums
 		int columWidth = 20;
+		
+		// Array of TableViewerColumn's
 		TableViewerColumn[] tableViewerColumns = new TableViewerColumn[mySeri.getNodeId().length];
+		// Array of TableColumn's
 		TableColumn[] tblclmns = new TableColumn[mySeri.getNodeId().length];
+		// ArrayList of String Array's for the Input
 		ArrayList<String[]> matrix = new ArrayList<String[]>();
+		
+		// Iterate over all Nodes
 		for(y = 0; y<mySeri.getNodeId().length; y++) {
 			
+			// Create a TableColumn
 			tableViewerColumns[y] = new TableViewerColumn(tableViewer, SWT.NONE);
 			tblclmns[y] = tableViewerColumns[y].getColumn();
 			tblclmns[y].setWidth(columWidth);
 			tblclmns[y].setText("" + mySeri.getNodeId()[y]);
 			tableViewerColumns[y].setLabelProvider(new DynamicCellLabelProvider(y));
 			
+			// Add Input for each row
 			String[] row = new String[mySeri.getNodeId().length];
 			for(int x = 0; x<mySeri.getNodeId().length; x++) {
 				if(x==0) {
