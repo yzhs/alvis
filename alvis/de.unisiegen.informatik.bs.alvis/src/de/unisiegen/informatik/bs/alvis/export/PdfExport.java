@@ -14,6 +14,8 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
 import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.ui.IEditorReference;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.internal.Workbench;
 import org.eclipse.ui.texteditor.AbstractTextEditor;
 
@@ -445,10 +447,17 @@ public class PdfExport extends Document{
 	 * @return content of active editor
 	 */
 	private String getContentFromActiveEditor(){
-		AbstractTextEditor part = (AbstractTextEditor) Workbench.getInstance()
-        								.getActiveWorkbenchWindow().getActivePage().getActiveEditor()
-        								.getAdapter(AbstractTextEditor.class);
-	
+		AbstractTextEditor part = null;
+		IWorkbenchPage pages[] = Workbench.getInstance().getActiveWorkbenchWindow().getPages();
+		for(int i = 0; i < pages.length; i++){
+			IEditorReference[] ref = pages[i].getEditorReferences();
+			for(int k = 0; k < ref.length; k++){
+				String title = ref[i].getTitle();
+				if(title.contains(".algo")){
+					part = (AbstractTextEditor) ref[i].getEditor(true).getAdapter(AbstractTextEditor.class);
+				}
+			}
+		}
 		if (part != null) {
 		    IDocument document = part.getDocumentProvider().getDocument(
 		    							part.getEditorInput());
