@@ -1,9 +1,10 @@
 package de.unisiegen.informatik.bs.alvis;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
+import de.unisiegen.informatik.bs.alvis.editors.EBreakPoint;
+import de.unisiegen.informatik.bs.alvis.editors.EDecisionPoint;
+import de.unisiegen.informatik.bs.alvis.editors.EStartPoint;
 
 /**
  * A Run object contains informations about which Algorithm should be run on
@@ -14,10 +15,25 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
  */
 public class Run implements Serializable {
 
+	/**
+	 * Generated Serial ID
+	 */
+	private static final long serialVersionUID = 4861607093496803650L;
+	
+	/**
+	 * data
+	 */
 	private String algorithmFile = "";
 	private String exampleFile = "";
+
+	private EBreakPoint onBreakPoint = EBreakPoint.STOP;
+	private EStartPoint onStartPoint = EStartPoint.RAND;
+	private EDecisionPoint onDecisionPoint = EDecisionPoint.RAND;
+	
+	private boolean limitSteps = true;
+	
 	/**
-	 * Run information tupel
+	 * Run information
 	 * @param algorithmFile
 	 * @param exampleFile
 	 */
@@ -63,12 +79,75 @@ public class Run implements Serializable {
 	 * @return
 	 */
 	public boolean equals(Run toCompare) {
-		
 		if(!this.getAlgorithmFile().equals(toCompare.getAlgorithmFile())) 
 			return false;
 		if(!this.getExampleFile().equals(toCompare.getExampleFile()))
 			return false;
+		if(!this.getOnBreakPoint().equals(toCompare.getOnBreakPoint()))
+			return false;		
+		if(!this.getOnDecisionPoint().equals(toCompare.getOnDecisionPoint()))
+			return false;
+		if(!this.getOnStartPoint().equals(toCompare.getOnStartPoint()))
+			return false;
+		if(this.isLimitSteps()!=toCompare.isLimitSteps())
+			return false;
 		return true;
+	}
+
+	/**
+	 * @param onDecisionPoint the onDecisionPoint to set
+	 */
+	public void setOnDecisionPoint(EDecisionPoint myDecisionPoint) {
+		this.onDecisionPoint = myDecisionPoint;
+	}
+
+	/**
+	 * @return the onDecisionPoint
+	 */
+	public EDecisionPoint getOnDecisionPoint() {
+		return onDecisionPoint;
+	}
+
+	/**
+	 * @param onStartPoint the onStartPoint to set
+	 */
+	public void setOnStartPoint(EStartPoint myStartPoint) {
+		this.onStartPoint = myStartPoint;
+	}
+
+	/**
+	 * @return the onStartPoint
+	 */
+	public EStartPoint getOnStartPoint() {
+		return onStartPoint;
+	}
+
+	/**
+	 * @param onBreakPoint the onBreakPoint to set
+	 */
+	public void setOnBreakPoint(EBreakPoint myBreakPoint) {
+		this.onBreakPoint = myBreakPoint;
+	}
+
+	/**
+	 * @return the onBreakPoint
+	 */
+	public EBreakPoint getOnBreakPoint() {
+		return onBreakPoint;
+	}
+
+	/**
+	 * @param limitSteps the limitSteps to set
+	 */
+	public void setLimitSteps(boolean limitSteps) {
+		this.limitSteps = limitSteps;
+	}
+
+	/**
+	 * @return the limitSteps
+	 */
+	public boolean isLimitSteps() {
+		return limitSteps;
 	}
 	
 }

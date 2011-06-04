@@ -50,6 +50,13 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.layout.FormLayout;
+import org.eclipse.swt.layout.FormData;
+import org.eclipse.swt.layout.FormAttachment;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.layout.GridData;
 
 public class RunEditor extends EditorPart {
 	public RunEditor() {
@@ -68,7 +75,6 @@ public class RunEditor extends EditorPart {
 	private Group grpStartTheRun;
 	private ExpandItem xpndtmAlgorithm;
 	private Group grpAlgorithmFile;
-	private Text text;
 	
 	public void doSave(final IProgressMonitor monitor) {
 		myRun.setAlgorithmFile(myAlgorithmFile.getText());
@@ -151,6 +157,13 @@ public class RunEditor extends EditorPart {
 	// TODO diese Arraylist wird durch den button Preferences mit datentypen für 
 	// die VM gefüllt. nachschauen, was damit passieren kann.
 	private ArrayList<PCObject> pseudoCodeObjects;
+
+	private EStartPoint myStartPoint = EStartPoint.RAND;
+	private EDecisionPoint myDecisionPoint = EDecisionPoint.RAND;
+	private EBreakPoint myBreakPoint = EBreakPoint.STOP;
+
+	private boolean myLimitSteps = true;
+	
 	public void createPartControl(Composite parent) {
 		
 		composite_1 = new Composite(parent, SWT.NONE);
@@ -175,6 +188,7 @@ public class RunEditor extends EditorPart {
 		myAlgorithmFile.setToolTipText("Choose a file relative to the workspace.");
 		
 		Button btnselectAlgorithmFile = new Button(grpAlgorithmFile, SWT.NONE);
+		btnselectAlgorithmFile.setToolTipText("Select the algorithm file - this will be the algorithm that runs on the example.");
 		btnselectAlgorithmFile.setText("Select...");
 		btnselectAlgorithmFile.addListener(SWT.Selection, new Listener() {
 
@@ -223,6 +237,7 @@ public class RunEditor extends EditorPart {
 		myExampleFile.setToolTipText("Choose a file relative to the workspace.");
 		
 		Button btnSelectExampleFile = new Button(grpExampleFile, SWT.NONE);
+		btnSelectExampleFile.setToolTipText("Select the file that contains the run's example");
 		btnSelectExampleFile.setText("Select...");
 		btnSelectExampleFile.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event event) {
@@ -267,6 +282,7 @@ public class RunEditor extends EditorPart {
 		grpStartTheRun.setLayout(new FillLayout(SWT.HORIZONTAL));
 		
 		Button run = new Button(grpStartTheRun, SWT.CENTER);
+		run.setToolTipText("Click here to start the run.");
 		run.setImage(ImageCache.getImage("icons/extension/ext_run.png"));
 		run.setFont(SWTResourceManager.getFont("Calibri", 14, SWT.NORMAL));
 		run.addListener(SWT.Selection, new Listener(){
@@ -288,18 +304,64 @@ public class RunEditor extends EditorPart {
 		xpndtmSettings.setControl(tabFolder);
 		
 		TabItem tbtmRun = new TabItem(tabFolder, SWT.NONE);
-		tbtmRun.setText("Run");
+		tbtmRun.setText("Start point");
 		
 		Group grpRun = new Group(tabFolder, SWT.NONE);
 		tbtmRun.setControl(grpRun);
-		grpRun.setText("Run Settings");
-		grpRun.setLayout(new FillLayout(SWT.HORIZONTAL));
+		grpRun.setText("Start point settings");
 		
 		/*
 		 * This section asks the plugins for parameters to add to the run. 
 		 */
 		pseudoCodeObjects = new ArrayList<PCObject>();
+		grpRun.setLayout(new GridLayout(3, false));
+		
+		Label lblNewLabel = new Label(grpRun, SWT.NONE);
+		lblNewLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 3, 1));
+		lblNewLabel.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		lblNewLabel.setText("How do you want to choose the start configurations for the run?");
+		
+		Button btn_startpoint_rand = new Button(grpRun, SWT.RADIO);
+		btn_startpoint_rand.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				//TODO STARTPOINT_RAND
+				myStartPoint = EStartPoint.RAND;
+				myRun.setOnStartPoint(myStartPoint);
+				checkDirty();
+			}
+		});
+		btn_startpoint_rand.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		btn_startpoint_rand.setText("Randomly");
+		
+		Label lblLetThe_1 = new Label(grpRun, SWT.NONE);
+		lblLetThe_1.setText("- let the computer decide.");
+		new Label(grpRun, SWT.NONE);
+		
+		Button btn_startpoint_decide = new Button(grpRun, SWT.RADIO);
+		btn_startpoint_decide.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		btn_startpoint_decide.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				//TODO STARTPOINT_DECIDE
+				myStartPoint = EStartPoint.DECIDE;
+				myRun.setOnStartPoint(myStartPoint);
+				checkDirty();
+			}
+		});
+		btn_startpoint_decide.setText("Decide");
+		
+		Label lblSetThe = new Label(grpRun, SWT.NONE);
+		lblSetThe.setText("- set the preferences first.");
+		new Label(grpRun, SWT.NONE);
 		Button btnSetPreferences = new Button(grpRun, SWT.NONE);
+		btnSetPreferences.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+			}
+		});
+		btnSetPreferences.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		btnSetPreferences.setToolTipText("Click here to set the preferences for the run.");
 		btnSetPreferences.addListener(SWT.Selection, new Listener () {
 
 			@Override
@@ -345,45 +407,149 @@ public class RunEditor extends EditorPart {
 			
 		});
 		btnSetPreferences.setText("Set Preferences");
+		new Label(grpRun, SWT.NONE);
+		new Label(grpRun, SWT.NONE);
 		
-		// END OF PARAMETER ADDING
+		TabItem tbtmDecisionPoint = new TabItem(tabFolder, SWT.NONE);
+		tbtmDecisionPoint.setText("Decision point");
 		
-		Button btnCheckButton = new Button(grpRun, SWT.CHECK);
-		btnCheckButton.setSelection(true);
-		btnCheckButton.setText("Stop on Breakpoints");
+		Group grpDecisionPointSettings = new Group(tabFolder, SWT.NONE);
+		tbtmDecisionPoint.setControl(grpDecisionPointSettings);
+		grpDecisionPointSettings.setText("Decision point settings");
+		grpDecisionPointSettings.setLayout(new GridLayout(2, false));
 		
-		Button btnInstantStart = new Button(grpRun, SWT.CHECK);
-		btnInstantStart.setText("Instant Start");
+		Label lblHowDoYou = new Label(grpDecisionPointSettings, SWT.NONE);
+		lblHowDoYou.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		lblHowDoYou.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
+		lblHowDoYou.setText("When more than one ways are possible. How do you want the run to choose the way it goes?");
 		
-		Button btnEnableTolog = new Button(grpRun, SWT.CHECK);
-		btnEnableTolog.setText("Enable to .log");
+		Button btn_decisionpoint_rand = new Button(grpDecisionPointSettings, SWT.RADIO);
+		btn_decisionpoint_rand.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				// TODO DECISIONPOINT_RAND
+				myDecisionPoint = EDecisionPoint.RAND;
+				myRun.setOnDecisionPoint(myDecisionPoint);
+				checkDirty();
+			}
+		});
+		btn_decisionpoint_rand.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		btn_decisionpoint_rand.setToolTipText("Set decision point settings to random");
+		btn_decisionpoint_rand.setText("Randomly");
 		
-		TabItem tbtmSave = new TabItem(tabFolder, SWT.NONE);
-		tbtmSave.setText("Save");
+		Label lblLetThe = new Label(grpDecisionPointSettings, SWT.NONE);
+		lblLetThe.setText("- let the computer decide.");
 		
-		Group grpSaveOptions = new Group(tabFolder, SWT.NONE);
-		grpSaveOptions.setText("Save Options");
-		tbtmSave.setControl(grpSaveOptions);
-		grpSaveOptions.setLayout(new FillLayout(SWT.HORIZONTAL));
+		Button btn_decisionpoint_once = new Button(grpDecisionPointSettings, SWT.RADIO);
+		btn_decisionpoint_once.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				// TODO DECISIONPOINT_ONCE
+				myDecisionPoint = EDecisionPoint.ONCE;
+				myRun.setOnDecisionPoint(myDecisionPoint);
+				checkDirty();
+			}
+		});
+		btn_decisionpoint_once.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		btn_decisionpoint_once.setToolTipText("Set decision point settings to once");
+		btn_decisionpoint_once.setText("Once");
 		
-		Button btnSaveAspdf = new Button(grpSaveOptions, SWT.CHECK);
-		btnSaveAspdf.setText("Save as .pdf");
+		Label lblChooseAn = new Label(grpDecisionPointSettings, SWT.NONE);
+		lblChooseAn.setText("- configure an order first.");
 		
-		Button btnSaveAstex = new Button(grpSaveOptions, SWT.CHECK);
-		btnSaveAstex.setText("Save as .tex");
+		Button btn_decisionpoint_always = new Button(grpDecisionPointSettings, SWT.RADIO);
+		btn_decisionpoint_always.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				// TODO DECISIONPOINT_ALWAYS
+				myDecisionPoint = EDecisionPoint.ALWAYS;
+				myRun.setOnDecisionPoint(myDecisionPoint);
+				checkDirty();
+			}
+		});
+		btn_decisionpoint_always.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		btn_decisionpoint_always.setToolTipText("Set decision point settings to always");
+		btn_decisionpoint_always.setText("Always");
 		
-		Button btnSaveEachBreakpoint = new Button(grpSaveOptions, SWT.CHECK);
-		btnSaveEachBreakpoint.setText("Save each Breakpoint");
+		Label lblDecideWhat = new Label(grpDecisionPointSettings, SWT.NONE);
+		lblDecideWhat.setText("- decide what way the run should go on each decision point.");
 		
-		TabItem tbtmThisrun = new TabItem(tabFolder, SWT.NONE);
-		tbtmThisrun.setText("Content");
+		TabItem tbtmBreakPoint = new TabItem(tabFolder, SWT.NONE);
+		tbtmBreakPoint.setText("Break point");
 		
-		text = new Text(tabFolder, SWT.BORDER);
-		tbtmThisrun.setControl(text);
-		xpndtmSettings.setHeight(xpndtmSettings.getControl().computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
+		Group grpBreakPoint = new Group(tabFolder, SWT.NONE);
+		tbtmBreakPoint.setControl(grpBreakPoint);
+		grpBreakPoint.setText("Break point settings");
+		grpBreakPoint.setLayout(new GridLayout(2, false));
+		
+		Label lblWhatShallHappen = new Label(grpBreakPoint, SWT.NONE);
+		lblWhatShallHappen.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
+		lblWhatShallHappen.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		lblWhatShallHappen.setText("What shall happen on break points?");
+		
+		Button btn_breakpoint_stop = new Button(grpBreakPoint, SWT.RADIO);
+		btn_breakpoint_stop.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				// TODO BREAKPOINT_STOP
+				myBreakPoint = EBreakPoint.STOP;
+				myRun.setOnBreakPoint(myBreakPoint);
+				checkDirty();
+			}
+		});
+		btn_breakpoint_stop.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		btn_breakpoint_stop.setText("Stop");
+		
+		Label lblStopOnEvery = new Label(grpBreakPoint, SWT.NONE);
+		lblStopOnEvery.setText("- on every break point. Use next and back buttons to navigate.");
+		
+		Button btn_breakpoint_run = new Button(grpBreakPoint, SWT.RADIO);
+		btn_breakpoint_run.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				// TODO BREAKPOINT_RUN
+				myBreakPoint = EBreakPoint.RUN;
+				myRun.setOnBreakPoint(myBreakPoint);
+				checkDirty();
+			}
+		});
+		btn_breakpoint_run.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		btn_breakpoint_run.setText("Run");
+		
+		Label lblThroughEvery = new Label(grpBreakPoint, SWT.NONE);
+		lblThroughEvery.setText("- through every break points. Make a short pause - then go on.");
+		
+		TabItem tbtmSecurity = new TabItem(tabFolder, SWT.NONE);
+		tbtmSecurity.setText("Security");
+		
+		Group grpSecurity = new Group(tabFolder, SWT.NONE);
+		grpSecurity.setText("Security Settings");
+		tbtmSecurity.setControl(grpSecurity);
+		grpSecurity.setLayout(new GridLayout(2, false));
+		
+		Label lblIfTheAlgorithm = new Label(grpSecurity, SWT.NONE);
+		lblIfTheAlgorithm.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		lblIfTheAlgorithm.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
+		lblIfTheAlgorithm.setText("If the algorithm turns into an infinity loop the program may be unable to respond.");
+		
+		Button btnLimitTo = new Button(grpSecurity, SWT.CHECK);
+		btnLimitTo.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				// TODO Limit of Steps
+				myLimitSteps = !myLimitSteps;
+				myRun.setLimitSteps(myLimitSteps);
+				checkDirty();
+			}
+		});
+		btnLimitTo.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		btnLimitTo.setText("Limit");
+		
+		Label lblStepsIn = new Label(grpSecurity, SWT.NONE);
+		lblStepsIn.setText("- run to 1000 steps.");
+		xpndtmSettings.setHeight(140);
 		
 		ExpandItem xpndtmInformations = new ExpandItem(expandBar, SWT.NONE);
-		xpndtmInformations.setExpanded(false);
 		xpndtmInformations.setText("Informations");
 		
 		Group grpI = new Group(expandBar, SWT.NONE);
@@ -399,12 +565,52 @@ public class RunEditor extends EditorPart {
 				"The second textbox need to contain a *.graph file. \n" +
 				"By clicking on the \"Run\"-button you can start the run.");
 		label.setFont(SWTResourceManager.getFont("Calibri", 9, SWT.NORMAL));
-//		label.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		xpndtmInformations.setHeight(xpndtmInformations.getControl().computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
+		
+		/*
+		 * INITIAL ALL FIELDS
+		 */
 		if(myRun.getAlgorithmFile() != null) 
 			myAlgorithmFile.setText(myRun.getAlgorithmFile());
 		if(myRun.getExampleFile() != null) 
 			myExampleFile.setText(myRun.getExampleFile());
+		
+		if(myRun.getOnStartPoint().equals(EStartPoint.RAND)) {
+			btn_startpoint_rand.setSelection(true);
+			myStartPoint = EStartPoint.RAND;
+		}
+		if(myRun.getOnStartPoint().equals(EStartPoint.DECIDE)) {
+			btn_startpoint_decide.setSelection(true);
+			myStartPoint = EStartPoint.DECIDE;
+		}
+		if(myRun.getOnDecisionPoint().equals(EDecisionPoint.RAND)) {
+			btn_decisionpoint_rand.setSelection(true);
+			myDecisionPoint = EDecisionPoint.RAND;
+		}
+		if(myRun.getOnDecisionPoint().equals(EDecisionPoint.ONCE)) {
+			btn_decisionpoint_once.setSelection(true);
+			myDecisionPoint = EDecisionPoint.ONCE;
+		}
+		if(myRun.getOnDecisionPoint().equals(EDecisionPoint.ALWAYS)) {
+			btn_decisionpoint_always.setSelection(true);
+			myDecisionPoint = EDecisionPoint.ALWAYS;
+		}
+		if(myRun.getOnBreakPoint().equals(EBreakPoint.STOP)) {
+			btn_breakpoint_stop.setSelection(true);
+			myBreakPoint = EBreakPoint.STOP;
+		}
+		if(myRun.getOnBreakPoint().equals(EBreakPoint.RUN)) {
+			btn_breakpoint_run.setSelection(true);
+			myBreakPoint = EBreakPoint.RUN;
+		}
+		if(myRun.isLimitSteps() == true) {
+			btnLimitTo.setSelection(true);
+			myLimitSteps = true;
+		}
+		else {
+			btnLimitTo.setSelection(false);
+			myLimitSteps = false;
+		}
 	}
 
 	public void setFocus() {
