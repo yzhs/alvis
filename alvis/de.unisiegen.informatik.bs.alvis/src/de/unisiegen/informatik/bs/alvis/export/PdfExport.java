@@ -38,7 +38,7 @@ import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 /**
  * class which creates the export PDF file
  * 
- * @author Frank Weiler
+ * @author Frank Weiler & Sebastian Schmitz
  */
 public class PdfExport extends Document{
 
@@ -213,8 +213,9 @@ public class PdfExport extends Document{
 			try {
 					bodyText =  HTMLWorker.parseToList(new StringReader(content), styles);
 					
-				for(int k = 0; k < bodyText.size(); k++)
-					paragraph.add((Element) bodyText.get(k));
+					for(Element elem : bodyText){
+						paragraph.add(elem);
+					}
 			} catch (IOException e) {
 				paragraph.add(Messages.getLabel("noSourceCodeAdded"));
 			}
@@ -288,8 +289,8 @@ public class PdfExport extends Document{
 	 */
 	private String highlightString(String stringToHighight) {
 
-		stringToHighight = stringToHighight.replaceAll("<", "&#060");
-		stringToHighight = stringToHighight.replaceAll(">", "&#062");
+		stringToHighight = stringToHighight.replaceAll("<", "&lt;");
+		stringToHighight = stringToHighight.replaceAll(">", "&gt;");
 
 		ArrayList<String> tokenList = new ArrayList<String>();
 		tokenList.add("end");
@@ -363,9 +364,10 @@ public class PdfExport extends Document{
 			bodyText =  HTMLWorker.parseToList(new StringReader
 																(highlightString
 																		(pseudoCode
-																)), styles);	
-			for(int k = 0; k < bodyText.size(); k++)
-				add(bodyText.get(k));
+																)), styles);
+			for(Element elem : bodyText){
+				add(elem);
+			}
 		}
 		else{
 			// TODO: Possible usage site for our logger?
@@ -381,11 +383,16 @@ public class PdfExport extends Document{
 	 */
 	private String getContentFromAlgoEditor(){
 		AbstractTextEditor part = null;
+		// Get open pages
 		IWorkbenchPage pages[] = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getPages();
+		
+		// Cycle through these pages
 		for(int i = 0; i < pages.length; i++){
 			IEditorReference[] ref = pages[i].getEditorReferences();
+			// Cycle through every page's editors
 			for(int k = 0; k < ref.length; k++){
 				String title = ref[i].getTitle();
+				// Get algo-editor
 				if(title.contains(".algo")){
 					part = (AbstractTextEditor) ref[i].getEditor(true).getAdapter(AbstractTextEditor.class);
 				}
