@@ -18,6 +18,7 @@ import org.eclipse.jface.text.source.projection.ProjectionAnnotation;
 import org.eclipse.jface.text.source.projection.ProjectionAnnotationModel;
 import org.eclipse.jface.text.source.projection.ProjectionSupport;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.RGB;
@@ -76,6 +77,14 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements IExp
 				highlightColor, highlightTokens);
 		setSourceViewerConfiguration(sourceViewerConfiguration);
 		setDocumentProvider(new AlgorithmDocumentProvider());
+	}
+	
+	/**
+	 * Returns the Editors TextWidget
+	 * @return the StyledText represented by the TextWidget
+	 */
+	public StyledText  getTextWidget() {
+		return getSourceViewer().getTextWidget();
 	}
 
 	@Override
