@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Compiler
+Bundle-SymbolicName: de.unisiegen.informatik.bs.alvis.compiler
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: de.unisiegen.informatik.bs.alvis.compiler.Activator
+Require-Bundle: org.eclipse.core.runtime,
+ de.unisiegen.informatik.bs.alvis.primitive.datatypes;bundle-version="1.0.0"
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ClassPath: alvic-0.0.1-SNAPSHOT-jar-with-dependencies.jar,
+ .
