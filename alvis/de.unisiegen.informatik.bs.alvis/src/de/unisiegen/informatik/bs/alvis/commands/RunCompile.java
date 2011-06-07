@@ -1,9 +1,17 @@
 package de.unisiegen.informatik.bs.alvis.commands;
 
+import java.util.ArrayList;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtension;
+import org.eclipse.core.runtime.IExtensionPoint;
+import org.eclipse.core.runtime.IExtensionRegistry;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
@@ -14,6 +22,7 @@ import org.eclipse.ui.part.FileEditorInput;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.Run;
+import de.unisiegen.informatik.bs.alvis.extensionpoints.IDatatypeList;
 import de.unisiegen.informatik.bs.alvis.tools.IO;
 
 @SuppressWarnings("restriction")
@@ -79,6 +88,36 @@ public class RunCompile extends AbstractHandler{
 			return null;
 		}
 		
+		return null;
+	}
+	
+	private ArrayList<String> getAllDatatypes() {
+        IExtensionRegistry registry = Platform.getExtensionRegistry();
+        IExtensionPoint extensionPoint = registry.getExtensionPoint(
+        		"de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist");
+        IExtension[] extensions = extensionPoint.getExtensions();
+
+        //     * For all Extensions that contribute:
+        for (int i = 0; i < extensions.length; i++)
+        {
+            IExtension extension = extensions[i];
+            IConfigurationElement[] elements = extension.getConfigurationElements();
+            for (int j = 0; j < elements.length; j++)
+            {
+                try
+                {
+                    IConfigurationElement element = elements[j];
+                    IDatatypeList datatypes = (IDatatypeList)element.
+                        createExecutableExtension("class");
+                    // Save the found IRunVisualizer in a list
+                    // HIER ALLE Objekte aus datatypes in deiner Globale Liste speichern
+                }
+                catch (CoreException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
 		return null;
 	}
 	
