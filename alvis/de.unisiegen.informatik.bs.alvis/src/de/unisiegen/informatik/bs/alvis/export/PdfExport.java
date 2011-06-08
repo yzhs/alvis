@@ -8,11 +8,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.eclipse.jface.text.IDocument;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StyleRange;
+import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
+import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IWorkbenchPage;
@@ -31,10 +34,10 @@ import com.itextpdf.text.html.simpleparser.StyleSheet;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
+import de.unisiegen.informatik.bs.alvis.editors.AlgorithmEditor;
 import de.unisiegen.informatik.bs.alvis.editors.Messages;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 
-//TODO replace static strings with dynamic, language-specific files
 /**
  * class which creates the export PDF file
  * 
@@ -145,44 +148,6 @@ public class PdfExport extends Document{
 			}
 		}
 		add(chapter);
-
-		// // GET THE ACTIVE EDITOR
-		// IExportItem activeEditor = (IExportItem) Activator.getDefault()
-		// .getWorkbench().getActiveWorkbenchWindow().getActivePage()
-		// .getActiveEditor();
-		// addSourceCode(activeEditor.getSourceCode());
-		// addImage(activeEditor.getImage());
-		//
-		// // PROBLEM NULLPOINTEREXCEOTION weil der die Instanz des IExportItem
-		// // neu erzeugt und nicht den aktiven Graph nimmt.
-		// IExtensionRegistry registry = Platform.getExtensionRegistry();
-		// IExtensionPoint extensionPoint = registry
-		// .getExtensionPoint("de.unisiegen.informatik.bs.alvis.export");
-		//
-		// for (IExtension extension : extensionPoint.getExtensions()) {
-		//
-		// IConfigurationElement[] elements = extension
-		// .getConfigurationElements();
-		//
-		// for (IConfigurationElement element : elements) {
-		//
-		// try {
-		// IExportItem myExportItem = (IExportItem) element
-		// .createExecutableExtension("class");
-		//
-		// // add all export items to the export file:
-		// String sourceCode = myExportItem.getSourceCode();
-		// addSourceCode(sourceCode);
-		// Image image = myExportItem.getImage();
-		// addImage(image);
-		// } catch (CoreException e) {
-		// e.printStackTrace();
-		// }
-		//
-		// }
-		//
-		// }
-
 	}
 
 	/**
@@ -205,7 +170,7 @@ public class PdfExport extends Document{
 		Paragraph paragraph = new Paragraph(Messages.getLabel("sourceCode") + ":\n", subFont);
 		
 		if(content != null){
-			content = highlightString(content);
+			content = indentCode(content);
 			
 			List<Element> bodyText;
 			StyleSheet styles = new StyleSheet();
@@ -282,68 +247,40 @@ public class PdfExport extends Document{
 	}
 
 	/**
-	 * accepts string and returns it with tokens highlighted using HTML tags
+	 * this method takes the String from the Editor (which has been highlighted already by getContentFromAlgoEditor)
+	 * and translates the indendation of the pseudo code to HTML
 	 * 
-	 * @param stringToHighight
-	 * @return highlighted String
+	 * The String is read linewise and indented via the <p padding-left:" XYpx;"> HTML-tag
+	 * 
+	 * @param stringToIndent
+	 * @return indented String
 	 */
-	private String highlightString(String stringToHighight) {
-
-		stringToHighight = stringToHighight.replaceAll("<", "&lt;");
-		stringToHighight = stringToHighight.replaceAll(">", "&gt;");
-
-		ArrayList<String> tokenList = new ArrayList<String>();
-		tokenList.add("end");
-		tokenList.add("begin");
-		tokenList.add("while");
-		tokenList.add("for");
-		tokenList.add("if");
-		tokenList.add("in");
-		tokenList.add("infty");
-		tokenList.add("null");
-		// TODO Diese Liste unbedingt mit der aus der Grammatik erzeugten
-		// Tokenlist ersetzen!
-		String temp = "";
-		int indentationCounter = 0;
+	private String indentCode(String stringToIndent) {
+		String line = ""; 					// storage for the lines
+		int indentationCounter = 0;			// variable holding knowledge about how deep the current line has to be indented
 		int indentationDepth = 40; 
-		String toReturn ="<p style=\"padding-left:" + indentationCounter * indentationDepth + "px; margin: 0;\">"; 
+		boolean onlyWhiteSpacesYet = true;	// tabs after the first char that's not a white space are ignored
+		char curr;
+		String toReturn = "";
 		
-		// Read the String charwise
-		for (int i = 0; i < stringToHighight.length(); i++) {
-			if (stringToHighight.charAt(i) != '\t'
-					&& stringToHighight.charAt(i) != '\n'
-					&& stringToHighight.charAt(i) != '\r'
-					&& stringToHighight.charAt(i) != ' ') {
-				// read the next word
-				temp += stringToHighight.charAt(i);
-			} else {
-				// if the token begins a new indented block => increase the indentation counter...
-				if (temp.equals("begin"))
-					indentationCounter++;
-				else if (temp.equals("end")){ // ... if it ends one => decrease it
-					indentationCounter--;
-					temp = "<p style=\"padding-left:" + indentationCounter * indentationDepth + "px; margin: 0px; margin-bottom: -12pt;\"><font color=\"#FF00FF\">" + temp + "</font></p>";
-				}	
-
-				// if the word is complete, check if it is a token
-				if (tokenList.contains(temp)) {
-					// if so, surround it with a color tag
-					temp = "<font color=\"#FF00FF\">" + temp + "</font>";
-				}
-				toReturn += temp;
-				temp = "";
-				if (stringToHighight.charAt(i) == '\n' || stringToHighight.charAt(i) == '\r'){
-					toReturn += "</p>";
-					toReturn += "<p style=\"padding-left:" + indentationCounter * indentationDepth + "px; margin: 0;\">";
-				}
-				else if (stringToHighight.charAt(i) != '\t'){
-					// write the current whitespace
-					toReturn += stringToHighight.charAt(i);
-				}
+		for (int i = 0; i < stringToIndent.length(); i++) {
+			curr = stringToIndent.charAt(i);
+			if (curr == '\t' && onlyWhiteSpacesYet == true) // if we are at the beginning of a line, we want to count how deep
+				indentationCounter++;						// the current line has to be indented
+			else if (!(curr == '\n' || curr == '\r')){		// if we read a common character, just add it to the line
+				onlyWhiteSpacesYet = false;
+				line += curr;
 			}
-			
+			else{
+				// the line is complete. Surround it with "tabs" and append it to the returned String
+				toReturn += "<p style=\"padding-left:" + indentationCounter * indentationDepth + "px; margin: 0;\">"; 
+				toReturn += line;
+				toReturn += "</p>";
+				indentationCounter = 0;		// reset
+				onlyWhiteSpacesYet = true;	// reset, because the next line is independent from this one
+				line = "";					// reset
+			}
 		}
-		toReturn += "</p>";
 		return toReturn;
 	}
 	
@@ -362,7 +299,7 @@ public class PdfExport extends Document{
 		
 		if(pseudoCode != null){
 			bodyText =  HTMLWorker.parseToList(new StringReader
-																(highlightString
+																(indentCode
 																		(pseudoCode
 																)), styles);
 			for(Element elem : bodyText){
@@ -370,7 +307,6 @@ public class PdfExport extends Document{
 			}
 		}
 		else{
-			// TODO: Possible usage site for our logger?
 			System.out.println("ERROR: The content retrieved from the editor was empty!");
 		}
 	}
@@ -382,10 +318,10 @@ public class PdfExport extends Document{
 	 * @return content of the editor
 	 */
 	private String getContentFromAlgoEditor(){
-		AbstractTextEditor part = null;
+		String codeWithHTMLColorTags = "";
+		AlgorithmEditor part = null;
 		// Get open pages
 		IWorkbenchPage pages[] = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getPages();
-		
 		// Cycle through these pages
 		for(int i = 0; i < pages.length; i++){
 			IEditorReference[] ref = pages[i].getEditorReferences();
@@ -394,15 +330,44 @@ public class PdfExport extends Document{
 				String title = ref[i].getTitle();
 				// Get algo-editor
 				if(title.contains(".algo")){
-					part = (AbstractTextEditor) ref[i].getEditor(true).getAdapter(AbstractTextEditor.class);
-				}
+					part = (AlgorithmEditor) ref[i].getEditor(true).getAdapter(AbstractTextEditor.class);
+}
 			}
 		}
 		if (part != null) {
-		    IDocument document = part.getDocumentProvider().getDocument(
-		    							part.getEditorInput());
-	
-		    return document.get();
+			RGB rgb;
+			RGB black = new RGB(0,0,0);
+		    StyledText style = part.getTextWidget();
+		    String text = style.getText(); 				// the complete text grabbed from the editor
+		    StyleRange[] range = style.getStyleRanges();// ranges declaring the styles of each part of the text
+		    
+		    for(StyleRange ran : range){				// cycle through these ranges and style them using HTML
+		    	String word = "";
+		    	for(int i = ran.start; i < ran.start+ran.length; i++){
+		    		if (text.charAt(i) == '<') // Replace "<" and ">" otherwise they will be interpreted and thus erased by the HTMLWorker
+		    			word += "&lt;";
+		    		else if (text.charAt(i) == '>')
+		    			word += "&gt;";
+		    		else
+		    			word += text.charAt(i);  // if the character is neither "<" nor ">" append it to the current word
+		    	}
+		    	Color col = ran.foreground;
+		    	if(col == null){ // color must not be null
+		    		rgb = black;
+		    	}
+		    	else
+		    		rgb = col.getRGB();
+		    	if(!rgb.equals(black)) // black is assumed as standard color, other color will be included here.
+		    		codeWithHTMLColorTags += 	"<font color=\"#"+
+		    										Integer.toHexString(rgb.red)+
+		    										Integer.toHexString(rgb.green)+
+		    										Integer.toHexString(rgb.blue)+
+		    									"\">" + word + "</font>";
+		    	else
+		    		codeWithHTMLColorTags += word;
+		    	
+		    }
+		    return codeWithHTMLColorTags;
 		}
 		return null;
 	}

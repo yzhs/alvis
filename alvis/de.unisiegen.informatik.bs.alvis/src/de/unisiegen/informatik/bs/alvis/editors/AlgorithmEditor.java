@@ -12,6 +12,7 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
+import org.eclipse.jface.text.source.AnnotationModel;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.IVerticalRuler;
 import org.eclipse.jface.text.source.projection.ProjectionAnnotation;
@@ -231,5 +232,8 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements IExp
 	public Image getImage() {
 		// no image in this editor
 		return null;
+	}
+	public AnnotationModel getAnnotationModel(){
+		return annotationModel;
 	}
 }
