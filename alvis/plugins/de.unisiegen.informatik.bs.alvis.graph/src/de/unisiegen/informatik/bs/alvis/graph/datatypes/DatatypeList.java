@@ -13,9 +13,9 @@ public class DatatypeList implements IDatatypeList {
 	public ArrayList<PCObject> getAllDatatypesInThisPlugin() {
 		ArrayList<PCObject> allDatatypesInThisPlugin = new ArrayList<PCObject>();
 
-		allDatatypesInThisPlugin.add(PseudoCodeEdge.getNull());
-		allDatatypesInThisPlugin.add(PseudoCodeGraph.getNull());
-		allDatatypesInThisPlugin.add(PseudoCodeVertex.getNull());
+		allDatatypesInThisPlugin.add(new PseudoCodeEdge(null, null));
+		allDatatypesInThisPlugin.add(new PseudoCodeGraph());
+		allDatatypesInThisPlugin.add(new PseudoCodeVertex());
 		return allDatatypesInThisPlugin;
 	}
 
