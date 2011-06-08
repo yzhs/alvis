@@ -224,8 +224,8 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements IExp
 
 	@Override
 	public String getSourceCode() {
-		// TODO Auto-generated method stub
-		return "this is source code from the algorithm editor";
+		String sourceCode = "TODO change in AlgorithmEditor.java";//TODO change
+		return sourceCode;
 	}
 
 	@Override
