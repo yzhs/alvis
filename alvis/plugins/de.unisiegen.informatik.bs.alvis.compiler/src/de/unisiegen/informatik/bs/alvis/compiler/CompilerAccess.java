@@ -21,7 +21,7 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
  */
 public class CompilerAccess {
 	
-	public boolean compile(String code, ArrayList<PCObject> datatypes) {
+	public static boolean compile(String code, ArrayList<PCObject> datatypes) {
 		// TODO Compilieren
 //		CompilerManager manager = new CompilerManager();
 		return true;
