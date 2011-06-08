@@ -39,7 +39,6 @@ import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.Run;
 import de.unisiegen.informatik.bs.alvis.commands.RunCompile;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IRunPreferences;
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.tools.IO;
 import org.eclipse.swt.widgets.ExpandBar;
@@ -50,9 +49,6 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.layout.FormLayout;
-import org.eclipse.swt.layout.FormData;
-import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridLayout;
@@ -214,7 +210,6 @@ public class RunEditor extends EditorPart {
 					}
 				}
 			}
-			
 		});
 		
 		myAlgorithmFile.addVerifyListener(new VerifyListener() {
@@ -282,6 +277,11 @@ public class RunEditor extends EditorPart {
 		grpStartTheRun.setLayout(new FillLayout(SWT.HORIZONTAL));
 		
 		Button run = new Button(grpStartTheRun, SWT.CENTER);
+		run.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+			}
+		});
 		run.setToolTipText("Click here to start the run.");
 		run.setImage(ImageCache.getImage("icons/extension/ext_run.png"));
 		run.setFont(SWTResourceManager.getFont("Calibri", 14, SWT.NORMAL));

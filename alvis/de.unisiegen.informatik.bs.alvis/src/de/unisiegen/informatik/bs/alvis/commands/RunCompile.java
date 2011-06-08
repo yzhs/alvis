@@ -22,7 +22,9 @@ import org.eclipse.ui.part.FileEditorInput;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.Run;
+import de.unisiegen.informatik.bs.alvis.compiler.CompilerAccess;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IDatatypeList;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.tools.IO;
 
 @SuppressWarnings("restriction")
@@ -39,6 +41,9 @@ public class RunCompile extends AbstractHandler{
 		
 		IEditorInput input = null;
 		
+		for(PCObject obj : getAllDatatypes()) {
+			System.out.println(obj.getClass());
+		}
 		
 		try {
 			// What to run? get the input (filepath)
@@ -57,6 +62,9 @@ public class RunCompile extends AbstractHandler{
 		//instanciate a new Run object
 		Run seri = null;
 		
+		/*
+		 * GET THE RUN OBJECT
+		 */
 		// Check if the input is a FileEditorInput
 		if(input != null & input instanceof FileEditorInput) {
 			// cast to FileEditorInput
@@ -79,9 +87,17 @@ public class RunCompile extends AbstractHandler{
 			seri = getUsersRun();
 		}
 
+		// END OF GET THE RUN OBJECT
+		
 		if(seri != null) {
 			// Set the ActiveRun field in the Activater to seri
 			Activator.getDefault().setActiveRun(seri);
+			
+			// Compile 
+			// TODO
+			// GET THE ALGORITHM AS STRING code
+//			CompilerAccess.compile("", getAllDatatypes());
+			
 			// Then activate command SwitchToRunPerspective
 			new SwitchToRunPerspective().execute(event);
 		} else {
@@ -91,7 +107,9 @@ public class RunCompile extends AbstractHandler{
 		return null;
 	}
 	
-	private ArrayList<String> getAllDatatypes() {
+	private ArrayList<PCObject> getAllDatatypes() {
+		ArrayList<PCObject> allDatatypes = new ArrayList<PCObject>();
+		
         IExtensionRegistry registry = Platform.getExtensionRegistry();
         IExtensionPoint extensionPoint = registry.getExtensionPoint(
         		"de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist");
@@ -109,6 +127,7 @@ public class RunCompile extends AbstractHandler{
                     IConfigurationElement element = elements[j];
                     IDatatypeList datatypes = (IDatatypeList)element.
                         createExecutableExtension("class");
+                    allDatatypes.addAll(datatypes.getAllDatatypesInThisPlugin());
                     // Save the found IRunVisualizer in a list
                     // HIER ALLE Objekte aus datatypes in deiner Globale Liste speichern
                 }
@@ -118,7 +137,7 @@ public class RunCompile extends AbstractHandler{
                 }
             }
         }
-		return null;
+		return allDatatypes;
 	}
 	
 	private Run getUsersRun() {
