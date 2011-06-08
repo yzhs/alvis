@@ -2,7 +2,7 @@ package de.unisiegen.informatik.bs.alvis.graph.datatypes;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
-
+import java.io.Serializable;
 
 
 /**
@@ -22,6 +22,15 @@ public class PseudoCodeEdge extends PCObject {
 	private PseudoCodeVertex v2;
 	private PCBoolean isDirected;
 
+	/** 
+	 * 
+	 */
+	public PseudoCodeEdge() {
+		v1 = new PseudoCodeVertex();
+		v2 = new PseudoCodeVertex();
+		isDirected = new PCBoolean(false);
+	}
+	
 	/**
 	 * Constructor to create new Edge (not directed)
 	 * 
