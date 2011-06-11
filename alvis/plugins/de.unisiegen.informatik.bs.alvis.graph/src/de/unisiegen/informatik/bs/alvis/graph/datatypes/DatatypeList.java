@@ -13,7 +13,7 @@ public class DatatypeList implements IDatatypeList {
 	public ArrayList<PCObject> getAllDatatypesInThisPlugin() {
 		ArrayList<PCObject> allDatatypesInThisPlugin = new ArrayList<PCObject>();
 
-		allDatatypesInThisPlugin.add(new PseudoCodeEdge(null, null));
+		allDatatypesInThisPlugin.add(new PseudoCodeEdge());
 		allDatatypesInThisPlugin.add(new PseudoCodeGraph());
 		allDatatypesInThisPlugin.add(new PseudoCodeVertex());
 		return allDatatypesInThisPlugin;

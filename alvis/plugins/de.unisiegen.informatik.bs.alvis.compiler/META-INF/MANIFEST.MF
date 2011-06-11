@@ -11,3 +11,5 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ClassPath: alvic-0.0.1-SNAPSHOT-jar-with-dependencies.jar,
  .
 Export-Package: de.unisiegen.informatik.bs.alvis.compiler
+Import-Package: org.eclipse.ui,
+ org.eclipse.ui.plugin

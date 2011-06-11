@@ -224,7 +224,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		bHand = new Button(tools, SWT.NONE);
 		bHand.setImage(ImageCache.getImage("icons/editor/graph_move.png")); //$NON-NLS-1$
 		bHand.setToolTipText(Messages.getLabel("button_move"));
-
+		
 		bNode = new Button(tools, SWT.NONE);
 		bNode.setImage(ImageCache.getImage("icons/editor/graph_add.png")); //$NON-NLS-1$
 		bNode.setToolTipText(Messages.getLabel("button_add"));
@@ -1035,6 +1035,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	// }
 
 	public static Object deserialize(String filename) {
+		System.out.println(filename);
 		long filesize = new File(filename).length();
 		Object seri = null;
 		if (filesize > 7) {// TODO this is not so cool check it (SIMON)
