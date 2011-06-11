@@ -96,10 +96,16 @@ public class RunCompile extends AbstractHandler{
 			// Compile 
 			// TODO
 			// GET THE ALGORITHM AS STRING code
-//			CompilerAccess.compile("", getAllDatatypes());
-			
-			// Then activate command SwitchToRunPerspective
-			new SwitchToRunPerspective().execute(event);
+			String pathToAlgoInJava = CompilerAccess.compileThisDummy("keinString", null);
+			System.out.println(pathToAlgoInJava);
+			if(Activator.getDefault().setJavaAlgorithmToVM(pathToAlgoInJava)) {
+				// Then activate command SwitchToRunPerspective
+				new SwitchToRunPerspective().execute(event);
+			}
+			else {
+				System.out.println("Fehler");
+				//TODO FEHLER AUSGEBEN MIT WINDOWS
+			}
 		} else {
 			return null;
 		}

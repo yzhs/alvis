@@ -130,10 +130,9 @@ public class Activator extends AbstractUIPlugin {
 		return pseudoCodeList;
 	}
 	
-	private VirtualMachine vm;
+	private VirtualMachine vm = VirtualMachine.getInstance();;
 	public void runStart() {
 		ArrayList<PCObject> paras = new ArrayList<PCObject>();
-		vm = VirtualMachine.getInstance();
 		vm.clear();
 		 
 		// Hier muss das plugin nach datentypen gefragt werden
@@ -179,6 +178,14 @@ public class Activator extends AbstractUIPlugin {
 	
 	public ArrayList<IExportItem> getExportItems() {
 		return myExport.getExportItems();
+	}
+
+	/**
+	 * Set the compiled .java algorithm path
+	 * @param pathToAlgoInJava
+	 */
+	public boolean setJavaAlgorithmToVM(String pathToAlgoInJava) {
+		return vm.addAlgoToVM("first", pathToAlgoInJava);
 	}
 	
 }
