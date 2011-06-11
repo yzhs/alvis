@@ -15,7 +15,6 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
-import org.eclipse.ui.internal.Workbench;
 import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.ui.part.FileEditorInput;
@@ -27,14 +26,13 @@ import de.unisiegen.informatik.bs.alvis.extensionpoints.IDatatypeList;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.tools.IO;
 
-@SuppressWarnings("restriction")
+
 public class RunCompile extends AbstractHandler{
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		
 		// Save all Editors
-		Workbench.
-		getInstance().
+		PlatformUI.getWorkbench().
 		getActiveWorkbenchWindow().
 		getActivePage().
 		saveAllEditors(true);
@@ -48,8 +46,8 @@ public class RunCompile extends AbstractHandler{
 		try {
 			// What to run? get the input (filepath)
 			input = 
-				Workbench.
-				getInstance().
+				PlatformUI.
+				getWorkbench().
 				getActiveWorkbenchWindow().
 				getActivePage().
 				getActiveEditor().
@@ -90,9 +88,7 @@ public class RunCompile extends AbstractHandler{
 		// END OF GET THE RUN OBJECT
 		
 		if(seri != null) {
-			// Set the ActiveRun field in the Activater to seri
-			Activator.getDefault().setActiveRun(seri);
-			
+
 			// Compile 
 			// TODO
 			// GET THE ALGORITHM AS STRING code

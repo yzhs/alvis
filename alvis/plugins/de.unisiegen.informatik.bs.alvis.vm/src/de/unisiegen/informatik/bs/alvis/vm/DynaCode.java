@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import org.eclipse.core.runtime.FileLocator;
+import de.unisiegen.informatik.bs.alvis.compiler.CompilerAccess;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
+import de.unisiegen.informatik.bs.alvis.graph.datatypes.PseudoCodeEdge;;
+
 /**
  * Class which handles the class path in order to be able to compile Java Code at runtime
  * 
@@ -45,12 +50,14 @@ public final class DynaCode {
 	public DynaCode(String compileClasspath, ClassLoader parentClassLoader) {
 		this.compileClasspath = compileClasspath;
 		this.parentClassLoader = parentClassLoader;
-		this.compileClasspath = this.compileClasspath.concat(":" +
-									this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+"src/:"+
-									this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+":"+
-									this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+"vm/:"+
-									this.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+"vm/src/:"
-								);
+		CompilerAccess compiler_DUMMY = new CompilerAccess(); // dummy to get the path to this file
+		PCBoolean primitive_datatypes_DUMMY = new PCBoolean(true);
+		PseudoCodeEdge graph_datatypes_DUMMY = new PseudoCodeEdge();
+		this.compileClasspath += ":";
+		this.compileClasspath += this						.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+"src/:";								;
+		this.compileClasspath += compiler_DUMMY				.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+"src/:";
+		this.compileClasspath += primitive_datatypes_DUMMY	.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+"src/:";
+		this.compileClasspath += graph_datatypes_DUMMY		.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+"src/:";
 	}
 
 	/**
@@ -62,10 +69,17 @@ public final class DynaCode {
 	 */
 	public boolean addSourceDir(File srcDir) {
 		try {
-			srcDir = srcDir.getCanonicalFile();
-			
+			String dir = FileLocator.getBundleFile(
+					Activator.getBundle())
+					.getCanonicalFile().toString();
+			dir = dir.replace("vm", "compiler");  // dirty... DIRTY hack
+			// TODO: weg finden, den Pfad des Bundles des Activators des *compilers* hier her zu bringen
+			// Sprich: diesen Pfad mit in die Argumente von addAlgoToVM usw legen
+			srcDir = new File(dir);
+//			System.out.println("srcDir: " + srcDir);
+//			srcDir = srcDir.getCanonicalFile(); // obsolete, pointed to eclipse installation path			
 		} catch (IOException e) {
-			// ignore
+			e.printStackTrace();
 		}
 
 		synchronized (sourceDirs) {
@@ -84,7 +98,6 @@ public final class DynaCode {
 
 			info("Add source dir " + srcDir);
 		}
-
 		return true;
 	}
 
@@ -98,7 +111,6 @@ public final class DynaCode {
 	 */
 	@SuppressWarnings("unchecked")
 	public Class<AbstractAlgo> loadClass(String className) throws ClassNotFoundException {
-
 		LoadedClass loadedClass = null;
 		synchronized (loadedClasses) {
 			loadedClass = (LoadedClass) loadedClasses.get(className);
@@ -106,7 +118,6 @@ public final class DynaCode {
 
 		// first access of a class
 		if (loadedClass == null) {
-
 			String resource = className.replace('.', '/') + ".java";
 			SourceDir src = locateResource(resource);
 			if (src == null) {

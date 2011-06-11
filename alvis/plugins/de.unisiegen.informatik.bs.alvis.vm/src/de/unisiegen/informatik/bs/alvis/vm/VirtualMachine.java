@@ -90,7 +90,7 @@ public class VirtualMachine {
 			tmp = new AlgoThread(fileName, lock);
 		} catch (ClassNotFoundException e) {
 			// TODO possible case for the logger?
-			// e.printStackTrace();
+			e.printStackTrace();
 			return false;
 		}
 		algos.put(key, tmp);

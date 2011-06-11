@@ -3,22 +3,23 @@ import java.util.ArrayList;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.*;
 import de.unisiegen.informatik.bs.alvis.vm.*;
+import de.unisiegen.informatik.bs.alvis.graph.datatypes.*;
 
 public class Algorithm implements AbstractAlgo {
-    private PCGraph G;
-    private PCVertex s;
+    private PseudoCodeGraph G;
+    private PseudoCodeVertex s;
 
-    public Algorithm(PCGraph G, PCVertex s) {
+    public Algorithm(PseudoCodeGraph G, PseudoCodeVertex s) {
         this.G = G;
         this.s = s;
     }
 
     public void run() {
-        for (PCVertex v : G.getVertices())
+        for (PseudoCodeVertex v : G.getVertices())
             {
                 v.set("color", new PCString("white"));
-                v.set("distance", PCInteger.localInfty);
-                v.set("pi", PCVertex.localNull);
+                v.set("distance", PCInteger.getInfty());
+                v.set("pi", PseudoCodeVertex.getNull());
             }
         s.set("color", new PCString("grey"));
         insertBreakpoint(7);
@@ -27,14 +28,14 @@ public class Algorithm implements AbstractAlgo {
         Q.enqueue(s);
         while ((Q.isEmpty().not()).getLiteralValue())
             {
-                PCVertex u = new PCVertex();
+                PseudoCodeVertex u = new PseudoCodeVertex();
                 u = Q.dequeue();
-                for (PCVertex v : u.getAdjacents())
-                    if ((v.getColor().equal(new PCString("white"))).getLiteralValue())
+                for (PseudoCodeVertex v : u.getAdjacents())
+                    if ((v.get("color").equal(new PCString("white"))).getLiteralValue())
                         {
                             v.set("color", new PCString("grey"));
                             insertBreakpoint(17);
-                            v.set("distance", u.getDistance().add(new PCInteger(1)));
+                            v.set("distance", u.get("distance").add(new PCInteger(1)));
                             v.set("pi", u);
                             Q.enqueue(v);
                         }

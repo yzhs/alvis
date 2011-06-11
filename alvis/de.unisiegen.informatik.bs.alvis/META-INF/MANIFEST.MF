@@ -37,4 +37,6 @@ Bundle-ClassPath: xstream-1.3.1.jar,
  alvic-0.0.1-SNAPSHOT-jar-with-dependencies.jar,
  itextpdf-5.1.0-javadoc.jar,
  itextpdf-5.1.0-sources.jar,
- itextpdf-5.1.0.jar
+ itextpdf-5.1.0.jar,
+ core-renderer.jar,
+ iText-2.0.8.jar

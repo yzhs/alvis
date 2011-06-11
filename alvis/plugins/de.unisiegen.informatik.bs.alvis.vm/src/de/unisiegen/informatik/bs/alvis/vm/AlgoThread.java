@@ -165,7 +165,9 @@ public class AlgoThread {
 	 */
 	private void loadAlgo(String fileName) throws ClassNotFoundException {
 		DynaCode dynacode = new DynaCode();
-		dynacode.addSourceDir(new File("src"));
+		//dynacode.addSourceDir(new File("file"));
+		//dynacode.addSourceDir(new File(fileName));
+		dynacode.addSourceDir(new File("Algorithm"));
 		// set aA to the loaded class
 		algoClass = dynacode.loadClass(fileName);
 	}

@@ -357,46 +357,43 @@ public class PdfExport extends Document {
 		}
 		if (part != null) {
 			RGB rgb;
-			RGB black = new RGB(0, 0, 0);
-			StyledText style = part.getTextWidget();
-			String text = style.getText(); // the complete text grabbed from the
-											// editor
-			StyleRange[] range = style.getStyleRanges();// ranges declaring the
-														// styles of each part
-														// of the text
+			RGB black = new RGB(0,0,0);
+		    StyledText style = part.getTextWidget();
+		    String text = style.getText(); 				// the complete text grabbed from the editor
+		    StyleRange[] range = style.getStyleRanges();// ranges declaring the styles of each part of the text
+		    
+		    for(StyleRange ran : range){				// cycle through these ranges and style them using HTML
+		    	String word = "";
+		    	for(int i = ran.start; i < ran.start+ran.length; i++){
+		    		if (text.charAt(i) == '<') // Replace "<" and ">" otherwise they will be interpreted and thus erased by the HTMLWorker
+		    			word += "&lt;";
+		    		else if (text.charAt(i) == '>')
+		    			word += "&gt;";
+		    		else
+		    			word += text.charAt(i);  // if the character is neither "<" nor ">" append it to the current word
+		    	}
+		    	Color col = ran.foreground;
+		    	if(col == null){ // color must not be null
+		    		rgb = black;
+		    	}
+		    	else
+		    		rgb = col.getRGB();
+		    	if(!rgb.equals(black)) // black is assumed as standard color, other color will be included here.
+		    		word = 	"<font color=\"#"+
+								Integer.toHexString(rgb.red)+
+								Integer.toHexString(rgb.green)+
+								Integer.toHexString(rgb.blue)+
+							"\">" + word + "</font>";
+		    	if(ran.fontStyle == 1)
+		    		word = "<b>" + word + "</b>";
+		    	codeWithHTMLColorTags += word;
+		    	
+		    }
+		    System.out.println("Bold: " + SWT.BOLD);
+		    System.out.println("Underline: " + SWT.UNDERLINE_SINGLE);
+		    System.out.println("Italic " + SWT.ITALIC);
+		    return codeWithHTMLColorTags;
 
-			for (StyleRange ran : range) { // cycle through these ranges and
-											// style them using HTML
-				String word = "";
-				for (int i = ran.start; i < ran.start + ran.length; i++) {
-					if (text.charAt(i) == '<') // Replace "<" and ">" otherwise
-												// they will be interpreted and
-												// thus erased by the HTMLWorker
-						word += "&lt;";
-					else if (text.charAt(i) == '>')
-						word += "&gt;";
-					else
-						word += text.charAt(i); // if the character is neither
-												// "<" nor ">" append it to the
-												// current word
-				}
-				Color col = ran.foreground;
-				if (col == null) { // color must not be null
-					rgb = black;
-				} else
-					rgb = col.getRGB();
-				if (!rgb.equals(black)) // black is assumed as standard color,
-										// other color will be included here.
-					codeWithHTMLColorTags += "<font color=\"#"
-							+ Integer.toHexString(rgb.red)
-							+ Integer.toHexString(rgb.green)
-							+ Integer.toHexString(rgb.blue) + "\">" + word
-							+ "</font>";
-				else
-					codeWithHTMLColorTags += word;
-
-			}
-			return codeWithHTMLColorTags;
 		}
 		return null;
 	}
