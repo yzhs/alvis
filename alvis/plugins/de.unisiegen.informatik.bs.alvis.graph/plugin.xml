@@ -80,9 +80,9 @@
                commandId="de.unisiegen.informatik.bs.alvis.commands.showNewGraphWizard"
                hoverIcon="icons/extension/ext_graph.png"
                icon="icons/extension/ext_graph.png"
-               label="Graph File"
+               label="%command.label"
                style="push"
-               tooltip="creates a new File with the extension .graph">
+               tooltip="%command.tooltip">
          </command>
       </menuContribution>
    </extension>
@@ -127,7 +127,7 @@
       <command
             defaultHandler="de.unisiegen.informatik.bs.alvis.graph.newwizards.showNewGraphWizard"
             id="de.unisiegen.informatik.bs.alvis.commands.showNewGraphWizard"
-            name="New Graph">
+            name="%command.name">
       </command>
    </extension>
    <extension
@@ -249,7 +249,7 @@
             extensions="graph"
             icon="icons/extension/ext_graph.png"
             id="de.unisiegen.informatik.bs.alvis.graph.grapheditor"
-            name="Graph Editor">
+            name="%editor.name">
       </editor>
       <editor
             class="de.unisiegen.informatik.bs.alvis.graph.editors.GraphEditorAdjacencyMatrix"
@@ -257,7 +257,7 @@
             extensions="graph"
             icon="icons/extension/ext_graph.png"
             id="de.unisiegen.informatik.bs.alvis.graph.grapheditormatrix"
-            name="Graph Editor Adjacency Matrix">
+            name="%editor.name.0">
       </editor>
    </extension>
    <extension
@@ -270,7 +270,7 @@
          point="org.eclipse.ui.newWizards">
       <category
             id="de.unisiegen.informatik.bs.alvis.graph.category"
-            name="Graph">
+            name="%category.name">
       </category>
       <wizard
             category="de.unisiegen.informatik.bs.alvis.graph.category"

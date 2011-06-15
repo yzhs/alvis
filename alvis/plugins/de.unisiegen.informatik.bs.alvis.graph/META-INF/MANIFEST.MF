@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Graph
+Bundle-Name: %Bundle-Name
 Bundle-SymbolicName: de.unisiegen.informatik.bs.alvis.graph;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: de.unisiegen.informatik.bs.alvis.graph.Activator
