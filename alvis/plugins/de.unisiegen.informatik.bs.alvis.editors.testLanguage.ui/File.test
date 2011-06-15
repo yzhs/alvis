@@ -1,0 +1,14 @@
+Datatype String
+
+entity Person{
+	String name
+	String lastName
+	Address address	
+	
+}
+
+entity Address{
+	String street
+	String zip
+	String city
+}
