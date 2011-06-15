@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import org.eclipse.core.runtime.FileLocator;
 import de.unisiegen.informatik.bs.alvis.compiler.CompilerAccess;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.PseudoCodeEdge;;
@@ -70,15 +69,7 @@ public final class DynaCode {
 	public boolean addSourceDir(File srcDir) {
 		try {
 			String dir = CompilerAccess.getAlgorithmPath();
-//			de.unisiegen.informatik.bs.alvis.Activator.get
-//			de.unisiegen.informatik.bs.alvis.compiler.Activator.getDefault()
-//			dir = dir.replace("vm", "compiler");  // dirty... DIRTY hack
-			// TODO: weg finden, den Pfad des Bundles des Activators des *compilers* hier her zu bringen
-			// Sprich: diesen Pfad mit in die Argumente von addAlgoToVM usw legen
 			srcDir = new File(dir);
-			System.out.println("srcDir: " + srcDir);
-//			System.out.println("srcDir: " + srcDir);
-//			srcDir = srcDir.getCanonicalFile(); // obsolete, pointed to eclipse installation path			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

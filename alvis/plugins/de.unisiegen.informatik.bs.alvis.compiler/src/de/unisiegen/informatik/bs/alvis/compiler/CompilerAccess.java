@@ -40,20 +40,7 @@ public class CompilerAccess {
 	 * @param datatypes
 	 * @return
 	 */
-	public static String compileThisDummy(String code, ArrayList<PCObject> datatypes) {
-//		String javaFilePath = "-1";
-		try {
-			String dir = FileLocator.getBundleFile(
-					Activator.getDefault().getBundle())
-					.getAbsolutePath().toString();
-////			 javaFilePath = dir+"/Algorithm.java";
-//			 javaFilePath = "Algorithm";
-////			 javaFilePath = javaFilePath.replaceAll("\\\\", "/");
-//
-//			 System.out.println("Dir: " + dir);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}	
+	public static String compileThisDummy(String code, ArrayList<PCObject> datatypes) {	
 		String javaFilePath = "Algorithm"; // TODO HARD CODED!
 		return javaFilePath;
 	}
