@@ -90,7 +90,7 @@ public class RunCompile extends AbstractHandler{
 		if(seri != null) {
 
 			// Compile 
-			// TODO
+			// TODO 
 			// GET THE ALGORITHM AS STRING code
 			String pathToAlgoInJava = CompilerAccess.compileThisDummy("keinString", null);
 			System.out.println(pathToAlgoInJava);
