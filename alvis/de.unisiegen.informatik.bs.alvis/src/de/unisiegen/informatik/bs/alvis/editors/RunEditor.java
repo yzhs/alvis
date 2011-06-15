@@ -163,29 +163,29 @@ public class RunEditor extends EditorPart {
 	public void createPartControl(Composite parent) {
 		
 		composite_1 = new Composite(parent, SWT.NONE);
-		composite_1.setFont(SWTResourceManager.getFont("Calibri", 10, SWT.BOLD));
+		composite_1.setFont(SWTResourceManager.getFont("Calibri", 10, SWT.BOLD)); //$NON-NLS-1$
 		composite_1.setLayout(new FillLayout(SWT.HORIZONTAL));
 		
 		expandBar = new ExpandBar(composite_1, SWT.NONE);
-		expandBar.setFont(SWTResourceManager.getFont("Calibri", 10, SWT.NORMAL));
+		expandBar.setFont(SWTResourceManager.getFont("Calibri", 10, SWT.NORMAL)); //$NON-NLS-1$
 		expandBar.setSpacing(10);
 		expandBar.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_RED));
 		expandBar.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		
 		xpndtmAlgorithm = new ExpandItem(expandBar, SWT.NONE);
 		xpndtmAlgorithm.setExpanded(true);
-		xpndtmAlgorithm.setText("Algorithm");
+		xpndtmAlgorithm.setText(Messages.RunEditor_2);
 		
 		grpAlgorithmFile = new Group(expandBar, SWT.NONE);
 		xpndtmAlgorithm.setControl(grpAlgorithmFile);
-		grpAlgorithmFile.setText("Algorithm File");
+		grpAlgorithmFile.setText(Messages.RunEditor_3);
 		grpAlgorithmFile.setLayout(new FillLayout(SWT.HORIZONTAL));
 		myAlgorithmFile = new Text(grpAlgorithmFile, SWT.NONE);
-		myAlgorithmFile.setToolTipText("Choose a file relative to the workspace.");
+		myAlgorithmFile.setToolTipText(Messages.RunEditor_4);
 		
 		Button btnselectAlgorithmFile = new Button(grpAlgorithmFile, SWT.NONE);
-		btnselectAlgorithmFile.setToolTipText("Select the algorithm file - this will be the algorithm that runs on the example.");
-		btnselectAlgorithmFile.setText("Select...");
+		btnselectAlgorithmFile.setToolTipText(Messages.RunEditor_5);
+		btnselectAlgorithmFile.setText(Messages.RunEditor_6);
 		btnselectAlgorithmFile.addListener(SWT.Selection, new Listener() {
 
 			@Override
@@ -195,15 +195,15 @@ public class RunEditor extends EditorPart {
 							PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), 
 							new WorkbenchLabelProvider(), 
 							new BaseWorkbenchContentProvider());
-				dialog.setTitle("Select an \"Algorithm File\"");
-				dialog.setMessage("Choose one file from the type .algo");
+				dialog.setTitle(Messages.RunEditor_7);
+				dialog.setMessage(Messages.RunEditor_8);
 				dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
 				dialog.open();
 				if(dialog.getResult() != null) {
-					String result = "";
+					String result = ""; //$NON-NLS-1$
 					for(Object o : dialog.getResult()) 
 						result = o.toString();
-					if(result.startsWith("L") & result.endsWith("algo")) {
+					if(result.startsWith("L") & result.endsWith("algo")) { //$NON-NLS-1$ //$NON-NLS-2$
 						result = result.substring(2); // cut the first two chars
 						myAlgorithmFile.setText(result);
 						setDirty(true);
@@ -222,18 +222,18 @@ public class RunEditor extends EditorPart {
 		
 		xpndtmExample = new ExpandItem(expandBar, SWT.NONE);
 		xpndtmExample.setExpanded(true);
-		xpndtmExample.setText("Example");
+		xpndtmExample.setText(Messages.RunEditor_12);
 		
 		grpExampleFile = new Group(expandBar, SWT.SHADOW_OUT);
-		grpExampleFile.setText("Example File");
+		grpExampleFile.setText(Messages.RunEditor_13);
 		xpndtmExample.setControl(grpExampleFile);
 		grpExampleFile.setLayout(new FillLayout(SWT.HORIZONTAL));
 		myExampleFile = new Text(grpExampleFile, SWT.NONE);
-		myExampleFile.setToolTipText("Choose a file relative to the workspace.");
+		myExampleFile.setToolTipText(Messages.RunEditor_14);
 		
 		Button btnSelectExampleFile = new Button(grpExampleFile, SWT.NONE);
-		btnSelectExampleFile.setToolTipText("Select the file that contains the run's example");
-		btnSelectExampleFile.setText("Select...");
+		btnSelectExampleFile.setToolTipText(Messages.RunEditor_15);
+		btnSelectExampleFile.setText(Messages.RunEditor_16);
 		btnSelectExampleFile.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event event) {
 				ElementTreeSelectionDialog dialog = 
@@ -241,15 +241,15 @@ public class RunEditor extends EditorPart {
 							PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), 
 							new WorkbenchLabelProvider(), 
 							new BaseWorkbenchContentProvider());
-				dialog.setTitle("Select an \"Example File\"");
-				dialog.setMessage("Choose one file of the type .graph");
+				dialog.setTitle(Messages.RunEditor_17);
+				dialog.setMessage(Messages.RunEditor_18);
 				dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
 				dialog.open();
 				if(dialog.getResult() != null) {
-					String result = "";
+					String result = ""; //$NON-NLS-1$
 					for(Object o : dialog.getResult()) 
 						result = o.toString();
-					if(result.startsWith("L") & result.endsWith("graph")) {
+					if(result.startsWith("L") & result.endsWith("graph")) { //$NON-NLS-1$ //$NON-NLS-2$
 						result = result.substring(2); // cut the first two chars
 						myExampleFile.setText(result);
 						setDirty(true);
@@ -269,10 +269,10 @@ public class RunEditor extends EditorPart {
 		
 		xpndtmRun = new ExpandItem(expandBar, SWT.NONE);
 		xpndtmRun.setExpanded(true);
-		xpndtmRun.setText("Run");
+		xpndtmRun.setText(Messages.RunEditor_22);
 		
 		grpStartTheRun = new Group(expandBar, SWT.NONE);
-		grpStartTheRun.setText("Start the Run");
+		grpStartTheRun.setText(Messages.RunEditor_23);
 		xpndtmRun.setControl(grpStartTheRun);
 		grpStartTheRun.setLayout(new FillLayout(SWT.HORIZONTAL));
 		
@@ -282,9 +282,9 @@ public class RunEditor extends EditorPart {
 			public void widgetSelected(SelectionEvent e) {
 			}
 		});
-		run.setToolTipText("Click here to start the run.");
-		run.setImage(ImageCache.getImage("icons/extension/ext_run.png"));
-		run.setFont(SWTResourceManager.getFont("Calibri", 14, SWT.NORMAL));
+		run.setToolTipText(Messages.RunEditor_24);
+		run.setImage(ImageCache.getImage("icons/extension/ext_run.png")); //$NON-NLS-1$
+		run.setFont(SWTResourceManager.getFont("Calibri", 14, SWT.NORMAL)); //$NON-NLS-1$
 		run.addListener(SWT.Selection, new Listener(){
 			public void handleEvent(Event event) {
 				try {
@@ -298,17 +298,17 @@ public class RunEditor extends EditorPart {
 		
 		ExpandItem xpndtmSettings = new ExpandItem(expandBar, SWT.NONE);
 		xpndtmSettings.setExpanded(true);
-		xpndtmSettings.setText("Settings");
+		xpndtmSettings.setText(Messages.RunEditor_27);
 		
 		TabFolder tabFolder = new TabFolder(expandBar, SWT.NONE);
 		xpndtmSettings.setControl(tabFolder);
 		
 		TabItem tbtmRun = new TabItem(tabFolder, SWT.NONE);
-		tbtmRun.setText("Start point");
+		tbtmRun.setText(Messages.RunEditor_28);
 		
 		Group grpRun = new Group(tabFolder, SWT.NONE);
 		tbtmRun.setControl(grpRun);
-		grpRun.setText("Start point settings");
+		grpRun.setText(Messages.RunEditor_29);
 		
 		/*
 		 * This section asks the plugins for parameters to add to the run. 
@@ -318,8 +318,8 @@ public class RunEditor extends EditorPart {
 		
 		Label lblNewLabel = new Label(grpRun, SWT.NONE);
 		lblNewLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 3, 1));
-		lblNewLabel.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
-		lblNewLabel.setText("How do you want to choose the start configurations for the run?");
+		lblNewLabel.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
+		lblNewLabel.setText(Messages.RunEditor_31);
 		
 		Button btn_startpoint_rand = new Button(grpRun, SWT.RADIO);
 		btn_startpoint_rand.addSelectionListener(new SelectionAdapter() {
@@ -331,15 +331,15 @@ public class RunEditor extends EditorPart {
 				checkDirty();
 			}
 		});
-		btn_startpoint_rand.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
-		btn_startpoint_rand.setText("Randomly");
+		btn_startpoint_rand.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
+		btn_startpoint_rand.setText(Messages.RunEditor_33);
 		
 		Label lblLetThe_1 = new Label(grpRun, SWT.NONE);
-		lblLetThe_1.setText("- let the computer decide.");
+		lblLetThe_1.setText(Messages.RunEditor_34);
 		new Label(grpRun, SWT.NONE);
 		
 		Button btn_startpoint_decide = new Button(grpRun, SWT.RADIO);
-		btn_startpoint_decide.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		btn_startpoint_decide.setFont(SWTResourceManager.getFont(Messages.RunEditor_35, 9, SWT.BOLD));
 		btn_startpoint_decide.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -349,10 +349,10 @@ public class RunEditor extends EditorPart {
 				checkDirty();
 			}
 		});
-		btn_startpoint_decide.setText("Decide");
+		btn_startpoint_decide.setText(Messages.RunEditor_36);
 		
 		Label lblSetThe = new Label(grpRun, SWT.NONE);
-		lblSetThe.setText("- set the preferences first.");
+		lblSetThe.setText(Messages.RunEditor_37);
 		new Label(grpRun, SWT.NONE);
 		Button btnSetPreferences = new Button(grpRun, SWT.NONE);
 		btnSetPreferences.addSelectionListener(new SelectionAdapter() {
@@ -360,16 +360,16 @@ public class RunEditor extends EditorPart {
 			public void widgetSelected(SelectionEvent e) {
 			}
 		});
-		btnSetPreferences.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
-		btnSetPreferences.setToolTipText("Click here to set the preferences for the run.");
+		btnSetPreferences.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
+		btnSetPreferences.setToolTipText(Messages.RunEditor_39);
 		btnSetPreferences.addListener(SWT.Selection, new Listener () {
 
 			@Override
 			public void handleEvent(Event event) {
-				if(!myExampleFile.getText().equals("")) {
+				if(!myExampleFile.getText().equals("")) { //$NON-NLS-1$
 			        IExtensionRegistry registry = Platform.getExtensionRegistry();
 			        IExtensionPoint extensionPoint = registry.getExtensionPoint(
-			        		"de.unisiegen.informatik.bs.alvis.extensions.runpreferences");
+			        		"de.unisiegen.informatik.bs.alvis.extensions.runpreferences"); //$NON-NLS-1$
 			        IExtension[] extensions = extensionPoint.getExtensions();
 			        
 			        //	 * For all Extensions that contribute:
@@ -383,7 +383,7 @@ public class RunEditor extends EditorPart {
 			                {
 			                    IConfigurationElement element = elements[j];
 			                    IRunPreferences myRunPreferences = (IRunPreferences)element.
-			                    	createExecutableExtension("class");
+			                    	createExecutableExtension("class"); //$NON-NLS-1$
 			                    
 			                    // Get the PseudoCodeObjects the user choosed as Parameters
 			                    ArrayList<PCObject> returnedPseudoCodeObjects = 
@@ -406,22 +406,22 @@ public class RunEditor extends EditorPart {
 			}
 			
 		});
-		btnSetPreferences.setText("Set Preferences");
+		btnSetPreferences.setText(Messages.RunEditor_43);
 		new Label(grpRun, SWT.NONE);
 		new Label(grpRun, SWT.NONE);
 		
 		TabItem tbtmDecisionPoint = new TabItem(tabFolder, SWT.NONE);
-		tbtmDecisionPoint.setText("Decision point");
+		tbtmDecisionPoint.setText(Messages.RunEditor_44);
 		
 		Group grpDecisionPointSettings = new Group(tabFolder, SWT.NONE);
 		tbtmDecisionPoint.setControl(grpDecisionPointSettings);
-		grpDecisionPointSettings.setText("Decision point settings");
+		grpDecisionPointSettings.setText(Messages.RunEditor_45);
 		grpDecisionPointSettings.setLayout(new GridLayout(2, false));
 		
 		Label lblHowDoYou = new Label(grpDecisionPointSettings, SWT.NONE);
-		lblHowDoYou.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		lblHowDoYou.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
 		lblHowDoYou.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
-		lblHowDoYou.setText("When more than one ways are possible. How do you want the run to choose the way it goes?");
+		lblHowDoYou.setText(Messages.RunEditor_47);
 		
 		Button btn_decisionpoint_rand = new Button(grpDecisionPointSettings, SWT.RADIO);
 		btn_decisionpoint_rand.addSelectionListener(new SelectionAdapter() {
@@ -433,12 +433,12 @@ public class RunEditor extends EditorPart {
 				checkDirty();
 			}
 		});
-		btn_decisionpoint_rand.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
-		btn_decisionpoint_rand.setToolTipText("Set decision point settings to random");
-		btn_decisionpoint_rand.setText("Randomly");
+		btn_decisionpoint_rand.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
+		btn_decisionpoint_rand.setToolTipText(Messages.RunEditor_49);
+		btn_decisionpoint_rand.setText(Messages.RunEditor_50);
 		
 		Label lblLetThe = new Label(grpDecisionPointSettings, SWT.NONE);
-		lblLetThe.setText("- let the computer decide.");
+		lblLetThe.setText(Messages.RunEditor_51);
 		
 		Button btn_decisionpoint_once = new Button(grpDecisionPointSettings, SWT.RADIO);
 		btn_decisionpoint_once.addSelectionListener(new SelectionAdapter() {
@@ -450,12 +450,12 @@ public class RunEditor extends EditorPart {
 				checkDirty();
 			}
 		});
-		btn_decisionpoint_once.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
-		btn_decisionpoint_once.setToolTipText("Set decision point settings to once");
-		btn_decisionpoint_once.setText("Once");
+		btn_decisionpoint_once.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
+		btn_decisionpoint_once.setToolTipText(Messages.RunEditor_53);
+		btn_decisionpoint_once.setText(Messages.RunEditor_54);
 		
 		Label lblChooseAn = new Label(grpDecisionPointSettings, SWT.NONE);
-		lblChooseAn.setText("- configure an order first.");
+		lblChooseAn.setText(Messages.RunEditor_55);
 		
 		Button btn_decisionpoint_always = new Button(grpDecisionPointSettings, SWT.RADIO);
 		btn_decisionpoint_always.addSelectionListener(new SelectionAdapter() {
@@ -467,25 +467,25 @@ public class RunEditor extends EditorPart {
 				checkDirty();
 			}
 		});
-		btn_decisionpoint_always.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
-		btn_decisionpoint_always.setToolTipText("Set decision point settings to always");
-		btn_decisionpoint_always.setText("Always");
+		btn_decisionpoint_always.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
+		btn_decisionpoint_always.setToolTipText(Messages.RunEditor_57);
+		btn_decisionpoint_always.setText(Messages.RunEditor_58);
 		
 		Label lblDecideWhat = new Label(grpDecisionPointSettings, SWT.NONE);
-		lblDecideWhat.setText("- decide what way the run should go on each decision point.");
+		lblDecideWhat.setText(Messages.RunEditor_59);
 		
 		TabItem tbtmBreakPoint = new TabItem(tabFolder, SWT.NONE);
-		tbtmBreakPoint.setText("Break point");
+		tbtmBreakPoint.setText(Messages.RunEditor_60);
 		
 		Group grpBreakPoint = new Group(tabFolder, SWT.NONE);
 		tbtmBreakPoint.setControl(grpBreakPoint);
-		grpBreakPoint.setText("Break point settings");
+		grpBreakPoint.setText(Messages.RunEditor_61);
 		grpBreakPoint.setLayout(new GridLayout(2, false));
 		
 		Label lblWhatShallHappen = new Label(grpBreakPoint, SWT.NONE);
 		lblWhatShallHappen.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
-		lblWhatShallHappen.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
-		lblWhatShallHappen.setText("What shall happen on break points?");
+		lblWhatShallHappen.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
+		lblWhatShallHappen.setText(Messages.RunEditor_63);
 		
 		Button btn_breakpoint_stop = new Button(grpBreakPoint, SWT.RADIO);
 		btn_breakpoint_stop.addSelectionListener(new SelectionAdapter() {
@@ -497,11 +497,11 @@ public class RunEditor extends EditorPart {
 				checkDirty();
 			}
 		});
-		btn_breakpoint_stop.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
-		btn_breakpoint_stop.setText("Stop");
+		btn_breakpoint_stop.setFont(SWTResourceManager.getFont(Messages.RunEditor_64, 9, SWT.BOLD));
+		btn_breakpoint_stop.setText(Messages.RunEditor_65);
 		
 		Label lblStopOnEvery = new Label(grpBreakPoint, SWT.NONE);
-		lblStopOnEvery.setText("- on every break point. Use next and back buttons to navigate.");
+		lblStopOnEvery.setText(Messages.RunEditor_66);
 		
 		Button btn_breakpoint_run = new Button(grpBreakPoint, SWT.RADIO);
 		btn_breakpoint_run.addSelectionListener(new SelectionAdapter() {
@@ -513,24 +513,24 @@ public class RunEditor extends EditorPart {
 				checkDirty();
 			}
 		});
-		btn_breakpoint_run.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
-		btn_breakpoint_run.setText("Run");
+		btn_breakpoint_run.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
+		btn_breakpoint_run.setText(Messages.RunEditor_68);
 		
 		Label lblThroughEvery = new Label(grpBreakPoint, SWT.NONE);
-		lblThroughEvery.setText("- through every break points. Make a short pause - then go on.");
+		lblThroughEvery.setText(Messages.RunEditor_69);
 		
 		TabItem tbtmSecurity = new TabItem(tabFolder, SWT.NONE);
-		tbtmSecurity.setText("Security");
+		tbtmSecurity.setText(Messages.RunEditor_70);
 		
 		Group grpSecurity = new Group(tabFolder, SWT.NONE);
-		grpSecurity.setText("Security Settings");
+		grpSecurity.setText(Messages.RunEditor_71);
 		tbtmSecurity.setControl(grpSecurity);
 		grpSecurity.setLayout(new GridLayout(2, false));
 		
 		Label lblIfTheAlgorithm = new Label(grpSecurity, SWT.NONE);
-		lblIfTheAlgorithm.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
+		lblIfTheAlgorithm.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
 		lblIfTheAlgorithm.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
-		lblIfTheAlgorithm.setText("If the algorithm turns into an infinity loop the program may be unable to respond.");
+		lblIfTheAlgorithm.setText(Messages.RunEditor_73);
 		
 		Button btnLimitTo = new Button(grpSecurity, SWT.CHECK);
 		btnLimitTo.addSelectionListener(new SelectionAdapter() {
@@ -542,29 +542,29 @@ public class RunEditor extends EditorPart {
 				checkDirty();
 			}
 		});
-		btnLimitTo.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD));
-		btnLimitTo.setText("Limit");
+		btnLimitTo.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
+		btnLimitTo.setText(Messages.RunEditor_75);
 		
 		Label lblStepsIn = new Label(grpSecurity, SWT.NONE);
-		lblStepsIn.setText("- run to 1000 steps.");
+		lblStepsIn.setText(Messages.RunEditor_76);
 		xpndtmSettings.setHeight(140);
 		
 		ExpandItem xpndtmInformations = new ExpandItem(expandBar, SWT.NONE);
-		xpndtmInformations.setText("Informations");
+		xpndtmInformations.setText(Messages.RunEditor_77);
 		
 		Group grpI = new Group(expandBar, SWT.NONE);
-		grpI.setText("Informations about this file");
+		grpI.setText(Messages.RunEditor_78);
 		xpndtmInformations.setControl(grpI);
 		grpI.setLayout(new FillLayout(SWT.HORIZONTAL));
 		
 		Label label = new Label(grpI, SWT.HORIZONTAL);
-		label.setText("Here you can save the settings for a specific run. \n" +
-				"Choose the algorithm you want to run on the example. \n" +
-				"The first textbox need to contain the path to the *.algo file. \n" +
-				"The path must be relative to your workspace. \n" +
-				"The second textbox need to contain a *.graph file. \n" +
-				"By clicking on the \"Run\"-button you can start the run.");
-		label.setFont(SWTResourceManager.getFont("Calibri", 9, SWT.NORMAL));
+		label.setText(Messages.RunEditor_79 +
+				Messages.RunEditor_80 +
+				Messages.RunEditor_81 +
+				Messages.RunEditor_82 +
+				Messages.RunEditor_83 +
+				Messages.RunEditor_84);
+		label.setFont(SWTResourceManager.getFont("Calibri", 9, SWT.NORMAL)); //$NON-NLS-1$
 		xpndtmInformations.setHeight(xpndtmInformations.getControl().computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
 		
 		/*

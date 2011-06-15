@@ -24,7 +24,7 @@ public class NewRunWizard extends Wizard implements INewWizard {
 	 * 
 	 */
 	public NewRunWizard() {
-		setWindowTitle("New Run File");
+		setWindowTitle(Messages.NewRunWizard_0);
 	}
 
 	public void init(IWorkbench workbench, IStructuredSelection selection) {

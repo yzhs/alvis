@@ -45,10 +45,8 @@ Frank Weiler
       </win>
    </launcher>
 
-
    <vm>
    </vm>
-
 
    <plugins>
       <plugin id="com.ibm.icu"/>
@@ -117,6 +115,7 @@ Frank Weiler
 
    <features>
       <feature id="de.unisiegen.informatik.bs.alvis.app"/>
+      <feature id="org.eclipse.rcp.nl_de" version="1.0.0.qualifier"/>
    </features>
 
 

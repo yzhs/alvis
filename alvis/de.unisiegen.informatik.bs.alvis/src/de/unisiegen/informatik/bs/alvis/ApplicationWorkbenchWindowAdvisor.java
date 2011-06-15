@@ -30,7 +30,7 @@ public class ApplicationWorkbenchWindowAdvisor extends WorkbenchWindowAdvisor {
 		configurer.setShowCoolBar(true);
 		configurer.setShowStatusLine(false);
 		configurer.setShowMenuBar(true);
-		configurer.setTitle("Alvis");
+		configurer.setTitle(Messages.ApplicationWorkbenchWindowAdvisor_0);
 	}
 	
 	/*

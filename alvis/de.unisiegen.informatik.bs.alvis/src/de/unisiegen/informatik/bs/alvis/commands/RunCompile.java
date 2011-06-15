@@ -68,7 +68,7 @@ public class RunCompile extends AbstractHandler{
 			// cast to FileEditorInput
 			FileEditorInput fileInput = (FileEditorInput) input;
 			// If the user has choosen a graph to run...
-			if(fileInput.getFile().getFileExtension().equals("run")) {
+			if(fileInput.getFile().getFileExtension().equals("run")) { //$NON-NLS-1$
 				// get the path in system
 				String systemPath =
 					fileInput.getPath().toString();
@@ -92,14 +92,14 @@ public class RunCompile extends AbstractHandler{
 			// Compile 
 			// TODO 
 			// GET THE ALGORITHM AS STRING code
-			String pathToAlgoInJava = CompilerAccess.compileThisDummy("keinString", null);
+			String pathToAlgoInJava = CompilerAccess.compileThisDummy("keinString", null); //$NON-NLS-1$
 			System.out.println(pathToAlgoInJava);
 			if(Activator.getDefault().setJavaAlgorithmToVM(pathToAlgoInJava)) {
 				// Then activate command SwitchToRunPerspective
 				new SwitchToRunPerspective().execute(event);
 			}
 			else {
-				System.out.println("Fehler");
+				System.out.println("Fehler"); //$NON-NLS-1$
 				//TODO FEHLER AUSGEBEN MIT WINDOWS
 			}
 		} else {
@@ -114,7 +114,7 @@ public class RunCompile extends AbstractHandler{
 		
         IExtensionRegistry registry = Platform.getExtensionRegistry();
         IExtensionPoint extensionPoint = registry.getExtensionPoint(
-        		"de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist");
+        		"de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist"); //$NON-NLS-1$
         IExtension[] extensions = extensionPoint.getExtensions();
 
         //     * For all Extensions that contribute:
@@ -128,7 +128,7 @@ public class RunCompile extends AbstractHandler{
                 {
                     IConfigurationElement element = elements[j];
                     IDatatypeList datatypes = (IDatatypeList)element.
-                        createExecutableExtension("class");
+                        createExecutableExtension("class"); //$NON-NLS-1$
                     allDatatypes.addAll(datatypes.getAllDatatypesInThisPlugin());
                     // Save the found IRunVisualizer in a list
                     // HIER ALLE Objekte aus datatypes in deiner Globale Liste speichern
@@ -145,25 +145,25 @@ public class RunCompile extends AbstractHandler{
 	private Run getUsersRun() {
 		
 		Run seri = new Run();
-		while(seri.getAlgorithmFile().equals("") | seri.getExampleFile().equals("")) {
+		while(seri.getAlgorithmFile().equals("") | seri.getExampleFile().equals("")) { //$NON-NLS-1$ //$NON-NLS-2$
 			ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(
 					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), 
 					new WorkbenchLabelProvider(), 
 					new BaseWorkbenchContentProvider());
-			dialog.setTitle("Select the elements from the run.");
-			dialog.setMessage("Select a .algo file or a .graph file or both by using the crlt key.");
+			dialog.setTitle(Messages.RunCompile_7);
+			dialog.setMessage(Messages.RunCompile_8);
 			dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
 			dialog.open();
 			
 			if(dialog.getResult() != null) {
-				String result = "";
+				String result = ""; //$NON-NLS-1$
 					for(Object o : dialog.getResult()) {
 						result = o.toString();
-					if(result.startsWith("L") & result.endsWith("graph")) {
+					if(result.startsWith("L") & result.endsWith("graph")) { //$NON-NLS-1$ //$NON-NLS-2$
 						result = result.substring(2); // cut the first two chars
 						seri.setExampleFile(result);
 					}
-					if(result.startsWith("L") & result.endsWith("algo")) {
+					if(result.startsWith("L") & result.endsWith("algo")) { //$NON-NLS-1$ //$NON-NLS-2$
 						result = result.substring(2); // cut the first two chars
 						seri.setAlgorithmFile(result);
 					}

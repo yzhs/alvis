@@ -27,7 +27,7 @@ public class Activator extends AbstractUIPlugin {
 	// The plug-in ID
 	public static final String PLUGIN_ID = "de.unisiegen.informatik.bs.alvis"; //$NON-NLS-1$
 	/** Naming convention of partitioning */
-	public static final String ALGORITHM_PARTITIONING = "___algorithm__partitioning____";
+	public static final String ALGORITHM_PARTITIONING = "___algorithm__partitioning____"; //$NON-NLS-1$
 
 	// The shared instance
 	private static Activator plugin;
@@ -147,7 +147,7 @@ public class Activator extends AbstractUIPlugin {
 			// startnode and end node
 			paras.add(pseudoObj);
 		}
-		vm.setParameter("algo", paras);
+		vm.setParameter("algo", paras); //$NON-NLS-1$
 //		if(this.runGraph.getStartNode() != null)
 //			vm.addParameter(gr.getVertexFromGraphic(
 //					this.runGraph.getStartNode()));
@@ -165,7 +165,7 @@ public class Activator extends AbstractUIPlugin {
 	}
 
 	public void runNext() {
-		vm.stepAlgoBackward("algo");
+		vm.stepAlgoBackward("algo"); //$NON-NLS-1$
 	}
 
 	public void runBack() {
@@ -185,7 +185,7 @@ public class Activator extends AbstractUIPlugin {
 	 * @param pathToAlgoInJava
 	 */
 	public boolean setJavaAlgorithmToVM(String pathToAlgoInJava) {
-		return vm.addAlgoToVM("first", pathToAlgoInJava);
+		return vm.addAlgoToVM("first", pathToAlgoInJava); //$NON-NLS-1$
 	}
 	
 }

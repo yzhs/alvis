@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-   <extension-point id="de.unisiegen.informatik.bs.alvis.extensions.runpreferences" name="RunPreferences" schema="schema/de.unisiegen.informatik.bs.alvis.extensions.runpreferences.exsd"/>
-   <extension-point id="de.unisiegen.informatik.bs.alvis.runvisualizer" name="RunVisualizer" schema="schema/de.unisiegen.informatik.bs.alvis.runvisualizer.exsd"/>
-   <extension-point id="de.unisiegen.informatik.bs.alvis.export" name="Exporter" schema="schema/de.unisiegen.informatik.bs.alvis.export.exsd"/>
-   <extension-point id="de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist" name="DatatypeList" schema="schema/de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist.exsd"/>
+   <extension-point id="de.unisiegen.informatik.bs.alvis.extensions.runpreferences" name="%extension-point.name" schema="schema/de.unisiegen.informatik.bs.alvis.extensions.runpreferences.exsd"/>
+   <extension-point id="de.unisiegen.informatik.bs.alvis.runvisualizer" name="%extension-point.name.0" schema="schema/de.unisiegen.informatik.bs.alvis.runvisualizer.exsd"/>
+   <extension-point id="de.unisiegen.informatik.bs.alvis.export" name="%extension-point.name.1" schema="schema/de.unisiegen.informatik.bs.alvis.export.exsd"/>
+   <extension-point id="de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist" name="%extension-point.name.2" schema="schema/de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist.exsd"/>
 
    <extension
          id="application"
@@ -103,7 +103,7 @@
             extensions="run"
             icon="icons/extension/ext_run.png"
             id="de.unisiegen.informatik.bs.alvis.editors.runeditor"
-            name="Run Editor">
+            name="%editor.name">
       </editor>
    </extension>
    <extension point="org.eclipse.ui.menus">
@@ -113,7 +113,7 @@
          <command
                commandId="de.unisiegen.informatik.bs.alvis.commands.showNewRunWizard"
                icon="icons/extension/ext_run.png"
-               label="Run File"
+               label="%command.label"
                style="push">
          </command>
       </menuContribution>
@@ -366,7 +366,7 @@
                   commandId="de.unisiegen.informatik.bs.alvis.commands.run.compile"
                   icon="icons/toolbar/compile.png"
                   style="push"
-                  tooltip="Compile">
+                  tooltip="%command.compile">
                <visibleWhen
                      checkEnabled="true">
                   <with
@@ -384,7 +384,7 @@
                   commandId="de.unisiegen.informatik.bs.alvis.commands.runStart"
                   icon="icons/toolbar/run_play.png"
                   style="push"
-                  tooltip="Start run">
+                  tooltip="%command.startrun">
                <visibleWhen
                      checkEnabled="true">
                   <with
@@ -399,7 +399,7 @@
                   commandId="de.unisiegen.informatik.bs.alvis.commands.runBack"
                   icon="icons/toolbar/run_previous.png"
                   style="push"
-                  tooltip="Previous breakpoint">
+                  tooltip="%command.prevbp">
                <visibleWhen
                      checkEnabled="true">
                   <with
@@ -414,7 +414,7 @@
                   commandId="de.unisiegen.informatik.bs.alvis.commands.runNext"
                   icon="icons/toolbar/run_next.png"
                   style="push"
-                  tooltip="BNext breakpoint">
+                  tooltip="%command.nextbp">
                <visibleWhen
                      checkEnabled="true">
                   <with
@@ -433,36 +433,36 @@
       <command
             defaultHandler="de.unisiegen.informatik.bs.alvis.commands.RunCompile"
             id="de.unisiegen.informatik.bs.alvis.commands.run.compile"
-            name="Compile">
+            name="%command.compile2">
       </command>
       <command
             defaultHandler="de.unisiegen.informatik.bs.alvis.commands.showNewRunWizard"
             id="de.unisiegen.informatik.bs.alvis.commands.showNewRunWizard"
-            name="new Run">
+            name="%command.newRun">
       </command>
       <command
             defaultHandler="de.unisiegen.informatik.bs.alvis.commands.RunStart"
             id="de.unisiegen.informatik.bs.alvis.commands.runStart"
-            name="RunStart">
+            name="%command.runStart">
       </command>
       <command
             defaultHandler="de.unisiegen.informatik.bs.alvis.commands.RunNext"
             id="de.unisiegen.informatik.bs.alvis.commands.runNext"
-            name="RunNext">
+            name="%command.runNext">
       </command>
       <command
             defaultHandler="de.unisiegen.informatik.bs.alvis.commands.RunBack"
             id="de.unisiegen.informatik.bs.alvis.commands.runBack"
-            name="RunBack">
+            name="%command.name.3">
       </command>
       <command
             id="de.unisiegen.informatik.bs.alvis.commands.SwitchToRunPerspective"
-            name="SwitchToRunPerspective">
+            name="%command.name.4">
       </command>
       <command
             defaultHandler="de.unisiegen.informatik.bs.alvis.commands.ExportTo"
             id="de.unisiegen.informatik.bs.alvis.commands.ExportTo"
-            name="ExportTo">
+            name="%command.name.5">
       </command>
    </extension>
    <extension

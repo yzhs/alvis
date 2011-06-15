@@ -15,10 +15,10 @@ import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 public class NewRunWizardPage extends WizardNewFileCreationPage {
 
 	public NewRunWizardPage(IStructuredSelection selection) {
-		super("New Run File Wizard", selection);
-		setTitle("Run File");
-		setDescription("Creates a new Run File");
-		setFileExtension("run");
+		super(Messages.NewRunWizardPage_0, selection);
+		setTitle(Messages.NewRunWizardPage_1);
+		setDescription(Messages.NewRunWizardPage_2);
+		setFileExtension("run"); //$NON-NLS-1$
 	}
 
 	protected InputStream getInitialContents() {
