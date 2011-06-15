@@ -24,6 +24,17 @@ public class CompilerAccess {
 	}
 	
 	/**
+	 * Returns the path to the algorithm file
+	 * @return
+	 * @throws IOException
+	 */
+	public static String getAlgorithmPath() throws IOException {
+		String path = "";
+		path = FileLocator.getBundleFile(Activator.getDefault().getBundle()).getCanonicalPath().toString();
+		return path;
+	}
+	
+	/**
 	 * 
 	 * @param code
 	 * @param datatypes
