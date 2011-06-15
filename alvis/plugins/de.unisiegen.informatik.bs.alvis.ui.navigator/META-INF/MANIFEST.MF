@@ -5,7 +5,10 @@ Bundle-SymbolicName: de.unisiegen.informatik.bs.alvis.ui.navigator;singleton:=tr
 Bundle-Version: 1.0.1.qualifier
 Bundle-Activator: de.unisiegen.informatik.bs.alvis.ui.navigator.Activator
 Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
+ org.eclipse.core.runtime,
+ org.eclipse.ui.navigator,
+ org.eclipse.ui.navigator.resources,
+ org.eclipse.core.resources
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.eclipse.core.resources,
