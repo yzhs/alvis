@@ -1,0 +1,19 @@
+grammar org.xtext.example.mydsl2.TestLanguage with org.eclipse.xtext.common.Terminals
+
+generate testLanguage "http://www.xtext.org/example/mydsl2/TestLanguage"
+
+Model:
+	(types+=Type)*;
+	
+Type : Datatype | Entity;
+
+Datatype :
+	"Datatype" name=ID;
+
+Entity :
+	"entity" name=ID "{"
+		(features+=Feature)*
+	"}";
+	
+Feature :
+	type=[Type|ID] name=ID;
