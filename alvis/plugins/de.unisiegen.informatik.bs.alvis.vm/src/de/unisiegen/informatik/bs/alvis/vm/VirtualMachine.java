@@ -81,13 +81,14 @@ public class VirtualMachine {
 	 * Adds a new Algo to the VM, would also replace a currently existing one
 	 * 
 	 * @param key
+	 * @param pathToFile
 	 * @param fileName
 	 * @return boolean with success
 	 */
-	public boolean addAlgoToVM(String key, String fileName) {
+	public boolean addAlgoToVM(String key, String pathToFile, String fileName) {
 		AlgoThread tmp;
 		try {
-			tmp = new AlgoThread(fileName, lock);
+			tmp = new AlgoThread(pathToFile, fileName, lock);
 		} catch (ClassNotFoundException e) {
 			// TODO possible case for the logger?
 			e.printStackTrace();
@@ -182,7 +183,10 @@ public class VirtualMachine {
 	 */
 	public void startAlgos() {
 		for (AlgoThread algo : algos.values()) {
+			// we start this algo till we run in the first breakpoint, so that
+			// there is all the time only one algo running
 			algo.startAlgo();
+			this.waitForBreakPoint();
 		}
 	}
 
@@ -201,7 +205,7 @@ public class VirtualMachine {
 	 */
 	public void stopAlgos() {
 		for (AlgoThread algo : algos.values()) {
-			algo.startAlgo();
+			algo.stopAlgo();
 		}
 	}
 
@@ -259,22 +263,27 @@ public class VirtualMachine {
 
 	/**
 	 * lets wait for breakpoints, will wait till every! thread reached a
-	 * breakpoint
+	 * breakpoint waiting only for Thread.State.TIMED_WAITING
+	 * 
 	 */
 	public void waitForBreakPoint() {
-		boolean everyoneDone = true;
-		for (AlgoThread algo : algos.values()) {
-			algo.waitForBreakpoint();
-			everyoneDone = everyoneDone
-					&& (algo.getCurrentThreadState().equals(
-							Thread.State.TIMED_WAITING)
-							|| algo.getCurrentThreadState().equals(
-									Thread.State.TERMINATED) || algo
-							.getCurrentThreadState().equals(
-									Thread.State.WAITING));
-		}
-		if (everyoneDone == false) {
-			waitForBreakPoint();
+		boolean everyOneDone = false;
+		while (!everyOneDone) {
+			everyOneDone = true;
+			for (AlgoThread algo : algos.values()) {
+				everyOneDone = everyOneDone
+						&& (algo.getCurrentThreadState().equals(
+								Thread.State.TIMED_WAITING) || algo
+								.getCurrentThreadState().equals(
+										Thread.State.NEW));
+
+				if (!(algo.getCurrentThreadState().equals(
+						Thread.State.TIMED_WAITING) || algo
+						.getCurrentThreadState().equals(Thread.State.NEW))) {
+					algo.waitForBreakpoint();
+				}
+
+			}
 		}
 	}
 

@@ -11,17 +11,19 @@ import java.util.Iterator;
 
 import de.unisiegen.informatik.bs.alvis.compiler.CompilerAccess;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
-import de.unisiegen.informatik.bs.alvis.graph.datatypes.PseudoCodeEdge;;
+import de.unisiegen.informatik.bs.alvis.graph.datatypes.PseudoCodeEdge;
+
+;
 
 /**
- * Class which handles the class path in order to be able to compile Java Code at runtime
+ * Class which handles the class path in order to be able to compile Java Code
+ * at runtime
  * 
  * @author Sebastian Schmitz
  */
 
 public final class DynaCode {
-	
-	
+
 	private String compileClasspath;
 
 	private ClassLoader parentClassLoader;
@@ -39,6 +41,7 @@ public final class DynaCode {
 		this(extractClasspath(parentClassLoader), parentClassLoader);
 
 	}
+
 	/**
 	 * @param compileClasspath
 	 *            used to compile dynamic classes
@@ -49,30 +52,41 @@ public final class DynaCode {
 	public DynaCode(String compileClasspath, ClassLoader parentClassLoader) {
 		this.compileClasspath = compileClasspath;
 		this.parentClassLoader = parentClassLoader;
-		CompilerAccess compiler_DUMMY = new CompilerAccess(); // dummy to get the path to this file
+		CompilerAccess compiler_DUMMY = new CompilerAccess(); // dummy to get
+																// the path to
+																// this file
 		PCBoolean primitive_datatypes_DUMMY = new PCBoolean(true);
 		PseudoCodeEdge graph_datatypes_DUMMY = new PseudoCodeEdge();
 		this.compileClasspath += ":";
-		this.compileClasspath += this						.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+"src/:";								;
-		this.compileClasspath += compiler_DUMMY				.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+"src/:";
-		this.compileClasspath += primitive_datatypes_DUMMY	.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+"src/:";
-		this.compileClasspath += graph_datatypes_DUMMY		.getClass().getProtectionDomain().getCodeSource().getLocation().getFile().toString()+"src/:";
+		this.compileClasspath += this.getClass().getProtectionDomain()
+				.getCodeSource().getLocation().getFile().toString()
+				+ "src/:";
+		;
+		this.compileClasspath += compiler_DUMMY.getClass()
+				.getProtectionDomain().getCodeSource().getLocation().getFile()
+				.toString()
+				+ "src/:";
+		this.compileClasspath += primitive_datatypes_DUMMY.getClass()
+				.getProtectionDomain().getCodeSource().getLocation().getFile()
+				.toString()
+				+ "src/:";
+		this.compileClasspath += graph_datatypes_DUMMY.getClass()
+				.getProtectionDomain().getCodeSource().getLocation().getFile()
+				.toString()
+				+ "src/:";
 	}
 
 	/**
 	 * Add a directory that contains the source of dynamic java code.
 	 * 
 	 * @param srcDir
+	 * @param pathToFile
+	 *            path to file
 	 * @return true if the add is successful
-	 * @throws IOException 
+	 * @throws IOException
 	 */
-	public boolean addSourceDir(File srcDir) {
-		try {
-			String dir = CompilerAccess.getAlgorithmPath();
-			srcDir = new File(dir);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public boolean addSourceDir(String pathToFile, File srcDir) {
+		srcDir = new File(pathToFile);
 
 		synchronized (sourceDirs) {
 
@@ -102,7 +116,8 @@ public final class DynaCode {
 	 *             if source file not found or compilation error
 	 */
 	@SuppressWarnings("unchecked")
-	public Class<AbstractAlgo> loadClass(String className) throws ClassNotFoundException {
+	public Class<AbstractAlgo> loadClass(String className)
+			throws ClassNotFoundException {
 		LoadedClass loadedClass = null;
 		synchronized (loadedClasses) {
 			loadedClass = (LoadedClass) loadedClasses.get(className);
@@ -166,7 +181,7 @@ public final class DynaCode {
 		src.recreateClassLoader();
 	}
 
-	/** 
+	/**
 	 * Class to handle the directories relevant for compiling
 	 */
 	private class SourceDir {
@@ -181,22 +196,22 @@ public final class DynaCode {
 		SourceDir(File srcDir) {
 			this.srcDir = srcDir;
 
-			String subdir = srcDir.getAbsolutePath().replace(':', '_').replace(
-					'/', '_').replace('\\', '_');
+			String subdir = srcDir.getAbsolutePath().replace(':', '_')
+					.replace('/', '_').replace('\\', '_');
 			this.binDir = new File(System.getProperty("java.io.tmpdir"), subdir);
 			this.binDir.mkdirs();
 
 			// prepare compiler
 			this.javac = new Javac(compileClasspath, binDir.getAbsolutePath());
-			
+
 			// class loader
 			recreateClassLoader();
 		}
-		
+
 		void recreateClassLoader() {
 			try {
-				classLoader = new URLClassLoader(new URL[] { binDir.toURI().toURL() },
-						parentClassLoader);
+				classLoader = new URLClassLoader(new URL[] { binDir.toURI()
+						.toURL() }, parentClassLoader);
 			} catch (MalformedURLException e) {
 				// should not happen
 			}
@@ -265,6 +280,7 @@ public final class DynaCode {
 			info("Init " + clazz);
 		}
 	}
+
 	/**
 	 * Extracts a classpath string from a given class loader. Recognizes only
 	 * URLClassLoader.

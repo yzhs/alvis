@@ -31,26 +31,56 @@ public class VMSingleThreadTest {
 
 	@Test
 	public void loadAlgoClassTrue() {
+		String path = new String();
+		File cdir = new File(".");
+		try {
+			path = cdir.getCanonicalPath();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		VirtualMachine vm = VirtualMachine.getInstance();
-		Assert.assertEquals(true, vm.addAlgoToVM("algo", "resources.FirstAlgo"));
+		Assert.assertEquals(true,
+				vm.addAlgoToVM("algo", path + "/src/resources", "FirstAlgo"));
 	}
 
 	@Test
 	public void loadAlgoClassFalse() {
+		String path = new String();
+		File cdir = new File(".");
+		try {
+			path = cdir.getCanonicalPath();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		VirtualMachine vm = VirtualMachine.getInstance();
-		Assert.assertEquals(false, vm.addAlgoToVM("algo", ""));
+		Assert.assertEquals(false,
+				vm.addAlgoToVM("algo", path + "/src/resources", ""));
 	}
 
 	@Test
 	public void loadAlgoAndStartConstructor() {
+		String path = new String();
+		File cdir = new File(".");
+		try {
+			path = cdir.getCanonicalPath();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		VirtualMachine vm = VirtualMachine.getInstance();
-		vm.addAlgoToVM("algo", "resources.FirstAlgo");
+		vm.addAlgoToVM("algo", path + "/src/resources", "FirstAlgo");
 	}
 
 	@Test
 	public void getStartTypes() {
+		String path = new String();
+		File cdir = new File(".");
+		try {
+			path = cdir.getCanonicalPath();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		VirtualMachine vm = VirtualMachine.getInstance();
-		vm.addAlgoToVM("algo", "resources.ThreadAlgo");
+		vm.addAlgoToVM("algo", path + "/src/resources/", "ThreadAlgo");
 		Assert.assertEquals("Integer",
 				((PCInteger) vm.getParametersTypesAlgo("algo").get(0))
 						.getTypeName());
@@ -58,9 +88,16 @@ public class VMSingleThreadTest {
 
 	@Test
 	public void runThreadWithBPBackwardsOnTermination() {
+		String path = new String();
+		File cdir = new File(".");
+		try {
+			path = cdir.getCanonicalPath();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		VirtualMachine vm = VirtualMachine.getInstance();
+		vm.addAlgoToVM("algo", path + "/src/resources/", "ThreadAlgo");
 		Object lock = new Object();
-		vm.addAlgoToVM("algo", "resources.ThreadAlgo");
 		vm.addBPListener(new BPListener() {
 			@Override
 			public void onBreakPoint(int BreakPointNumber) {
@@ -83,16 +120,23 @@ public class VMSingleThreadTest {
 			}
 		}
 		vm.waitForBreakPoint();
-		Assert.assertEquals(4,
-				((PCInteger) vm.getRunningReferences("algo").get(0)).getLiteralValue());
+		Assert.assertEquals(4, ((PCInteger) vm.getRunningReferences("algo")
+				.get(0)).getLiteralValue());
 
 	}
 
 	@Test
 	public void runThreadWithBPBackwards() {
+		String path = new String();
+		File cdir = new File(".");
+		try {
+			path = cdir.getCanonicalPath();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		VirtualMachine vm = VirtualMachine.getInstance();
+		vm.addAlgoToVM("algo", path + "/src/resources/", "ThreadAlgo");
 		Object lock = new Object();
-		vm.addAlgoToVM("algo", "resources.ThreadAlgo");
 		vm.addBPListener(new BPListener() {
 			@Override
 			public void onBreakPoint(int BreakPointNumber) {
@@ -116,15 +160,22 @@ public class VMSingleThreadTest {
 		}
 		vm.stepAlgoBackward("algo");
 		vm.waitForBreakPoint();
-		Assert.assertEquals(2,
-				((PCInteger) vm.getRunningReferences("algo").get(0)).getLiteralValue());
+		Assert.assertEquals(2, ((PCInteger) vm.getRunningReferences("algo")
+				.get(0)).getLiteralValue());
 	}
 
 	@Test
 	public void runThreadWithBPBackwardsError() {
+		String path = new String();
+		File cdir = new File(".");
+		try {
+			path = cdir.getCanonicalPath();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		VirtualMachine vm = VirtualMachine.getInstance();
+		vm.addAlgoToVM("algo", path + "/src/resources/", "ThreadAlgo");
 		Object lock = new Object();
-		vm.addAlgoToVM("algo", "resources.ThreadAlgo");
 		vm.addBPListener(new BPListener() {
 			@Override
 			public void onBreakPoint(int BreakPointNumber) {
@@ -149,28 +200,35 @@ public class VMSingleThreadTest {
 		vm.stepAlgoBackward("algo");
 		vm.waitForBreakPoint();
 		// now at 2:2
-		
+
 		vm.stepAlgoBackward("algo");
 		vm.waitForBreakPoint();
 		// now at 2:1
-		
+
 		vm.stepAlgoBackward("algo");
 		vm.waitForBreakPoint();
 		// now at 1
-		
+
 		vm.stepAlgoBackward("algo");
 		vm.waitForBreakPoint();
 		// still at 1
-		
-		Assert.assertEquals(0,
-				((PCInteger) vm.getRunningReferences("algo").get(0)).getLiteralValue());
+
+		Assert.assertEquals(0, ((PCInteger) vm.getRunningReferences("algo")
+				.get(0)).getLiteralValue());
 	}
-	
+
 	@Test
 	public void runThreadWithBPBackwardsTillBeginning() {
+		String path = new String();
+		File cdir = new File(".");
+		try {
+			path = cdir.getCanonicalPath();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		VirtualMachine vm = VirtualMachine.getInstance();
+		vm.addAlgoToVM("algo", path + "/src/resources/", "ThreadAlgo");
 		Object lock = new Object();
-		vm.addAlgoToVM("algo", "resources.ThreadAlgo");
 		vm.addBPListener(new BPListener() {
 			@Override
 			public void onBreakPoint(int BreakPointNumber) {
@@ -195,25 +253,31 @@ public class VMSingleThreadTest {
 		vm.stepAlgoBackward("algo");
 		vm.waitForBreakPoint();
 		// now at 2:2
-		
+
 		vm.stepAlgoBackward("algo");
 		vm.waitForBreakPoint();
 		// now at 2:1
-		
+
 		vm.stepAlgoBackward("algo");
 		vm.waitForBreakPoint();
 		// now at 1
-		
-		Assert.assertEquals(0,
-				((PCInteger) vm.getRunningReferences("algo").get(0)).getLiteralValue());
+
+		Assert.assertEquals(0, ((PCInteger) vm.getRunningReferences("algo")
+				.get(0)).getLiteralValue());
 	}
 
-	
 	@Test
 	public void runThreadWithBP() {
+		String path = new String();
+		File cdir = new File(".");
+		try {
+			path = cdir.getCanonicalPath();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		VirtualMachine vm = VirtualMachine.getInstance();
+		vm.addAlgoToVM("algo", path + "/src/resources/", "ThreadAlgo");
 		Object lock = new Object();
-		vm.addAlgoToVM("algo", "resources.ThreadAlgo");
 		vm.addBPListener(new BPListener() {
 			@Override
 			public void onBreakPoint(int BreakPointNumber) {
@@ -230,9 +294,9 @@ public class VMSingleThreadTest {
 				}
 				vm.stepAlgoForward();
 				if (!vm.runningThreads()) {
-					Assert.assertEquals(4,
-							((PCInteger) vm.getRunningReferences("algo").get(0))
-									.getLiteralValue());
+					Assert.assertEquals(4, ((PCInteger) vm
+							.getRunningReferences("algo").get(0))
+							.getLiteralValue());
 					return;
 				}
 			}
@@ -277,10 +341,16 @@ public class VMSingleThreadTest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		String path = new String();
+		File cdir = new File(".");
+		try {
+			path = cdir.getCanonicalPath();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		VirtualMachine vm = VirtualMachine.getInstance();
+		vm.addAlgoToVM("algo", path + "/src/resources/", fileName);
 		Object lock = new Object();
-		vm.addAlgoToVM("algo", "resources."+ fileName);
 		vm.addBPListener(new BPListener() {
 			@Override
 			public void onBreakPoint(int BreakPointNumber) {
@@ -309,8 +379,8 @@ public class VMSingleThreadTest {
 			output.delete();
 		}
 
-		Assert.assertEquals(4,
-				((PCInteger) vm.getRunningReferences("algo").get(0)).getLiteralValue());
+		Assert.assertEquals(4, ((PCInteger) vm.getRunningReferences("algo")
+				.get(0)).getLiteralValue());
 
 	}
 
@@ -353,10 +423,16 @@ public class VMSingleThreadTest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
+		String path = new String();
+		File cdir = new File(".");
+		try {
+			path = cdir.getCanonicalPath();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		VirtualMachine vm = VirtualMachine.getInstance();
+		vm.addAlgoToVM("algo", path + "/src/resources/", fileName);
 		Object lock = new Object();
-		vm.addAlgoToVM("algo", "resources."+ fileName);
 		vm.addBPListener(new BPListener() {
 			@Override
 			public void onBreakPoint(int BreakPointNumber) {
@@ -385,7 +461,7 @@ public class VMSingleThreadTest {
 			output.delete();
 		}
 
-		Assert.assertEquals(7,
-				((PCInteger) vm.getRunningReferences("algo").get(0)).getLiteralValue());
+		Assert.assertEquals(7, ((PCInteger) vm.getRunningReferences("algo")
+				.get(0)).getLiteralValue());
 	}
 }

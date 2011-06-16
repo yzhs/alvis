@@ -1,5 +1,3 @@
-package resources;
-
 import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
 
@@ -24,17 +22,30 @@ public class SecondAlgoMVM implements AbstractAlgo {
 	public void run() {
 		this.reachedBreakPoint(1);
 		lock.lock();
+		try {
 			counter.inc();
-		lock.unlock();
+		}
+		finally {
+			lock.unlock();
+		}
 		this.reachedBreakPoint(2);
+		
 		lock.lock();
+		try {
 			counter.inc();
-		lock.unlock();
+		}
+		finally {
+			lock.unlock();
+		}
 		this.reachedBreakPoint(3);
+		
 		lock.lock();
+		try {
 			counter.inc();
-		lock.unlock();
-		this.reachedBreakPoint(4);
+		}
+		finally {
+			lock.unlock();
+		}this.reachedBreakPoint(4);
 
 	}
 

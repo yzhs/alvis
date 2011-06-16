@@ -11,6 +11,7 @@ import de.unisiegen.informatik.bs.alvis.export.Export;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
+
 /* Ein paar Notizen
  * 
  * Der Ordner in dem der Workspace liegt auf dem System:
@@ -31,11 +32,11 @@ public class Activator extends AbstractUIPlugin {
 
 	// The shared instance
 	private static Activator plugin;
-	
+
 	private AlgorithmPartitionScanner fPartitionsScanner;
-	
+
 	private Export myExport = new Export();
-	
+
 	/**
 	 * The constructor
 	 */
@@ -44,7 +45,10 @@ public class Activator extends AbstractUIPlugin {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
+	 * 
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext
+	 * )
 	 */
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
@@ -53,7 +57,10 @@ public class Activator extends AbstractUIPlugin {
 
 	/*
 	 * (non-Javadoc)
-	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
+	 * 
+	 * @see
+	 * org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext
+	 * )
 	 */
 	public void stop(BundleContext context) throws Exception {
 		plugin = null;
@@ -62,7 +69,7 @@ public class Activator extends AbstractUIPlugin {
 
 	/**
 	 * Returns the shared instance
-	 *
+	 * 
 	 * @return the shared instance
 	 */
 	public static Activator getDefault() {
@@ -70,26 +77,24 @@ public class Activator extends AbstractUIPlugin {
 	}
 
 	/**
-	 * Returns an image descriptor for the image file at the given
-	 * plug-in relative path
-	 *
-	 * @param path the path
+	 * Returns an image descriptor for the image file at the given plug-in
+	 * relative path
+	 * 
+	 * @param path
+	 *            the path
 	 * @return the image descriptor
 	 */
 	public static ImageDescriptor getImageDescriptor(String path) {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
-	
-
 
 	/**
 	 * Attributes for a run.
 	 */
 	private Run activeRun;
-	
-	
-	
+
 	private PCObject runObject;
+
 	public void setRunObject(PCObject runObject) {
 		this.runObject = runObject;
 	}
@@ -97,28 +102,25 @@ public class Activator extends AbstractUIPlugin {
 	public PCObject getRunObject() {
 		return runObject;
 	}
-	
+
 	public void setActiveRun(Run activeRun) {
 		this.activeRun = activeRun;
 	}
-	
+
 	public Run getActiveRun() {
 		return this.activeRun;
 	}
-	
+
 	/**
 	 * @return the AlgorithmPartition Scannner used for the Editor
 	 */
 	public AlgorithmPartitionScanner getAlgorithmPartitionScanner() {
-		if (fPartitionsScanner==null)
-		{
+		if (fPartitionsScanner == null) {
 			fPartitionsScanner = new AlgorithmPartitionScanner();
 			return fPartitionsScanner;
 		}
 		return fPartitionsScanner;
 	}
-
-
 
 	private ArrayList<PCObject> pseudoCodeList = new ArrayList<PCObject>();
 
@@ -129,37 +131,38 @@ public class Activator extends AbstractUIPlugin {
 	public ArrayList<PCObject> getPseudoCodeList() {
 		return pseudoCodeList;
 	}
-	
+
 	private VirtualMachine vm = VirtualMachine.getInstance();;
+
 	public void runStart() {
 		ArrayList<PCObject> paras = new ArrayList<PCObject>();
 		vm.clear();
-		 
+
 		// Hier muss das plugin nach datentypen gefragt werden
 		// aus dem primitiv
 		// typename
-//		Graph gr = new Graph(this.runGraph.getAllNodesG(), 
-//				this.runGraph.getAllConnectionsG());
+		// Graph gr = new Graph(this.runGraph.getAllNodesG(),
+		// this.runGraph.getAllConnectionsG());
 
 		paras.add(runObject);
-		for(PCObject pseudoObj : pseudoCodeList) {
+		for (PCObject pseudoObj : pseudoCodeList) {
 			// Currently there are two objects in there
 			// startnode and end node
 			paras.add(pseudoObj);
 		}
 		vm.setParameter("algo", paras); //$NON-NLS-1$
-//		if(this.runGraph.getStartNode() != null)
-//			vm.addParameter(gr.getVertexFromGraphic(
-//					this.runGraph.getStartNode()));
-//		else {
-//			for(AlvisGraphNode node : this.runGraph.getAllNodes()) {
-//				vm.addParameter(gr.getVertexFromGraphic(node));
-//				break;
-//			}
-//		}
-//		if(this.runGraph.getEndNode() != null) {
-//			vm.addParameter(gr.getVertexFromGraphic(this.runGraph.getEndNode()));
-//		}
+		// if(this.runGraph.getStartNode() != null)
+		// vm.addParameter(gr.getVertexFromGraphic(
+		// this.runGraph.getStartNode()));
+		// else {
+		// for(AlvisGraphNode node : this.runGraph.getAllNodes()) {
+		// vm.addParameter(gr.getVertexFromGraphic(node));
+		// break;
+		// }
+		// }
+		// if(this.runGraph.getEndNode() != null) {
+		// vm.addParameter(gr.getVertexFromGraphic(this.runGraph.getEndNode()));
+		// }
 
 		vm.startAlgos();
 	}
@@ -175,17 +178,22 @@ public class Activator extends AbstractUIPlugin {
 	public void registerExport(IExportItem item) {
 		myExport.register(item);
 	}
-	
+
 	public ArrayList<IExportItem> getExportItems() {
 		return myExport.getExportItems();
 	}
 
 	/**
 	 * Set the compiled .java algorithm path
+	 * 
 	 * @param pathToAlgoInJava
 	 */
 	public boolean setJavaAlgorithmToVM(String pathToAlgoInJava) {
-		return vm.addAlgoToVM("first", pathToAlgoInJava); //$NON-NLS-1$
+		// TODO vm.addAlgo needs three arguments: key to identify algo, path to
+		// the java algo file, the java algo filename, without the typending
+		// .java
+		//	return vm.addAlgoToVM("first", pathToAlgoInJava); //$NON-NLS-1$
+		return true;
 	}
-	
+
 }

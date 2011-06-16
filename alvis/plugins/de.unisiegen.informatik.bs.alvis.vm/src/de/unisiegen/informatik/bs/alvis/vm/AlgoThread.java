@@ -53,11 +53,11 @@ public class AlgoThread {
 	 * Creates new AlgoThread, will directly load the fileName, create the Class
 	 * Inst and the Thread Object
 	 * 
-	 * @param key
+	 * @param pathName
 	 * @param fileName
 	 * @param toLockOn
 	 */
-	public AlgoThread(String fileName, Lock toLockOn)
+	public AlgoThread(String pathName, String fileName, Lock toLockOn)
 			throws ClassNotFoundException {
 		bpListeners = new ArrayList<BPListener>();
 		lineCounter = new HashMap<Integer, Integer>();
@@ -65,7 +65,7 @@ public class AlgoThread {
 		parameters = null;
 		onBreak = false;
 		lock = toLockOn;
-		loadAlgo(fileName);
+		loadAlgo(pathName,fileName);
 		createThread();
 	}
 
@@ -160,15 +160,13 @@ public class AlgoThread {
 	/**
 	 * loads the Algo key from the file named fileName
 	 * 
-	 * @param key
-	 * @param fileName
+	 * @param pathToFile
+	 * @param fileName without .java postfix
 	 */
-	private void loadAlgo(String fileName) throws ClassNotFoundException {
+	private void loadAlgo(String pathToFile, String fileName) throws ClassNotFoundException {
 		DynaCode dynacode = new DynaCode();
-		//dynacode.addSourceDir(new File("file"));
-		//dynacode.addSourceDir(new File(fileName));
-		dynacode.addSourceDir(new File("Algorithm"));
-		// set aA to the loaded class
+		
+		dynacode.addSourceDir(pathToFile, new File(fileName));
 		algoClass = dynacode.loadClass(fileName);
 	}
 

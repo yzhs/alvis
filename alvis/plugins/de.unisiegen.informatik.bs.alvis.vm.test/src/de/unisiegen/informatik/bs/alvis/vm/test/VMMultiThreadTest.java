@@ -1,5 +1,7 @@
 package de.unisiegen.informatik.bs.alvis.vm.test;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import junit.framework.Assert;
@@ -20,9 +22,16 @@ import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
 public class VMMultiThreadTest {
 	@Test
 	public void counter() {
+		String path = new String();
+		File cdir = new File(".");
+		try {
+			path = cdir.getCanonicalPath();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		VirtualMachine vm = VirtualMachine.getInstance();
-		vm.addAlgoToVM("first", "resources.FirstAlgoMVM");
-		vm.addAlgoToVM("second", "resources.SecondAlgoMVM");
+		vm.addAlgoToVM("first", path + "/src/resources", "FirstAlgoMVM");
+		vm.addAlgoToVM("second", path + "/src/resources", "SecondAlgoMVM");
 
 		PCInteger tmp = new PCInteger(0);
 		ArrayList<PCObject> tmpl = new ArrayList<PCObject>();
@@ -31,44 +40,62 @@ public class VMMultiThreadTest {
 		vm.addBPListener(new BPListener() {
 			@Override
 			public void onBreakPoint(int BreakPointNumber) {
-				if (VirtualMachine.getInstance().getThreadState("first")
-						.equals(Thread.State.TIMED_WAITING)
-						|| VirtualMachine.getInstance().getThreadState("first")
-								.equals(Thread.State.NEW)) {
-					Assert.assertEquals(
-							true,
-							VirtualMachine.getInstance()
-									.getThreadState("first")
-									.equals(Thread.State.TIMED_WAITING)
-									|| VirtualMachine.getInstance()
-											.getThreadState("first")
-											.equals(Thread.State.NEW));
-					Assert.assertEquals(
-							true,
-							VirtualMachine.getInstance()
-									.getThreadState("second")
-									.equals(Thread.State.RUNNABLE));
-
+				VirtualMachine vm = VirtualMachine.getInstance();
+				System.out.println(VirtualMachine.getInstance().getThreadState(
+						"first"));
+				System.out.println(VirtualMachine.getInstance().getThreadState(
+						"second"));
+				// first start
+				if (vm.getThreadState("first").equals(Thread.State.NEW)
+						|| vm.getThreadState("second").equals(Thread.State.NEW)) {
+					if (vm.getThreadState("first").equals(Thread.State.NEW)) {
+						Assert.assertEquals(true, vm.getThreadState("second")
+								.equals(Thread.State.RUNNABLE));
+					}
+					if (vm.getThreadState("second").equals(Thread.State.NEW)) {
+						Assert.assertEquals(true, vm.getThreadState("first")
+								.equals(Thread.State.RUNNABLE));
+					}
 				} else {
-					Assert.assertEquals(
-							true,
-							VirtualMachine.getInstance()
-									.getThreadState("first")
-									.equals(Thread.State.RUNNABLE));
-					Assert.assertEquals(
-							true,
-							VirtualMachine.getInstance()
-									.getThreadState("second")
-									.equals(Thread.State.TIMED_WAITING));
+					// after that any breakpoint, only one is allowed to be
+					// runnable
+					if (vm.getThreadState("first")
+							.equals(Thread.State.RUNNABLE)
+							|| vm.getThreadState("second").equals(
+									Thread.State.RUNNABLE)) {
+						if (vm.getThreadState("first").equals(
+								Thread.State.RUNNABLE)) {
+							Assert.assertEquals(
+									false,
+									vm.getThreadState("second").equals(
+											Thread.State.RUNNABLE));
+						}
+						if (vm.getThreadState("second").equals(
+								Thread.State.RUNNABLE)) {
+							Assert.assertEquals(
+									false,
+									vm.getThreadState("first").equals(
+											Thread.State.RUNNABLE));
+						}
+					}
 				}
 			}
 		});
 
+		
+		
 		vm.setParameter("first", tmpl);
 		vm.setParameter("second", tmpl);
 		vm.startAlgos();
+		
 		vm.waitForBreakPoint();
-
+		
+//		System.out.println(VirtualMachine.getInstance().getThreadState(
+//				"first"));
+//		System.out.println(VirtualMachine.getInstance().getThreadState(
+//				"second"));
+		
+		
 		Assert.assertEquals(true,
 				vm.getThreadState("first").equals(Thread.State.TIMED_WAITING));
 		Assert.assertEquals(true,
