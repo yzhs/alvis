@@ -13,7 +13,15 @@ import java.util.Stack;
 public class PCBoolean extends PCObject {
 	protected static final String TYPENAME = "Boolean";
 
+	protected static PCObject localNull = new PCBoolean();
+
 	private boolean value;
+
+	/**
+	 * private Constructor to create the null object
+	 */
+	private PCBoolean() {
+	}
 
 	/**
 	 * create new Boolean from literal
@@ -87,10 +95,9 @@ public class PCBoolean extends PCObject {
 	@Override
 	public String toString() {
 		String result = new String();
-		if(this.value) {
+		if (this.value) {
 			result += "true";
-		}
-		else {
+		} else {
 			result += "false";
 		}
 		return result;
@@ -103,13 +110,12 @@ public class PCBoolean extends PCObject {
 		}
 		return null;
 	}
-	
+
 	@Override
 	protected void runDelayedCommands() {
 		for (GraphicalRepresentation gr : allGr) {
-			((GRBoolean) gr)
-					.set(((Boolean) this.commandsforGr.get(0).pop())
-							.booleanValue());
+			((GRBoolean) gr).set(((Boolean) this.commandsforGr.get(0).pop())
+					.booleanValue());
 		}
 		this.commandsforGr.get(0).clear();
 	}
@@ -117,7 +123,7 @@ public class PCBoolean extends PCObject {
 	@Override
 	public boolean equals(PCObject toCheckAgainst) {
 		try {
-			return ((PCBoolean) toCheckAgainst).getLiteralValue() == this.value;
+			return (((PCBoolean) toCheckAgainst).getLiteralValue() == this.value && ((toCheckAgainst != localNull) || (toCheckAgainst == localNull && this == localNull)));
 		} catch (ClassCastException e) {
 			return false;
 		}
@@ -131,15 +137,19 @@ public class PCBoolean extends PCObject {
 	public PCBoolean and(PCBoolean other) {
 		return new PCBoolean(this.getLiteralValue() && other.getLiteralValue());
 	}
+
 	public PCBoolean or(PCBoolean other) {
 		return new PCBoolean(this.getLiteralValue() || other.getLiteralValue());
 	}
+
 	public PCBoolean not() {
 		return new PCBoolean(!this.getLiteralValue());
 	}
+
 	public PCBoolean equal(PCBoolean other) {
 		return new PCBoolean(this.getLiteralValue() == other.getLiteralValue());
 	}
+
 	public PCBoolean notEqual(PCBoolean other) {
 		return this.equal(other).not();
 	}
