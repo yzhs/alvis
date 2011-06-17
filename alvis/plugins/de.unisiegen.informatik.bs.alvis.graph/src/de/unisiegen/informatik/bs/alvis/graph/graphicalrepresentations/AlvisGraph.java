@@ -588,6 +588,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 			createTree(depth - 1, width, gn);
 		}
 
+
 	}
 
 	/**
@@ -625,6 +626,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		}
 		makeGraphConnection(one, start);
 
+		
 	}
 
 	/**

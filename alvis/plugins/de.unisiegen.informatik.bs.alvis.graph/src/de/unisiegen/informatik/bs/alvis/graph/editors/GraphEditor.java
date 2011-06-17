@@ -48,6 +48,7 @@ import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
@@ -78,17 +79,13 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 	private Button bNode, bConnection, bStartNode, bEndNode, bHand, bDelete,
 			bZoomIn, bZoomOut;
-	private Button bAutoFill, bChangeLayout, bDeleteAll, bScreenShot;
-	private Combo cAutoFill;
-	private Text tDepth, tWidth;
-	private Label lDepth, lWidth;
+	private Button bChangeLayout, bDeleteAll, bScreenShot;
 	public AlvisGraph myGraph;
 	private Composite myParent;
 	private Cursor oldCursor;
 	private static IEditorInput myInput;
 	private String myInputFilePath;
 	private boolean rename;
-	private int treeOrCircle;
 	AlvisGraphNode actNode;
 	AlvisGraphConnection actCon;
 
@@ -179,10 +176,9 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		myParent = parent;
 		myInput = input;
 		oldCursor = myParent.getCursor();
-		treeOrCircle = 0;
 
 		Activator.getDefault().registerExport(this);
-		
+
 		RowLayout rowLayout = new RowLayout();
 		rowLayout.type = SWT.VERTICAL;
 		parent.setLayout(new GridLayout(1, false));
@@ -224,7 +220,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		bHand = new Button(tools, SWT.NONE);
 		bHand.setImage(ImageCache.getImage("icons/editor/graph_move.png")); //$NON-NLS-1$
 		bHand.setToolTipText(Messages.getLabel("button_move"));
-		
+
 		bNode = new Button(tools, SWT.NONE);
 		bNode.setImage(ImageCache.getImage("icons/editor/graph_add.png")); //$NON-NLS-1$
 		bNode.setToolTipText(Messages.getLabel("button_add"));
@@ -255,27 +251,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		gdAutoFill.horizontalAlignment = SWT.FILL;
 		gdAutoFill.grabExcessHorizontalSpace = true;
 		autofill.setLayoutData(gdAutoFill);
-
-		cAutoFill = new Combo(autofill, SWT.READ_ONLY);
-		cAutoFill.add(Messages.getLabel("makeTree"));
-		cAutoFill.add(Messages.getLabel("makeCircle"));
-		cAutoFill.select(0);
-
-		lDepth = new Label(autofill, SWT.NONE);
-		lDepth.setText(Messages.getLabel("button_depth"));
-		tDepth = new Text(autofill, SWT.NONE);
-		tDepth.setText("4");
-		tDepth.pack();
-
-		lWidth = new Label(autofill, SWT.NONE);
-		lWidth.setText(Messages.getLabel("button_width"));
-
-		tWidth = new Text(autofill, SWT.NONE);
-		tWidth.setText("2");
-		tWidth.pack();
-
-		bAutoFill = new Button(autofill, SWT.NONE);
-		bAutoFill.setText(Messages.getLabel("button_ok"));
 
 		bChangeLayout = new Button(autofill, SWT.NONE);
 		bChangeLayout.setText(Messages.getLabel("button_change_layout"));
@@ -478,8 +453,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 					pressed = MODUS_END;
 				} else if (event.widget.equals(bHand)) {
 					pressed = MODUS_STANDARD;
-				} else if (event.widget.equals(bAutoFill)) {
-					autoFill();
 				} else if (event.widget.equals(bChangeLayout)) {
 					setLayoutManager();
 				} else if (event.widget.equals(bDelete)) {
@@ -499,7 +472,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		bConnection.addListener(SWT.Selection, listener);
 		bStartNode.addListener(SWT.Selection, listener);
 		bEndNode.addListener(SWT.Selection, listener);
-		bAutoFill.addListener(SWT.Selection, listener);
 		bChangeLayout.addListener(SWT.Selection, listener);
 		bDelete.addListener(SWT.Selection, listener);
 		bDeleteAll.addListener(SWT.Selection, listener);
@@ -580,40 +552,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 			}
 		});
 
-		cAutoFill.addSelectionListener(new SelectionListener() {
-
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-
-				treeOrCircle = cAutoFill.getSelectionIndex();
-				if (treeOrCircle == 0) { // tree
-					lDepth.setText(Messages.getLabel("button_depth"));
-					lDepth.pack();
-					tDepth.setText("4");
-
-					lWidth.setText(Messages.getLabel("button_width"));
-					lWidth.pack();
-					tWidth.setEnabled(true);
-					tWidth.setText("2");
-				} else if (treeOrCircle == 1) { // circle
-					lDepth.setText(Messages.getLabel("circleAmount"));
-					lDepth.pack();
-					tDepth.setText("10");
-
-					lWidth.setText("");
-					lWidth.setSize(0, 0);
-					tWidth.setText("");
-					tWidth.setSize(0, 0);
-					tWidth.setEnabled(false);
-				}
-				tWidth.getParent().pack();
-			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent e) {
-			}
-		});
-
 	}
 
 	/**
@@ -657,7 +595,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 	@Override
 	public String getSourceCode() {
-		//no source code in this plug in
+		// no source code in this plug in
 		return null;
 	}
 
@@ -851,35 +789,35 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		}
 	}
 
-	protected void autoFill() {
-		int depth, width;
-		if (treeOrCircle == 0) {
-			try {
-				depth = Integer.parseInt(tDepth.getText());
-			} catch (NumberFormatException nfe) {
-				depth = 4;
-			}
-			try {
-				width = Integer.parseInt(tWidth.getText());
-			} catch (NumberFormatException nfe) {
-				width = 2;
-			}
+	// * @param type tree or circle, tree==0,circle==1
+	// * @param width either average width of tree or number of circle nodes
+	// * @param depth depth of tree, don't care if its a circle
+	/**
+	 * creates tree or circle and adds it to the graph editor
+	 */
+	public void autoFill() {
 
-			myGraph.createTree(depth, width, null);
-		} else if (treeOrCircle == 1) {
-			try {
-				depth = Integer.parseInt(tDepth.getText());
-			} catch (NumberFormatException nfe) {
-				depth = 4;
-			}
+		AddTreeWindow adw = new AddTreeWindow(new Shell());
+		int result = adw.open();
+		if (result == -1)
+			return;
+		
+		int depth = result % 65536 /* (2^16) */;
+		int width = result / 65536;
+
+		if(width == 0){
 			myGraph.createCircle(depth);
+		} else {
+			myGraph.createTree(depth, width, null);
 		}
+		
 		setLayoutManager();
-
-		// the graph might be changed
-		checkDirty();
+		
 	}
 
+	/**
+	 * clears the graph editor by creating a new alvis save
+	 */
 	public void clearGraph() {
 		MessageBox sure = new MessageBox(myGraph.getShell(), SWT.ICON_WARNING
 				| SWT.YES | SWT.NO);
@@ -891,39 +829,19 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		}
 	}
 
+	/**
+	 * removes highlighted node
+	 */
 	protected void removeHighlightedNode() {
 		myGraph.removeHighlightedNode();
 	}
 
+	/**
+	 * removes highlighted connection
+	 */
 	protected void removeHighlightedConnection() {
 		myGraph.removeHighlightedConnection();
 	}
-
-	// private String[] understandTNodes(Text t) {
-	// String[] result = null;
-	//
-	// String content = t.getText();
-	//		result = content.split(","); //$NON-NLS-1$
-	//
-	// return result;
-	// }
-	//
-	// private String[][] understandTConnections(Text t) {
-	// String[][] result = null;
-	// if (t.getText().isEmpty())
-	// return new String[0][0];
-	//
-	// String[] fcontent = t.getText().split(",");
-	//
-	// result = new String[fcontent.length][2];
-	// for (int i = 0; i < fcontent.length; i++) {
-	// String[] tmp = fcontent[i].split("-");
-	// result[i][0] = tmp[0];
-	// result[i][1] = tmp[1];
-	// }
-	//
-	// return result;
-	// }
 
 	/**
 	 * switches between layouts
@@ -1035,7 +953,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	// }
 
 	public static Object deserialize(String filename) {
-		System.out.println(filename);
+		System.out.println(filename);//TODO weg
 		long filesize = new File(filename).length();
 		Object seri = null;
 		if (filesize > 7) {// TODO this is not so cool check it (SIMON)
@@ -1058,7 +976,5 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		}
 		return seri;
 	}
-
-	
 
 }
