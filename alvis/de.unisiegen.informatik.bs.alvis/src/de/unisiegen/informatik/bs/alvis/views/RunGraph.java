@@ -3,21 +3,21 @@
  */
 package de.unisiegen.informatik.bs.alvis.views;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
-import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IRunVisualizer;
-import de.unisiegen.informatik.bs.alvis.tools.IO;
 
 /**
  * @author simon
@@ -41,14 +41,18 @@ public class RunGraph extends ViewPart {
 	public void createPartControl(Composite parent) {
 		myParent = parent;
 		try {
-		myInputFilePath = Platform.getInstanceLocation().getURL().getPath() +
-			Activator.getDefault().getActiveRun().getExampleFile();
+		myInputFilePath = Platform.getInstanceLocation().getURL().getPath();
+		myInputFilePath += Activator.getDefault().getActiveRun().getExampleFile();
+		if (myInputFilePath.charAt(0) == '\\' || myInputFilePath.charAt(0) == '/') { 
+			myInputFilePath = myInputFilePath.substring(1); 
+			} 
 		}
 		catch(NullPointerException e) {
-			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 
 		activateExtensions();
+		
 		handExampleToExtensions();
 	}
 

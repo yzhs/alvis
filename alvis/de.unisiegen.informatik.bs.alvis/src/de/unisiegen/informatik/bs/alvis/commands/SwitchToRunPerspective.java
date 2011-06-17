@@ -20,15 +20,6 @@ public class SwitchToRunPerspective extends AbstractHandler {
 		} catch (WorkbenchException e) {
 			e.printStackTrace();
 		}
-
-//		
-//		
-//		// Redraw the run example
-//		IViewPart runGraphView = HandlerUtil.getActiveWorkbenchWindow(event)
-//		.getActivePage().findView(RunExample.ID);
-//		RunExample graphView = (RunExample) runGraphView;
-//		graphView.refresh();
-		
 		
 		return null;
 	}

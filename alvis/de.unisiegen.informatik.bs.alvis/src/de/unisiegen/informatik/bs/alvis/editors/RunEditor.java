@@ -54,6 +54,11 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.GridData;
 
+/**
+ * Editor to edit the run preferences
+ * Note: This class has been made with (google)WindowBuilder Eclipse Plugin
+ * @author simon
+ */
 public class RunEditor extends EditorPart {
 	public RunEditor() {
 	}
@@ -101,10 +106,11 @@ public class RunEditor extends EditorPart {
 	 * Currently not allowed
 	 */
 	public void doSaveAs() {
-
 	}
 
-	@Override
+	/**
+	 * Initial Method.
+	 */
 	public void init(IEditorSite site, IEditorInput input)
 			throws PartInitException {
 		setSite(site);
@@ -120,6 +126,10 @@ public class RunEditor extends EditorPart {
 		return myDirty;
 	}
 
+	/**
+	 * Loads the run at myInputFilePath
+	 * @return deserialized Run
+	 */
 	private Run loadRun() {
 		Run tempRun = null;
 		
@@ -130,6 +140,9 @@ public class RunEditor extends EditorPart {
 		return tempRun;
 	}
 	
+	/**
+	 * Has something changed?
+	 */
 	private void checkDirty() {
 		if(!loadRun().equals(myRun)) {
 			setDirty(true);
@@ -288,6 +301,7 @@ public class RunEditor extends EditorPart {
 		run.addListener(SWT.Selection, new Listener(){
 			public void handleEvent(Event event) {
 				try {
+					// Compile the PCode in the algorithm file and set the run as activeRun in the activator
 					new RunCompile().execute(null);
 				} catch (ExecutionException e) {
 					e.printStackTrace();

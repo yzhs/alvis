@@ -185,13 +185,18 @@ public class Activator extends AbstractUIPlugin {
 
 	/**
 	 * Set the compiled .java algorithm path
-	 * 
+	 * TODO @throws VMException
 	 * @param pathToAlgoInJava
 	 */
-	public boolean setJavaAlgorithmToVM(String pathToAlgoInJava) {
+	public boolean setJavaAlgorithmToVM(String pathToFile, String fileName) /* throws Exception */ {
 		// TODO vm.addAlgo needs three arguments: key to identify algo, path to
 		// the java algo file, the java algo filename, without the typending
 		// .java
+		// Add all this to VM.
+		// TODO CHECK WHAT KEY IS NEEDED.
+		//             |||||||
+		//             vvvvvvv
+//		vm.addAlgoToVM("first", pathToFile, fileName);
 		//	return vm.addAlgoToVM("first", pathToAlgoInJava); //$NON-NLS-1$
 		return true;
 	}

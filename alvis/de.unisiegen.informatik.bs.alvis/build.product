@@ -115,7 +115,7 @@ Frank Weiler
 
    <features>
       <feature id="de.unisiegen.informatik.bs.alvis.app"/>
-      <feature id="org.eclipse.rcp.nl_de" version="1.0.0.qualifier"/>
+      <feature id="org.eclipse.rcp.nl_de"/>
    </features>
 
 

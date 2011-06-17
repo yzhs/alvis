@@ -1,5 +1,6 @@
 package de.unisiegen.informatik.bs.alvis.commands;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.eclipse.core.commands.AbstractHandler;
@@ -30,6 +31,7 @@ import de.unisiegen.informatik.bs.alvis.tools.IO;
 public class RunCompile extends AbstractHandler{
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
+		// NOTE: event is null when executing from run editor.
 		
 		// Save all Editors
 		PlatformUI.getWorkbench().
@@ -37,6 +39,7 @@ public class RunCompile extends AbstractHandler{
 		getActivePage().
 		saveAllEditors(true);
 		
+		// Instantiate IEditorInput
 		IEditorInput input = null;
 		
 		for(PCObject obj : getAllDatatypes()) {
@@ -57,7 +60,7 @@ public class RunCompile extends AbstractHandler{
 			
 		}
 
-		//instanciate a new Run object
+		//Instantiate a new Run object
 		Run seri = null;
 		
 		/*
@@ -77,30 +80,43 @@ public class RunCompile extends AbstractHandler{
 			}
 			else {
 				// ask for run settings
-				seri = getUsersRun();
+				seri = getPreferencesByDialog();
 			}
 			
 		} else {
 			// ask for run settings
-			seri = getUsersRun();
+			seri = getPreferencesByDialog();
 		}
 
 		// END OF GET THE RUN OBJECT
 		
 		if(seri != null) {
 
-			// Compile 
-			// TODO 
-			// GET THE ALGORITHM AS STRING code
-			String pathToAlgoInJava = CompilerAccess.compileThisDummy("keinString", null); //$NON-NLS-1$
-			System.out.println(pathToAlgoInJava);
-			if(Activator.getDefault().setJavaAlgorithmToVM(pathToAlgoInJava)) {
-				// Then activate command SwitchToRunPerspective
-				new SwitchToRunPerspective().execute(event);
-			}
-			else {
-				System.out.println("Fehler"); //$NON-NLS-1$
-				//TODO FEHLER AUSGEBEN MIT WINDOWS
+			// GET THE ALGORITHM AS STRING
+			try {
+				// Translate the PseudoCode and get name of the translated file without extension.
+				String fileNameOfTheAlgorithm = CompilerAccess.compileThisDummy("keinString", null); //$NON-NLS-1$
+				// Get the path where the translated files are saved to.
+				String pathToTheAlgorithm = CompilerAccess.getAlgorithmPath();
+				
+//				System.out.println("Filename: " + fileNameOfTheAlgorithm);
+//				System.out.println("Path: " + pathToTheAlgorithm);
+
+				// Register Algorithm to VM
+				if(Activator.getDefault().setJavaAlgorithmToVM(
+						pathToTheAlgorithm, 
+						fileNameOfTheAlgorithm)) {
+					Activator.getDefault().setActiveRun(seri);
+					// Then activate command SwitchToRunPerspective
+					new SwitchToRunPerspective().execute(event);
+				}
+				else {
+					System.out.println("Fehler"); //$NON-NLS-1$
+					//TODO FEHLER AUSGEBEN MIT WINDOWS
+				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		} else {
 			return null;
@@ -142,7 +158,7 @@ public class RunCompile extends AbstractHandler{
 		return allDatatypes;
 	}
 	
-	private Run getUsersRun() {
+	private Run getPreferencesByDialog() {
 		
 		Run seri = new Run();
 		while(seri.getAlgorithmFile().equals("") | seri.getExampleFile().equals("")) { //$NON-NLS-1$ //$NON-NLS-2$
