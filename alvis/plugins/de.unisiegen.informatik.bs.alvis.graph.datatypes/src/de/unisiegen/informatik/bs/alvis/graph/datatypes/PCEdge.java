@@ -13,21 +13,21 @@ import java.io.Serializable;
  * 
  */
 
-public class PseudoCodeEdge extends PCObject {
+public class PCEdge extends PCObject {
 
 	protected static final String TYPENAME = "Edge";
 
 	// the used members
-	private PseudoCodeVertex v1;
-	private PseudoCodeVertex v2;
+	private PCVertex v1;
+	private PCVertex v2;
 	private PCBoolean isDirected;
 
 	/** 
 	 * 
 	 */
-	public PseudoCodeEdge() {
-		v1 = new PseudoCodeVertex();
-		v2 = new PseudoCodeVertex();
+	public PCEdge() {
+		v1 = new PCVertex();
+		v2 = new PCVertex();
 		isDirected = new PCBoolean(false);
 	}
 	
@@ -38,7 +38,7 @@ public class PseudoCodeEdge extends PCObject {
 	 * @param v2
 	 * @param edge
 	 */
-	public PseudoCodeEdge(PseudoCodeVertex v1, PseudoCodeVertex v2,
+	public PCEdge(PCVertex v1, PCVertex v2,
 			GraphicalRepresentationEdge edge) {
 		this.allGr.add(edge);
 		this.v1 = v1;
@@ -53,7 +53,7 @@ public class PseudoCodeEdge extends PCObject {
 	 * @param v1
 	 * @param v2
 	 */
-	public PseudoCodeEdge(PseudoCodeVertex v1, PseudoCodeVertex v2) {
+	public PCEdge(PCVertex v1, PCVertex v2) {
 		this.v1 = v1;
 		this.v2 = v2;
 		isDirected = new PCBoolean(false);
@@ -67,7 +67,7 @@ public class PseudoCodeEdge extends PCObject {
 	 * @param v2
 	 * @param isDirected
 	 */
-	public PseudoCodeEdge(PseudoCodeVertex v1, PseudoCodeVertex v2,
+	public PCEdge(PCVertex v1, PCVertex v2,
 			boolean isDirected) {
 		this.v1 = v1;
 		this.v2 = v2;
@@ -105,9 +105,9 @@ public class PseudoCodeEdge extends PCObject {
 
 	@Override
 	public boolean equals(PCObject toCheckAgainst) {
-		if (((PseudoCodeEdge) toCheckAgainst).v1.equals(this.v1)
-				&& ((PseudoCodeEdge) toCheckAgainst).v2.equals(this.v2)
-				&& ((PseudoCodeEdge) toCheckAgainst).isDirected
+		if (((PCEdge) toCheckAgainst).v1.equals(this.v1)
+				&& ((PCEdge) toCheckAgainst).v2.equals(this.v2)
+				&& ((PCEdge) toCheckAgainst).isDirected
 						.equals(this.isDirected)) {
 			return true;
 		}
@@ -117,6 +117,6 @@ public class PseudoCodeEdge extends PCObject {
 
 	@Override
 	public String getTypeName() {
-		return PseudoCodeEdge.TYPENAME;
+		return PCEdge.TYPENAME;
 	}
 }

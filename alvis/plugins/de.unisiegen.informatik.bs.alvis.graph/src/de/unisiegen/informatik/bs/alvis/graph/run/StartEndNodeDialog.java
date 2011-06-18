@@ -19,7 +19,7 @@ import org.eclipse.swt.widgets.Shell;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
 import de.unisiegen.informatik.bs.alvis.graph.Activator;
-import de.unisiegen.informatik.bs.alvis.graph.datatypes.PseudoCodeGraph;
+import de.unisiegen.informatik.bs.alvis.graph.datatypes.PCGraph;
 import de.unisiegen.informatik.bs.alvis.graph.editors.GraphEditor;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraph;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraphNode;
@@ -108,7 +108,7 @@ public class StartEndNodeDialog extends Dialog {
 			}
 			
 			protected void refreshGraphicalRepresentations() {
-				PseudoCodeGraph pseudoGraph = new PseudoCodeGraph();
+				PCGraph pseudoGraph = new PCGraph();
 				
 				Activator.getDefault().getTempPseudoCodeObjects().clear();
 				if(startNode != null)

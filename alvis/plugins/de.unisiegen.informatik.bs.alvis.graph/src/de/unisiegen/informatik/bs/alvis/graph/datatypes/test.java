@@ -13,9 +13,9 @@ public class test {
 	public static void main(String[] args) {
 		ArrayList<PCObject> allDatatypesInThisPlugin = new ArrayList<PCObject>();
 
-		allDatatypesInThisPlugin.add(new PseudoCodeEdge());
-		allDatatypesInThisPlugin.add(new PseudoCodeGraph());
-		allDatatypesInThisPlugin.add(new PseudoCodeVertex());
+		allDatatypesInThisPlugin.add(new PCEdge());
+		allDatatypesInThisPlugin.add(new PCGraph());
+		allDatatypesInThisPlugin.add(new PCVertex());
 		
 		for(PCObject temp : allDatatypesInThisPlugin)  {
 			System.out.println("~~~~~~~~~~~~");

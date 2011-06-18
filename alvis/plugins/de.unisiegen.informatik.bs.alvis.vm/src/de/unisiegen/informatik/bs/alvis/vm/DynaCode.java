@@ -11,7 +11,7 @@ import java.util.Iterator;
 
 import de.unisiegen.informatik.bs.alvis.compiler.CompilerAccess;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
-import de.unisiegen.informatik.bs.alvis.graph.datatypes.PseudoCodeEdge;
+import de.unisiegen.informatik.bs.alvis.graph.datatypes.PCEdge;
 
 ;
 
@@ -56,7 +56,7 @@ public final class DynaCode {
 																// the path to
 																// this file
 		PCBoolean primitive_datatypes_DUMMY = new PCBoolean(true);
-		PseudoCodeEdge graph_datatypes_DUMMY = new PseudoCodeEdge();
+		PCEdge graph_datatypes_DUMMY = new PCEdge();
 		this.compileClasspath += ":";
 		this.compileClasspath += this.getClass().getProtectionDomain()
 				.getCodeSource().getLocation().getFile().toString()

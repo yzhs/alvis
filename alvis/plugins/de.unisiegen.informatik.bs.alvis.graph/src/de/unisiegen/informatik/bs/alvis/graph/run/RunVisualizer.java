@@ -17,9 +17,9 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IRunVisualizer;
-import de.unisiegen.informatik.bs.alvis.graph.datatypes.PseudoCodeEdge;
-import de.unisiegen.informatik.bs.alvis.graph.datatypes.PseudoCodeGraph;
-import de.unisiegen.informatik.bs.alvis.graph.datatypes.PseudoCodeVertex;
+import de.unisiegen.informatik.bs.alvis.graph.datatypes.PCEdge;
+import de.unisiegen.informatik.bs.alvis.graph.datatypes.PCGraph;
+import de.unisiegen.informatik.bs.alvis.graph.datatypes.PCVertex;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraph;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraphConnection;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraphNode;
@@ -62,26 +62,27 @@ public class RunVisualizer implements IRunVisualizer {
 			 * to Objects of the PseudoCode kind.
 			 */
 			
-			PseudoCodeGraph codeGraph = new PseudoCodeGraph();
+			PCGraph codeGraph = new PCGraph();
 			
 			// Make a list that contains Nodes
-			PCList<PseudoCodeVertex> pseudoCodeVertexList =
-				new PCList<PseudoCodeVertex>();
+			PCList<PCVertex> pseudoCodeVertexList =
+				new PCList<PCVertex>();
 			
 			for(AlvisGraphNode node : myGraph.getAllNodes()) {
 				pseudoCodeVertexList.add(codeGraph.getVertexFromGraphic(node));
 			}
 			
 			// Make a list that contains Edges
-			PCList<PseudoCodeEdge> pseudoCodeEdgeList =
-				new PCList<PseudoCodeEdge>();
+			PCList<PCEdge> pseudoCodeEdgeList =
+				new PCList<PCEdge>();
 			
 			for(AlvisGraphConnection connecton : myGraph.getAllConnections()) {
 				// TODO Dingel soll diese Methode überprüfen.
+				// Groth sollte mal sagen was er damit meint... welche Methode, welches Ergebnis?
 			}
 			
 			// Give the lists to the graph.
-			codeGraph = new PseudoCodeGraph(
+			codeGraph = new PCGraph(
 					pseudoCodeVertexList,
 					pseudoCodeEdgeList
 					);

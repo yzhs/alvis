@@ -9,10 +9,10 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentat
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCList;
 
-public class PseudoCodeGraph extends PCObject {
+public class PCGraph extends PCObject {
 	protected static final String TYPENAME = "Graph";
-	private PCList<PseudoCodeEdge> edges;
-	private PCList<PseudoCodeVertex> vertices;
+	private PCList<PCEdge> edges;
+	private PCList<PCVertex> vertices;
 
 	/**
 	 * Creates new Graph from PseudoCodeLists
@@ -20,8 +20,8 @@ public class PseudoCodeGraph extends PCObject {
 	 * @param vertices
 	 * @param edges
 	 */
-	public PseudoCodeGraph(PCList<PseudoCodeVertex> vertices,
-			PCList<PseudoCodeEdge> edges) {
+	public PCGraph(PCList<PCVertex> vertices,
+			PCList<PCEdge> edges) {
 		this.edges = edges;
 		this.vertices = vertices;
 	}
@@ -32,14 +32,14 @@ public class PseudoCodeGraph extends PCObject {
 	 * @param tmpvertices
 	 * @param tmpedges
 	 */
-	public PseudoCodeGraph(ArrayList<PseudoCodeVertex> tmpvertices,
-			ArrayList<PseudoCodeEdge> tmpedges) {
-		edges = new PCList<PseudoCodeEdge>();
-		vertices = new PCList<PseudoCodeVertex>();
-		for (PseudoCodeVertex vert : tmpvertices) {
+	public PCGraph(ArrayList<PCVertex> tmpvertices,
+			ArrayList<PCEdge> tmpedges) {
+		edges = new PCList<PCEdge>();
+		vertices = new PCList<PCVertex>();
+		for (PCVertex vert : tmpvertices) {
 			vertices.add(vert);
 		}
-		for (PseudoCodeEdge ed : tmpedges) {
+		for (PCEdge ed : tmpedges) {
 			edges.add(ed);
 		}
 	}
@@ -47,13 +47,13 @@ public class PseudoCodeGraph extends PCObject {
 	/**
 	 * Creates new empty Graph
 	 */
-	public PseudoCodeGraph() {
-		edges = new PCList<PseudoCodeEdge>();
-		vertices = new PCList<PseudoCodeVertex>();
+	public PCGraph() {
+		edges = new PCList<PCEdge>();
+		vertices = new PCList<PCVertex>();
 	}
 
 	// TODO DUMMY Constructor
-	public PseudoCodeGraph(GraphicalRepresentationGraph gr) {
+	public PCGraph(GraphicalRepresentationGraph gr) {
 
 	}
 
@@ -64,16 +64,16 @@ public class PseudoCodeGraph extends PCObject {
 	 * @param allgNodes
 	 * @param allgConnections
 	 */
-	public PseudoCodeGraph(HashSet<GraphicalRepresentationVertex> allgNodes,
+	public PCGraph(HashSet<GraphicalRepresentationVertex> allgNodes,
 			HashSet<GraphicalRepresentationEdge> allgConnections) {
 
-		edges = new PCList<PseudoCodeEdge>();
-		vertices = new PCList<PseudoCodeVertex>();
+		edges = new PCList<PCEdge>();
+		vertices = new PCList<PCVertex>();
 		for (GraphicalRepresentationVertex node : allgNodes) {
-			vertices.add(new PseudoCodeVertex(node));
+			vertices.add(new PCVertex(node));
 		}
 		for (GraphicalRepresentationEdge conn : allgConnections) {
-			edges.add(new PseudoCodeEdge(this.getVertexFromGraphic((conn)
+			edges.add(new PCEdge(this.getVertexFromGraphic((conn)
 					.getSourceVertex()), this.getVertexFromGraphic((conn)
 					.getDestinationVertex()), (conn)));
 		}
@@ -85,12 +85,12 @@ public class PseudoCodeGraph extends PCObject {
 	 * @param node
 	 * @return Vertex
 	 */
-	public PseudoCodeVertex getVertexFromGraphic(
+	public PCVertex getVertexFromGraphic(
 			GraphicalRepresentationVertex node) {
 		if (node == null) {
 			return null;
 		}
-		for (PseudoCodeVertex vnode : vertices) {
+		for (PCVertex vnode : vertices) {
 			if (vnode.isGraphical(node)) {
 				return vnode;
 			}
@@ -102,7 +102,7 @@ public class PseudoCodeGraph extends PCObject {
 	 * 
 	 * @return the saved vertices as PseudoCodeList
 	 */
-	public PCList<PseudoCodeVertex> getVertices() {
+	public PCList<PCVertex> getVertices() {
 		return this.vertices;
 	}
 
@@ -110,7 +110,7 @@ public class PseudoCodeGraph extends PCObject {
 	 * 
 	 * @return the saved edges as PseudoCode
 	 */
-	public PCList<PseudoCodeEdge> getEdges() {
+	public PCList<PCEdge> getEdges() {
 		return this.edges;
 	}
 
@@ -150,7 +150,7 @@ public class PseudoCodeGraph extends PCObject {
 
 	@Override
 	public String getTypeName() {
-		return PseudoCodeGraph.TYPENAME;
+		return PCGraph.TYPENAME;
 	}
 	
 	@Override

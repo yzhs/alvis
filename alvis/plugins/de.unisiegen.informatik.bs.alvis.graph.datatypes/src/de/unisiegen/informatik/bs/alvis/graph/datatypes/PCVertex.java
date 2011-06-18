@@ -13,15 +13,15 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCString;
  * @author Dominik Dingel
  */
 
-public class PseudoCodeVertex extends PCObject {
+public class PCVertex extends PCObject {
 	protected static final String TYPENAME = "Vertex";
 
-	private PCList<PseudoCodeEdge> edges;
-	private PCList<PseudoCodeVertex> adjacants;
+	private PCList<PCEdge> edges;
+	private PCList<PCVertex> adjacants;
 
 	private PCInteger distance;
 	private PCString color;
-	private PseudoCodeVertex parentId;
+	private PCVertex parentId;
 	private PCString label;
 
 	/**
@@ -38,11 +38,11 @@ public class PseudoCodeVertex extends PCObject {
 		return false;
 	}
 
-	public PCList<PseudoCodeVertex> getAdjacents() {
+	public PCList<PCVertex> getAdjacents() {
 		return this.adjacants;
 	}
 
-	public void setParentId(PseudoCodeVertex parentId) {
+	public void setParentId(PCVertex parentId) {
 		this.parentId = parentId;
 	}
 
@@ -63,29 +63,29 @@ public class PseudoCodeVertex extends PCObject {
 		}
 	}
 	
-	public void addEdge(PseudoCodeEdge toAdd, PseudoCodeVertex adjacent) {
+	public void addEdge(PCEdge toAdd, PCVertex adjacent) {
 		this.edges.add(toAdd);
 		this.adjacants.add(adjacent);
 	}
 
-	public PseudoCodeVertex(GraphicalRepresentationVertex graphical) {
+	public PCVertex(GraphicalRepresentationVertex graphical) {
 		allGr.add(graphical);
-		this.adjacants = new PCList<PseudoCodeVertex>();
-		this.edges = new PCList<PseudoCodeEdge>();
+		this.adjacants = new PCList<PCVertex>();
+		this.edges = new PCList<PCEdge>();
 		this.distance = new PCInteger(0);
-		this.parentId = (PseudoCodeVertex) PseudoCodeVertex.localNull;
+		this.parentId = (PCVertex) PCVertex.localNull;
 		this.color = new PCString(graphical.getColorText());
 		this.label = new PCString(graphical.getLabel());
 		commandsforGr = new ArrayList<Stack<Object>>();
 		commandsforGr.add(new Stack<Object>());
 	}
 
-	public PseudoCodeVertex() {
-		this.adjacants = new PCList<PseudoCodeVertex>();
-		this.edges = new PCList<PseudoCodeEdge>();
+	public PCVertex() {
+		this.adjacants = new PCList<PCVertex>();
+		this.edges = new PCList<PCEdge>();
 		this.distance = new PCInteger(0);
 		this.color = new PCString("");
-		this.parentId = (PseudoCodeVertex) PseudoCodeVertex.localNull;
+		this.parentId = (PCVertex) PCVertex.localNull;
 		this.label = new PCString("");
 		commandsforGr = new ArrayList<Stack<Object>>();
 		commandsforGr.add(new Stack<Object>());
@@ -102,7 +102,7 @@ public class PseudoCodeVertex extends PCObject {
 			this.setColor((PCString) value);
 		}
 		if (memberName.equals("pi")) {
-			this.setParentId((PseudoCodeVertex) value);
+			this.setParentId((PCVertex) value);
 		}
 		if (memberName.equals("distance")) {
 			this.setDistance((PCInteger) value);
@@ -142,7 +142,7 @@ public class PseudoCodeVertex extends PCObject {
 		return label;
 	}
 
-	private PseudoCodeVertex getParentID() {
+	private PCVertex getParentID() {
 		return parentId;
 	}
 
@@ -156,7 +156,7 @@ public class PseudoCodeVertex extends PCObject {
 
 	@Override
 	public boolean equals(PCObject toCheckAgainst) {
-		if (((PseudoCodeVertex) toCheckAgainst).label.equals(this.label)) {
+		if (((PCVertex) toCheckAgainst).label.equals(this.label)) {
 			return true;
 		}
 		return false;
@@ -174,7 +174,7 @@ public class PseudoCodeVertex extends PCObject {
 
 	@Override
 	public String getTypeName() {
-		return PseudoCodeVertex.TYPENAME;
+		return PCVertex.TYPENAME;
 	}
 
 }
