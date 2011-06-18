@@ -21,6 +21,15 @@ import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
 
 public class VMMultiThreadTest {
 	@Test
+	public void multipleCounter() {
+		for(int i = 1; i < 500; i ++) {
+			System.out.println("---- NR " + i + " ----");
+			this.counter();
+		}
+	}
+	
+	
+	@Test
 	public void counter() {
 		String path = new String();
 		File cdir = new File(".");

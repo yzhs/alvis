@@ -186,7 +186,7 @@ public class VirtualMachine {
 			// we start this algo till we run in the first breakpoint, so that
 			// there is all the time only one algo running
 			algo.startAlgo();
-			this.waitForBreakPoint();
+			// this.waitForBreakPoint();
 		}
 	}
 
@@ -267,24 +267,34 @@ public class VirtualMachine {
 	 * 
 	 */
 	public void waitForBreakPoint() {
-		boolean everyOneDone = false;
-		while (!everyOneDone) {
-			everyOneDone = true;
-			for (AlgoThread algo : algos.values()) {
-				everyOneDone = everyOneDone
-						&& (algo.getCurrentThreadState().equals(
-								Thread.State.TIMED_WAITING) || algo
-								.getCurrentThreadState().equals(
-										Thread.State.NEW));
-
-				if (!(algo.getCurrentThreadState().equals(
-						Thread.State.TIMED_WAITING) || algo
-						.getCurrentThreadState().equals(Thread.State.NEW))) {
-					algo.waitForBreakpoint();
-				}
-
-			}
+		boolean everyoneDone = true;
+		for (AlgoThread algo : algos.values()) {
+			algo.waitForBreakpoint();
+			everyoneDone = everyoneDone
+					&& (algo.getCurrentThreadState().equals(
+							Thread.State.TIMED_WAITING)
+							|| algo.getCurrentThreadState().equals(
+									Thread.State.TERMINATED) || algo
+							.getCurrentThreadState().equals(
+									Thread.State.WAITING));
 		}
+		if (everyoneDone == false) {
+			waitForBreakPoint();
+		}
+		/*
+		 * boolean everyOneDone = false; while (!everyOneDone) { everyOneDone =
+		 * true; for (AlgoThread algo : algos.values()) { everyOneDone =
+		 * everyOneDone && (algo.getCurrentThreadState().equals(
+		 * Thread.State.TIMED_WAITING) || algo .getCurrentThreadState().equals(
+		 * Thread.State.NEW));
+		 * 
+		 * if (!(algo.getCurrentThreadState().equals(
+		 * Thread.State.TIMED_WAITING) || algo
+		 * .getCurrentThreadState().equals(Thread.State.NEW))) {
+		 * algo.waitForBreakpoint(); }
+		 * 
+		 * } }
+		 */
 	}
 
 	/**
