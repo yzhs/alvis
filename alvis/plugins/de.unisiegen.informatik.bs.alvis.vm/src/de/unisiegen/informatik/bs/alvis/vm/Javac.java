@@ -98,7 +98,7 @@ public final class Javac {
 			args.add(srcFiles[i]);
 		}
 
-		return (String[]) args.toArray(new String[args.size()]);
+		return args.toArray(new String[args.size()]);
 	}
 
 }

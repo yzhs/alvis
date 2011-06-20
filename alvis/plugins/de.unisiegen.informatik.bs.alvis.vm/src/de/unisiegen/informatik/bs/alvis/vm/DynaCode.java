@@ -92,7 +92,7 @@ public final class DynaCode {
 
 			// check existence
 			for (int i = 0; i < sourceDirs.size(); i++) {
-				SourceDir src = (SourceDir) sourceDirs.get(i);
+				SourceDir src = sourceDirs.get(i);
 				if (src.srcDir.equals(srcDir)) {
 					return false;
 				}
@@ -120,7 +120,7 @@ public final class DynaCode {
 			throws ClassNotFoundException {
 		LoadedClass loadedClass = null;
 		synchronized (loadedClasses) {
-			loadedClass = (LoadedClass) loadedClasses.get(className);
+			loadedClass = loadedClasses.get(className);
 		}
 
 		// first access of a class
@@ -157,7 +157,7 @@ public final class DynaCode {
 
 	private SourceDir locateResource(String resource) {
 		for (int i = 0; i < sourceDirs.size(); i++) {
-			SourceDir src = (SourceDir) sourceDirs.get(i);
+			SourceDir src = sourceDirs.get(i);
 			if (new File(src.srcDir, resource).exists()) {
 				return src;
 			}
@@ -170,7 +170,7 @@ public final class DynaCode {
 		synchronized (loadedClasses) {
 			for (Iterator<LoadedClass> iter = loadedClasses.values().iterator(); iter
 					.hasNext();) {
-				LoadedClass loadedClass = (LoadedClass) iter.next();
+				LoadedClass loadedClass = iter.next();
 				if (loadedClass.srcDir == src) {
 					iter.remove();
 				}

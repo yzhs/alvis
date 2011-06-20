@@ -181,6 +181,7 @@ public class AlgoThread {
 			/**
 			 * BPNr = Line number
 			 */
+			@Override
 			public void onBreakPoint(int BPNr) {
 				if (lineCounter.containsKey(new Integer(BPNr))) {
 					int tmp = lineCounter.get(new Integer(BPNr)).intValue();
@@ -276,6 +277,7 @@ public class AlgoThread {
 		lineCounter.clear();
 		onBreak = false;
 		algoInst.addBPListener(new BPListener() {
+			@Override
 			public void onBreakPoint(int BPNr) {
 				// this is a already reached Breakpoint
 				if (lineCounter.containsKey(new Integer(BPNr))) {
@@ -294,6 +296,7 @@ public class AlgoThread {
 					reduce(lastCounter);
 					onBreak = true;
 					algoInst.addBPListener(new BPListener() {
+						@Override
 						public void onBreakPoint(int BPNr) {
 							if (lineCounter.containsKey(new Integer(BPNr))) {
 								int tmp = lineCounter.get(new Integer(BPNr))
