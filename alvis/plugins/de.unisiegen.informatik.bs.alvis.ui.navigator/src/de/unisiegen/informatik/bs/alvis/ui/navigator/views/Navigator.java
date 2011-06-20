@@ -15,14 +15,17 @@ import org.eclipse.ui.navigator.CommonViewer;
 public class Navigator extends CommonNavigator {
 	public static final String ID = "de.unisiegen.informatik.bs.alvis.ui.navigator.views.navigator";
 
+	@Override
 	public CommonViewer getCommonViewer() {
 		return super.getCommonViewer();
 	}
 
+	@Override
 	public void init(IViewSite site) throws PartInitException {
 		super.init(site);
 	}
 
+	@Override
 	public void createPartControl(Composite aParent) {
 		super.createPartControl(aParent);
 		/** set initial input for the Navigator, otherwise it sometimes would be blank

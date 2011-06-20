@@ -21,6 +21,7 @@ public class NewAlgorithmWizardPage extends WizardNewFileCreationPage {
 		setFileExtension("algo");
 	}
 
+	@Override
 	protected InputStream getInitialContents() {
 		return null;
 	}

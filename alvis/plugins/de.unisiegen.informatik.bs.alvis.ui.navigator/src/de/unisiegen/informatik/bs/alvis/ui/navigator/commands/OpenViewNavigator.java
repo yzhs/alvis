@@ -19,6 +19,7 @@ public class OpenViewNavigator extends AbstractHandler {
 	public static final String ID 
 		= "de.unisiegen.informatik.bs.alvis.navigator.commands.openNavigator";
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
 			PlatformUI.getWorkbench().getActiveWorkbenchWindow()

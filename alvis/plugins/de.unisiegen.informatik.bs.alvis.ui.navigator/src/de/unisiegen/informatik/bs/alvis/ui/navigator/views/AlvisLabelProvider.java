@@ -25,25 +25,30 @@ import de.unisiegen.informatik.bs.alvis.ui.navigator.Activator;
 public class AlvisLabelProvider extends WorkbenchLabelProvider implements
 		ILabelProvider, IDescriptionProvider {
 
+	@Override
 	public void addListener(ILabelProviderListener listener) {
 		super.addListener(listener);
 
 	}
 
+	@Override
 	public void dispose() {
 		super.dispose();
 
 	}
 
+	@Override
 	public boolean isLabelProperty(Object element, String property) {
 		return super.isLabelProperty(element, property);
 	}
 
+	@Override
 	public void removeListener(ILabelProviderListener listener) {
 		super.removeListener(listener);
 
 	}
 
+	@Override
 	public String getDescription(Object anElement) {
 		if (anElement instanceof IResource) {
 			return ((IResource) anElement).getFullPath().makeRelative()
@@ -52,6 +57,7 @@ public class AlvisLabelProvider extends WorkbenchLabelProvider implements
 		return null;
 	}
 
+	@Override
 	protected ImageDescriptor decorateImage(ImageDescriptor input,
 			Object element) {
 			if (element instanceof IProject) {

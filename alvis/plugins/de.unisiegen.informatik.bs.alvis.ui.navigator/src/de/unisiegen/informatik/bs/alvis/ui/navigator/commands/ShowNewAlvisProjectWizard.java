@@ -21,6 +21,7 @@ public class ShowNewAlvisProjectWizard extends AbstractHandler {
 
 	public static final String HANDLING_COMMAND_ID = "de.unisiegen.informatik.bs.alvis.navigator.commands.showNewAlvisProjectWizard";
 	
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		NewAlvisProjectWizard wizard = new NewAlvisProjectWizard();
 		WizardDialog dialog = new WizardDialog(HandlerUtil.getActiveShell(event), wizard);

@@ -20,6 +20,7 @@ import de.unisiegen.informatik.bs.alvis.ui.navigator.wizards.*;
  */
 public class ShowNewAlgorithmWizard extends AbstractHandler {
 	public static final String HANDLING_COMMAND_ID = "de.unisiegen.informatik.bs.alvis.navigator.commands.showNewAlgorithmWizard";
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		NewAlgorithmWizard algorithmWizard = new NewAlgorithmWizard();
 		WizardDialog dialog = new WizardDialog(HandlerUtil.getActiveShell(event), algorithmWizard);

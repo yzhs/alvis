@@ -31,16 +31,19 @@ public class NewAlgorithmWizard extends Wizard implements INewWizard {
 		setWindowTitle("New Algorithm File");
 	}
 
+	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
 		this.workbench = workbench;
 	}
 	
-    public void addPages() {
+    @Override
+	public void addPages() {
     	newAlgorithmWizardPage = new NewAlgorithmWizardPage(selection);
     	addPage(newAlgorithmWizardPage);
     }
 
+	@Override
 	public boolean performFinish() {
 		IFile file = createNewAlgorithmFile();
 		if(file==null)

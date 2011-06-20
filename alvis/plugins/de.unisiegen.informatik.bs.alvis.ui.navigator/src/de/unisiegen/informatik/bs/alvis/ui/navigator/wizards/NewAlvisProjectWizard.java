@@ -26,6 +26,7 @@ public class NewAlvisProjectWizard extends BasicNewProjectResourceWizard {
 	public static final String WIZARD_ID = "de.unisiegen.informatik.bs.alvis.navigator.wizards.newAlvisProjectWizard";
 	public IFile fileToBeOpened;
 	
+	@Override
 	public boolean performFinish() {
 		boolean result = super.performFinish();
 		IProject project =  this.getNewProject();
