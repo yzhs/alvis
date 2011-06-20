@@ -3,7 +3,6 @@ package de.unisiegen.informatik.bs.alvis.editors;
 import java.beans.PropertyChangeListener;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.ISafeRunnable;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 

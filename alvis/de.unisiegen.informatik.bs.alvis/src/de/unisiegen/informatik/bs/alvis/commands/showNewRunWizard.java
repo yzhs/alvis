@@ -21,6 +21,7 @@ import de.unisiegen.informatik.bs.alvis.wizards.NewRunWizard;
 public class showNewRunWizard extends AbstractHandler {
 	public static final String HANDLING_COMMAND_ID =
 		"de.unisiegen.informatik.bs.alvis.commands.showNewRunWizard";
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		NewRunWizard runWizard = new NewRunWizard();
 		WizardDialog dialog = new WizardDialog(

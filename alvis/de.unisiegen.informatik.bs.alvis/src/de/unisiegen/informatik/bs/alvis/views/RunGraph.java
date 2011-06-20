@@ -3,11 +3,9 @@
  */
 package de.unisiegen.informatik.bs.alvis.views;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IExtensionPoint;
@@ -38,6 +36,7 @@ public class RunGraph extends ViewPart {
 	public static final String ID = 
 		"de.unisiegen.informatik.bs.alvis.views.run.graph"; // TODO change id
 	
+	@Override
 	public void createPartControl(Composite parent) {
 		myParent = parent;
 		try {
@@ -106,6 +105,7 @@ public class RunGraph extends ViewPart {
 	
 	
 	/* Methods we do not use */
+	@Override
 	public void setFocus() {
 	}
 }

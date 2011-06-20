@@ -11,6 +11,7 @@ public class RunPerspective implements IPerspectiveFactory {
 
 	public static final String ID = "de.unisiegen.informatik.bs.alvis.perspective.run";
 	
+	@Override
 	public void createInitialLayout(IPageLayout layout) {
 		// EditorArea?
 		layout.setEditorAreaVisible(false);

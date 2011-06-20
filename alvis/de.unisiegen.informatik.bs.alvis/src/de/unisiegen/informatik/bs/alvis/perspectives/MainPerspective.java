@@ -15,6 +15,7 @@ import org.osgi.framework.Bundle;
 
 public class MainPerspective implements IPerspectiveFactory {
 
+	@Override
 	public void createInitialLayout(IPageLayout layout) {
 		layout.setEditorAreaVisible(true);
 		layout.setFixed(false);

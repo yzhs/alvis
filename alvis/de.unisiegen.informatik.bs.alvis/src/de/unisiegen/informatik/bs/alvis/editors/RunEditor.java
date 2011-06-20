@@ -77,6 +77,7 @@ public class RunEditor extends EditorPart {
 	private ExpandItem xpndtmAlgorithm;
 	private Group grpAlgorithmFile;
 	
+	@Override
 	public void doSave(final IProgressMonitor monitor) {
 		myRun.setAlgorithmFile(myAlgorithmFile.getText());
 		myRun.setExampleFile(myExampleFile.getText());
@@ -98,6 +99,7 @@ public class RunEditor extends EditorPart {
 	/**
 	 * isSaveAsAllowed? Currently not!
 	 */
+	@Override
 	public boolean isSaveAsAllowed() {
 		return false;
 	}
@@ -105,12 +107,14 @@ public class RunEditor extends EditorPart {
 	 * Save the Graph as...
 	 * Currently not allowed
 	 */
+	@Override
 	public void doSaveAs() {
 	}
 
 	/**
 	 * Initial Method.
 	 */
+	@Override
 	public void init(IEditorSite site, IEditorInput input)
 			throws PartInitException {
 		setSite(site);
@@ -122,6 +126,7 @@ public class RunEditor extends EditorPart {
 		checkDirty();
 	}
 	
+	@Override
 	public boolean isDirty() {
 		return myDirty;
 	}
@@ -173,6 +178,7 @@ public class RunEditor extends EditorPart {
 
 	private boolean myLimitSteps = true;
 	
+	@Override
 	public void createPartControl(Composite parent) {
 		
 		composite_1 = new Composite(parent, SWT.NONE);
@@ -226,6 +232,7 @@ public class RunEditor extends EditorPart {
 		});
 		
 		myAlgorithmFile.addVerifyListener(new VerifyListener() {
+			@Override
 			public void verifyText(VerifyEvent e) {
 				myRun.setAlgorithmFile(myAlgorithmFile.getText());
 				checkDirty();
@@ -248,6 +255,7 @@ public class RunEditor extends EditorPart {
 		btnSelectExampleFile.setToolTipText(Messages.RunEditor_15);
 		btnSelectExampleFile.setText(Messages.RunEditor_16);
 		btnSelectExampleFile.addListener(SWT.Selection, new Listener() {
+			@Override
 			public void handleEvent(Event event) {
 				ElementTreeSelectionDialog dialog = 
 					new ElementTreeSelectionDialog(
@@ -273,6 +281,7 @@ public class RunEditor extends EditorPart {
 		
 		
 		myExampleFile.addVerifyListener(new VerifyListener() {
+			@Override
 			public void verifyText(VerifyEvent e) {
 				myRun.setExampleFile(myExampleFile.getText());
 				checkDirty();
@@ -299,6 +308,7 @@ public class RunEditor extends EditorPart {
 		run.setImage(ImageCache.getImage("icons/extension/ext_run.png")); //$NON-NLS-1$
 		run.setFont(SWTResourceManager.getFont("Calibri", 14, SWT.NORMAL)); //$NON-NLS-1$
 		run.addListener(SWT.Selection, new Listener(){
+			@Override
 			public void handleEvent(Event event) {
 				try {
 					// Compile the PCode in the algorithm file and set the run as activeRun in the activator
@@ -627,6 +637,7 @@ public class RunEditor extends EditorPart {
 		}
 	}
 
+	@Override
 	public void setFocus() {
 
 	}

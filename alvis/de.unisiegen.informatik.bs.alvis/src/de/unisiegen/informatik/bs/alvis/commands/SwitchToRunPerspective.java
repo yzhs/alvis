@@ -10,6 +10,7 @@ import de.unisiegen.informatik.bs.alvis.perspectives.RunPerspective;
 
 public class SwitchToRunPerspective extends AbstractHandler {
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		
 		// Switch to run perspective

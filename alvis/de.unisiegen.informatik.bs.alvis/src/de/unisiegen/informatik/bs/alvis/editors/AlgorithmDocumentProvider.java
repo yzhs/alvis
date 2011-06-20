@@ -18,6 +18,7 @@ import de.unisiegen.informatik.bs.alvis.Activator;
  */
 public class AlgorithmDocumentProvider extends FileDocumentProvider {
 
+	@Override
 	protected IDocument createDocument(Object element) throws CoreException {
 		IDocument document = super.createDocument(element);
 		if (document != null) {

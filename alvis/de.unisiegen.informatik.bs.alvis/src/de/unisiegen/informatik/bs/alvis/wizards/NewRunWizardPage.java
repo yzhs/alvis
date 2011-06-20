@@ -21,6 +21,7 @@ public class NewRunWizardPage extends WizardNewFileCreationPage {
 		setFileExtension("run"); //$NON-NLS-1$
 	}
 
+	@Override
 	protected InputStream getInitialContents() {
 		return null;
 	}

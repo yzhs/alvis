@@ -13,6 +13,7 @@ import de.unisiegen.informatik.bs.alvis.Activator;
 public class RunStart extends AbstractHandler {
 	public static final String HANDLING_COMMAND_ID =
 		"de.unisiegen.informatik.bs.alvis.commands.runStart";
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		Activator.getDefault().runStart();
 		return null;

@@ -49,6 +49,7 @@ public class AlgorithmEditorCompletionProcessor implements
 		/*
 		 * @see IContextInformationValidator#isContextInformationValid(int)
 		 */
+		@Override
 		public boolean isContextInformationValid(int offset) {
 			return Math.abs(fInstallOffset - offset) < 5;
 		}
@@ -56,6 +57,7 @@ public class AlgorithmEditorCompletionProcessor implements
 		/*
 		 * @see IContextInformationValidator#install(IContextInformation, ITextViewer, int)
 		 */
+		@Override
 		public void install(IContextInformation info, ITextViewer viewer, int offset) {
 			fInstallOffset= offset;
 		}
@@ -63,6 +65,7 @@ public class AlgorithmEditorCompletionProcessor implements
 		/*
 		 * @see org.eclipse.jface.text.contentassist.IContextInformationPresenter#updatePresentation(int, TextPresentation)
 		 */
+		@Override
 		public boolean updatePresentation(int documentPosition, TextPresentation presentation) {
 			return false;
 		}

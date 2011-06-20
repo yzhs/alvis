@@ -22,15 +22,18 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 
 	private static final String PERSPECTIVE_ID = "de.unisiegen.informatik.bs.alvis.perspective";
 
+	@Override
 	public WorkbenchWindowAdvisor createWorkbenchWindowAdvisor(
 			IWorkbenchWindowConfigurer configurer) {
 		return new ApplicationWorkbenchWindowAdvisor(configurer);
 	}
 
+	@Override
 	public String getInitialWindowPerspectiveId() {
 		return PERSPECTIVE_ID;
 	}
 
+	@Override
 	public void initialize(IWorkbenchConfigurer configurer) {
 		configurer.setSaveAndRestore(true);
 		IDE.registerAdapters();
@@ -201,6 +204,7 @@ public class ApplicationWorkbenchAdvisor extends WorkbenchAdvisor {
 		getWorkbenchConfigurer().declareImage(symbolicName, desc, shared);
 	}
 
+	@Override
 	public IAdaptable getDefaultPageInput() {
 		return ResourcesPlugin.getWorkspace().getRoot();
 	}

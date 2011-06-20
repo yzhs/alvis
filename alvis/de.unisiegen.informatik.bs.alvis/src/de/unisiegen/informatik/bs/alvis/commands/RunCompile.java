@@ -30,6 +30,7 @@ import de.unisiegen.informatik.bs.alvis.tools.IO;
 
 public class RunCompile extends AbstractHandler{
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		// NOTE: event is null when executing from run editor.
 		

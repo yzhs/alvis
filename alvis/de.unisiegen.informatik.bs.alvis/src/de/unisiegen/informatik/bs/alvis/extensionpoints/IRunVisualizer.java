@@ -1,7 +1,6 @@
 package de.unisiegen.informatik.bs.alvis.extensionpoints;
 
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.ui.IEditorInput;
 
 public interface IRunVisualizer {
 

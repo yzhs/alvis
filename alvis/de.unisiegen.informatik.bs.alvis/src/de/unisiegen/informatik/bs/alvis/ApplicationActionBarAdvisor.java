@@ -24,6 +24,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 	
 	// This is nessesary to activate the save button in the file menu
 	// for all editors
+	@Override
 	protected void makeActions(final IWorkbenchWindow window) {
 		register(ActionFactory.SAVE.create(window));
 		

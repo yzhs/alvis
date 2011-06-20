@@ -194,6 +194,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements IExp
 		} catch (BadLocationException e) {
 		}
 		Display.getDefault().asyncExec(new Runnable() {
+			@Override
 			public void run() {
 				editor.updateFoldingStructure(oldList);
 			}

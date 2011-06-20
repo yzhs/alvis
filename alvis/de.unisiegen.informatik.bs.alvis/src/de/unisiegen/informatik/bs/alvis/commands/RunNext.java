@@ -15,6 +15,7 @@ import de.unisiegen.informatik.bs.alvis.Activator;
  */
 public class RunNext extends AbstractHandler {
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		Activator.getDefault().runNext();
 		return null;

@@ -14,7 +14,6 @@ import org.eclipse.swt.custom.LineStyleEvent;
 import org.eclipse.swt.custom.LineStyleListener;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.custom.VerifyKeyListener;
 import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.graphics.Color;
@@ -46,6 +45,7 @@ public class RunAlgorithm extends ViewPart {
 	}
 
 
+	@Override
 	public void createPartControl(Composite parent) {
 		RowLayout rowLayout = new RowLayout();
 		rowLayout.type = SWT.VERTICAL;
@@ -69,6 +69,7 @@ public class RunAlgorithm extends ViewPart {
 		
 		// Content Assist
 		text.addVerifyListener(new VerifyListener() {
+			@Override
 			public void verifyText(VerifyEvent event) {
 				
 				// Only expand when text is inserted.
@@ -93,6 +94,7 @@ public class RunAlgorithm extends ViewPart {
 		 * This highlights all words that are in the highlightlist in the algorithm class
 		 */
 		text.addLineStyleListener(new LineStyleListener() {
+			@Override
 			public void lineGetStyle(LineStyleEvent event) {
 				ArrayList<StyleRange> styles = new ArrayList<StyleRange>();
 				for(String regex: myAlgorithm.getHighlightTokens()) {
@@ -206,6 +208,7 @@ public class RunAlgorithm extends ViewPart {
 		// End errorlinehighlight
 	}
 
+	@Override
 	public void setFocus() {
 	}
 

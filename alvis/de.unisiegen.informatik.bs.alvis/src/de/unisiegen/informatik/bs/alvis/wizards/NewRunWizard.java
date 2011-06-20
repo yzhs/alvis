@@ -27,16 +27,19 @@ public class NewRunWizard extends Wizard implements INewWizard {
 		setWindowTitle(Messages.NewRunWizard_0);
 	}
 
+	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
 		this.workbench = workbench;
 	}
 	
-    public void addPages() {
+    @Override
+	public void addPages() {
     	newRunWizardPage = new NewRunWizardPage(selection);
     	addPage(newRunWizardPage);
     }
 
+	@Override
 	public boolean performFinish() {
 		boolean result = createNewRunFile();
 		return result;
