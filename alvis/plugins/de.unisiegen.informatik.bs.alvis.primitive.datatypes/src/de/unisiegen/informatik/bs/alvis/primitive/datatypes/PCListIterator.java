@@ -27,6 +27,7 @@ public class PCListIterator<E> implements Iterator<E> {
 	/**
 	 * is there a next item in our collection
 	 */
+	@Override
 	public boolean hasNext() {
 		if(index < parent.size()-1) {
 			return true;
@@ -37,6 +38,7 @@ public class PCListIterator<E> implements Iterator<E> {
 	/**
 	 * we don't support removing a object from a list with a iterator!
 	 */
+	@Override
 	public void remove() throws UnsupportedOperationException {
 		throw new UnsupportedOperationException();
 	}
@@ -44,6 +46,7 @@ public class PCListIterator<E> implements Iterator<E> {
 	/**
 	 * retrive next object, throws out of bound exception
 	 */
+	@Override
 	public E next() {
 		index++;
 		return parent.get(index);

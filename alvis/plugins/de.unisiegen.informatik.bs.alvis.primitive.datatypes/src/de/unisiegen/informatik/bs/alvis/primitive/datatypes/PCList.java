@@ -45,11 +45,13 @@ public class PCList<E> extends PCObject implements SortableCollection, Iterable<
 		items.add(itemToAdd);
 	}
 
+	@Override
 	public Iterator<E> iterator() {
 		PCListIterator<E> it = new PCListIterator<E>(this);
 		return it;
 	}	
 	
+	@Override
 	public void shuffle() {
 	}
 

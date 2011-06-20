@@ -78,8 +78,8 @@ public class PCQueue<T extends PCObject> extends PCObject {
 		namesEnq.add("enqueue");
 		namesEnq.add("enqueue");
 		ArrayList<PCObject> dataEnq = new ArrayList<PCObject>();
-		dataEnq.add(PCVoid.localNull);
-		dataEnq.add(T.localNull);
+		dataEnq.add(PCObject.localNull);
+		dataEnq.add(PCObject.localNull);
 		
 		result.put(namesEnq, dataEnq);
 		
@@ -87,7 +87,7 @@ public class PCQueue<T extends PCObject> extends PCObject {
 		namesDeq.add("dequeue");
 		namesDeq.add("dequeue");
 		ArrayList<PCObject> dataDeq = new ArrayList<PCObject>();
-		dataDeq.add(T.localNull);
+		dataDeq.add(PCObject.localNull);
 		
 		result.put(namesDeq, dataDeq);
 		
@@ -106,7 +106,7 @@ public class PCQueue<T extends PCObject> extends PCObject {
 	public String getTypeName() {
 		String result = PCQueue.TYPENAME;
 		result.concat("<");
-		result.concat(T.localNull.getTypeName());
+		result.concat(PCObject.localNull.getTypeName());
 		result.concat(">");
 		return result;
 	}

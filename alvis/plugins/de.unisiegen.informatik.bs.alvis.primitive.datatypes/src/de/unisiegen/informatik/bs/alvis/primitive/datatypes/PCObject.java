@@ -120,6 +120,7 @@ public abstract class PCObject {
 	 * 
 	 * @return String
 	 */
+	@Override
 	public abstract String toString();
 
 	/**
