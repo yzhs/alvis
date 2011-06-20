@@ -73,7 +73,7 @@ public class PCVertex extends PCObject {
 		this.adjacants = new PCList<PCVertex>();
 		this.edges = new PCList<PCEdge>();
 		this.distance = new PCInteger(0);
-		this.parentId = (PCVertex) PCVertex.localNull;
+		this.parentId = (PCVertex) PCObject.localNull;
 		this.color = new PCString(graphical.getColorText());
 		this.label = new PCString(graphical.getLabel());
 		commandsforGr = new ArrayList<Stack<Object>>();
@@ -85,7 +85,7 @@ public class PCVertex extends PCObject {
 		this.edges = new PCList<PCEdge>();
 		this.distance = new PCInteger(0);
 		this.color = new PCString("");
-		this.parentId = (PCVertex) PCVertex.localNull;
+		this.parentId = (PCVertex) PCObject.localNull;
 		this.label = new PCString("");
 		commandsforGr = new ArrayList<Stack<Object>>();
 		commandsforGr.add(new Stack<Object>());
