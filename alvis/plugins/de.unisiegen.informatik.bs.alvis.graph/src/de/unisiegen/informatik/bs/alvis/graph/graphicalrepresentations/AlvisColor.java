@@ -21,6 +21,7 @@ public enum AlvisColor {
 		B = blue;
 	}
 
+	@Override
 	public String toString() {
 		return name();
 	}

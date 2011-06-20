@@ -19,6 +19,7 @@ public class DynamicCellLabelProvider extends CellLabelProvider {
 		this.row = row;
 	}
 	
+	@Override
 	public void update(ViewerCell cell) {
 		cell.setText(((String[])cell.getElement())[row]);
 	}

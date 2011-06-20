@@ -6,10 +6,7 @@ package de.unisiegen.informatik.bs.alvis.graph.handlers;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.zest.core.widgets.Graph;
-
 import de.unisiegen.informatik.bs.alvis.graph.Activator;
 import de.unisiegen.informatik.bs.alvis.graph.editors.GraphEditor;
 
@@ -24,6 +21,7 @@ import de.unisiegen.informatik.bs.alvis.graph.editors.GraphEditor;
  */
 public class AddTree extends AbstractHandler {
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IEditorPart editor = Activator.getDefault().getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage().getActiveEditor();

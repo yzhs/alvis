@@ -170,12 +170,12 @@ public class AlvisGraphConnection extends GraphConnection implements
 
 	@Override
 	public GraphicalRepresentationVertex getSourceVertex() {
-		return (GraphicalRepresentationVertex)getFirstNode();
+		return getFirstNode();
 	}
 
 	@Override
 	public GraphicalRepresentationVertex getDestinationVertex() {
-		return (GraphicalRepresentationVertex)getSecondNode();
+		return getSecondNode();
 	}
 
 }

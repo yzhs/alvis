@@ -19,6 +19,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 public class showNewGraphWizard extends AbstractHandler {
 	public static final String HANDLING_COMMAND_ID = "de.unisiegen.informatik.bs.alvis.graph.commands.showNewGraphWizard";
 
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		NewGraphWizard graphWizard = new NewGraphWizard();
 		WizardDialog dialog = new WizardDialog(HandlerUtil.getActiveShell(event), graphWizard);

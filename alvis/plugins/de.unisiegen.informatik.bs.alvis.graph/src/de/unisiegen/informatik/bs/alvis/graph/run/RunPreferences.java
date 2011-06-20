@@ -5,6 +5,8 @@ package de.unisiegen.informatik.bs.alvis.graph.run;
 
 import java.util.ArrayList;
 
+import org.eclipse.jface.window.Window;
+
 import de.unisiegen.informatik.bs.alvis.graph.Activator;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IRunPreferences;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
@@ -16,6 +18,7 @@ public class RunPreferences implements IRunPreferences {
 
 	String myInputFilePath;
 	
+	@Override
 	public ArrayList<PCObject> getRunPreferences(String inputFilePath) {
 		myInputFilePath = inputFilePath;
 
@@ -25,7 +28,7 @@ public class RunPreferences implements IRunPreferences {
 				Activator.getDefault().getWorkbench()
 					.getActiveWorkbenchWindow().getShell(), myInputFilePath);
 
-		if(dialog.open() == StartEndNodeDialog.OK)
+		if(dialog.open() == Window.OK)
 			return Activator.getDefault().getTempPseudoCodeObjects();
 		else 
 			return null;

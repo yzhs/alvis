@@ -229,6 +229,7 @@ public class AlvisGraphNode extends GraphNode implements
 		return (this.id == other.id);
 	}
 
+	@Override
 	public String toString() {
 		if (getText().isEmpty())
 			return Integer.toString(getId());

@@ -21,6 +21,7 @@ public class NewGraphWizardPage extends WizardNewFileCreationPage {
 		setFileExtension("graph");
 	}
 
+	@Override
 	protected InputStream getInitialContents() {
 		return null;
 	}

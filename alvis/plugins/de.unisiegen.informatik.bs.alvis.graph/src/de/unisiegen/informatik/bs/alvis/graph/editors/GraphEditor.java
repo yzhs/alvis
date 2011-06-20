@@ -26,8 +26,6 @@ import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseWheelListener;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
@@ -39,17 +37,14 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
@@ -123,6 +118,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	 * 
 	 * @return true if they are not equal else false
 	 */
+	@Override
 	public boolean isDirty() {
 		return dirty;
 	}
@@ -152,6 +148,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	/**
 	 * Save the current state of myGraph to the file in myInput
 	 */
+	@Override
 	public void doSave(IProgressMonitor monitor) {
 		if (myInputFilePath == null)
 			myInputFilePath = ((FileEditorInput) myInput).getPath().toString();
@@ -271,6 +268,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	/*
 	 * TEST
 	 */
+	@Override
 	public void createPartControl(Composite parent) {
 		myParent = parent;
 		createEditor(myParent, myInput);
@@ -350,7 +348,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		ImageIO.write(bi, "PNG",
 				new File(dir + System.getProperty("file.separator") + "temp"
 						+ System.getProperty("file.separator")
-						+ "alvis_graph_icon_" //$NON-NLS-1$ //$NON-NLS-2$
+						+ "alvis_graph_icon_" //$NON-NLS-1$ 
 						+ text + ".png")); //$NON-NLS-1$
 
 		return loadImage("/temp/alvis_graph_icon_" + text + ".png");
@@ -873,6 +871,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	/**
 	 * isSaveAsAllowed? Currently not!
 	 */
+	@Override
 	public boolean isSaveAsAllowed() {
 		return true;
 	}
@@ -880,6 +879,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	/**
 	 * Save the Graph as... Currently not allowed
 	 */
+	@Override
 	public void doSaveAs() {
 
 	}

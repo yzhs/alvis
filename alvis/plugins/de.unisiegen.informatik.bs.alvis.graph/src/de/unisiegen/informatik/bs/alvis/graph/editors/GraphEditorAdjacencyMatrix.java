@@ -6,10 +6,8 @@ import java.util.ArrayList;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.viewers.ArrayContentProvider;
-import org.eclipse.jface.viewers.CellLabelProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
-import org.eclipse.jface.viewers.ViewerCell;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
@@ -55,6 +53,7 @@ public class GraphEditorAdjacencyMatrix extends EditorPart implements
 	private IEditorInput myInput;
 	private String myInputFilePath;
 	private AlvisSerialize mySeri;
+	@Override
 	public void init(IEditorSite site, IEditorInput input)
 			throws PartInitException {
 		setSite(site);
@@ -71,16 +70,19 @@ public class GraphEditorAdjacencyMatrix extends EditorPart implements
 		}
 	}
 
+	@Override
 	public boolean isDirty() {
 		return false;
 	}
 
+	@Override
 	public boolean isSaveAsAllowed() {
 		return false;
 	}
 
 	private Composite myParent;
 	private static int y;
+	@Override
 	public void createPartControl(Composite parent) {
 		myParent = parent;
 		parent.setLayout(new FillLayout(SWT.HORIZONTAL));

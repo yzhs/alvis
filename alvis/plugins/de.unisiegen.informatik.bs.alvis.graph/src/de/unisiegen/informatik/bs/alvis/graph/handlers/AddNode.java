@@ -24,6 +24,7 @@ public class AddNode extends AbstractHandler {
 	/**
 	 * Execute the event.
 	 */
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IEditorPart editor = Activator.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
 //		Try to cast the active editor to GraphEditor.

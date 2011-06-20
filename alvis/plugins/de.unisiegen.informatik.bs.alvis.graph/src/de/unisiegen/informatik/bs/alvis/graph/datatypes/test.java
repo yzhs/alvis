@@ -27,7 +27,7 @@ public class test {
 			}
 			System.out.println("~~");
 			temp.getClass().getPackage().getName();
-			System.out.println(temp.getNull());
+			System.out.println(PCObject.getNull());
 			System.out.println(temp.toString());
 			System.out.println(temp.getTypeName());
 			System.out.println(temp.getMethods());

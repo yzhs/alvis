@@ -42,6 +42,7 @@ public class RunVisualizer implements IRunVisualizer {
 	/**
 	 * Adds the content of input to the parent
 	 */
+	@Override
 	public boolean addVisualizing(Composite parent, String inputFilePath) {
 
 		if(parent == null | inputFilePath == null) {

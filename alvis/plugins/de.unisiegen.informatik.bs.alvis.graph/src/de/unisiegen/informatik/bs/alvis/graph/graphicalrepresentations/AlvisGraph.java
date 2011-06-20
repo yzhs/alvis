@@ -263,7 +263,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 			middleFactor++;
 			middleX = middleFactor
 					* ((double) this.getSize().x / (getAmountOfGraphs() + 1));
-			middleY = (double) this.getSize().y / (2.0);
+			middleY = this.getSize().y / (2.0);
 
 			if (gns.size() != 0) {
 				angle = 1.0 / gns.size();
@@ -814,7 +814,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	public ArrayList<GraphicalRepresentationVertex> getVertex() {
 		ArrayList<GraphicalRepresentationVertex> result = new ArrayList<GraphicalRepresentationVertex>();
 		for (AlvisGraphNode node : getAllNodes()) {
-			result.add((GraphicalRepresentationVertex) node);
+			result.add(node);
 		}
 		return result;
 	}
@@ -823,7 +823,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	public ArrayList<GraphicalRepresentationEdge> getEdges() {
 		ArrayList<GraphicalRepresentationEdge> result = new ArrayList<GraphicalRepresentationEdge>();
 		for (AlvisGraphConnection conn : getAllConnections()) {
-			result.add((GraphicalRepresentationEdge) conn);
+			result.add(conn);
 		}
 		return result;
 	}

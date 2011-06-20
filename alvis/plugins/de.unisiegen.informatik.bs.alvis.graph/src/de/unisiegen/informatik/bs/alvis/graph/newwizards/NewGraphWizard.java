@@ -29,16 +29,19 @@ public class NewGraphWizard extends Wizard implements INewWizard {
 		setWindowTitle("New Graph File");
 	}
 
+	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
 		this.workbench = workbench;
 	}
 	
-    public void addPages() {
+    @Override
+	public void addPages() {
     	newGraphWizardPage = new NewGraphWizardPage(selection);
     	addPage(newGraphWizardPage);
     }
 
+	@Override
 	public boolean performFinish() {
 		IFile file = createNewGraphFile();
 		if(file==null)

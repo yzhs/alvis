@@ -17,7 +17,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
 import de.unisiegen.informatik.bs.alvis.graph.Activator;
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.PCGraph;
 import de.unisiegen.informatik.bs.alvis.graph.editors.GraphEditor;
@@ -50,6 +49,7 @@ public class StartEndNodeDialog extends Dialog {
 	private AlvisGraphNode startNode;
 	private AlvisGraphNode endNode;
 	private FieldEditorPreferencePage page;
+	@Override
 	protected Control createDialogArea(Composite parent) {
 		Composite composite = (Composite) super.createDialogArea(parent);
 		Label lbl_instruction = new Label(composite, 0);
@@ -57,6 +57,7 @@ public class StartEndNodeDialog extends Dialog {
 		Button btn_startnode = new Button(composite, 0);
 		btn_startnode.setText("StartNode");
 		btn_startnode.addListener(SWT.Selection, new Listener() {
+			@Override
 			public void handleEvent(Event event) {
 				MODUS = STARTNODE;
 			}
@@ -64,6 +65,7 @@ public class StartEndNodeDialog extends Dialog {
 		Button btn_endnode = new Button(composite, 0);
 		btn_endnode.setText("EndNode");
 		btn_endnode.addListener(SWT.Selection, new Listener() {
+			@Override
 			public void handleEvent(Event event) {
 				MODUS = ENDNODE;
 			}
@@ -117,10 +119,13 @@ public class StartEndNodeDialog extends Dialog {
 					Activator.getDefault().getTempPseudoCodeObjects().add(pseudoGraph.getVertexFromGraphic(endNode));
 			}
 			
+			@Override
 			public void mouseDoubleClick(MouseEvent e) {
 			}
+			@Override
 			public void mouseDown(MouseEvent e) {
 			}
+			@Override
 			public void mouseUp(MouseEvent e) {
 				AlvisGraphNode actNode = myGraph.getHighlightedNode();
 				if(MODUS == STARTNODE) {
@@ -134,6 +139,7 @@ public class StartEndNodeDialog extends Dialog {
 		
 		page = new FieldEditorPreferencePage("Choose start and end node",
 				FieldEditorPreferencePage.GRID) {
+			@Override
 			protected void createFieldEditors() {
 			}
 		};
