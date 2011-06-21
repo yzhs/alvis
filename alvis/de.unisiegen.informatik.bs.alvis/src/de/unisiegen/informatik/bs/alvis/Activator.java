@@ -138,7 +138,7 @@ public class Activator extends AbstractUIPlugin {
 
 	public void runStart() {
 		ArrayList<PCObject> paras = new ArrayList<PCObject>();
-		vm.clear();
+//		vm.clear();
 
 		// Hier muss das plugin nach datentypen gefragt werden
 		// aus dem primitiv

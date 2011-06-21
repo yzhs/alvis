@@ -40,11 +40,13 @@ public class RunGraph extends ViewPart {
 	public void createPartControl(Composite parent) {
 		myParent = parent;
 		try {
-		myInputFilePath = Platform.getInstanceLocation().getURL().getPath();
-		myInputFilePath += Activator.getDefault().getActiveRun().getExampleFile();
-		if (myInputFilePath.charAt(0) == '\\' || myInputFilePath.charAt(0) == '/') { 
-			myInputFilePath = myInputFilePath.substring(1); 
-			} 
+			myInputFilePath = Platform.getInstanceLocation().getURL().getPath();
+			myInputFilePath += Activator.getDefault().getActiveRun().getExampleFile();
+			if(System.getProperty("os.name").contains("win") ) {
+				if (myInputFilePath.charAt(0) == '\\' || myInputFilePath.charAt(0) == '/') { 
+					myInputFilePath = myInputFilePath.substring(1); 
+				}
+			}
 		}
 		catch(NullPointerException e) {
 			e.printStackTrace();

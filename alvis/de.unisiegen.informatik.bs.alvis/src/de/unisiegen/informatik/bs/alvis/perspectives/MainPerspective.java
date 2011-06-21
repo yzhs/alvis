@@ -15,6 +15,8 @@ import org.osgi.framework.Bundle;
 
 public class MainPerspective implements IPerspectiveFactory {
 
+	public static final String ID = "de.unisiegen.informatik.bs.alvis.perspective";
+	
 	@Override
 	public void createInitialLayout(IPageLayout layout) {
 		layout.setEditorAreaVisible(true);
