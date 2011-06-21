@@ -57,23 +57,23 @@ public final class DynaCode {
 																// this file
 		PCBoolean primitive_datatypes_DUMMY = new PCBoolean(true);
 		PCEdge graph_datatypes_DUMMY = new PCEdge();
-		this.compileClasspath += ":";
+		this.compileClasspath += System.getProperty("path.separator");
 		this.compileClasspath += this.getClass().getProtectionDomain()
 				.getCodeSource().getLocation().getFile().toString()
-				+ "src/:";
+				+ "src/"+System.getProperty("path.separator");
 		;
 		this.compileClasspath += compiler_DUMMY.getClass()
 				.getProtectionDomain().getCodeSource().getLocation().getFile()
 				.toString()
-				+ "src/:";
+				+ "src/"+System.getProperty("path.separator");
 		this.compileClasspath += primitive_datatypes_DUMMY.getClass()
 				.getProtectionDomain().getCodeSource().getLocation().getFile()
 				.toString()
-				+ "src/:";
+				+ "src/"+System.getProperty("path.separator");
 		this.compileClasspath += graph_datatypes_DUMMY.getClass()
 				.getProtectionDomain().getCodeSource().getLocation().getFile()
 				.toString()
-				+ "src/:";
+				+ "src/"+System.getProperty("path.separator");
 	}
 
 	/**
