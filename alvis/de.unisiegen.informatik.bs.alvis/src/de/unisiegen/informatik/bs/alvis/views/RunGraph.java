@@ -49,9 +49,12 @@ public class RunGraph extends ViewPart {
 		catch(NullPointerException e) {
 			e.printStackTrace();
 		}
-
+		
+		// Activate the Extension 
+			// Look for plug-ins that can draw our objects
 		activateExtensions();
 		
+		// Give the known 
 		handExampleToExtensions();
 	}
 

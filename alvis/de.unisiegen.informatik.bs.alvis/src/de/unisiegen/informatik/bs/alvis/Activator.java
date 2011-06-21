@@ -200,7 +200,7 @@ public class Activator extends AbstractUIPlugin {
 		// the java algo file, the java algo filename, without the typending
 		// .java
 		// Add all this to VM.
-		return vm.addAlgoToVM("first", pathToFile, fileName);
+		return vm.addAlgoToVM("algo", pathToFile, fileName);
 		 //			return vm.addAlgoToVM("first", pathToAlgoInJava); //$NON-NLS-1$
 	}
 
