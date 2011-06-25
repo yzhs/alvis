@@ -12,12 +12,13 @@ public class SwitchToAlvisPerspective extends AbstractHandler {
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		
-		// Switch to run perspective
+		// Switch to MainPerspective
 		try {
-		Activator.getDefault().getWorkbench()
-			.showPerspective(MainPerspective.ID, 
-					Activator.getDefault().getWorkbench().getActiveWorkbenchWindow());
+			Activator.getDefault().getWorkbench()
+				.showPerspective(MainPerspective.ID, 
+						Activator.getDefault().getWorkbench().getActiveWorkbenchWindow());
 		} catch (WorkbenchException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

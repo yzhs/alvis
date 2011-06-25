@@ -1,6 +1,10 @@
 package de.unisiegen.informatik.bs.alvis.extensionpoints;
 
+import java.util.ArrayList;
+
 import org.eclipse.swt.widgets.Composite;
+
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
 public interface IRunVisualizer {
 
@@ -9,5 +13,13 @@ public interface IRunVisualizer {
 	 * @param parent
 	 */
 	public boolean addVisualizing(Composite parent, String inputFile);
+	
+	/**
+	 * 
+	 * @param typ
+	 * @param bezeichner
+	 * @return
+	 */
+	public ArrayList<PCObject> chooseVariable(PCObject typ, String bezeichner);
 	
 }

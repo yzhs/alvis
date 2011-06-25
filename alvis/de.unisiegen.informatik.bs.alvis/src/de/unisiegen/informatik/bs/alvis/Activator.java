@@ -138,18 +138,9 @@ public class Activator extends AbstractUIPlugin {
 
 	public void runStart() {
 		ArrayList<PCObject> paras = new ArrayList<PCObject>();
-//		vm.clear();
 
-		// Hier muss das plugin nach datentypen gefragt werden
-		// aus dem primitiv
-		// typename
-		// Graph gr = new Graph(this.runGraph.getAllNodesG(),
-		// this.runGraph.getAllConnectionsG());
-
-		paras.add(runObject);
+//		pseudoCodeList wurde in der Klasse RunGraph gefüllt.
 		for (PCObject pseudoObj : pseudoCodeList) {
-			// Currently there are two objects in there
-			// startnode and end node
 			paras.add(pseudoObj);
 		}
 		vm.setParameter("algo", paras); //$NON-NLS-1$
