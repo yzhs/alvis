@@ -1,5 +1,6 @@
 package de.unisiegen.informatik.bs.alvis.graph.datatypes;
 
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
 
@@ -117,5 +118,13 @@ public class PCEdge extends PCObject {
 	@Override
 	public String getTypeName() {
 		return PCEdge.TYPENAME;
+	}
+
+	public boolean isGraphical(GraphicalRepresentationEdge edge) {
+		for (GraphicalRepresentation gr : this.allGr) {
+			if (gr == edge) {
+				return true;
+			}
+		}		return false;
 	}
 }

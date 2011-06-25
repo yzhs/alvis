@@ -82,6 +82,23 @@ public class PCGraph extends PCObject {
 	}
 
 	/**
+	 * returns Edge from its GraphicalRepresentation
+	 *
+	 * @param edge
+	 * @return Edge
+	 */
+	public PCEdge getEdgeFromGraphic(GraphicalRepresentationEdge edge) {
+			if (edge == null) {
+				return null;
+			}
+			for (PCEdge vedge : edges) {
+				if (vedge.isGraphical(edge)) {
+					return vedge;
+				}
+			}
+			return null;
+	}
+	/**
 	 * 
 	 * @return the saved vertices as PseudoCodeList
 	 */
@@ -145,4 +162,6 @@ public class PCGraph extends PCObject {
 		//((GraphicalRepresentationGraph) gr).setEdges(null);
 		
 	}
+
+
 }
