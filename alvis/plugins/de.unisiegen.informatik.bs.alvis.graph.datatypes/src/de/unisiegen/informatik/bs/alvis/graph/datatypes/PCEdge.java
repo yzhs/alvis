@@ -42,7 +42,7 @@ public class PCEdge extends PCObject {
 		this.allGr.add(edge);
 		this.v1 = v1;
 		this.v2 = v2;
-		isDirected.setLiteralValue(false);
+		isDirected = new PCBoolean(false);
 		notifyVertices();
 	}
 
