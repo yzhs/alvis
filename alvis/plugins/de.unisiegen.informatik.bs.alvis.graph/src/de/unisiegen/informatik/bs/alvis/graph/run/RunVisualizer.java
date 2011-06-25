@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Composite;
@@ -17,6 +18,8 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IRunVisualizer;
+import de.unisiegen.informatik.bs.alvis.graph.datatypes.GraphicalRepresentationEdge;
+import de.unisiegen.informatik.bs.alvis.graph.datatypes.GraphicalRepresentationVertex;
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.PCEdge;
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.PCGraph;
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.PCVertex;
@@ -25,7 +28,7 @@ import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGrap
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraphNode;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSave;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSerialize;
-
+import de.unisiegen.informatik.bs.alvis.io.dialogs.*;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCList;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
@@ -46,7 +49,6 @@ public class RunVisualizer implements IRunVisualizer {
 	public boolean addVisualizing(Composite parent, String inputFilePath) {
 
 		if (parent == null | inputFilePath == null) {
-			System.out.println("You got me!"); // TODO was?! (Ändern : SImon)
 			return false;
 		}
 
@@ -63,29 +65,29 @@ public class RunVisualizer implements IRunVisualizer {
 			 * PseudoCode kind.
 			 */
 			
-			
-			PCGraph codeGraph = new PCGraph();
-
 			// Make a list that contains Nodes
-			PCList<PCVertex> pseudoCodeVertexList = new PCList<PCVertex>();
+//			PCList<PCVertex> pseudoCodeVertexList = new PCList<PCVertex>();
 
-			for (AlvisGraphNode node : myGraph.getAllNodes()) {
-				pseudoCodeVertexList.add(codeGraph.getVertexFromGraphic(node));
-			}
+//			for (AlvisGraphNode node : myGraph.getAllNodes()) {
+//				pseudoCodeVertexList.add(codeGraph.getVertexFromGraphic(node));
+//			}
 
-			// Make a list that contains Edges
-			PCList<PCEdge> pseudoCodeEdgeList = new PCList<PCEdge>();
+//			ArrayList allVertex = myGraph.getVertex();
+//			ArrayList allConnection = myGraph.getEdges();
+//			PCGraph codeGraph = new PCGraph(allVertex, allConnection);
+//			// Make a list that contains Edges
+//			PCList<PCEdge> pseudoCodeEdgeList = new PCList<PCEdge>();
 
-			for (AlvisGraphConnection connecton : myGraph.getAllConnections()) {
-				// TODO Dingel soll diese Methode überprüfen.
-				// Groth sollte mal sagen was er damit meint... welche Methode,
-				// welches Ergebnis?
-			} 
+//			for (AlvisGraphConnection connecton : myGraph.getAllConnections()) {
+//				// TODO Dingel soll diese Methode überprüfen.
+//				// Groth sollte mal sagen was er damit meint... welche Methode,
+//				// welches Ergebnis?
+//			} 
 
 			// Give the lists to the graph.
-			codeGraph = new PCGraph(myGraph.getVertex(), myGraph.getEdges());
+//			codeGraph = new PCGraph(myGraph.getVertex(), myGraph.getEdges());
 
-			Activator.getDefault().setRunObject(codeGraph);
+//			Activator.getDefault().setRunObject(codeGraph);
 		}
 
 		return true;
@@ -116,9 +118,9 @@ public class RunVisualizer implements IRunVisualizer {
 			 * 
 			 * Die Frage ist, wo soll die Entscheidung fallen, welche benutzt
 			 * werden. Ich denke erstmal nach dem klick auf RunStart. Wie wir
-			 * (Dingel) schon besprochenhaben aus der gesamtliste der datentypen
+			 * (Dingel) schon besprochenhaben aus der Gesamtliste der Datentypen
 			 * alle Graphen aussuchen und dann alle knoten. Da nur ein Knoten
-			 * gebraucht wird aber viele vorhadnen sind eine abfrage
+			 * gebraucht wird aber viele vorhanden sind eine abfrage
 			 */
 			success = true;
 		} catch (ClassCastException e) {
@@ -149,6 +151,58 @@ public class RunVisualizer implements IRunVisualizer {
 			}
 		}
 		return seri;
+	}
+
+	@Override
+	public ArrayList<PCObject> chooseVariable(PCObject typ, String bezeichner) {
+		ArrayList<PCObject> result = new ArrayList<PCObject>();
+		ArrayList<GraphicalRepresentationVertex> allVertex = myGraph.getVertex();
+		ArrayList<GraphicalRepresentationEdge> allEdge = myGraph.getEdges();
+		PCGraph codeGraph = new PCGraph(allVertex, allEdge);
+		
+		// Temporär
+		if(typ == null && bezeichner.equals("G")) {
+			typ = new PCGraph(); 
+		}
+		if(typ == null && bezeichner.equals("V")) {
+			typ = new PCVertex();
+		}
+		//
+		
+		if(typ instanceof PCGraph) {
+			result.add(codeGraph);
+		}
+		if(typ instanceof PCVertex) {
+			ArrayList<PCVertex> allPCVertex = new ArrayList<PCVertex>();
+			for(GraphicalRepresentationVertex node : allVertex) {
+				allPCVertex.add(codeGraph.getVertexFromGraphic(node));
+			}
+			CheckDialog getVertex = new CheckDialog(
+					myParent.getShell(), 
+					allPCVertex, // From
+					result, // To
+					1, // How much
+					"Choose \"" + bezeichner + "\"", // window title
+					"Choose parameter", // Title
+					"Choose one parameter for \"" + bezeichner + "\""); // 
+			getVertex.open();
+		}
+		if(typ instanceof PCEdge) {
+			ArrayList<PCEdge> allPCEdge = new ArrayList<PCEdge>();
+			for(GraphicalRepresentationEdge edge : allEdge) {
+				allPCEdge.add(codeGraph.getEdgeFromGraphic(edge));
+			}
+			CheckDialog getEdge = new CheckDialog(
+					myParent.getShell(), 
+					allPCEdge, // From
+					result, // To
+					1, // How much
+					"Choose \"" + bezeichner + "\"", // window title
+					"Choose parameter", // Title
+					"Choose one parameter for \"" + bezeichner + "\""); // 
+			getEdge.open();
+		}
+		return result;
 	}
 
 }

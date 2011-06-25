@@ -14,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 
@@ -58,6 +59,7 @@ import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.editors.ImageCache;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.*;
+import de.unisiegen.informatik.bs.alvis.io.dialogs.CheckDialog;
 
 public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		IExportItem {
@@ -262,6 +264,8 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 		setListeners();
 
+
+		
 		return parent;
 	}
 
@@ -440,6 +444,21 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 			@Override
 			public void handleEvent(Event event) {
 
+//				/* TEST */
+//				ArrayList<AlvisGraphNode> drain = new ArrayList<AlvisGraphNode>();
+//				ArrayList<AlvisGraphNode> source = new ArrayList<AlvisGraphNode>();
+//				source.addAll(myGraph.getAllNodes());
+//				CheckDialog dialog = new CheckDialog(
+//						myParent.getShell(), 
+//						source, 
+//						drain, 
+//						4, 
+//						"Alle Knoten", "Das sind alle Knoten", "Wählen Sie bis zu vier Knoten");
+//				dialog.open();
+//				for(Object o : drain) {
+//					System.out.println(o.toString());
+//				}
+				
 				myGraph.resetMarking();
 				if (event.widget.equals(bNode)) {
 					pressed = MODUS_NODE;
@@ -953,7 +972,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	// }
 
 	public static Object deserialize(String filename) {
-		System.out.println(filename);//TODO weg
+//		System.out.println(filename);//TODO weg
 		long filesize = new File(filename).length();
 		Object seri = null;
 		if (filesize > 7) {// TODO this is not so cool check it (SIMON)
