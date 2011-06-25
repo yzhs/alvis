@@ -14,6 +14,7 @@ public class PCGraph extends PCObject {
 	private PCList<PCEdge> edges;
 	private PCList<PCVertex> vertices;
 
+	
 	/**
 	 * Creates new Graph from PseudoCodeLists
 	 * 
@@ -24,24 +25,6 @@ public class PCGraph extends PCObject {
 			PCList<PCEdge> edges) {
 		this.edges = edges;
 		this.vertices = vertices;
-	}
-
-	/**
-	 * Creates new Graph from ArrayLists with PseudoCodeVertex and Edges
-	 * 
-	 * @param tmpvertices
-	 * @param tmpedges
-	 */
-	public PCGraph(ArrayList<PCVertex> tmpvertices,
-			ArrayList<PCEdge> tmpedges) {
-		edges = new PCList<PCEdge>();
-		vertices = new PCList<PCVertex>();
-		for (PCVertex vert : tmpvertices) {
-			vertices.add(vert);
-		}
-		for (PCEdge ed : tmpedges) {
-			edges.add(ed);
-		}
 	}
 
 	/**
@@ -64,8 +47,8 @@ public class PCGraph extends PCObject {
 	 * @param allgNodes
 	 * @param allgConnections
 	 */
-	public PCGraph(HashSet<GraphicalRepresentationVertex> allgNodes,
-			HashSet<GraphicalRepresentationEdge> allgConnections) {
+	public PCGraph(ArrayList<GraphicalRepresentationVertex> allgNodes,
+			ArrayList<GraphicalRepresentationEdge> allgConnections) {
 
 		edges = new PCList<PCEdge>();
 		vertices = new PCList<PCVertex>();
@@ -154,6 +137,7 @@ public class PCGraph extends PCObject {
 	}
 	
 	@Override
+	// TODO FIX ME
 	public void updateGR(GraphicalRepresentation gr) {
 		ArrayList<GraphicalRepresentationVertex> vlist = new ArrayList<GraphicalRepresentationVertex>();
 		//for()

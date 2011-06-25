@@ -62,7 +62,8 @@ public class RunVisualizer implements IRunVisualizer {
 			 * to convert the Graph and all its containing to Objects of the
 			 * PseudoCode kind.
 			 */
-
+			
+			
 			PCGraph codeGraph = new PCGraph();
 
 			// Make a list that contains Nodes
@@ -79,10 +80,10 @@ public class RunVisualizer implements IRunVisualizer {
 				// TODO Dingel soll diese Methode überprüfen.
 				// Groth sollte mal sagen was er damit meint... welche Methode,
 				// welches Ergebnis?
-			}
+			} 
 
 			// Give the lists to the graph.
-			codeGraph = new PCGraph(pseudoCodeVertexList, pseudoCodeEdgeList);
+			codeGraph = new PCGraph(myGraph.getVertex(), myGraph.getEdges());
 
 			Activator.getDefault().setRunObject(codeGraph);
 		}
