@@ -266,9 +266,14 @@ public class PdfExport extends Document {
 	 */
 	private String indentCode(String stringToIndent) {
 		String line = ""; // storage for the lines
+		
+		// Support for different styles of indendation (four spaces, eight spaces and tabs):
+		stringToIndent = stringToIndent.replaceAll("\t", "    ");
+		stringToIndent = stringToIndent.replaceAll("    ", "\t");
+		
 		int indentationCounter = 0; // variable holding knowledge about how deep
 									// the current line has to be indented
-		int indentationDepth = 40;
+		int indentationDepth = 20;
 		boolean onlyWhiteSpacesYet = true; // tabs after the first char that's
 											// not a white space are ignored
 		String toReturn = "";
@@ -283,7 +288,11 @@ public class PdfExport extends Document {
 														// it to the line
 				onlyWhiteSpacesYet = false;
 				line += curr;
-			} else {
+			}
+			else if (line.isEmpty() && (curr == '\n' || curr == '\r')){ // Support for empty lines
+				toReturn += "<br/>";
+			}
+			else {
 				// the line is complete. Surround it with "tabs" and append it
 				// to the returned String
 				toReturn += "<p style=\"padding-left:" + indentationCounter
@@ -372,7 +381,7 @@ public class PdfExport extends Document {
 		if(edit != null)
 			style = edit.getInternalSourceViewer().getTextWidget();
 		
-		if (edit != null || part != null) {
+		if ((edit != null || part != null) && style != null) {
 			RGB rgb;
 			RGB black = new RGB(0,0,0);
 		    String text = style.getText(); 				// the complete text grabbed from the editor
