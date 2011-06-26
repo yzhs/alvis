@@ -146,6 +146,7 @@ public class Activator extends AbstractUIPlugin {
 	public void runStart() {
 		ArrayList<PCObject> paras = new ArrayList<PCObject>();
 
+
 //		pseudoCodeList wurde in der Klasse RunGraph gefüllt.
 		for (PCObject pseudoObj : pseudoCodeList) {
 			paras.add(pseudoObj);

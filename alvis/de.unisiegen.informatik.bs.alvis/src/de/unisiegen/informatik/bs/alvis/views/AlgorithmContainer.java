@@ -13,7 +13,7 @@ import org.antlr.runtime.RecognitionException;
  * This are the text itself, the token to highlight, the token for content assist,
  * the token for auto-complete
  */
-public class Algorithm extends ObservedObject {
+public class AlgorithmContainer extends ObservedObject {
 	
 	private String algorithm = "";
 	// The Tokens to highlight

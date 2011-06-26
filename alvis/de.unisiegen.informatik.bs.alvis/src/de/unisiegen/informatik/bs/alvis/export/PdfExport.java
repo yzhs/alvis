@@ -17,10 +17,10 @@ import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.texteditor.AbstractTextEditor;
 
 import com.itextpdf.text.Anchor;
 import com.itextpdf.text.Chapter;
@@ -32,6 +32,8 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.html.simpleparser.HTMLWorker;
 import com.itextpdf.text.html.simpleparser.StyleSheet;
 import com.itextpdf.text.pdf.PdfWriter;
+
+import org.eclipse.xtext.ui.editor.XtextEditor;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.editors.AlgorithmEditor;
@@ -269,11 +271,8 @@ public class PdfExport extends Document {
 		int indentationDepth = 40;
 		boolean onlyWhiteSpacesYet = true; // tabs after the first char that's
 											// not a white space are ignored
-		char curr;
 		String toReturn = "";
-
-		for (int i = 0; i < stringToIndent.length(); i++) {
-			curr = stringToIndent.charAt(i);
+		for(Character curr : stringToIndent.toCharArray()){
 			if (curr == '\t' && onlyWhiteSpacesYet == true) // if we are at the
 															// beginning of a
 															// line, we want to
@@ -335,33 +334,50 @@ public class PdfExport extends Document {
 	 */
 
 	private String getContentFromAlgoEditor() {
-		String codeWithHTMLColorTags = "";
-		AlgorithmEditor part = null;
+		String codeWithHTMLStyleTags = "";
+		AlgorithmEditor part = null; // TODO: weg damit! AlgorithmEditor is obsolete. XTextEditor is the futuer!
+		XtextEditor edit = null;
+		
 		// Get open pages
 		IWorkbenchPage pages[] = PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getPages();
 		// Cycle through these pages
-		for (int i = 0; i < pages.length; i++) {
-			IEditorReference[] ref = pages[i].getEditorReferences();
+		for (IWorkbenchPage page : pages) {
 			// Cycle through every page's editors
-			for (int k = 0; k < ref.length; k++) {
-				String title = ref[i].getTitle();
+			for(IEditorReference ref : page.getEditorReferences()){
+				String title = ref.getTitle();
+				IEditorPart refpart = ref.getEditor(true);
 				// Get algo-editor
 				if (title.contains(".algo")) {
-					part = (AlgorithmEditor) ref[i].getEditor(true).getAdapter(
-							AbstractTextEditor.class);
+					if (refpart.getAdapter(refpart.getClass()) instanceof XtextEditor)
+						edit = (XtextEditor) ref.getEditor(true).getAdapter(XtextEditor.class);
+					if(refpart.getAdapter(refpart.getClass()) instanceof AlgorithmEditor)
+						part = (AlgorithmEditor) ref.getEditor(true).getAdapter(
+								AlgorithmEditor.class);
 				}
 
 			}
 
 		}
-		if (part != null) {
+		/*
+		 *  The AlgorithmEditor is only still included for compatibility reasons
+		 *  If you don't have the language-Plugins (de.~.alvis.language.*) you're 
+		 *  still using the obsolete AlgorithmEditor. This will be changed!
+		 *  The AlgorithmEditor will not be used in the release build and all 
+		 *  references to it in this class will be erased.
+		 */
+		StyledText style = null;
+		if(part != null)
+			style = part.getTextWidget();
+		if(edit != null)
+			style = edit.getInternalSourceViewer().getTextWidget();
+		
+		if (edit != null || part != null) {
 			RGB rgb;
 			RGB black = new RGB(0,0,0);
-		    StyledText style = part.getTextWidget();
 		    String text = style.getText(); 				// the complete text grabbed from the editor
 		    StyleRange[] range = style.getStyleRanges();// ranges declaring the styles of each part of the text
-		    
+
 		    for(StyleRange ran : range){				// cycle through these ranges and style them using HTML
 		    	String word = "";
 		    	for(int i = ran.start; i < ran.start+ran.length; i++){
@@ -380,22 +396,40 @@ public class PdfExport extends Document {
 		    		rgb = col.getRGB();
 		    	if(!rgb.equals(black)) // black is assumed as standard color, other color will be included here.
 		    		word = 	"<font color=\"#"+
-								Integer.toHexString(rgb.red)+
-								Integer.toHexString(rgb.green)+
-								Integer.toHexString(rgb.blue)+
+								FormatStringCorrectly(Integer.toHexString(rgb.red))+
+								FormatStringCorrectly(Integer.toHexString(rgb.green))+
+								FormatStringCorrectly(Integer.toHexString(rgb.blue))+
 							"\">" + word + "</font>";
+		    	// add font style to the current word
+//		    	if (ran.fontStyle == 0)
+//		    		word = "<u>" + word + "</u>";
 		    	if(ran.fontStyle == 1)
 		    		word = "<b>" + word + "</b>";
-		    	codeWithHTMLColorTags += word;
+		    	if(ran.fontStyle == 2){
+		    		word = "<i>" + word + "</i>";
+		    	}
+		    	codeWithHTMLStyleTags += word;
 		    	
-		    }
-		    System.out.println("Bold: " + SWT.BOLD);
-		    System.out.println("Underline: " + SWT.UNDERLINE_SINGLE);
-		    System.out.println("Italic " + SWT.ITALIC);
-		    return codeWithHTMLColorTags;
+		    	
+		    }		    
+		    return codeWithHTMLStyleTags + "\n";
 
 		}
+		else
+			System.out.println("ERROR: No Editor could be found");
 		return null;
+	}
+	/**
+	 * Adds a '0' character in front a string.
+	 * Important for color values: "0" instead of "00" or "f" instead of "0f"
+	 *  would be misinterpreted by the HTMLParser
+	 * @param toFormat
+	 * @return formatted String
+	 */
+	private String FormatStringCorrectly(String toFormat){
+		if (toFormat.length() == 1)
+			return "0"+toFormat;
+		return toFormat;
 	}
 
 }

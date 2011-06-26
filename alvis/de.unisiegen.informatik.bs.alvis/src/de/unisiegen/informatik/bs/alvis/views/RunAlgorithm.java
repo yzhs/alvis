@@ -34,14 +34,14 @@ public class RunAlgorithm extends ViewPart {
 
 	public static final String ID = "de.unisiegen.informatik.bs.alvis.views.run.algorithm";
 	public static StyledText text;
-	public static Algorithm myAlgorithm;
+	public static AlgorithmContainer myAlgorithm;
 	
 	
 	/**
 	 * 
 	 */
 	public RunAlgorithm() {
-		myAlgorithm = new Algorithm();
+		myAlgorithm = new AlgorithmContainer();
 	}
 
 
