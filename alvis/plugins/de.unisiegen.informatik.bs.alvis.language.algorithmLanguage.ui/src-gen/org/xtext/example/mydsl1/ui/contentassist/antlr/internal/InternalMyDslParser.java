@@ -24,22 +24,22 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalMyDslParser extends AbstractInternalContentAssistParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_CONSTANT", "RULE_ENDEXPR", "RULE_ID", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'String'", "'Integer'", "'Boolean'", "'=='", "'!='", "'<'", "'>'", "'<='", "'>='", "'+'", "'-'", "'*'", "'/'", "'%'", "'('", "')'", "':'", "'main('", "','", "'begin'", "'end'", "'return'", "'if'", "'else'", "'for'", "'in'", "'while'", "'mains'", "'='", "'||'", "'&&'", "'!'", "'PRINT'", "'.'", "'['", "']'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_CONSTANT", "RULE_SIGN", "RULE_ID", "RULE_STRING", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'String'", "'Integer'", "'Boolean'", "'=='", "'!='", "'<'", "'>'", "'<='", "'>='", "'+'", "'-'", "'*'", "'/'", "'%'", "','", "';'", "'('", "')'", "':'", "'main('", "'begin'", "'end'", "'return'", "'if'", "'else'", "'for'", "'in'", "'while'", "'[]'", "'='", "'||'", "'&&'", "'!'", "'.'", "'['", "']'"
     };
     public static final int RULE_ID=6;
-    public static final int RULE_STRING=8;
+    public static final int RULE_STRING=7;
     public static final int RULE_CONSTANT=4;
     public static final int RULE_ANY_OTHER=12;
-    public static final int RULE_INT=7;
+    public static final int RULE_INT=8;
+    public static final int RULE_SIGN=5;
     public static final int RULE_WS=11;
     public static final int RULE_SL_COMMENT=10;
     public static final int EOF=-1;
     public static final int RULE_ML_COMMENT=9;
-    public static final int RULE_ENDEXPR=5;
 
         public InternalMyDslParser(TokenStream input) {
             super(input);
-            ruleMemo = new HashMap[346+1];
+            ruleMemo = new HashMap[347+1];
          }
         
 
@@ -1512,33 +1512,33 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rulepostfixExpr
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:547:1: rulepostfixExpr : ( ( rule__PostfixExpr__Alternatives ) ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:547:1: rulepostfixExpr : ( ( rule__PostfixExpr__Group__0 ) ) ;
     public final void rulepostfixExpr() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:551:2: ( ( ( rule__PostfixExpr__Alternatives ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:552:1: ( ( rule__PostfixExpr__Alternatives ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:551:2: ( ( ( rule__PostfixExpr__Group__0 ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:552:1: ( ( rule__PostfixExpr__Group__0 ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:552:1: ( ( rule__PostfixExpr__Alternatives ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:553:1: ( rule__PostfixExpr__Alternatives )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:552:1: ( ( rule__PostfixExpr__Group__0 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:553:1: ( rule__PostfixExpr__Group__0 )
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getPostfixExprAccess().getAlternatives()); 
+               before(grammarAccess.getPostfixExprAccess().getGroup()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:554:1: ( rule__PostfixExpr__Alternatives )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:554:2: rule__PostfixExpr__Alternatives
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:554:1: ( rule__PostfixExpr__Group__0 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:554:2: rule__PostfixExpr__Group__0
             {
-            pushFollow(FOLLOW_rule__PostfixExpr__Alternatives_in_rulepostfixExpr1120);
-            rule__PostfixExpr__Alternatives();
+            pushFollow(FOLLOW_rule__PostfixExpr__Group__0_in_rulepostfixExpr1120);
+            rule__PostfixExpr__Group__0();
             _fsp--;
             if (failed) return ;
 
             }
 
             if ( backtracking==0 ) {
-               after(grammarAccess.getPostfixExprAccess().getAlternatives()); 
+               after(grammarAccess.getPostfixExprAccess().getGroup()); 
             }
 
             }
@@ -1561,14 +1561,97 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
     // $ANTLR end rulepostfixExpr
 
 
+    // $ANTLR start entryRuleendExpr
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:566:1: entryRuleendExpr : ruleendExpr EOF ;
+    public final void entryRuleendExpr() throws RecognitionException {
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:567:1: ( ruleendExpr EOF )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:568:1: ruleendExpr EOF
+            {
+            if ( backtracking==0 ) {
+               before(grammarAccess.getEndExprRule()); 
+            }
+            pushFollow(FOLLOW_ruleendExpr_in_entryRuleendExpr1147);
+            ruleendExpr();
+            _fsp--;
+            if (failed) return ;
+            if ( backtracking==0 ) {
+               after(grammarAccess.getEndExprRule()); 
+            }
+            match(input,EOF,FOLLOW_EOF_in_entryRuleendExpr1154); if (failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+        }
+        return ;
+    }
+    // $ANTLR end entryRuleendExpr
+
+
+    // $ANTLR start ruleendExpr
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:575:1: ruleendExpr : ( ( rule__EndExpr__Alternatives ) ) ;
+    public final void ruleendExpr() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:579:2: ( ( ( rule__EndExpr__Alternatives ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:580:1: ( ( rule__EndExpr__Alternatives ) )
+            {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:580:1: ( ( rule__EndExpr__Alternatives ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:581:1: ( rule__EndExpr__Alternatives )
+            {
+            if ( backtracking==0 ) {
+               before(grammarAccess.getEndExprAccess().getAlternatives()); 
+            }
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:582:1: ( rule__EndExpr__Alternatives )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:582:2: rule__EndExpr__Alternatives
+            {
+            pushFollow(FOLLOW_rule__EndExpr__Alternatives_in_ruleendExpr1180);
+            rule__EndExpr__Alternatives();
+            _fsp--;
+            if (failed) return ;
+
+            }
+
+            if ( backtracking==0 ) {
+               after(grammarAccess.getEndExprAccess().getAlternatives()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end ruleendExpr
+
+
     // $ANTLR start rule__Type__Alternatives_1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:566:1: rule__Type__Alternatives_1 : ( ( ( rule__Type__TypeAssignment_1_0 ) ) | ( 'String' ) | ( 'Integer' ) | ( 'Boolean' ) );
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:594:1: rule__Type__Alternatives_1 : ( ( ( rule__Type__TypeAssignment_1_0 ) ) | ( 'String' ) | ( 'Integer' ) | ( 'Boolean' ) );
     public final void rule__Type__Alternatives_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:570:1: ( ( ( rule__Type__TypeAssignment_1_0 ) ) | ( 'String' ) | ( 'Integer' ) | ( 'Boolean' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:598:1: ( ( ( rule__Type__TypeAssignment_1_0 ) ) | ( 'String' ) | ( 'Integer' ) | ( 'Boolean' ) )
             int alt1=4;
             switch ( input.LA(1) ) {
             case RULE_ID:
@@ -1594,25 +1677,25 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             default:
                 if (backtracking>0) {failed=true; return ;}
                 NoViableAltException nvae =
-                    new NoViableAltException("566:1: rule__Type__Alternatives_1 : ( ( ( rule__Type__TypeAssignment_1_0 ) ) | ( 'String' ) | ( 'Integer' ) | ( 'Boolean' ) );", 1, 0, input);
+                    new NoViableAltException("594:1: rule__Type__Alternatives_1 : ( ( ( rule__Type__TypeAssignment_1_0 ) ) | ( 'String' ) | ( 'Integer' ) | ( 'Boolean' ) );", 1, 0, input);
 
                 throw nvae;
             }
 
             switch (alt1) {
                 case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:571:1: ( ( rule__Type__TypeAssignment_1_0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:599:1: ( ( rule__Type__TypeAssignment_1_0 ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:571:1: ( ( rule__Type__TypeAssignment_1_0 ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:572:1: ( rule__Type__TypeAssignment_1_0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:599:1: ( ( rule__Type__TypeAssignment_1_0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:600:1: ( rule__Type__TypeAssignment_1_0 )
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getTypeAccess().getTypeAssignment_1_0()); 
                     }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:573:1: ( rule__Type__TypeAssignment_1_0 )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:573:2: rule__Type__TypeAssignment_1_0
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:601:1: ( rule__Type__TypeAssignment_1_0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:601:2: rule__Type__TypeAssignment_1_0
                     {
-                    pushFollow(FOLLOW_rule__Type__TypeAssignment_1_0_in_rule__Type__Alternatives_11156);
+                    pushFollow(FOLLOW_rule__Type__TypeAssignment_1_0_in_rule__Type__Alternatives_11216);
                     rule__Type__TypeAssignment_1_0();
                     _fsp--;
                     if (failed) return ;
@@ -1629,15 +1712,15 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:577:6: ( 'String' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:605:6: ( 'String' )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:577:6: ( 'String' )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:578:1: 'String'
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:605:6: ( 'String' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:606:1: 'String'
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getTypeAccess().getStringKeyword_1_1()); 
                     }
-                    match(input,13,FOLLOW_13_in_rule__Type__Alternatives_11175); if (failed) return ;
+                    match(input,13,FOLLOW_13_in_rule__Type__Alternatives_11235); if (failed) return ;
                     if ( backtracking==0 ) {
                        after(grammarAccess.getTypeAccess().getStringKeyword_1_1()); 
                     }
@@ -1648,15 +1731,15 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:585:6: ( 'Integer' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:613:6: ( 'Integer' )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:585:6: ( 'Integer' )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:586:1: 'Integer'
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:613:6: ( 'Integer' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:614:1: 'Integer'
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getTypeAccess().getIntegerKeyword_1_2()); 
                     }
-                    match(input,14,FOLLOW_14_in_rule__Type__Alternatives_11195); if (failed) return ;
+                    match(input,14,FOLLOW_14_in_rule__Type__Alternatives_11255); if (failed) return ;
                     if ( backtracking==0 ) {
                        after(grammarAccess.getTypeAccess().getIntegerKeyword_1_2()); 
                     }
@@ -1667,15 +1750,15 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 4 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:593:6: ( 'Boolean' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:621:6: ( 'Boolean' )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:593:6: ( 'Boolean' )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:594:1: 'Boolean'
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:621:6: ( 'Boolean' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:622:1: 'Boolean'
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getTypeAccess().getBooleanKeyword_1_3()); 
                     }
-                    match(input,15,FOLLOW_15_in_rule__Type__Alternatives_11215); if (failed) return ;
+                    match(input,15,FOLLOW_15_in_rule__Type__Alternatives_11275); if (failed) return ;
                     if ( backtracking==0 ) {
                        after(grammarAccess.getTypeAccess().getBooleanKeyword_1_3()); 
                     }
@@ -1703,14 +1786,14 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Alternatives
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:606:1: rule__Statement__Alternatives : ( ( ( rule__Statement__Group_0__0 ) ) | ( ( rule__Statement__Group_1__0 ) ) | ( ( rule__Statement__Group_2__0 ) ) | ( ( rule__Statement__Group_3__0 ) ) | ( ( rule__Statement__Group_4__0 ) ) | ( ( rule__Statement__Group_5__0 ) ) | ( ( rule__Statement__Group_6__0 ) ) | ( ruleblock ) | ( ( rule__Statement__Group_8__0 ) ) | ( ( rule__Statement__Group_9__0 ) ) | ( ( rule__Statement__Group_10__0 ) ) );
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:634:1: rule__Statement__Alternatives : ( ( ( rule__Statement__Group_0__0 ) ) | ( ( rule__Statement__Group_1__0 ) ) | ( ( rule__Statement__Group_2__0 ) ) | ( ( rule__Statement__Group_3__0 ) ) | ( ( rule__Statement__Group_4__0 ) ) | ( ( rule__Statement__Group_5__0 ) ) | ( ( rule__Statement__Group_6__0 ) ) | ( ruleblock ) );
     public final void rule__Statement__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:610:1: ( ( ( rule__Statement__Group_0__0 ) ) | ( ( rule__Statement__Group_1__0 ) ) | ( ( rule__Statement__Group_2__0 ) ) | ( ( rule__Statement__Group_3__0 ) ) | ( ( rule__Statement__Group_4__0 ) ) | ( ( rule__Statement__Group_5__0 ) ) | ( ( rule__Statement__Group_6__0 ) ) | ( ruleblock ) | ( ( rule__Statement__Group_8__0 ) ) | ( ( rule__Statement__Group_9__0 ) ) | ( ( rule__Statement__Group_10__0 ) ) )
-            int alt2=11;
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:638:1: ( ( ( rule__Statement__Group_0__0 ) ) | ( ( rule__Statement__Group_1__0 ) ) | ( ( rule__Statement__Group_2__0 ) ) | ( ( rule__Statement__Group_3__0 ) ) | ( ( rule__Statement__Group_4__0 ) ) | ( ( rule__Statement__Group_5__0 ) ) | ( ( rule__Statement__Group_6__0 ) ) | ( ruleblock ) )
+            int alt2=8;
             switch ( input.LA(1) ) {
             case RULE_ID:
                 {
@@ -1725,99 +1808,76 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                 else if ( (synpred6()) ) {
                     alt2=3;
                 }
-                else if ( (synpred12()) ) {
-                    alt2=9;
-                }
-                else if ( (synpred13()) ) {
-                    alt2=10;
-                }
                 else {
                     if (backtracking>0) {failed=true; return ;}
                     NoViableAltException nvae =
-                        new NoViableAltException("606:1: rule__Statement__Alternatives : ( ( ( rule__Statement__Group_0__0 ) ) | ( ( rule__Statement__Group_1__0 ) ) | ( ( rule__Statement__Group_2__0 ) ) | ( ( rule__Statement__Group_3__0 ) ) | ( ( rule__Statement__Group_4__0 ) ) | ( ( rule__Statement__Group_5__0 ) ) | ( ( rule__Statement__Group_6__0 ) ) | ( ruleblock ) | ( ( rule__Statement__Group_8__0 ) ) | ( ( rule__Statement__Group_9__0 ) ) | ( ( rule__Statement__Group_10__0 ) ) );", 2, 1, input);
+                        new NoViableAltException("634:1: rule__Statement__Alternatives : ( ( ( rule__Statement__Group_0__0 ) ) | ( ( rule__Statement__Group_1__0 ) ) | ( ( rule__Statement__Group_2__0 ) ) | ( ( rule__Statement__Group_3__0 ) ) | ( ( rule__Statement__Group_4__0 ) ) | ( ( rule__Statement__Group_5__0 ) ) | ( ( rule__Statement__Group_6__0 ) ) | ( ruleblock ) );", 2, 1, input);
 
                     throw nvae;
                 }
                 }
                 break;
+            case 13:
+            case 14:
+            case 15:
+                {
+                alt2=1;
+                }
+                break;
             case RULE_CONSTANT:
-            case 27:
-            case 44:
+            case 29:
+            case 45:
                 {
                 alt2=2;
                 }
                 break;
-            case 45:
-                {
-                int LA2_4 = input.LA(2);
-
-                if ( (synpred5()) ) {
-                    alt2=2;
-                }
-                else if ( (synpred6()) ) {
-                    alt2=3;
-                }
-                else {
-                    if (backtracking>0) {failed=true; return ;}
-                    NoViableAltException nvae =
-                        new NoViableAltException("606:1: rule__Statement__Alternatives : ( ( ( rule__Statement__Group_0__0 ) ) | ( ( rule__Statement__Group_1__0 ) ) | ( ( rule__Statement__Group_2__0 ) ) | ( ( rule__Statement__Group_3__0 ) ) | ( ( rule__Statement__Group_4__0 ) ) | ( ( rule__Statement__Group_5__0 ) ) | ( ( rule__Statement__Group_6__0 ) ) | ( ruleblock ) | ( ( rule__Statement__Group_8__0 ) ) | ( ( rule__Statement__Group_9__0 ) ) | ( ( rule__Statement__Group_10__0 ) ) );", 2, 4, input);
-
-                    throw nvae;
-                }
-                }
-                break;
-            case 34:
+            case 35:
                 {
                 alt2=4;
                 }
                 break;
-            case 35:
+            case 36:
                 {
                 alt2=5;
                 }
                 break;
-            case 37:
+            case 38:
                 {
                 alt2=6;
                 }
                 break;
-            case 39:
+            case 40:
                 {
                 alt2=7;
                 }
                 break;
-            case 32:
+            case 33:
                 {
                 alt2=8;
-                }
-                break;
-            case 40:
-                {
-                alt2=11;
                 }
                 break;
             default:
                 if (backtracking>0) {failed=true; return ;}
                 NoViableAltException nvae =
-                    new NoViableAltException("606:1: rule__Statement__Alternatives : ( ( ( rule__Statement__Group_0__0 ) ) | ( ( rule__Statement__Group_1__0 ) ) | ( ( rule__Statement__Group_2__0 ) ) | ( ( rule__Statement__Group_3__0 ) ) | ( ( rule__Statement__Group_4__0 ) ) | ( ( rule__Statement__Group_5__0 ) ) | ( ( rule__Statement__Group_6__0 ) ) | ( ruleblock ) | ( ( rule__Statement__Group_8__0 ) ) | ( ( rule__Statement__Group_9__0 ) ) | ( ( rule__Statement__Group_10__0 ) ) );", 2, 0, input);
+                    new NoViableAltException("634:1: rule__Statement__Alternatives : ( ( ( rule__Statement__Group_0__0 ) ) | ( ( rule__Statement__Group_1__0 ) ) | ( ( rule__Statement__Group_2__0 ) ) | ( ( rule__Statement__Group_3__0 ) ) | ( ( rule__Statement__Group_4__0 ) ) | ( ( rule__Statement__Group_5__0 ) ) | ( ( rule__Statement__Group_6__0 ) ) | ( ruleblock ) );", 2, 0, input);
 
                 throw nvae;
             }
 
             switch (alt2) {
                 case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:611:1: ( ( rule__Statement__Group_0__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:639:1: ( ( rule__Statement__Group_0__0 ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:611:1: ( ( rule__Statement__Group_0__0 ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:612:1: ( rule__Statement__Group_0__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:639:1: ( ( rule__Statement__Group_0__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:640:1: ( rule__Statement__Group_0__0 )
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getStatementAccess().getGroup_0()); 
                     }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:613:1: ( rule__Statement__Group_0__0 )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:613:2: rule__Statement__Group_0__0
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:641:1: ( rule__Statement__Group_0__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:641:2: rule__Statement__Group_0__0
                     {
-                    pushFollow(FOLLOW_rule__Statement__Group_0__0_in_rule__Statement__Alternatives1249);
+                    pushFollow(FOLLOW_rule__Statement__Group_0__0_in_rule__Statement__Alternatives1309);
                     rule__Statement__Group_0__0();
                     _fsp--;
                     if (failed) return ;
@@ -1834,18 +1894,18 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:617:6: ( ( rule__Statement__Group_1__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:645:6: ( ( rule__Statement__Group_1__0 ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:617:6: ( ( rule__Statement__Group_1__0 ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:618:1: ( rule__Statement__Group_1__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:645:6: ( ( rule__Statement__Group_1__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:646:1: ( rule__Statement__Group_1__0 )
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getStatementAccess().getGroup_1()); 
                     }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:619:1: ( rule__Statement__Group_1__0 )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:619:2: rule__Statement__Group_1__0
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:647:1: ( rule__Statement__Group_1__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:647:2: rule__Statement__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__Statement__Group_1__0_in_rule__Statement__Alternatives1267);
+                    pushFollow(FOLLOW_rule__Statement__Group_1__0_in_rule__Statement__Alternatives1327);
                     rule__Statement__Group_1__0();
                     _fsp--;
                     if (failed) return ;
@@ -1862,18 +1922,18 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:623:6: ( ( rule__Statement__Group_2__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:651:6: ( ( rule__Statement__Group_2__0 ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:623:6: ( ( rule__Statement__Group_2__0 ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:624:1: ( rule__Statement__Group_2__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:651:6: ( ( rule__Statement__Group_2__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:652:1: ( rule__Statement__Group_2__0 )
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getStatementAccess().getGroup_2()); 
                     }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:625:1: ( rule__Statement__Group_2__0 )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:625:2: rule__Statement__Group_2__0
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:653:1: ( rule__Statement__Group_2__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:653:2: rule__Statement__Group_2__0
                     {
-                    pushFollow(FOLLOW_rule__Statement__Group_2__0_in_rule__Statement__Alternatives1285);
+                    pushFollow(FOLLOW_rule__Statement__Group_2__0_in_rule__Statement__Alternatives1345);
                     rule__Statement__Group_2__0();
                     _fsp--;
                     if (failed) return ;
@@ -1890,18 +1950,18 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 4 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:629:6: ( ( rule__Statement__Group_3__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:657:6: ( ( rule__Statement__Group_3__0 ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:629:6: ( ( rule__Statement__Group_3__0 ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:630:1: ( rule__Statement__Group_3__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:657:6: ( ( rule__Statement__Group_3__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:658:1: ( rule__Statement__Group_3__0 )
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getStatementAccess().getGroup_3()); 
                     }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:631:1: ( rule__Statement__Group_3__0 )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:631:2: rule__Statement__Group_3__0
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:659:1: ( rule__Statement__Group_3__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:659:2: rule__Statement__Group_3__0
                     {
-                    pushFollow(FOLLOW_rule__Statement__Group_3__0_in_rule__Statement__Alternatives1303);
+                    pushFollow(FOLLOW_rule__Statement__Group_3__0_in_rule__Statement__Alternatives1363);
                     rule__Statement__Group_3__0();
                     _fsp--;
                     if (failed) return ;
@@ -1918,18 +1978,18 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 5 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:635:6: ( ( rule__Statement__Group_4__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:663:6: ( ( rule__Statement__Group_4__0 ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:635:6: ( ( rule__Statement__Group_4__0 ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:636:1: ( rule__Statement__Group_4__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:663:6: ( ( rule__Statement__Group_4__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:664:1: ( rule__Statement__Group_4__0 )
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getStatementAccess().getGroup_4()); 
                     }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:637:1: ( rule__Statement__Group_4__0 )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:637:2: rule__Statement__Group_4__0
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:665:1: ( rule__Statement__Group_4__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:665:2: rule__Statement__Group_4__0
                     {
-                    pushFollow(FOLLOW_rule__Statement__Group_4__0_in_rule__Statement__Alternatives1321);
+                    pushFollow(FOLLOW_rule__Statement__Group_4__0_in_rule__Statement__Alternatives1381);
                     rule__Statement__Group_4__0();
                     _fsp--;
                     if (failed) return ;
@@ -1946,18 +2006,18 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 6 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:641:6: ( ( rule__Statement__Group_5__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:669:6: ( ( rule__Statement__Group_5__0 ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:641:6: ( ( rule__Statement__Group_5__0 ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:642:1: ( rule__Statement__Group_5__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:669:6: ( ( rule__Statement__Group_5__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:670:1: ( rule__Statement__Group_5__0 )
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getStatementAccess().getGroup_5()); 
                     }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:643:1: ( rule__Statement__Group_5__0 )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:643:2: rule__Statement__Group_5__0
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:671:1: ( rule__Statement__Group_5__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:671:2: rule__Statement__Group_5__0
                     {
-                    pushFollow(FOLLOW_rule__Statement__Group_5__0_in_rule__Statement__Alternatives1339);
+                    pushFollow(FOLLOW_rule__Statement__Group_5__0_in_rule__Statement__Alternatives1399);
                     rule__Statement__Group_5__0();
                     _fsp--;
                     if (failed) return ;
@@ -1974,18 +2034,18 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 7 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:647:6: ( ( rule__Statement__Group_6__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:675:6: ( ( rule__Statement__Group_6__0 ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:647:6: ( ( rule__Statement__Group_6__0 ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:648:1: ( rule__Statement__Group_6__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:675:6: ( ( rule__Statement__Group_6__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:676:1: ( rule__Statement__Group_6__0 )
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getStatementAccess().getGroup_6()); 
                     }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:649:1: ( rule__Statement__Group_6__0 )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:649:2: rule__Statement__Group_6__0
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:677:1: ( rule__Statement__Group_6__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:677:2: rule__Statement__Group_6__0
                     {
-                    pushFollow(FOLLOW_rule__Statement__Group_6__0_in_rule__Statement__Alternatives1357);
+                    pushFollow(FOLLOW_rule__Statement__Group_6__0_in_rule__Statement__Alternatives1417);
                     rule__Statement__Group_6__0();
                     _fsp--;
                     if (failed) return ;
@@ -2002,104 +2062,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 8 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:653:6: ( ruleblock )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:681:6: ( ruleblock )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:653:6: ( ruleblock )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:654:1: ruleblock
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:681:6: ( ruleblock )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:682:1: ruleblock
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getStatementAccess().getBlockParserRuleCall_7()); 
                     }
-                    pushFollow(FOLLOW_ruleblock_in_rule__Statement__Alternatives1375);
+                    pushFollow(FOLLOW_ruleblock_in_rule__Statement__Alternatives1435);
                     ruleblock();
                     _fsp--;
                     if (failed) return ;
                     if ( backtracking==0 ) {
                        after(grammarAccess.getStatementAccess().getBlockParserRuleCall_7()); 
-                    }
-
-                    }
-
-
-                    }
-                    break;
-                case 9 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:659:6: ( ( rule__Statement__Group_8__0 ) )
-                    {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:659:6: ( ( rule__Statement__Group_8__0 ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:660:1: ( rule__Statement__Group_8__0 )
-                    {
-                    if ( backtracking==0 ) {
-                       before(grammarAccess.getStatementAccess().getGroup_8()); 
-                    }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:661:1: ( rule__Statement__Group_8__0 )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:661:2: rule__Statement__Group_8__0
-                    {
-                    pushFollow(FOLLOW_rule__Statement__Group_8__0_in_rule__Statement__Alternatives1392);
-                    rule__Statement__Group_8__0();
-                    _fsp--;
-                    if (failed) return ;
-
-                    }
-
-                    if ( backtracking==0 ) {
-                       after(grammarAccess.getStatementAccess().getGroup_8()); 
-                    }
-
-                    }
-
-
-                    }
-                    break;
-                case 10 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:665:6: ( ( rule__Statement__Group_9__0 ) )
-                    {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:665:6: ( ( rule__Statement__Group_9__0 ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:666:1: ( rule__Statement__Group_9__0 )
-                    {
-                    if ( backtracking==0 ) {
-                       before(grammarAccess.getStatementAccess().getGroup_9()); 
-                    }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:667:1: ( rule__Statement__Group_9__0 )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:667:2: rule__Statement__Group_9__0
-                    {
-                    pushFollow(FOLLOW_rule__Statement__Group_9__0_in_rule__Statement__Alternatives1410);
-                    rule__Statement__Group_9__0();
-                    _fsp--;
-                    if (failed) return ;
-
-                    }
-
-                    if ( backtracking==0 ) {
-                       after(grammarAccess.getStatementAccess().getGroup_9()); 
-                    }
-
-                    }
-
-
-                    }
-                    break;
-                case 11 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:671:6: ( ( rule__Statement__Group_10__0 ) )
-                    {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:671:6: ( ( rule__Statement__Group_10__0 ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:672:1: ( rule__Statement__Group_10__0 )
-                    {
-                    if ( backtracking==0 ) {
-                       before(grammarAccess.getStatementAccess().getGroup_10()); 
-                    }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:673:1: ( rule__Statement__Group_10__0 )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:673:2: rule__Statement__Group_10__0
-                    {
-                    pushFollow(FOLLOW_rule__Statement__Group_10__0_in_rule__Statement__Alternatives1428);
-                    rule__Statement__Group_10__0();
-                    _fsp--;
-                    if (failed) return ;
-
-                    }
-
-                    if ( backtracking==0 ) {
-                       after(grammarAccess.getStatementAccess().getGroup_10()); 
                     }
 
                     }
@@ -2125,13 +2101,13 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__EqExpr__Alternatives_1_0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:682:1: rule__EqExpr__Alternatives_1_0 : ( ( '==' ) | ( '!=' ) );
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:692:1: rule__EqExpr__Alternatives_1_0 : ( ( '==' ) | ( '!=' ) );
     public final void rule__EqExpr__Alternatives_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:686:1: ( ( '==' ) | ( '!=' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:696:1: ( ( '==' ) | ( '!=' ) )
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -2144,21 +2120,21 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             else {
                 if (backtracking>0) {failed=true; return ;}
                 NoViableAltException nvae =
-                    new NoViableAltException("682:1: rule__EqExpr__Alternatives_1_0 : ( ( '==' ) | ( '!=' ) );", 3, 0, input);
+                    new NoViableAltException("692:1: rule__EqExpr__Alternatives_1_0 : ( ( '==' ) | ( '!=' ) );", 3, 0, input);
 
                 throw nvae;
             }
             switch (alt3) {
                 case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:687:1: ( '==' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:697:1: ( '==' )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:687:1: ( '==' )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:688:1: '=='
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:697:1: ( '==' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:698:1: '=='
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getEqExprAccess().getEqualsSignEqualsSignKeyword_1_0_0()); 
                     }
-                    match(input,16,FOLLOW_16_in_rule__EqExpr__Alternatives_1_01462); if (failed) return ;
+                    match(input,16,FOLLOW_16_in_rule__EqExpr__Alternatives_1_01468); if (failed) return ;
                     if ( backtracking==0 ) {
                        after(grammarAccess.getEqExprAccess().getEqualsSignEqualsSignKeyword_1_0_0()); 
                     }
@@ -2169,15 +2145,15 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:695:6: ( '!=' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:705:6: ( '!=' )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:695:6: ( '!=' )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:696:1: '!='
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:705:6: ( '!=' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:706:1: '!='
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getEqExprAccess().getExclamationMarkEqualsSignKeyword_1_0_1()); 
                     }
-                    match(input,17,FOLLOW_17_in_rule__EqExpr__Alternatives_1_01482); if (failed) return ;
+                    match(input,17,FOLLOW_17_in_rule__EqExpr__Alternatives_1_01488); if (failed) return ;
                     if ( backtracking==0 ) {
                        after(grammarAccess.getEqExprAccess().getExclamationMarkEqualsSignKeyword_1_0_1()); 
                     }
@@ -2205,13 +2181,13 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__RelExpr__Alternatives_1_0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:708:1: rule__RelExpr__Alternatives_1_0 : ( ( '<' ) | ( '>' ) | ( '<=' ) | ( '>=' ) );
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:718:1: rule__RelExpr__Alternatives_1_0 : ( ( '<' ) | ( '>' ) | ( '<=' ) | ( '>=' ) );
     public final void rule__RelExpr__Alternatives_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:712:1: ( ( '<' ) | ( '>' ) | ( '<=' ) | ( '>=' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:722:1: ( ( '<' ) | ( '>' ) | ( '<=' ) | ( '>=' ) )
             int alt4=4;
             switch ( input.LA(1) ) {
             case 18:
@@ -2237,22 +2213,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             default:
                 if (backtracking>0) {failed=true; return ;}
                 NoViableAltException nvae =
-                    new NoViableAltException("708:1: rule__RelExpr__Alternatives_1_0 : ( ( '<' ) | ( '>' ) | ( '<=' ) | ( '>=' ) );", 4, 0, input);
+                    new NoViableAltException("718:1: rule__RelExpr__Alternatives_1_0 : ( ( '<' ) | ( '>' ) | ( '<=' ) | ( '>=' ) );", 4, 0, input);
 
                 throw nvae;
             }
 
             switch (alt4) {
                 case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:713:1: ( '<' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:723:1: ( '<' )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:713:1: ( '<' )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:714:1: '<'
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:723:1: ( '<' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:724:1: '<'
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getRelExprAccess().getLessThanSignKeyword_1_0_0()); 
                     }
-                    match(input,18,FOLLOW_18_in_rule__RelExpr__Alternatives_1_01517); if (failed) return ;
+                    match(input,18,FOLLOW_18_in_rule__RelExpr__Alternatives_1_01523); if (failed) return ;
                     if ( backtracking==0 ) {
                        after(grammarAccess.getRelExprAccess().getLessThanSignKeyword_1_0_0()); 
                     }
@@ -2263,15 +2239,15 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:721:6: ( '>' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:731:6: ( '>' )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:721:6: ( '>' )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:722:1: '>'
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:731:6: ( '>' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:732:1: '>'
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getRelExprAccess().getGreaterThanSignKeyword_1_0_1()); 
                     }
-                    match(input,19,FOLLOW_19_in_rule__RelExpr__Alternatives_1_01537); if (failed) return ;
+                    match(input,19,FOLLOW_19_in_rule__RelExpr__Alternatives_1_01543); if (failed) return ;
                     if ( backtracking==0 ) {
                        after(grammarAccess.getRelExprAccess().getGreaterThanSignKeyword_1_0_1()); 
                     }
@@ -2282,15 +2258,15 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:729:6: ( '<=' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:739:6: ( '<=' )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:729:6: ( '<=' )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:730:1: '<='
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:739:6: ( '<=' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:740:1: '<='
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getRelExprAccess().getLessThanSignEqualsSignKeyword_1_0_2()); 
                     }
-                    match(input,20,FOLLOW_20_in_rule__RelExpr__Alternatives_1_01557); if (failed) return ;
+                    match(input,20,FOLLOW_20_in_rule__RelExpr__Alternatives_1_01563); if (failed) return ;
                     if ( backtracking==0 ) {
                        after(grammarAccess.getRelExprAccess().getLessThanSignEqualsSignKeyword_1_0_2()); 
                     }
@@ -2301,15 +2277,15 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 4 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:737:6: ( '>=' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:747:6: ( '>=' )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:737:6: ( '>=' )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:738:1: '>='
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:747:6: ( '>=' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:748:1: '>='
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getRelExprAccess().getGreaterThanSignEqualsSignKeyword_1_0_3()); 
                     }
-                    match(input,21,FOLLOW_21_in_rule__RelExpr__Alternatives_1_01577); if (failed) return ;
+                    match(input,21,FOLLOW_21_in_rule__RelExpr__Alternatives_1_01583); if (failed) return ;
                     if ( backtracking==0 ) {
                        after(grammarAccess.getRelExprAccess().getGreaterThanSignEqualsSignKeyword_1_0_3()); 
                     }
@@ -2337,13 +2313,13 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__AddExpr__Alternatives_1_0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:750:1: rule__AddExpr__Alternatives_1_0 : ( ( '+' ) | ( '-' ) );
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:760:1: rule__AddExpr__Alternatives_1_0 : ( ( '+' ) | ( '-' ) );
     public final void rule__AddExpr__Alternatives_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:754:1: ( ( '+' ) | ( '-' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:764:1: ( ( '+' ) | ( '-' ) )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -2356,21 +2332,21 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             else {
                 if (backtracking>0) {failed=true; return ;}
                 NoViableAltException nvae =
-                    new NoViableAltException("750:1: rule__AddExpr__Alternatives_1_0 : ( ( '+' ) | ( '-' ) );", 5, 0, input);
+                    new NoViableAltException("760:1: rule__AddExpr__Alternatives_1_0 : ( ( '+' ) | ( '-' ) );", 5, 0, input);
 
                 throw nvae;
             }
             switch (alt5) {
                 case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:755:1: ( '+' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:765:1: ( '+' )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:755:1: ( '+' )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:756:1: '+'
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:765:1: ( '+' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:766:1: '+'
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getAddExprAccess().getPlusSignKeyword_1_0_0()); 
                     }
-                    match(input,22,FOLLOW_22_in_rule__AddExpr__Alternatives_1_01612); if (failed) return ;
+                    match(input,22,FOLLOW_22_in_rule__AddExpr__Alternatives_1_01618); if (failed) return ;
                     if ( backtracking==0 ) {
                        after(grammarAccess.getAddExprAccess().getPlusSignKeyword_1_0_0()); 
                     }
@@ -2381,15 +2357,15 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:763:6: ( '-' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:773:6: ( '-' )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:763:6: ( '-' )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:764:1: '-'
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:773:6: ( '-' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:774:1: '-'
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getAddExprAccess().getHyphenMinusKeyword_1_0_1()); 
                     }
-                    match(input,23,FOLLOW_23_in_rule__AddExpr__Alternatives_1_01632); if (failed) return ;
+                    match(input,23,FOLLOW_23_in_rule__AddExpr__Alternatives_1_01638); if (failed) return ;
                     if ( backtracking==0 ) {
                        after(grammarAccess.getAddExprAccess().getHyphenMinusKeyword_1_0_1()); 
                     }
@@ -2417,13 +2393,13 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__MulExpr__Alternatives_1_0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:776:1: rule__MulExpr__Alternatives_1_0 : ( ( '*' ) | ( '/' ) | ( '%' ) );
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:786:1: rule__MulExpr__Alternatives_1_0 : ( ( '*' ) | ( '/' ) | ( '%' ) );
     public final void rule__MulExpr__Alternatives_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:780:1: ( ( '*' ) | ( '/' ) | ( '%' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:790:1: ( ( '*' ) | ( '/' ) | ( '%' ) )
             int alt6=3;
             switch ( input.LA(1) ) {
             case 24:
@@ -2444,22 +2420,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             default:
                 if (backtracking>0) {failed=true; return ;}
                 NoViableAltException nvae =
-                    new NoViableAltException("776:1: rule__MulExpr__Alternatives_1_0 : ( ( '*' ) | ( '/' ) | ( '%' ) );", 6, 0, input);
+                    new NoViableAltException("786:1: rule__MulExpr__Alternatives_1_0 : ( ( '*' ) | ( '/' ) | ( '%' ) );", 6, 0, input);
 
                 throw nvae;
             }
 
             switch (alt6) {
                 case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:781:1: ( '*' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:791:1: ( '*' )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:781:1: ( '*' )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:782:1: '*'
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:791:1: ( '*' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:792:1: '*'
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getMulExprAccess().getAsteriskKeyword_1_0_0()); 
                     }
-                    match(input,24,FOLLOW_24_in_rule__MulExpr__Alternatives_1_01667); if (failed) return ;
+                    match(input,24,FOLLOW_24_in_rule__MulExpr__Alternatives_1_01673); if (failed) return ;
                     if ( backtracking==0 ) {
                        after(grammarAccess.getMulExprAccess().getAsteriskKeyword_1_0_0()); 
                     }
@@ -2470,15 +2446,15 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:789:6: ( '/' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:799:6: ( '/' )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:789:6: ( '/' )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:790:1: '/'
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:799:6: ( '/' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:800:1: '/'
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getMulExprAccess().getSolidusKeyword_1_0_1()); 
                     }
-                    match(input,25,FOLLOW_25_in_rule__MulExpr__Alternatives_1_01687); if (failed) return ;
+                    match(input,25,FOLLOW_25_in_rule__MulExpr__Alternatives_1_01693); if (failed) return ;
                     if ( backtracking==0 ) {
                        after(grammarAccess.getMulExprAccess().getSolidusKeyword_1_0_1()); 
                     }
@@ -2489,15 +2465,15 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:797:6: ( '%' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:807:6: ( '%' )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:797:6: ( '%' )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:798:1: '%'
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:807:6: ( '%' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:808:1: '%'
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getMulExprAccess().getPercentSignKeyword_1_0_2()); 
                     }
-                    match(input,26,FOLLOW_26_in_rule__MulExpr__Alternatives_1_01707); if (failed) return ;
+                    match(input,26,FOLLOW_26_in_rule__MulExpr__Alternatives_1_01713); if (failed) return ;
                     if ( backtracking==0 ) {
                        after(grammarAccess.getMulExprAccess().getPercentSignKeyword_1_0_2()); 
                     }
@@ -2525,72 +2501,84 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Atom__Alternatives
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:810:1: rule__Atom__Alternatives : ( ( ( rule__Atom__Group_0__0 ) ) | ( ( rule__Atom__Group_1__0 ) ) | ( ( rule__Atom__Group_2__0 ) ) | ( rulepostfixExpr ) | ( RULE_CONSTANT ) );
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:820:1: rule__Atom__Alternatives : ( ( ( rule__Atom__Group_0__0 ) ) | ( ( rule__Atom__Group_1__0 ) ) | ( ( rule__Atom__Group_2__0 ) ) | ( ( rule__Atom__Group_3__0 ) ) | ( rulepostfixExpr ) | ( RULE_CONSTANT ) );
     public final void rule__Atom__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:814:1: ( ( ( rule__Atom__Group_0__0 ) ) | ( ( rule__Atom__Group_1__0 ) ) | ( ( rule__Atom__Group_2__0 ) ) | ( rulepostfixExpr ) | ( RULE_CONSTANT ) )
-            int alt7=5;
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:824:1: ( ( ( rule__Atom__Group_0__0 ) ) | ( ( rule__Atom__Group_1__0 ) ) | ( ( rule__Atom__Group_2__0 ) ) | ( ( rule__Atom__Group_3__0 ) ) | ( rulepostfixExpr ) | ( RULE_CONSTANT ) )
+            int alt7=6;
             switch ( input.LA(1) ) {
-            case 44:
+            case 45:
                 {
                 alt7=1;
                 }
                 break;
-            case 27:
+            case 29:
                 {
-                int LA7_2 = input.LA(2);
-
-                if ( ((LA7_2>=22 && LA7_2<=23)) ) {
-                    alt7=2;
-                }
-                else if ( (LA7_2==RULE_CONSTANT||LA7_2==RULE_ID||LA7_2==27||(LA7_2>=44 && LA7_2<=45)) ) {
+                switch ( input.LA(2) ) {
+                case 22:
+                case 23:
+                    {
                     alt7=3;
-                }
-                else {
+                    }
+                    break;
+                case RULE_SIGN:
+                    {
+                    alt7=2;
+                    }
+                    break;
+                case RULE_CONSTANT:
+                case RULE_ID:
+                case 29:
+                case 45:
+                    {
+                    alt7=4;
+                    }
+                    break;
+                default:
                     if (backtracking>0) {failed=true; return ;}
                     NoViableAltException nvae =
-                        new NoViableAltException("810:1: rule__Atom__Alternatives : ( ( ( rule__Atom__Group_0__0 ) ) | ( ( rule__Atom__Group_1__0 ) ) | ( ( rule__Atom__Group_2__0 ) ) | ( rulepostfixExpr ) | ( RULE_CONSTANT ) );", 7, 2, input);
+                        new NoViableAltException("820:1: rule__Atom__Alternatives : ( ( ( rule__Atom__Group_0__0 ) ) | ( ( rule__Atom__Group_1__0 ) ) | ( ( rule__Atom__Group_2__0 ) ) | ( ( rule__Atom__Group_3__0 ) ) | ( rulepostfixExpr ) | ( RULE_CONSTANT ) );", 7, 2, input);
 
                     throw nvae;
                 }
+
                 }
                 break;
             case RULE_ID:
-            case 45:
                 {
-                alt7=4;
+                alt7=5;
                 }
                 break;
             case RULE_CONSTANT:
                 {
-                alt7=5;
+                alt7=6;
                 }
                 break;
             default:
                 if (backtracking>0) {failed=true; return ;}
                 NoViableAltException nvae =
-                    new NoViableAltException("810:1: rule__Atom__Alternatives : ( ( ( rule__Atom__Group_0__0 ) ) | ( ( rule__Atom__Group_1__0 ) ) | ( ( rule__Atom__Group_2__0 ) ) | ( rulepostfixExpr ) | ( RULE_CONSTANT ) );", 7, 0, input);
+                    new NoViableAltException("820:1: rule__Atom__Alternatives : ( ( ( rule__Atom__Group_0__0 ) ) | ( ( rule__Atom__Group_1__0 ) ) | ( ( rule__Atom__Group_2__0 ) ) | ( ( rule__Atom__Group_3__0 ) ) | ( rulepostfixExpr ) | ( RULE_CONSTANT ) );", 7, 0, input);
 
                 throw nvae;
             }
 
             switch (alt7) {
                 case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:815:1: ( ( rule__Atom__Group_0__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:825:1: ( ( rule__Atom__Group_0__0 ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:815:1: ( ( rule__Atom__Group_0__0 ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:816:1: ( rule__Atom__Group_0__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:825:1: ( ( rule__Atom__Group_0__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:826:1: ( rule__Atom__Group_0__0 )
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getAtomAccess().getGroup_0()); 
                     }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:817:1: ( rule__Atom__Group_0__0 )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:817:2: rule__Atom__Group_0__0
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:827:1: ( rule__Atom__Group_0__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:827:2: rule__Atom__Group_0__0
                     {
-                    pushFollow(FOLLOW_rule__Atom__Group_0__0_in_rule__Atom__Alternatives1741);
+                    pushFollow(FOLLOW_rule__Atom__Group_0__0_in_rule__Atom__Alternatives1747);
                     rule__Atom__Group_0__0();
                     _fsp--;
                     if (failed) return ;
@@ -2607,18 +2595,18 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:821:6: ( ( rule__Atom__Group_1__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:831:6: ( ( rule__Atom__Group_1__0 ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:821:6: ( ( rule__Atom__Group_1__0 ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:822:1: ( rule__Atom__Group_1__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:831:6: ( ( rule__Atom__Group_1__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:832:1: ( rule__Atom__Group_1__0 )
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getAtomAccess().getGroup_1()); 
                     }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:823:1: ( rule__Atom__Group_1__0 )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:823:2: rule__Atom__Group_1__0
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:833:1: ( rule__Atom__Group_1__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:833:2: rule__Atom__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__Atom__Group_1__0_in_rule__Atom__Alternatives1759);
+                    pushFollow(FOLLOW_rule__Atom__Group_1__0_in_rule__Atom__Alternatives1765);
                     rule__Atom__Group_1__0();
                     _fsp--;
                     if (failed) return ;
@@ -2635,18 +2623,18 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:827:6: ( ( rule__Atom__Group_2__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:837:6: ( ( rule__Atom__Group_2__0 ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:827:6: ( ( rule__Atom__Group_2__0 ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:828:1: ( rule__Atom__Group_2__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:837:6: ( ( rule__Atom__Group_2__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:838:1: ( rule__Atom__Group_2__0 )
                     {
                     if ( backtracking==0 ) {
                        before(grammarAccess.getAtomAccess().getGroup_2()); 
                     }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:829:1: ( rule__Atom__Group_2__0 )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:829:2: rule__Atom__Group_2__0
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:839:1: ( rule__Atom__Group_2__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:839:2: rule__Atom__Group_2__0
                     {
-                    pushFollow(FOLLOW_rule__Atom__Group_2__0_in_rule__Atom__Alternatives1777);
+                    pushFollow(FOLLOW_rule__Atom__Group_2__0_in_rule__Atom__Alternatives1783);
                     rule__Atom__Group_2__0();
                     _fsp--;
                     if (failed) return ;
@@ -2663,20 +2651,26 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 4 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:833:6: ( rulepostfixExpr )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:843:6: ( ( rule__Atom__Group_3__0 ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:833:6: ( rulepostfixExpr )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:834:1: rulepostfixExpr
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:843:6: ( ( rule__Atom__Group_3__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:844:1: ( rule__Atom__Group_3__0 )
                     {
                     if ( backtracking==0 ) {
-                       before(grammarAccess.getAtomAccess().getPostfixExprParserRuleCall_3()); 
+                       before(grammarAccess.getAtomAccess().getGroup_3()); 
                     }
-                    pushFollow(FOLLOW_rulepostfixExpr_in_rule__Atom__Alternatives1795);
-                    rulepostfixExpr();
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:845:1: ( rule__Atom__Group_3__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:845:2: rule__Atom__Group_3__0
+                    {
+                    pushFollow(FOLLOW_rule__Atom__Group_3__0_in_rule__Atom__Alternatives1801);
+                    rule__Atom__Group_3__0();
                     _fsp--;
                     if (failed) return ;
+
+                    }
+
                     if ( backtracking==0 ) {
-                       after(grammarAccess.getAtomAccess().getPostfixExprParserRuleCall_3()); 
+                       after(grammarAccess.getAtomAccess().getGroup_3()); 
                     }
 
                     }
@@ -2685,17 +2679,39 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 5 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:839:6: ( RULE_CONSTANT )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:849:6: ( rulepostfixExpr )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:839:6: ( RULE_CONSTANT )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:840:1: RULE_CONSTANT
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:849:6: ( rulepostfixExpr )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:850:1: rulepostfixExpr
                     {
                     if ( backtracking==0 ) {
-                       before(grammarAccess.getAtomAccess().getConstantTerminalRuleCall_4()); 
+                       before(grammarAccess.getAtomAccess().getPostfixExprParserRuleCall_4()); 
                     }
-                    match(input,RULE_CONSTANT,FOLLOW_RULE_CONSTANT_in_rule__Atom__Alternatives1812); if (failed) return ;
+                    pushFollow(FOLLOW_rulepostfixExpr_in_rule__Atom__Alternatives1819);
+                    rulepostfixExpr();
+                    _fsp--;
+                    if (failed) return ;
                     if ( backtracking==0 ) {
-                       after(grammarAccess.getAtomAccess().getConstantTerminalRuleCall_4()); 
+                       after(grammarAccess.getAtomAccess().getPostfixExprParserRuleCall_4()); 
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 6 :
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:855:6: ( RULE_CONSTANT )
+                    {
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:855:6: ( RULE_CONSTANT )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:856:1: RULE_CONSTANT
+                    {
+                    if ( backtracking==0 ) {
+                       before(grammarAccess.getAtomAccess().getConstantTerminalRuleCall_5()); 
+                    }
+                    match(input,RULE_CONSTANT,FOLLOW_RULE_CONSTANT_in_rule__Atom__Alternatives1836); if (failed) return ;
+                    if ( backtracking==0 ) {
+                       after(grammarAccess.getAtomAccess().getConstantTerminalRuleCall_5()); 
                     }
 
                     }
@@ -2720,14 +2736,14 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
     // $ANTLR end rule__Atom__Alternatives
 
 
-    // $ANTLR start rule__Atom__Alternatives_1_1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:850:1: rule__Atom__Alternatives_1_1 : ( ( '+' ) | ( '-' ) );
-    public final void rule__Atom__Alternatives_1_1() throws RecognitionException {
+    // $ANTLR start rule__Atom__Alternatives_2_1
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:866:1: rule__Atom__Alternatives_2_1 : ( ( '+' ) | ( '-' ) );
+    public final void rule__Atom__Alternatives_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:854:1: ( ( '+' ) | ( '-' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:870:1: ( ( '+' ) | ( '-' ) )
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -2740,23 +2756,23 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             else {
                 if (backtracking>0) {failed=true; return ;}
                 NoViableAltException nvae =
-                    new NoViableAltException("850:1: rule__Atom__Alternatives_1_1 : ( ( '+' ) | ( '-' ) );", 8, 0, input);
+                    new NoViableAltException("866:1: rule__Atom__Alternatives_2_1 : ( ( '+' ) | ( '-' ) );", 8, 0, input);
 
                 throw nvae;
             }
             switch (alt8) {
                 case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:855:1: ( '+' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:871:1: ( '+' )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:855:1: ( '+' )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:856:1: '+'
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:871:1: ( '+' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:872:1: '+'
                     {
                     if ( backtracking==0 ) {
-                       before(grammarAccess.getAtomAccess().getPlusSignKeyword_1_1_0()); 
+                       before(grammarAccess.getAtomAccess().getPlusSignKeyword_2_1_0()); 
                     }
-                    match(input,22,FOLLOW_22_in_rule__Atom__Alternatives_1_11845); if (failed) return ;
+                    match(input,22,FOLLOW_22_in_rule__Atom__Alternatives_2_11869); if (failed) return ;
                     if ( backtracking==0 ) {
-                       after(grammarAccess.getAtomAccess().getPlusSignKeyword_1_1_0()); 
+                       after(grammarAccess.getAtomAccess().getPlusSignKeyword_2_1_0()); 
                     }
 
                     }
@@ -2765,17 +2781,17 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:863:6: ( '-' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:879:6: ( '-' )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:863:6: ( '-' )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:864:1: '-'
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:879:6: ( '-' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:880:1: '-'
                     {
                     if ( backtracking==0 ) {
-                       before(grammarAccess.getAtomAccess().getHyphenMinusKeyword_1_1_1()); 
+                       before(grammarAccess.getAtomAccess().getHyphenMinusKeyword_2_1_1()); 
                     }
-                    match(input,23,FOLLOW_23_in_rule__Atom__Alternatives_1_11865); if (failed) return ;
+                    match(input,23,FOLLOW_23_in_rule__Atom__Alternatives_2_11889); if (failed) return ;
                     if ( backtracking==0 ) {
-                       after(grammarAccess.getAtomAccess().getHyphenMinusKeyword_1_1_1()); 
+                       after(grammarAccess.getAtomAccess().getHyphenMinusKeyword_2_1_1()); 
                     }
 
                     }
@@ -2797,162 +2813,64 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Atom__Alternatives_1_1
+    // $ANTLR end rule__Atom__Alternatives_2_1
 
 
-    // $ANTLR start rule__PostfixExpr__Alternatives
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:876:1: rule__PostfixExpr__Alternatives : ( ( ( rule__PostfixExpr__Group_0__0 ) ) | ( ( rule__PostfixExpr__Group_1__0 ) ) );
-    public final void rule__PostfixExpr__Alternatives() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:880:1: ( ( ( rule__PostfixExpr__Group_0__0 ) ) | ( ( rule__PostfixExpr__Group_1__0 ) ) )
-            int alt9=2;
-            int LA9_0 = input.LA(1);
-
-            if ( (LA9_0==45) ) {
-                alt9=1;
-            }
-            else if ( (LA9_0==RULE_ID) ) {
-                alt9=2;
-            }
-            else {
-                if (backtracking>0) {failed=true; return ;}
-                NoViableAltException nvae =
-                    new NoViableAltException("876:1: rule__PostfixExpr__Alternatives : ( ( ( rule__PostfixExpr__Group_0__0 ) ) | ( ( rule__PostfixExpr__Group_1__0 ) ) );", 9, 0, input);
-
-                throw nvae;
-            }
-            switch (alt9) {
-                case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:881:1: ( ( rule__PostfixExpr__Group_0__0 ) )
-                    {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:881:1: ( ( rule__PostfixExpr__Group_0__0 ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:882:1: ( rule__PostfixExpr__Group_0__0 )
-                    {
-                    if ( backtracking==0 ) {
-                       before(grammarAccess.getPostfixExprAccess().getGroup_0()); 
-                    }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:883:1: ( rule__PostfixExpr__Group_0__0 )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:883:2: rule__PostfixExpr__Group_0__0
-                    {
-                    pushFollow(FOLLOW_rule__PostfixExpr__Group_0__0_in_rule__PostfixExpr__Alternatives1899);
-                    rule__PostfixExpr__Group_0__0();
-                    _fsp--;
-                    if (failed) return ;
-
-                    }
-
-                    if ( backtracking==0 ) {
-                       after(grammarAccess.getPostfixExprAccess().getGroup_0()); 
-                    }
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:887:6: ( ( rule__PostfixExpr__Group_1__0 ) )
-                    {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:887:6: ( ( rule__PostfixExpr__Group_1__0 ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:888:1: ( rule__PostfixExpr__Group_1__0 )
-                    {
-                    if ( backtracking==0 ) {
-                       before(grammarAccess.getPostfixExprAccess().getGroup_1()); 
-                    }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:889:1: ( rule__PostfixExpr__Group_1__0 )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:889:2: rule__PostfixExpr__Group_1__0
-                    {
-                    pushFollow(FOLLOW_rule__PostfixExpr__Group_1__0_in_rule__PostfixExpr__Alternatives1917);
-                    rule__PostfixExpr__Group_1__0();
-                    _fsp--;
-                    if (failed) return ;
-
-                    }
-
-                    if ( backtracking==0 ) {
-                       after(grammarAccess.getPostfixExprAccess().getGroup_1()); 
-                    }
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__PostfixExpr__Alternatives
-
-
-    // $ANTLR start rule__PostfixExpr__Alternatives_1_1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:898:1: rule__PostfixExpr__Alternatives_1_1 : ( ( ( rule__PostfixExpr__Group_1_1_0__0 ) ) | ( ( rule__PostfixExpr__Group_1_1_1__0 ) ) | ( ( rule__PostfixExpr__Group_1_1_2__0 ) ) );
-    public final void rule__PostfixExpr__Alternatives_1_1() throws RecognitionException {
+    // $ANTLR start rule__PostfixExpr__Alternatives_1
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:892:1: rule__PostfixExpr__Alternatives_1 : ( ( ( rule__PostfixExpr__Group_1_0__0 ) ) | ( ( rule__PostfixExpr__Group_1_1__0 ) ) | ( ( rule__PostfixExpr__Group_1_2__0 ) ) );
+    public final void rule__PostfixExpr__Alternatives_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:902:1: ( ( ( rule__PostfixExpr__Group_1_1_0__0 ) ) | ( ( rule__PostfixExpr__Group_1_1_1__0 ) ) | ( ( rule__PostfixExpr__Group_1_1_2__0 ) ) )
-            int alt10=3;
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:896:1: ( ( ( rule__PostfixExpr__Group_1_0__0 ) ) | ( ( rule__PostfixExpr__Group_1_1__0 ) ) | ( ( rule__PostfixExpr__Group_1_2__0 ) ) )
+            int alt9=3;
             switch ( input.LA(1) ) {
             case 46:
                 {
-                alt10=1;
+                alt9=1;
                 }
                 break;
-            case 27:
+            case 29:
                 {
-                alt10=2;
+                alt9=2;
                 }
                 break;
             case 47:
                 {
-                alt10=3;
+                alt9=3;
                 }
                 break;
             default:
                 if (backtracking>0) {failed=true; return ;}
                 NoViableAltException nvae =
-                    new NoViableAltException("898:1: rule__PostfixExpr__Alternatives_1_1 : ( ( ( rule__PostfixExpr__Group_1_1_0__0 ) ) | ( ( rule__PostfixExpr__Group_1_1_1__0 ) ) | ( ( rule__PostfixExpr__Group_1_1_2__0 ) ) );", 10, 0, input);
+                    new NoViableAltException("892:1: rule__PostfixExpr__Alternatives_1 : ( ( ( rule__PostfixExpr__Group_1_0__0 ) ) | ( ( rule__PostfixExpr__Group_1_1__0 ) ) | ( ( rule__PostfixExpr__Group_1_2__0 ) ) );", 9, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt10) {
+            switch (alt9) {
                 case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:903:1: ( ( rule__PostfixExpr__Group_1_1_0__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:897:1: ( ( rule__PostfixExpr__Group_1_0__0 ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:903:1: ( ( rule__PostfixExpr__Group_1_1_0__0 ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:904:1: ( rule__PostfixExpr__Group_1_1_0__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:897:1: ( ( rule__PostfixExpr__Group_1_0__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:898:1: ( rule__PostfixExpr__Group_1_0__0 )
                     {
                     if ( backtracking==0 ) {
-                       before(grammarAccess.getPostfixExprAccess().getGroup_1_1_0()); 
+                       before(grammarAccess.getPostfixExprAccess().getGroup_1_0()); 
                     }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:905:1: ( rule__PostfixExpr__Group_1_1_0__0 )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:905:2: rule__PostfixExpr__Group_1_1_0__0
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:899:1: ( rule__PostfixExpr__Group_1_0__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:899:2: rule__PostfixExpr__Group_1_0__0
                     {
-                    pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_0__0_in_rule__PostfixExpr__Alternatives_1_11950);
-                    rule__PostfixExpr__Group_1_1_0__0();
+                    pushFollow(FOLLOW_rule__PostfixExpr__Group_1_0__0_in_rule__PostfixExpr__Alternatives_11923);
+                    rule__PostfixExpr__Group_1_0__0();
                     _fsp--;
                     if (failed) return ;
 
                     }
 
                     if ( backtracking==0 ) {
-                       after(grammarAccess.getPostfixExprAccess().getGroup_1_1_0()); 
+                       after(grammarAccess.getPostfixExprAccess().getGroup_1_0()); 
                     }
 
                     }
@@ -2961,26 +2879,26 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 2 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:909:6: ( ( rule__PostfixExpr__Group_1_1_1__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:903:6: ( ( rule__PostfixExpr__Group_1_1__0 ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:909:6: ( ( rule__PostfixExpr__Group_1_1_1__0 ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:910:1: ( rule__PostfixExpr__Group_1_1_1__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:903:6: ( ( rule__PostfixExpr__Group_1_1__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:904:1: ( rule__PostfixExpr__Group_1_1__0 )
                     {
                     if ( backtracking==0 ) {
-                       before(grammarAccess.getPostfixExprAccess().getGroup_1_1_1()); 
+                       before(grammarAccess.getPostfixExprAccess().getGroup_1_1()); 
                     }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:911:1: ( rule__PostfixExpr__Group_1_1_1__0 )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:911:2: rule__PostfixExpr__Group_1_1_1__0
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:905:1: ( rule__PostfixExpr__Group_1_1__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:905:2: rule__PostfixExpr__Group_1_1__0
                     {
-                    pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_1__0_in_rule__PostfixExpr__Alternatives_1_11968);
-                    rule__PostfixExpr__Group_1_1_1__0();
+                    pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1__0_in_rule__PostfixExpr__Alternatives_11941);
+                    rule__PostfixExpr__Group_1_1__0();
                     _fsp--;
                     if (failed) return ;
 
                     }
 
                     if ( backtracking==0 ) {
-                       after(grammarAccess.getPostfixExprAccess().getGroup_1_1_1()); 
+                       after(grammarAccess.getPostfixExprAccess().getGroup_1_1()); 
                     }
 
                     }
@@ -2989,26 +2907,26 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
                     }
                     break;
                 case 3 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:915:6: ( ( rule__PostfixExpr__Group_1_1_2__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:909:6: ( ( rule__PostfixExpr__Group_1_2__0 ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:915:6: ( ( rule__PostfixExpr__Group_1_1_2__0 ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:916:1: ( rule__PostfixExpr__Group_1_1_2__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:909:6: ( ( rule__PostfixExpr__Group_1_2__0 ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:910:1: ( rule__PostfixExpr__Group_1_2__0 )
                     {
                     if ( backtracking==0 ) {
-                       before(grammarAccess.getPostfixExprAccess().getGroup_1_1_2()); 
+                       before(grammarAccess.getPostfixExprAccess().getGroup_1_2()); 
                     }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:917:1: ( rule__PostfixExpr__Group_1_1_2__0 )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:917:2: rule__PostfixExpr__Group_1_1_2__0
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:911:1: ( rule__PostfixExpr__Group_1_2__0 )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:911:2: rule__PostfixExpr__Group_1_2__0
                     {
-                    pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_2__0_in_rule__PostfixExpr__Alternatives_1_11986);
-                    rule__PostfixExpr__Group_1_1_2__0();
+                    pushFollow(FOLLOW_rule__PostfixExpr__Group_1_2__0_in_rule__PostfixExpr__Alternatives_11959);
+                    rule__PostfixExpr__Group_1_2__0();
                     _fsp--;
                     if (failed) return ;
 
                     }
 
                     if ( backtracking==0 ) {
-                       after(grammarAccess.getPostfixExprAccess().getGroup_1_1_2()); 
+                       after(grammarAccess.getPostfixExprAccess().getGroup_1_2()); 
                     }
 
                     }
@@ -3030,24 +2948,104 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__PostfixExpr__Alternatives_1_1
+    // $ANTLR end rule__PostfixExpr__Alternatives_1
+
+
+    // $ANTLR start rule__EndExpr__Alternatives
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:920:1: rule__EndExpr__Alternatives : ( ( ',' ) | ( ';' ) );
+    public final void rule__EndExpr__Alternatives() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:924:1: ( ( ',' ) | ( ';' ) )
+            int alt10=2;
+            int LA10_0 = input.LA(1);
+
+            if ( (LA10_0==27) ) {
+                alt10=1;
+            }
+            else if ( (LA10_0==28) ) {
+                alt10=2;
+            }
+            else {
+                if (backtracking>0) {failed=true; return ;}
+                NoViableAltException nvae =
+                    new NoViableAltException("920:1: rule__EndExpr__Alternatives : ( ( ',' ) | ( ';' ) );", 10, 0, input);
+
+                throw nvae;
+            }
+            switch (alt10) {
+                case 1 :
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:925:1: ( ',' )
+                    {
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:925:1: ( ',' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:926:1: ','
+                    {
+                    if ( backtracking==0 ) {
+                       before(grammarAccess.getEndExprAccess().getCommaKeyword_0()); 
+                    }
+                    match(input,27,FOLLOW_27_in_rule__EndExpr__Alternatives1993); if (failed) return ;
+                    if ( backtracking==0 ) {
+                       after(grammarAccess.getEndExprAccess().getCommaKeyword_0()); 
+                    }
+
+                    }
+
+
+                    }
+                    break;
+                case 2 :
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:933:6: ( ';' )
+                    {
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:933:6: ( ';' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:934:1: ';'
+                    {
+                    if ( backtracking==0 ) {
+                       before(grammarAccess.getEndExprAccess().getSemicolonKeyword_1()); 
+                    }
+                    match(input,28,FOLLOW_28_in_rule__EndExpr__Alternatives2013); if (failed) return ;
+                    if ( backtracking==0 ) {
+                       after(grammarAccess.getEndExprAccess().getSemicolonKeyword_1()); 
+                    }
+
+                    }
+
+
+                    }
+                    break;
+
+            }
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__EndExpr__Alternatives
 
 
     // $ANTLR start rule__Model__Group__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:928:1: rule__Model__Group__0 : rule__Model__Group__0__Impl rule__Model__Group__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:948:1: rule__Model__Group__0 : rule__Model__Group__0__Impl rule__Model__Group__1 ;
     public final void rule__Model__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:932:1: ( rule__Model__Group__0__Impl rule__Model__Group__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:933:2: rule__Model__Group__0__Impl rule__Model__Group__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:952:1: ( rule__Model__Group__0__Impl rule__Model__Group__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:953:2: rule__Model__Group__0__Impl rule__Model__Group__1
             {
-            pushFollow(FOLLOW_rule__Model__Group__0__Impl_in_rule__Model__Group__02017);
+            pushFollow(FOLLOW_rule__Model__Group__0__Impl_in_rule__Model__Group__02045);
             rule__Model__Group__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Model__Group__1_in_rule__Model__Group__02020);
+            pushFollow(FOLLOW_rule__Model__Group__1_in_rule__Model__Group__02048);
             rule__Model__Group__1();
             _fsp--;
             if (failed) return ;
@@ -3070,23 +3068,23 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Model__Group__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:940:1: rule__Model__Group__0__Impl : ( () ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:960:1: rule__Model__Group__0__Impl : ( () ) ;
     public final void rule__Model__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:944:1: ( ( () ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:945:1: ( () )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:964:1: ( ( () ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:965:1: ( () )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:945:1: ( () )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:946:1: ()
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:965:1: ( () )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:966:1: ()
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getModelAccess().getModelAction_0()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:947:1: ()
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:949:1: 
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:967:1: ()
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:969:1: 
             {
             }
 
@@ -3111,16 +3109,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Model__Group__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:959:1: rule__Model__Group__1 : rule__Model__Group__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:979:1: rule__Model__Group__1 : rule__Model__Group__1__Impl ;
     public final void rule__Model__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:963:1: ( rule__Model__Group__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:964:2: rule__Model__Group__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:983:1: ( rule__Model__Group__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:984:2: rule__Model__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__Model__Group__1__Impl_in_rule__Model__Group__12078);
+            pushFollow(FOLLOW_rule__Model__Group__1__Impl_in_rule__Model__Group__12106);
             rule__Model__Group__1__Impl();
             _fsp--;
             if (failed) return ;
@@ -3143,25 +3141,25 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Model__Group__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:970:1: rule__Model__Group__1__Impl : ( ( rule__Model__Group_1__0 ) ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:990:1: rule__Model__Group__1__Impl : ( ( rule__Model__Group_1__0 ) ) ;
     public final void rule__Model__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:974:1: ( ( ( rule__Model__Group_1__0 ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:975:1: ( ( rule__Model__Group_1__0 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:994:1: ( ( ( rule__Model__Group_1__0 ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:995:1: ( ( rule__Model__Group_1__0 ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:975:1: ( ( rule__Model__Group_1__0 ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:976:1: ( rule__Model__Group_1__0 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:995:1: ( ( rule__Model__Group_1__0 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:996:1: ( rule__Model__Group_1__0 )
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getModelAccess().getGroup_1()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:977:1: ( rule__Model__Group_1__0 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:977:2: rule__Model__Group_1__0
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:997:1: ( rule__Model__Group_1__0 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:997:2: rule__Model__Group_1__0
             {
-            pushFollow(FOLLOW_rule__Model__Group_1__0_in_rule__Model__Group__1__Impl2105);
+            pushFollow(FOLLOW_rule__Model__Group_1__0_in_rule__Model__Group__1__Impl2133);
             rule__Model__Group_1__0();
             _fsp--;
             if (failed) return ;
@@ -3193,20 +3191,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Model__Group_1__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:991:1: rule__Model__Group_1__0 : rule__Model__Group_1__0__Impl rule__Model__Group_1__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1011:1: rule__Model__Group_1__0 : rule__Model__Group_1__0__Impl rule__Model__Group_1__1 ;
     public final void rule__Model__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:995:1: ( rule__Model__Group_1__0__Impl rule__Model__Group_1__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:996:2: rule__Model__Group_1__0__Impl rule__Model__Group_1__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1015:1: ( rule__Model__Group_1__0__Impl rule__Model__Group_1__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1016:2: rule__Model__Group_1__0__Impl rule__Model__Group_1__1
             {
-            pushFollow(FOLLOW_rule__Model__Group_1__0__Impl_in_rule__Model__Group_1__02139);
+            pushFollow(FOLLOW_rule__Model__Group_1__0__Impl_in_rule__Model__Group_1__02167);
             rule__Model__Group_1__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Model__Group_1__1_in_rule__Model__Group_1__02142);
+            pushFollow(FOLLOW_rule__Model__Group_1__1_in_rule__Model__Group_1__02170);
             rule__Model__Group_1__1();
             _fsp--;
             if (failed) return ;
@@ -3229,22 +3227,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Model__Group_1__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1003:1: rule__Model__Group_1__0__Impl : ( ( rule__Model__FunctionsAssignment_1_0 )* ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1023:1: rule__Model__Group_1__0__Impl : ( ( rule__Model__FunctionsAssignment_1_0 )* ) ;
     public final void rule__Model__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1007:1: ( ( ( rule__Model__FunctionsAssignment_1_0 )* ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1008:1: ( ( rule__Model__FunctionsAssignment_1_0 )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1027:1: ( ( ( rule__Model__FunctionsAssignment_1_0 )* ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1028:1: ( ( rule__Model__FunctionsAssignment_1_0 )* )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1008:1: ( ( rule__Model__FunctionsAssignment_1_0 )* )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1009:1: ( rule__Model__FunctionsAssignment_1_0 )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1028:1: ( ( rule__Model__FunctionsAssignment_1_0 )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1029:1: ( rule__Model__FunctionsAssignment_1_0 )*
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getModelAccess().getFunctionsAssignment_1_0()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1010:1: ( rule__Model__FunctionsAssignment_1_0 )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1030:1: ( rule__Model__FunctionsAssignment_1_0 )*
             loop11:
             do {
                 int alt11=2;
@@ -3257,9 +3255,9 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
                 switch (alt11) {
             	case 1 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1010:2: rule__Model__FunctionsAssignment_1_0
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1030:2: rule__Model__FunctionsAssignment_1_0
             	    {
-            	    pushFollow(FOLLOW_rule__Model__FunctionsAssignment_1_0_in_rule__Model__Group_1__0__Impl2169);
+            	    pushFollow(FOLLOW_rule__Model__FunctionsAssignment_1_0_in_rule__Model__Group_1__0__Impl2197);
             	    rule__Model__FunctionsAssignment_1_0();
             	    _fsp--;
             	    if (failed) return ;
@@ -3297,16 +3295,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Model__Group_1__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1020:1: rule__Model__Group_1__1 : rule__Model__Group_1__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1040:1: rule__Model__Group_1__1 : rule__Model__Group_1__1__Impl ;
     public final void rule__Model__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1024:1: ( rule__Model__Group_1__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1025:2: rule__Model__Group_1__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1044:1: ( rule__Model__Group_1__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1045:2: rule__Model__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__Model__Group_1__1__Impl_in_rule__Model__Group_1__12200);
+            pushFollow(FOLLOW_rule__Model__Group_1__1__Impl_in_rule__Model__Group_1__12228);
             rule__Model__Group_1__1__Impl();
             _fsp--;
             if (failed) return ;
@@ -3329,25 +3327,25 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Model__Group_1__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1031:1: rule__Model__Group_1__1__Impl : ( ( rule__Model__MainAssignment_1_1 ) ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1051:1: rule__Model__Group_1__1__Impl : ( ( rule__Model__MainAssignment_1_1 ) ) ;
     public final void rule__Model__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1035:1: ( ( ( rule__Model__MainAssignment_1_1 ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1036:1: ( ( rule__Model__MainAssignment_1_1 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1055:1: ( ( ( rule__Model__MainAssignment_1_1 ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1056:1: ( ( rule__Model__MainAssignment_1_1 ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1036:1: ( ( rule__Model__MainAssignment_1_1 ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1037:1: ( rule__Model__MainAssignment_1_1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1056:1: ( ( rule__Model__MainAssignment_1_1 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1057:1: ( rule__Model__MainAssignment_1_1 )
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getModelAccess().getMainAssignment_1_1()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1038:1: ( rule__Model__MainAssignment_1_1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1038:2: rule__Model__MainAssignment_1_1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1058:1: ( rule__Model__MainAssignment_1_1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1058:2: rule__Model__MainAssignment_1_1
             {
-            pushFollow(FOLLOW_rule__Model__MainAssignment_1_1_in_rule__Model__Group_1__1__Impl2227);
+            pushFollow(FOLLOW_rule__Model__MainAssignment_1_1_in_rule__Model__Group_1__1__Impl2255);
             rule__Model__MainAssignment_1_1();
             _fsp--;
             if (failed) return ;
@@ -3379,20 +3377,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__Group__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1052:1: rule__FunctionDefinition__Group__0 : rule__FunctionDefinition__Group__0__Impl rule__FunctionDefinition__Group__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1072:1: rule__FunctionDefinition__Group__0 : rule__FunctionDefinition__Group__0__Impl rule__FunctionDefinition__Group__1 ;
     public final void rule__FunctionDefinition__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1056:1: ( rule__FunctionDefinition__Group__0__Impl rule__FunctionDefinition__Group__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1057:2: rule__FunctionDefinition__Group__0__Impl rule__FunctionDefinition__Group__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1076:1: ( rule__FunctionDefinition__Group__0__Impl rule__FunctionDefinition__Group__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1077:2: rule__FunctionDefinition__Group__0__Impl rule__FunctionDefinition__Group__1
             {
-            pushFollow(FOLLOW_rule__FunctionDefinition__Group__0__Impl_in_rule__FunctionDefinition__Group__02261);
+            pushFollow(FOLLOW_rule__FunctionDefinition__Group__0__Impl_in_rule__FunctionDefinition__Group__02289);
             rule__FunctionDefinition__Group__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__FunctionDefinition__Group__1_in_rule__FunctionDefinition__Group__02264);
+            pushFollow(FOLLOW_rule__FunctionDefinition__Group__1_in_rule__FunctionDefinition__Group__02292);
             rule__FunctionDefinition__Group__1();
             _fsp--;
             if (failed) return ;
@@ -3415,25 +3413,25 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__Group__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1064:1: rule__FunctionDefinition__Group__0__Impl : ( ( rule__FunctionDefinition__NameAssignment_0 ) ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1084:1: rule__FunctionDefinition__Group__0__Impl : ( ( rule__FunctionDefinition__NameAssignment_0 ) ) ;
     public final void rule__FunctionDefinition__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1068:1: ( ( ( rule__FunctionDefinition__NameAssignment_0 ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1069:1: ( ( rule__FunctionDefinition__NameAssignment_0 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1088:1: ( ( ( rule__FunctionDefinition__NameAssignment_0 ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1089:1: ( ( rule__FunctionDefinition__NameAssignment_0 ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1069:1: ( ( rule__FunctionDefinition__NameAssignment_0 ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1070:1: ( rule__FunctionDefinition__NameAssignment_0 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1089:1: ( ( rule__FunctionDefinition__NameAssignment_0 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1090:1: ( rule__FunctionDefinition__NameAssignment_0 )
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getNameAssignment_0()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1071:1: ( rule__FunctionDefinition__NameAssignment_0 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1071:2: rule__FunctionDefinition__NameAssignment_0
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1091:1: ( rule__FunctionDefinition__NameAssignment_0 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1091:2: rule__FunctionDefinition__NameAssignment_0
             {
-            pushFollow(FOLLOW_rule__FunctionDefinition__NameAssignment_0_in_rule__FunctionDefinition__Group__0__Impl2291);
+            pushFollow(FOLLOW_rule__FunctionDefinition__NameAssignment_0_in_rule__FunctionDefinition__Group__0__Impl2319);
             rule__FunctionDefinition__NameAssignment_0();
             _fsp--;
             if (failed) return ;
@@ -3465,20 +3463,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__Group__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1081:1: rule__FunctionDefinition__Group__1 : rule__FunctionDefinition__Group__1__Impl rule__FunctionDefinition__Group__2 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1101:1: rule__FunctionDefinition__Group__1 : rule__FunctionDefinition__Group__1__Impl rule__FunctionDefinition__Group__2 ;
     public final void rule__FunctionDefinition__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1085:1: ( rule__FunctionDefinition__Group__1__Impl rule__FunctionDefinition__Group__2 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1086:2: rule__FunctionDefinition__Group__1__Impl rule__FunctionDefinition__Group__2
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1105:1: ( rule__FunctionDefinition__Group__1__Impl rule__FunctionDefinition__Group__2 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1106:2: rule__FunctionDefinition__Group__1__Impl rule__FunctionDefinition__Group__2
             {
-            pushFollow(FOLLOW_rule__FunctionDefinition__Group__1__Impl_in_rule__FunctionDefinition__Group__12321);
+            pushFollow(FOLLOW_rule__FunctionDefinition__Group__1__Impl_in_rule__FunctionDefinition__Group__12349);
             rule__FunctionDefinition__Group__1__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__FunctionDefinition__Group__2_in_rule__FunctionDefinition__Group__12324);
+            pushFollow(FOLLOW_rule__FunctionDefinition__Group__2_in_rule__FunctionDefinition__Group__12352);
             rule__FunctionDefinition__Group__2();
             _fsp--;
             if (failed) return ;
@@ -3501,22 +3499,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__Group__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1093:1: rule__FunctionDefinition__Group__1__Impl : ( '(' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1113:1: rule__FunctionDefinition__Group__1__Impl : ( '(' ) ;
     public final void rule__FunctionDefinition__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1097:1: ( ( '(' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1098:1: ( '(' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1117:1: ( ( '(' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1118:1: ( '(' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1098:1: ( '(' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1099:1: '('
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1118:1: ( '(' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1119:1: '('
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getLeftParenthesisKeyword_1()); 
             }
-            match(input,27,FOLLOW_27_in_rule__FunctionDefinition__Group__1__Impl2352); if (failed) return ;
+            match(input,29,FOLLOW_29_in_rule__FunctionDefinition__Group__1__Impl2380); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getFunctionDefinitionAccess().getLeftParenthesisKeyword_1()); 
             }
@@ -3542,20 +3540,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__Group__2
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1112:1: rule__FunctionDefinition__Group__2 : rule__FunctionDefinition__Group__2__Impl rule__FunctionDefinition__Group__3 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1132:1: rule__FunctionDefinition__Group__2 : rule__FunctionDefinition__Group__2__Impl rule__FunctionDefinition__Group__3 ;
     public final void rule__FunctionDefinition__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1116:1: ( rule__FunctionDefinition__Group__2__Impl rule__FunctionDefinition__Group__3 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1117:2: rule__FunctionDefinition__Group__2__Impl rule__FunctionDefinition__Group__3
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1136:1: ( rule__FunctionDefinition__Group__2__Impl rule__FunctionDefinition__Group__3 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1137:2: rule__FunctionDefinition__Group__2__Impl rule__FunctionDefinition__Group__3
             {
-            pushFollow(FOLLOW_rule__FunctionDefinition__Group__2__Impl_in_rule__FunctionDefinition__Group__22383);
+            pushFollow(FOLLOW_rule__FunctionDefinition__Group__2__Impl_in_rule__FunctionDefinition__Group__22411);
             rule__FunctionDefinition__Group__2__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__FunctionDefinition__Group__3_in_rule__FunctionDefinition__Group__22386);
+            pushFollow(FOLLOW_rule__FunctionDefinition__Group__3_in_rule__FunctionDefinition__Group__22414);
             rule__FunctionDefinition__Group__3();
             _fsp--;
             if (failed) return ;
@@ -3578,22 +3576,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__Group__2__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1124:1: rule__FunctionDefinition__Group__2__Impl : ( ( rule__FunctionDefinition__FormalParamsAssignment_2 )? ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1144:1: rule__FunctionDefinition__Group__2__Impl : ( ( rule__FunctionDefinition__FormalParamsAssignment_2 )? ) ;
     public final void rule__FunctionDefinition__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1128:1: ( ( ( rule__FunctionDefinition__FormalParamsAssignment_2 )? ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1129:1: ( ( rule__FunctionDefinition__FormalParamsAssignment_2 )? )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1148:1: ( ( ( rule__FunctionDefinition__FormalParamsAssignment_2 )? ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1149:1: ( ( rule__FunctionDefinition__FormalParamsAssignment_2 )? )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1129:1: ( ( rule__FunctionDefinition__FormalParamsAssignment_2 )? )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1130:1: ( rule__FunctionDefinition__FormalParamsAssignment_2 )?
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1149:1: ( ( rule__FunctionDefinition__FormalParamsAssignment_2 )? )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1150:1: ( rule__FunctionDefinition__FormalParamsAssignment_2 )?
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getFormalParamsAssignment_2()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1131:1: ( rule__FunctionDefinition__FormalParamsAssignment_2 )?
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1151:1: ( rule__FunctionDefinition__FormalParamsAssignment_2 )?
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -3602,9 +3600,9 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             }
             switch (alt12) {
                 case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1131:2: rule__FunctionDefinition__FormalParamsAssignment_2
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1151:2: rule__FunctionDefinition__FormalParamsAssignment_2
                     {
-                    pushFollow(FOLLOW_rule__FunctionDefinition__FormalParamsAssignment_2_in_rule__FunctionDefinition__Group__2__Impl2413);
+                    pushFollow(FOLLOW_rule__FunctionDefinition__FormalParamsAssignment_2_in_rule__FunctionDefinition__Group__2__Impl2441);
                     rule__FunctionDefinition__FormalParamsAssignment_2();
                     _fsp--;
                     if (failed) return ;
@@ -3639,20 +3637,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__Group__3
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1141:1: rule__FunctionDefinition__Group__3 : rule__FunctionDefinition__Group__3__Impl rule__FunctionDefinition__Group__4 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1161:1: rule__FunctionDefinition__Group__3 : rule__FunctionDefinition__Group__3__Impl rule__FunctionDefinition__Group__4 ;
     public final void rule__FunctionDefinition__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1145:1: ( rule__FunctionDefinition__Group__3__Impl rule__FunctionDefinition__Group__4 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1146:2: rule__FunctionDefinition__Group__3__Impl rule__FunctionDefinition__Group__4
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1165:1: ( rule__FunctionDefinition__Group__3__Impl rule__FunctionDefinition__Group__4 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1166:2: rule__FunctionDefinition__Group__3__Impl rule__FunctionDefinition__Group__4
             {
-            pushFollow(FOLLOW_rule__FunctionDefinition__Group__3__Impl_in_rule__FunctionDefinition__Group__32444);
+            pushFollow(FOLLOW_rule__FunctionDefinition__Group__3__Impl_in_rule__FunctionDefinition__Group__32472);
             rule__FunctionDefinition__Group__3__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__FunctionDefinition__Group__4_in_rule__FunctionDefinition__Group__32447);
+            pushFollow(FOLLOW_rule__FunctionDefinition__Group__4_in_rule__FunctionDefinition__Group__32475);
             rule__FunctionDefinition__Group__4();
             _fsp--;
             if (failed) return ;
@@ -3675,22 +3673,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__Group__3__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1153:1: rule__FunctionDefinition__Group__3__Impl : ( ')' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1173:1: rule__FunctionDefinition__Group__3__Impl : ( ')' ) ;
     public final void rule__FunctionDefinition__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1157:1: ( ( ')' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1158:1: ( ')' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1177:1: ( ( ')' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1178:1: ( ')' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1158:1: ( ')' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1159:1: ')'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1178:1: ( ')' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1179:1: ')'
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getRightParenthesisKeyword_3()); 
             }
-            match(input,28,FOLLOW_28_in_rule__FunctionDefinition__Group__3__Impl2475); if (failed) return ;
+            match(input,30,FOLLOW_30_in_rule__FunctionDefinition__Group__3__Impl2503); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getFunctionDefinitionAccess().getRightParenthesisKeyword_3()); 
             }
@@ -3716,20 +3714,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__Group__4
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1172:1: rule__FunctionDefinition__Group__4 : rule__FunctionDefinition__Group__4__Impl rule__FunctionDefinition__Group__5 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1192:1: rule__FunctionDefinition__Group__4 : rule__FunctionDefinition__Group__4__Impl rule__FunctionDefinition__Group__5 ;
     public final void rule__FunctionDefinition__Group__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1176:1: ( rule__FunctionDefinition__Group__4__Impl rule__FunctionDefinition__Group__5 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1177:2: rule__FunctionDefinition__Group__4__Impl rule__FunctionDefinition__Group__5
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1196:1: ( rule__FunctionDefinition__Group__4__Impl rule__FunctionDefinition__Group__5 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1197:2: rule__FunctionDefinition__Group__4__Impl rule__FunctionDefinition__Group__5
             {
-            pushFollow(FOLLOW_rule__FunctionDefinition__Group__4__Impl_in_rule__FunctionDefinition__Group__42506);
+            pushFollow(FOLLOW_rule__FunctionDefinition__Group__4__Impl_in_rule__FunctionDefinition__Group__42534);
             rule__FunctionDefinition__Group__4__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__FunctionDefinition__Group__5_in_rule__FunctionDefinition__Group__42509);
+            pushFollow(FOLLOW_rule__FunctionDefinition__Group__5_in_rule__FunctionDefinition__Group__42537);
             rule__FunctionDefinition__Group__5();
             _fsp--;
             if (failed) return ;
@@ -3752,33 +3750,33 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__Group__4__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1184:1: rule__FunctionDefinition__Group__4__Impl : ( ( rule__FunctionDefinition__Group_4__0 )? ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1204:1: rule__FunctionDefinition__Group__4__Impl : ( ( rule__FunctionDefinition__Group_4__0 )? ) ;
     public final void rule__FunctionDefinition__Group__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1188:1: ( ( ( rule__FunctionDefinition__Group_4__0 )? ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1189:1: ( ( rule__FunctionDefinition__Group_4__0 )? )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1208:1: ( ( ( rule__FunctionDefinition__Group_4__0 )? ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1209:1: ( ( rule__FunctionDefinition__Group_4__0 )? )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1189:1: ( ( rule__FunctionDefinition__Group_4__0 )? )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1190:1: ( rule__FunctionDefinition__Group_4__0 )?
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1209:1: ( ( rule__FunctionDefinition__Group_4__0 )? )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1210:1: ( rule__FunctionDefinition__Group_4__0 )?
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getGroup_4()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1191:1: ( rule__FunctionDefinition__Group_4__0 )?
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1211:1: ( rule__FunctionDefinition__Group_4__0 )?
             int alt13=2;
             int LA13_0 = input.LA(1);
 
-            if ( (LA13_0==29) ) {
+            if ( (LA13_0==31) ) {
                 alt13=1;
             }
             switch (alt13) {
                 case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1191:2: rule__FunctionDefinition__Group_4__0
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1211:2: rule__FunctionDefinition__Group_4__0
                     {
-                    pushFollow(FOLLOW_rule__FunctionDefinition__Group_4__0_in_rule__FunctionDefinition__Group__4__Impl2536);
+                    pushFollow(FOLLOW_rule__FunctionDefinition__Group_4__0_in_rule__FunctionDefinition__Group__4__Impl2564);
                     rule__FunctionDefinition__Group_4__0();
                     _fsp--;
                     if (failed) return ;
@@ -3813,16 +3811,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__Group__5
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1201:1: rule__FunctionDefinition__Group__5 : rule__FunctionDefinition__Group__5__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1221:1: rule__FunctionDefinition__Group__5 : rule__FunctionDefinition__Group__5__Impl ;
     public final void rule__FunctionDefinition__Group__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1205:1: ( rule__FunctionDefinition__Group__5__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1206:2: rule__FunctionDefinition__Group__5__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1225:1: ( rule__FunctionDefinition__Group__5__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1226:2: rule__FunctionDefinition__Group__5__Impl
             {
-            pushFollow(FOLLOW_rule__FunctionDefinition__Group__5__Impl_in_rule__FunctionDefinition__Group__52567);
+            pushFollow(FOLLOW_rule__FunctionDefinition__Group__5__Impl_in_rule__FunctionDefinition__Group__52595);
             rule__FunctionDefinition__Group__5__Impl();
             _fsp--;
             if (failed) return ;
@@ -3845,25 +3843,25 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__Group__5__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1212:1: rule__FunctionDefinition__Group__5__Impl : ( ( rule__FunctionDefinition__BlocksAssignment_5 ) ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1232:1: rule__FunctionDefinition__Group__5__Impl : ( ( rule__FunctionDefinition__BlocksAssignment_5 ) ) ;
     public final void rule__FunctionDefinition__Group__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1216:1: ( ( ( rule__FunctionDefinition__BlocksAssignment_5 ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1217:1: ( ( rule__FunctionDefinition__BlocksAssignment_5 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1236:1: ( ( ( rule__FunctionDefinition__BlocksAssignment_5 ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1237:1: ( ( rule__FunctionDefinition__BlocksAssignment_5 ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1217:1: ( ( rule__FunctionDefinition__BlocksAssignment_5 ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1218:1: ( rule__FunctionDefinition__BlocksAssignment_5 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1237:1: ( ( rule__FunctionDefinition__BlocksAssignment_5 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1238:1: ( rule__FunctionDefinition__BlocksAssignment_5 )
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getBlocksAssignment_5()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1219:1: ( rule__FunctionDefinition__BlocksAssignment_5 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1219:2: rule__FunctionDefinition__BlocksAssignment_5
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1239:1: ( rule__FunctionDefinition__BlocksAssignment_5 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1239:2: rule__FunctionDefinition__BlocksAssignment_5
             {
-            pushFollow(FOLLOW_rule__FunctionDefinition__BlocksAssignment_5_in_rule__FunctionDefinition__Group__5__Impl2594);
+            pushFollow(FOLLOW_rule__FunctionDefinition__BlocksAssignment_5_in_rule__FunctionDefinition__Group__5__Impl2622);
             rule__FunctionDefinition__BlocksAssignment_5();
             _fsp--;
             if (failed) return ;
@@ -3895,20 +3893,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__Group_4__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1241:1: rule__FunctionDefinition__Group_4__0 : rule__FunctionDefinition__Group_4__0__Impl rule__FunctionDefinition__Group_4__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1261:1: rule__FunctionDefinition__Group_4__0 : rule__FunctionDefinition__Group_4__0__Impl rule__FunctionDefinition__Group_4__1 ;
     public final void rule__FunctionDefinition__Group_4__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1245:1: ( rule__FunctionDefinition__Group_4__0__Impl rule__FunctionDefinition__Group_4__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1246:2: rule__FunctionDefinition__Group_4__0__Impl rule__FunctionDefinition__Group_4__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1265:1: ( rule__FunctionDefinition__Group_4__0__Impl rule__FunctionDefinition__Group_4__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1266:2: rule__FunctionDefinition__Group_4__0__Impl rule__FunctionDefinition__Group_4__1
             {
-            pushFollow(FOLLOW_rule__FunctionDefinition__Group_4__0__Impl_in_rule__FunctionDefinition__Group_4__02636);
+            pushFollow(FOLLOW_rule__FunctionDefinition__Group_4__0__Impl_in_rule__FunctionDefinition__Group_4__02664);
             rule__FunctionDefinition__Group_4__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__FunctionDefinition__Group_4__1_in_rule__FunctionDefinition__Group_4__02639);
+            pushFollow(FOLLOW_rule__FunctionDefinition__Group_4__1_in_rule__FunctionDefinition__Group_4__02667);
             rule__FunctionDefinition__Group_4__1();
             _fsp--;
             if (failed) return ;
@@ -3931,22 +3929,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__Group_4__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1253:1: rule__FunctionDefinition__Group_4__0__Impl : ( ':' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1273:1: rule__FunctionDefinition__Group_4__0__Impl : ( ':' ) ;
     public final void rule__FunctionDefinition__Group_4__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1257:1: ( ( ':' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1258:1: ( ':' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1277:1: ( ( ':' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1278:1: ( ':' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1258:1: ( ':' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1259:1: ':'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1278:1: ( ':' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1279:1: ':'
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getColonKeyword_4_0()); 
             }
-            match(input,29,FOLLOW_29_in_rule__FunctionDefinition__Group_4__0__Impl2667); if (failed) return ;
+            match(input,31,FOLLOW_31_in_rule__FunctionDefinition__Group_4__0__Impl2695); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getFunctionDefinitionAccess().getColonKeyword_4_0()); 
             }
@@ -3972,16 +3970,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__Group_4__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1272:1: rule__FunctionDefinition__Group_4__1 : rule__FunctionDefinition__Group_4__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1292:1: rule__FunctionDefinition__Group_4__1 : rule__FunctionDefinition__Group_4__1__Impl ;
     public final void rule__FunctionDefinition__Group_4__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1276:1: ( rule__FunctionDefinition__Group_4__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1277:2: rule__FunctionDefinition__Group_4__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1296:1: ( rule__FunctionDefinition__Group_4__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1297:2: rule__FunctionDefinition__Group_4__1__Impl
             {
-            pushFollow(FOLLOW_rule__FunctionDefinition__Group_4__1__Impl_in_rule__FunctionDefinition__Group_4__12698);
+            pushFollow(FOLLOW_rule__FunctionDefinition__Group_4__1__Impl_in_rule__FunctionDefinition__Group_4__12726);
             rule__FunctionDefinition__Group_4__1__Impl();
             _fsp--;
             if (failed) return ;
@@ -4004,25 +4002,25 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__Group_4__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1283:1: rule__FunctionDefinition__Group_4__1__Impl : ( ( rule__FunctionDefinition__ReturnTypeAssignment_4_1 ) ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1303:1: rule__FunctionDefinition__Group_4__1__Impl : ( ( rule__FunctionDefinition__ReturnTypeAssignment_4_1 ) ) ;
     public final void rule__FunctionDefinition__Group_4__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1287:1: ( ( ( rule__FunctionDefinition__ReturnTypeAssignment_4_1 ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1288:1: ( ( rule__FunctionDefinition__ReturnTypeAssignment_4_1 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1307:1: ( ( ( rule__FunctionDefinition__ReturnTypeAssignment_4_1 ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1308:1: ( ( rule__FunctionDefinition__ReturnTypeAssignment_4_1 ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1288:1: ( ( rule__FunctionDefinition__ReturnTypeAssignment_4_1 ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1289:1: ( rule__FunctionDefinition__ReturnTypeAssignment_4_1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1308:1: ( ( rule__FunctionDefinition__ReturnTypeAssignment_4_1 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1309:1: ( rule__FunctionDefinition__ReturnTypeAssignment_4_1 )
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getReturnTypeAssignment_4_1()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1290:1: ( rule__FunctionDefinition__ReturnTypeAssignment_4_1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1290:2: rule__FunctionDefinition__ReturnTypeAssignment_4_1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1310:1: ( rule__FunctionDefinition__ReturnTypeAssignment_4_1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1310:2: rule__FunctionDefinition__ReturnTypeAssignment_4_1
             {
-            pushFollow(FOLLOW_rule__FunctionDefinition__ReturnTypeAssignment_4_1_in_rule__FunctionDefinition__Group_4__1__Impl2725);
+            pushFollow(FOLLOW_rule__FunctionDefinition__ReturnTypeAssignment_4_1_in_rule__FunctionDefinition__Group_4__1__Impl2753);
             rule__FunctionDefinition__ReturnTypeAssignment_4_1();
             _fsp--;
             if (failed) return ;
@@ -4054,20 +4052,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__MainFunction__Group__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1304:1: rule__MainFunction__Group__0 : rule__MainFunction__Group__0__Impl rule__MainFunction__Group__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1324:1: rule__MainFunction__Group__0 : rule__MainFunction__Group__0__Impl rule__MainFunction__Group__1 ;
     public final void rule__MainFunction__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1308:1: ( rule__MainFunction__Group__0__Impl rule__MainFunction__Group__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1309:2: rule__MainFunction__Group__0__Impl rule__MainFunction__Group__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1328:1: ( rule__MainFunction__Group__0__Impl rule__MainFunction__Group__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1329:2: rule__MainFunction__Group__0__Impl rule__MainFunction__Group__1
             {
-            pushFollow(FOLLOW_rule__MainFunction__Group__0__Impl_in_rule__MainFunction__Group__02759);
+            pushFollow(FOLLOW_rule__MainFunction__Group__0__Impl_in_rule__MainFunction__Group__02787);
             rule__MainFunction__Group__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__MainFunction__Group__1_in_rule__MainFunction__Group__02762);
+            pushFollow(FOLLOW_rule__MainFunction__Group__1_in_rule__MainFunction__Group__02790);
             rule__MainFunction__Group__1();
             _fsp--;
             if (failed) return ;
@@ -4090,22 +4088,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__MainFunction__Group__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1316:1: rule__MainFunction__Group__0__Impl : ( 'main(' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1336:1: rule__MainFunction__Group__0__Impl : ( 'main(' ) ;
     public final void rule__MainFunction__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1320:1: ( ( 'main(' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1321:1: ( 'main(' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1340:1: ( ( 'main(' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1341:1: ( 'main(' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1321:1: ( 'main(' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1322:1: 'main('
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1341:1: ( 'main(' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1342:1: 'main('
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getMainFunctionAccess().getMainKeyword_0()); 
             }
-            match(input,30,FOLLOW_30_in_rule__MainFunction__Group__0__Impl2790); if (failed) return ;
+            match(input,32,FOLLOW_32_in_rule__MainFunction__Group__0__Impl2818); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getMainFunctionAccess().getMainKeyword_0()); 
             }
@@ -4131,20 +4129,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__MainFunction__Group__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1335:1: rule__MainFunction__Group__1 : rule__MainFunction__Group__1__Impl rule__MainFunction__Group__2 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1355:1: rule__MainFunction__Group__1 : rule__MainFunction__Group__1__Impl rule__MainFunction__Group__2 ;
     public final void rule__MainFunction__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1339:1: ( rule__MainFunction__Group__1__Impl rule__MainFunction__Group__2 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1340:2: rule__MainFunction__Group__1__Impl rule__MainFunction__Group__2
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1359:1: ( rule__MainFunction__Group__1__Impl rule__MainFunction__Group__2 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1360:2: rule__MainFunction__Group__1__Impl rule__MainFunction__Group__2
             {
-            pushFollow(FOLLOW_rule__MainFunction__Group__1__Impl_in_rule__MainFunction__Group__12821);
+            pushFollow(FOLLOW_rule__MainFunction__Group__1__Impl_in_rule__MainFunction__Group__12849);
             rule__MainFunction__Group__1__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__MainFunction__Group__2_in_rule__MainFunction__Group__12824);
+            pushFollow(FOLLOW_rule__MainFunction__Group__2_in_rule__MainFunction__Group__12852);
             rule__MainFunction__Group__2();
             _fsp--;
             if (failed) return ;
@@ -4167,22 +4165,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__MainFunction__Group__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1347:1: rule__MainFunction__Group__1__Impl : ( ( rule__MainFunction__FormalParamsAssignment_1 )? ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1367:1: rule__MainFunction__Group__1__Impl : ( ( rule__MainFunction__FormalParamsAssignment_1 )? ) ;
     public final void rule__MainFunction__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1351:1: ( ( ( rule__MainFunction__FormalParamsAssignment_1 )? ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1352:1: ( ( rule__MainFunction__FormalParamsAssignment_1 )? )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1371:1: ( ( ( rule__MainFunction__FormalParamsAssignment_1 )? ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1372:1: ( ( rule__MainFunction__FormalParamsAssignment_1 )? )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1352:1: ( ( rule__MainFunction__FormalParamsAssignment_1 )? )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1353:1: ( rule__MainFunction__FormalParamsAssignment_1 )?
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1372:1: ( ( rule__MainFunction__FormalParamsAssignment_1 )? )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1373:1: ( rule__MainFunction__FormalParamsAssignment_1 )?
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getMainFunctionAccess().getFormalParamsAssignment_1()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1354:1: ( rule__MainFunction__FormalParamsAssignment_1 )?
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1374:1: ( rule__MainFunction__FormalParamsAssignment_1 )?
             int alt14=2;
             int LA14_0 = input.LA(1);
 
@@ -4191,9 +4189,9 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             }
             switch (alt14) {
                 case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1354:2: rule__MainFunction__FormalParamsAssignment_1
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1374:2: rule__MainFunction__FormalParamsAssignment_1
                     {
-                    pushFollow(FOLLOW_rule__MainFunction__FormalParamsAssignment_1_in_rule__MainFunction__Group__1__Impl2851);
+                    pushFollow(FOLLOW_rule__MainFunction__FormalParamsAssignment_1_in_rule__MainFunction__Group__1__Impl2879);
                     rule__MainFunction__FormalParamsAssignment_1();
                     _fsp--;
                     if (failed) return ;
@@ -4228,20 +4226,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__MainFunction__Group__2
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1364:1: rule__MainFunction__Group__2 : rule__MainFunction__Group__2__Impl rule__MainFunction__Group__3 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1384:1: rule__MainFunction__Group__2 : rule__MainFunction__Group__2__Impl rule__MainFunction__Group__3 ;
     public final void rule__MainFunction__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1368:1: ( rule__MainFunction__Group__2__Impl rule__MainFunction__Group__3 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1369:2: rule__MainFunction__Group__2__Impl rule__MainFunction__Group__3
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1388:1: ( rule__MainFunction__Group__2__Impl rule__MainFunction__Group__3 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1389:2: rule__MainFunction__Group__2__Impl rule__MainFunction__Group__3
             {
-            pushFollow(FOLLOW_rule__MainFunction__Group__2__Impl_in_rule__MainFunction__Group__22882);
+            pushFollow(FOLLOW_rule__MainFunction__Group__2__Impl_in_rule__MainFunction__Group__22910);
             rule__MainFunction__Group__2__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__MainFunction__Group__3_in_rule__MainFunction__Group__22885);
+            pushFollow(FOLLOW_rule__MainFunction__Group__3_in_rule__MainFunction__Group__22913);
             rule__MainFunction__Group__3();
             _fsp--;
             if (failed) return ;
@@ -4264,22 +4262,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__MainFunction__Group__2__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1376:1: rule__MainFunction__Group__2__Impl : ( ')' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1396:1: rule__MainFunction__Group__2__Impl : ( ')' ) ;
     public final void rule__MainFunction__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1380:1: ( ( ')' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1381:1: ( ')' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1400:1: ( ( ')' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1401:1: ( ')' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1381:1: ( ')' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1382:1: ')'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1401:1: ( ')' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1402:1: ')'
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getMainFunctionAccess().getRightParenthesisKeyword_2()); 
             }
-            match(input,28,FOLLOW_28_in_rule__MainFunction__Group__2__Impl2913); if (failed) return ;
+            match(input,30,FOLLOW_30_in_rule__MainFunction__Group__2__Impl2941); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getMainFunctionAccess().getRightParenthesisKeyword_2()); 
             }
@@ -4305,16 +4303,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__MainFunction__Group__3
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1395:1: rule__MainFunction__Group__3 : rule__MainFunction__Group__3__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1415:1: rule__MainFunction__Group__3 : rule__MainFunction__Group__3__Impl ;
     public final void rule__MainFunction__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1399:1: ( rule__MainFunction__Group__3__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1400:2: rule__MainFunction__Group__3__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1419:1: ( rule__MainFunction__Group__3__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1420:2: rule__MainFunction__Group__3__Impl
             {
-            pushFollow(FOLLOW_rule__MainFunction__Group__3__Impl_in_rule__MainFunction__Group__32944);
+            pushFollow(FOLLOW_rule__MainFunction__Group__3__Impl_in_rule__MainFunction__Group__32972);
             rule__MainFunction__Group__3__Impl();
             _fsp--;
             if (failed) return ;
@@ -4337,25 +4335,25 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__MainFunction__Group__3__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1406:1: rule__MainFunction__Group__3__Impl : ( ( rule__MainFunction__BlocksAssignment_3 ) ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1426:1: rule__MainFunction__Group__3__Impl : ( ( rule__MainFunction__BlocksAssignment_3 ) ) ;
     public final void rule__MainFunction__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1410:1: ( ( ( rule__MainFunction__BlocksAssignment_3 ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1411:1: ( ( rule__MainFunction__BlocksAssignment_3 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1430:1: ( ( ( rule__MainFunction__BlocksAssignment_3 ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1431:1: ( ( rule__MainFunction__BlocksAssignment_3 ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1411:1: ( ( rule__MainFunction__BlocksAssignment_3 ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1412:1: ( rule__MainFunction__BlocksAssignment_3 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1431:1: ( ( rule__MainFunction__BlocksAssignment_3 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1432:1: ( rule__MainFunction__BlocksAssignment_3 )
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getMainFunctionAccess().getBlocksAssignment_3()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1413:1: ( rule__MainFunction__BlocksAssignment_3 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1413:2: rule__MainFunction__BlocksAssignment_3
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1433:1: ( rule__MainFunction__BlocksAssignment_3 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1433:2: rule__MainFunction__BlocksAssignment_3
             {
-            pushFollow(FOLLOW_rule__MainFunction__BlocksAssignment_3_in_rule__MainFunction__Group__3__Impl2971);
+            pushFollow(FOLLOW_rule__MainFunction__BlocksAssignment_3_in_rule__MainFunction__Group__3__Impl2999);
             rule__MainFunction__BlocksAssignment_3();
             _fsp--;
             if (failed) return ;
@@ -4387,20 +4385,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FormalParams__Group__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1431:1: rule__FormalParams__Group__0 : rule__FormalParams__Group__0__Impl rule__FormalParams__Group__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1451:1: rule__FormalParams__Group__0 : rule__FormalParams__Group__0__Impl rule__FormalParams__Group__1 ;
     public final void rule__FormalParams__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1435:1: ( rule__FormalParams__Group__0__Impl rule__FormalParams__Group__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1436:2: rule__FormalParams__Group__0__Impl rule__FormalParams__Group__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1455:1: ( rule__FormalParams__Group__0__Impl rule__FormalParams__Group__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1456:2: rule__FormalParams__Group__0__Impl rule__FormalParams__Group__1
             {
-            pushFollow(FOLLOW_rule__FormalParams__Group__0__Impl_in_rule__FormalParams__Group__03009);
+            pushFollow(FOLLOW_rule__FormalParams__Group__0__Impl_in_rule__FormalParams__Group__03037);
             rule__FormalParams__Group__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__FormalParams__Group__1_in_rule__FormalParams__Group__03012);
+            pushFollow(FOLLOW_rule__FormalParams__Group__1_in_rule__FormalParams__Group__03040);
             rule__FormalParams__Group__1();
             _fsp--;
             if (failed) return ;
@@ -4423,25 +4421,25 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FormalParams__Group__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1443:1: rule__FormalParams__Group__0__Impl : ( ( rule__FormalParams__ParamsAssignment_0 ) ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1463:1: rule__FormalParams__Group__0__Impl : ( ( rule__FormalParams__ParamsAssignment_0 ) ) ;
     public final void rule__FormalParams__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1447:1: ( ( ( rule__FormalParams__ParamsAssignment_0 ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1448:1: ( ( rule__FormalParams__ParamsAssignment_0 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1467:1: ( ( ( rule__FormalParams__ParamsAssignment_0 ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1468:1: ( ( rule__FormalParams__ParamsAssignment_0 ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1448:1: ( ( rule__FormalParams__ParamsAssignment_0 ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1449:1: ( rule__FormalParams__ParamsAssignment_0 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1468:1: ( ( rule__FormalParams__ParamsAssignment_0 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1469:1: ( rule__FormalParams__ParamsAssignment_0 )
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getFormalParamsAccess().getParamsAssignment_0()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1450:1: ( rule__FormalParams__ParamsAssignment_0 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1450:2: rule__FormalParams__ParamsAssignment_0
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1470:1: ( rule__FormalParams__ParamsAssignment_0 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1470:2: rule__FormalParams__ParamsAssignment_0
             {
-            pushFollow(FOLLOW_rule__FormalParams__ParamsAssignment_0_in_rule__FormalParams__Group__0__Impl3039);
+            pushFollow(FOLLOW_rule__FormalParams__ParamsAssignment_0_in_rule__FormalParams__Group__0__Impl3067);
             rule__FormalParams__ParamsAssignment_0();
             _fsp--;
             if (failed) return ;
@@ -4473,16 +4471,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FormalParams__Group__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1460:1: rule__FormalParams__Group__1 : rule__FormalParams__Group__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1480:1: rule__FormalParams__Group__1 : rule__FormalParams__Group__1__Impl ;
     public final void rule__FormalParams__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1464:1: ( rule__FormalParams__Group__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1465:2: rule__FormalParams__Group__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1484:1: ( rule__FormalParams__Group__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1485:2: rule__FormalParams__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__FormalParams__Group__1__Impl_in_rule__FormalParams__Group__13069);
+            pushFollow(FOLLOW_rule__FormalParams__Group__1__Impl_in_rule__FormalParams__Group__13097);
             rule__FormalParams__Group__1__Impl();
             _fsp--;
             if (failed) return ;
@@ -4505,37 +4503,37 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FormalParams__Group__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1471:1: rule__FormalParams__Group__1__Impl : ( ( rule__FormalParams__Group_1__0 )* ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1491:1: rule__FormalParams__Group__1__Impl : ( ( rule__FormalParams__Group_1__0 )* ) ;
     public final void rule__FormalParams__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1475:1: ( ( ( rule__FormalParams__Group_1__0 )* ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1476:1: ( ( rule__FormalParams__Group_1__0 )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1495:1: ( ( ( rule__FormalParams__Group_1__0 )* ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1496:1: ( ( rule__FormalParams__Group_1__0 )* )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1476:1: ( ( rule__FormalParams__Group_1__0 )* )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1477:1: ( rule__FormalParams__Group_1__0 )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1496:1: ( ( rule__FormalParams__Group_1__0 )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1497:1: ( rule__FormalParams__Group_1__0 )*
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getFormalParamsAccess().getGroup_1()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1478:1: ( rule__FormalParams__Group_1__0 )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1498:1: ( rule__FormalParams__Group_1__0 )*
             loop15:
             do {
                 int alt15=2;
                 int LA15_0 = input.LA(1);
 
-                if ( (LA15_0==31) ) {
+                if ( (LA15_0==27) ) {
                     alt15=1;
                 }
 
 
                 switch (alt15) {
             	case 1 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1478:2: rule__FormalParams__Group_1__0
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1498:2: rule__FormalParams__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__FormalParams__Group_1__0_in_rule__FormalParams__Group__1__Impl3096);
+            	    pushFollow(FOLLOW_rule__FormalParams__Group_1__0_in_rule__FormalParams__Group__1__Impl3124);
             	    rule__FormalParams__Group_1__0();
             	    _fsp--;
             	    if (failed) return ;
@@ -4573,20 +4571,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FormalParams__Group_1__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1492:1: rule__FormalParams__Group_1__0 : rule__FormalParams__Group_1__0__Impl rule__FormalParams__Group_1__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1512:1: rule__FormalParams__Group_1__0 : rule__FormalParams__Group_1__0__Impl rule__FormalParams__Group_1__1 ;
     public final void rule__FormalParams__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1496:1: ( rule__FormalParams__Group_1__0__Impl rule__FormalParams__Group_1__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1497:2: rule__FormalParams__Group_1__0__Impl rule__FormalParams__Group_1__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1516:1: ( rule__FormalParams__Group_1__0__Impl rule__FormalParams__Group_1__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1517:2: rule__FormalParams__Group_1__0__Impl rule__FormalParams__Group_1__1
             {
-            pushFollow(FOLLOW_rule__FormalParams__Group_1__0__Impl_in_rule__FormalParams__Group_1__03131);
+            pushFollow(FOLLOW_rule__FormalParams__Group_1__0__Impl_in_rule__FormalParams__Group_1__03159);
             rule__FormalParams__Group_1__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__FormalParams__Group_1__1_in_rule__FormalParams__Group_1__03134);
+            pushFollow(FOLLOW_rule__FormalParams__Group_1__1_in_rule__FormalParams__Group_1__03162);
             rule__FormalParams__Group_1__1();
             _fsp--;
             if (failed) return ;
@@ -4609,22 +4607,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FormalParams__Group_1__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1504:1: rule__FormalParams__Group_1__0__Impl : ( ',' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1524:1: rule__FormalParams__Group_1__0__Impl : ( ',' ) ;
     public final void rule__FormalParams__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1508:1: ( ( ',' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1509:1: ( ',' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1528:1: ( ( ',' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1529:1: ( ',' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1509:1: ( ',' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1510:1: ','
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1529:1: ( ',' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1530:1: ','
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getFormalParamsAccess().getCommaKeyword_1_0()); 
             }
-            match(input,31,FOLLOW_31_in_rule__FormalParams__Group_1__0__Impl3162); if (failed) return ;
+            match(input,27,FOLLOW_27_in_rule__FormalParams__Group_1__0__Impl3190); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getFormalParamsAccess().getCommaKeyword_1_0()); 
             }
@@ -4650,16 +4648,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FormalParams__Group_1__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1523:1: rule__FormalParams__Group_1__1 : rule__FormalParams__Group_1__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1543:1: rule__FormalParams__Group_1__1 : rule__FormalParams__Group_1__1__Impl ;
     public final void rule__FormalParams__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1527:1: ( rule__FormalParams__Group_1__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1528:2: rule__FormalParams__Group_1__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1547:1: ( rule__FormalParams__Group_1__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1548:2: rule__FormalParams__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__FormalParams__Group_1__1__Impl_in_rule__FormalParams__Group_1__13193);
+            pushFollow(FOLLOW_rule__FormalParams__Group_1__1__Impl_in_rule__FormalParams__Group_1__13221);
             rule__FormalParams__Group_1__1__Impl();
             _fsp--;
             if (failed) return ;
@@ -4682,25 +4680,25 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FormalParams__Group_1__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1534:1: rule__FormalParams__Group_1__1__Impl : ( ( rule__FormalParams__ParamsAssignment_1_1 ) ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1554:1: rule__FormalParams__Group_1__1__Impl : ( ( rule__FormalParams__ParamsAssignment_1_1 ) ) ;
     public final void rule__FormalParams__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1538:1: ( ( ( rule__FormalParams__ParamsAssignment_1_1 ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1539:1: ( ( rule__FormalParams__ParamsAssignment_1_1 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1558:1: ( ( ( rule__FormalParams__ParamsAssignment_1_1 ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1559:1: ( ( rule__FormalParams__ParamsAssignment_1_1 ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1539:1: ( ( rule__FormalParams__ParamsAssignment_1_1 ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1540:1: ( rule__FormalParams__ParamsAssignment_1_1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1559:1: ( ( rule__FormalParams__ParamsAssignment_1_1 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1560:1: ( rule__FormalParams__ParamsAssignment_1_1 )
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getFormalParamsAccess().getParamsAssignment_1_1()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1541:1: ( rule__FormalParams__ParamsAssignment_1_1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1541:2: rule__FormalParams__ParamsAssignment_1_1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1561:1: ( rule__FormalParams__ParamsAssignment_1_1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1561:2: rule__FormalParams__ParamsAssignment_1_1
             {
-            pushFollow(FOLLOW_rule__FormalParams__ParamsAssignment_1_1_in_rule__FormalParams__Group_1__1__Impl3220);
+            pushFollow(FOLLOW_rule__FormalParams__ParamsAssignment_1_1_in_rule__FormalParams__Group_1__1__Impl3248);
             rule__FormalParams__ParamsAssignment_1_1();
             _fsp--;
             if (failed) return ;
@@ -4732,20 +4730,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Param__Group__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1555:1: rule__Param__Group__0 : rule__Param__Group__0__Impl rule__Param__Group__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1575:1: rule__Param__Group__0 : rule__Param__Group__0__Impl rule__Param__Group__1 ;
     public final void rule__Param__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1559:1: ( rule__Param__Group__0__Impl rule__Param__Group__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1560:2: rule__Param__Group__0__Impl rule__Param__Group__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1579:1: ( rule__Param__Group__0__Impl rule__Param__Group__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1580:2: rule__Param__Group__0__Impl rule__Param__Group__1
             {
-            pushFollow(FOLLOW_rule__Param__Group__0__Impl_in_rule__Param__Group__03254);
+            pushFollow(FOLLOW_rule__Param__Group__0__Impl_in_rule__Param__Group__03282);
             rule__Param__Group__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Param__Group__1_in_rule__Param__Group__03257);
+            pushFollow(FOLLOW_rule__Param__Group__1_in_rule__Param__Group__03285);
             rule__Param__Group__1();
             _fsp--;
             if (failed) return ;
@@ -4768,22 +4766,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Param__Group__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1567:1: rule__Param__Group__0__Impl : ( ruletype ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1587:1: rule__Param__Group__0__Impl : ( ruletype ) ;
     public final void rule__Param__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1571:1: ( ( ruletype ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1572:1: ( ruletype )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1591:1: ( ( ruletype ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1592:1: ( ruletype )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1572:1: ( ruletype )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1573:1: ruletype
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1592:1: ( ruletype )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1593:1: ruletype
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getParamAccess().getTypeParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruletype_in_rule__Param__Group__0__Impl3284);
+            pushFollow(FOLLOW_ruletype_in_rule__Param__Group__0__Impl3312);
             ruletype();
             _fsp--;
             if (failed) return ;
@@ -4812,16 +4810,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Param__Group__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1584:1: rule__Param__Group__1 : rule__Param__Group__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1604:1: rule__Param__Group__1 : rule__Param__Group__1__Impl ;
     public final void rule__Param__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1588:1: ( rule__Param__Group__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1589:2: rule__Param__Group__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1608:1: ( rule__Param__Group__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1609:2: rule__Param__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__Param__Group__1__Impl_in_rule__Param__Group__13313);
+            pushFollow(FOLLOW_rule__Param__Group__1__Impl_in_rule__Param__Group__13341);
             rule__Param__Group__1__Impl();
             _fsp--;
             if (failed) return ;
@@ -4844,25 +4842,25 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Param__Group__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1595:1: rule__Param__Group__1__Impl : ( ( rule__Param__NameAssignment_1 ) ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1615:1: rule__Param__Group__1__Impl : ( ( rule__Param__NameAssignment_1 ) ) ;
     public final void rule__Param__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1599:1: ( ( ( rule__Param__NameAssignment_1 ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1600:1: ( ( rule__Param__NameAssignment_1 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1619:1: ( ( ( rule__Param__NameAssignment_1 ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1620:1: ( ( rule__Param__NameAssignment_1 ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1600:1: ( ( rule__Param__NameAssignment_1 ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1601:1: ( rule__Param__NameAssignment_1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1620:1: ( ( rule__Param__NameAssignment_1 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1621:1: ( rule__Param__NameAssignment_1 )
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getParamAccess().getNameAssignment_1()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1602:1: ( rule__Param__NameAssignment_1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1602:2: rule__Param__NameAssignment_1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1622:1: ( rule__Param__NameAssignment_1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1622:2: rule__Param__NameAssignment_1
             {
-            pushFollow(FOLLOW_rule__Param__NameAssignment_1_in_rule__Param__Group__1__Impl3340);
+            pushFollow(FOLLOW_rule__Param__NameAssignment_1_in_rule__Param__Group__1__Impl3368);
             rule__Param__NameAssignment_1();
             _fsp--;
             if (failed) return ;
@@ -4894,20 +4892,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Block__Group__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1616:1: rule__Block__Group__0 : rule__Block__Group__0__Impl rule__Block__Group__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1636:1: rule__Block__Group__0 : rule__Block__Group__0__Impl rule__Block__Group__1 ;
     public final void rule__Block__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1620:1: ( rule__Block__Group__0__Impl rule__Block__Group__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1621:2: rule__Block__Group__0__Impl rule__Block__Group__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1640:1: ( rule__Block__Group__0__Impl rule__Block__Group__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1641:2: rule__Block__Group__0__Impl rule__Block__Group__1
             {
-            pushFollow(FOLLOW_rule__Block__Group__0__Impl_in_rule__Block__Group__03374);
+            pushFollow(FOLLOW_rule__Block__Group__0__Impl_in_rule__Block__Group__03402);
             rule__Block__Group__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Block__Group__1_in_rule__Block__Group__03377);
+            pushFollow(FOLLOW_rule__Block__Group__1_in_rule__Block__Group__03405);
             rule__Block__Group__1();
             _fsp--;
             if (failed) return ;
@@ -4930,23 +4928,23 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Block__Group__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1628:1: rule__Block__Group__0__Impl : ( () ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1648:1: rule__Block__Group__0__Impl : ( () ) ;
     public final void rule__Block__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1632:1: ( ( () ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1633:1: ( () )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1652:1: ( ( () ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1653:1: ( () )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1633:1: ( () )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1634:1: ()
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1653:1: ( () )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1654:1: ()
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getBlockAccess().getBlockAction_0()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1635:1: ()
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1637:1: 
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1655:1: ()
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1657:1: 
             {
             }
 
@@ -4971,20 +4969,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Block__Group__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1647:1: rule__Block__Group__1 : rule__Block__Group__1__Impl rule__Block__Group__2 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1667:1: rule__Block__Group__1 : rule__Block__Group__1__Impl rule__Block__Group__2 ;
     public final void rule__Block__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1651:1: ( rule__Block__Group__1__Impl rule__Block__Group__2 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1652:2: rule__Block__Group__1__Impl rule__Block__Group__2
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1671:1: ( rule__Block__Group__1__Impl rule__Block__Group__2 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1672:2: rule__Block__Group__1__Impl rule__Block__Group__2
             {
-            pushFollow(FOLLOW_rule__Block__Group__1__Impl_in_rule__Block__Group__13435);
+            pushFollow(FOLLOW_rule__Block__Group__1__Impl_in_rule__Block__Group__13463);
             rule__Block__Group__1__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Block__Group__2_in_rule__Block__Group__13438);
+            pushFollow(FOLLOW_rule__Block__Group__2_in_rule__Block__Group__13466);
             rule__Block__Group__2();
             _fsp--;
             if (failed) return ;
@@ -5007,22 +5005,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Block__Group__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1659:1: rule__Block__Group__1__Impl : ( 'begin' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1679:1: rule__Block__Group__1__Impl : ( 'begin' ) ;
     public final void rule__Block__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1663:1: ( ( 'begin' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1664:1: ( 'begin' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1683:1: ( ( 'begin' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1684:1: ( 'begin' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1664:1: ( 'begin' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1665:1: 'begin'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1684:1: ( 'begin' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1685:1: 'begin'
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getBlockAccess().getBeginKeyword_1()); 
             }
-            match(input,32,FOLLOW_32_in_rule__Block__Group__1__Impl3466); if (failed) return ;
+            match(input,33,FOLLOW_33_in_rule__Block__Group__1__Impl3494); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getBlockAccess().getBeginKeyword_1()); 
             }
@@ -5048,20 +5046,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Block__Group__2
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1678:1: rule__Block__Group__2 : rule__Block__Group__2__Impl rule__Block__Group__3 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1698:1: rule__Block__Group__2 : rule__Block__Group__2__Impl rule__Block__Group__3 ;
     public final void rule__Block__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1682:1: ( rule__Block__Group__2__Impl rule__Block__Group__3 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1683:2: rule__Block__Group__2__Impl rule__Block__Group__3
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1702:1: ( rule__Block__Group__2__Impl rule__Block__Group__3 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1703:2: rule__Block__Group__2__Impl rule__Block__Group__3
             {
-            pushFollow(FOLLOW_rule__Block__Group__2__Impl_in_rule__Block__Group__23497);
+            pushFollow(FOLLOW_rule__Block__Group__2__Impl_in_rule__Block__Group__23525);
             rule__Block__Group__2__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Block__Group__3_in_rule__Block__Group__23500);
+            pushFollow(FOLLOW_rule__Block__Group__3_in_rule__Block__Group__23528);
             rule__Block__Group__3();
             _fsp--;
             if (failed) return ;
@@ -5084,37 +5082,37 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Block__Group__2__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1690:1: rule__Block__Group__2__Impl : ( ( rule__Block__StatementsAssignment_2 )* ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1710:1: rule__Block__Group__2__Impl : ( ( rule__Block__StatementsAssignment_2 )* ) ;
     public final void rule__Block__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1694:1: ( ( ( rule__Block__StatementsAssignment_2 )* ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1695:1: ( ( rule__Block__StatementsAssignment_2 )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1714:1: ( ( ( rule__Block__StatementsAssignment_2 )* ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1715:1: ( ( rule__Block__StatementsAssignment_2 )* )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1695:1: ( ( rule__Block__StatementsAssignment_2 )* )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1696:1: ( rule__Block__StatementsAssignment_2 )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1715:1: ( ( rule__Block__StatementsAssignment_2 )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1716:1: ( rule__Block__StatementsAssignment_2 )*
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getBlockAccess().getStatementsAssignment_2()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1697:1: ( rule__Block__StatementsAssignment_2 )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1717:1: ( rule__Block__StatementsAssignment_2 )*
             loop16:
             do {
                 int alt16=2;
                 int LA16_0 = input.LA(1);
 
-                if ( (LA16_0==RULE_CONSTANT||LA16_0==RULE_ID||LA16_0==27||LA16_0==32||(LA16_0>=34 && LA16_0<=35)||LA16_0==37||(LA16_0>=39 && LA16_0<=40)||(LA16_0>=44 && LA16_0<=45)) ) {
+                if ( (LA16_0==RULE_CONSTANT||LA16_0==RULE_ID||(LA16_0>=13 && LA16_0<=15)||LA16_0==29||LA16_0==33||(LA16_0>=35 && LA16_0<=36)||LA16_0==38||LA16_0==40||LA16_0==45) ) {
                     alt16=1;
                 }
 
 
                 switch (alt16) {
             	case 1 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1697:2: rule__Block__StatementsAssignment_2
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1717:2: rule__Block__StatementsAssignment_2
             	    {
-            	    pushFollow(FOLLOW_rule__Block__StatementsAssignment_2_in_rule__Block__Group__2__Impl3527);
+            	    pushFollow(FOLLOW_rule__Block__StatementsAssignment_2_in_rule__Block__Group__2__Impl3555);
             	    rule__Block__StatementsAssignment_2();
             	    _fsp--;
             	    if (failed) return ;
@@ -5152,16 +5150,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Block__Group__3
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1707:1: rule__Block__Group__3 : rule__Block__Group__3__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1727:1: rule__Block__Group__3 : rule__Block__Group__3__Impl ;
     public final void rule__Block__Group__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1711:1: ( rule__Block__Group__3__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1712:2: rule__Block__Group__3__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1731:1: ( rule__Block__Group__3__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1732:2: rule__Block__Group__3__Impl
             {
-            pushFollow(FOLLOW_rule__Block__Group__3__Impl_in_rule__Block__Group__33558);
+            pushFollow(FOLLOW_rule__Block__Group__3__Impl_in_rule__Block__Group__33586);
             rule__Block__Group__3__Impl();
             _fsp--;
             if (failed) return ;
@@ -5184,22 +5182,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Block__Group__3__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1718:1: rule__Block__Group__3__Impl : ( 'end' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1738:1: rule__Block__Group__3__Impl : ( 'end' ) ;
     public final void rule__Block__Group__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1722:1: ( ( 'end' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1723:1: ( 'end' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1742:1: ( ( 'end' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1743:1: ( 'end' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1723:1: ( 'end' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1724:1: 'end'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1743:1: ( 'end' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1744:1: 'end'
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getBlockAccess().getEndKeyword_3()); 
             }
-            match(input,33,FOLLOW_33_in_rule__Block__Group__3__Impl3586); if (failed) return ;
+            match(input,34,FOLLOW_34_in_rule__Block__Group__3__Impl3614); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getBlockAccess().getEndKeyword_3()); 
             }
@@ -5225,20 +5223,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Type__Group__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1745:1: rule__Type__Group__0 : rule__Type__Group__0__Impl rule__Type__Group__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1765:1: rule__Type__Group__0 : rule__Type__Group__0__Impl rule__Type__Group__1 ;
     public final void rule__Type__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1749:1: ( rule__Type__Group__0__Impl rule__Type__Group__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1750:2: rule__Type__Group__0__Impl rule__Type__Group__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1769:1: ( rule__Type__Group__0__Impl rule__Type__Group__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1770:2: rule__Type__Group__0__Impl rule__Type__Group__1
             {
-            pushFollow(FOLLOW_rule__Type__Group__0__Impl_in_rule__Type__Group__03625);
+            pushFollow(FOLLOW_rule__Type__Group__0__Impl_in_rule__Type__Group__03653);
             rule__Type__Group__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Type__Group__1_in_rule__Type__Group__03628);
+            pushFollow(FOLLOW_rule__Type__Group__1_in_rule__Type__Group__03656);
             rule__Type__Group__1();
             _fsp--;
             if (failed) return ;
@@ -5261,23 +5259,23 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Type__Group__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1757:1: rule__Type__Group__0__Impl : ( () ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1777:1: rule__Type__Group__0__Impl : ( () ) ;
     public final void rule__Type__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1761:1: ( ( () ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1762:1: ( () )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1781:1: ( ( () ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1782:1: ( () )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1762:1: ( () )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1763:1: ()
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1782:1: ( () )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1783:1: ()
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getTypeAccess().getTypeAction_0()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1764:1: ()
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1766:1: 
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1784:1: ()
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1786:1: 
             {
             }
 
@@ -5302,16 +5300,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Type__Group__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1776:1: rule__Type__Group__1 : rule__Type__Group__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1796:1: rule__Type__Group__1 : rule__Type__Group__1__Impl ;
     public final void rule__Type__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1780:1: ( rule__Type__Group__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1781:2: rule__Type__Group__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1800:1: ( rule__Type__Group__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1801:2: rule__Type__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__Type__Group__1__Impl_in_rule__Type__Group__13686);
+            pushFollow(FOLLOW_rule__Type__Group__1__Impl_in_rule__Type__Group__13714);
             rule__Type__Group__1__Impl();
             _fsp--;
             if (failed) return ;
@@ -5334,25 +5332,25 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Type__Group__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1787:1: rule__Type__Group__1__Impl : ( ( rule__Type__Alternatives_1 ) ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1807:1: rule__Type__Group__1__Impl : ( ( rule__Type__Alternatives_1 ) ) ;
     public final void rule__Type__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1791:1: ( ( ( rule__Type__Alternatives_1 ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1792:1: ( ( rule__Type__Alternatives_1 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1811:1: ( ( ( rule__Type__Alternatives_1 ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1812:1: ( ( rule__Type__Alternatives_1 ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1792:1: ( ( rule__Type__Alternatives_1 ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1793:1: ( rule__Type__Alternatives_1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1812:1: ( ( rule__Type__Alternatives_1 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1813:1: ( rule__Type__Alternatives_1 )
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getTypeAccess().getAlternatives_1()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1794:1: ( rule__Type__Alternatives_1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1794:2: rule__Type__Alternatives_1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1814:1: ( rule__Type__Alternatives_1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1814:2: rule__Type__Alternatives_1
             {
-            pushFollow(FOLLOW_rule__Type__Alternatives_1_in_rule__Type__Group__1__Impl3713);
+            pushFollow(FOLLOW_rule__Type__Alternatives_1_in_rule__Type__Group__1__Impl3741);
             rule__Type__Alternatives_1();
             _fsp--;
             if (failed) return ;
@@ -5384,20 +5382,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_0__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1808:1: rule__Statement__Group_0__0 : rule__Statement__Group_0__0__Impl rule__Statement__Group_0__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1828:1: rule__Statement__Group_0__0 : rule__Statement__Group_0__0__Impl rule__Statement__Group_0__1 ;
     public final void rule__Statement__Group_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1812:1: ( rule__Statement__Group_0__0__Impl rule__Statement__Group_0__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1813:2: rule__Statement__Group_0__0__Impl rule__Statement__Group_0__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1832:1: ( rule__Statement__Group_0__0__Impl rule__Statement__Group_0__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1833:2: rule__Statement__Group_0__0__Impl rule__Statement__Group_0__1
             {
-            pushFollow(FOLLOW_rule__Statement__Group_0__0__Impl_in_rule__Statement__Group_0__03747);
+            pushFollow(FOLLOW_rule__Statement__Group_0__0__Impl_in_rule__Statement__Group_0__03775);
             rule__Statement__Group_0__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Statement__Group_0__1_in_rule__Statement__Group_0__03750);
+            pushFollow(FOLLOW_rule__Statement__Group_0__1_in_rule__Statement__Group_0__03778);
             rule__Statement__Group_0__1();
             _fsp--;
             if (failed) return ;
@@ -5420,22 +5418,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_0__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1820:1: rule__Statement__Group_0__0__Impl : ( ruledeclaration ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1840:1: rule__Statement__Group_0__0__Impl : ( ruledeclaration ) ;
     public final void rule__Statement__Group_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1824:1: ( ( ruledeclaration ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1825:1: ( ruledeclaration )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1844:1: ( ( ruledeclaration ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1845:1: ( ruledeclaration )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1825:1: ( ruledeclaration )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1826:1: ruledeclaration
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1845:1: ( ruledeclaration )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1846:1: ruledeclaration
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getStatementAccess().getDeclarationParserRuleCall_0_0()); 
             }
-            pushFollow(FOLLOW_ruledeclaration_in_rule__Statement__Group_0__0__Impl3777);
+            pushFollow(FOLLOW_ruledeclaration_in_rule__Statement__Group_0__0__Impl3805);
             ruledeclaration();
             _fsp--;
             if (failed) return ;
@@ -5464,16 +5462,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_0__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1837:1: rule__Statement__Group_0__1 : rule__Statement__Group_0__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1857:1: rule__Statement__Group_0__1 : rule__Statement__Group_0__1__Impl ;
     public final void rule__Statement__Group_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1841:1: ( rule__Statement__Group_0__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1842:2: rule__Statement__Group_0__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1861:1: ( rule__Statement__Group_0__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1862:2: rule__Statement__Group_0__1__Impl
             {
-            pushFollow(FOLLOW_rule__Statement__Group_0__1__Impl_in_rule__Statement__Group_0__13806);
+            pushFollow(FOLLOW_rule__Statement__Group_0__1__Impl_in_rule__Statement__Group_0__13834);
             rule__Statement__Group_0__1__Impl();
             _fsp--;
             if (failed) return ;
@@ -5496,24 +5494,27 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_0__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1848:1: rule__Statement__Group_0__1__Impl : ( RULE_ENDEXPR ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1868:1: rule__Statement__Group_0__1__Impl : ( ruleendExpr ) ;
     public final void rule__Statement__Group_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1852:1: ( ( RULE_ENDEXPR ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1853:1: ( RULE_ENDEXPR )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1872:1: ( ( ruleendExpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1873:1: ( ruleendExpr )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1853:1: ( RULE_ENDEXPR )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1854:1: RULE_ENDEXPR
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1873:1: ( ruleendExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1874:1: ruleendExpr
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getStatementAccess().getEndExprTerminalRuleCall_0_1()); 
+               before(grammarAccess.getStatementAccess().getEndExprParserRuleCall_0_1()); 
             }
-            match(input,RULE_ENDEXPR,FOLLOW_RULE_ENDEXPR_in_rule__Statement__Group_0__1__Impl3833); if (failed) return ;
+            pushFollow(FOLLOW_ruleendExpr_in_rule__Statement__Group_0__1__Impl3861);
+            ruleendExpr();
+            _fsp--;
+            if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getStatementAccess().getEndExprTerminalRuleCall_0_1()); 
+               after(grammarAccess.getStatementAccess().getEndExprParserRuleCall_0_1()); 
             }
 
             }
@@ -5537,20 +5538,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_1__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1869:1: rule__Statement__Group_1__0 : rule__Statement__Group_1__0__Impl rule__Statement__Group_1__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1889:1: rule__Statement__Group_1__0 : rule__Statement__Group_1__0__Impl rule__Statement__Group_1__1 ;
     public final void rule__Statement__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1873:1: ( rule__Statement__Group_1__0__Impl rule__Statement__Group_1__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1874:2: rule__Statement__Group_1__0__Impl rule__Statement__Group_1__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1893:1: ( rule__Statement__Group_1__0__Impl rule__Statement__Group_1__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1894:2: rule__Statement__Group_1__0__Impl rule__Statement__Group_1__1
             {
-            pushFollow(FOLLOW_rule__Statement__Group_1__0__Impl_in_rule__Statement__Group_1__03866);
+            pushFollow(FOLLOW_rule__Statement__Group_1__0__Impl_in_rule__Statement__Group_1__03894);
             rule__Statement__Group_1__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Statement__Group_1__1_in_rule__Statement__Group_1__03869);
+            pushFollow(FOLLOW_rule__Statement__Group_1__1_in_rule__Statement__Group_1__03897);
             rule__Statement__Group_1__1();
             _fsp--;
             if (failed) return ;
@@ -5573,27 +5574,28 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_1__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1881:1: rule__Statement__Group_1__0__Impl : ( ruleexpr ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1901:1: rule__Statement__Group_1__0__Impl : ( () ) ;
     public final void rule__Statement__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1885:1: ( ( ruleexpr ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1886:1: ( ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1905:1: ( ( () ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1906:1: ( () )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1886:1: ( ruleexpr )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1887:1: ruleexpr
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1906:1: ( () )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1907:1: ()
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getStatementAccess().getExprParserRuleCall_1_0()); 
+               before(grammarAccess.getStatementAccess().getStatementAction_1_0()); 
             }
-            pushFollow(FOLLOW_ruleexpr_in_rule__Statement__Group_1__0__Impl3896);
-            ruleexpr();
-            _fsp--;
-            if (failed) return ;
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1908:1: ()
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1910:1: 
+            {
+            }
+
             if ( backtracking==0 ) {
-               after(grammarAccess.getStatementAccess().getExprParserRuleCall_1_0()); 
+               after(grammarAccess.getStatementAccess().getStatementAction_1_0()); 
             }
 
             }
@@ -5601,10 +5603,6 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
             }
 
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
         }
         finally {
 
@@ -5617,17 +5615,21 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_1__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1898:1: rule__Statement__Group_1__1 : rule__Statement__Group_1__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1920:1: rule__Statement__Group_1__1 : rule__Statement__Group_1__1__Impl rule__Statement__Group_1__2 ;
     public final void rule__Statement__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1902:1: ( rule__Statement__Group_1__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1903:2: rule__Statement__Group_1__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1924:1: ( rule__Statement__Group_1__1__Impl rule__Statement__Group_1__2 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1925:2: rule__Statement__Group_1__1__Impl rule__Statement__Group_1__2
             {
-            pushFollow(FOLLOW_rule__Statement__Group_1__1__Impl_in_rule__Statement__Group_1__13925);
+            pushFollow(FOLLOW_rule__Statement__Group_1__1__Impl_in_rule__Statement__Group_1__13955);
             rule__Statement__Group_1__1__Impl();
+            _fsp--;
+            if (failed) return ;
+            pushFollow(FOLLOW_rule__Statement__Group_1__2_in_rule__Statement__Group_1__13958);
+            rule__Statement__Group_1__2();
             _fsp--;
             if (failed) return ;
 
@@ -5649,24 +5651,27 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_1__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1909:1: rule__Statement__Group_1__1__Impl : ( RULE_ENDEXPR ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1932:1: rule__Statement__Group_1__1__Impl : ( ruleexpr ) ;
     public final void rule__Statement__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1913:1: ( ( RULE_ENDEXPR ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1914:1: ( RULE_ENDEXPR )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1936:1: ( ( ruleexpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1937:1: ( ruleexpr )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1914:1: ( RULE_ENDEXPR )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1915:1: RULE_ENDEXPR
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1937:1: ( ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1938:1: ruleexpr
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getStatementAccess().getEndExprTerminalRuleCall_1_1()); 
+               before(grammarAccess.getStatementAccess().getExprParserRuleCall_1_1()); 
             }
-            match(input,RULE_ENDEXPR,FOLLOW_RULE_ENDEXPR_in_rule__Statement__Group_1__1__Impl3952); if (failed) return ;
+            pushFollow(FOLLOW_ruleexpr_in_rule__Statement__Group_1__1__Impl3985);
+            ruleexpr();
+            _fsp--;
+            if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getStatementAccess().getEndExprTerminalRuleCall_1_1()); 
+               after(grammarAccess.getStatementAccess().getExprParserRuleCall_1_1()); 
             }
 
             }
@@ -5689,21 +5694,97 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
     // $ANTLR end rule__Statement__Group_1__1__Impl
 
 
+    // $ANTLR start rule__Statement__Group_1__2
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1949:1: rule__Statement__Group_1__2 : rule__Statement__Group_1__2__Impl ;
+    public final void rule__Statement__Group_1__2() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1953:1: ( rule__Statement__Group_1__2__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1954:2: rule__Statement__Group_1__2__Impl
+            {
+            pushFollow(FOLLOW_rule__Statement__Group_1__2__Impl_in_rule__Statement__Group_1__24014);
+            rule__Statement__Group_1__2__Impl();
+            _fsp--;
+            if (failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Statement__Group_1__2
+
+
+    // $ANTLR start rule__Statement__Group_1__2__Impl
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1960:1: rule__Statement__Group_1__2__Impl : ( ruleendExpr ) ;
+    public final void rule__Statement__Group_1__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1964:1: ( ( ruleendExpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1965:1: ( ruleendExpr )
+            {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1965:1: ( ruleendExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1966:1: ruleendExpr
+            {
+            if ( backtracking==0 ) {
+               before(grammarAccess.getStatementAccess().getEndExprParserRuleCall_1_2()); 
+            }
+            pushFollow(FOLLOW_ruleendExpr_in_rule__Statement__Group_1__2__Impl4041);
+            ruleendExpr();
+            _fsp--;
+            if (failed) return ;
+            if ( backtracking==0 ) {
+               after(grammarAccess.getStatementAccess().getEndExprParserRuleCall_1_2()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Statement__Group_1__2__Impl
+
+
     // $ANTLR start rule__Statement__Group_2__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1930:1: rule__Statement__Group_2__0 : rule__Statement__Group_2__0__Impl rule__Statement__Group_2__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1983:1: rule__Statement__Group_2__0 : rule__Statement__Group_2__0__Impl rule__Statement__Group_2__1 ;
     public final void rule__Statement__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1934:1: ( rule__Statement__Group_2__0__Impl rule__Statement__Group_2__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1935:2: rule__Statement__Group_2__0__Impl rule__Statement__Group_2__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1987:1: ( rule__Statement__Group_2__0__Impl rule__Statement__Group_2__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1988:2: rule__Statement__Group_2__0__Impl rule__Statement__Group_2__1
             {
-            pushFollow(FOLLOW_rule__Statement__Group_2__0__Impl_in_rule__Statement__Group_2__03985);
+            pushFollow(FOLLOW_rule__Statement__Group_2__0__Impl_in_rule__Statement__Group_2__04076);
             rule__Statement__Group_2__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Statement__Group_2__1_in_rule__Statement__Group_2__03988);
+            pushFollow(FOLLOW_rule__Statement__Group_2__1_in_rule__Statement__Group_2__04079);
             rule__Statement__Group_2__1();
             _fsp--;
             if (failed) return ;
@@ -5726,27 +5807,28 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_2__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1942:1: rule__Statement__Group_2__0__Impl : ( ruleassignment ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1995:1: rule__Statement__Group_2__0__Impl : ( () ) ;
     public final void rule__Statement__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1946:1: ( ( ruleassignment ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1947:1: ( ruleassignment )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1999:1: ( ( () ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2000:1: ( () )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1947:1: ( ruleassignment )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1948:1: ruleassignment
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2000:1: ( () )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2001:1: ()
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getStatementAccess().getAssignmentParserRuleCall_2_0()); 
+               before(grammarAccess.getStatementAccess().getStatementAction_2_0()); 
             }
-            pushFollow(FOLLOW_ruleassignment_in_rule__Statement__Group_2__0__Impl4015);
-            ruleassignment();
-            _fsp--;
-            if (failed) return ;
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2002:1: ()
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2004:1: 
+            {
+            }
+
             if ( backtracking==0 ) {
-               after(grammarAccess.getStatementAccess().getAssignmentParserRuleCall_2_0()); 
+               after(grammarAccess.getStatementAccess().getStatementAction_2_0()); 
             }
 
             }
@@ -5754,10 +5836,6 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
             }
 
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
         }
         finally {
 
@@ -5770,17 +5848,21 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_2__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1959:1: rule__Statement__Group_2__1 : rule__Statement__Group_2__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2014:1: rule__Statement__Group_2__1 : rule__Statement__Group_2__1__Impl rule__Statement__Group_2__2 ;
     public final void rule__Statement__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1963:1: ( rule__Statement__Group_2__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1964:2: rule__Statement__Group_2__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2018:1: ( rule__Statement__Group_2__1__Impl rule__Statement__Group_2__2 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2019:2: rule__Statement__Group_2__1__Impl rule__Statement__Group_2__2
             {
-            pushFollow(FOLLOW_rule__Statement__Group_2__1__Impl_in_rule__Statement__Group_2__14044);
+            pushFollow(FOLLOW_rule__Statement__Group_2__1__Impl_in_rule__Statement__Group_2__14137);
             rule__Statement__Group_2__1__Impl();
+            _fsp--;
+            if (failed) return ;
+            pushFollow(FOLLOW_rule__Statement__Group_2__2_in_rule__Statement__Group_2__14140);
+            rule__Statement__Group_2__2();
             _fsp--;
             if (failed) return ;
 
@@ -5802,24 +5884,27 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_2__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1970:1: rule__Statement__Group_2__1__Impl : ( RULE_ENDEXPR ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2026:1: rule__Statement__Group_2__1__Impl : ( ruleassignment ) ;
     public final void rule__Statement__Group_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1974:1: ( ( RULE_ENDEXPR ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1975:1: ( RULE_ENDEXPR )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2030:1: ( ( ruleassignment ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2031:1: ( ruleassignment )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1975:1: ( RULE_ENDEXPR )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1976:1: RULE_ENDEXPR
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2031:1: ( ruleassignment )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2032:1: ruleassignment
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getStatementAccess().getEndExprTerminalRuleCall_2_1()); 
+               before(grammarAccess.getStatementAccess().getAssignmentParserRuleCall_2_1()); 
             }
-            match(input,RULE_ENDEXPR,FOLLOW_RULE_ENDEXPR_in_rule__Statement__Group_2__1__Impl4071); if (failed) return ;
+            pushFollow(FOLLOW_ruleassignment_in_rule__Statement__Group_2__1__Impl4167);
+            ruleassignment();
+            _fsp--;
+            if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getStatementAccess().getEndExprTerminalRuleCall_2_1()); 
+               after(grammarAccess.getStatementAccess().getAssignmentParserRuleCall_2_1()); 
             }
 
             }
@@ -5842,21 +5927,97 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
     // $ANTLR end rule__Statement__Group_2__1__Impl
 
 
+    // $ANTLR start rule__Statement__Group_2__2
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2043:1: rule__Statement__Group_2__2 : rule__Statement__Group_2__2__Impl ;
+    public final void rule__Statement__Group_2__2() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2047:1: ( rule__Statement__Group_2__2__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2048:2: rule__Statement__Group_2__2__Impl
+            {
+            pushFollow(FOLLOW_rule__Statement__Group_2__2__Impl_in_rule__Statement__Group_2__24196);
+            rule__Statement__Group_2__2__Impl();
+            _fsp--;
+            if (failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Statement__Group_2__2
+
+
+    // $ANTLR start rule__Statement__Group_2__2__Impl
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2054:1: rule__Statement__Group_2__2__Impl : ( ruleendExpr ) ;
+    public final void rule__Statement__Group_2__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2058:1: ( ( ruleendExpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2059:1: ( ruleendExpr )
+            {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2059:1: ( ruleendExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2060:1: ruleendExpr
+            {
+            if ( backtracking==0 ) {
+               before(grammarAccess.getStatementAccess().getEndExprParserRuleCall_2_2()); 
+            }
+            pushFollow(FOLLOW_ruleendExpr_in_rule__Statement__Group_2__2__Impl4223);
+            ruleendExpr();
+            _fsp--;
+            if (failed) return ;
+            if ( backtracking==0 ) {
+               after(grammarAccess.getStatementAccess().getEndExprParserRuleCall_2_2()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Statement__Group_2__2__Impl
+
+
     // $ANTLR start rule__Statement__Group_3__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1991:1: rule__Statement__Group_3__0 : rule__Statement__Group_3__0__Impl rule__Statement__Group_3__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2077:1: rule__Statement__Group_3__0 : rule__Statement__Group_3__0__Impl rule__Statement__Group_3__1 ;
     public final void rule__Statement__Group_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1995:1: ( rule__Statement__Group_3__0__Impl rule__Statement__Group_3__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1996:2: rule__Statement__Group_3__0__Impl rule__Statement__Group_3__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2081:1: ( rule__Statement__Group_3__0__Impl rule__Statement__Group_3__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2082:2: rule__Statement__Group_3__0__Impl rule__Statement__Group_3__1
             {
-            pushFollow(FOLLOW_rule__Statement__Group_3__0__Impl_in_rule__Statement__Group_3__04104);
+            pushFollow(FOLLOW_rule__Statement__Group_3__0__Impl_in_rule__Statement__Group_3__04258);
             rule__Statement__Group_3__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Statement__Group_3__1_in_rule__Statement__Group_3__04107);
+            pushFollow(FOLLOW_rule__Statement__Group_3__1_in_rule__Statement__Group_3__04261);
             rule__Statement__Group_3__1();
             _fsp--;
             if (failed) return ;
@@ -5879,24 +6040,28 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_3__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2003:1: rule__Statement__Group_3__0__Impl : ( 'return' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2089:1: rule__Statement__Group_3__0__Impl : ( () ) ;
     public final void rule__Statement__Group_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2007:1: ( ( 'return' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2008:1: ( 'return' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2093:1: ( ( () ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2094:1: ( () )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2008:1: ( 'return' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2009:1: 'return'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2094:1: ( () )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2095:1: ()
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getStatementAccess().getReturnKeyword_3_0()); 
+               before(grammarAccess.getStatementAccess().getStatementAction_3_0()); 
             }
-            match(input,34,FOLLOW_34_in_rule__Statement__Group_3__0__Impl4135); if (failed) return ;
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2096:1: ()
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2098:1: 
+            {
+            }
+
             if ( backtracking==0 ) {
-               after(grammarAccess.getStatementAccess().getReturnKeyword_3_0()); 
+               after(grammarAccess.getStatementAccess().getStatementAction_3_0()); 
             }
 
             }
@@ -5904,10 +6069,6 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
             }
 
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
         }
         finally {
 
@@ -5920,20 +6081,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_3__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2022:1: rule__Statement__Group_3__1 : rule__Statement__Group_3__1__Impl rule__Statement__Group_3__2 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2108:1: rule__Statement__Group_3__1 : rule__Statement__Group_3__1__Impl rule__Statement__Group_3__2 ;
     public final void rule__Statement__Group_3__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2026:1: ( rule__Statement__Group_3__1__Impl rule__Statement__Group_3__2 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2027:2: rule__Statement__Group_3__1__Impl rule__Statement__Group_3__2
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2112:1: ( rule__Statement__Group_3__1__Impl rule__Statement__Group_3__2 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2113:2: rule__Statement__Group_3__1__Impl rule__Statement__Group_3__2
             {
-            pushFollow(FOLLOW_rule__Statement__Group_3__1__Impl_in_rule__Statement__Group_3__14166);
+            pushFollow(FOLLOW_rule__Statement__Group_3__1__Impl_in_rule__Statement__Group_3__14319);
             rule__Statement__Group_3__1__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Statement__Group_3__2_in_rule__Statement__Group_3__14169);
+            pushFollow(FOLLOW_rule__Statement__Group_3__2_in_rule__Statement__Group_3__14322);
             rule__Statement__Group_3__2();
             _fsp--;
             if (failed) return ;
@@ -5956,44 +6117,24 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_3__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2034:1: rule__Statement__Group_3__1__Impl : ( ( ruleexpr )? ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2120:1: rule__Statement__Group_3__1__Impl : ( 'return' ) ;
     public final void rule__Statement__Group_3__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2038:1: ( ( ( ruleexpr )? ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2039:1: ( ( ruleexpr )? )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2124:1: ( ( 'return' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2125:1: ( 'return' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2039:1: ( ( ruleexpr )? )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2040:1: ( ruleexpr )?
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2125:1: ( 'return' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2126:1: 'return'
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getStatementAccess().getExprParserRuleCall_3_1()); 
+               before(grammarAccess.getStatementAccess().getReturnKeyword_3_1()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2041:1: ( ruleexpr )?
-            int alt17=2;
-            int LA17_0 = input.LA(1);
-
-            if ( (LA17_0==RULE_CONSTANT||LA17_0==RULE_ID||LA17_0==27||(LA17_0>=44 && LA17_0<=45)) ) {
-                alt17=1;
-            }
-            switch (alt17) {
-                case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2041:3: ruleexpr
-                    {
-                    pushFollow(FOLLOW_ruleexpr_in_rule__Statement__Group_3__1__Impl4197);
-                    ruleexpr();
-                    _fsp--;
-                    if (failed) return ;
-
-                    }
-                    break;
-
-            }
-
+            match(input,35,FOLLOW_35_in_rule__Statement__Group_3__1__Impl4350); if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getStatementAccess().getExprParserRuleCall_3_1()); 
+               after(grammarAccess.getStatementAccess().getReturnKeyword_3_1()); 
             }
 
             }
@@ -6017,17 +6158,21 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_3__2
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2051:1: rule__Statement__Group_3__2 : rule__Statement__Group_3__2__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2139:1: rule__Statement__Group_3__2 : rule__Statement__Group_3__2__Impl rule__Statement__Group_3__3 ;
     public final void rule__Statement__Group_3__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2055:1: ( rule__Statement__Group_3__2__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2056:2: rule__Statement__Group_3__2__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2143:1: ( rule__Statement__Group_3__2__Impl rule__Statement__Group_3__3 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2144:2: rule__Statement__Group_3__2__Impl rule__Statement__Group_3__3
             {
-            pushFollow(FOLLOW_rule__Statement__Group_3__2__Impl_in_rule__Statement__Group_3__24228);
+            pushFollow(FOLLOW_rule__Statement__Group_3__2__Impl_in_rule__Statement__Group_3__24381);
             rule__Statement__Group_3__2__Impl();
+            _fsp--;
+            if (failed) return ;
+            pushFollow(FOLLOW_rule__Statement__Group_3__3_in_rule__Statement__Group_3__24384);
+            rule__Statement__Group_3__3();
             _fsp--;
             if (failed) return ;
 
@@ -6049,24 +6194,44 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_3__2__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2062:1: rule__Statement__Group_3__2__Impl : ( RULE_ENDEXPR ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2151:1: rule__Statement__Group_3__2__Impl : ( ( ruleexpr )? ) ;
     public final void rule__Statement__Group_3__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2066:1: ( ( RULE_ENDEXPR ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2067:1: ( RULE_ENDEXPR )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2155:1: ( ( ( ruleexpr )? ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2156:1: ( ( ruleexpr )? )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2067:1: ( RULE_ENDEXPR )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2068:1: RULE_ENDEXPR
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2156:1: ( ( ruleexpr )? )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2157:1: ( ruleexpr )?
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getStatementAccess().getEndExprTerminalRuleCall_3_2()); 
+               before(grammarAccess.getStatementAccess().getExprParserRuleCall_3_2()); 
             }
-            match(input,RULE_ENDEXPR,FOLLOW_RULE_ENDEXPR_in_rule__Statement__Group_3__2__Impl4255); if (failed) return ;
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2158:1: ( ruleexpr )?
+            int alt17=2;
+            int LA17_0 = input.LA(1);
+
+            if ( (LA17_0==RULE_CONSTANT||LA17_0==RULE_ID||LA17_0==29||LA17_0==45) ) {
+                alt17=1;
+            }
+            switch (alt17) {
+                case 1 :
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2158:3: ruleexpr
+                    {
+                    pushFollow(FOLLOW_ruleexpr_in_rule__Statement__Group_3__2__Impl4412);
+                    ruleexpr();
+                    _fsp--;
+                    if (failed) return ;
+
+                    }
+                    break;
+
+            }
+
             if ( backtracking==0 ) {
-               after(grammarAccess.getStatementAccess().getEndExprTerminalRuleCall_3_2()); 
+               after(grammarAccess.getStatementAccess().getExprParserRuleCall_3_2()); 
             }
 
             }
@@ -6089,21 +6254,97 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
     // $ANTLR end rule__Statement__Group_3__2__Impl
 
 
+    // $ANTLR start rule__Statement__Group_3__3
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2168:1: rule__Statement__Group_3__3 : rule__Statement__Group_3__3__Impl ;
+    public final void rule__Statement__Group_3__3() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2172:1: ( rule__Statement__Group_3__3__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2173:2: rule__Statement__Group_3__3__Impl
+            {
+            pushFollow(FOLLOW_rule__Statement__Group_3__3__Impl_in_rule__Statement__Group_3__34443);
+            rule__Statement__Group_3__3__Impl();
+            _fsp--;
+            if (failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Statement__Group_3__3
+
+
+    // $ANTLR start rule__Statement__Group_3__3__Impl
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2179:1: rule__Statement__Group_3__3__Impl : ( ruleendExpr ) ;
+    public final void rule__Statement__Group_3__3__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2183:1: ( ( ruleendExpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2184:1: ( ruleendExpr )
+            {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2184:1: ( ruleendExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2185:1: ruleendExpr
+            {
+            if ( backtracking==0 ) {
+               before(grammarAccess.getStatementAccess().getEndExprParserRuleCall_3_3()); 
+            }
+            pushFollow(FOLLOW_ruleendExpr_in_rule__Statement__Group_3__3__Impl4470);
+            ruleendExpr();
+            _fsp--;
+            if (failed) return ;
+            if ( backtracking==0 ) {
+               after(grammarAccess.getStatementAccess().getEndExprParserRuleCall_3_3()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Statement__Group_3__3__Impl
+
+
     // $ANTLR start rule__Statement__Group_4__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2085:1: rule__Statement__Group_4__0 : rule__Statement__Group_4__0__Impl rule__Statement__Group_4__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2204:1: rule__Statement__Group_4__0 : rule__Statement__Group_4__0__Impl rule__Statement__Group_4__1 ;
     public final void rule__Statement__Group_4__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2089:1: ( rule__Statement__Group_4__0__Impl rule__Statement__Group_4__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2090:2: rule__Statement__Group_4__0__Impl rule__Statement__Group_4__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2208:1: ( rule__Statement__Group_4__0__Impl rule__Statement__Group_4__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2209:2: rule__Statement__Group_4__0__Impl rule__Statement__Group_4__1
             {
-            pushFollow(FOLLOW_rule__Statement__Group_4__0__Impl_in_rule__Statement__Group_4__04290);
+            pushFollow(FOLLOW_rule__Statement__Group_4__0__Impl_in_rule__Statement__Group_4__04507);
             rule__Statement__Group_4__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Statement__Group_4__1_in_rule__Statement__Group_4__04293);
+            pushFollow(FOLLOW_rule__Statement__Group_4__1_in_rule__Statement__Group_4__04510);
             rule__Statement__Group_4__1();
             _fsp--;
             if (failed) return ;
@@ -6126,22 +6367,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_4__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2097:1: rule__Statement__Group_4__0__Impl : ( 'if' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2216:1: rule__Statement__Group_4__0__Impl : ( 'if' ) ;
     public final void rule__Statement__Group_4__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2101:1: ( ( 'if' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2102:1: ( 'if' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2220:1: ( ( 'if' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2221:1: ( 'if' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2102:1: ( 'if' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2103:1: 'if'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2221:1: ( 'if' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2222:1: 'if'
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getStatementAccess().getIfKeyword_4_0()); 
             }
-            match(input,35,FOLLOW_35_in_rule__Statement__Group_4__0__Impl4321); if (failed) return ;
+            match(input,36,FOLLOW_36_in_rule__Statement__Group_4__0__Impl4538); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getStatementAccess().getIfKeyword_4_0()); 
             }
@@ -6167,20 +6408,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_4__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2116:1: rule__Statement__Group_4__1 : rule__Statement__Group_4__1__Impl rule__Statement__Group_4__2 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2235:1: rule__Statement__Group_4__1 : rule__Statement__Group_4__1__Impl rule__Statement__Group_4__2 ;
     public final void rule__Statement__Group_4__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2120:1: ( rule__Statement__Group_4__1__Impl rule__Statement__Group_4__2 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2121:2: rule__Statement__Group_4__1__Impl rule__Statement__Group_4__2
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2239:1: ( rule__Statement__Group_4__1__Impl rule__Statement__Group_4__2 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2240:2: rule__Statement__Group_4__1__Impl rule__Statement__Group_4__2
             {
-            pushFollow(FOLLOW_rule__Statement__Group_4__1__Impl_in_rule__Statement__Group_4__14352);
+            pushFollow(FOLLOW_rule__Statement__Group_4__1__Impl_in_rule__Statement__Group_4__14569);
             rule__Statement__Group_4__1__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Statement__Group_4__2_in_rule__Statement__Group_4__14355);
+            pushFollow(FOLLOW_rule__Statement__Group_4__2_in_rule__Statement__Group_4__14572);
             rule__Statement__Group_4__2();
             _fsp--;
             if (failed) return ;
@@ -6203,22 +6444,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_4__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2128:1: rule__Statement__Group_4__1__Impl : ( ruleexpr ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2247:1: rule__Statement__Group_4__1__Impl : ( ruleexpr ) ;
     public final void rule__Statement__Group_4__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2132:1: ( ( ruleexpr ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2133:1: ( ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2251:1: ( ( ruleexpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2252:1: ( ruleexpr )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2133:1: ( ruleexpr )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2134:1: ruleexpr
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2252:1: ( ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2253:1: ruleexpr
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getStatementAccess().getExprParserRuleCall_4_1()); 
             }
-            pushFollow(FOLLOW_ruleexpr_in_rule__Statement__Group_4__1__Impl4382);
+            pushFollow(FOLLOW_ruleexpr_in_rule__Statement__Group_4__1__Impl4599);
             ruleexpr();
             _fsp--;
             if (failed) return ;
@@ -6247,20 +6488,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_4__2
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2145:1: rule__Statement__Group_4__2 : rule__Statement__Group_4__2__Impl rule__Statement__Group_4__3 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2264:1: rule__Statement__Group_4__2 : rule__Statement__Group_4__2__Impl rule__Statement__Group_4__3 ;
     public final void rule__Statement__Group_4__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2149:1: ( rule__Statement__Group_4__2__Impl rule__Statement__Group_4__3 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2150:2: rule__Statement__Group_4__2__Impl rule__Statement__Group_4__3
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2268:1: ( rule__Statement__Group_4__2__Impl rule__Statement__Group_4__3 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2269:2: rule__Statement__Group_4__2__Impl rule__Statement__Group_4__3
             {
-            pushFollow(FOLLOW_rule__Statement__Group_4__2__Impl_in_rule__Statement__Group_4__24411);
+            pushFollow(FOLLOW_rule__Statement__Group_4__2__Impl_in_rule__Statement__Group_4__24628);
             rule__Statement__Group_4__2__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Statement__Group_4__3_in_rule__Statement__Group_4__24414);
+            pushFollow(FOLLOW_rule__Statement__Group_4__3_in_rule__Statement__Group_4__24631);
             rule__Statement__Group_4__3();
             _fsp--;
             if (failed) return ;
@@ -6283,22 +6524,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_4__2__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2157:1: rule__Statement__Group_4__2__Impl : ( ':' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2276:1: rule__Statement__Group_4__2__Impl : ( ':' ) ;
     public final void rule__Statement__Group_4__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2161:1: ( ( ':' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2162:1: ( ':' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2280:1: ( ( ':' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2281:1: ( ':' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2162:1: ( ':' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2163:1: ':'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2281:1: ( ':' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2282:1: ':'
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getStatementAccess().getColonKeyword_4_2()); 
             }
-            match(input,29,FOLLOW_29_in_rule__Statement__Group_4__2__Impl4442); if (failed) return ;
+            match(input,31,FOLLOW_31_in_rule__Statement__Group_4__2__Impl4659); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getStatementAccess().getColonKeyword_4_2()); 
             }
@@ -6324,20 +6565,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_4__3
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2176:1: rule__Statement__Group_4__3 : rule__Statement__Group_4__3__Impl rule__Statement__Group_4__4 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2295:1: rule__Statement__Group_4__3 : rule__Statement__Group_4__3__Impl rule__Statement__Group_4__4 ;
     public final void rule__Statement__Group_4__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2180:1: ( rule__Statement__Group_4__3__Impl rule__Statement__Group_4__4 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2181:2: rule__Statement__Group_4__3__Impl rule__Statement__Group_4__4
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2299:1: ( rule__Statement__Group_4__3__Impl rule__Statement__Group_4__4 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2300:2: rule__Statement__Group_4__3__Impl rule__Statement__Group_4__4
             {
-            pushFollow(FOLLOW_rule__Statement__Group_4__3__Impl_in_rule__Statement__Group_4__34473);
+            pushFollow(FOLLOW_rule__Statement__Group_4__3__Impl_in_rule__Statement__Group_4__34690);
             rule__Statement__Group_4__3__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Statement__Group_4__4_in_rule__Statement__Group_4__34476);
+            pushFollow(FOLLOW_rule__Statement__Group_4__4_in_rule__Statement__Group_4__34693);
             rule__Statement__Group_4__4();
             _fsp--;
             if (failed) return ;
@@ -6360,22 +6601,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_4__3__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2188:1: rule__Statement__Group_4__3__Impl : ( rulestatement ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2307:1: rule__Statement__Group_4__3__Impl : ( rulestatement ) ;
     public final void rule__Statement__Group_4__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2192:1: ( ( rulestatement ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2193:1: ( rulestatement )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2311:1: ( ( rulestatement ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2312:1: ( rulestatement )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2193:1: ( rulestatement )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2194:1: rulestatement
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2312:1: ( rulestatement )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2313:1: rulestatement
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getStatementAccess().getStatementParserRuleCall_4_3()); 
             }
-            pushFollow(FOLLOW_rulestatement_in_rule__Statement__Group_4__3__Impl4503);
+            pushFollow(FOLLOW_rulestatement_in_rule__Statement__Group_4__3__Impl4720);
             rulestatement();
             _fsp--;
             if (failed) return ;
@@ -6404,16 +6645,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_4__4
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2205:1: rule__Statement__Group_4__4 : rule__Statement__Group_4__4__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2324:1: rule__Statement__Group_4__4 : rule__Statement__Group_4__4__Impl ;
     public final void rule__Statement__Group_4__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2209:1: ( rule__Statement__Group_4__4__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2210:2: rule__Statement__Group_4__4__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2328:1: ( rule__Statement__Group_4__4__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2329:2: rule__Statement__Group_4__4__Impl
             {
-            pushFollow(FOLLOW_rule__Statement__Group_4__4__Impl_in_rule__Statement__Group_4__44532);
+            pushFollow(FOLLOW_rule__Statement__Group_4__4__Impl_in_rule__Statement__Group_4__44749);
             rule__Statement__Group_4__4__Impl();
             _fsp--;
             if (failed) return ;
@@ -6436,37 +6677,37 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_4__4__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2216:1: rule__Statement__Group_4__4__Impl : ( ( rule__Statement__Group_4_4__0 )? ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2335:1: rule__Statement__Group_4__4__Impl : ( ( rule__Statement__Group_4_4__0 )? ) ;
     public final void rule__Statement__Group_4__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2220:1: ( ( ( rule__Statement__Group_4_4__0 )? ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2221:1: ( ( rule__Statement__Group_4_4__0 )? )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2339:1: ( ( ( rule__Statement__Group_4_4__0 )? ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2340:1: ( ( rule__Statement__Group_4_4__0 )? )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2221:1: ( ( rule__Statement__Group_4_4__0 )? )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2222:1: ( rule__Statement__Group_4_4__0 )?
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2340:1: ( ( rule__Statement__Group_4_4__0 )? )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2341:1: ( rule__Statement__Group_4_4__0 )?
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getStatementAccess().getGroup_4_4()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2223:1: ( rule__Statement__Group_4_4__0 )?
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2342:1: ( rule__Statement__Group_4_4__0 )?
             int alt18=2;
             int LA18_0 = input.LA(1);
 
-            if ( (LA18_0==36) ) {
+            if ( (LA18_0==37) ) {
                 int LA18_1 = input.LA(2);
 
-                if ( (synpred36()) ) {
+                if ( (synpred34()) ) {
                     alt18=1;
                 }
             }
             switch (alt18) {
                 case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2223:2: rule__Statement__Group_4_4__0
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2342:2: rule__Statement__Group_4_4__0
                     {
-                    pushFollow(FOLLOW_rule__Statement__Group_4_4__0_in_rule__Statement__Group_4__4__Impl4559);
+                    pushFollow(FOLLOW_rule__Statement__Group_4_4__0_in_rule__Statement__Group_4__4__Impl4776);
                     rule__Statement__Group_4_4__0();
                     _fsp--;
                     if (failed) return ;
@@ -6501,20 +6742,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_4_4__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2243:1: rule__Statement__Group_4_4__0 : rule__Statement__Group_4_4__0__Impl rule__Statement__Group_4_4__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2362:1: rule__Statement__Group_4_4__0 : rule__Statement__Group_4_4__0__Impl rule__Statement__Group_4_4__1 ;
     public final void rule__Statement__Group_4_4__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2247:1: ( rule__Statement__Group_4_4__0__Impl rule__Statement__Group_4_4__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2248:2: rule__Statement__Group_4_4__0__Impl rule__Statement__Group_4_4__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2366:1: ( rule__Statement__Group_4_4__0__Impl rule__Statement__Group_4_4__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2367:2: rule__Statement__Group_4_4__0__Impl rule__Statement__Group_4_4__1
             {
-            pushFollow(FOLLOW_rule__Statement__Group_4_4__0__Impl_in_rule__Statement__Group_4_4__04600);
+            pushFollow(FOLLOW_rule__Statement__Group_4_4__0__Impl_in_rule__Statement__Group_4_4__04817);
             rule__Statement__Group_4_4__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Statement__Group_4_4__1_in_rule__Statement__Group_4_4__04603);
+            pushFollow(FOLLOW_rule__Statement__Group_4_4__1_in_rule__Statement__Group_4_4__04820);
             rule__Statement__Group_4_4__1();
             _fsp--;
             if (failed) return ;
@@ -6537,22 +6778,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_4_4__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2255:1: rule__Statement__Group_4_4__0__Impl : ( 'else' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2374:1: rule__Statement__Group_4_4__0__Impl : ( 'else' ) ;
     public final void rule__Statement__Group_4_4__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2259:1: ( ( 'else' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2260:1: ( 'else' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2378:1: ( ( 'else' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2379:1: ( 'else' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2260:1: ( 'else' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2261:1: 'else'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2379:1: ( 'else' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2380:1: 'else'
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getStatementAccess().getElseKeyword_4_4_0()); 
             }
-            match(input,36,FOLLOW_36_in_rule__Statement__Group_4_4__0__Impl4631); if (failed) return ;
+            match(input,37,FOLLOW_37_in_rule__Statement__Group_4_4__0__Impl4848); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getStatementAccess().getElseKeyword_4_4_0()); 
             }
@@ -6578,16 +6819,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_4_4__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2274:1: rule__Statement__Group_4_4__1 : rule__Statement__Group_4_4__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2393:1: rule__Statement__Group_4_4__1 : rule__Statement__Group_4_4__1__Impl ;
     public final void rule__Statement__Group_4_4__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2278:1: ( rule__Statement__Group_4_4__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2279:2: rule__Statement__Group_4_4__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2397:1: ( rule__Statement__Group_4_4__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2398:2: rule__Statement__Group_4_4__1__Impl
             {
-            pushFollow(FOLLOW_rule__Statement__Group_4_4__1__Impl_in_rule__Statement__Group_4_4__14662);
+            pushFollow(FOLLOW_rule__Statement__Group_4_4__1__Impl_in_rule__Statement__Group_4_4__14879);
             rule__Statement__Group_4_4__1__Impl();
             _fsp--;
             if (failed) return ;
@@ -6610,25 +6851,25 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_4_4__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2285:1: rule__Statement__Group_4_4__1__Impl : ( ( rule__Statement__StatementsAssignment_4_4_1 ) ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2404:1: rule__Statement__Group_4_4__1__Impl : ( ( rule__Statement__StatementsAssignment_4_4_1 ) ) ;
     public final void rule__Statement__Group_4_4__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2289:1: ( ( ( rule__Statement__StatementsAssignment_4_4_1 ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2290:1: ( ( rule__Statement__StatementsAssignment_4_4_1 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2408:1: ( ( ( rule__Statement__StatementsAssignment_4_4_1 ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2409:1: ( ( rule__Statement__StatementsAssignment_4_4_1 ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2290:1: ( ( rule__Statement__StatementsAssignment_4_4_1 ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2291:1: ( rule__Statement__StatementsAssignment_4_4_1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2409:1: ( ( rule__Statement__StatementsAssignment_4_4_1 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2410:1: ( rule__Statement__StatementsAssignment_4_4_1 )
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getStatementAccess().getStatementsAssignment_4_4_1()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2292:1: ( rule__Statement__StatementsAssignment_4_4_1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2292:2: rule__Statement__StatementsAssignment_4_4_1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2411:1: ( rule__Statement__StatementsAssignment_4_4_1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2411:2: rule__Statement__StatementsAssignment_4_4_1
             {
-            pushFollow(FOLLOW_rule__Statement__StatementsAssignment_4_4_1_in_rule__Statement__Group_4_4__1__Impl4689);
+            pushFollow(FOLLOW_rule__Statement__StatementsAssignment_4_4_1_in_rule__Statement__Group_4_4__1__Impl4906);
             rule__Statement__StatementsAssignment_4_4_1();
             _fsp--;
             if (failed) return ;
@@ -6660,20 +6901,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_5__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2306:1: rule__Statement__Group_5__0 : rule__Statement__Group_5__0__Impl rule__Statement__Group_5__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2425:1: rule__Statement__Group_5__0 : rule__Statement__Group_5__0__Impl rule__Statement__Group_5__1 ;
     public final void rule__Statement__Group_5__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2310:1: ( rule__Statement__Group_5__0__Impl rule__Statement__Group_5__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2311:2: rule__Statement__Group_5__0__Impl rule__Statement__Group_5__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2429:1: ( rule__Statement__Group_5__0__Impl rule__Statement__Group_5__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2430:2: rule__Statement__Group_5__0__Impl rule__Statement__Group_5__1
             {
-            pushFollow(FOLLOW_rule__Statement__Group_5__0__Impl_in_rule__Statement__Group_5__04723);
+            pushFollow(FOLLOW_rule__Statement__Group_5__0__Impl_in_rule__Statement__Group_5__04940);
             rule__Statement__Group_5__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Statement__Group_5__1_in_rule__Statement__Group_5__04726);
+            pushFollow(FOLLOW_rule__Statement__Group_5__1_in_rule__Statement__Group_5__04943);
             rule__Statement__Group_5__1();
             _fsp--;
             if (failed) return ;
@@ -6696,22 +6937,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_5__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2318:1: rule__Statement__Group_5__0__Impl : ( 'for' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2437:1: rule__Statement__Group_5__0__Impl : ( 'for' ) ;
     public final void rule__Statement__Group_5__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2322:1: ( ( 'for' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2323:1: ( 'for' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2441:1: ( ( 'for' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2442:1: ( 'for' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2323:1: ( 'for' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2324:1: 'for'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2442:1: ( 'for' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2443:1: 'for'
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getStatementAccess().getForKeyword_5_0()); 
             }
-            match(input,37,FOLLOW_37_in_rule__Statement__Group_5__0__Impl4754); if (failed) return ;
+            match(input,38,FOLLOW_38_in_rule__Statement__Group_5__0__Impl4971); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getStatementAccess().getForKeyword_5_0()); 
             }
@@ -6737,20 +6978,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_5__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2337:1: rule__Statement__Group_5__1 : rule__Statement__Group_5__1__Impl rule__Statement__Group_5__2 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2456:1: rule__Statement__Group_5__1 : rule__Statement__Group_5__1__Impl rule__Statement__Group_5__2 ;
     public final void rule__Statement__Group_5__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2341:1: ( rule__Statement__Group_5__1__Impl rule__Statement__Group_5__2 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2342:2: rule__Statement__Group_5__1__Impl rule__Statement__Group_5__2
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2460:1: ( rule__Statement__Group_5__1__Impl rule__Statement__Group_5__2 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2461:2: rule__Statement__Group_5__1__Impl rule__Statement__Group_5__2
             {
-            pushFollow(FOLLOW_rule__Statement__Group_5__1__Impl_in_rule__Statement__Group_5__14785);
+            pushFollow(FOLLOW_rule__Statement__Group_5__1__Impl_in_rule__Statement__Group_5__15002);
             rule__Statement__Group_5__1__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Statement__Group_5__2_in_rule__Statement__Group_5__14788);
+            pushFollow(FOLLOW_rule__Statement__Group_5__2_in_rule__Statement__Group_5__15005);
             rule__Statement__Group_5__2();
             _fsp--;
             if (failed) return ;
@@ -6773,22 +7014,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_5__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2349:1: rule__Statement__Group_5__1__Impl : ( ruleparam ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2468:1: rule__Statement__Group_5__1__Impl : ( ruleparam ) ;
     public final void rule__Statement__Group_5__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2353:1: ( ( ruleparam ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2354:1: ( ruleparam )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2472:1: ( ( ruleparam ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2473:1: ( ruleparam )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2354:1: ( ruleparam )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2355:1: ruleparam
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2473:1: ( ruleparam )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2474:1: ruleparam
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getStatementAccess().getParamParserRuleCall_5_1()); 
             }
-            pushFollow(FOLLOW_ruleparam_in_rule__Statement__Group_5__1__Impl4815);
+            pushFollow(FOLLOW_ruleparam_in_rule__Statement__Group_5__1__Impl5032);
             ruleparam();
             _fsp--;
             if (failed) return ;
@@ -6817,20 +7058,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_5__2
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2366:1: rule__Statement__Group_5__2 : rule__Statement__Group_5__2__Impl rule__Statement__Group_5__3 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2485:1: rule__Statement__Group_5__2 : rule__Statement__Group_5__2__Impl rule__Statement__Group_5__3 ;
     public final void rule__Statement__Group_5__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2370:1: ( rule__Statement__Group_5__2__Impl rule__Statement__Group_5__3 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2371:2: rule__Statement__Group_5__2__Impl rule__Statement__Group_5__3
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2489:1: ( rule__Statement__Group_5__2__Impl rule__Statement__Group_5__3 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2490:2: rule__Statement__Group_5__2__Impl rule__Statement__Group_5__3
             {
-            pushFollow(FOLLOW_rule__Statement__Group_5__2__Impl_in_rule__Statement__Group_5__24844);
+            pushFollow(FOLLOW_rule__Statement__Group_5__2__Impl_in_rule__Statement__Group_5__25061);
             rule__Statement__Group_5__2__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Statement__Group_5__3_in_rule__Statement__Group_5__24847);
+            pushFollow(FOLLOW_rule__Statement__Group_5__3_in_rule__Statement__Group_5__25064);
             rule__Statement__Group_5__3();
             _fsp--;
             if (failed) return ;
@@ -6853,22 +7094,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_5__2__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2378:1: rule__Statement__Group_5__2__Impl : ( 'in' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2497:1: rule__Statement__Group_5__2__Impl : ( 'in' ) ;
     public final void rule__Statement__Group_5__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2382:1: ( ( 'in' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2383:1: ( 'in' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2501:1: ( ( 'in' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2502:1: ( 'in' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2383:1: ( 'in' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2384:1: 'in'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2502:1: ( 'in' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2503:1: 'in'
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getStatementAccess().getInKeyword_5_2()); 
             }
-            match(input,38,FOLLOW_38_in_rule__Statement__Group_5__2__Impl4875); if (failed) return ;
+            match(input,39,FOLLOW_39_in_rule__Statement__Group_5__2__Impl5092); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getStatementAccess().getInKeyword_5_2()); 
             }
@@ -6894,20 +7135,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_5__3
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2397:1: rule__Statement__Group_5__3 : rule__Statement__Group_5__3__Impl rule__Statement__Group_5__4 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2516:1: rule__Statement__Group_5__3 : rule__Statement__Group_5__3__Impl rule__Statement__Group_5__4 ;
     public final void rule__Statement__Group_5__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2401:1: ( rule__Statement__Group_5__3__Impl rule__Statement__Group_5__4 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2402:2: rule__Statement__Group_5__3__Impl rule__Statement__Group_5__4
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2520:1: ( rule__Statement__Group_5__3__Impl rule__Statement__Group_5__4 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2521:2: rule__Statement__Group_5__3__Impl rule__Statement__Group_5__4
             {
-            pushFollow(FOLLOW_rule__Statement__Group_5__3__Impl_in_rule__Statement__Group_5__34906);
+            pushFollow(FOLLOW_rule__Statement__Group_5__3__Impl_in_rule__Statement__Group_5__35123);
             rule__Statement__Group_5__3__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Statement__Group_5__4_in_rule__Statement__Group_5__34909);
+            pushFollow(FOLLOW_rule__Statement__Group_5__4_in_rule__Statement__Group_5__35126);
             rule__Statement__Group_5__4();
             _fsp--;
             if (failed) return ;
@@ -6930,22 +7171,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_5__3__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2409:1: rule__Statement__Group_5__3__Impl : ( ruleexpr ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2528:1: rule__Statement__Group_5__3__Impl : ( ruleexpr ) ;
     public final void rule__Statement__Group_5__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2413:1: ( ( ruleexpr ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2414:1: ( ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2532:1: ( ( ruleexpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2533:1: ( ruleexpr )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2414:1: ( ruleexpr )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2415:1: ruleexpr
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2533:1: ( ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2534:1: ruleexpr
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getStatementAccess().getExprParserRuleCall_5_3()); 
             }
-            pushFollow(FOLLOW_ruleexpr_in_rule__Statement__Group_5__3__Impl4936);
+            pushFollow(FOLLOW_ruleexpr_in_rule__Statement__Group_5__3__Impl5153);
             ruleexpr();
             _fsp--;
             if (failed) return ;
@@ -6974,20 +7215,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_5__4
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2426:1: rule__Statement__Group_5__4 : rule__Statement__Group_5__4__Impl rule__Statement__Group_5__5 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2545:1: rule__Statement__Group_5__4 : rule__Statement__Group_5__4__Impl rule__Statement__Group_5__5 ;
     public final void rule__Statement__Group_5__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2430:1: ( rule__Statement__Group_5__4__Impl rule__Statement__Group_5__5 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2431:2: rule__Statement__Group_5__4__Impl rule__Statement__Group_5__5
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2549:1: ( rule__Statement__Group_5__4__Impl rule__Statement__Group_5__5 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2550:2: rule__Statement__Group_5__4__Impl rule__Statement__Group_5__5
             {
-            pushFollow(FOLLOW_rule__Statement__Group_5__4__Impl_in_rule__Statement__Group_5__44965);
+            pushFollow(FOLLOW_rule__Statement__Group_5__4__Impl_in_rule__Statement__Group_5__45182);
             rule__Statement__Group_5__4__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Statement__Group_5__5_in_rule__Statement__Group_5__44968);
+            pushFollow(FOLLOW_rule__Statement__Group_5__5_in_rule__Statement__Group_5__45185);
             rule__Statement__Group_5__5();
             _fsp--;
             if (failed) return ;
@@ -7010,22 +7251,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_5__4__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2438:1: rule__Statement__Group_5__4__Impl : ( ':' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2557:1: rule__Statement__Group_5__4__Impl : ( ':' ) ;
     public final void rule__Statement__Group_5__4__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2442:1: ( ( ':' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2443:1: ( ':' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2561:1: ( ( ':' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2562:1: ( ':' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2443:1: ( ':' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2444:1: ':'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2562:1: ( ':' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2563:1: ':'
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getStatementAccess().getColonKeyword_5_4()); 
             }
-            match(input,29,FOLLOW_29_in_rule__Statement__Group_5__4__Impl4996); if (failed) return ;
+            match(input,31,FOLLOW_31_in_rule__Statement__Group_5__4__Impl5213); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getStatementAccess().getColonKeyword_5_4()); 
             }
@@ -7051,16 +7292,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_5__5
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2457:1: rule__Statement__Group_5__5 : rule__Statement__Group_5__5__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2576:1: rule__Statement__Group_5__5 : rule__Statement__Group_5__5__Impl ;
     public final void rule__Statement__Group_5__5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2461:1: ( rule__Statement__Group_5__5__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2462:2: rule__Statement__Group_5__5__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2580:1: ( rule__Statement__Group_5__5__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2581:2: rule__Statement__Group_5__5__Impl
             {
-            pushFollow(FOLLOW_rule__Statement__Group_5__5__Impl_in_rule__Statement__Group_5__55027);
+            pushFollow(FOLLOW_rule__Statement__Group_5__5__Impl_in_rule__Statement__Group_5__55244);
             rule__Statement__Group_5__5__Impl();
             _fsp--;
             if (failed) return ;
@@ -7083,25 +7324,25 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_5__5__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2468:1: rule__Statement__Group_5__5__Impl : ( ( rule__Statement__StatementsAssignment_5_5 ) ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2587:1: rule__Statement__Group_5__5__Impl : ( ( rule__Statement__StatementsAssignment_5_5 ) ) ;
     public final void rule__Statement__Group_5__5__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2472:1: ( ( ( rule__Statement__StatementsAssignment_5_5 ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2473:1: ( ( rule__Statement__StatementsAssignment_5_5 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2591:1: ( ( ( rule__Statement__StatementsAssignment_5_5 ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2592:1: ( ( rule__Statement__StatementsAssignment_5_5 ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2473:1: ( ( rule__Statement__StatementsAssignment_5_5 ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2474:1: ( rule__Statement__StatementsAssignment_5_5 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2592:1: ( ( rule__Statement__StatementsAssignment_5_5 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2593:1: ( rule__Statement__StatementsAssignment_5_5 )
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getStatementAccess().getStatementsAssignment_5_5()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2475:1: ( rule__Statement__StatementsAssignment_5_5 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2475:2: rule__Statement__StatementsAssignment_5_5
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2594:1: ( rule__Statement__StatementsAssignment_5_5 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2594:2: rule__Statement__StatementsAssignment_5_5
             {
-            pushFollow(FOLLOW_rule__Statement__StatementsAssignment_5_5_in_rule__Statement__Group_5__5__Impl5054);
+            pushFollow(FOLLOW_rule__Statement__StatementsAssignment_5_5_in_rule__Statement__Group_5__5__Impl5271);
             rule__Statement__StatementsAssignment_5_5();
             _fsp--;
             if (failed) return ;
@@ -7133,20 +7374,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_6__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2497:1: rule__Statement__Group_6__0 : rule__Statement__Group_6__0__Impl rule__Statement__Group_6__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2616:1: rule__Statement__Group_6__0 : rule__Statement__Group_6__0__Impl rule__Statement__Group_6__1 ;
     public final void rule__Statement__Group_6__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2501:1: ( rule__Statement__Group_6__0__Impl rule__Statement__Group_6__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2502:2: rule__Statement__Group_6__0__Impl rule__Statement__Group_6__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2620:1: ( rule__Statement__Group_6__0__Impl rule__Statement__Group_6__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2621:2: rule__Statement__Group_6__0__Impl rule__Statement__Group_6__1
             {
-            pushFollow(FOLLOW_rule__Statement__Group_6__0__Impl_in_rule__Statement__Group_6__05096);
+            pushFollow(FOLLOW_rule__Statement__Group_6__0__Impl_in_rule__Statement__Group_6__05313);
             rule__Statement__Group_6__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Statement__Group_6__1_in_rule__Statement__Group_6__05099);
+            pushFollow(FOLLOW_rule__Statement__Group_6__1_in_rule__Statement__Group_6__05316);
             rule__Statement__Group_6__1();
             _fsp--;
             if (failed) return ;
@@ -7169,22 +7410,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_6__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2509:1: rule__Statement__Group_6__0__Impl : ( 'while' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2628:1: rule__Statement__Group_6__0__Impl : ( 'while' ) ;
     public final void rule__Statement__Group_6__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2513:1: ( ( 'while' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2514:1: ( 'while' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2632:1: ( ( 'while' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2633:1: ( 'while' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2514:1: ( 'while' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2515:1: 'while'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2633:1: ( 'while' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2634:1: 'while'
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getStatementAccess().getWhileKeyword_6_0()); 
             }
-            match(input,39,FOLLOW_39_in_rule__Statement__Group_6__0__Impl5127); if (failed) return ;
+            match(input,40,FOLLOW_40_in_rule__Statement__Group_6__0__Impl5344); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getStatementAccess().getWhileKeyword_6_0()); 
             }
@@ -7210,20 +7451,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_6__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2528:1: rule__Statement__Group_6__1 : rule__Statement__Group_6__1__Impl rule__Statement__Group_6__2 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2647:1: rule__Statement__Group_6__1 : rule__Statement__Group_6__1__Impl rule__Statement__Group_6__2 ;
     public final void rule__Statement__Group_6__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2532:1: ( rule__Statement__Group_6__1__Impl rule__Statement__Group_6__2 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2533:2: rule__Statement__Group_6__1__Impl rule__Statement__Group_6__2
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2651:1: ( rule__Statement__Group_6__1__Impl rule__Statement__Group_6__2 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2652:2: rule__Statement__Group_6__1__Impl rule__Statement__Group_6__2
             {
-            pushFollow(FOLLOW_rule__Statement__Group_6__1__Impl_in_rule__Statement__Group_6__15158);
+            pushFollow(FOLLOW_rule__Statement__Group_6__1__Impl_in_rule__Statement__Group_6__15375);
             rule__Statement__Group_6__1__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Statement__Group_6__2_in_rule__Statement__Group_6__15161);
+            pushFollow(FOLLOW_rule__Statement__Group_6__2_in_rule__Statement__Group_6__15378);
             rule__Statement__Group_6__2();
             _fsp--;
             if (failed) return ;
@@ -7246,22 +7487,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_6__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2540:1: rule__Statement__Group_6__1__Impl : ( ruleexpr ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2659:1: rule__Statement__Group_6__1__Impl : ( ruleexpr ) ;
     public final void rule__Statement__Group_6__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2544:1: ( ( ruleexpr ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2545:1: ( ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2663:1: ( ( ruleexpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2664:1: ( ruleexpr )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2545:1: ( ruleexpr )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2546:1: ruleexpr
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2664:1: ( ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2665:1: ruleexpr
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getStatementAccess().getExprParserRuleCall_6_1()); 
             }
-            pushFollow(FOLLOW_ruleexpr_in_rule__Statement__Group_6__1__Impl5188);
+            pushFollow(FOLLOW_ruleexpr_in_rule__Statement__Group_6__1__Impl5405);
             ruleexpr();
             _fsp--;
             if (failed) return ;
@@ -7290,20 +7531,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_6__2
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2557:1: rule__Statement__Group_6__2 : rule__Statement__Group_6__2__Impl rule__Statement__Group_6__3 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2676:1: rule__Statement__Group_6__2 : rule__Statement__Group_6__2__Impl rule__Statement__Group_6__3 ;
     public final void rule__Statement__Group_6__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2561:1: ( rule__Statement__Group_6__2__Impl rule__Statement__Group_6__3 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2562:2: rule__Statement__Group_6__2__Impl rule__Statement__Group_6__3
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2680:1: ( rule__Statement__Group_6__2__Impl rule__Statement__Group_6__3 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2681:2: rule__Statement__Group_6__2__Impl rule__Statement__Group_6__3
             {
-            pushFollow(FOLLOW_rule__Statement__Group_6__2__Impl_in_rule__Statement__Group_6__25217);
+            pushFollow(FOLLOW_rule__Statement__Group_6__2__Impl_in_rule__Statement__Group_6__25434);
             rule__Statement__Group_6__2__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Statement__Group_6__3_in_rule__Statement__Group_6__25220);
+            pushFollow(FOLLOW_rule__Statement__Group_6__3_in_rule__Statement__Group_6__25437);
             rule__Statement__Group_6__3();
             _fsp--;
             if (failed) return ;
@@ -7326,22 +7567,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_6__2__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2569:1: rule__Statement__Group_6__2__Impl : ( ':' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2688:1: rule__Statement__Group_6__2__Impl : ( ':' ) ;
     public final void rule__Statement__Group_6__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2573:1: ( ( ':' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2574:1: ( ':' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2692:1: ( ( ':' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2693:1: ( ':' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2574:1: ( ':' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2575:1: ':'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2693:1: ( ':' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2694:1: ':'
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getStatementAccess().getColonKeyword_6_2()); 
             }
-            match(input,29,FOLLOW_29_in_rule__Statement__Group_6__2__Impl5248); if (failed) return ;
+            match(input,31,FOLLOW_31_in_rule__Statement__Group_6__2__Impl5465); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getStatementAccess().getColonKeyword_6_2()); 
             }
@@ -7367,16 +7608,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_6__3
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2588:1: rule__Statement__Group_6__3 : rule__Statement__Group_6__3__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2707:1: rule__Statement__Group_6__3 : rule__Statement__Group_6__3__Impl ;
     public final void rule__Statement__Group_6__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2592:1: ( rule__Statement__Group_6__3__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2593:2: rule__Statement__Group_6__3__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2711:1: ( rule__Statement__Group_6__3__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2712:2: rule__Statement__Group_6__3__Impl
             {
-            pushFollow(FOLLOW_rule__Statement__Group_6__3__Impl_in_rule__Statement__Group_6__35279);
+            pushFollow(FOLLOW_rule__Statement__Group_6__3__Impl_in_rule__Statement__Group_6__35496);
             rule__Statement__Group_6__3__Impl();
             _fsp--;
             if (failed) return ;
@@ -7399,22 +7640,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__Group_6__3__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2599:1: rule__Statement__Group_6__3__Impl : ( rulestatement ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2718:1: rule__Statement__Group_6__3__Impl : ( rulestatement ) ;
     public final void rule__Statement__Group_6__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2603:1: ( ( rulestatement ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2604:1: ( rulestatement )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2722:1: ( ( rulestatement ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2723:1: ( rulestatement )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2604:1: ( rulestatement )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2605:1: rulestatement
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2723:1: ( rulestatement )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2724:1: rulestatement
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getStatementAccess().getStatementParserRuleCall_6_3()); 
             }
-            pushFollow(FOLLOW_rulestatement_in_rule__Statement__Group_6__3__Impl5306);
+            pushFollow(FOLLOW_rulestatement_in_rule__Statement__Group_6__3__Impl5523);
             rulestatement();
             _fsp--;
             if (failed) return ;
@@ -7442,516 +7683,21 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
     // $ANTLR end rule__Statement__Group_6__3__Impl
 
 
-    // $ANTLR start rule__Statement__Group_8__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2624:1: rule__Statement__Group_8__0 : rule__Statement__Group_8__0__Impl rule__Statement__Group_8__1 ;
-    public final void rule__Statement__Group_8__0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2628:1: ( rule__Statement__Group_8__0__Impl rule__Statement__Group_8__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2629:2: rule__Statement__Group_8__0__Impl rule__Statement__Group_8__1
-            {
-            pushFollow(FOLLOW_rule__Statement__Group_8__0__Impl_in_rule__Statement__Group_8__05343);
-            rule__Statement__Group_8__0__Impl();
-            _fsp--;
-            if (failed) return ;
-            pushFollow(FOLLOW_rule__Statement__Group_8__1_in_rule__Statement__Group_8__05346);
-            rule__Statement__Group_8__1();
-            _fsp--;
-            if (failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Statement__Group_8__0
-
-
-    // $ANTLR start rule__Statement__Group_8__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2636:1: rule__Statement__Group_8__0__Impl : ( ( rule__Statement__TypesAssignment_8_0 ) ) ;
-    public final void rule__Statement__Group_8__0__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2640:1: ( ( ( rule__Statement__TypesAssignment_8_0 ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2641:1: ( ( rule__Statement__TypesAssignment_8_0 ) )
-            {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2641:1: ( ( rule__Statement__TypesAssignment_8_0 ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2642:1: ( rule__Statement__TypesAssignment_8_0 )
-            {
-            if ( backtracking==0 ) {
-               before(grammarAccess.getStatementAccess().getTypesAssignment_8_0()); 
-            }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2643:1: ( rule__Statement__TypesAssignment_8_0 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2643:2: rule__Statement__TypesAssignment_8_0
-            {
-            pushFollow(FOLLOW_rule__Statement__TypesAssignment_8_0_in_rule__Statement__Group_8__0__Impl5373);
-            rule__Statement__TypesAssignment_8_0();
-            _fsp--;
-            if (failed) return ;
-
-            }
-
-            if ( backtracking==0 ) {
-               after(grammarAccess.getStatementAccess().getTypesAssignment_8_0()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Statement__Group_8__0__Impl
-
-
-    // $ANTLR start rule__Statement__Group_8__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2653:1: rule__Statement__Group_8__1 : rule__Statement__Group_8__1__Impl ;
-    public final void rule__Statement__Group_8__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2657:1: ( rule__Statement__Group_8__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2658:2: rule__Statement__Group_8__1__Impl
-            {
-            pushFollow(FOLLOW_rule__Statement__Group_8__1__Impl_in_rule__Statement__Group_8__15403);
-            rule__Statement__Group_8__1__Impl();
-            _fsp--;
-            if (failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Statement__Group_8__1
-
-
-    // $ANTLR start rule__Statement__Group_8__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2664:1: rule__Statement__Group_8__1__Impl : ( ( rule__Statement__NameAssignment_8_1 ) ) ;
-    public final void rule__Statement__Group_8__1__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2668:1: ( ( ( rule__Statement__NameAssignment_8_1 ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2669:1: ( ( rule__Statement__NameAssignment_8_1 ) )
-            {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2669:1: ( ( rule__Statement__NameAssignment_8_1 ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2670:1: ( rule__Statement__NameAssignment_8_1 )
-            {
-            if ( backtracking==0 ) {
-               before(grammarAccess.getStatementAccess().getNameAssignment_8_1()); 
-            }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2671:1: ( rule__Statement__NameAssignment_8_1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2671:2: rule__Statement__NameAssignment_8_1
-            {
-            pushFollow(FOLLOW_rule__Statement__NameAssignment_8_1_in_rule__Statement__Group_8__1__Impl5430);
-            rule__Statement__NameAssignment_8_1();
-            _fsp--;
-            if (failed) return ;
-
-            }
-
-            if ( backtracking==0 ) {
-               after(grammarAccess.getStatementAccess().getNameAssignment_8_1()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Statement__Group_8__1__Impl
-
-
-    // $ANTLR start rule__Statement__Group_9__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2685:1: rule__Statement__Group_9__0 : rule__Statement__Group_9__0__Impl rule__Statement__Group_9__1 ;
-    public final void rule__Statement__Group_9__0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2689:1: ( rule__Statement__Group_9__0__Impl rule__Statement__Group_9__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2690:2: rule__Statement__Group_9__0__Impl rule__Statement__Group_9__1
-            {
-            pushFollow(FOLLOW_rule__Statement__Group_9__0__Impl_in_rule__Statement__Group_9__05464);
-            rule__Statement__Group_9__0__Impl();
-            _fsp--;
-            if (failed) return ;
-            pushFollow(FOLLOW_rule__Statement__Group_9__1_in_rule__Statement__Group_9__05467);
-            rule__Statement__Group_9__1();
-            _fsp--;
-            if (failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Statement__Group_9__0
-
-
-    // $ANTLR start rule__Statement__Group_9__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2697:1: rule__Statement__Group_9__0__Impl : ( ( rule__Statement__TypesAssignment_9_0 ) ) ;
-    public final void rule__Statement__Group_9__0__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2701:1: ( ( ( rule__Statement__TypesAssignment_9_0 ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2702:1: ( ( rule__Statement__TypesAssignment_9_0 ) )
-            {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2702:1: ( ( rule__Statement__TypesAssignment_9_0 ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2703:1: ( rule__Statement__TypesAssignment_9_0 )
-            {
-            if ( backtracking==0 ) {
-               before(grammarAccess.getStatementAccess().getTypesAssignment_9_0()); 
-            }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2704:1: ( rule__Statement__TypesAssignment_9_0 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2704:2: rule__Statement__TypesAssignment_9_0
-            {
-            pushFollow(FOLLOW_rule__Statement__TypesAssignment_9_0_in_rule__Statement__Group_9__0__Impl5494);
-            rule__Statement__TypesAssignment_9_0();
-            _fsp--;
-            if (failed) return ;
-
-            }
-
-            if ( backtracking==0 ) {
-               after(grammarAccess.getStatementAccess().getTypesAssignment_9_0()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Statement__Group_9__0__Impl
-
-
-    // $ANTLR start rule__Statement__Group_9__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2714:1: rule__Statement__Group_9__1 : rule__Statement__Group_9__1__Impl ;
-    public final void rule__Statement__Group_9__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2718:1: ( rule__Statement__Group_9__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2719:2: rule__Statement__Group_9__1__Impl
-            {
-            pushFollow(FOLLOW_rule__Statement__Group_9__1__Impl_in_rule__Statement__Group_9__15524);
-            rule__Statement__Group_9__1__Impl();
-            _fsp--;
-            if (failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Statement__Group_9__1
-
-
-    // $ANTLR start rule__Statement__Group_9__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2725:1: rule__Statement__Group_9__1__Impl : ( ( rule__Statement__NameAssignment_9_1 ) ) ;
-    public final void rule__Statement__Group_9__1__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2729:1: ( ( ( rule__Statement__NameAssignment_9_1 ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2730:1: ( ( rule__Statement__NameAssignment_9_1 ) )
-            {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2730:1: ( ( rule__Statement__NameAssignment_9_1 ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2731:1: ( rule__Statement__NameAssignment_9_1 )
-            {
-            if ( backtracking==0 ) {
-               before(grammarAccess.getStatementAccess().getNameAssignment_9_1()); 
-            }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2732:1: ( rule__Statement__NameAssignment_9_1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2732:2: rule__Statement__NameAssignment_9_1
-            {
-            pushFollow(FOLLOW_rule__Statement__NameAssignment_9_1_in_rule__Statement__Group_9__1__Impl5551);
-            rule__Statement__NameAssignment_9_1();
-            _fsp--;
-            if (failed) return ;
-
-            }
-
-            if ( backtracking==0 ) {
-               after(grammarAccess.getStatementAccess().getNameAssignment_9_1()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Statement__Group_9__1__Impl
-
-
-    // $ANTLR start rule__Statement__Group_10__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2746:1: rule__Statement__Group_10__0 : rule__Statement__Group_10__0__Impl rule__Statement__Group_10__1 ;
-    public final void rule__Statement__Group_10__0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2750:1: ( rule__Statement__Group_10__0__Impl rule__Statement__Group_10__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2751:2: rule__Statement__Group_10__0__Impl rule__Statement__Group_10__1
-            {
-            pushFollow(FOLLOW_rule__Statement__Group_10__0__Impl_in_rule__Statement__Group_10__05585);
-            rule__Statement__Group_10__0__Impl();
-            _fsp--;
-            if (failed) return ;
-            pushFollow(FOLLOW_rule__Statement__Group_10__1_in_rule__Statement__Group_10__05588);
-            rule__Statement__Group_10__1();
-            _fsp--;
-            if (failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Statement__Group_10__0
-
-
-    // $ANTLR start rule__Statement__Group_10__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2758:1: rule__Statement__Group_10__0__Impl : ( 'mains' ) ;
-    public final void rule__Statement__Group_10__0__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2762:1: ( ( 'mains' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2763:1: ( 'mains' )
-            {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2763:1: ( 'mains' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2764:1: 'mains'
-            {
-            if ( backtracking==0 ) {
-               before(grammarAccess.getStatementAccess().getMainsKeyword_10_0()); 
-            }
-            match(input,40,FOLLOW_40_in_rule__Statement__Group_10__0__Impl5616); if (failed) return ;
-            if ( backtracking==0 ) {
-               after(grammarAccess.getStatementAccess().getMainsKeyword_10_0()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Statement__Group_10__0__Impl
-
-
-    // $ANTLR start rule__Statement__Group_10__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2777:1: rule__Statement__Group_10__1 : rule__Statement__Group_10__1__Impl ;
-    public final void rule__Statement__Group_10__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2781:1: ( rule__Statement__Group_10__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2782:2: rule__Statement__Group_10__1__Impl
-            {
-            pushFollow(FOLLOW_rule__Statement__Group_10__1__Impl_in_rule__Statement__Group_10__15647);
-            rule__Statement__Group_10__1__Impl();
-            _fsp--;
-            if (failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Statement__Group_10__1
-
-
-    // $ANTLR start rule__Statement__Group_10__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2788:1: rule__Statement__Group_10__1__Impl : ( ( rule__Statement__NameAssignment_10_1 ) ) ;
-    public final void rule__Statement__Group_10__1__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2792:1: ( ( ( rule__Statement__NameAssignment_10_1 ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2793:1: ( ( rule__Statement__NameAssignment_10_1 ) )
-            {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2793:1: ( ( rule__Statement__NameAssignment_10_1 ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2794:1: ( rule__Statement__NameAssignment_10_1 )
-            {
-            if ( backtracking==0 ) {
-               before(grammarAccess.getStatementAccess().getNameAssignment_10_1()); 
-            }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2795:1: ( rule__Statement__NameAssignment_10_1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2795:2: rule__Statement__NameAssignment_10_1
-            {
-            pushFollow(FOLLOW_rule__Statement__NameAssignment_10_1_in_rule__Statement__Group_10__1__Impl5674);
-            rule__Statement__NameAssignment_10_1();
-            _fsp--;
-            if (failed) return ;
-
-            }
-
-            if ( backtracking==0 ) {
-               after(grammarAccess.getStatementAccess().getNameAssignment_10_1()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Statement__Group_10__1__Impl
-
-
     // $ANTLR start rule__Declaration__Group__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2809:1: rule__Declaration__Group__0 : rule__Declaration__Group__0__Impl rule__Declaration__Group__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2743:1: rule__Declaration__Group__0 : rule__Declaration__Group__0__Impl rule__Declaration__Group__1 ;
     public final void rule__Declaration__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2813:1: ( rule__Declaration__Group__0__Impl rule__Declaration__Group__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2814:2: rule__Declaration__Group__0__Impl rule__Declaration__Group__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2747:1: ( rule__Declaration__Group__0__Impl rule__Declaration__Group__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2748:2: rule__Declaration__Group__0__Impl rule__Declaration__Group__1
             {
-            pushFollow(FOLLOW_rule__Declaration__Group__0__Impl_in_rule__Declaration__Group__05708);
+            pushFollow(FOLLOW_rule__Declaration__Group__0__Impl_in_rule__Declaration__Group__05560);
             rule__Declaration__Group__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Declaration__Group__1_in_rule__Declaration__Group__05711);
+            pushFollow(FOLLOW_rule__Declaration__Group__1_in_rule__Declaration__Group__05563);
             rule__Declaration__Group__1();
             _fsp--;
             if (failed) return ;
@@ -7974,34 +7720,89 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Declaration__Group__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2821:1: rule__Declaration__Group__0__Impl : ( ( rule__Declaration__NameAssignment_0 ) ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2755:1: rule__Declaration__Group__0__Impl : ( ( ( rule__Declaration__Group_0__0 ) ) ( ( rule__Declaration__Group_0__0 )* ) ) ;
     public final void rule__Declaration__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2825:1: ( ( ( rule__Declaration__NameAssignment_0 ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2826:1: ( ( rule__Declaration__NameAssignment_0 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2759:1: ( ( ( ( rule__Declaration__Group_0__0 ) ) ( ( rule__Declaration__Group_0__0 )* ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2760:1: ( ( ( rule__Declaration__Group_0__0 ) ) ( ( rule__Declaration__Group_0__0 )* ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2826:1: ( ( rule__Declaration__NameAssignment_0 ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2827:1: ( rule__Declaration__NameAssignment_0 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2760:1: ( ( ( rule__Declaration__Group_0__0 ) ) ( ( rule__Declaration__Group_0__0 )* ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2761:1: ( ( rule__Declaration__Group_0__0 ) ) ( ( rule__Declaration__Group_0__0 )* )
+            {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2761:1: ( ( rule__Declaration__Group_0__0 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2762:1: ( rule__Declaration__Group_0__0 )
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getDeclarationAccess().getNameAssignment_0()); 
+               before(grammarAccess.getDeclarationAccess().getGroup_0()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2828:1: ( rule__Declaration__NameAssignment_0 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2828:2: rule__Declaration__NameAssignment_0
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2763:1: ( rule__Declaration__Group_0__0 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2763:2: rule__Declaration__Group_0__0
             {
-            pushFollow(FOLLOW_rule__Declaration__NameAssignment_0_in_rule__Declaration__Group__0__Impl5738);
-            rule__Declaration__NameAssignment_0();
+            pushFollow(FOLLOW_rule__Declaration__Group_0__0_in_rule__Declaration__Group__0__Impl5592);
+            rule__Declaration__Group_0__0();
             _fsp--;
             if (failed) return ;
 
             }
 
             if ( backtracking==0 ) {
-               after(grammarAccess.getDeclarationAccess().getNameAssignment_0()); 
+               after(grammarAccess.getDeclarationAccess().getGroup_0()); 
             }
+
+            }
+
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2766:1: ( ( rule__Declaration__Group_0__0 )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2767:1: ( rule__Declaration__Group_0__0 )*
+            {
+            if ( backtracking==0 ) {
+               before(grammarAccess.getDeclarationAccess().getGroup_0()); 
+            }
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2768:1: ( rule__Declaration__Group_0__0 )*
+            loop19:
+            do {
+                int alt19=2;
+                int LA19_0 = input.LA(1);
+
+                if ( (LA19_0==RULE_ID) ) {
+                    int LA19_1 = input.LA(2);
+
+                    if ( (LA19_1==RULE_ID||(LA19_1>=13 && LA19_1<=15)||LA19_1==41) ) {
+                        alt19=1;
+                    }
+
+
+                }
+                else if ( ((LA19_0>=13 && LA19_0<=15)) ) {
+                    alt19=1;
+                }
+
+
+                switch (alt19) {
+            	case 1 :
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2768:2: rule__Declaration__Group_0__0
+            	    {
+            	    pushFollow(FOLLOW_rule__Declaration__Group_0__0_in_rule__Declaration__Group__0__Impl5604);
+            	    rule__Declaration__Group_0__0();
+            	    _fsp--;
+            	    if (failed) return ;
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop19;
+                }
+            } while (true);
+
+            if ( backtracking==0 ) {
+               after(grammarAccess.getDeclarationAccess().getGroup_0()); 
+            }
+
+            }
+
 
             }
 
@@ -8024,20 +7825,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Declaration__Group__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2838:1: rule__Declaration__Group__1 : rule__Declaration__Group__1__Impl rule__Declaration__Group__2 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2779:1: rule__Declaration__Group__1 : rule__Declaration__Group__1__Impl rule__Declaration__Group__2 ;
     public final void rule__Declaration__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2842:1: ( rule__Declaration__Group__1__Impl rule__Declaration__Group__2 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2843:2: rule__Declaration__Group__1__Impl rule__Declaration__Group__2
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2783:1: ( rule__Declaration__Group__1__Impl rule__Declaration__Group__2 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2784:2: rule__Declaration__Group__1__Impl rule__Declaration__Group__2
             {
-            pushFollow(FOLLOW_rule__Declaration__Group__1__Impl_in_rule__Declaration__Group__15768);
+            pushFollow(FOLLOW_rule__Declaration__Group__1__Impl_in_rule__Declaration__Group__15637);
             rule__Declaration__Group__1__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Declaration__Group__2_in_rule__Declaration__Group__15771);
+            pushFollow(FOLLOW_rule__Declaration__Group__2_in_rule__Declaration__Group__15640);
             rule__Declaration__Group__2();
             _fsp--;
             if (failed) return ;
@@ -8060,24 +7861,33 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Declaration__Group__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2850:1: rule__Declaration__Group__1__Impl : ( '=' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2791:1: rule__Declaration__Group__1__Impl : ( ( rule__Declaration__NameAssignment_1 ) ) ;
     public final void rule__Declaration__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2854:1: ( ( '=' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2855:1: ( '=' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2795:1: ( ( ( rule__Declaration__NameAssignment_1 ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2796:1: ( ( rule__Declaration__NameAssignment_1 ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2855:1: ( '=' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2856:1: '='
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2796:1: ( ( rule__Declaration__NameAssignment_1 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2797:1: ( rule__Declaration__NameAssignment_1 )
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getDeclarationAccess().getEqualsSignKeyword_1()); 
+               before(grammarAccess.getDeclarationAccess().getNameAssignment_1()); 
             }
-            match(input,41,FOLLOW_41_in_rule__Declaration__Group__1__Impl5799); if (failed) return ;
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2798:1: ( rule__Declaration__NameAssignment_1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2798:2: rule__Declaration__NameAssignment_1
+            {
+            pushFollow(FOLLOW_rule__Declaration__NameAssignment_1_in_rule__Declaration__Group__1__Impl5667);
+            rule__Declaration__NameAssignment_1();
+            _fsp--;
+            if (failed) return ;
+
+            }
+
             if ( backtracking==0 ) {
-               after(grammarAccess.getDeclarationAccess().getEqualsSignKeyword_1()); 
+               after(grammarAccess.getDeclarationAccess().getNameAssignment_1()); 
             }
 
             }
@@ -8101,16 +7911,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Declaration__Group__2
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2869:1: rule__Declaration__Group__2 : rule__Declaration__Group__2__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2808:1: rule__Declaration__Group__2 : rule__Declaration__Group__2__Impl ;
     public final void rule__Declaration__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2873:1: ( rule__Declaration__Group__2__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2874:2: rule__Declaration__Group__2__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2812:1: ( rule__Declaration__Group__2__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2813:2: rule__Declaration__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__Declaration__Group__2__Impl_in_rule__Declaration__Group__25830);
+            pushFollow(FOLLOW_rule__Declaration__Group__2__Impl_in_rule__Declaration__Group__25697);
             rule__Declaration__Group__2__Impl();
             _fsp--;
             if (failed) return ;
@@ -8133,27 +7943,44 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Declaration__Group__2__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2880:1: rule__Declaration__Group__2__Impl : ( ruleexpr ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2819:1: rule__Declaration__Group__2__Impl : ( ( rule__Declaration__Group_2__0 )? ) ;
     public final void rule__Declaration__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2884:1: ( ( ruleexpr ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2885:1: ( ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2823:1: ( ( ( rule__Declaration__Group_2__0 )? ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2824:1: ( ( rule__Declaration__Group_2__0 )? )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2885:1: ( ruleexpr )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2886:1: ruleexpr
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2824:1: ( ( rule__Declaration__Group_2__0 )? )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2825:1: ( rule__Declaration__Group_2__0 )?
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getDeclarationAccess().getExprParserRuleCall_2()); 
+               before(grammarAccess.getDeclarationAccess().getGroup_2()); 
             }
-            pushFollow(FOLLOW_ruleexpr_in_rule__Declaration__Group__2__Impl5857);
-            ruleexpr();
-            _fsp--;
-            if (failed) return ;
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2826:1: ( rule__Declaration__Group_2__0 )?
+            int alt20=2;
+            int LA20_0 = input.LA(1);
+
+            if ( (LA20_0==42) ) {
+                alt20=1;
+            }
+            switch (alt20) {
+                case 1 :
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2826:2: rule__Declaration__Group_2__0
+                    {
+                    pushFollow(FOLLOW_rule__Declaration__Group_2__0_in_rule__Declaration__Group__2__Impl5724);
+                    rule__Declaration__Group_2__0();
+                    _fsp--;
+                    if (failed) return ;
+
+                    }
+                    break;
+
+            }
+
             if ( backtracking==0 ) {
-               after(grammarAccess.getDeclarationAccess().getExprParserRuleCall_2()); 
+               after(grammarAccess.getDeclarationAccess().getGroup_2()); 
             }
 
             }
@@ -8176,21 +8003,350 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
     // $ANTLR end rule__Declaration__Group__2__Impl
 
 
+    // $ANTLR start rule__Declaration__Group_0__0
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2842:1: rule__Declaration__Group_0__0 : rule__Declaration__Group_0__0__Impl rule__Declaration__Group_0__1 ;
+    public final void rule__Declaration__Group_0__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2846:1: ( rule__Declaration__Group_0__0__Impl rule__Declaration__Group_0__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2847:2: rule__Declaration__Group_0__0__Impl rule__Declaration__Group_0__1
+            {
+            pushFollow(FOLLOW_rule__Declaration__Group_0__0__Impl_in_rule__Declaration__Group_0__05761);
+            rule__Declaration__Group_0__0__Impl();
+            _fsp--;
+            if (failed) return ;
+            pushFollow(FOLLOW_rule__Declaration__Group_0__1_in_rule__Declaration__Group_0__05764);
+            rule__Declaration__Group_0__1();
+            _fsp--;
+            if (failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Declaration__Group_0__0
+
+
+    // $ANTLR start rule__Declaration__Group_0__0__Impl
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2854:1: rule__Declaration__Group_0__0__Impl : ( ( rule__Declaration__VariableTypeAssignment_0_0 ) ) ;
+    public final void rule__Declaration__Group_0__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2858:1: ( ( ( rule__Declaration__VariableTypeAssignment_0_0 ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2859:1: ( ( rule__Declaration__VariableTypeAssignment_0_0 ) )
+            {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2859:1: ( ( rule__Declaration__VariableTypeAssignment_0_0 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2860:1: ( rule__Declaration__VariableTypeAssignment_0_0 )
+            {
+            if ( backtracking==0 ) {
+               before(grammarAccess.getDeclarationAccess().getVariableTypeAssignment_0_0()); 
+            }
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2861:1: ( rule__Declaration__VariableTypeAssignment_0_0 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2861:2: rule__Declaration__VariableTypeAssignment_0_0
+            {
+            pushFollow(FOLLOW_rule__Declaration__VariableTypeAssignment_0_0_in_rule__Declaration__Group_0__0__Impl5791);
+            rule__Declaration__VariableTypeAssignment_0_0();
+            _fsp--;
+            if (failed) return ;
+
+            }
+
+            if ( backtracking==0 ) {
+               after(grammarAccess.getDeclarationAccess().getVariableTypeAssignment_0_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Declaration__Group_0__0__Impl
+
+
+    // $ANTLR start rule__Declaration__Group_0__1
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2871:1: rule__Declaration__Group_0__1 : rule__Declaration__Group_0__1__Impl ;
+    public final void rule__Declaration__Group_0__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2875:1: ( rule__Declaration__Group_0__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2876:2: rule__Declaration__Group_0__1__Impl
+            {
+            pushFollow(FOLLOW_rule__Declaration__Group_0__1__Impl_in_rule__Declaration__Group_0__15821);
+            rule__Declaration__Group_0__1__Impl();
+            _fsp--;
+            if (failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Declaration__Group_0__1
+
+
+    // $ANTLR start rule__Declaration__Group_0__1__Impl
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2882:1: rule__Declaration__Group_0__1__Impl : ( ( '[]' )? ) ;
+    public final void rule__Declaration__Group_0__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2886:1: ( ( ( '[]' )? ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2887:1: ( ( '[]' )? )
+            {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2887:1: ( ( '[]' )? )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2888:1: ( '[]' )?
+            {
+            if ( backtracking==0 ) {
+               before(grammarAccess.getDeclarationAccess().getLeftSquareBracketRightSquareBracketKeyword_0_1()); 
+            }
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2889:1: ( '[]' )?
+            int alt21=2;
+            int LA21_0 = input.LA(1);
+
+            if ( (LA21_0==41) ) {
+                alt21=1;
+            }
+            switch (alt21) {
+                case 1 :
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2890:2: '[]'
+                    {
+                    match(input,41,FOLLOW_41_in_rule__Declaration__Group_0__1__Impl5850); if (failed) return ;
+
+                    }
+                    break;
+
+            }
+
+            if ( backtracking==0 ) {
+               after(grammarAccess.getDeclarationAccess().getLeftSquareBracketRightSquareBracketKeyword_0_1()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Declaration__Group_0__1__Impl
+
+
+    // $ANTLR start rule__Declaration__Group_2__0
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2905:1: rule__Declaration__Group_2__0 : rule__Declaration__Group_2__0__Impl rule__Declaration__Group_2__1 ;
+    public final void rule__Declaration__Group_2__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2909:1: ( rule__Declaration__Group_2__0__Impl rule__Declaration__Group_2__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2910:2: rule__Declaration__Group_2__0__Impl rule__Declaration__Group_2__1
+            {
+            pushFollow(FOLLOW_rule__Declaration__Group_2__0__Impl_in_rule__Declaration__Group_2__05887);
+            rule__Declaration__Group_2__0__Impl();
+            _fsp--;
+            if (failed) return ;
+            pushFollow(FOLLOW_rule__Declaration__Group_2__1_in_rule__Declaration__Group_2__05890);
+            rule__Declaration__Group_2__1();
+            _fsp--;
+            if (failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Declaration__Group_2__0
+
+
+    // $ANTLR start rule__Declaration__Group_2__0__Impl
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2917:1: rule__Declaration__Group_2__0__Impl : ( '=' ) ;
+    public final void rule__Declaration__Group_2__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2921:1: ( ( '=' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2922:1: ( '=' )
+            {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2922:1: ( '=' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2923:1: '='
+            {
+            if ( backtracking==0 ) {
+               before(grammarAccess.getDeclarationAccess().getEqualsSignKeyword_2_0()); 
+            }
+            match(input,42,FOLLOW_42_in_rule__Declaration__Group_2__0__Impl5918); if (failed) return ;
+            if ( backtracking==0 ) {
+               after(grammarAccess.getDeclarationAccess().getEqualsSignKeyword_2_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Declaration__Group_2__0__Impl
+
+
+    // $ANTLR start rule__Declaration__Group_2__1
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2936:1: rule__Declaration__Group_2__1 : rule__Declaration__Group_2__1__Impl ;
+    public final void rule__Declaration__Group_2__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2940:1: ( rule__Declaration__Group_2__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2941:2: rule__Declaration__Group_2__1__Impl
+            {
+            pushFollow(FOLLOW_rule__Declaration__Group_2__1__Impl_in_rule__Declaration__Group_2__15949);
+            rule__Declaration__Group_2__1__Impl();
+            _fsp--;
+            if (failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Declaration__Group_2__1
+
+
+    // $ANTLR start rule__Declaration__Group_2__1__Impl
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2947:1: rule__Declaration__Group_2__1__Impl : ( ruleexpr ) ;
+    public final void rule__Declaration__Group_2__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2951:1: ( ( ruleexpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2952:1: ( ruleexpr )
+            {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2952:1: ( ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2953:1: ruleexpr
+            {
+            if ( backtracking==0 ) {
+               before(grammarAccess.getDeclarationAccess().getExprParserRuleCall_2_1()); 
+            }
+            pushFollow(FOLLOW_ruleexpr_in_rule__Declaration__Group_2__1__Impl5976);
+            ruleexpr();
+            _fsp--;
+            if (failed) return ;
+            if ( backtracking==0 ) {
+               after(grammarAccess.getDeclarationAccess().getExprParserRuleCall_2_1()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Declaration__Group_2__1__Impl
+
+
     // $ANTLR start rule__Assignment__Group__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2903:1: rule__Assignment__Group__0 : rule__Assignment__Group__0__Impl rule__Assignment__Group__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2968:1: rule__Assignment__Group__0 : rule__Assignment__Group__0__Impl rule__Assignment__Group__1 ;
     public final void rule__Assignment__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2907:1: ( rule__Assignment__Group__0__Impl rule__Assignment__Group__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2908:2: rule__Assignment__Group__0__Impl rule__Assignment__Group__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2972:1: ( rule__Assignment__Group__0__Impl rule__Assignment__Group__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2973:2: rule__Assignment__Group__0__Impl rule__Assignment__Group__1
             {
-            pushFollow(FOLLOW_rule__Assignment__Group__0__Impl_in_rule__Assignment__Group__05892);
+            pushFollow(FOLLOW_rule__Assignment__Group__0__Impl_in_rule__Assignment__Group__06009);
             rule__Assignment__Group__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Assignment__Group__1_in_rule__Assignment__Group__05895);
+            pushFollow(FOLLOW_rule__Assignment__Group__1_in_rule__Assignment__Group__06012);
             rule__Assignment__Group__1();
             _fsp--;
             if (failed) return ;
@@ -8213,22 +8369,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Assignment__Group__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2915:1: rule__Assignment__Group__0__Impl : ( rulepostfixExpr ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2980:1: rule__Assignment__Group__0__Impl : ( rulepostfixExpr ) ;
     public final void rule__Assignment__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2919:1: ( ( rulepostfixExpr ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2920:1: ( rulepostfixExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2984:1: ( ( rulepostfixExpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2985:1: ( rulepostfixExpr )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2920:1: ( rulepostfixExpr )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2921:1: rulepostfixExpr
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2985:1: ( rulepostfixExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2986:1: rulepostfixExpr
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getAssignmentAccess().getPostfixExprParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_rulepostfixExpr_in_rule__Assignment__Group__0__Impl5922);
+            pushFollow(FOLLOW_rulepostfixExpr_in_rule__Assignment__Group__0__Impl6039);
             rulepostfixExpr();
             _fsp--;
             if (failed) return ;
@@ -8257,20 +8413,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Assignment__Group__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2932:1: rule__Assignment__Group__1 : rule__Assignment__Group__1__Impl rule__Assignment__Group__2 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2997:1: rule__Assignment__Group__1 : rule__Assignment__Group__1__Impl rule__Assignment__Group__2 ;
     public final void rule__Assignment__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2936:1: ( rule__Assignment__Group__1__Impl rule__Assignment__Group__2 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2937:2: rule__Assignment__Group__1__Impl rule__Assignment__Group__2
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3001:1: ( rule__Assignment__Group__1__Impl rule__Assignment__Group__2 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3002:2: rule__Assignment__Group__1__Impl rule__Assignment__Group__2
             {
-            pushFollow(FOLLOW_rule__Assignment__Group__1__Impl_in_rule__Assignment__Group__15951);
+            pushFollow(FOLLOW_rule__Assignment__Group__1__Impl_in_rule__Assignment__Group__16068);
             rule__Assignment__Group__1__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Assignment__Group__2_in_rule__Assignment__Group__15954);
+            pushFollow(FOLLOW_rule__Assignment__Group__2_in_rule__Assignment__Group__16071);
             rule__Assignment__Group__2();
             _fsp--;
             if (failed) return ;
@@ -8293,22 +8449,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Assignment__Group__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2944:1: rule__Assignment__Group__1__Impl : ( '=' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3009:1: rule__Assignment__Group__1__Impl : ( '=' ) ;
     public final void rule__Assignment__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2948:1: ( ( '=' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2949:1: ( '=' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3013:1: ( ( '=' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3014:1: ( '=' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2949:1: ( '=' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2950:1: '='
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3014:1: ( '=' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3015:1: '='
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getAssignmentAccess().getEqualsSignKeyword_1()); 
             }
-            match(input,41,FOLLOW_41_in_rule__Assignment__Group__1__Impl5982); if (failed) return ;
+            match(input,42,FOLLOW_42_in_rule__Assignment__Group__1__Impl6099); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getAssignmentAccess().getEqualsSignKeyword_1()); 
             }
@@ -8334,16 +8490,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Assignment__Group__2
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2963:1: rule__Assignment__Group__2 : rule__Assignment__Group__2__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3028:1: rule__Assignment__Group__2 : rule__Assignment__Group__2__Impl ;
     public final void rule__Assignment__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2967:1: ( rule__Assignment__Group__2__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2968:2: rule__Assignment__Group__2__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3032:1: ( rule__Assignment__Group__2__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3033:2: rule__Assignment__Group__2__Impl
             {
-            pushFollow(FOLLOW_rule__Assignment__Group__2__Impl_in_rule__Assignment__Group__26013);
+            pushFollow(FOLLOW_rule__Assignment__Group__2__Impl_in_rule__Assignment__Group__26130);
             rule__Assignment__Group__2__Impl();
             _fsp--;
             if (failed) return ;
@@ -8366,22 +8522,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Assignment__Group__2__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2974:1: rule__Assignment__Group__2__Impl : ( ruleexpr ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3039:1: rule__Assignment__Group__2__Impl : ( ruleexpr ) ;
     public final void rule__Assignment__Group__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2978:1: ( ( ruleexpr ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2979:1: ( ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3043:1: ( ( ruleexpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3044:1: ( ruleexpr )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2979:1: ( ruleexpr )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2980:1: ruleexpr
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3044:1: ( ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3045:1: ruleexpr
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getAssignmentAccess().getExprParserRuleCall_2()); 
             }
-            pushFollow(FOLLOW_ruleexpr_in_rule__Assignment__Group__2__Impl6040);
+            pushFollow(FOLLOW_ruleexpr_in_rule__Assignment__Group__2__Impl6157);
             ruleexpr();
             _fsp--;
             if (failed) return ;
@@ -8410,20 +8566,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Expr__Group__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2997:1: rule__Expr__Group__0 : rule__Expr__Group__0__Impl rule__Expr__Group__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3062:1: rule__Expr__Group__0 : rule__Expr__Group__0__Impl rule__Expr__Group__1 ;
     public final void rule__Expr__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3001:1: ( rule__Expr__Group__0__Impl rule__Expr__Group__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3002:2: rule__Expr__Group__0__Impl rule__Expr__Group__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3066:1: ( rule__Expr__Group__0__Impl rule__Expr__Group__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3067:2: rule__Expr__Group__0__Impl rule__Expr__Group__1
             {
-            pushFollow(FOLLOW_rule__Expr__Group__0__Impl_in_rule__Expr__Group__06075);
+            pushFollow(FOLLOW_rule__Expr__Group__0__Impl_in_rule__Expr__Group__06192);
             rule__Expr__Group__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Expr__Group__1_in_rule__Expr__Group__06078);
+            pushFollow(FOLLOW_rule__Expr__Group__1_in_rule__Expr__Group__06195);
             rule__Expr__Group__1();
             _fsp--;
             if (failed) return ;
@@ -8446,22 +8602,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Expr__Group__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3009:1: rule__Expr__Group__0__Impl : ( ruleandExpr ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3074:1: rule__Expr__Group__0__Impl : ( ruleandExpr ) ;
     public final void rule__Expr__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3013:1: ( ( ruleandExpr ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3014:1: ( ruleandExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3078:1: ( ( ruleandExpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3079:1: ( ruleandExpr )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3014:1: ( ruleandExpr )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3015:1: ruleandExpr
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3079:1: ( ruleandExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3080:1: ruleandExpr
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getExprAccess().getAndExprParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleandExpr_in_rule__Expr__Group__0__Impl6105);
+            pushFollow(FOLLOW_ruleandExpr_in_rule__Expr__Group__0__Impl6222);
             ruleandExpr();
             _fsp--;
             if (failed) return ;
@@ -8490,16 +8646,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Expr__Group__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3026:1: rule__Expr__Group__1 : rule__Expr__Group__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3091:1: rule__Expr__Group__1 : rule__Expr__Group__1__Impl ;
     public final void rule__Expr__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3030:1: ( rule__Expr__Group__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3031:2: rule__Expr__Group__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3095:1: ( rule__Expr__Group__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3096:2: rule__Expr__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__Expr__Group__1__Impl_in_rule__Expr__Group__16134);
+            pushFollow(FOLLOW_rule__Expr__Group__1__Impl_in_rule__Expr__Group__16251);
             rule__Expr__Group__1__Impl();
             _fsp--;
             if (failed) return ;
@@ -8522,37 +8678,37 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Expr__Group__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3037:1: rule__Expr__Group__1__Impl : ( ( rule__Expr__Group_1__0 )* ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3102:1: rule__Expr__Group__1__Impl : ( ( rule__Expr__Group_1__0 )* ) ;
     public final void rule__Expr__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3041:1: ( ( ( rule__Expr__Group_1__0 )* ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3042:1: ( ( rule__Expr__Group_1__0 )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3106:1: ( ( ( rule__Expr__Group_1__0 )* ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3107:1: ( ( rule__Expr__Group_1__0 )* )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3042:1: ( ( rule__Expr__Group_1__0 )* )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3043:1: ( rule__Expr__Group_1__0 )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3107:1: ( ( rule__Expr__Group_1__0 )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3108:1: ( rule__Expr__Group_1__0 )*
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getExprAccess().getGroup_1()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3044:1: ( rule__Expr__Group_1__0 )*
-            loop19:
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3109:1: ( rule__Expr__Group_1__0 )*
+            loop22:
             do {
-                int alt19=2;
-                int LA19_0 = input.LA(1);
+                int alt22=2;
+                int LA22_0 = input.LA(1);
 
-                if ( (LA19_0==42) ) {
-                    alt19=1;
+                if ( (LA22_0==43) ) {
+                    alt22=1;
                 }
 
 
-                switch (alt19) {
+                switch (alt22) {
             	case 1 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3044:2: rule__Expr__Group_1__0
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3109:2: rule__Expr__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__Expr__Group_1__0_in_rule__Expr__Group__1__Impl6161);
+            	    pushFollow(FOLLOW_rule__Expr__Group_1__0_in_rule__Expr__Group__1__Impl6278);
             	    rule__Expr__Group_1__0();
             	    _fsp--;
             	    if (failed) return ;
@@ -8561,7 +8717,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop19;
+            	    break loop22;
                 }
             } while (true);
 
@@ -8590,20 +8746,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Expr__Group_1__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3058:1: rule__Expr__Group_1__0 : rule__Expr__Group_1__0__Impl rule__Expr__Group_1__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3123:1: rule__Expr__Group_1__0 : rule__Expr__Group_1__0__Impl rule__Expr__Group_1__1 ;
     public final void rule__Expr__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3062:1: ( rule__Expr__Group_1__0__Impl rule__Expr__Group_1__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3063:2: rule__Expr__Group_1__0__Impl rule__Expr__Group_1__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3127:1: ( rule__Expr__Group_1__0__Impl rule__Expr__Group_1__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3128:2: rule__Expr__Group_1__0__Impl rule__Expr__Group_1__1
             {
-            pushFollow(FOLLOW_rule__Expr__Group_1__0__Impl_in_rule__Expr__Group_1__06196);
+            pushFollow(FOLLOW_rule__Expr__Group_1__0__Impl_in_rule__Expr__Group_1__06313);
             rule__Expr__Group_1__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Expr__Group_1__1_in_rule__Expr__Group_1__06199);
+            pushFollow(FOLLOW_rule__Expr__Group_1__1_in_rule__Expr__Group_1__06316);
             rule__Expr__Group_1__1();
             _fsp--;
             if (failed) return ;
@@ -8626,22 +8782,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Expr__Group_1__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3070:1: rule__Expr__Group_1__0__Impl : ( '||' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3135:1: rule__Expr__Group_1__0__Impl : ( '||' ) ;
     public final void rule__Expr__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3074:1: ( ( '||' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3075:1: ( '||' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3139:1: ( ( '||' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3140:1: ( '||' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3075:1: ( '||' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3076:1: '||'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3140:1: ( '||' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3141:1: '||'
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getExprAccess().getVerticalLineVerticalLineKeyword_1_0()); 
             }
-            match(input,42,FOLLOW_42_in_rule__Expr__Group_1__0__Impl6227); if (failed) return ;
+            match(input,43,FOLLOW_43_in_rule__Expr__Group_1__0__Impl6344); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getExprAccess().getVerticalLineVerticalLineKeyword_1_0()); 
             }
@@ -8667,16 +8823,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Expr__Group_1__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3089:1: rule__Expr__Group_1__1 : rule__Expr__Group_1__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3154:1: rule__Expr__Group_1__1 : rule__Expr__Group_1__1__Impl ;
     public final void rule__Expr__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3093:1: ( rule__Expr__Group_1__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3094:2: rule__Expr__Group_1__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3158:1: ( rule__Expr__Group_1__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3159:2: rule__Expr__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__Expr__Group_1__1__Impl_in_rule__Expr__Group_1__16258);
+            pushFollow(FOLLOW_rule__Expr__Group_1__1__Impl_in_rule__Expr__Group_1__16375);
             rule__Expr__Group_1__1__Impl();
             _fsp--;
             if (failed) return ;
@@ -8699,22 +8855,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Expr__Group_1__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3100:1: rule__Expr__Group_1__1__Impl : ( ruleandExpr ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3165:1: rule__Expr__Group_1__1__Impl : ( ruleandExpr ) ;
     public final void rule__Expr__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3104:1: ( ( ruleandExpr ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3105:1: ( ruleandExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3169:1: ( ( ruleandExpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3170:1: ( ruleandExpr )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3105:1: ( ruleandExpr )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3106:1: ruleandExpr
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3170:1: ( ruleandExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3171:1: ruleandExpr
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getExprAccess().getAndExprParserRuleCall_1_1()); 
             }
-            pushFollow(FOLLOW_ruleandExpr_in_rule__Expr__Group_1__1__Impl6285);
+            pushFollow(FOLLOW_ruleandExpr_in_rule__Expr__Group_1__1__Impl6402);
             ruleandExpr();
             _fsp--;
             if (failed) return ;
@@ -8743,20 +8899,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__AndExpr__Group__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3121:1: rule__AndExpr__Group__0 : rule__AndExpr__Group__0__Impl rule__AndExpr__Group__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3186:1: rule__AndExpr__Group__0 : rule__AndExpr__Group__0__Impl rule__AndExpr__Group__1 ;
     public final void rule__AndExpr__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3125:1: ( rule__AndExpr__Group__0__Impl rule__AndExpr__Group__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3126:2: rule__AndExpr__Group__0__Impl rule__AndExpr__Group__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3190:1: ( rule__AndExpr__Group__0__Impl rule__AndExpr__Group__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3191:2: rule__AndExpr__Group__0__Impl rule__AndExpr__Group__1
             {
-            pushFollow(FOLLOW_rule__AndExpr__Group__0__Impl_in_rule__AndExpr__Group__06318);
+            pushFollow(FOLLOW_rule__AndExpr__Group__0__Impl_in_rule__AndExpr__Group__06435);
             rule__AndExpr__Group__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__AndExpr__Group__1_in_rule__AndExpr__Group__06321);
+            pushFollow(FOLLOW_rule__AndExpr__Group__1_in_rule__AndExpr__Group__06438);
             rule__AndExpr__Group__1();
             _fsp--;
             if (failed) return ;
@@ -8779,22 +8935,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__AndExpr__Group__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3133:1: rule__AndExpr__Group__0__Impl : ( ruleeqExpr ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3198:1: rule__AndExpr__Group__0__Impl : ( ruleeqExpr ) ;
     public final void rule__AndExpr__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3137:1: ( ( ruleeqExpr ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3138:1: ( ruleeqExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3202:1: ( ( ruleeqExpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3203:1: ( ruleeqExpr )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3138:1: ( ruleeqExpr )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3139:1: ruleeqExpr
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3203:1: ( ruleeqExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3204:1: ruleeqExpr
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getAndExprAccess().getEqExprParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleeqExpr_in_rule__AndExpr__Group__0__Impl6348);
+            pushFollow(FOLLOW_ruleeqExpr_in_rule__AndExpr__Group__0__Impl6465);
             ruleeqExpr();
             _fsp--;
             if (failed) return ;
@@ -8823,16 +8979,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__AndExpr__Group__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3150:1: rule__AndExpr__Group__1 : rule__AndExpr__Group__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3215:1: rule__AndExpr__Group__1 : rule__AndExpr__Group__1__Impl ;
     public final void rule__AndExpr__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3154:1: ( rule__AndExpr__Group__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3155:2: rule__AndExpr__Group__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3219:1: ( rule__AndExpr__Group__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3220:2: rule__AndExpr__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__AndExpr__Group__1__Impl_in_rule__AndExpr__Group__16377);
+            pushFollow(FOLLOW_rule__AndExpr__Group__1__Impl_in_rule__AndExpr__Group__16494);
             rule__AndExpr__Group__1__Impl();
             _fsp--;
             if (failed) return ;
@@ -8855,37 +9011,37 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__AndExpr__Group__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3161:1: rule__AndExpr__Group__1__Impl : ( ( rule__AndExpr__Group_1__0 )* ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3226:1: rule__AndExpr__Group__1__Impl : ( ( rule__AndExpr__Group_1__0 )* ) ;
     public final void rule__AndExpr__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3165:1: ( ( ( rule__AndExpr__Group_1__0 )* ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3166:1: ( ( rule__AndExpr__Group_1__0 )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3230:1: ( ( ( rule__AndExpr__Group_1__0 )* ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3231:1: ( ( rule__AndExpr__Group_1__0 )* )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3166:1: ( ( rule__AndExpr__Group_1__0 )* )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3167:1: ( rule__AndExpr__Group_1__0 )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3231:1: ( ( rule__AndExpr__Group_1__0 )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3232:1: ( rule__AndExpr__Group_1__0 )*
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getAndExprAccess().getGroup_1()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3168:1: ( rule__AndExpr__Group_1__0 )*
-            loop20:
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3233:1: ( rule__AndExpr__Group_1__0 )*
+            loop23:
             do {
-                int alt20=2;
-                int LA20_0 = input.LA(1);
+                int alt23=2;
+                int LA23_0 = input.LA(1);
 
-                if ( (LA20_0==43) ) {
-                    alt20=1;
+                if ( (LA23_0==44) ) {
+                    alt23=1;
                 }
 
 
-                switch (alt20) {
+                switch (alt23) {
             	case 1 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3168:2: rule__AndExpr__Group_1__0
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3233:2: rule__AndExpr__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__AndExpr__Group_1__0_in_rule__AndExpr__Group__1__Impl6404);
+            	    pushFollow(FOLLOW_rule__AndExpr__Group_1__0_in_rule__AndExpr__Group__1__Impl6521);
             	    rule__AndExpr__Group_1__0();
             	    _fsp--;
             	    if (failed) return ;
@@ -8894,7 +9050,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop20;
+            	    break loop23;
                 }
             } while (true);
 
@@ -8923,20 +9079,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__AndExpr__Group_1__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3182:1: rule__AndExpr__Group_1__0 : rule__AndExpr__Group_1__0__Impl rule__AndExpr__Group_1__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3247:1: rule__AndExpr__Group_1__0 : rule__AndExpr__Group_1__0__Impl rule__AndExpr__Group_1__1 ;
     public final void rule__AndExpr__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3186:1: ( rule__AndExpr__Group_1__0__Impl rule__AndExpr__Group_1__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3187:2: rule__AndExpr__Group_1__0__Impl rule__AndExpr__Group_1__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3251:1: ( rule__AndExpr__Group_1__0__Impl rule__AndExpr__Group_1__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3252:2: rule__AndExpr__Group_1__0__Impl rule__AndExpr__Group_1__1
             {
-            pushFollow(FOLLOW_rule__AndExpr__Group_1__0__Impl_in_rule__AndExpr__Group_1__06439);
+            pushFollow(FOLLOW_rule__AndExpr__Group_1__0__Impl_in_rule__AndExpr__Group_1__06556);
             rule__AndExpr__Group_1__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__AndExpr__Group_1__1_in_rule__AndExpr__Group_1__06442);
+            pushFollow(FOLLOW_rule__AndExpr__Group_1__1_in_rule__AndExpr__Group_1__06559);
             rule__AndExpr__Group_1__1();
             _fsp--;
             if (failed) return ;
@@ -8959,22 +9115,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__AndExpr__Group_1__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3194:1: rule__AndExpr__Group_1__0__Impl : ( '&&' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3259:1: rule__AndExpr__Group_1__0__Impl : ( '&&' ) ;
     public final void rule__AndExpr__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3198:1: ( ( '&&' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3199:1: ( '&&' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3263:1: ( ( '&&' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3264:1: ( '&&' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3199:1: ( '&&' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3200:1: '&&'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3264:1: ( '&&' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3265:1: '&&'
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getAndExprAccess().getAmpersandAmpersandKeyword_1_0()); 
             }
-            match(input,43,FOLLOW_43_in_rule__AndExpr__Group_1__0__Impl6470); if (failed) return ;
+            match(input,44,FOLLOW_44_in_rule__AndExpr__Group_1__0__Impl6587); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getAndExprAccess().getAmpersandAmpersandKeyword_1_0()); 
             }
@@ -9000,16 +9156,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__AndExpr__Group_1__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3213:1: rule__AndExpr__Group_1__1 : rule__AndExpr__Group_1__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3278:1: rule__AndExpr__Group_1__1 : rule__AndExpr__Group_1__1__Impl ;
     public final void rule__AndExpr__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3217:1: ( rule__AndExpr__Group_1__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3218:2: rule__AndExpr__Group_1__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3282:1: ( rule__AndExpr__Group_1__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3283:2: rule__AndExpr__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__AndExpr__Group_1__1__Impl_in_rule__AndExpr__Group_1__16501);
+            pushFollow(FOLLOW_rule__AndExpr__Group_1__1__Impl_in_rule__AndExpr__Group_1__16618);
             rule__AndExpr__Group_1__1__Impl();
             _fsp--;
             if (failed) return ;
@@ -9032,22 +9188,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__AndExpr__Group_1__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3224:1: rule__AndExpr__Group_1__1__Impl : ( ruleeqExpr ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3289:1: rule__AndExpr__Group_1__1__Impl : ( ruleeqExpr ) ;
     public final void rule__AndExpr__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3228:1: ( ( ruleeqExpr ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3229:1: ( ruleeqExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3293:1: ( ( ruleeqExpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3294:1: ( ruleeqExpr )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3229:1: ( ruleeqExpr )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3230:1: ruleeqExpr
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3294:1: ( ruleeqExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3295:1: ruleeqExpr
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getAndExprAccess().getEqExprParserRuleCall_1_1()); 
             }
-            pushFollow(FOLLOW_ruleeqExpr_in_rule__AndExpr__Group_1__1__Impl6528);
+            pushFollow(FOLLOW_ruleeqExpr_in_rule__AndExpr__Group_1__1__Impl6645);
             ruleeqExpr();
             _fsp--;
             if (failed) return ;
@@ -9076,20 +9232,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__EqExpr__Group__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3245:1: rule__EqExpr__Group__0 : rule__EqExpr__Group__0__Impl rule__EqExpr__Group__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3310:1: rule__EqExpr__Group__0 : rule__EqExpr__Group__0__Impl rule__EqExpr__Group__1 ;
     public final void rule__EqExpr__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3249:1: ( rule__EqExpr__Group__0__Impl rule__EqExpr__Group__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3250:2: rule__EqExpr__Group__0__Impl rule__EqExpr__Group__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3314:1: ( rule__EqExpr__Group__0__Impl rule__EqExpr__Group__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3315:2: rule__EqExpr__Group__0__Impl rule__EqExpr__Group__1
             {
-            pushFollow(FOLLOW_rule__EqExpr__Group__0__Impl_in_rule__EqExpr__Group__06561);
+            pushFollow(FOLLOW_rule__EqExpr__Group__0__Impl_in_rule__EqExpr__Group__06678);
             rule__EqExpr__Group__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__EqExpr__Group__1_in_rule__EqExpr__Group__06564);
+            pushFollow(FOLLOW_rule__EqExpr__Group__1_in_rule__EqExpr__Group__06681);
             rule__EqExpr__Group__1();
             _fsp--;
             if (failed) return ;
@@ -9112,22 +9268,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__EqExpr__Group__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3257:1: rule__EqExpr__Group__0__Impl : ( rulerelExpr ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3322:1: rule__EqExpr__Group__0__Impl : ( rulerelExpr ) ;
     public final void rule__EqExpr__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3261:1: ( ( rulerelExpr ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3262:1: ( rulerelExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3326:1: ( ( rulerelExpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3327:1: ( rulerelExpr )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3262:1: ( rulerelExpr )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3263:1: rulerelExpr
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3327:1: ( rulerelExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3328:1: rulerelExpr
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getEqExprAccess().getRelExprParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_rulerelExpr_in_rule__EqExpr__Group__0__Impl6591);
+            pushFollow(FOLLOW_rulerelExpr_in_rule__EqExpr__Group__0__Impl6708);
             rulerelExpr();
             _fsp--;
             if (failed) return ;
@@ -9156,16 +9312,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__EqExpr__Group__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3274:1: rule__EqExpr__Group__1 : rule__EqExpr__Group__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3339:1: rule__EqExpr__Group__1 : rule__EqExpr__Group__1__Impl ;
     public final void rule__EqExpr__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3278:1: ( rule__EqExpr__Group__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3279:2: rule__EqExpr__Group__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3343:1: ( rule__EqExpr__Group__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3344:2: rule__EqExpr__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__EqExpr__Group__1__Impl_in_rule__EqExpr__Group__16620);
+            pushFollow(FOLLOW_rule__EqExpr__Group__1__Impl_in_rule__EqExpr__Group__16737);
             rule__EqExpr__Group__1__Impl();
             _fsp--;
             if (failed) return ;
@@ -9188,37 +9344,37 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__EqExpr__Group__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3285:1: rule__EqExpr__Group__1__Impl : ( ( rule__EqExpr__Group_1__0 )* ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3350:1: rule__EqExpr__Group__1__Impl : ( ( rule__EqExpr__Group_1__0 )* ) ;
     public final void rule__EqExpr__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3289:1: ( ( ( rule__EqExpr__Group_1__0 )* ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3290:1: ( ( rule__EqExpr__Group_1__0 )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3354:1: ( ( ( rule__EqExpr__Group_1__0 )* ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3355:1: ( ( rule__EqExpr__Group_1__0 )* )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3290:1: ( ( rule__EqExpr__Group_1__0 )* )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3291:1: ( rule__EqExpr__Group_1__0 )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3355:1: ( ( rule__EqExpr__Group_1__0 )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3356:1: ( rule__EqExpr__Group_1__0 )*
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getEqExprAccess().getGroup_1()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3292:1: ( rule__EqExpr__Group_1__0 )*
-            loop21:
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3357:1: ( rule__EqExpr__Group_1__0 )*
+            loop24:
             do {
-                int alt21=2;
-                int LA21_0 = input.LA(1);
+                int alt24=2;
+                int LA24_0 = input.LA(1);
 
-                if ( ((LA21_0>=16 && LA21_0<=17)) ) {
-                    alt21=1;
+                if ( ((LA24_0>=16 && LA24_0<=17)) ) {
+                    alt24=1;
                 }
 
 
-                switch (alt21) {
+                switch (alt24) {
             	case 1 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3292:2: rule__EqExpr__Group_1__0
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3357:2: rule__EqExpr__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__EqExpr__Group_1__0_in_rule__EqExpr__Group__1__Impl6647);
+            	    pushFollow(FOLLOW_rule__EqExpr__Group_1__0_in_rule__EqExpr__Group__1__Impl6764);
             	    rule__EqExpr__Group_1__0();
             	    _fsp--;
             	    if (failed) return ;
@@ -9227,7 +9383,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop21;
+            	    break loop24;
                 }
             } while (true);
 
@@ -9256,20 +9412,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__EqExpr__Group_1__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3306:1: rule__EqExpr__Group_1__0 : rule__EqExpr__Group_1__0__Impl rule__EqExpr__Group_1__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3371:1: rule__EqExpr__Group_1__0 : rule__EqExpr__Group_1__0__Impl rule__EqExpr__Group_1__1 ;
     public final void rule__EqExpr__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3310:1: ( rule__EqExpr__Group_1__0__Impl rule__EqExpr__Group_1__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3311:2: rule__EqExpr__Group_1__0__Impl rule__EqExpr__Group_1__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3375:1: ( rule__EqExpr__Group_1__0__Impl rule__EqExpr__Group_1__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3376:2: rule__EqExpr__Group_1__0__Impl rule__EqExpr__Group_1__1
             {
-            pushFollow(FOLLOW_rule__EqExpr__Group_1__0__Impl_in_rule__EqExpr__Group_1__06682);
+            pushFollow(FOLLOW_rule__EqExpr__Group_1__0__Impl_in_rule__EqExpr__Group_1__06799);
             rule__EqExpr__Group_1__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__EqExpr__Group_1__1_in_rule__EqExpr__Group_1__06685);
+            pushFollow(FOLLOW_rule__EqExpr__Group_1__1_in_rule__EqExpr__Group_1__06802);
             rule__EqExpr__Group_1__1();
             _fsp--;
             if (failed) return ;
@@ -9292,25 +9448,25 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__EqExpr__Group_1__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3318:1: rule__EqExpr__Group_1__0__Impl : ( ( rule__EqExpr__Alternatives_1_0 ) ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3383:1: rule__EqExpr__Group_1__0__Impl : ( ( rule__EqExpr__Alternatives_1_0 ) ) ;
     public final void rule__EqExpr__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3322:1: ( ( ( rule__EqExpr__Alternatives_1_0 ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3323:1: ( ( rule__EqExpr__Alternatives_1_0 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3387:1: ( ( ( rule__EqExpr__Alternatives_1_0 ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3388:1: ( ( rule__EqExpr__Alternatives_1_0 ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3323:1: ( ( rule__EqExpr__Alternatives_1_0 ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3324:1: ( rule__EqExpr__Alternatives_1_0 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3388:1: ( ( rule__EqExpr__Alternatives_1_0 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3389:1: ( rule__EqExpr__Alternatives_1_0 )
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getEqExprAccess().getAlternatives_1_0()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3325:1: ( rule__EqExpr__Alternatives_1_0 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3325:2: rule__EqExpr__Alternatives_1_0
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3390:1: ( rule__EqExpr__Alternatives_1_0 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3390:2: rule__EqExpr__Alternatives_1_0
             {
-            pushFollow(FOLLOW_rule__EqExpr__Alternatives_1_0_in_rule__EqExpr__Group_1__0__Impl6712);
+            pushFollow(FOLLOW_rule__EqExpr__Alternatives_1_0_in_rule__EqExpr__Group_1__0__Impl6829);
             rule__EqExpr__Alternatives_1_0();
             _fsp--;
             if (failed) return ;
@@ -9342,16 +9498,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__EqExpr__Group_1__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3335:1: rule__EqExpr__Group_1__1 : rule__EqExpr__Group_1__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3400:1: rule__EqExpr__Group_1__1 : rule__EqExpr__Group_1__1__Impl ;
     public final void rule__EqExpr__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3339:1: ( rule__EqExpr__Group_1__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3340:2: rule__EqExpr__Group_1__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3404:1: ( rule__EqExpr__Group_1__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3405:2: rule__EqExpr__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__EqExpr__Group_1__1__Impl_in_rule__EqExpr__Group_1__16742);
+            pushFollow(FOLLOW_rule__EqExpr__Group_1__1__Impl_in_rule__EqExpr__Group_1__16859);
             rule__EqExpr__Group_1__1__Impl();
             _fsp--;
             if (failed) return ;
@@ -9374,22 +9530,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__EqExpr__Group_1__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3346:1: rule__EqExpr__Group_1__1__Impl : ( rulerelExpr ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3411:1: rule__EqExpr__Group_1__1__Impl : ( rulerelExpr ) ;
     public final void rule__EqExpr__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3350:1: ( ( rulerelExpr ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3351:1: ( rulerelExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3415:1: ( ( rulerelExpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3416:1: ( rulerelExpr )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3351:1: ( rulerelExpr )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3352:1: rulerelExpr
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3416:1: ( rulerelExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3417:1: rulerelExpr
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getEqExprAccess().getRelExprParserRuleCall_1_1()); 
             }
-            pushFollow(FOLLOW_rulerelExpr_in_rule__EqExpr__Group_1__1__Impl6769);
+            pushFollow(FOLLOW_rulerelExpr_in_rule__EqExpr__Group_1__1__Impl6886);
             rulerelExpr();
             _fsp--;
             if (failed) return ;
@@ -9418,20 +9574,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__RelExpr__Group__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3367:1: rule__RelExpr__Group__0 : rule__RelExpr__Group__0__Impl rule__RelExpr__Group__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3432:1: rule__RelExpr__Group__0 : rule__RelExpr__Group__0__Impl rule__RelExpr__Group__1 ;
     public final void rule__RelExpr__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3371:1: ( rule__RelExpr__Group__0__Impl rule__RelExpr__Group__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3372:2: rule__RelExpr__Group__0__Impl rule__RelExpr__Group__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3436:1: ( rule__RelExpr__Group__0__Impl rule__RelExpr__Group__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3437:2: rule__RelExpr__Group__0__Impl rule__RelExpr__Group__1
             {
-            pushFollow(FOLLOW_rule__RelExpr__Group__0__Impl_in_rule__RelExpr__Group__06802);
+            pushFollow(FOLLOW_rule__RelExpr__Group__0__Impl_in_rule__RelExpr__Group__06919);
             rule__RelExpr__Group__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__RelExpr__Group__1_in_rule__RelExpr__Group__06805);
+            pushFollow(FOLLOW_rule__RelExpr__Group__1_in_rule__RelExpr__Group__06922);
             rule__RelExpr__Group__1();
             _fsp--;
             if (failed) return ;
@@ -9454,22 +9610,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__RelExpr__Group__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3379:1: rule__RelExpr__Group__0__Impl : ( ruleaddExpr ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3444:1: rule__RelExpr__Group__0__Impl : ( ruleaddExpr ) ;
     public final void rule__RelExpr__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3383:1: ( ( ruleaddExpr ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3384:1: ( ruleaddExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3448:1: ( ( ruleaddExpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3449:1: ( ruleaddExpr )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3384:1: ( ruleaddExpr )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3385:1: ruleaddExpr
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3449:1: ( ruleaddExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3450:1: ruleaddExpr
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getRelExprAccess().getAddExprParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleaddExpr_in_rule__RelExpr__Group__0__Impl6832);
+            pushFollow(FOLLOW_ruleaddExpr_in_rule__RelExpr__Group__0__Impl6949);
             ruleaddExpr();
             _fsp--;
             if (failed) return ;
@@ -9498,16 +9654,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__RelExpr__Group__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3396:1: rule__RelExpr__Group__1 : rule__RelExpr__Group__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3461:1: rule__RelExpr__Group__1 : rule__RelExpr__Group__1__Impl ;
     public final void rule__RelExpr__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3400:1: ( rule__RelExpr__Group__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3401:2: rule__RelExpr__Group__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3465:1: ( rule__RelExpr__Group__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3466:2: rule__RelExpr__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__RelExpr__Group__1__Impl_in_rule__RelExpr__Group__16861);
+            pushFollow(FOLLOW_rule__RelExpr__Group__1__Impl_in_rule__RelExpr__Group__16978);
             rule__RelExpr__Group__1__Impl();
             _fsp--;
             if (failed) return ;
@@ -9530,37 +9686,37 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__RelExpr__Group__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3407:1: rule__RelExpr__Group__1__Impl : ( ( rule__RelExpr__Group_1__0 )* ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3472:1: rule__RelExpr__Group__1__Impl : ( ( rule__RelExpr__Group_1__0 )* ) ;
     public final void rule__RelExpr__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3411:1: ( ( ( rule__RelExpr__Group_1__0 )* ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3412:1: ( ( rule__RelExpr__Group_1__0 )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3476:1: ( ( ( rule__RelExpr__Group_1__0 )* ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3477:1: ( ( rule__RelExpr__Group_1__0 )* )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3412:1: ( ( rule__RelExpr__Group_1__0 )* )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3413:1: ( rule__RelExpr__Group_1__0 )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3477:1: ( ( rule__RelExpr__Group_1__0 )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3478:1: ( rule__RelExpr__Group_1__0 )*
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getRelExprAccess().getGroup_1()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3414:1: ( rule__RelExpr__Group_1__0 )*
-            loop22:
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3479:1: ( rule__RelExpr__Group_1__0 )*
+            loop25:
             do {
-                int alt22=2;
-                int LA22_0 = input.LA(1);
+                int alt25=2;
+                int LA25_0 = input.LA(1);
 
-                if ( ((LA22_0>=18 && LA22_0<=21)) ) {
-                    alt22=1;
+                if ( ((LA25_0>=18 && LA25_0<=21)) ) {
+                    alt25=1;
                 }
 
 
-                switch (alt22) {
+                switch (alt25) {
             	case 1 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3414:2: rule__RelExpr__Group_1__0
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3479:2: rule__RelExpr__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__RelExpr__Group_1__0_in_rule__RelExpr__Group__1__Impl6888);
+            	    pushFollow(FOLLOW_rule__RelExpr__Group_1__0_in_rule__RelExpr__Group__1__Impl7005);
             	    rule__RelExpr__Group_1__0();
             	    _fsp--;
             	    if (failed) return ;
@@ -9569,7 +9725,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop22;
+            	    break loop25;
                 }
             } while (true);
 
@@ -9598,20 +9754,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__RelExpr__Group_1__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3428:1: rule__RelExpr__Group_1__0 : rule__RelExpr__Group_1__0__Impl rule__RelExpr__Group_1__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3493:1: rule__RelExpr__Group_1__0 : rule__RelExpr__Group_1__0__Impl rule__RelExpr__Group_1__1 ;
     public final void rule__RelExpr__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3432:1: ( rule__RelExpr__Group_1__0__Impl rule__RelExpr__Group_1__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3433:2: rule__RelExpr__Group_1__0__Impl rule__RelExpr__Group_1__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3497:1: ( rule__RelExpr__Group_1__0__Impl rule__RelExpr__Group_1__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3498:2: rule__RelExpr__Group_1__0__Impl rule__RelExpr__Group_1__1
             {
-            pushFollow(FOLLOW_rule__RelExpr__Group_1__0__Impl_in_rule__RelExpr__Group_1__06923);
+            pushFollow(FOLLOW_rule__RelExpr__Group_1__0__Impl_in_rule__RelExpr__Group_1__07040);
             rule__RelExpr__Group_1__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__RelExpr__Group_1__1_in_rule__RelExpr__Group_1__06926);
+            pushFollow(FOLLOW_rule__RelExpr__Group_1__1_in_rule__RelExpr__Group_1__07043);
             rule__RelExpr__Group_1__1();
             _fsp--;
             if (failed) return ;
@@ -9634,25 +9790,25 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__RelExpr__Group_1__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3440:1: rule__RelExpr__Group_1__0__Impl : ( ( rule__RelExpr__Alternatives_1_0 ) ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3505:1: rule__RelExpr__Group_1__0__Impl : ( ( rule__RelExpr__Alternatives_1_0 ) ) ;
     public final void rule__RelExpr__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3444:1: ( ( ( rule__RelExpr__Alternatives_1_0 ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3445:1: ( ( rule__RelExpr__Alternatives_1_0 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3509:1: ( ( ( rule__RelExpr__Alternatives_1_0 ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3510:1: ( ( rule__RelExpr__Alternatives_1_0 ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3445:1: ( ( rule__RelExpr__Alternatives_1_0 ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3446:1: ( rule__RelExpr__Alternatives_1_0 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3510:1: ( ( rule__RelExpr__Alternatives_1_0 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3511:1: ( rule__RelExpr__Alternatives_1_0 )
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getRelExprAccess().getAlternatives_1_0()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3447:1: ( rule__RelExpr__Alternatives_1_0 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3447:2: rule__RelExpr__Alternatives_1_0
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3512:1: ( rule__RelExpr__Alternatives_1_0 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3512:2: rule__RelExpr__Alternatives_1_0
             {
-            pushFollow(FOLLOW_rule__RelExpr__Alternatives_1_0_in_rule__RelExpr__Group_1__0__Impl6953);
+            pushFollow(FOLLOW_rule__RelExpr__Alternatives_1_0_in_rule__RelExpr__Group_1__0__Impl7070);
             rule__RelExpr__Alternatives_1_0();
             _fsp--;
             if (failed) return ;
@@ -9684,16 +9840,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__RelExpr__Group_1__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3457:1: rule__RelExpr__Group_1__1 : rule__RelExpr__Group_1__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3522:1: rule__RelExpr__Group_1__1 : rule__RelExpr__Group_1__1__Impl ;
     public final void rule__RelExpr__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3461:1: ( rule__RelExpr__Group_1__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3462:2: rule__RelExpr__Group_1__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3526:1: ( rule__RelExpr__Group_1__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3527:2: rule__RelExpr__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__RelExpr__Group_1__1__Impl_in_rule__RelExpr__Group_1__16983);
+            pushFollow(FOLLOW_rule__RelExpr__Group_1__1__Impl_in_rule__RelExpr__Group_1__17100);
             rule__RelExpr__Group_1__1__Impl();
             _fsp--;
             if (failed) return ;
@@ -9716,22 +9872,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__RelExpr__Group_1__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3468:1: rule__RelExpr__Group_1__1__Impl : ( ruleaddExpr ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3533:1: rule__RelExpr__Group_1__1__Impl : ( ruleaddExpr ) ;
     public final void rule__RelExpr__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3472:1: ( ( ruleaddExpr ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3473:1: ( ruleaddExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3537:1: ( ( ruleaddExpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3538:1: ( ruleaddExpr )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3473:1: ( ruleaddExpr )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3474:1: ruleaddExpr
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3538:1: ( ruleaddExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3539:1: ruleaddExpr
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getRelExprAccess().getAddExprParserRuleCall_1_1()); 
             }
-            pushFollow(FOLLOW_ruleaddExpr_in_rule__RelExpr__Group_1__1__Impl7010);
+            pushFollow(FOLLOW_ruleaddExpr_in_rule__RelExpr__Group_1__1__Impl7127);
             ruleaddExpr();
             _fsp--;
             if (failed) return ;
@@ -9760,20 +9916,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__AddExpr__Group__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3489:1: rule__AddExpr__Group__0 : rule__AddExpr__Group__0__Impl rule__AddExpr__Group__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3554:1: rule__AddExpr__Group__0 : rule__AddExpr__Group__0__Impl rule__AddExpr__Group__1 ;
     public final void rule__AddExpr__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3493:1: ( rule__AddExpr__Group__0__Impl rule__AddExpr__Group__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3494:2: rule__AddExpr__Group__0__Impl rule__AddExpr__Group__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3558:1: ( rule__AddExpr__Group__0__Impl rule__AddExpr__Group__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3559:2: rule__AddExpr__Group__0__Impl rule__AddExpr__Group__1
             {
-            pushFollow(FOLLOW_rule__AddExpr__Group__0__Impl_in_rule__AddExpr__Group__07043);
+            pushFollow(FOLLOW_rule__AddExpr__Group__0__Impl_in_rule__AddExpr__Group__07160);
             rule__AddExpr__Group__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__AddExpr__Group__1_in_rule__AddExpr__Group__07046);
+            pushFollow(FOLLOW_rule__AddExpr__Group__1_in_rule__AddExpr__Group__07163);
             rule__AddExpr__Group__1();
             _fsp--;
             if (failed) return ;
@@ -9796,22 +9952,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__AddExpr__Group__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3501:1: rule__AddExpr__Group__0__Impl : ( rulemulExpr ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3566:1: rule__AddExpr__Group__0__Impl : ( rulemulExpr ) ;
     public final void rule__AddExpr__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3505:1: ( ( rulemulExpr ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3506:1: ( rulemulExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3570:1: ( ( rulemulExpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3571:1: ( rulemulExpr )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3506:1: ( rulemulExpr )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3507:1: rulemulExpr
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3571:1: ( rulemulExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3572:1: rulemulExpr
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getAddExprAccess().getMulExprParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_rulemulExpr_in_rule__AddExpr__Group__0__Impl7073);
+            pushFollow(FOLLOW_rulemulExpr_in_rule__AddExpr__Group__0__Impl7190);
             rulemulExpr();
             _fsp--;
             if (failed) return ;
@@ -9840,16 +9996,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__AddExpr__Group__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3518:1: rule__AddExpr__Group__1 : rule__AddExpr__Group__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3583:1: rule__AddExpr__Group__1 : rule__AddExpr__Group__1__Impl ;
     public final void rule__AddExpr__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3522:1: ( rule__AddExpr__Group__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3523:2: rule__AddExpr__Group__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3587:1: ( rule__AddExpr__Group__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3588:2: rule__AddExpr__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__AddExpr__Group__1__Impl_in_rule__AddExpr__Group__17102);
+            pushFollow(FOLLOW_rule__AddExpr__Group__1__Impl_in_rule__AddExpr__Group__17219);
             rule__AddExpr__Group__1__Impl();
             _fsp--;
             if (failed) return ;
@@ -9872,37 +10028,37 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__AddExpr__Group__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3529:1: rule__AddExpr__Group__1__Impl : ( ( rule__AddExpr__Group_1__0 )* ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3594:1: rule__AddExpr__Group__1__Impl : ( ( rule__AddExpr__Group_1__0 )* ) ;
     public final void rule__AddExpr__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3533:1: ( ( ( rule__AddExpr__Group_1__0 )* ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3534:1: ( ( rule__AddExpr__Group_1__0 )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3598:1: ( ( ( rule__AddExpr__Group_1__0 )* ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3599:1: ( ( rule__AddExpr__Group_1__0 )* )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3534:1: ( ( rule__AddExpr__Group_1__0 )* )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3535:1: ( rule__AddExpr__Group_1__0 )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3599:1: ( ( rule__AddExpr__Group_1__0 )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3600:1: ( rule__AddExpr__Group_1__0 )*
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getAddExprAccess().getGroup_1()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3536:1: ( rule__AddExpr__Group_1__0 )*
-            loop23:
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3601:1: ( rule__AddExpr__Group_1__0 )*
+            loop26:
             do {
-                int alt23=2;
-                int LA23_0 = input.LA(1);
+                int alt26=2;
+                int LA26_0 = input.LA(1);
 
-                if ( ((LA23_0>=22 && LA23_0<=23)) ) {
-                    alt23=1;
+                if ( ((LA26_0>=22 && LA26_0<=23)) ) {
+                    alt26=1;
                 }
 
 
-                switch (alt23) {
+                switch (alt26) {
             	case 1 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3536:2: rule__AddExpr__Group_1__0
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3601:2: rule__AddExpr__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__AddExpr__Group_1__0_in_rule__AddExpr__Group__1__Impl7129);
+            	    pushFollow(FOLLOW_rule__AddExpr__Group_1__0_in_rule__AddExpr__Group__1__Impl7246);
             	    rule__AddExpr__Group_1__0();
             	    _fsp--;
             	    if (failed) return ;
@@ -9911,7 +10067,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop23;
+            	    break loop26;
                 }
             } while (true);
 
@@ -9940,20 +10096,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__AddExpr__Group_1__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3550:1: rule__AddExpr__Group_1__0 : rule__AddExpr__Group_1__0__Impl rule__AddExpr__Group_1__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3615:1: rule__AddExpr__Group_1__0 : rule__AddExpr__Group_1__0__Impl rule__AddExpr__Group_1__1 ;
     public final void rule__AddExpr__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3554:1: ( rule__AddExpr__Group_1__0__Impl rule__AddExpr__Group_1__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3555:2: rule__AddExpr__Group_1__0__Impl rule__AddExpr__Group_1__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3619:1: ( rule__AddExpr__Group_1__0__Impl rule__AddExpr__Group_1__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3620:2: rule__AddExpr__Group_1__0__Impl rule__AddExpr__Group_1__1
             {
-            pushFollow(FOLLOW_rule__AddExpr__Group_1__0__Impl_in_rule__AddExpr__Group_1__07164);
+            pushFollow(FOLLOW_rule__AddExpr__Group_1__0__Impl_in_rule__AddExpr__Group_1__07281);
             rule__AddExpr__Group_1__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__AddExpr__Group_1__1_in_rule__AddExpr__Group_1__07167);
+            pushFollow(FOLLOW_rule__AddExpr__Group_1__1_in_rule__AddExpr__Group_1__07284);
             rule__AddExpr__Group_1__1();
             _fsp--;
             if (failed) return ;
@@ -9976,25 +10132,25 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__AddExpr__Group_1__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3562:1: rule__AddExpr__Group_1__0__Impl : ( ( rule__AddExpr__Alternatives_1_0 ) ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3627:1: rule__AddExpr__Group_1__0__Impl : ( ( rule__AddExpr__Alternatives_1_0 ) ) ;
     public final void rule__AddExpr__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3566:1: ( ( ( rule__AddExpr__Alternatives_1_0 ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3567:1: ( ( rule__AddExpr__Alternatives_1_0 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3631:1: ( ( ( rule__AddExpr__Alternatives_1_0 ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3632:1: ( ( rule__AddExpr__Alternatives_1_0 ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3567:1: ( ( rule__AddExpr__Alternatives_1_0 ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3568:1: ( rule__AddExpr__Alternatives_1_0 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3632:1: ( ( rule__AddExpr__Alternatives_1_0 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3633:1: ( rule__AddExpr__Alternatives_1_0 )
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getAddExprAccess().getAlternatives_1_0()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3569:1: ( rule__AddExpr__Alternatives_1_0 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3569:2: rule__AddExpr__Alternatives_1_0
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3634:1: ( rule__AddExpr__Alternatives_1_0 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3634:2: rule__AddExpr__Alternatives_1_0
             {
-            pushFollow(FOLLOW_rule__AddExpr__Alternatives_1_0_in_rule__AddExpr__Group_1__0__Impl7194);
+            pushFollow(FOLLOW_rule__AddExpr__Alternatives_1_0_in_rule__AddExpr__Group_1__0__Impl7311);
             rule__AddExpr__Alternatives_1_0();
             _fsp--;
             if (failed) return ;
@@ -10026,16 +10182,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__AddExpr__Group_1__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3579:1: rule__AddExpr__Group_1__1 : rule__AddExpr__Group_1__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3644:1: rule__AddExpr__Group_1__1 : rule__AddExpr__Group_1__1__Impl ;
     public final void rule__AddExpr__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3583:1: ( rule__AddExpr__Group_1__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3584:2: rule__AddExpr__Group_1__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3648:1: ( rule__AddExpr__Group_1__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3649:2: rule__AddExpr__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__AddExpr__Group_1__1__Impl_in_rule__AddExpr__Group_1__17224);
+            pushFollow(FOLLOW_rule__AddExpr__Group_1__1__Impl_in_rule__AddExpr__Group_1__17341);
             rule__AddExpr__Group_1__1__Impl();
             _fsp--;
             if (failed) return ;
@@ -10058,22 +10214,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__AddExpr__Group_1__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3590:1: rule__AddExpr__Group_1__1__Impl : ( rulemulExpr ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3655:1: rule__AddExpr__Group_1__1__Impl : ( rulemulExpr ) ;
     public final void rule__AddExpr__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3594:1: ( ( rulemulExpr ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3595:1: ( rulemulExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3659:1: ( ( rulemulExpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3660:1: ( rulemulExpr )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3595:1: ( rulemulExpr )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3596:1: rulemulExpr
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3660:1: ( rulemulExpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3661:1: rulemulExpr
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getAddExprAccess().getMulExprParserRuleCall_1_1()); 
             }
-            pushFollow(FOLLOW_rulemulExpr_in_rule__AddExpr__Group_1__1__Impl7251);
+            pushFollow(FOLLOW_rulemulExpr_in_rule__AddExpr__Group_1__1__Impl7368);
             rulemulExpr();
             _fsp--;
             if (failed) return ;
@@ -10102,20 +10258,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__MulExpr__Group__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3611:1: rule__MulExpr__Group__0 : rule__MulExpr__Group__0__Impl rule__MulExpr__Group__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3676:1: rule__MulExpr__Group__0 : rule__MulExpr__Group__0__Impl rule__MulExpr__Group__1 ;
     public final void rule__MulExpr__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3615:1: ( rule__MulExpr__Group__0__Impl rule__MulExpr__Group__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3616:2: rule__MulExpr__Group__0__Impl rule__MulExpr__Group__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3680:1: ( rule__MulExpr__Group__0__Impl rule__MulExpr__Group__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3681:2: rule__MulExpr__Group__0__Impl rule__MulExpr__Group__1
             {
-            pushFollow(FOLLOW_rule__MulExpr__Group__0__Impl_in_rule__MulExpr__Group__07284);
+            pushFollow(FOLLOW_rule__MulExpr__Group__0__Impl_in_rule__MulExpr__Group__07401);
             rule__MulExpr__Group__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__MulExpr__Group__1_in_rule__MulExpr__Group__07287);
+            pushFollow(FOLLOW_rule__MulExpr__Group__1_in_rule__MulExpr__Group__07404);
             rule__MulExpr__Group__1();
             _fsp--;
             if (failed) return ;
@@ -10138,22 +10294,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__MulExpr__Group__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3623:1: rule__MulExpr__Group__0__Impl : ( ruleatom ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3688:1: rule__MulExpr__Group__0__Impl : ( ruleatom ) ;
     public final void rule__MulExpr__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3627:1: ( ( ruleatom ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3628:1: ( ruleatom )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3692:1: ( ( ruleatom ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3693:1: ( ruleatom )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3628:1: ( ruleatom )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3629:1: ruleatom
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3693:1: ( ruleatom )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3694:1: ruleatom
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getMulExprAccess().getAtomParserRuleCall_0()); 
             }
-            pushFollow(FOLLOW_ruleatom_in_rule__MulExpr__Group__0__Impl7314);
+            pushFollow(FOLLOW_ruleatom_in_rule__MulExpr__Group__0__Impl7431);
             ruleatom();
             _fsp--;
             if (failed) return ;
@@ -10182,16 +10338,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__MulExpr__Group__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3640:1: rule__MulExpr__Group__1 : rule__MulExpr__Group__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3705:1: rule__MulExpr__Group__1 : rule__MulExpr__Group__1__Impl ;
     public final void rule__MulExpr__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3644:1: ( rule__MulExpr__Group__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3645:2: rule__MulExpr__Group__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3709:1: ( rule__MulExpr__Group__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3710:2: rule__MulExpr__Group__1__Impl
             {
-            pushFollow(FOLLOW_rule__MulExpr__Group__1__Impl_in_rule__MulExpr__Group__17343);
+            pushFollow(FOLLOW_rule__MulExpr__Group__1__Impl_in_rule__MulExpr__Group__17460);
             rule__MulExpr__Group__1__Impl();
             _fsp--;
             if (failed) return ;
@@ -10214,37 +10370,37 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__MulExpr__Group__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3651:1: rule__MulExpr__Group__1__Impl : ( ( rule__MulExpr__Group_1__0 )* ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3716:1: rule__MulExpr__Group__1__Impl : ( ( rule__MulExpr__Group_1__0 )* ) ;
     public final void rule__MulExpr__Group__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3655:1: ( ( ( rule__MulExpr__Group_1__0 )* ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3656:1: ( ( rule__MulExpr__Group_1__0 )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3720:1: ( ( ( rule__MulExpr__Group_1__0 )* ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3721:1: ( ( rule__MulExpr__Group_1__0 )* )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3656:1: ( ( rule__MulExpr__Group_1__0 )* )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3657:1: ( rule__MulExpr__Group_1__0 )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3721:1: ( ( rule__MulExpr__Group_1__0 )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3722:1: ( rule__MulExpr__Group_1__0 )*
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getMulExprAccess().getGroup_1()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3658:1: ( rule__MulExpr__Group_1__0 )*
-            loop24:
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3723:1: ( rule__MulExpr__Group_1__0 )*
+            loop27:
             do {
-                int alt24=2;
-                int LA24_0 = input.LA(1);
+                int alt27=2;
+                int LA27_0 = input.LA(1);
 
-                if ( ((LA24_0>=24 && LA24_0<=26)) ) {
-                    alt24=1;
+                if ( ((LA27_0>=24 && LA27_0<=26)) ) {
+                    alt27=1;
                 }
 
 
-                switch (alt24) {
+                switch (alt27) {
             	case 1 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3658:2: rule__MulExpr__Group_1__0
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3723:2: rule__MulExpr__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__MulExpr__Group_1__0_in_rule__MulExpr__Group__1__Impl7370);
+            	    pushFollow(FOLLOW_rule__MulExpr__Group_1__0_in_rule__MulExpr__Group__1__Impl7487);
             	    rule__MulExpr__Group_1__0();
             	    _fsp--;
             	    if (failed) return ;
@@ -10253,7 +10409,7 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop24;
+            	    break loop27;
                 }
             } while (true);
 
@@ -10282,20 +10438,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__MulExpr__Group_1__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3672:1: rule__MulExpr__Group_1__0 : rule__MulExpr__Group_1__0__Impl rule__MulExpr__Group_1__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3737:1: rule__MulExpr__Group_1__0 : rule__MulExpr__Group_1__0__Impl rule__MulExpr__Group_1__1 ;
     public final void rule__MulExpr__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3676:1: ( rule__MulExpr__Group_1__0__Impl rule__MulExpr__Group_1__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3677:2: rule__MulExpr__Group_1__0__Impl rule__MulExpr__Group_1__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3741:1: ( rule__MulExpr__Group_1__0__Impl rule__MulExpr__Group_1__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3742:2: rule__MulExpr__Group_1__0__Impl rule__MulExpr__Group_1__1
             {
-            pushFollow(FOLLOW_rule__MulExpr__Group_1__0__Impl_in_rule__MulExpr__Group_1__07405);
+            pushFollow(FOLLOW_rule__MulExpr__Group_1__0__Impl_in_rule__MulExpr__Group_1__07522);
             rule__MulExpr__Group_1__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__MulExpr__Group_1__1_in_rule__MulExpr__Group_1__07408);
+            pushFollow(FOLLOW_rule__MulExpr__Group_1__1_in_rule__MulExpr__Group_1__07525);
             rule__MulExpr__Group_1__1();
             _fsp--;
             if (failed) return ;
@@ -10318,25 +10474,25 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__MulExpr__Group_1__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3684:1: rule__MulExpr__Group_1__0__Impl : ( ( rule__MulExpr__Alternatives_1_0 ) ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3749:1: rule__MulExpr__Group_1__0__Impl : ( ( rule__MulExpr__Alternatives_1_0 ) ) ;
     public final void rule__MulExpr__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3688:1: ( ( ( rule__MulExpr__Alternatives_1_0 ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3689:1: ( ( rule__MulExpr__Alternatives_1_0 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3753:1: ( ( ( rule__MulExpr__Alternatives_1_0 ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3754:1: ( ( rule__MulExpr__Alternatives_1_0 ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3689:1: ( ( rule__MulExpr__Alternatives_1_0 ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3690:1: ( rule__MulExpr__Alternatives_1_0 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3754:1: ( ( rule__MulExpr__Alternatives_1_0 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3755:1: ( rule__MulExpr__Alternatives_1_0 )
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getMulExprAccess().getAlternatives_1_0()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3691:1: ( rule__MulExpr__Alternatives_1_0 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3691:2: rule__MulExpr__Alternatives_1_0
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3756:1: ( rule__MulExpr__Alternatives_1_0 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3756:2: rule__MulExpr__Alternatives_1_0
             {
-            pushFollow(FOLLOW_rule__MulExpr__Alternatives_1_0_in_rule__MulExpr__Group_1__0__Impl7435);
+            pushFollow(FOLLOW_rule__MulExpr__Alternatives_1_0_in_rule__MulExpr__Group_1__0__Impl7552);
             rule__MulExpr__Alternatives_1_0();
             _fsp--;
             if (failed) return ;
@@ -10368,16 +10524,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__MulExpr__Group_1__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3701:1: rule__MulExpr__Group_1__1 : rule__MulExpr__Group_1__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3766:1: rule__MulExpr__Group_1__1 : rule__MulExpr__Group_1__1__Impl ;
     public final void rule__MulExpr__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3705:1: ( rule__MulExpr__Group_1__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3706:2: rule__MulExpr__Group_1__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3770:1: ( rule__MulExpr__Group_1__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3771:2: rule__MulExpr__Group_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__MulExpr__Group_1__1__Impl_in_rule__MulExpr__Group_1__17465);
+            pushFollow(FOLLOW_rule__MulExpr__Group_1__1__Impl_in_rule__MulExpr__Group_1__17582);
             rule__MulExpr__Group_1__1__Impl();
             _fsp--;
             if (failed) return ;
@@ -10400,22 +10556,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__MulExpr__Group_1__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3712:1: rule__MulExpr__Group_1__1__Impl : ( ruleatom ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3777:1: rule__MulExpr__Group_1__1__Impl : ( ruleatom ) ;
     public final void rule__MulExpr__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3716:1: ( ( ruleatom ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3717:1: ( ruleatom )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3781:1: ( ( ruleatom ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3782:1: ( ruleatom )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3717:1: ( ruleatom )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3718:1: ruleatom
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3782:1: ( ruleatom )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3783:1: ruleatom
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getMulExprAccess().getAtomParserRuleCall_1_1()); 
             }
-            pushFollow(FOLLOW_ruleatom_in_rule__MulExpr__Group_1__1__Impl7492);
+            pushFollow(FOLLOW_ruleatom_in_rule__MulExpr__Group_1__1__Impl7609);
             ruleatom();
             _fsp--;
             if (failed) return ;
@@ -10444,20 +10600,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Atom__Group_0__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3733:1: rule__Atom__Group_0__0 : rule__Atom__Group_0__0__Impl rule__Atom__Group_0__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3798:1: rule__Atom__Group_0__0 : rule__Atom__Group_0__0__Impl rule__Atom__Group_0__1 ;
     public final void rule__Atom__Group_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3737:1: ( rule__Atom__Group_0__0__Impl rule__Atom__Group_0__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3738:2: rule__Atom__Group_0__0__Impl rule__Atom__Group_0__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3802:1: ( rule__Atom__Group_0__0__Impl rule__Atom__Group_0__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3803:2: rule__Atom__Group_0__0__Impl rule__Atom__Group_0__1
             {
-            pushFollow(FOLLOW_rule__Atom__Group_0__0__Impl_in_rule__Atom__Group_0__07525);
+            pushFollow(FOLLOW_rule__Atom__Group_0__0__Impl_in_rule__Atom__Group_0__07642);
             rule__Atom__Group_0__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Atom__Group_0__1_in_rule__Atom__Group_0__07528);
+            pushFollow(FOLLOW_rule__Atom__Group_0__1_in_rule__Atom__Group_0__07645);
             rule__Atom__Group_0__1();
             _fsp--;
             if (failed) return ;
@@ -10480,22 +10636,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Atom__Group_0__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3745:1: rule__Atom__Group_0__0__Impl : ( '!' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3810:1: rule__Atom__Group_0__0__Impl : ( '!' ) ;
     public final void rule__Atom__Group_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3749:1: ( ( '!' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3750:1: ( '!' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3814:1: ( ( '!' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3815:1: ( '!' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3750:1: ( '!' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3751:1: '!'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3815:1: ( '!' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3816:1: '!'
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getAtomAccess().getExclamationMarkKeyword_0_0()); 
             }
-            match(input,44,FOLLOW_44_in_rule__Atom__Group_0__0__Impl7556); if (failed) return ;
+            match(input,45,FOLLOW_45_in_rule__Atom__Group_0__0__Impl7673); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getAtomAccess().getExclamationMarkKeyword_0_0()); 
             }
@@ -10521,16 +10677,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Atom__Group_0__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3764:1: rule__Atom__Group_0__1 : rule__Atom__Group_0__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3829:1: rule__Atom__Group_0__1 : rule__Atom__Group_0__1__Impl ;
     public final void rule__Atom__Group_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3768:1: ( rule__Atom__Group_0__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3769:2: rule__Atom__Group_0__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3833:1: ( rule__Atom__Group_0__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3834:2: rule__Atom__Group_0__1__Impl
             {
-            pushFollow(FOLLOW_rule__Atom__Group_0__1__Impl_in_rule__Atom__Group_0__17587);
+            pushFollow(FOLLOW_rule__Atom__Group_0__1__Impl_in_rule__Atom__Group_0__17704);
             rule__Atom__Group_0__1__Impl();
             _fsp--;
             if (failed) return ;
@@ -10553,22 +10709,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Atom__Group_0__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3775:1: rule__Atom__Group_0__1__Impl : ( ruleatom ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3840:1: rule__Atom__Group_0__1__Impl : ( ruleatom ) ;
     public final void rule__Atom__Group_0__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3779:1: ( ( ruleatom ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3780:1: ( ruleatom )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3844:1: ( ( ruleatom ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3845:1: ( ruleatom )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3780:1: ( ruleatom )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3781:1: ruleatom
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3845:1: ( ruleatom )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3846:1: ruleatom
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getAtomAccess().getAtomParserRuleCall_0_1()); 
             }
-            pushFollow(FOLLOW_ruleatom_in_rule__Atom__Group_0__1__Impl7614);
+            pushFollow(FOLLOW_ruleatom_in_rule__Atom__Group_0__1__Impl7731);
             ruleatom();
             _fsp--;
             if (failed) return ;
@@ -10597,20 +10753,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Atom__Group_1__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3796:1: rule__Atom__Group_1__0 : rule__Atom__Group_1__0__Impl rule__Atom__Group_1__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3861:1: rule__Atom__Group_1__0 : rule__Atom__Group_1__0__Impl rule__Atom__Group_1__1 ;
     public final void rule__Atom__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3800:1: ( rule__Atom__Group_1__0__Impl rule__Atom__Group_1__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3801:2: rule__Atom__Group_1__0__Impl rule__Atom__Group_1__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3865:1: ( rule__Atom__Group_1__0__Impl rule__Atom__Group_1__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3866:2: rule__Atom__Group_1__0__Impl rule__Atom__Group_1__1
             {
-            pushFollow(FOLLOW_rule__Atom__Group_1__0__Impl_in_rule__Atom__Group_1__07647);
+            pushFollow(FOLLOW_rule__Atom__Group_1__0__Impl_in_rule__Atom__Group_1__07764);
             rule__Atom__Group_1__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Atom__Group_1__1_in_rule__Atom__Group_1__07650);
+            pushFollow(FOLLOW_rule__Atom__Group_1__1_in_rule__Atom__Group_1__07767);
             rule__Atom__Group_1__1();
             _fsp--;
             if (failed) return ;
@@ -10633,22 +10789,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Atom__Group_1__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3808:1: rule__Atom__Group_1__0__Impl : ( '(' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3873:1: rule__Atom__Group_1__0__Impl : ( '(' ) ;
     public final void rule__Atom__Group_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3812:1: ( ( '(' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3813:1: ( '(' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3877:1: ( ( '(' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3878:1: ( '(' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3813:1: ( '(' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3814:1: '('
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3878:1: ( '(' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3879:1: '('
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getAtomAccess().getLeftParenthesisKeyword_1_0()); 
             }
-            match(input,27,FOLLOW_27_in_rule__Atom__Group_1__0__Impl7678); if (failed) return ;
+            match(input,29,FOLLOW_29_in_rule__Atom__Group_1__0__Impl7795); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getAtomAccess().getLeftParenthesisKeyword_1_0()); 
             }
@@ -10674,20 +10830,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Atom__Group_1__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3827:1: rule__Atom__Group_1__1 : rule__Atom__Group_1__1__Impl rule__Atom__Group_1__2 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3892:1: rule__Atom__Group_1__1 : rule__Atom__Group_1__1__Impl rule__Atom__Group_1__2 ;
     public final void rule__Atom__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3831:1: ( rule__Atom__Group_1__1__Impl rule__Atom__Group_1__2 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3832:2: rule__Atom__Group_1__1__Impl rule__Atom__Group_1__2
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3896:1: ( rule__Atom__Group_1__1__Impl rule__Atom__Group_1__2 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3897:2: rule__Atom__Group_1__1__Impl rule__Atom__Group_1__2
             {
-            pushFollow(FOLLOW_rule__Atom__Group_1__1__Impl_in_rule__Atom__Group_1__17709);
+            pushFollow(FOLLOW_rule__Atom__Group_1__1__Impl_in_rule__Atom__Group_1__17826);
             rule__Atom__Group_1__1__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Atom__Group_1__2_in_rule__Atom__Group_1__17712);
+            pushFollow(FOLLOW_rule__Atom__Group_1__2_in_rule__Atom__Group_1__17829);
             rule__Atom__Group_1__2();
             _fsp--;
             if (failed) return ;
@@ -10710,33 +10866,24 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Atom__Group_1__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3839:1: rule__Atom__Group_1__1__Impl : ( ( rule__Atom__Alternatives_1_1 ) ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3904:1: rule__Atom__Group_1__1__Impl : ( RULE_SIGN ) ;
     public final void rule__Atom__Group_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3843:1: ( ( ( rule__Atom__Alternatives_1_1 ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3844:1: ( ( rule__Atom__Alternatives_1_1 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3908:1: ( ( RULE_SIGN ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3909:1: ( RULE_SIGN )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3844:1: ( ( rule__Atom__Alternatives_1_1 ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3845:1: ( rule__Atom__Alternatives_1_1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3909:1: ( RULE_SIGN )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3910:1: RULE_SIGN
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getAtomAccess().getAlternatives_1_1()); 
+               before(grammarAccess.getAtomAccess().getSignTerminalRuleCall_1_1()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3846:1: ( rule__Atom__Alternatives_1_1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3846:2: rule__Atom__Alternatives_1_1
-            {
-            pushFollow(FOLLOW_rule__Atom__Alternatives_1_1_in_rule__Atom__Group_1__1__Impl7739);
-            rule__Atom__Alternatives_1_1();
-            _fsp--;
-            if (failed) return ;
-
-            }
-
+            match(input,RULE_SIGN,FOLLOW_RULE_SIGN_in_rule__Atom__Group_1__1__Impl7856); if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getAtomAccess().getAlternatives_1_1()); 
+               after(grammarAccess.getAtomAccess().getSignTerminalRuleCall_1_1()); 
             }
 
             }
@@ -10760,20 +10907,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Atom__Group_1__2
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3856:1: rule__Atom__Group_1__2 : rule__Atom__Group_1__2__Impl rule__Atom__Group_1__3 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3921:1: rule__Atom__Group_1__2 : rule__Atom__Group_1__2__Impl rule__Atom__Group_1__3 ;
     public final void rule__Atom__Group_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3860:1: ( rule__Atom__Group_1__2__Impl rule__Atom__Group_1__3 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3861:2: rule__Atom__Group_1__2__Impl rule__Atom__Group_1__3
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3925:1: ( rule__Atom__Group_1__2__Impl rule__Atom__Group_1__3 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3926:2: rule__Atom__Group_1__2__Impl rule__Atom__Group_1__3
             {
-            pushFollow(FOLLOW_rule__Atom__Group_1__2__Impl_in_rule__Atom__Group_1__27769);
+            pushFollow(FOLLOW_rule__Atom__Group_1__2__Impl_in_rule__Atom__Group_1__27885);
             rule__Atom__Group_1__2__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Atom__Group_1__3_in_rule__Atom__Group_1__27772);
+            pushFollow(FOLLOW_rule__Atom__Group_1__3_in_rule__Atom__Group_1__27888);
             rule__Atom__Group_1__3();
             _fsp--;
             if (failed) return ;
@@ -10796,22 +10943,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Atom__Group_1__2__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3868:1: rule__Atom__Group_1__2__Impl : ( ruleexpr ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3933:1: rule__Atom__Group_1__2__Impl : ( ruleexpr ) ;
     public final void rule__Atom__Group_1__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3872:1: ( ( ruleexpr ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3873:1: ( ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3937:1: ( ( ruleexpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3938:1: ( ruleexpr )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3873:1: ( ruleexpr )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3874:1: ruleexpr
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3938:1: ( ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3939:1: ruleexpr
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getAtomAccess().getExprParserRuleCall_1_2()); 
             }
-            pushFollow(FOLLOW_ruleexpr_in_rule__Atom__Group_1__2__Impl7799);
+            pushFollow(FOLLOW_ruleexpr_in_rule__Atom__Group_1__2__Impl7915);
             ruleexpr();
             _fsp--;
             if (failed) return ;
@@ -10840,16 +10987,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Atom__Group_1__3
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3885:1: rule__Atom__Group_1__3 : rule__Atom__Group_1__3__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3950:1: rule__Atom__Group_1__3 : rule__Atom__Group_1__3__Impl ;
     public final void rule__Atom__Group_1__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3889:1: ( rule__Atom__Group_1__3__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3890:2: rule__Atom__Group_1__3__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3954:1: ( rule__Atom__Group_1__3__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3955:2: rule__Atom__Group_1__3__Impl
             {
-            pushFollow(FOLLOW_rule__Atom__Group_1__3__Impl_in_rule__Atom__Group_1__37828);
+            pushFollow(FOLLOW_rule__Atom__Group_1__3__Impl_in_rule__Atom__Group_1__37944);
             rule__Atom__Group_1__3__Impl();
             _fsp--;
             if (failed) return ;
@@ -10872,22 +11019,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Atom__Group_1__3__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3896:1: rule__Atom__Group_1__3__Impl : ( ')' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3961:1: rule__Atom__Group_1__3__Impl : ( ')' ) ;
     public final void rule__Atom__Group_1__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3900:1: ( ( ')' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3901:1: ( ')' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3965:1: ( ( ')' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3966:1: ( ')' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3901:1: ( ')' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3902:1: ')'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3966:1: ( ')' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3967:1: ')'
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getAtomAccess().getRightParenthesisKeyword_1_3()); 
             }
-            match(input,28,FOLLOW_28_in_rule__Atom__Group_1__3__Impl7856); if (failed) return ;
+            match(input,30,FOLLOW_30_in_rule__Atom__Group_1__3__Impl7972); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getAtomAccess().getRightParenthesisKeyword_1_3()); 
             }
@@ -10913,20 +11060,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Atom__Group_2__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3923:1: rule__Atom__Group_2__0 : rule__Atom__Group_2__0__Impl rule__Atom__Group_2__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3988:1: rule__Atom__Group_2__0 : rule__Atom__Group_2__0__Impl rule__Atom__Group_2__1 ;
     public final void rule__Atom__Group_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3927:1: ( rule__Atom__Group_2__0__Impl rule__Atom__Group_2__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3928:2: rule__Atom__Group_2__0__Impl rule__Atom__Group_2__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3992:1: ( rule__Atom__Group_2__0__Impl rule__Atom__Group_2__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3993:2: rule__Atom__Group_2__0__Impl rule__Atom__Group_2__1
             {
-            pushFollow(FOLLOW_rule__Atom__Group_2__0__Impl_in_rule__Atom__Group_2__07895);
+            pushFollow(FOLLOW_rule__Atom__Group_2__0__Impl_in_rule__Atom__Group_2__08011);
             rule__Atom__Group_2__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Atom__Group_2__1_in_rule__Atom__Group_2__07898);
+            pushFollow(FOLLOW_rule__Atom__Group_2__1_in_rule__Atom__Group_2__08014);
             rule__Atom__Group_2__1();
             _fsp--;
             if (failed) return ;
@@ -10949,22 +11096,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Atom__Group_2__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3935:1: rule__Atom__Group_2__0__Impl : ( '(' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4000:1: rule__Atom__Group_2__0__Impl : ( '(' ) ;
     public final void rule__Atom__Group_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3939:1: ( ( '(' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3940:1: ( '(' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4004:1: ( ( '(' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4005:1: ( '(' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3940:1: ( '(' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3941:1: '('
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4005:1: ( '(' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4006:1: '('
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getAtomAccess().getLeftParenthesisKeyword_2_0()); 
             }
-            match(input,27,FOLLOW_27_in_rule__Atom__Group_2__0__Impl7926); if (failed) return ;
+            match(input,29,FOLLOW_29_in_rule__Atom__Group_2__0__Impl8042); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getAtomAccess().getLeftParenthesisKeyword_2_0()); 
             }
@@ -10990,20 +11137,20 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Atom__Group_2__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3954:1: rule__Atom__Group_2__1 : rule__Atom__Group_2__1__Impl rule__Atom__Group_2__2 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4019:1: rule__Atom__Group_2__1 : rule__Atom__Group_2__1__Impl rule__Atom__Group_2__2 ;
     public final void rule__Atom__Group_2__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3958:1: ( rule__Atom__Group_2__1__Impl rule__Atom__Group_2__2 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3959:2: rule__Atom__Group_2__1__Impl rule__Atom__Group_2__2
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4023:1: ( rule__Atom__Group_2__1__Impl rule__Atom__Group_2__2 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4024:2: rule__Atom__Group_2__1__Impl rule__Atom__Group_2__2
             {
-            pushFollow(FOLLOW_rule__Atom__Group_2__1__Impl_in_rule__Atom__Group_2__17957);
+            pushFollow(FOLLOW_rule__Atom__Group_2__1__Impl_in_rule__Atom__Group_2__18073);
             rule__Atom__Group_2__1__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__Atom__Group_2__2_in_rule__Atom__Group_2__17960);
+            pushFollow(FOLLOW_rule__Atom__Group_2__2_in_rule__Atom__Group_2__18076);
             rule__Atom__Group_2__2();
             _fsp--;
             if (failed) return ;
@@ -11026,27 +11173,33 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Atom__Group_2__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3966:1: rule__Atom__Group_2__1__Impl : ( ruleexpr ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4031:1: rule__Atom__Group_2__1__Impl : ( ( rule__Atom__Alternatives_2_1 ) ) ;
     public final void rule__Atom__Group_2__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3970:1: ( ( ruleexpr ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3971:1: ( ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4035:1: ( ( ( rule__Atom__Alternatives_2_1 ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4036:1: ( ( rule__Atom__Alternatives_2_1 ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3971:1: ( ruleexpr )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3972:1: ruleexpr
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4036:1: ( ( rule__Atom__Alternatives_2_1 ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4037:1: ( rule__Atom__Alternatives_2_1 )
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getAtomAccess().getExprParserRuleCall_2_1()); 
+               before(grammarAccess.getAtomAccess().getAlternatives_2_1()); 
             }
-            pushFollow(FOLLOW_ruleexpr_in_rule__Atom__Group_2__1__Impl7987);
-            ruleexpr();
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4038:1: ( rule__Atom__Alternatives_2_1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4038:2: rule__Atom__Alternatives_2_1
+            {
+            pushFollow(FOLLOW_rule__Atom__Alternatives_2_1_in_rule__Atom__Group_2__1__Impl8103);
+            rule__Atom__Alternatives_2_1();
             _fsp--;
             if (failed) return ;
+
+            }
+
             if ( backtracking==0 ) {
-               after(grammarAccess.getAtomAccess().getExprParserRuleCall_2_1()); 
+               after(grammarAccess.getAtomAccess().getAlternatives_2_1()); 
             }
 
             }
@@ -11070,17 +11223,21 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Atom__Group_2__2
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3983:1: rule__Atom__Group_2__2 : rule__Atom__Group_2__2__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4048:1: rule__Atom__Group_2__2 : rule__Atom__Group_2__2__Impl rule__Atom__Group_2__3 ;
     public final void rule__Atom__Group_2__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3987:1: ( rule__Atom__Group_2__2__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3988:2: rule__Atom__Group_2__2__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4052:1: ( rule__Atom__Group_2__2__Impl rule__Atom__Group_2__3 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4053:2: rule__Atom__Group_2__2__Impl rule__Atom__Group_2__3
             {
-            pushFollow(FOLLOW_rule__Atom__Group_2__2__Impl_in_rule__Atom__Group_2__28016);
+            pushFollow(FOLLOW_rule__Atom__Group_2__2__Impl_in_rule__Atom__Group_2__28133);
             rule__Atom__Group_2__2__Impl();
+            _fsp--;
+            if (failed) return ;
+            pushFollow(FOLLOW_rule__Atom__Group_2__3_in_rule__Atom__Group_2__28136);
+            rule__Atom__Group_2__3();
             _fsp--;
             if (failed) return ;
 
@@ -11102,24 +11259,27 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Atom__Group_2__2__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3994:1: rule__Atom__Group_2__2__Impl : ( ')' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4060:1: rule__Atom__Group_2__2__Impl : ( ruleexpr ) ;
     public final void rule__Atom__Group_2__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3998:1: ( ( ')' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3999:1: ( ')' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4064:1: ( ( ruleexpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4065:1: ( ruleexpr )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:3999:1: ( ')' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4000:1: ')'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4065:1: ( ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4066:1: ruleexpr
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getAtomAccess().getRightParenthesisKeyword_2_2()); 
+               before(grammarAccess.getAtomAccess().getExprParserRuleCall_2_2()); 
             }
-            match(input,28,FOLLOW_28_in_rule__Atom__Group_2__2__Impl8044); if (failed) return ;
+            pushFollow(FOLLOW_ruleexpr_in_rule__Atom__Group_2__2__Impl8163);
+            ruleexpr();
+            _fsp--;
+            if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getAtomAccess().getRightParenthesisKeyword_2_2()); 
+               after(grammarAccess.getAtomAccess().getExprParserRuleCall_2_2()); 
             }
 
             }
@@ -11142,22 +11302,18 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
     // $ANTLR end rule__Atom__Group_2__2__Impl
 
 
-    // $ANTLR start rule__PostfixExpr__Group_0__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4019:1: rule__PostfixExpr__Group_0__0 : rule__PostfixExpr__Group_0__0__Impl rule__PostfixExpr__Group_0__1 ;
-    public final void rule__PostfixExpr__Group_0__0() throws RecognitionException {
+    // $ANTLR start rule__Atom__Group_2__3
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4077:1: rule__Atom__Group_2__3 : rule__Atom__Group_2__3__Impl ;
+    public final void rule__Atom__Group_2__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4023:1: ( rule__PostfixExpr__Group_0__0__Impl rule__PostfixExpr__Group_0__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4024:2: rule__PostfixExpr__Group_0__0__Impl rule__PostfixExpr__Group_0__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4081:1: ( rule__Atom__Group_2__3__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4082:2: rule__Atom__Group_2__3__Impl
             {
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_0__0__Impl_in_rule__PostfixExpr__Group_0__08081);
-            rule__PostfixExpr__Group_0__0__Impl();
-            _fsp--;
-            if (failed) return ;
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_0__1_in_rule__PostfixExpr__Group_0__08084);
-            rule__PostfixExpr__Group_0__1();
+            pushFollow(FOLLOW_rule__Atom__Group_2__3__Impl_in_rule__Atom__Group_2__38192);
+            rule__Atom__Group_2__3__Impl();
             _fsp--;
             if (failed) return ;
 
@@ -11175,105 +11331,28 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__PostfixExpr__Group_0__0
+    // $ANTLR end rule__Atom__Group_2__3
 
 
-    // $ANTLR start rule__PostfixExpr__Group_0__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4031:1: rule__PostfixExpr__Group_0__0__Impl : ( 'PRINT' ) ;
-    public final void rule__PostfixExpr__Group_0__0__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4035:1: ( ( 'PRINT' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4036:1: ( 'PRINT' )
-            {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4036:1: ( 'PRINT' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4037:1: 'PRINT'
-            {
-            if ( backtracking==0 ) {
-               before(grammarAccess.getPostfixExprAccess().getPRINTKeyword_0_0()); 
-            }
-            match(input,45,FOLLOW_45_in_rule__PostfixExpr__Group_0__0__Impl8112); if (failed) return ;
-            if ( backtracking==0 ) {
-               after(grammarAccess.getPostfixExprAccess().getPRINTKeyword_0_0()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__PostfixExpr__Group_0__0__Impl
-
-
-    // $ANTLR start rule__PostfixExpr__Group_0__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4050:1: rule__PostfixExpr__Group_0__1 : rule__PostfixExpr__Group_0__1__Impl rule__PostfixExpr__Group_0__2 ;
-    public final void rule__PostfixExpr__Group_0__1() throws RecognitionException {
+    // $ANTLR start rule__Atom__Group_2__3__Impl
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4088:1: rule__Atom__Group_2__3__Impl : ( ')' ) ;
+    public final void rule__Atom__Group_2__3__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4054:1: ( rule__PostfixExpr__Group_0__1__Impl rule__PostfixExpr__Group_0__2 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4055:2: rule__PostfixExpr__Group_0__1__Impl rule__PostfixExpr__Group_0__2
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4092:1: ( ( ')' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4093:1: ( ')' )
             {
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_0__1__Impl_in_rule__PostfixExpr__Group_0__18143);
-            rule__PostfixExpr__Group_0__1__Impl();
-            _fsp--;
-            if (failed) return ;
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_0__2_in_rule__PostfixExpr__Group_0__18146);
-            rule__PostfixExpr__Group_0__2();
-            _fsp--;
-            if (failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__PostfixExpr__Group_0__1
-
-
-    // $ANTLR start rule__PostfixExpr__Group_0__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4062:1: rule__PostfixExpr__Group_0__1__Impl : ( '(' ) ;
-    public final void rule__PostfixExpr__Group_0__1__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4066:1: ( ( '(' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4067:1: ( '(' )
-            {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4067:1: ( '(' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4068:1: '('
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4093:1: ( ')' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4094:1: ')'
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getPostfixExprAccess().getLeftParenthesisKeyword_0_1()); 
+               before(grammarAccess.getAtomAccess().getRightParenthesisKeyword_2_3()); 
             }
-            match(input,27,FOLLOW_27_in_rule__PostfixExpr__Group_0__1__Impl8174); if (failed) return ;
+            match(input,30,FOLLOW_30_in_rule__Atom__Group_2__3__Impl8220); if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getPostfixExprAccess().getLeftParenthesisKeyword_0_1()); 
+               after(grammarAccess.getAtomAccess().getRightParenthesisKeyword_2_3()); 
             }
 
             }
@@ -11293,25 +11372,25 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__PostfixExpr__Group_0__1__Impl
+    // $ANTLR end rule__Atom__Group_2__3__Impl
 
 
-    // $ANTLR start rule__PostfixExpr__Group_0__2
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4081:1: rule__PostfixExpr__Group_0__2 : rule__PostfixExpr__Group_0__2__Impl rule__PostfixExpr__Group_0__3 ;
-    public final void rule__PostfixExpr__Group_0__2() throws RecognitionException {
+    // $ANTLR start rule__Atom__Group_3__0
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4115:1: rule__Atom__Group_3__0 : rule__Atom__Group_3__0__Impl rule__Atom__Group_3__1 ;
+    public final void rule__Atom__Group_3__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4085:1: ( rule__PostfixExpr__Group_0__2__Impl rule__PostfixExpr__Group_0__3 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4086:2: rule__PostfixExpr__Group_0__2__Impl rule__PostfixExpr__Group_0__3
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4119:1: ( rule__Atom__Group_3__0__Impl rule__Atom__Group_3__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4120:2: rule__Atom__Group_3__0__Impl rule__Atom__Group_3__1
             {
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_0__2__Impl_in_rule__PostfixExpr__Group_0__28205);
-            rule__PostfixExpr__Group_0__2__Impl();
+            pushFollow(FOLLOW_rule__Atom__Group_3__0__Impl_in_rule__Atom__Group_3__08259);
+            rule__Atom__Group_3__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_0__3_in_rule__PostfixExpr__Group_0__28208);
-            rule__PostfixExpr__Group_0__3();
+            pushFollow(FOLLOW_rule__Atom__Group_3__1_in_rule__Atom__Group_3__08262);
+            rule__Atom__Group_3__1();
             _fsp--;
             if (failed) return ;
 
@@ -11329,31 +11408,108 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__PostfixExpr__Group_0__2
+    // $ANTLR end rule__Atom__Group_3__0
 
 
-    // $ANTLR start rule__PostfixExpr__Group_0__2__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4093:1: rule__PostfixExpr__Group_0__2__Impl : ( ruleexpr ) ;
-    public final void rule__PostfixExpr__Group_0__2__Impl() throws RecognitionException {
+    // $ANTLR start rule__Atom__Group_3__0__Impl
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4127:1: rule__Atom__Group_3__0__Impl : ( '(' ) ;
+    public final void rule__Atom__Group_3__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4097:1: ( ( ruleexpr ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4098:1: ( ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4131:1: ( ( '(' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4132:1: ( '(' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4098:1: ( ruleexpr )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4099:1: ruleexpr
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4132:1: ( '(' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4133:1: '('
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getPostfixExprAccess().getExprParserRuleCall_0_2()); 
+               before(grammarAccess.getAtomAccess().getLeftParenthesisKeyword_3_0()); 
             }
-            pushFollow(FOLLOW_ruleexpr_in_rule__PostfixExpr__Group_0__2__Impl8235);
+            match(input,29,FOLLOW_29_in_rule__Atom__Group_3__0__Impl8290); if (failed) return ;
+            if ( backtracking==0 ) {
+               after(grammarAccess.getAtomAccess().getLeftParenthesisKeyword_3_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Atom__Group_3__0__Impl
+
+
+    // $ANTLR start rule__Atom__Group_3__1
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4146:1: rule__Atom__Group_3__1 : rule__Atom__Group_3__1__Impl rule__Atom__Group_3__2 ;
+    public final void rule__Atom__Group_3__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4150:1: ( rule__Atom__Group_3__1__Impl rule__Atom__Group_3__2 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4151:2: rule__Atom__Group_3__1__Impl rule__Atom__Group_3__2
+            {
+            pushFollow(FOLLOW_rule__Atom__Group_3__1__Impl_in_rule__Atom__Group_3__18321);
+            rule__Atom__Group_3__1__Impl();
+            _fsp--;
+            if (failed) return ;
+            pushFollow(FOLLOW_rule__Atom__Group_3__2_in_rule__Atom__Group_3__18324);
+            rule__Atom__Group_3__2();
+            _fsp--;
+            if (failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__Atom__Group_3__1
+
+
+    // $ANTLR start rule__Atom__Group_3__1__Impl
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4158:1: rule__Atom__Group_3__1__Impl : ( ruleexpr ) ;
+    public final void rule__Atom__Group_3__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4162:1: ( ( ruleexpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4163:1: ( ruleexpr )
+            {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4163:1: ( ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4164:1: ruleexpr
+            {
+            if ( backtracking==0 ) {
+               before(grammarAccess.getAtomAccess().getExprParserRuleCall_3_1()); 
+            }
+            pushFollow(FOLLOW_ruleexpr_in_rule__Atom__Group_3__1__Impl8351);
             ruleexpr();
             _fsp--;
             if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getPostfixExprAccess().getExprParserRuleCall_0_2()); 
+               after(grammarAccess.getAtomAccess().getExprParserRuleCall_3_1()); 
             }
 
             }
@@ -11373,21 +11529,21 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__PostfixExpr__Group_0__2__Impl
+    // $ANTLR end rule__Atom__Group_3__1__Impl
 
 
-    // $ANTLR start rule__PostfixExpr__Group_0__3
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4110:1: rule__PostfixExpr__Group_0__3 : rule__PostfixExpr__Group_0__3__Impl ;
-    public final void rule__PostfixExpr__Group_0__3() throws RecognitionException {
+    // $ANTLR start rule__Atom__Group_3__2
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4175:1: rule__Atom__Group_3__2 : rule__Atom__Group_3__2__Impl ;
+    public final void rule__Atom__Group_3__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4114:1: ( rule__PostfixExpr__Group_0__3__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4115:2: rule__PostfixExpr__Group_0__3__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4179:1: ( rule__Atom__Group_3__2__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4180:2: rule__Atom__Group_3__2__Impl
             {
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_0__3__Impl_in_rule__PostfixExpr__Group_0__38264);
-            rule__PostfixExpr__Group_0__3__Impl();
+            pushFollow(FOLLOW_rule__Atom__Group_3__2__Impl_in_rule__Atom__Group_3__28380);
+            rule__Atom__Group_3__2__Impl();
             _fsp--;
             if (failed) return ;
 
@@ -11405,28 +11561,28 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__PostfixExpr__Group_0__3
+    // $ANTLR end rule__Atom__Group_3__2
 
 
-    // $ANTLR start rule__PostfixExpr__Group_0__3__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4121:1: rule__PostfixExpr__Group_0__3__Impl : ( ')' ) ;
-    public final void rule__PostfixExpr__Group_0__3__Impl() throws RecognitionException {
+    // $ANTLR start rule__Atom__Group_3__2__Impl
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4186:1: rule__Atom__Group_3__2__Impl : ( ')' ) ;
+    public final void rule__Atom__Group_3__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4125:1: ( ( ')' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4126:1: ( ')' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4190:1: ( ( ')' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4191:1: ( ')' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4126:1: ( ')' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4127:1: ')'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4191:1: ( ')' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4192:1: ')'
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getPostfixExprAccess().getRightParenthesisKeyword_0_3()); 
+               before(grammarAccess.getAtomAccess().getRightParenthesisKeyword_3_2()); 
             }
-            match(input,28,FOLLOW_28_in_rule__PostfixExpr__Group_0__3__Impl8292); if (failed) return ;
+            match(input,30,FOLLOW_30_in_rule__Atom__Group_3__2__Impl8408); if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getPostfixExprAccess().getRightParenthesisKeyword_0_3()); 
+               after(grammarAccess.getAtomAccess().getRightParenthesisKeyword_3_2()); 
             }
 
             }
@@ -11446,98 +11602,25 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__PostfixExpr__Group_0__3__Impl
+    // $ANTLR end rule__Atom__Group_3__2__Impl
 
 
-    // $ANTLR start rule__PostfixExpr__Group_1__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4148:1: rule__PostfixExpr__Group_1__0 : rule__PostfixExpr__Group_1__0__Impl rule__PostfixExpr__Group_1__1 ;
-    public final void rule__PostfixExpr__Group_1__0() throws RecognitionException {
+    // $ANTLR start rule__PostfixExpr__Group__0
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4211:1: rule__PostfixExpr__Group__0 : rule__PostfixExpr__Group__0__Impl rule__PostfixExpr__Group__1 ;
+    public final void rule__PostfixExpr__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4152:1: ( rule__PostfixExpr__Group_1__0__Impl rule__PostfixExpr__Group_1__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4153:2: rule__PostfixExpr__Group_1__0__Impl rule__PostfixExpr__Group_1__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4215:1: ( rule__PostfixExpr__Group__0__Impl rule__PostfixExpr__Group__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4216:2: rule__PostfixExpr__Group__0__Impl rule__PostfixExpr__Group__1
             {
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_1__0__Impl_in_rule__PostfixExpr__Group_1__08331);
-            rule__PostfixExpr__Group_1__0__Impl();
+            pushFollow(FOLLOW_rule__PostfixExpr__Group__0__Impl_in_rule__PostfixExpr__Group__08445);
+            rule__PostfixExpr__Group__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_1__1_in_rule__PostfixExpr__Group_1__08334);
-            rule__PostfixExpr__Group_1__1();
-            _fsp--;
-            if (failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__PostfixExpr__Group_1__0
-
-
-    // $ANTLR start rule__PostfixExpr__Group_1__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4160:1: rule__PostfixExpr__Group_1__0__Impl : ( RULE_ID ) ;
-    public final void rule__PostfixExpr__Group_1__0__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4164:1: ( ( RULE_ID ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4165:1: ( RULE_ID )
-            {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4165:1: ( RULE_ID )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4166:1: RULE_ID
-            {
-            if ( backtracking==0 ) {
-               before(grammarAccess.getPostfixExprAccess().getIDTerminalRuleCall_1_0()); 
-            }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__PostfixExpr__Group_1__0__Impl8361); if (failed) return ;
-            if ( backtracking==0 ) {
-               after(grammarAccess.getPostfixExprAccess().getIDTerminalRuleCall_1_0()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__PostfixExpr__Group_1__0__Impl
-
-
-    // $ANTLR start rule__PostfixExpr__Group_1__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4177:1: rule__PostfixExpr__Group_1__1 : rule__PostfixExpr__Group_1__1__Impl ;
-    public final void rule__PostfixExpr__Group_1__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4181:1: ( rule__PostfixExpr__Group_1__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4182:2: rule__PostfixExpr__Group_1__1__Impl
-            {
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_1__1__Impl_in_rule__PostfixExpr__Group_1__18390);
-            rule__PostfixExpr__Group_1__1__Impl();
+            pushFollow(FOLLOW_rule__PostfixExpr__Group__1_in_rule__PostfixExpr__Group__08448);
+            rule__PostfixExpr__Group__1();
             _fsp--;
             if (failed) return ;
 
@@ -11555,42 +11638,115 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__PostfixExpr__Group_1__1
+    // $ANTLR end rule__PostfixExpr__Group__0
 
 
-    // $ANTLR start rule__PostfixExpr__Group_1__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4188:1: rule__PostfixExpr__Group_1__1__Impl : ( ( rule__PostfixExpr__Alternatives_1_1 )* ) ;
-    public final void rule__PostfixExpr__Group_1__1__Impl() throws RecognitionException {
+    // $ANTLR start rule__PostfixExpr__Group__0__Impl
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4223:1: rule__PostfixExpr__Group__0__Impl : ( RULE_ID ) ;
+    public final void rule__PostfixExpr__Group__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4192:1: ( ( ( rule__PostfixExpr__Alternatives_1_1 )* ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4193:1: ( ( rule__PostfixExpr__Alternatives_1_1 )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4227:1: ( ( RULE_ID ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4228:1: ( RULE_ID )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4193:1: ( ( rule__PostfixExpr__Alternatives_1_1 )* )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4194:1: ( rule__PostfixExpr__Alternatives_1_1 )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4228:1: ( RULE_ID )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4229:1: RULE_ID
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getPostfixExprAccess().getAlternatives_1_1()); 
+               before(grammarAccess.getPostfixExprAccess().getIDTerminalRuleCall_0()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4195:1: ( rule__PostfixExpr__Alternatives_1_1 )*
-            loop25:
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__PostfixExpr__Group__0__Impl8475); if (failed) return ;
+            if ( backtracking==0 ) {
+               after(grammarAccess.getPostfixExprAccess().getIDTerminalRuleCall_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__PostfixExpr__Group__0__Impl
+
+
+    // $ANTLR start rule__PostfixExpr__Group__1
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4240:1: rule__PostfixExpr__Group__1 : rule__PostfixExpr__Group__1__Impl ;
+    public final void rule__PostfixExpr__Group__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4244:1: ( rule__PostfixExpr__Group__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4245:2: rule__PostfixExpr__Group__1__Impl
+            {
+            pushFollow(FOLLOW_rule__PostfixExpr__Group__1__Impl_in_rule__PostfixExpr__Group__18504);
+            rule__PostfixExpr__Group__1__Impl();
+            _fsp--;
+            if (failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__PostfixExpr__Group__1
+
+
+    // $ANTLR start rule__PostfixExpr__Group__1__Impl
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4251:1: rule__PostfixExpr__Group__1__Impl : ( ( rule__PostfixExpr__Alternatives_1 )* ) ;
+    public final void rule__PostfixExpr__Group__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4255:1: ( ( ( rule__PostfixExpr__Alternatives_1 )* ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4256:1: ( ( rule__PostfixExpr__Alternatives_1 )* )
+            {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4256:1: ( ( rule__PostfixExpr__Alternatives_1 )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4257:1: ( rule__PostfixExpr__Alternatives_1 )*
+            {
+            if ( backtracking==0 ) {
+               before(grammarAccess.getPostfixExprAccess().getAlternatives_1()); 
+            }
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4258:1: ( rule__PostfixExpr__Alternatives_1 )*
+            loop28:
             do {
-                int alt25=2;
-                int LA25_0 = input.LA(1);
+                int alt28=2;
+                int LA28_0 = input.LA(1);
 
-                if ( (LA25_0==27||(LA25_0>=46 && LA25_0<=47)) ) {
-                    alt25=1;
+                if ( (LA28_0==29||(LA28_0>=46 && LA28_0<=47)) ) {
+                    alt28=1;
                 }
 
 
-                switch (alt25) {
+                switch (alt28) {
             	case 1 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4195:2: rule__PostfixExpr__Alternatives_1_1
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4258:2: rule__PostfixExpr__Alternatives_1
             	    {
-            	    pushFollow(FOLLOW_rule__PostfixExpr__Alternatives_1_1_in_rule__PostfixExpr__Group_1__1__Impl8417);
-            	    rule__PostfixExpr__Alternatives_1_1();
+            	    pushFollow(FOLLOW_rule__PostfixExpr__Alternatives_1_in_rule__PostfixExpr__Group__1__Impl8531);
+            	    rule__PostfixExpr__Alternatives_1();
             	    _fsp--;
             	    if (failed) return ;
 
@@ -11598,12 +11754,12 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
             	    break;
 
             	default :
-            	    break loop25;
+            	    break loop28;
                 }
             } while (true);
 
             if ( backtracking==0 ) {
-               after(grammarAccess.getPostfixExprAccess().getAlternatives_1_1()); 
+               after(grammarAccess.getPostfixExprAccess().getAlternatives_1()); 
             }
 
             }
@@ -11623,98 +11779,25 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__PostfixExpr__Group_1__1__Impl
+    // $ANTLR end rule__PostfixExpr__Group__1__Impl
 
 
-    // $ANTLR start rule__PostfixExpr__Group_1_1_0__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4209:1: rule__PostfixExpr__Group_1_1_0__0 : rule__PostfixExpr__Group_1_1_0__0__Impl rule__PostfixExpr__Group_1_1_0__1 ;
-    public final void rule__PostfixExpr__Group_1_1_0__0() throws RecognitionException {
+    // $ANTLR start rule__PostfixExpr__Group_1_0__0
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4272:1: rule__PostfixExpr__Group_1_0__0 : rule__PostfixExpr__Group_1_0__0__Impl rule__PostfixExpr__Group_1_0__1 ;
+    public final void rule__PostfixExpr__Group_1_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4213:1: ( rule__PostfixExpr__Group_1_1_0__0__Impl rule__PostfixExpr__Group_1_1_0__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4214:2: rule__PostfixExpr__Group_1_1_0__0__Impl rule__PostfixExpr__Group_1_1_0__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4276:1: ( rule__PostfixExpr__Group_1_0__0__Impl rule__PostfixExpr__Group_1_0__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4277:2: rule__PostfixExpr__Group_1_0__0__Impl rule__PostfixExpr__Group_1_0__1
             {
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_0__0__Impl_in_rule__PostfixExpr__Group_1_1_0__08452);
-            rule__PostfixExpr__Group_1_1_0__0__Impl();
+            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_0__0__Impl_in_rule__PostfixExpr__Group_1_0__08566);
+            rule__PostfixExpr__Group_1_0__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_0__1_in_rule__PostfixExpr__Group_1_1_0__08455);
-            rule__PostfixExpr__Group_1_1_0__1();
-            _fsp--;
-            if (failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__PostfixExpr__Group_1_1_0__0
-
-
-    // $ANTLR start rule__PostfixExpr__Group_1_1_0__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4221:1: rule__PostfixExpr__Group_1_1_0__0__Impl : ( '.' ) ;
-    public final void rule__PostfixExpr__Group_1_1_0__0__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4225:1: ( ( '.' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4226:1: ( '.' )
-            {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4226:1: ( '.' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4227:1: '.'
-            {
-            if ( backtracking==0 ) {
-               before(grammarAccess.getPostfixExprAccess().getFullStopKeyword_1_1_0_0()); 
-            }
-            match(input,46,FOLLOW_46_in_rule__PostfixExpr__Group_1_1_0__0__Impl8483); if (failed) return ;
-            if ( backtracking==0 ) {
-               after(grammarAccess.getPostfixExprAccess().getFullStopKeyword_1_1_0_0()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__PostfixExpr__Group_1_1_0__0__Impl
-
-
-    // $ANTLR start rule__PostfixExpr__Group_1_1_0__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4240:1: rule__PostfixExpr__Group_1_1_0__1 : rule__PostfixExpr__Group_1_1_0__1__Impl ;
-    public final void rule__PostfixExpr__Group_1_1_0__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4244:1: ( rule__PostfixExpr__Group_1_1_0__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4245:2: rule__PostfixExpr__Group_1_1_0__1__Impl
-            {
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_0__1__Impl_in_rule__PostfixExpr__Group_1_1_0__18514);
-            rule__PostfixExpr__Group_1_1_0__1__Impl();
+            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_0__1_in_rule__PostfixExpr__Group_1_0__08569);
+            rule__PostfixExpr__Group_1_0__1();
             _fsp--;
             if (failed) return ;
 
@@ -11732,28 +11815,28 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__PostfixExpr__Group_1_1_0__1
+    // $ANTLR end rule__PostfixExpr__Group_1_0__0
 
 
-    // $ANTLR start rule__PostfixExpr__Group_1_1_0__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4251:1: rule__PostfixExpr__Group_1_1_0__1__Impl : ( RULE_ID ) ;
-    public final void rule__PostfixExpr__Group_1_1_0__1__Impl() throws RecognitionException {
+    // $ANTLR start rule__PostfixExpr__Group_1_0__0__Impl
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4284:1: rule__PostfixExpr__Group_1_0__0__Impl : ( '.' ) ;
+    public final void rule__PostfixExpr__Group_1_0__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4255:1: ( ( RULE_ID ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4256:1: ( RULE_ID )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4288:1: ( ( '.' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4289:1: ( '.' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4256:1: ( RULE_ID )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4257:1: RULE_ID
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4289:1: ( '.' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4290:1: '.'
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getPostfixExprAccess().getIDTerminalRuleCall_1_1_0_1()); 
+               before(grammarAccess.getPostfixExprAccess().getFullStopKeyword_1_0_0()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__PostfixExpr__Group_1_1_0__1__Impl8541); if (failed) return ;
+            match(input,46,FOLLOW_46_in_rule__PostfixExpr__Group_1_0__0__Impl8597); if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getPostfixExprAccess().getIDTerminalRuleCall_1_1_0_1()); 
+               after(grammarAccess.getPostfixExprAccess().getFullStopKeyword_1_0_0()); 
             }
 
             }
@@ -11773,24 +11856,344 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__PostfixExpr__Group_1_1_0__1__Impl
+    // $ANTLR end rule__PostfixExpr__Group_1_0__0__Impl
+
+
+    // $ANTLR start rule__PostfixExpr__Group_1_0__1
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4303:1: rule__PostfixExpr__Group_1_0__1 : rule__PostfixExpr__Group_1_0__1__Impl ;
+    public final void rule__PostfixExpr__Group_1_0__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4307:1: ( rule__PostfixExpr__Group_1_0__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4308:2: rule__PostfixExpr__Group_1_0__1__Impl
+            {
+            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_0__1__Impl_in_rule__PostfixExpr__Group_1_0__18628);
+            rule__PostfixExpr__Group_1_0__1__Impl();
+            _fsp--;
+            if (failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__PostfixExpr__Group_1_0__1
+
+
+    // $ANTLR start rule__PostfixExpr__Group_1_0__1__Impl
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4314:1: rule__PostfixExpr__Group_1_0__1__Impl : ( RULE_ID ) ;
+    public final void rule__PostfixExpr__Group_1_0__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4318:1: ( ( RULE_ID ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4319:1: ( RULE_ID )
+            {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4319:1: ( RULE_ID )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4320:1: RULE_ID
+            {
+            if ( backtracking==0 ) {
+               before(grammarAccess.getPostfixExprAccess().getIDTerminalRuleCall_1_0_1()); 
+            }
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__PostfixExpr__Group_1_0__1__Impl8655); if (failed) return ;
+            if ( backtracking==0 ) {
+               after(grammarAccess.getPostfixExprAccess().getIDTerminalRuleCall_1_0_1()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__PostfixExpr__Group_1_0__1__Impl
+
+
+    // $ANTLR start rule__PostfixExpr__Group_1_1__0
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4335:1: rule__PostfixExpr__Group_1_1__0 : rule__PostfixExpr__Group_1_1__0__Impl rule__PostfixExpr__Group_1_1__1 ;
+    public final void rule__PostfixExpr__Group_1_1__0() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4339:1: ( rule__PostfixExpr__Group_1_1__0__Impl rule__PostfixExpr__Group_1_1__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4340:2: rule__PostfixExpr__Group_1_1__0__Impl rule__PostfixExpr__Group_1_1__1
+            {
+            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1__0__Impl_in_rule__PostfixExpr__Group_1_1__08688);
+            rule__PostfixExpr__Group_1_1__0__Impl();
+            _fsp--;
+            if (failed) return ;
+            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1__1_in_rule__PostfixExpr__Group_1_1__08691);
+            rule__PostfixExpr__Group_1_1__1();
+            _fsp--;
+            if (failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__PostfixExpr__Group_1_1__0
+
+
+    // $ANTLR start rule__PostfixExpr__Group_1_1__0__Impl
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4347:1: rule__PostfixExpr__Group_1_1__0__Impl : ( '(' ) ;
+    public final void rule__PostfixExpr__Group_1_1__0__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4351:1: ( ( '(' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4352:1: ( '(' )
+            {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4352:1: ( '(' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4353:1: '('
+            {
+            if ( backtracking==0 ) {
+               before(grammarAccess.getPostfixExprAccess().getLeftParenthesisKeyword_1_1_0()); 
+            }
+            match(input,29,FOLLOW_29_in_rule__PostfixExpr__Group_1_1__0__Impl8719); if (failed) return ;
+            if ( backtracking==0 ) {
+               after(grammarAccess.getPostfixExprAccess().getLeftParenthesisKeyword_1_1_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__PostfixExpr__Group_1_1__0__Impl
+
+
+    // $ANTLR start rule__PostfixExpr__Group_1_1__1
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4366:1: rule__PostfixExpr__Group_1_1__1 : rule__PostfixExpr__Group_1_1__1__Impl rule__PostfixExpr__Group_1_1__2 ;
+    public final void rule__PostfixExpr__Group_1_1__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4370:1: ( rule__PostfixExpr__Group_1_1__1__Impl rule__PostfixExpr__Group_1_1__2 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4371:2: rule__PostfixExpr__Group_1_1__1__Impl rule__PostfixExpr__Group_1_1__2
+            {
+            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1__1__Impl_in_rule__PostfixExpr__Group_1_1__18750);
+            rule__PostfixExpr__Group_1_1__1__Impl();
+            _fsp--;
+            if (failed) return ;
+            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1__2_in_rule__PostfixExpr__Group_1_1__18753);
+            rule__PostfixExpr__Group_1_1__2();
+            _fsp--;
+            if (failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__PostfixExpr__Group_1_1__1
+
+
+    // $ANTLR start rule__PostfixExpr__Group_1_1__1__Impl
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4378:1: rule__PostfixExpr__Group_1_1__1__Impl : ( ( rule__PostfixExpr__Group_1_1_1__0 )? ) ;
+    public final void rule__PostfixExpr__Group_1_1__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4382:1: ( ( ( rule__PostfixExpr__Group_1_1_1__0 )? ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4383:1: ( ( rule__PostfixExpr__Group_1_1_1__0 )? )
+            {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4383:1: ( ( rule__PostfixExpr__Group_1_1_1__0 )? )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4384:1: ( rule__PostfixExpr__Group_1_1_1__0 )?
+            {
+            if ( backtracking==0 ) {
+               before(grammarAccess.getPostfixExprAccess().getGroup_1_1_1()); 
+            }
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4385:1: ( rule__PostfixExpr__Group_1_1_1__0 )?
+            int alt29=2;
+            int LA29_0 = input.LA(1);
+
+            if ( (LA29_0==RULE_CONSTANT||LA29_0==RULE_ID||LA29_0==29||LA29_0==45) ) {
+                alt29=1;
+            }
+            switch (alt29) {
+                case 1 :
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4385:2: rule__PostfixExpr__Group_1_1_1__0
+                    {
+                    pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_1__0_in_rule__PostfixExpr__Group_1_1__1__Impl8780);
+                    rule__PostfixExpr__Group_1_1_1__0();
+                    _fsp--;
+                    if (failed) return ;
+
+                    }
+                    break;
+
+            }
+
+            if ( backtracking==0 ) {
+               after(grammarAccess.getPostfixExprAccess().getGroup_1_1_1()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__PostfixExpr__Group_1_1__1__Impl
+
+
+    // $ANTLR start rule__PostfixExpr__Group_1_1__2
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4395:1: rule__PostfixExpr__Group_1_1__2 : rule__PostfixExpr__Group_1_1__2__Impl ;
+    public final void rule__PostfixExpr__Group_1_1__2() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4399:1: ( rule__PostfixExpr__Group_1_1__2__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4400:2: rule__PostfixExpr__Group_1_1__2__Impl
+            {
+            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1__2__Impl_in_rule__PostfixExpr__Group_1_1__28811);
+            rule__PostfixExpr__Group_1_1__2__Impl();
+            _fsp--;
+            if (failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__PostfixExpr__Group_1_1__2
+
+
+    // $ANTLR start rule__PostfixExpr__Group_1_1__2__Impl
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4406:1: rule__PostfixExpr__Group_1_1__2__Impl : ( ')' ) ;
+    public final void rule__PostfixExpr__Group_1_1__2__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4410:1: ( ( ')' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4411:1: ( ')' )
+            {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4411:1: ( ')' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4412:1: ')'
+            {
+            if ( backtracking==0 ) {
+               before(grammarAccess.getPostfixExprAccess().getRightParenthesisKeyword_1_1_2()); 
+            }
+            match(input,30,FOLLOW_30_in_rule__PostfixExpr__Group_1_1__2__Impl8839); if (failed) return ;
+            if ( backtracking==0 ) {
+               after(grammarAccess.getPostfixExprAccess().getRightParenthesisKeyword_1_1_2()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__PostfixExpr__Group_1_1__2__Impl
 
 
     // $ANTLR start rule__PostfixExpr__Group_1_1_1__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4272:1: rule__PostfixExpr__Group_1_1_1__0 : rule__PostfixExpr__Group_1_1_1__0__Impl rule__PostfixExpr__Group_1_1_1__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4431:1: rule__PostfixExpr__Group_1_1_1__0 : rule__PostfixExpr__Group_1_1_1__0__Impl rule__PostfixExpr__Group_1_1_1__1 ;
     public final void rule__PostfixExpr__Group_1_1_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4276:1: ( rule__PostfixExpr__Group_1_1_1__0__Impl rule__PostfixExpr__Group_1_1_1__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4277:2: rule__PostfixExpr__Group_1_1_1__0__Impl rule__PostfixExpr__Group_1_1_1__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4435:1: ( rule__PostfixExpr__Group_1_1_1__0__Impl rule__PostfixExpr__Group_1_1_1__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4436:2: rule__PostfixExpr__Group_1_1_1__0__Impl rule__PostfixExpr__Group_1_1_1__1
             {
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_1__0__Impl_in_rule__PostfixExpr__Group_1_1_1__08574);
+            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_1__0__Impl_in_rule__PostfixExpr__Group_1_1_1__08876);
             rule__PostfixExpr__Group_1_1_1__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_1__1_in_rule__PostfixExpr__Group_1_1_1__08577);
+            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_1__1_in_rule__PostfixExpr__Group_1_1_1__08879);
             rule__PostfixExpr__Group_1_1_1__1();
             _fsp--;
             if (failed) return ;
@@ -11813,24 +12216,27 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__PostfixExpr__Group_1_1_1__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4284:1: rule__PostfixExpr__Group_1_1_1__0__Impl : ( '(' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4443:1: rule__PostfixExpr__Group_1_1_1__0__Impl : ( ruleexpr ) ;
     public final void rule__PostfixExpr__Group_1_1_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4288:1: ( ( '(' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4289:1: ( '(' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4447:1: ( ( ruleexpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4448:1: ( ruleexpr )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4289:1: ( '(' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4290:1: '('
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4448:1: ( ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4449:1: ruleexpr
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getPostfixExprAccess().getLeftParenthesisKeyword_1_1_1_0()); 
+               before(grammarAccess.getPostfixExprAccess().getExprParserRuleCall_1_1_1_0()); 
             }
-            match(input,27,FOLLOW_27_in_rule__PostfixExpr__Group_1_1_1__0__Impl8605); if (failed) return ;
+            pushFollow(FOLLOW_ruleexpr_in_rule__PostfixExpr__Group_1_1_1__0__Impl8906);
+            ruleexpr();
+            _fsp--;
+            if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getPostfixExprAccess().getLeftParenthesisKeyword_1_1_1_0()); 
+               after(grammarAccess.getPostfixExprAccess().getExprParserRuleCall_1_1_1_0()); 
             }
 
             }
@@ -11854,21 +12260,17 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__PostfixExpr__Group_1_1_1__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4303:1: rule__PostfixExpr__Group_1_1_1__1 : rule__PostfixExpr__Group_1_1_1__1__Impl rule__PostfixExpr__Group_1_1_1__2 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4460:1: rule__PostfixExpr__Group_1_1_1__1 : rule__PostfixExpr__Group_1_1_1__1__Impl ;
     public final void rule__PostfixExpr__Group_1_1_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4307:1: ( rule__PostfixExpr__Group_1_1_1__1__Impl rule__PostfixExpr__Group_1_1_1__2 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4308:2: rule__PostfixExpr__Group_1_1_1__1__Impl rule__PostfixExpr__Group_1_1_1__2
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4464:1: ( rule__PostfixExpr__Group_1_1_1__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4465:2: rule__PostfixExpr__Group_1_1_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_1__1__Impl_in_rule__PostfixExpr__Group_1_1_1__18636);
+            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_1__1__Impl_in_rule__PostfixExpr__Group_1_1_1__18935);
             rule__PostfixExpr__Group_1_1_1__1__Impl();
-            _fsp--;
-            if (failed) return ;
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_1__2_in_rule__PostfixExpr__Group_1_1_1__18639);
-            rule__PostfixExpr__Group_1_1_1__2();
             _fsp--;
             if (failed) return ;
 
@@ -11890,41 +12292,48 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__PostfixExpr__Group_1_1_1__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4315:1: rule__PostfixExpr__Group_1_1_1__1__Impl : ( ( rule__PostfixExpr__Group_1_1_1_1__0 )? ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4471:1: rule__PostfixExpr__Group_1_1_1__1__Impl : ( ( rule__PostfixExpr__Group_1_1_1_1__0 )* ) ;
     public final void rule__PostfixExpr__Group_1_1_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4319:1: ( ( ( rule__PostfixExpr__Group_1_1_1_1__0 )? ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4320:1: ( ( rule__PostfixExpr__Group_1_1_1_1__0 )? )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4475:1: ( ( ( rule__PostfixExpr__Group_1_1_1_1__0 )* ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4476:1: ( ( rule__PostfixExpr__Group_1_1_1_1__0 )* )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4320:1: ( ( rule__PostfixExpr__Group_1_1_1_1__0 )? )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4321:1: ( rule__PostfixExpr__Group_1_1_1_1__0 )?
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4476:1: ( ( rule__PostfixExpr__Group_1_1_1_1__0 )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4477:1: ( rule__PostfixExpr__Group_1_1_1_1__0 )*
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getPostfixExprAccess().getGroup_1_1_1_1()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4322:1: ( rule__PostfixExpr__Group_1_1_1_1__0 )?
-            int alt26=2;
-            int LA26_0 = input.LA(1);
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4478:1: ( rule__PostfixExpr__Group_1_1_1_1__0 )*
+            loop30:
+            do {
+                int alt30=2;
+                int LA30_0 = input.LA(1);
 
-            if ( (LA26_0==RULE_CONSTANT||LA26_0==RULE_ID||LA26_0==27||(LA26_0>=44 && LA26_0<=45)) ) {
-                alt26=1;
-            }
-            switch (alt26) {
-                case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4322:2: rule__PostfixExpr__Group_1_1_1_1__0
-                    {
-                    pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_1_1__0_in_rule__PostfixExpr__Group_1_1_1__1__Impl8666);
-                    rule__PostfixExpr__Group_1_1_1_1__0();
-                    _fsp--;
-                    if (failed) return ;
+                if ( (LA30_0==27) ) {
+                    alt30=1;
+                }
 
-                    }
-                    break;
 
-            }
+                switch (alt30) {
+            	case 1 :
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4478:2: rule__PostfixExpr__Group_1_1_1_1__0
+            	    {
+            	    pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_1_1__0_in_rule__PostfixExpr__Group_1_1_1__1__Impl8962);
+            	    rule__PostfixExpr__Group_1_1_1_1__0();
+            	    _fsp--;
+            	    if (failed) return ;
+
+            	    }
+            	    break;
+
+            	default :
+            	    break loop30;
+                }
+            } while (true);
 
             if ( backtracking==0 ) {
                after(grammarAccess.getPostfixExprAccess().getGroup_1_1_1_1()); 
@@ -11950,94 +12359,21 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
     // $ANTLR end rule__PostfixExpr__Group_1_1_1__1__Impl
 
 
-    // $ANTLR start rule__PostfixExpr__Group_1_1_1__2
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4332:1: rule__PostfixExpr__Group_1_1_1__2 : rule__PostfixExpr__Group_1_1_1__2__Impl ;
-    public final void rule__PostfixExpr__Group_1_1_1__2() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4336:1: ( rule__PostfixExpr__Group_1_1_1__2__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4337:2: rule__PostfixExpr__Group_1_1_1__2__Impl
-            {
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_1__2__Impl_in_rule__PostfixExpr__Group_1_1_1__28697);
-            rule__PostfixExpr__Group_1_1_1__2__Impl();
-            _fsp--;
-            if (failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__PostfixExpr__Group_1_1_1__2
-
-
-    // $ANTLR start rule__PostfixExpr__Group_1_1_1__2__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4343:1: rule__PostfixExpr__Group_1_1_1__2__Impl : ( ')' ) ;
-    public final void rule__PostfixExpr__Group_1_1_1__2__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4347:1: ( ( ')' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4348:1: ( ')' )
-            {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4348:1: ( ')' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4349:1: ')'
-            {
-            if ( backtracking==0 ) {
-               before(grammarAccess.getPostfixExprAccess().getRightParenthesisKeyword_1_1_1_2()); 
-            }
-            match(input,28,FOLLOW_28_in_rule__PostfixExpr__Group_1_1_1__2__Impl8725); if (failed) return ;
-            if ( backtracking==0 ) {
-               after(grammarAccess.getPostfixExprAccess().getRightParenthesisKeyword_1_1_1_2()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__PostfixExpr__Group_1_1_1__2__Impl
-
-
     // $ANTLR start rule__PostfixExpr__Group_1_1_1_1__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4368:1: rule__PostfixExpr__Group_1_1_1_1__0 : rule__PostfixExpr__Group_1_1_1_1__0__Impl rule__PostfixExpr__Group_1_1_1_1__1 ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4492:1: rule__PostfixExpr__Group_1_1_1_1__0 : rule__PostfixExpr__Group_1_1_1_1__0__Impl rule__PostfixExpr__Group_1_1_1_1__1 ;
     public final void rule__PostfixExpr__Group_1_1_1_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4372:1: ( rule__PostfixExpr__Group_1_1_1_1__0__Impl rule__PostfixExpr__Group_1_1_1_1__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4373:2: rule__PostfixExpr__Group_1_1_1_1__0__Impl rule__PostfixExpr__Group_1_1_1_1__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4496:1: ( rule__PostfixExpr__Group_1_1_1_1__0__Impl rule__PostfixExpr__Group_1_1_1_1__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4497:2: rule__PostfixExpr__Group_1_1_1_1__0__Impl rule__PostfixExpr__Group_1_1_1_1__1
             {
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_1_1__0__Impl_in_rule__PostfixExpr__Group_1_1_1_1__08762);
+            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_1_1__0__Impl_in_rule__PostfixExpr__Group_1_1_1_1__08997);
             rule__PostfixExpr__Group_1_1_1_1__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_1_1__1_in_rule__PostfixExpr__Group_1_1_1_1__08765);
+            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_1_1__1_in_rule__PostfixExpr__Group_1_1_1_1__09000);
             rule__PostfixExpr__Group_1_1_1_1__1();
             _fsp--;
             if (failed) return ;
@@ -12060,27 +12396,24 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__PostfixExpr__Group_1_1_1_1__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4380:1: rule__PostfixExpr__Group_1_1_1_1__0__Impl : ( ruleexpr ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4504:1: rule__PostfixExpr__Group_1_1_1_1__0__Impl : ( ',' ) ;
     public final void rule__PostfixExpr__Group_1_1_1_1__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4384:1: ( ( ruleexpr ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4385:1: ( ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4508:1: ( ( ',' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4509:1: ( ',' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4385:1: ( ruleexpr )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4386:1: ruleexpr
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4509:1: ( ',' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4510:1: ','
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getPostfixExprAccess().getExprParserRuleCall_1_1_1_1_0()); 
+               before(grammarAccess.getPostfixExprAccess().getCommaKeyword_1_1_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleexpr_in_rule__PostfixExpr__Group_1_1_1_1__0__Impl8792);
-            ruleexpr();
-            _fsp--;
-            if (failed) return ;
+            match(input,27,FOLLOW_27_in_rule__PostfixExpr__Group_1_1_1_1__0__Impl9028); if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getPostfixExprAccess().getExprParserRuleCall_1_1_1_1_0()); 
+               after(grammarAccess.getPostfixExprAccess().getCommaKeyword_1_1_1_1_0()); 
             }
 
             }
@@ -12104,16 +12437,16 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__PostfixExpr__Group_1_1_1_1__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4397:1: rule__PostfixExpr__Group_1_1_1_1__1 : rule__PostfixExpr__Group_1_1_1_1__1__Impl ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4523:1: rule__PostfixExpr__Group_1_1_1_1__1 : rule__PostfixExpr__Group_1_1_1_1__1__Impl ;
     public final void rule__PostfixExpr__Group_1_1_1_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4401:1: ( rule__PostfixExpr__Group_1_1_1_1__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4402:2: rule__PostfixExpr__Group_1_1_1_1__1__Impl
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4527:1: ( rule__PostfixExpr__Group_1_1_1_1__1__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4528:2: rule__PostfixExpr__Group_1_1_1_1__1__Impl
             {
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_1_1__1__Impl_in_rule__PostfixExpr__Group_1_1_1_1__18821);
+            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_1_1__1__Impl_in_rule__PostfixExpr__Group_1_1_1_1__19059);
             rule__PostfixExpr__Group_1_1_1_1__1__Impl();
             _fsp--;
             if (failed) return ;
@@ -12136,51 +12469,27 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__PostfixExpr__Group_1_1_1_1__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4408:1: rule__PostfixExpr__Group_1_1_1_1__1__Impl : ( ( rule__PostfixExpr__Group_1_1_1_1_1__0 )* ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4534:1: rule__PostfixExpr__Group_1_1_1_1__1__Impl : ( ruleexpr ) ;
     public final void rule__PostfixExpr__Group_1_1_1_1__1__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4412:1: ( ( ( rule__PostfixExpr__Group_1_1_1_1_1__0 )* ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4413:1: ( ( rule__PostfixExpr__Group_1_1_1_1_1__0 )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4538:1: ( ( ruleexpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4539:1: ( ruleexpr )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4413:1: ( ( rule__PostfixExpr__Group_1_1_1_1_1__0 )* )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4414:1: ( rule__PostfixExpr__Group_1_1_1_1_1__0 )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4539:1: ( ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4540:1: ruleexpr
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getPostfixExprAccess().getGroup_1_1_1_1_1()); 
+               before(grammarAccess.getPostfixExprAccess().getExprParserRuleCall_1_1_1_1_1()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4415:1: ( rule__PostfixExpr__Group_1_1_1_1_1__0 )*
-            loop27:
-            do {
-                int alt27=2;
-                int LA27_0 = input.LA(1);
-
-                if ( (LA27_0==31) ) {
-                    alt27=1;
-                }
-
-
-                switch (alt27) {
-            	case 1 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4415:2: rule__PostfixExpr__Group_1_1_1_1_1__0
-            	    {
-            	    pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_1_1_1__0_in_rule__PostfixExpr__Group_1_1_1_1__1__Impl8848);
-            	    rule__PostfixExpr__Group_1_1_1_1_1__0();
-            	    _fsp--;
-            	    if (failed) return ;
-
-            	    }
-            	    break;
-
-            	default :
-            	    break loop27;
-                }
-            } while (true);
-
+            pushFollow(FOLLOW_ruleexpr_in_rule__PostfixExpr__Group_1_1_1_1__1__Impl9086);
+            ruleexpr();
+            _fsp--;
+            if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getPostfixExprAccess().getGroup_1_1_1_1_1()); 
+               after(grammarAccess.getPostfixExprAccess().getExprParserRuleCall_1_1_1_1_1()); 
             }
 
             }
@@ -12203,95 +12512,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
     // $ANTLR end rule__PostfixExpr__Group_1_1_1_1__1__Impl
 
 
-    // $ANTLR start rule__PostfixExpr__Group_1_1_1_1_1__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4429:1: rule__PostfixExpr__Group_1_1_1_1_1__0 : rule__PostfixExpr__Group_1_1_1_1_1__0__Impl rule__PostfixExpr__Group_1_1_1_1_1__1 ;
-    public final void rule__PostfixExpr__Group_1_1_1_1_1__0() throws RecognitionException {
+    // $ANTLR start rule__PostfixExpr__Group_1_2__0
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4555:1: rule__PostfixExpr__Group_1_2__0 : rule__PostfixExpr__Group_1_2__0__Impl rule__PostfixExpr__Group_1_2__1 ;
+    public final void rule__PostfixExpr__Group_1_2__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4433:1: ( rule__PostfixExpr__Group_1_1_1_1_1__0__Impl rule__PostfixExpr__Group_1_1_1_1_1__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4434:2: rule__PostfixExpr__Group_1_1_1_1_1__0__Impl rule__PostfixExpr__Group_1_1_1_1_1__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4559:1: ( rule__PostfixExpr__Group_1_2__0__Impl rule__PostfixExpr__Group_1_2__1 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4560:2: rule__PostfixExpr__Group_1_2__0__Impl rule__PostfixExpr__Group_1_2__1
             {
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_1_1_1__0__Impl_in_rule__PostfixExpr__Group_1_1_1_1_1__08883);
-            rule__PostfixExpr__Group_1_1_1_1_1__0__Impl();
+            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_2__0__Impl_in_rule__PostfixExpr__Group_1_2__09119);
+            rule__PostfixExpr__Group_1_2__0__Impl();
             _fsp--;
             if (failed) return ;
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_1_1_1__1_in_rule__PostfixExpr__Group_1_1_1_1_1__08886);
-            rule__PostfixExpr__Group_1_1_1_1_1__1();
-            _fsp--;
-            if (failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__PostfixExpr__Group_1_1_1_1_1__0
-
-
-    // $ANTLR start rule__PostfixExpr__Group_1_1_1_1_1__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4441:1: rule__PostfixExpr__Group_1_1_1_1_1__0__Impl : ( ',' ) ;
-    public final void rule__PostfixExpr__Group_1_1_1_1_1__0__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4445:1: ( ( ',' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4446:1: ( ',' )
-            {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4446:1: ( ',' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4447:1: ','
-            {
-            if ( backtracking==0 ) {
-               before(grammarAccess.getPostfixExprAccess().getCommaKeyword_1_1_1_1_1_0()); 
-            }
-            match(input,31,FOLLOW_31_in_rule__PostfixExpr__Group_1_1_1_1_1__0__Impl8914); if (failed) return ;
-            if ( backtracking==0 ) {
-               after(grammarAccess.getPostfixExprAccess().getCommaKeyword_1_1_1_1_1_0()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__PostfixExpr__Group_1_1_1_1_1__0__Impl
-
-
-    // $ANTLR start rule__PostfixExpr__Group_1_1_1_1_1__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4460:1: rule__PostfixExpr__Group_1_1_1_1_1__1 : rule__PostfixExpr__Group_1_1_1_1_1__1__Impl ;
-    public final void rule__PostfixExpr__Group_1_1_1_1_1__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4464:1: ( rule__PostfixExpr__Group_1_1_1_1_1__1__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4465:2: rule__PostfixExpr__Group_1_1_1_1_1__1__Impl
-            {
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_1_1_1__1__Impl_in_rule__PostfixExpr__Group_1_1_1_1_1__18945);
-            rule__PostfixExpr__Group_1_1_1_1_1__1__Impl();
+            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_2__1_in_rule__PostfixExpr__Group_1_2__09122);
+            rule__PostfixExpr__Group_1_2__1();
             _fsp--;
             if (failed) return ;
 
@@ -12309,31 +12545,108 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__PostfixExpr__Group_1_1_1_1_1__1
+    // $ANTLR end rule__PostfixExpr__Group_1_2__0
 
 
-    // $ANTLR start rule__PostfixExpr__Group_1_1_1_1_1__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4471:1: rule__PostfixExpr__Group_1_1_1_1_1__1__Impl : ( ruleexpr ) ;
-    public final void rule__PostfixExpr__Group_1_1_1_1_1__1__Impl() throws RecognitionException {
+    // $ANTLR start rule__PostfixExpr__Group_1_2__0__Impl
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4567:1: rule__PostfixExpr__Group_1_2__0__Impl : ( '[' ) ;
+    public final void rule__PostfixExpr__Group_1_2__0__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4475:1: ( ( ruleexpr ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4476:1: ( ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4571:1: ( ( '[' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4572:1: ( '[' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4476:1: ( ruleexpr )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4477:1: ruleexpr
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4572:1: ( '[' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4573:1: '['
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getPostfixExprAccess().getExprParserRuleCall_1_1_1_1_1_1()); 
+               before(grammarAccess.getPostfixExprAccess().getLeftSquareBracketKeyword_1_2_0()); 
             }
-            pushFollow(FOLLOW_ruleexpr_in_rule__PostfixExpr__Group_1_1_1_1_1__1__Impl8972);
+            match(input,47,FOLLOW_47_in_rule__PostfixExpr__Group_1_2__0__Impl9150); if (failed) return ;
+            if ( backtracking==0 ) {
+               after(grammarAccess.getPostfixExprAccess().getLeftSquareBracketKeyword_1_2_0()); 
+            }
+
+            }
+
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__PostfixExpr__Group_1_2__0__Impl
+
+
+    // $ANTLR start rule__PostfixExpr__Group_1_2__1
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4586:1: rule__PostfixExpr__Group_1_2__1 : rule__PostfixExpr__Group_1_2__1__Impl rule__PostfixExpr__Group_1_2__2 ;
+    public final void rule__PostfixExpr__Group_1_2__1() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4590:1: ( rule__PostfixExpr__Group_1_2__1__Impl rule__PostfixExpr__Group_1_2__2 )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4591:2: rule__PostfixExpr__Group_1_2__1__Impl rule__PostfixExpr__Group_1_2__2
+            {
+            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_2__1__Impl_in_rule__PostfixExpr__Group_1_2__19181);
+            rule__PostfixExpr__Group_1_2__1__Impl();
+            _fsp--;
+            if (failed) return ;
+            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_2__2_in_rule__PostfixExpr__Group_1_2__19184);
+            rule__PostfixExpr__Group_1_2__2();
+            _fsp--;
+            if (failed) return ;
+
+            }
+
+        }
+        catch (RecognitionException re) {
+            reportError(re);
+            recover(input,re);
+        }
+        finally {
+
+            	restoreStackSize(stackSize);
+
+        }
+        return ;
+    }
+    // $ANTLR end rule__PostfixExpr__Group_1_2__1
+
+
+    // $ANTLR start rule__PostfixExpr__Group_1_2__1__Impl
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4598:1: rule__PostfixExpr__Group_1_2__1__Impl : ( ruleexpr ) ;
+    public final void rule__PostfixExpr__Group_1_2__1__Impl() throws RecognitionException {
+
+        		int stackSize = keepStackSize();
+            
+        try {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4602:1: ( ( ruleexpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4603:1: ( ruleexpr )
+            {
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4603:1: ( ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4604:1: ruleexpr
+            {
+            if ( backtracking==0 ) {
+               before(grammarAccess.getPostfixExprAccess().getExprParserRuleCall_1_2_1()); 
+            }
+            pushFollow(FOLLOW_ruleexpr_in_rule__PostfixExpr__Group_1_2__1__Impl9211);
             ruleexpr();
             _fsp--;
             if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getPostfixExprAccess().getExprParserRuleCall_1_1_1_1_1_1()); 
+               after(grammarAccess.getPostfixExprAccess().getExprParserRuleCall_1_2_1()); 
             }
 
             }
@@ -12353,25 +12666,21 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__PostfixExpr__Group_1_1_1_1_1__1__Impl
+    // $ANTLR end rule__PostfixExpr__Group_1_2__1__Impl
 
 
-    // $ANTLR start rule__PostfixExpr__Group_1_1_2__0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4492:1: rule__PostfixExpr__Group_1_1_2__0 : rule__PostfixExpr__Group_1_1_2__0__Impl rule__PostfixExpr__Group_1_1_2__1 ;
-    public final void rule__PostfixExpr__Group_1_1_2__0() throws RecognitionException {
+    // $ANTLR start rule__PostfixExpr__Group_1_2__2
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4615:1: rule__PostfixExpr__Group_1_2__2 : rule__PostfixExpr__Group_1_2__2__Impl ;
+    public final void rule__PostfixExpr__Group_1_2__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4496:1: ( rule__PostfixExpr__Group_1_1_2__0__Impl rule__PostfixExpr__Group_1_1_2__1 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4497:2: rule__PostfixExpr__Group_1_1_2__0__Impl rule__PostfixExpr__Group_1_1_2__1
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4619:1: ( rule__PostfixExpr__Group_1_2__2__Impl )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4620:2: rule__PostfixExpr__Group_1_2__2__Impl
             {
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_2__0__Impl_in_rule__PostfixExpr__Group_1_1_2__09005);
-            rule__PostfixExpr__Group_1_1_2__0__Impl();
-            _fsp--;
-            if (failed) return ;
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_2__1_in_rule__PostfixExpr__Group_1_1_2__09008);
-            rule__PostfixExpr__Group_1_1_2__1();
+            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_2__2__Impl_in_rule__PostfixExpr__Group_1_2__29240);
+            rule__PostfixExpr__Group_1_2__2__Impl();
             _fsp--;
             if (failed) return ;
 
@@ -12389,28 +12698,28 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__PostfixExpr__Group_1_1_2__0
+    // $ANTLR end rule__PostfixExpr__Group_1_2__2
 
 
-    // $ANTLR start rule__PostfixExpr__Group_1_1_2__0__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4504:1: rule__PostfixExpr__Group_1_1_2__0__Impl : ( '[' ) ;
-    public final void rule__PostfixExpr__Group_1_1_2__0__Impl() throws RecognitionException {
+    // $ANTLR start rule__PostfixExpr__Group_1_2__2__Impl
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4626:1: rule__PostfixExpr__Group_1_2__2__Impl : ( ']' ) ;
+    public final void rule__PostfixExpr__Group_1_2__2__Impl() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4508:1: ( ( '[' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4509:1: ( '[' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4630:1: ( ( ']' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4631:1: ( ']' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4509:1: ( '[' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4510:1: '['
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4631:1: ( ']' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4632:1: ']'
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getPostfixExprAccess().getLeftSquareBracketKeyword_1_1_2_0()); 
+               before(grammarAccess.getPostfixExprAccess().getRightSquareBracketKeyword_1_2_2()); 
             }
-            match(input,47,FOLLOW_47_in_rule__PostfixExpr__Group_1_1_2__0__Impl9036); if (failed) return ;
+            match(input,48,FOLLOW_48_in_rule__PostfixExpr__Group_1_2__2__Impl9268); if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getPostfixExprAccess().getLeftSquareBracketKeyword_1_1_2_0()); 
+               after(grammarAccess.getPostfixExprAccess().getRightSquareBracketKeyword_1_2_2()); 
             }
 
             }
@@ -12430,179 +12739,26 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__PostfixExpr__Group_1_1_2__0__Impl
-
-
-    // $ANTLR start rule__PostfixExpr__Group_1_1_2__1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4523:1: rule__PostfixExpr__Group_1_1_2__1 : rule__PostfixExpr__Group_1_1_2__1__Impl rule__PostfixExpr__Group_1_1_2__2 ;
-    public final void rule__PostfixExpr__Group_1_1_2__1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4527:1: ( rule__PostfixExpr__Group_1_1_2__1__Impl rule__PostfixExpr__Group_1_1_2__2 )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4528:2: rule__PostfixExpr__Group_1_1_2__1__Impl rule__PostfixExpr__Group_1_1_2__2
-            {
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_2__1__Impl_in_rule__PostfixExpr__Group_1_1_2__19067);
-            rule__PostfixExpr__Group_1_1_2__1__Impl();
-            _fsp--;
-            if (failed) return ;
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_2__2_in_rule__PostfixExpr__Group_1_1_2__19070);
-            rule__PostfixExpr__Group_1_1_2__2();
-            _fsp--;
-            if (failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__PostfixExpr__Group_1_1_2__1
-
-
-    // $ANTLR start rule__PostfixExpr__Group_1_1_2__1__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4535:1: rule__PostfixExpr__Group_1_1_2__1__Impl : ( ruleexpr ) ;
-    public final void rule__PostfixExpr__Group_1_1_2__1__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4539:1: ( ( ruleexpr ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4540:1: ( ruleexpr )
-            {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4540:1: ( ruleexpr )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4541:1: ruleexpr
-            {
-            if ( backtracking==0 ) {
-               before(grammarAccess.getPostfixExprAccess().getExprParserRuleCall_1_1_2_1()); 
-            }
-            pushFollow(FOLLOW_ruleexpr_in_rule__PostfixExpr__Group_1_1_2__1__Impl9097);
-            ruleexpr();
-            _fsp--;
-            if (failed) return ;
-            if ( backtracking==0 ) {
-               after(grammarAccess.getPostfixExprAccess().getExprParserRuleCall_1_1_2_1()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__PostfixExpr__Group_1_1_2__1__Impl
-
-
-    // $ANTLR start rule__PostfixExpr__Group_1_1_2__2
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4552:1: rule__PostfixExpr__Group_1_1_2__2 : rule__PostfixExpr__Group_1_1_2__2__Impl ;
-    public final void rule__PostfixExpr__Group_1_1_2__2() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4556:1: ( rule__PostfixExpr__Group_1_1_2__2__Impl )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4557:2: rule__PostfixExpr__Group_1_1_2__2__Impl
-            {
-            pushFollow(FOLLOW_rule__PostfixExpr__Group_1_1_2__2__Impl_in_rule__PostfixExpr__Group_1_1_2__29126);
-            rule__PostfixExpr__Group_1_1_2__2__Impl();
-            _fsp--;
-            if (failed) return ;
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__PostfixExpr__Group_1_1_2__2
-
-
-    // $ANTLR start rule__PostfixExpr__Group_1_1_2__2__Impl
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4563:1: rule__PostfixExpr__Group_1_1_2__2__Impl : ( ']' ) ;
-    public final void rule__PostfixExpr__Group_1_1_2__2__Impl() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4567:1: ( ( ']' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4568:1: ( ']' )
-            {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4568:1: ( ']' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4569:1: ']'
-            {
-            if ( backtracking==0 ) {
-               before(grammarAccess.getPostfixExprAccess().getRightSquareBracketKeyword_1_1_2_2()); 
-            }
-            match(input,48,FOLLOW_48_in_rule__PostfixExpr__Group_1_1_2__2__Impl9154); if (failed) return ;
-            if ( backtracking==0 ) {
-               after(grammarAccess.getPostfixExprAccess().getRightSquareBracketKeyword_1_1_2_2()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__PostfixExpr__Group_1_1_2__2__Impl
+    // $ANTLR end rule__PostfixExpr__Group_1_2__2__Impl
 
 
     // $ANTLR start rule__Model__FunctionsAssignment_1_0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4589:1: rule__Model__FunctionsAssignment_1_0 : ( rulefunctionDefinition ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4652:1: rule__Model__FunctionsAssignment_1_0 : ( rulefunctionDefinition ) ;
     public final void rule__Model__FunctionsAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4593:1: ( ( rulefunctionDefinition ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4594:1: ( rulefunctionDefinition )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4656:1: ( ( rulefunctionDefinition ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4657:1: ( rulefunctionDefinition )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4594:1: ( rulefunctionDefinition )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4595:1: rulefunctionDefinition
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4657:1: ( rulefunctionDefinition )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4658:1: rulefunctionDefinition
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getModelAccess().getFunctionsFunctionDefinitionParserRuleCall_1_0_0()); 
             }
-            pushFollow(FOLLOW_rulefunctionDefinition_in_rule__Model__FunctionsAssignment_1_09196);
+            pushFollow(FOLLOW_rulefunctionDefinition_in_rule__Model__FunctionsAssignment_1_09310);
             rulefunctionDefinition();
             _fsp--;
             if (failed) return ;
@@ -12631,22 +12787,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Model__MainAssignment_1_1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4604:1: rule__Model__MainAssignment_1_1 : ( rulemainFunction ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4667:1: rule__Model__MainAssignment_1_1 : ( rulemainFunction ) ;
     public final void rule__Model__MainAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4608:1: ( ( rulemainFunction ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4609:1: ( rulemainFunction )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4671:1: ( ( rulemainFunction ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4672:1: ( rulemainFunction )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4609:1: ( rulemainFunction )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4610:1: rulemainFunction
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4672:1: ( rulemainFunction )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4673:1: rulemainFunction
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getModelAccess().getMainMainFunctionParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_rulemainFunction_in_rule__Model__MainAssignment_1_19227);
+            pushFollow(FOLLOW_rulemainFunction_in_rule__Model__MainAssignment_1_19341);
             rulemainFunction();
             _fsp--;
             if (failed) return ;
@@ -12675,22 +12831,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__NameAssignment_0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4619:1: rule__FunctionDefinition__NameAssignment_0 : ( RULE_ID ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4682:1: rule__FunctionDefinition__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__FunctionDefinition__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4623:1: ( ( RULE_ID ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4624:1: ( RULE_ID )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4686:1: ( ( RULE_ID ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4687:1: ( RULE_ID )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4624:1: ( RULE_ID )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4625:1: RULE_ID
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4687:1: ( RULE_ID )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4688:1: RULE_ID
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getNameIDTerminalRuleCall_0_0()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__FunctionDefinition__NameAssignment_09258); if (failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__FunctionDefinition__NameAssignment_09372); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getFunctionDefinitionAccess().getNameIDTerminalRuleCall_0_0()); 
             }
@@ -12716,22 +12872,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__FormalParamsAssignment_2
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4634:1: rule__FunctionDefinition__FormalParamsAssignment_2 : ( ruleformalParams ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4697:1: rule__FunctionDefinition__FormalParamsAssignment_2 : ( ruleformalParams ) ;
     public final void rule__FunctionDefinition__FormalParamsAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4638:1: ( ( ruleformalParams ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4639:1: ( ruleformalParams )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4701:1: ( ( ruleformalParams ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4702:1: ( ruleformalParams )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4639:1: ( ruleformalParams )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4640:1: ruleformalParams
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4702:1: ( ruleformalParams )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4703:1: ruleformalParams
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getFormalParamsFormalParamsParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_ruleformalParams_in_rule__FunctionDefinition__FormalParamsAssignment_29289);
+            pushFollow(FOLLOW_ruleformalParams_in_rule__FunctionDefinition__FormalParamsAssignment_29403);
             ruleformalParams();
             _fsp--;
             if (failed) return ;
@@ -12760,22 +12916,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__ReturnTypeAssignment_4_1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4649:1: rule__FunctionDefinition__ReturnTypeAssignment_4_1 : ( ruletype ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4712:1: rule__FunctionDefinition__ReturnTypeAssignment_4_1 : ( ruletype ) ;
     public final void rule__FunctionDefinition__ReturnTypeAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4653:1: ( ( ruletype ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4654:1: ( ruletype )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4716:1: ( ( ruletype ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4717:1: ( ruletype )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4654:1: ( ruletype )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4655:1: ruletype
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4717:1: ( ruletype )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4718:1: ruletype
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getReturnTypeTypeParserRuleCall_4_1_0()); 
             }
-            pushFollow(FOLLOW_ruletype_in_rule__FunctionDefinition__ReturnTypeAssignment_4_19320);
+            pushFollow(FOLLOW_ruletype_in_rule__FunctionDefinition__ReturnTypeAssignment_4_19434);
             ruletype();
             _fsp--;
             if (failed) return ;
@@ -12804,22 +12960,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FunctionDefinition__BlocksAssignment_5
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4664:1: rule__FunctionDefinition__BlocksAssignment_5 : ( ruleblock ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4727:1: rule__FunctionDefinition__BlocksAssignment_5 : ( ruleblock ) ;
     public final void rule__FunctionDefinition__BlocksAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4668:1: ( ( ruleblock ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4669:1: ( ruleblock )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4731:1: ( ( ruleblock ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4732:1: ( ruleblock )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4669:1: ( ruleblock )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4670:1: ruleblock
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4732:1: ( ruleblock )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4733:1: ruleblock
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getFunctionDefinitionAccess().getBlocksBlockParserRuleCall_5_0()); 
             }
-            pushFollow(FOLLOW_ruleblock_in_rule__FunctionDefinition__BlocksAssignment_59351);
+            pushFollow(FOLLOW_ruleblock_in_rule__FunctionDefinition__BlocksAssignment_59465);
             ruleblock();
             _fsp--;
             if (failed) return ;
@@ -12848,22 +13004,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__MainFunction__FormalParamsAssignment_1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4679:1: rule__MainFunction__FormalParamsAssignment_1 : ( ruleformalParams ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4742:1: rule__MainFunction__FormalParamsAssignment_1 : ( ruleformalParams ) ;
     public final void rule__MainFunction__FormalParamsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4683:1: ( ( ruleformalParams ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4684:1: ( ruleformalParams )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4746:1: ( ( ruleformalParams ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4747:1: ( ruleformalParams )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4684:1: ( ruleformalParams )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4685:1: ruleformalParams
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4747:1: ( ruleformalParams )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4748:1: ruleformalParams
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getMainFunctionAccess().getFormalParamsFormalParamsParserRuleCall_1_0()); 
             }
-            pushFollow(FOLLOW_ruleformalParams_in_rule__MainFunction__FormalParamsAssignment_19382);
+            pushFollow(FOLLOW_ruleformalParams_in_rule__MainFunction__FormalParamsAssignment_19496);
             ruleformalParams();
             _fsp--;
             if (failed) return ;
@@ -12892,22 +13048,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__MainFunction__BlocksAssignment_3
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4694:1: rule__MainFunction__BlocksAssignment_3 : ( ruleblock ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4757:1: rule__MainFunction__BlocksAssignment_3 : ( ruleblock ) ;
     public final void rule__MainFunction__BlocksAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4698:1: ( ( ruleblock ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4699:1: ( ruleblock )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4761:1: ( ( ruleblock ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4762:1: ( ruleblock )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4699:1: ( ruleblock )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4700:1: ruleblock
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4762:1: ( ruleblock )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4763:1: ruleblock
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getMainFunctionAccess().getBlocksBlockParserRuleCall_3_0()); 
             }
-            pushFollow(FOLLOW_ruleblock_in_rule__MainFunction__BlocksAssignment_39413);
+            pushFollow(FOLLOW_ruleblock_in_rule__MainFunction__BlocksAssignment_39527);
             ruleblock();
             _fsp--;
             if (failed) return ;
@@ -12936,22 +13092,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FormalParams__ParamsAssignment_0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4709:1: rule__FormalParams__ParamsAssignment_0 : ( ruleparam ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4772:1: rule__FormalParams__ParamsAssignment_0 : ( ruleparam ) ;
     public final void rule__FormalParams__ParamsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4713:1: ( ( ruleparam ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4714:1: ( ruleparam )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4776:1: ( ( ruleparam ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4777:1: ( ruleparam )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4714:1: ( ruleparam )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4715:1: ruleparam
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4777:1: ( ruleparam )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4778:1: ruleparam
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getFormalParamsAccess().getParamsParamParserRuleCall_0_0()); 
             }
-            pushFollow(FOLLOW_ruleparam_in_rule__FormalParams__ParamsAssignment_09444);
+            pushFollow(FOLLOW_ruleparam_in_rule__FormalParams__ParamsAssignment_09558);
             ruleparam();
             _fsp--;
             if (failed) return ;
@@ -12980,22 +13136,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__FormalParams__ParamsAssignment_1_1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4724:1: rule__FormalParams__ParamsAssignment_1_1 : ( ruleparam ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4787:1: rule__FormalParams__ParamsAssignment_1_1 : ( ruleparam ) ;
     public final void rule__FormalParams__ParamsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4728:1: ( ( ruleparam ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4729:1: ( ruleparam )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4791:1: ( ( ruleparam ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4792:1: ( ruleparam )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4729:1: ( ruleparam )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4730:1: ruleparam
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4792:1: ( ruleparam )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4793:1: ruleparam
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getFormalParamsAccess().getParamsParamParserRuleCall_1_1_0()); 
             }
-            pushFollow(FOLLOW_ruleparam_in_rule__FormalParams__ParamsAssignment_1_19475);
+            pushFollow(FOLLOW_ruleparam_in_rule__FormalParams__ParamsAssignment_1_19589);
             ruleparam();
             _fsp--;
             if (failed) return ;
@@ -13024,22 +13180,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Param__NameAssignment_1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4739:1: rule__Param__NameAssignment_1 : ( RULE_ID ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4802:1: rule__Param__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Param__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4743:1: ( ( RULE_ID ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4744:1: ( RULE_ID )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4806:1: ( ( RULE_ID ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4807:1: ( RULE_ID )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4744:1: ( RULE_ID )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4745:1: RULE_ID
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4807:1: ( RULE_ID )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4808:1: RULE_ID
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getParamAccess().getNameIDTerminalRuleCall_1_0()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Param__NameAssignment_19506); if (failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Param__NameAssignment_19620); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getParamAccess().getNameIDTerminalRuleCall_1_0()); 
             }
@@ -13065,22 +13221,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Block__StatementsAssignment_2
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4754:1: rule__Block__StatementsAssignment_2 : ( rulestatement ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4817:1: rule__Block__StatementsAssignment_2 : ( rulestatement ) ;
     public final void rule__Block__StatementsAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4758:1: ( ( rulestatement ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4759:1: ( rulestatement )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4821:1: ( ( rulestatement ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4822:1: ( rulestatement )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4759:1: ( rulestatement )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4760:1: rulestatement
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4822:1: ( rulestatement )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4823:1: rulestatement
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getBlockAccess().getStatementsStatementParserRuleCall_2_0()); 
             }
-            pushFollow(FOLLOW_rulestatement_in_rule__Block__StatementsAssignment_29537);
+            pushFollow(FOLLOW_rulestatement_in_rule__Block__StatementsAssignment_29651);
             rulestatement();
             _fsp--;
             if (failed) return ;
@@ -13109,28 +13265,28 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Type__TypeAssignment_1_0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4769:1: rule__Type__TypeAssignment_1_0 : ( ( RULE_ID ) ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4832:1: rule__Type__TypeAssignment_1_0 : ( ( RULE_ID ) ) ;
     public final void rule__Type__TypeAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4773:1: ( ( ( RULE_ID ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4774:1: ( ( RULE_ID ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4836:1: ( ( ( RULE_ID ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4837:1: ( ( RULE_ID ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4774:1: ( ( RULE_ID ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4775:1: ( RULE_ID )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4837:1: ( ( RULE_ID ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4838:1: ( RULE_ID )
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getTypeAccess().getTypeDeclarationCrossReference_1_0_0()); 
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4776:1: ( RULE_ID )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4777:1: RULE_ID
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4839:1: ( RULE_ID )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4840:1: RULE_ID
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getTypeAccess().getTypeDeclarationIDTerminalRuleCall_1_0_0_1()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Type__TypeAssignment_1_09572); if (failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Type__TypeAssignment_1_09686); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getTypeAccess().getTypeDeclarationIDTerminalRuleCall_1_0_0_1()); 
             }
@@ -13162,22 +13318,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__StatementsAssignment_4_4_1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4788:1: rule__Statement__StatementsAssignment_4_4_1 : ( rulestatement ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4851:1: rule__Statement__StatementsAssignment_4_4_1 : ( rulestatement ) ;
     public final void rule__Statement__StatementsAssignment_4_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4792:1: ( ( rulestatement ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4793:1: ( rulestatement )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4855:1: ( ( rulestatement ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4856:1: ( rulestatement )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4793:1: ( rulestatement )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4794:1: rulestatement
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4856:1: ( rulestatement )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4857:1: rulestatement
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getStatementAccess().getStatementsStatementParserRuleCall_4_4_1_0()); 
             }
-            pushFollow(FOLLOW_rulestatement_in_rule__Statement__StatementsAssignment_4_4_19607);
+            pushFollow(FOLLOW_rulestatement_in_rule__Statement__StatementsAssignment_4_4_19721);
             rulestatement();
             _fsp--;
             if (failed) return ;
@@ -13206,22 +13362,22 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
 
     // $ANTLR start rule__Statement__StatementsAssignment_5_5
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4803:1: rule__Statement__StatementsAssignment_5_5 : ( rulestatement ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4866:1: rule__Statement__StatementsAssignment_5_5 : ( rulestatement ) ;
     public final void rule__Statement__StatementsAssignment_5_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4807:1: ( ( rulestatement ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4808:1: ( rulestatement )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4870:1: ( ( rulestatement ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4871:1: ( rulestatement )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4808:1: ( rulestatement )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4809:1: rulestatement
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4871:1: ( rulestatement )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4872:1: rulestatement
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getStatementAccess().getStatementsStatementParserRuleCall_5_5_0()); 
             }
-            pushFollow(FOLLOW_rulestatement_in_rule__Statement__StatementsAssignment_5_59638);
+            pushFollow(FOLLOW_rulestatement_in_rule__Statement__StatementsAssignment_5_59752);
             rulestatement();
             _fsp--;
             if (failed) return ;
@@ -13249,37 +13405,28 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
     // $ANTLR end rule__Statement__StatementsAssignment_5_5
 
 
-    // $ANTLR start rule__Statement__TypesAssignment_8_0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4818:1: rule__Statement__TypesAssignment_8_0 : ( ( RULE_ID ) ) ;
-    public final void rule__Statement__TypesAssignment_8_0() throws RecognitionException {
+    // $ANTLR start rule__Declaration__VariableTypeAssignment_0_0
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4881:1: rule__Declaration__VariableTypeAssignment_0_0 : ( ruletype ) ;
+    public final void rule__Declaration__VariableTypeAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4822:1: ( ( ( RULE_ID ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4823:1: ( ( RULE_ID ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4885:1: ( ( ruletype ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4886:1: ( ruletype )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4823:1: ( ( RULE_ID ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4824:1: ( RULE_ID )
-            {
-            if ( backtracking==0 ) {
-               before(grammarAccess.getStatementAccess().getTypesFunctionDefinitionCrossReference_8_0_0()); 
-            }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4825:1: ( RULE_ID )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4826:1: RULE_ID
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4886:1: ( ruletype )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4887:1: ruletype
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getStatementAccess().getTypesFunctionDefinitionIDTerminalRuleCall_8_0_0_1()); 
+               before(grammarAccess.getDeclarationAccess().getVariableTypeTypeParserRuleCall_0_0_0()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Statement__TypesAssignment_8_09673); if (failed) return ;
+            pushFollow(FOLLOW_ruletype_in_rule__Declaration__VariableTypeAssignment_0_09783);
+            ruletype();
+            _fsp--;
+            if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getStatementAccess().getTypesFunctionDefinitionIDTerminalRuleCall_8_0_0_1()); 
-            }
-
-            }
-
-            if ( backtracking==0 ) {
-               after(grammarAccess.getStatementAccess().getTypesFunctionDefinitionCrossReference_8_0_0()); 
+               after(grammarAccess.getDeclarationAccess().getVariableTypeTypeParserRuleCall_0_0_0()); 
             }
 
             }
@@ -13299,28 +13446,28 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Statement__TypesAssignment_8_0
+    // $ANTLR end rule__Declaration__VariableTypeAssignment_0_0
 
 
-    // $ANTLR start rule__Statement__NameAssignment_8_1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4837:1: rule__Statement__NameAssignment_8_1 : ( RULE_ID ) ;
-    public final void rule__Statement__NameAssignment_8_1() throws RecognitionException {
+    // $ANTLR start rule__Declaration__NameAssignment_1
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4896:1: rule__Declaration__NameAssignment_1 : ( RULE_ID ) ;
+    public final void rule__Declaration__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4841:1: ( ( RULE_ID ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4842:1: ( RULE_ID )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4900:1: ( ( RULE_ID ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4901:1: ( RULE_ID )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4842:1: ( RULE_ID )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4843:1: RULE_ID
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4901:1: ( RULE_ID )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4902:1: RULE_ID
             {
             if ( backtracking==0 ) {
-               before(grammarAccess.getStatementAccess().getNameIDTerminalRuleCall_8_1_0()); 
+               before(grammarAccess.getDeclarationAccess().getNameIDTerminalRuleCall_1_0()); 
             }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Statement__NameAssignment_8_19708); if (failed) return ;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Declaration__NameAssignment_19814); if (failed) return ;
             if ( backtracking==0 ) {
-               after(grammarAccess.getStatementAccess().getNameIDTerminalRuleCall_8_1_0()); 
+               after(grammarAccess.getDeclarationAccess().getNameIDTerminalRuleCall_1_0()); 
             }
 
             }
@@ -13340,199 +13487,23 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
         }
         return ;
     }
-    // $ANTLR end rule__Statement__NameAssignment_8_1
-
-
-    // $ANTLR start rule__Statement__TypesAssignment_9_0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4852:1: rule__Statement__TypesAssignment_9_0 : ( ( RULE_ID ) ) ;
-    public final void rule__Statement__TypesAssignment_9_0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4856:1: ( ( ( RULE_ID ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4857:1: ( ( RULE_ID ) )
-            {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4857:1: ( ( RULE_ID ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4858:1: ( RULE_ID )
-            {
-            if ( backtracking==0 ) {
-               before(grammarAccess.getStatementAccess().getTypesStatementCrossReference_9_0_0()); 
-            }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4859:1: ( RULE_ID )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4860:1: RULE_ID
-            {
-            if ( backtracking==0 ) {
-               before(grammarAccess.getStatementAccess().getTypesStatementIDTerminalRuleCall_9_0_0_1()); 
-            }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Statement__TypesAssignment_9_09743); if (failed) return ;
-            if ( backtracking==0 ) {
-               after(grammarAccess.getStatementAccess().getTypesStatementIDTerminalRuleCall_9_0_0_1()); 
-            }
-
-            }
-
-            if ( backtracking==0 ) {
-               after(grammarAccess.getStatementAccess().getTypesStatementCrossReference_9_0_0()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Statement__TypesAssignment_9_0
-
-
-    // $ANTLR start rule__Statement__NameAssignment_9_1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4871:1: rule__Statement__NameAssignment_9_1 : ( RULE_ID ) ;
-    public final void rule__Statement__NameAssignment_9_1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4875:1: ( ( RULE_ID ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4876:1: ( RULE_ID )
-            {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4876:1: ( RULE_ID )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4877:1: RULE_ID
-            {
-            if ( backtracking==0 ) {
-               before(grammarAccess.getStatementAccess().getNameIDTerminalRuleCall_9_1_0()); 
-            }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Statement__NameAssignment_9_19778); if (failed) return ;
-            if ( backtracking==0 ) {
-               after(grammarAccess.getStatementAccess().getNameIDTerminalRuleCall_9_1_0()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Statement__NameAssignment_9_1
-
-
-    // $ANTLR start rule__Statement__NameAssignment_10_1
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4886:1: rule__Statement__NameAssignment_10_1 : ( RULE_ID ) ;
-    public final void rule__Statement__NameAssignment_10_1() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4890:1: ( ( RULE_ID ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4891:1: ( RULE_ID )
-            {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4891:1: ( RULE_ID )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4892:1: RULE_ID
-            {
-            if ( backtracking==0 ) {
-               before(grammarAccess.getStatementAccess().getNameIDTerminalRuleCall_10_1_0()); 
-            }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Statement__NameAssignment_10_19809); if (failed) return ;
-            if ( backtracking==0 ) {
-               after(grammarAccess.getStatementAccess().getNameIDTerminalRuleCall_10_1_0()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Statement__NameAssignment_10_1
-
-
-    // $ANTLR start rule__Declaration__NameAssignment_0
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4901:1: rule__Declaration__NameAssignment_0 : ( RULE_ID ) ;
-    public final void rule__Declaration__NameAssignment_0() throws RecognitionException {
-
-        		int stackSize = keepStackSize();
-            
-        try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4905:1: ( ( RULE_ID ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4906:1: ( RULE_ID )
-            {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4906:1: ( RULE_ID )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:4907:1: RULE_ID
-            {
-            if ( backtracking==0 ) {
-               before(grammarAccess.getDeclarationAccess().getNameIDTerminalRuleCall_0_0()); 
-            }
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Declaration__NameAssignment_09840); if (failed) return ;
-            if ( backtracking==0 ) {
-               after(grammarAccess.getDeclarationAccess().getNameIDTerminalRuleCall_0_0()); 
-            }
-
-            }
-
-
-            }
-
-        }
-        catch (RecognitionException re) {
-            reportError(re);
-            recover(input,re);
-        }
-        finally {
-
-            	restoreStackSize(stackSize);
-
-        }
-        return ;
-    }
-    // $ANTLR end rule__Declaration__NameAssignment_0
+    // $ANTLR end rule__Declaration__NameAssignment_1
 
     // $ANTLR start synpred4
     public final void synpred4_fragment() throws RecognitionException {   
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:611:1: ( ( ( rule__Statement__Group_0__0 ) ) )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:611:1: ( ( rule__Statement__Group_0__0 ) )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:639:1: ( ( ( rule__Statement__Group_0__0 ) ) )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:639:1: ( ( rule__Statement__Group_0__0 ) )
         {
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:611:1: ( ( rule__Statement__Group_0__0 ) )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:612:1: ( rule__Statement__Group_0__0 )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:639:1: ( ( rule__Statement__Group_0__0 ) )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:640:1: ( rule__Statement__Group_0__0 )
         {
         if ( backtracking==0 ) {
            before(grammarAccess.getStatementAccess().getGroup_0()); 
         }
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:613:1: ( rule__Statement__Group_0__0 )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:613:2: rule__Statement__Group_0__0
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:641:1: ( rule__Statement__Group_0__0 )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:641:2: rule__Statement__Group_0__0
         {
-        pushFollow(FOLLOW_rule__Statement__Group_0__0_in_synpred41249);
+        pushFollow(FOLLOW_rule__Statement__Group_0__0_in_synpred41309);
         rule__Statement__Group_0__0();
         _fsp--;
         if (failed) return ;
@@ -13549,19 +13520,19 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
     // $ANTLR start synpred5
     public final void synpred5_fragment() throws RecognitionException {   
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:617:6: ( ( ( rule__Statement__Group_1__0 ) ) )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:617:6: ( ( rule__Statement__Group_1__0 ) )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:645:6: ( ( ( rule__Statement__Group_1__0 ) ) )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:645:6: ( ( rule__Statement__Group_1__0 ) )
         {
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:617:6: ( ( rule__Statement__Group_1__0 ) )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:618:1: ( rule__Statement__Group_1__0 )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:645:6: ( ( rule__Statement__Group_1__0 ) )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:646:1: ( rule__Statement__Group_1__0 )
         {
         if ( backtracking==0 ) {
            before(grammarAccess.getStatementAccess().getGroup_1()); 
         }
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:619:1: ( rule__Statement__Group_1__0 )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:619:2: rule__Statement__Group_1__0
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:647:1: ( rule__Statement__Group_1__0 )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:647:2: rule__Statement__Group_1__0
         {
-        pushFollow(FOLLOW_rule__Statement__Group_1__0_in_synpred51267);
+        pushFollow(FOLLOW_rule__Statement__Group_1__0_in_synpred51327);
         rule__Statement__Group_1__0();
         _fsp--;
         if (failed) return ;
@@ -13578,19 +13549,19 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
 
     // $ANTLR start synpred6
     public final void synpred6_fragment() throws RecognitionException {   
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:623:6: ( ( ( rule__Statement__Group_2__0 ) ) )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:623:6: ( ( rule__Statement__Group_2__0 ) )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:651:6: ( ( ( rule__Statement__Group_2__0 ) ) )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:651:6: ( ( rule__Statement__Group_2__0 ) )
         {
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:623:6: ( ( rule__Statement__Group_2__0 ) )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:624:1: ( rule__Statement__Group_2__0 )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:651:6: ( ( rule__Statement__Group_2__0 ) )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:652:1: ( rule__Statement__Group_2__0 )
         {
         if ( backtracking==0 ) {
            before(grammarAccess.getStatementAccess().getGroup_2()); 
         }
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:625:1: ( rule__Statement__Group_2__0 )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:625:2: rule__Statement__Group_2__0
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:653:1: ( rule__Statement__Group_2__0 )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:653:2: rule__Statement__Group_2__0
         {
-        pushFollow(FOLLOW_rule__Statement__Group_2__0_in_synpred61285);
+        pushFollow(FOLLOW_rule__Statement__Group_2__0_in_synpred61345);
         rule__Statement__Group_2__0();
         _fsp--;
         if (failed) return ;
@@ -13605,83 +13576,25 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
     }
     // $ANTLR end synpred6
 
-    // $ANTLR start synpred12
-    public final void synpred12_fragment() throws RecognitionException {   
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:659:6: ( ( ( rule__Statement__Group_8__0 ) ) )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:659:6: ( ( rule__Statement__Group_8__0 ) )
+    // $ANTLR start synpred34
+    public final void synpred34_fragment() throws RecognitionException {   
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2342:2: ( rule__Statement__Group_4_4__0 )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2342:2: rule__Statement__Group_4_4__0
         {
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:659:6: ( ( rule__Statement__Group_8__0 ) )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:660:1: ( rule__Statement__Group_8__0 )
-        {
-        if ( backtracking==0 ) {
-           before(grammarAccess.getStatementAccess().getGroup_8()); 
-        }
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:661:1: ( rule__Statement__Group_8__0 )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:661:2: rule__Statement__Group_8__0
-        {
-        pushFollow(FOLLOW_rule__Statement__Group_8__0_in_synpred121392);
-        rule__Statement__Group_8__0();
-        _fsp--;
-        if (failed) return ;
-
-        }
-
-
-        }
-
-
-        }
-    }
-    // $ANTLR end synpred12
-
-    // $ANTLR start synpred13
-    public final void synpred13_fragment() throws RecognitionException {   
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:665:6: ( ( ( rule__Statement__Group_9__0 ) ) )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:665:6: ( ( rule__Statement__Group_9__0 ) )
-        {
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:665:6: ( ( rule__Statement__Group_9__0 ) )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:666:1: ( rule__Statement__Group_9__0 )
-        {
-        if ( backtracking==0 ) {
-           before(grammarAccess.getStatementAccess().getGroup_9()); 
-        }
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:667:1: ( rule__Statement__Group_9__0 )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:667:2: rule__Statement__Group_9__0
-        {
-        pushFollow(FOLLOW_rule__Statement__Group_9__0_in_synpred131410);
-        rule__Statement__Group_9__0();
-        _fsp--;
-        if (failed) return ;
-
-        }
-
-
-        }
-
-
-        }
-    }
-    // $ANTLR end synpred13
-
-    // $ANTLR start synpred36
-    public final void synpred36_fragment() throws RecognitionException {   
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2223:2: ( rule__Statement__Group_4_4__0 )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:2223:2: rule__Statement__Group_4_4__0
-        {
-        pushFollow(FOLLOW_rule__Statement__Group_4_4__0_in_synpred364559);
+        pushFollow(FOLLOW_rule__Statement__Group_4_4__0_in_synpred344776);
         rule__Statement__Group_4_4__0();
         _fsp--;
         if (failed) return ;
 
         }
     }
-    // $ANTLR end synpred36
+    // $ANTLR end synpred34
 
-    public final boolean synpred36() {
+    public final boolean synpred34() {
         backtracking++;
         int start = input.mark();
         try {
-            synpred36_fragment(); // can never throw exception
+            synpred34_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -13719,39 +13632,11 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
         failed=false;
         return success;
     }
-    public final boolean synpred12() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred12_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
     public final boolean synpred4() {
         backtracking++;
         int start = input.mark();
         try {
             synpred4_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred13() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred13_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -13818,374 +13703,371 @@ public class InternalMyDslParser extends AbstractInternalContentAssistParser {
     public static final BitSet FOLLOW_rule__Atom__Alternatives_in_ruleatom1060 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rulepostfixExpr_in_entryRulepostfixExpr1087 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRulepostfixExpr1094 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Alternatives_in_rulepostfixExpr1120 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Type__TypeAssignment_1_0_in_rule__Type__Alternatives_11156 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__Type__Alternatives_11175 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__Type__Alternatives_11195 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_rule__Type__Alternatives_11215 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_0__0_in_rule__Statement__Alternatives1249 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_1__0_in_rule__Statement__Alternatives1267 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_2__0_in_rule__Statement__Alternatives1285 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_3__0_in_rule__Statement__Alternatives1303 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_4__0_in_rule__Statement__Alternatives1321 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_5__0_in_rule__Statement__Alternatives1339 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_6__0_in_rule__Statement__Alternatives1357 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleblock_in_rule__Statement__Alternatives1375 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_8__0_in_rule__Statement__Alternatives1392 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_9__0_in_rule__Statement__Alternatives1410 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_10__0_in_rule__Statement__Alternatives1428 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_rule__EqExpr__Alternatives_1_01462 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_rule__EqExpr__Alternatives_1_01482 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_rule__RelExpr__Alternatives_1_01517 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_rule__RelExpr__Alternatives_1_01537 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_rule__RelExpr__Alternatives_1_01557 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_rule__RelExpr__Alternatives_1_01577 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_rule__AddExpr__Alternatives_1_01612 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_rule__AddExpr__Alternatives_1_01632 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_24_in_rule__MulExpr__Alternatives_1_01667 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_25_in_rule__MulExpr__Alternatives_1_01687 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_rule__MulExpr__Alternatives_1_01707 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atom__Group_0__0_in_rule__Atom__Alternatives1741 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atom__Group_1__0_in_rule__Atom__Alternatives1759 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atom__Group_2__0_in_rule__Atom__Alternatives1777 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulepostfixExpr_in_rule__Atom__Alternatives1795 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_CONSTANT_in_rule__Atom__Alternatives1812 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_rule__Atom__Alternatives_1_11845 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_rule__Atom__Alternatives_1_11865 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_0__0_in_rule__PostfixExpr__Alternatives1899 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1__0_in_rule__PostfixExpr__Alternatives1917 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_0__0_in_rule__PostfixExpr__Alternatives_1_11950 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_1__0_in_rule__PostfixExpr__Alternatives_1_11968 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_2__0_in_rule__PostfixExpr__Alternatives_1_11986 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__Group__0__Impl_in_rule__Model__Group__02017 = new BitSet(new long[]{0x0000000040000040L});
-    public static final BitSet FOLLOW_rule__Model__Group__1_in_rule__Model__Group__02020 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__Group__1__Impl_in_rule__Model__Group__12078 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__Group_1__0_in_rule__Model__Group__1__Impl2105 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__Group_1__0__Impl_in_rule__Model__Group_1__02139 = new BitSet(new long[]{0x0000000040000000L});
-    public static final BitSet FOLLOW_rule__Model__Group_1__1_in_rule__Model__Group_1__02142 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__FunctionsAssignment_1_0_in_rule__Model__Group_1__0__Impl2169 = new BitSet(new long[]{0x0000000000000042L});
-    public static final BitSet FOLLOW_rule__Model__Group_1__1__Impl_in_rule__Model__Group_1__12200 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__MainAssignment_1_1_in_rule__Model__Group_1__1__Impl2227 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__Group__0__Impl_in_rule__FunctionDefinition__Group__02261 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__Group__1_in_rule__FunctionDefinition__Group__02264 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__NameAssignment_0_in_rule__FunctionDefinition__Group__0__Impl2291 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__Group__1__Impl_in_rule__FunctionDefinition__Group__12321 = new BitSet(new long[]{0x000000001000E040L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__Group__2_in_rule__FunctionDefinition__Group__12324 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_rule__FunctionDefinition__Group__1__Impl2352 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__Group__2__Impl_in_rule__FunctionDefinition__Group__22383 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__Group__3_in_rule__FunctionDefinition__Group__22386 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__FormalParamsAssignment_2_in_rule__FunctionDefinition__Group__2__Impl2413 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__Group__3__Impl_in_rule__FunctionDefinition__Group__32444 = new BitSet(new long[]{0x0000000120000000L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__Group__4_in_rule__FunctionDefinition__Group__32447 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_rule__FunctionDefinition__Group__3__Impl2475 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__Group__4__Impl_in_rule__FunctionDefinition__Group__42506 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__Group__5_in_rule__FunctionDefinition__Group__42509 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__Group_4__0_in_rule__FunctionDefinition__Group__4__Impl2536 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__Group__5__Impl_in_rule__FunctionDefinition__Group__52567 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__BlocksAssignment_5_in_rule__FunctionDefinition__Group__5__Impl2594 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__Group_4__0__Impl_in_rule__FunctionDefinition__Group_4__02636 = new BitSet(new long[]{0x000000000000E040L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__Group_4__1_in_rule__FunctionDefinition__Group_4__02639 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_29_in_rule__FunctionDefinition__Group_4__0__Impl2667 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__Group_4__1__Impl_in_rule__FunctionDefinition__Group_4__12698 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FunctionDefinition__ReturnTypeAssignment_4_1_in_rule__FunctionDefinition__Group_4__1__Impl2725 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__MainFunction__Group__0__Impl_in_rule__MainFunction__Group__02759 = new BitSet(new long[]{0x000000001000E040L});
-    public static final BitSet FOLLOW_rule__MainFunction__Group__1_in_rule__MainFunction__Group__02762 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_30_in_rule__MainFunction__Group__0__Impl2790 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__MainFunction__Group__1__Impl_in_rule__MainFunction__Group__12821 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_rule__MainFunction__Group__2_in_rule__MainFunction__Group__12824 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__MainFunction__FormalParamsAssignment_1_in_rule__MainFunction__Group__1__Impl2851 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__MainFunction__Group__2__Impl_in_rule__MainFunction__Group__22882 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_rule__MainFunction__Group__3_in_rule__MainFunction__Group__22885 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_rule__MainFunction__Group__2__Impl2913 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__MainFunction__Group__3__Impl_in_rule__MainFunction__Group__32944 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__MainFunction__BlocksAssignment_3_in_rule__MainFunction__Group__3__Impl2971 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FormalParams__Group__0__Impl_in_rule__FormalParams__Group__03009 = new BitSet(new long[]{0x0000000080000002L});
-    public static final BitSet FOLLOW_rule__FormalParams__Group__1_in_rule__FormalParams__Group__03012 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FormalParams__ParamsAssignment_0_in_rule__FormalParams__Group__0__Impl3039 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FormalParams__Group__1__Impl_in_rule__FormalParams__Group__13069 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FormalParams__Group_1__0_in_rule__FormalParams__Group__1__Impl3096 = new BitSet(new long[]{0x0000000080000002L});
-    public static final BitSet FOLLOW_rule__FormalParams__Group_1__0__Impl_in_rule__FormalParams__Group_1__03131 = new BitSet(new long[]{0x000000000000E040L});
-    public static final BitSet FOLLOW_rule__FormalParams__Group_1__1_in_rule__FormalParams__Group_1__03134 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_rule__FormalParams__Group_1__0__Impl3162 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FormalParams__Group_1__1__Impl_in_rule__FormalParams__Group_1__13193 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__FormalParams__ParamsAssignment_1_1_in_rule__FormalParams__Group_1__1__Impl3220 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Param__Group__0__Impl_in_rule__Param__Group__03254 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_rule__Param__Group__1_in_rule__Param__Group__03257 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruletype_in_rule__Param__Group__0__Impl3284 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Param__Group__1__Impl_in_rule__Param__Group__13313 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Param__NameAssignment_1_in_rule__Param__Group__1__Impl3340 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Block__Group__0__Impl_in_rule__Block__Group__03374 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_rule__Block__Group__1_in_rule__Block__Group__03377 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Block__Group__1__Impl_in_rule__Block__Group__13435 = new BitSet(new long[]{0x000031AF08000050L});
-    public static final BitSet FOLLOW_rule__Block__Group__2_in_rule__Block__Group__13438 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_32_in_rule__Block__Group__1__Impl3466 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Block__Group__2__Impl_in_rule__Block__Group__23497 = new BitSet(new long[]{0x0000000200000000L});
-    public static final BitSet FOLLOW_rule__Block__Group__3_in_rule__Block__Group__23500 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Block__StatementsAssignment_2_in_rule__Block__Group__2__Impl3527 = new BitSet(new long[]{0x000031AD08000052L});
-    public static final BitSet FOLLOW_rule__Block__Group__3__Impl_in_rule__Block__Group__33558 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_33_in_rule__Block__Group__3__Impl3586 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Type__Group__0__Impl_in_rule__Type__Group__03625 = new BitSet(new long[]{0x000000000000E040L});
-    public static final BitSet FOLLOW_rule__Type__Group__1_in_rule__Type__Group__03628 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Type__Group__1__Impl_in_rule__Type__Group__13686 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Type__Alternatives_1_in_rule__Type__Group__1__Impl3713 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_0__0__Impl_in_rule__Statement__Group_0__03747 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__Statement__Group_0__1_in_rule__Statement__Group_0__03750 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruledeclaration_in_rule__Statement__Group_0__0__Impl3777 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_0__1__Impl_in_rule__Statement__Group_0__13806 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ENDEXPR_in_rule__Statement__Group_0__1__Impl3833 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_1__0__Impl_in_rule__Statement__Group_1__03866 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__Statement__Group_1__1_in_rule__Statement__Group_1__03869 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleexpr_in_rule__Statement__Group_1__0__Impl3896 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_1__1__Impl_in_rule__Statement__Group_1__13925 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ENDEXPR_in_rule__Statement__Group_1__1__Impl3952 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_2__0__Impl_in_rule__Statement__Group_2__03985 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__Statement__Group_2__1_in_rule__Statement__Group_2__03988 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleassignment_in_rule__Statement__Group_2__0__Impl4015 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_2__1__Impl_in_rule__Statement__Group_2__14044 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ENDEXPR_in_rule__Statement__Group_2__1__Impl4071 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_3__0__Impl_in_rule__Statement__Group_3__04104 = new BitSet(new long[]{0x0000300008000070L});
-    public static final BitSet FOLLOW_rule__Statement__Group_3__1_in_rule__Statement__Group_3__04107 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_rule__Statement__Group_3__0__Impl4135 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_3__1__Impl_in_rule__Statement__Group_3__14166 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__Statement__Group_3__2_in_rule__Statement__Group_3__14169 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleexpr_in_rule__Statement__Group_3__1__Impl4197 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_3__2__Impl_in_rule__Statement__Group_3__24228 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ENDEXPR_in_rule__Statement__Group_3__2__Impl4255 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_4__0__Impl_in_rule__Statement__Group_4__04290 = new BitSet(new long[]{0x0000300008000050L});
-    public static final BitSet FOLLOW_rule__Statement__Group_4__1_in_rule__Statement__Group_4__04293 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_35_in_rule__Statement__Group_4__0__Impl4321 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_4__1__Impl_in_rule__Statement__Group_4__14352 = new BitSet(new long[]{0x0000000020000000L});
-    public static final BitSet FOLLOW_rule__Statement__Group_4__2_in_rule__Statement__Group_4__14355 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleexpr_in_rule__Statement__Group_4__1__Impl4382 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_4__2__Impl_in_rule__Statement__Group_4__24411 = new BitSet(new long[]{0x000031AD08000050L});
-    public static final BitSet FOLLOW_rule__Statement__Group_4__3_in_rule__Statement__Group_4__24414 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_29_in_rule__Statement__Group_4__2__Impl4442 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_4__3__Impl_in_rule__Statement__Group_4__34473 = new BitSet(new long[]{0x0000001000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_4__4_in_rule__Statement__Group_4__34476 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulestatement_in_rule__Statement__Group_4__3__Impl4503 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_4__4__Impl_in_rule__Statement__Group_4__44532 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_4_4__0_in_rule__Statement__Group_4__4__Impl4559 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_4_4__0__Impl_in_rule__Statement__Group_4_4__04600 = new BitSet(new long[]{0x000031AD08000050L});
-    public static final BitSet FOLLOW_rule__Statement__Group_4_4__1_in_rule__Statement__Group_4_4__04603 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_rule__Statement__Group_4_4__0__Impl4631 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_4_4__1__Impl_in_rule__Statement__Group_4_4__14662 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__StatementsAssignment_4_4_1_in_rule__Statement__Group_4_4__1__Impl4689 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_5__0__Impl_in_rule__Statement__Group_5__04723 = new BitSet(new long[]{0x000000000000E040L});
-    public static final BitSet FOLLOW_rule__Statement__Group_5__1_in_rule__Statement__Group_5__04726 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_37_in_rule__Statement__Group_5__0__Impl4754 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_5__1__Impl_in_rule__Statement__Group_5__14785 = new BitSet(new long[]{0x0000004000000000L});
-    public static final BitSet FOLLOW_rule__Statement__Group_5__2_in_rule__Statement__Group_5__14788 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleparam_in_rule__Statement__Group_5__1__Impl4815 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_5__2__Impl_in_rule__Statement__Group_5__24844 = new BitSet(new long[]{0x0000300008000050L});
-    public static final BitSet FOLLOW_rule__Statement__Group_5__3_in_rule__Statement__Group_5__24847 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_38_in_rule__Statement__Group_5__2__Impl4875 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_5__3__Impl_in_rule__Statement__Group_5__34906 = new BitSet(new long[]{0x0000000020000000L});
-    public static final BitSet FOLLOW_rule__Statement__Group_5__4_in_rule__Statement__Group_5__34909 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleexpr_in_rule__Statement__Group_5__3__Impl4936 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_5__4__Impl_in_rule__Statement__Group_5__44965 = new BitSet(new long[]{0x000031AD08000050L});
-    public static final BitSet FOLLOW_rule__Statement__Group_5__5_in_rule__Statement__Group_5__44968 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_29_in_rule__Statement__Group_5__4__Impl4996 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_5__5__Impl_in_rule__Statement__Group_5__55027 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__StatementsAssignment_5_5_in_rule__Statement__Group_5__5__Impl5054 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_6__0__Impl_in_rule__Statement__Group_6__05096 = new BitSet(new long[]{0x0000300008000050L});
-    public static final BitSet FOLLOW_rule__Statement__Group_6__1_in_rule__Statement__Group_6__05099 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_39_in_rule__Statement__Group_6__0__Impl5127 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_6__1__Impl_in_rule__Statement__Group_6__15158 = new BitSet(new long[]{0x0000000020000000L});
-    public static final BitSet FOLLOW_rule__Statement__Group_6__2_in_rule__Statement__Group_6__15161 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleexpr_in_rule__Statement__Group_6__1__Impl5188 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_6__2__Impl_in_rule__Statement__Group_6__25217 = new BitSet(new long[]{0x000031AD08000050L});
-    public static final BitSet FOLLOW_rule__Statement__Group_6__3_in_rule__Statement__Group_6__25220 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_29_in_rule__Statement__Group_6__2__Impl5248 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_6__3__Impl_in_rule__Statement__Group_6__35279 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulestatement_in_rule__Statement__Group_6__3__Impl5306 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_8__0__Impl_in_rule__Statement__Group_8__05343 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_rule__Statement__Group_8__1_in_rule__Statement__Group_8__05346 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__TypesAssignment_8_0_in_rule__Statement__Group_8__0__Impl5373 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_8__1__Impl_in_rule__Statement__Group_8__15403 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__NameAssignment_8_1_in_rule__Statement__Group_8__1__Impl5430 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_9__0__Impl_in_rule__Statement__Group_9__05464 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_rule__Statement__Group_9__1_in_rule__Statement__Group_9__05467 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__TypesAssignment_9_0_in_rule__Statement__Group_9__0__Impl5494 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_9__1__Impl_in_rule__Statement__Group_9__15524 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__NameAssignment_9_1_in_rule__Statement__Group_9__1__Impl5551 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_10__0__Impl_in_rule__Statement__Group_10__05585 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_rule__Statement__Group_10__1_in_rule__Statement__Group_10__05588 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_40_in_rule__Statement__Group_10__0__Impl5616 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_10__1__Impl_in_rule__Statement__Group_10__15647 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__NameAssignment_10_1_in_rule__Statement__Group_10__1__Impl5674 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Declaration__Group__0__Impl_in_rule__Declaration__Group__05708 = new BitSet(new long[]{0x0000020000000000L});
-    public static final BitSet FOLLOW_rule__Declaration__Group__1_in_rule__Declaration__Group__05711 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Declaration__NameAssignment_0_in_rule__Declaration__Group__0__Impl5738 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Declaration__Group__1__Impl_in_rule__Declaration__Group__15768 = new BitSet(new long[]{0x0000300008000050L});
-    public static final BitSet FOLLOW_rule__Declaration__Group__2_in_rule__Declaration__Group__15771 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_41_in_rule__Declaration__Group__1__Impl5799 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Declaration__Group__2__Impl_in_rule__Declaration__Group__25830 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleexpr_in_rule__Declaration__Group__2__Impl5857 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Assignment__Group__0__Impl_in_rule__Assignment__Group__05892 = new BitSet(new long[]{0x0000020000000000L});
-    public static final BitSet FOLLOW_rule__Assignment__Group__1_in_rule__Assignment__Group__05895 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulepostfixExpr_in_rule__Assignment__Group__0__Impl5922 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Assignment__Group__1__Impl_in_rule__Assignment__Group__15951 = new BitSet(new long[]{0x0000300008000050L});
-    public static final BitSet FOLLOW_rule__Assignment__Group__2_in_rule__Assignment__Group__15954 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_41_in_rule__Assignment__Group__1__Impl5982 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Assignment__Group__2__Impl_in_rule__Assignment__Group__26013 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleexpr_in_rule__Assignment__Group__2__Impl6040 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Expr__Group__0__Impl_in_rule__Expr__Group__06075 = new BitSet(new long[]{0x0000040000000002L});
-    public static final BitSet FOLLOW_rule__Expr__Group__1_in_rule__Expr__Group__06078 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleandExpr_in_rule__Expr__Group__0__Impl6105 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Expr__Group__1__Impl_in_rule__Expr__Group__16134 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Expr__Group_1__0_in_rule__Expr__Group__1__Impl6161 = new BitSet(new long[]{0x0000040000000002L});
-    public static final BitSet FOLLOW_rule__Expr__Group_1__0__Impl_in_rule__Expr__Group_1__06196 = new BitSet(new long[]{0x0000300008000050L});
-    public static final BitSet FOLLOW_rule__Expr__Group_1__1_in_rule__Expr__Group_1__06199 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_42_in_rule__Expr__Group_1__0__Impl6227 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Expr__Group_1__1__Impl_in_rule__Expr__Group_1__16258 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleandExpr_in_rule__Expr__Group_1__1__Impl6285 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AndExpr__Group__0__Impl_in_rule__AndExpr__Group__06318 = new BitSet(new long[]{0x0000080000000002L});
-    public static final BitSet FOLLOW_rule__AndExpr__Group__1_in_rule__AndExpr__Group__06321 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleeqExpr_in_rule__AndExpr__Group__0__Impl6348 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AndExpr__Group__1__Impl_in_rule__AndExpr__Group__16377 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AndExpr__Group_1__0_in_rule__AndExpr__Group__1__Impl6404 = new BitSet(new long[]{0x0000080000000002L});
-    public static final BitSet FOLLOW_rule__AndExpr__Group_1__0__Impl_in_rule__AndExpr__Group_1__06439 = new BitSet(new long[]{0x0000300008000050L});
-    public static final BitSet FOLLOW_rule__AndExpr__Group_1__1_in_rule__AndExpr__Group_1__06442 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_43_in_rule__AndExpr__Group_1__0__Impl6470 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AndExpr__Group_1__1__Impl_in_rule__AndExpr__Group_1__16501 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleeqExpr_in_rule__AndExpr__Group_1__1__Impl6528 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EqExpr__Group__0__Impl_in_rule__EqExpr__Group__06561 = new BitSet(new long[]{0x0000000000030002L});
-    public static final BitSet FOLLOW_rule__EqExpr__Group__1_in_rule__EqExpr__Group__06564 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulerelExpr_in_rule__EqExpr__Group__0__Impl6591 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EqExpr__Group__1__Impl_in_rule__EqExpr__Group__16620 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EqExpr__Group_1__0_in_rule__EqExpr__Group__1__Impl6647 = new BitSet(new long[]{0x0000000000030002L});
-    public static final BitSet FOLLOW_rule__EqExpr__Group_1__0__Impl_in_rule__EqExpr__Group_1__06682 = new BitSet(new long[]{0x0000300008000050L});
-    public static final BitSet FOLLOW_rule__EqExpr__Group_1__1_in_rule__EqExpr__Group_1__06685 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EqExpr__Alternatives_1_0_in_rule__EqExpr__Group_1__0__Impl6712 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EqExpr__Group_1__1__Impl_in_rule__EqExpr__Group_1__16742 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulerelExpr_in_rule__EqExpr__Group_1__1__Impl6769 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RelExpr__Group__0__Impl_in_rule__RelExpr__Group__06802 = new BitSet(new long[]{0x00000000003C0002L});
-    public static final BitSet FOLLOW_rule__RelExpr__Group__1_in_rule__RelExpr__Group__06805 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleaddExpr_in_rule__RelExpr__Group__0__Impl6832 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RelExpr__Group__1__Impl_in_rule__RelExpr__Group__16861 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RelExpr__Group_1__0_in_rule__RelExpr__Group__1__Impl6888 = new BitSet(new long[]{0x00000000003C0002L});
-    public static final BitSet FOLLOW_rule__RelExpr__Group_1__0__Impl_in_rule__RelExpr__Group_1__06923 = new BitSet(new long[]{0x0000300008000050L});
-    public static final BitSet FOLLOW_rule__RelExpr__Group_1__1_in_rule__RelExpr__Group_1__06926 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RelExpr__Alternatives_1_0_in_rule__RelExpr__Group_1__0__Impl6953 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RelExpr__Group_1__1__Impl_in_rule__RelExpr__Group_1__16983 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleaddExpr_in_rule__RelExpr__Group_1__1__Impl7010 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AddExpr__Group__0__Impl_in_rule__AddExpr__Group__07043 = new BitSet(new long[]{0x0000000000C00002L});
-    public static final BitSet FOLLOW_rule__AddExpr__Group__1_in_rule__AddExpr__Group__07046 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulemulExpr_in_rule__AddExpr__Group__0__Impl7073 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AddExpr__Group__1__Impl_in_rule__AddExpr__Group__17102 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AddExpr__Group_1__0_in_rule__AddExpr__Group__1__Impl7129 = new BitSet(new long[]{0x0000000000C00002L});
-    public static final BitSet FOLLOW_rule__AddExpr__Group_1__0__Impl_in_rule__AddExpr__Group_1__07164 = new BitSet(new long[]{0x0000300008000050L});
-    public static final BitSet FOLLOW_rule__AddExpr__Group_1__1_in_rule__AddExpr__Group_1__07167 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AddExpr__Alternatives_1_0_in_rule__AddExpr__Group_1__0__Impl7194 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AddExpr__Group_1__1__Impl_in_rule__AddExpr__Group_1__17224 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulemulExpr_in_rule__AddExpr__Group_1__1__Impl7251 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__MulExpr__Group__0__Impl_in_rule__MulExpr__Group__07284 = new BitSet(new long[]{0x0000000007000002L});
-    public static final BitSet FOLLOW_rule__MulExpr__Group__1_in_rule__MulExpr__Group__07287 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleatom_in_rule__MulExpr__Group__0__Impl7314 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__MulExpr__Group__1__Impl_in_rule__MulExpr__Group__17343 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__MulExpr__Group_1__0_in_rule__MulExpr__Group__1__Impl7370 = new BitSet(new long[]{0x0000000007000002L});
-    public static final BitSet FOLLOW_rule__MulExpr__Group_1__0__Impl_in_rule__MulExpr__Group_1__07405 = new BitSet(new long[]{0x0000300008000050L});
-    public static final BitSet FOLLOW_rule__MulExpr__Group_1__1_in_rule__MulExpr__Group_1__07408 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__MulExpr__Alternatives_1_0_in_rule__MulExpr__Group_1__0__Impl7435 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__MulExpr__Group_1__1__Impl_in_rule__MulExpr__Group_1__17465 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleatom_in_rule__MulExpr__Group_1__1__Impl7492 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atom__Group_0__0__Impl_in_rule__Atom__Group_0__07525 = new BitSet(new long[]{0x0000300008000050L});
-    public static final BitSet FOLLOW_rule__Atom__Group_0__1_in_rule__Atom__Group_0__07528 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_44_in_rule__Atom__Group_0__0__Impl7556 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atom__Group_0__1__Impl_in_rule__Atom__Group_0__17587 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleatom_in_rule__Atom__Group_0__1__Impl7614 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atom__Group_1__0__Impl_in_rule__Atom__Group_1__07647 = new BitSet(new long[]{0x0000000000C00000L});
-    public static final BitSet FOLLOW_rule__Atom__Group_1__1_in_rule__Atom__Group_1__07650 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_rule__Atom__Group_1__0__Impl7678 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atom__Group_1__1__Impl_in_rule__Atom__Group_1__17709 = new BitSet(new long[]{0x0000300008000050L});
-    public static final BitSet FOLLOW_rule__Atom__Group_1__2_in_rule__Atom__Group_1__17712 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atom__Alternatives_1_1_in_rule__Atom__Group_1__1__Impl7739 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atom__Group_1__2__Impl_in_rule__Atom__Group_1__27769 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_rule__Atom__Group_1__3_in_rule__Atom__Group_1__27772 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleexpr_in_rule__Atom__Group_1__2__Impl7799 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atom__Group_1__3__Impl_in_rule__Atom__Group_1__37828 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_rule__Atom__Group_1__3__Impl7856 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atom__Group_2__0__Impl_in_rule__Atom__Group_2__07895 = new BitSet(new long[]{0x0000300008000050L});
-    public static final BitSet FOLLOW_rule__Atom__Group_2__1_in_rule__Atom__Group_2__07898 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_rule__Atom__Group_2__0__Impl7926 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atom__Group_2__1__Impl_in_rule__Atom__Group_2__17957 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_rule__Atom__Group_2__2_in_rule__Atom__Group_2__17960 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleexpr_in_rule__Atom__Group_2__1__Impl7987 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Atom__Group_2__2__Impl_in_rule__Atom__Group_2__28016 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_rule__Atom__Group_2__2__Impl8044 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_0__0__Impl_in_rule__PostfixExpr__Group_0__08081 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_0__1_in_rule__PostfixExpr__Group_0__08084 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_45_in_rule__PostfixExpr__Group_0__0__Impl8112 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_0__1__Impl_in_rule__PostfixExpr__Group_0__18143 = new BitSet(new long[]{0x0000300008000050L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_0__2_in_rule__PostfixExpr__Group_0__18146 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_rule__PostfixExpr__Group_0__1__Impl8174 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_0__2__Impl_in_rule__PostfixExpr__Group_0__28205 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_0__3_in_rule__PostfixExpr__Group_0__28208 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleexpr_in_rule__PostfixExpr__Group_0__2__Impl8235 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_0__3__Impl_in_rule__PostfixExpr__Group_0__38264 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_rule__PostfixExpr__Group_0__3__Impl8292 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1__0__Impl_in_rule__PostfixExpr__Group_1__08331 = new BitSet(new long[]{0x0000C00008000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1__1_in_rule__PostfixExpr__Group_1__08334 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__PostfixExpr__Group_1__0__Impl8361 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1__1__Impl_in_rule__PostfixExpr__Group_1__18390 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Alternatives_1_1_in_rule__PostfixExpr__Group_1__1__Impl8417 = new BitSet(new long[]{0x0000C00008000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_0__0__Impl_in_rule__PostfixExpr__Group_1_1_0__08452 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_0__1_in_rule__PostfixExpr__Group_1_1_0__08455 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_46_in_rule__PostfixExpr__Group_1_1_0__0__Impl8483 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_0__1__Impl_in_rule__PostfixExpr__Group_1_1_0__18514 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__PostfixExpr__Group_1_1_0__1__Impl8541 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_1__0__Impl_in_rule__PostfixExpr__Group_1_1_1__08574 = new BitSet(new long[]{0x0000300018000050L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_1__1_in_rule__PostfixExpr__Group_1_1_1__08577 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_rule__PostfixExpr__Group_1_1_1__0__Impl8605 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_1__1__Impl_in_rule__PostfixExpr__Group_1_1_1__18636 = new BitSet(new long[]{0x0000000010000000L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_1__2_in_rule__PostfixExpr__Group_1_1_1__18639 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_1_1__0_in_rule__PostfixExpr__Group_1_1_1__1__Impl8666 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_1__2__Impl_in_rule__PostfixExpr__Group_1_1_1__28697 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_rule__PostfixExpr__Group_1_1_1__2__Impl8725 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_1_1__0__Impl_in_rule__PostfixExpr__Group_1_1_1_1__08762 = new BitSet(new long[]{0x0000000080000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_1_1__1_in_rule__PostfixExpr__Group_1_1_1_1__08765 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleexpr_in_rule__PostfixExpr__Group_1_1_1_1__0__Impl8792 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_1_1__1__Impl_in_rule__PostfixExpr__Group_1_1_1_1__18821 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_1_1_1__0_in_rule__PostfixExpr__Group_1_1_1_1__1__Impl8848 = new BitSet(new long[]{0x0000000080000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_1_1_1__0__Impl_in_rule__PostfixExpr__Group_1_1_1_1_1__08883 = new BitSet(new long[]{0x0000300008000050L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_1_1_1__1_in_rule__PostfixExpr__Group_1_1_1_1_1__08886 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_rule__PostfixExpr__Group_1_1_1_1_1__0__Impl8914 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_1_1_1__1__Impl_in_rule__PostfixExpr__Group_1_1_1_1_1__18945 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleexpr_in_rule__PostfixExpr__Group_1_1_1_1_1__1__Impl8972 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_2__0__Impl_in_rule__PostfixExpr__Group_1_1_2__09005 = new BitSet(new long[]{0x0000300008000050L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_2__1_in_rule__PostfixExpr__Group_1_1_2__09008 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_47_in_rule__PostfixExpr__Group_1_1_2__0__Impl9036 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_2__1__Impl_in_rule__PostfixExpr__Group_1_1_2__19067 = new BitSet(new long[]{0x0001000000000000L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_2__2_in_rule__PostfixExpr__Group_1_1_2__19070 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleexpr_in_rule__PostfixExpr__Group_1_1_2__1__Impl9097 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_2__2__Impl_in_rule__PostfixExpr__Group_1_1_2__29126 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_48_in_rule__PostfixExpr__Group_1_1_2__2__Impl9154 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulefunctionDefinition_in_rule__Model__FunctionsAssignment_1_09196 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulemainFunction_in_rule__Model__MainAssignment_1_19227 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__FunctionDefinition__NameAssignment_09258 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleformalParams_in_rule__FunctionDefinition__FormalParamsAssignment_29289 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruletype_in_rule__FunctionDefinition__ReturnTypeAssignment_4_19320 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleblock_in_rule__FunctionDefinition__BlocksAssignment_59351 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleformalParams_in_rule__MainFunction__FormalParamsAssignment_19382 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleblock_in_rule__MainFunction__BlocksAssignment_39413 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleparam_in_rule__FormalParams__ParamsAssignment_09444 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleparam_in_rule__FormalParams__ParamsAssignment_1_19475 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Param__NameAssignment_19506 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulestatement_in_rule__Block__StatementsAssignment_29537 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Type__TypeAssignment_1_09572 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulestatement_in_rule__Statement__StatementsAssignment_4_4_19607 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulestatement_in_rule__Statement__StatementsAssignment_5_59638 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Statement__TypesAssignment_8_09673 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Statement__NameAssignment_8_19708 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Statement__TypesAssignment_9_09743 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Statement__NameAssignment_9_19778 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Statement__NameAssignment_10_19809 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Declaration__NameAssignment_09840 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_0__0_in_synpred41249 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_1__0_in_synpred51267 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_2__0_in_synpred61285 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_8__0_in_synpred121392 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_9__0_in_synpred131410 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Statement__Group_4_4__0_in_synpred364559 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group__0_in_rulepostfixExpr1120 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleendExpr_in_entryRuleendExpr1147 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleendExpr1154 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EndExpr__Alternatives_in_ruleendExpr1180 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Type__TypeAssignment_1_0_in_rule__Type__Alternatives_11216 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_rule__Type__Alternatives_11235 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_rule__Type__Alternatives_11255 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_rule__Type__Alternatives_11275 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_0__0_in_rule__Statement__Alternatives1309 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_1__0_in_rule__Statement__Alternatives1327 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_2__0_in_rule__Statement__Alternatives1345 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_3__0_in_rule__Statement__Alternatives1363 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_4__0_in_rule__Statement__Alternatives1381 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_5__0_in_rule__Statement__Alternatives1399 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_6__0_in_rule__Statement__Alternatives1417 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleblock_in_rule__Statement__Alternatives1435 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_rule__EqExpr__Alternatives_1_01468 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_rule__EqExpr__Alternatives_1_01488 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_rule__RelExpr__Alternatives_1_01523 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_rule__RelExpr__Alternatives_1_01543 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_rule__RelExpr__Alternatives_1_01563 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_21_in_rule__RelExpr__Alternatives_1_01583 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_rule__AddExpr__Alternatives_1_01618 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_23_in_rule__AddExpr__Alternatives_1_01638 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_24_in_rule__MulExpr__Alternatives_1_01673 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_25_in_rule__MulExpr__Alternatives_1_01693 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_rule__MulExpr__Alternatives_1_01713 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atom__Group_0__0_in_rule__Atom__Alternatives1747 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atom__Group_1__0_in_rule__Atom__Alternatives1765 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atom__Group_2__0_in_rule__Atom__Alternatives1783 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atom__Group_3__0_in_rule__Atom__Alternatives1801 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulepostfixExpr_in_rule__Atom__Alternatives1819 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_CONSTANT_in_rule__Atom__Alternatives1836 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_22_in_rule__Atom__Alternatives_2_11869 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_23_in_rule__Atom__Alternatives_2_11889 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_0__0_in_rule__PostfixExpr__Alternatives_11923 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1__0_in_rule__PostfixExpr__Alternatives_11941 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_2__0_in_rule__PostfixExpr__Alternatives_11959 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_27_in_rule__EndExpr__Alternatives1993 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_28_in_rule__EndExpr__Alternatives2013 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Model__Group__0__Impl_in_rule__Model__Group__02045 = new BitSet(new long[]{0x0000000100000040L});
+    public static final BitSet FOLLOW_rule__Model__Group__1_in_rule__Model__Group__02048 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Model__Group__1__Impl_in_rule__Model__Group__12106 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Model__Group_1__0_in_rule__Model__Group__1__Impl2133 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Model__Group_1__0__Impl_in_rule__Model__Group_1__02167 = new BitSet(new long[]{0x0000000100000000L});
+    public static final BitSet FOLLOW_rule__Model__Group_1__1_in_rule__Model__Group_1__02170 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Model__FunctionsAssignment_1_0_in_rule__Model__Group_1__0__Impl2197 = new BitSet(new long[]{0x0000000000000042L});
+    public static final BitSet FOLLOW_rule__Model__Group_1__1__Impl_in_rule__Model__Group_1__12228 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Model__MainAssignment_1_1_in_rule__Model__Group_1__1__Impl2255 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__Group__0__Impl_in_rule__FunctionDefinition__Group__02289 = new BitSet(new long[]{0x0000000020000000L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__Group__1_in_rule__FunctionDefinition__Group__02292 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__NameAssignment_0_in_rule__FunctionDefinition__Group__0__Impl2319 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__Group__1__Impl_in_rule__FunctionDefinition__Group__12349 = new BitSet(new long[]{0x000000004000E040L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__Group__2_in_rule__FunctionDefinition__Group__12352 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_29_in_rule__FunctionDefinition__Group__1__Impl2380 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__Group__2__Impl_in_rule__FunctionDefinition__Group__22411 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__Group__3_in_rule__FunctionDefinition__Group__22414 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__FormalParamsAssignment_2_in_rule__FunctionDefinition__Group__2__Impl2441 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__Group__3__Impl_in_rule__FunctionDefinition__Group__32472 = new BitSet(new long[]{0x0000000280000000L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__Group__4_in_rule__FunctionDefinition__Group__32475 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_30_in_rule__FunctionDefinition__Group__3__Impl2503 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__Group__4__Impl_in_rule__FunctionDefinition__Group__42534 = new BitSet(new long[]{0x0000000200000000L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__Group__5_in_rule__FunctionDefinition__Group__42537 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__Group_4__0_in_rule__FunctionDefinition__Group__4__Impl2564 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__Group__5__Impl_in_rule__FunctionDefinition__Group__52595 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__BlocksAssignment_5_in_rule__FunctionDefinition__Group__5__Impl2622 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__Group_4__0__Impl_in_rule__FunctionDefinition__Group_4__02664 = new BitSet(new long[]{0x000000000000E040L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__Group_4__1_in_rule__FunctionDefinition__Group_4__02667 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_rule__FunctionDefinition__Group_4__0__Impl2695 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__Group_4__1__Impl_in_rule__FunctionDefinition__Group_4__12726 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FunctionDefinition__ReturnTypeAssignment_4_1_in_rule__FunctionDefinition__Group_4__1__Impl2753 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__MainFunction__Group__0__Impl_in_rule__MainFunction__Group__02787 = new BitSet(new long[]{0x000000004000E040L});
+    public static final BitSet FOLLOW_rule__MainFunction__Group__1_in_rule__MainFunction__Group__02790 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_32_in_rule__MainFunction__Group__0__Impl2818 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__MainFunction__Group__1__Impl_in_rule__MainFunction__Group__12849 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_rule__MainFunction__Group__2_in_rule__MainFunction__Group__12852 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__MainFunction__FormalParamsAssignment_1_in_rule__MainFunction__Group__1__Impl2879 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__MainFunction__Group__2__Impl_in_rule__MainFunction__Group__22910 = new BitSet(new long[]{0x0000000200000000L});
+    public static final BitSet FOLLOW_rule__MainFunction__Group__3_in_rule__MainFunction__Group__22913 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_30_in_rule__MainFunction__Group__2__Impl2941 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__MainFunction__Group__3__Impl_in_rule__MainFunction__Group__32972 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__MainFunction__BlocksAssignment_3_in_rule__MainFunction__Group__3__Impl2999 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FormalParams__Group__0__Impl_in_rule__FormalParams__Group__03037 = new BitSet(new long[]{0x0000000008000002L});
+    public static final BitSet FOLLOW_rule__FormalParams__Group__1_in_rule__FormalParams__Group__03040 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FormalParams__ParamsAssignment_0_in_rule__FormalParams__Group__0__Impl3067 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FormalParams__Group__1__Impl_in_rule__FormalParams__Group__13097 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FormalParams__Group_1__0_in_rule__FormalParams__Group__1__Impl3124 = new BitSet(new long[]{0x0000000008000002L});
+    public static final BitSet FOLLOW_rule__FormalParams__Group_1__0__Impl_in_rule__FormalParams__Group_1__03159 = new BitSet(new long[]{0x000000000000E040L});
+    public static final BitSet FOLLOW_rule__FormalParams__Group_1__1_in_rule__FormalParams__Group_1__03162 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_27_in_rule__FormalParams__Group_1__0__Impl3190 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FormalParams__Group_1__1__Impl_in_rule__FormalParams__Group_1__13221 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__FormalParams__ParamsAssignment_1_1_in_rule__FormalParams__Group_1__1__Impl3248 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Param__Group__0__Impl_in_rule__Param__Group__03282 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_rule__Param__Group__1_in_rule__Param__Group__03285 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruletype_in_rule__Param__Group__0__Impl3312 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Param__Group__1__Impl_in_rule__Param__Group__13341 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Param__NameAssignment_1_in_rule__Param__Group__1__Impl3368 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Block__Group__0__Impl_in_rule__Block__Group__03402 = new BitSet(new long[]{0x0000000200000000L});
+    public static final BitSet FOLLOW_rule__Block__Group__1_in_rule__Block__Group__03405 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Block__Group__1__Impl_in_rule__Block__Group__13463 = new BitSet(new long[]{0x0000215E2000E050L});
+    public static final BitSet FOLLOW_rule__Block__Group__2_in_rule__Block__Group__13466 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_33_in_rule__Block__Group__1__Impl3494 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Block__Group__2__Impl_in_rule__Block__Group__23525 = new BitSet(new long[]{0x0000000400000000L});
+    public static final BitSet FOLLOW_rule__Block__Group__3_in_rule__Block__Group__23528 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Block__StatementsAssignment_2_in_rule__Block__Group__2__Impl3555 = new BitSet(new long[]{0x0000215A2000E052L});
+    public static final BitSet FOLLOW_rule__Block__Group__3__Impl_in_rule__Block__Group__33586 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_34_in_rule__Block__Group__3__Impl3614 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Type__Group__0__Impl_in_rule__Type__Group__03653 = new BitSet(new long[]{0x000000000000E040L});
+    public static final BitSet FOLLOW_rule__Type__Group__1_in_rule__Type__Group__03656 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Type__Group__1__Impl_in_rule__Type__Group__13714 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Type__Alternatives_1_in_rule__Type__Group__1__Impl3741 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_0__0__Impl_in_rule__Statement__Group_0__03775 = new BitSet(new long[]{0x0000000018000000L});
+    public static final BitSet FOLLOW_rule__Statement__Group_0__1_in_rule__Statement__Group_0__03778 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruledeclaration_in_rule__Statement__Group_0__0__Impl3805 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_0__1__Impl_in_rule__Statement__Group_0__13834 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleendExpr_in_rule__Statement__Group_0__1__Impl3861 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_1__0__Impl_in_rule__Statement__Group_1__03894 = new BitSet(new long[]{0x0000200020000050L});
+    public static final BitSet FOLLOW_rule__Statement__Group_1__1_in_rule__Statement__Group_1__03897 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_1__1__Impl_in_rule__Statement__Group_1__13955 = new BitSet(new long[]{0x0000000018000000L});
+    public static final BitSet FOLLOW_rule__Statement__Group_1__2_in_rule__Statement__Group_1__13958 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleexpr_in_rule__Statement__Group_1__1__Impl3985 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_1__2__Impl_in_rule__Statement__Group_1__24014 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleendExpr_in_rule__Statement__Group_1__2__Impl4041 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_2__0__Impl_in_rule__Statement__Group_2__04076 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_rule__Statement__Group_2__1_in_rule__Statement__Group_2__04079 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_2__1__Impl_in_rule__Statement__Group_2__14137 = new BitSet(new long[]{0x0000000018000000L});
+    public static final BitSet FOLLOW_rule__Statement__Group_2__2_in_rule__Statement__Group_2__14140 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleassignment_in_rule__Statement__Group_2__1__Impl4167 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_2__2__Impl_in_rule__Statement__Group_2__24196 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleendExpr_in_rule__Statement__Group_2__2__Impl4223 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_3__0__Impl_in_rule__Statement__Group_3__04258 = new BitSet(new long[]{0x0000000800000000L});
+    public static final BitSet FOLLOW_rule__Statement__Group_3__1_in_rule__Statement__Group_3__04261 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_3__1__Impl_in_rule__Statement__Group_3__14319 = new BitSet(new long[]{0x0000200038000050L});
+    public static final BitSet FOLLOW_rule__Statement__Group_3__2_in_rule__Statement__Group_3__14322 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_35_in_rule__Statement__Group_3__1__Impl4350 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_3__2__Impl_in_rule__Statement__Group_3__24381 = new BitSet(new long[]{0x0000000018000000L});
+    public static final BitSet FOLLOW_rule__Statement__Group_3__3_in_rule__Statement__Group_3__24384 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleexpr_in_rule__Statement__Group_3__2__Impl4412 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_3__3__Impl_in_rule__Statement__Group_3__34443 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleendExpr_in_rule__Statement__Group_3__3__Impl4470 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_4__0__Impl_in_rule__Statement__Group_4__04507 = new BitSet(new long[]{0x0000200020000050L});
+    public static final BitSet FOLLOW_rule__Statement__Group_4__1_in_rule__Statement__Group_4__04510 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_36_in_rule__Statement__Group_4__0__Impl4538 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_4__1__Impl_in_rule__Statement__Group_4__14569 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_rule__Statement__Group_4__2_in_rule__Statement__Group_4__14572 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleexpr_in_rule__Statement__Group_4__1__Impl4599 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_4__2__Impl_in_rule__Statement__Group_4__24628 = new BitSet(new long[]{0x0000215A2000E050L});
+    public static final BitSet FOLLOW_rule__Statement__Group_4__3_in_rule__Statement__Group_4__24631 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_rule__Statement__Group_4__2__Impl4659 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_4__3__Impl_in_rule__Statement__Group_4__34690 = new BitSet(new long[]{0x0000002000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_4__4_in_rule__Statement__Group_4__34693 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulestatement_in_rule__Statement__Group_4__3__Impl4720 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_4__4__Impl_in_rule__Statement__Group_4__44749 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_4_4__0_in_rule__Statement__Group_4__4__Impl4776 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_4_4__0__Impl_in_rule__Statement__Group_4_4__04817 = new BitSet(new long[]{0x0000215A2000E050L});
+    public static final BitSet FOLLOW_rule__Statement__Group_4_4__1_in_rule__Statement__Group_4_4__04820 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_37_in_rule__Statement__Group_4_4__0__Impl4848 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_4_4__1__Impl_in_rule__Statement__Group_4_4__14879 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__StatementsAssignment_4_4_1_in_rule__Statement__Group_4_4__1__Impl4906 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_5__0__Impl_in_rule__Statement__Group_5__04940 = new BitSet(new long[]{0x000000000000E040L});
+    public static final BitSet FOLLOW_rule__Statement__Group_5__1_in_rule__Statement__Group_5__04943 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_38_in_rule__Statement__Group_5__0__Impl4971 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_5__1__Impl_in_rule__Statement__Group_5__15002 = new BitSet(new long[]{0x0000008000000000L});
+    public static final BitSet FOLLOW_rule__Statement__Group_5__2_in_rule__Statement__Group_5__15005 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleparam_in_rule__Statement__Group_5__1__Impl5032 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_5__2__Impl_in_rule__Statement__Group_5__25061 = new BitSet(new long[]{0x0000200020000050L});
+    public static final BitSet FOLLOW_rule__Statement__Group_5__3_in_rule__Statement__Group_5__25064 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_39_in_rule__Statement__Group_5__2__Impl5092 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_5__3__Impl_in_rule__Statement__Group_5__35123 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_rule__Statement__Group_5__4_in_rule__Statement__Group_5__35126 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleexpr_in_rule__Statement__Group_5__3__Impl5153 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_5__4__Impl_in_rule__Statement__Group_5__45182 = new BitSet(new long[]{0x0000215A2000E050L});
+    public static final BitSet FOLLOW_rule__Statement__Group_5__5_in_rule__Statement__Group_5__45185 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_rule__Statement__Group_5__4__Impl5213 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_5__5__Impl_in_rule__Statement__Group_5__55244 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__StatementsAssignment_5_5_in_rule__Statement__Group_5__5__Impl5271 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_6__0__Impl_in_rule__Statement__Group_6__05313 = new BitSet(new long[]{0x0000200020000050L});
+    public static final BitSet FOLLOW_rule__Statement__Group_6__1_in_rule__Statement__Group_6__05316 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_40_in_rule__Statement__Group_6__0__Impl5344 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_6__1__Impl_in_rule__Statement__Group_6__15375 = new BitSet(new long[]{0x0000000080000000L});
+    public static final BitSet FOLLOW_rule__Statement__Group_6__2_in_rule__Statement__Group_6__15378 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleexpr_in_rule__Statement__Group_6__1__Impl5405 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_6__2__Impl_in_rule__Statement__Group_6__25434 = new BitSet(new long[]{0x0000215A2000E050L});
+    public static final BitSet FOLLOW_rule__Statement__Group_6__3_in_rule__Statement__Group_6__25437 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_rule__Statement__Group_6__2__Impl5465 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_6__3__Impl_in_rule__Statement__Group_6__35496 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulestatement_in_rule__Statement__Group_6__3__Impl5523 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Declaration__Group__0__Impl_in_rule__Declaration__Group__05560 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_rule__Declaration__Group__1_in_rule__Declaration__Group__05563 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Declaration__Group_0__0_in_rule__Declaration__Group__0__Impl5592 = new BitSet(new long[]{0x000000000000E042L});
+    public static final BitSet FOLLOW_rule__Declaration__Group_0__0_in_rule__Declaration__Group__0__Impl5604 = new BitSet(new long[]{0x000000000000E042L});
+    public static final BitSet FOLLOW_rule__Declaration__Group__1__Impl_in_rule__Declaration__Group__15637 = new BitSet(new long[]{0x0000040000000002L});
+    public static final BitSet FOLLOW_rule__Declaration__Group__2_in_rule__Declaration__Group__15640 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Declaration__NameAssignment_1_in_rule__Declaration__Group__1__Impl5667 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Declaration__Group__2__Impl_in_rule__Declaration__Group__25697 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Declaration__Group_2__0_in_rule__Declaration__Group__2__Impl5724 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Declaration__Group_0__0__Impl_in_rule__Declaration__Group_0__05761 = new BitSet(new long[]{0x0000020000000002L});
+    public static final BitSet FOLLOW_rule__Declaration__Group_0__1_in_rule__Declaration__Group_0__05764 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Declaration__VariableTypeAssignment_0_0_in_rule__Declaration__Group_0__0__Impl5791 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Declaration__Group_0__1__Impl_in_rule__Declaration__Group_0__15821 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_41_in_rule__Declaration__Group_0__1__Impl5850 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Declaration__Group_2__0__Impl_in_rule__Declaration__Group_2__05887 = new BitSet(new long[]{0x0000200020000050L});
+    public static final BitSet FOLLOW_rule__Declaration__Group_2__1_in_rule__Declaration__Group_2__05890 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_42_in_rule__Declaration__Group_2__0__Impl5918 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Declaration__Group_2__1__Impl_in_rule__Declaration__Group_2__15949 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleexpr_in_rule__Declaration__Group_2__1__Impl5976 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Assignment__Group__0__Impl_in_rule__Assignment__Group__06009 = new BitSet(new long[]{0x0000040000000000L});
+    public static final BitSet FOLLOW_rule__Assignment__Group__1_in_rule__Assignment__Group__06012 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulepostfixExpr_in_rule__Assignment__Group__0__Impl6039 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Assignment__Group__1__Impl_in_rule__Assignment__Group__16068 = new BitSet(new long[]{0x0000200020000050L});
+    public static final BitSet FOLLOW_rule__Assignment__Group__2_in_rule__Assignment__Group__16071 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_42_in_rule__Assignment__Group__1__Impl6099 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Assignment__Group__2__Impl_in_rule__Assignment__Group__26130 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleexpr_in_rule__Assignment__Group__2__Impl6157 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Expr__Group__0__Impl_in_rule__Expr__Group__06192 = new BitSet(new long[]{0x0000080000000002L});
+    public static final BitSet FOLLOW_rule__Expr__Group__1_in_rule__Expr__Group__06195 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleandExpr_in_rule__Expr__Group__0__Impl6222 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Expr__Group__1__Impl_in_rule__Expr__Group__16251 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Expr__Group_1__0_in_rule__Expr__Group__1__Impl6278 = new BitSet(new long[]{0x0000080000000002L});
+    public static final BitSet FOLLOW_rule__Expr__Group_1__0__Impl_in_rule__Expr__Group_1__06313 = new BitSet(new long[]{0x0000200020000050L});
+    public static final BitSet FOLLOW_rule__Expr__Group_1__1_in_rule__Expr__Group_1__06316 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_43_in_rule__Expr__Group_1__0__Impl6344 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Expr__Group_1__1__Impl_in_rule__Expr__Group_1__16375 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleandExpr_in_rule__Expr__Group_1__1__Impl6402 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__AndExpr__Group__0__Impl_in_rule__AndExpr__Group__06435 = new BitSet(new long[]{0x0000100000000002L});
+    public static final BitSet FOLLOW_rule__AndExpr__Group__1_in_rule__AndExpr__Group__06438 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleeqExpr_in_rule__AndExpr__Group__0__Impl6465 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__AndExpr__Group__1__Impl_in_rule__AndExpr__Group__16494 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__AndExpr__Group_1__0_in_rule__AndExpr__Group__1__Impl6521 = new BitSet(new long[]{0x0000100000000002L});
+    public static final BitSet FOLLOW_rule__AndExpr__Group_1__0__Impl_in_rule__AndExpr__Group_1__06556 = new BitSet(new long[]{0x0000200020000050L});
+    public static final BitSet FOLLOW_rule__AndExpr__Group_1__1_in_rule__AndExpr__Group_1__06559 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_44_in_rule__AndExpr__Group_1__0__Impl6587 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__AndExpr__Group_1__1__Impl_in_rule__AndExpr__Group_1__16618 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleeqExpr_in_rule__AndExpr__Group_1__1__Impl6645 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EqExpr__Group__0__Impl_in_rule__EqExpr__Group__06678 = new BitSet(new long[]{0x0000000000030002L});
+    public static final BitSet FOLLOW_rule__EqExpr__Group__1_in_rule__EqExpr__Group__06681 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulerelExpr_in_rule__EqExpr__Group__0__Impl6708 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EqExpr__Group__1__Impl_in_rule__EqExpr__Group__16737 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EqExpr__Group_1__0_in_rule__EqExpr__Group__1__Impl6764 = new BitSet(new long[]{0x0000000000030002L});
+    public static final BitSet FOLLOW_rule__EqExpr__Group_1__0__Impl_in_rule__EqExpr__Group_1__06799 = new BitSet(new long[]{0x0000200020000050L});
+    public static final BitSet FOLLOW_rule__EqExpr__Group_1__1_in_rule__EqExpr__Group_1__06802 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EqExpr__Alternatives_1_0_in_rule__EqExpr__Group_1__0__Impl6829 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__EqExpr__Group_1__1__Impl_in_rule__EqExpr__Group_1__16859 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulerelExpr_in_rule__EqExpr__Group_1__1__Impl6886 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RelExpr__Group__0__Impl_in_rule__RelExpr__Group__06919 = new BitSet(new long[]{0x00000000003C0002L});
+    public static final BitSet FOLLOW_rule__RelExpr__Group__1_in_rule__RelExpr__Group__06922 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleaddExpr_in_rule__RelExpr__Group__0__Impl6949 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RelExpr__Group__1__Impl_in_rule__RelExpr__Group__16978 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RelExpr__Group_1__0_in_rule__RelExpr__Group__1__Impl7005 = new BitSet(new long[]{0x00000000003C0002L});
+    public static final BitSet FOLLOW_rule__RelExpr__Group_1__0__Impl_in_rule__RelExpr__Group_1__07040 = new BitSet(new long[]{0x0000200020000050L});
+    public static final BitSet FOLLOW_rule__RelExpr__Group_1__1_in_rule__RelExpr__Group_1__07043 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RelExpr__Alternatives_1_0_in_rule__RelExpr__Group_1__0__Impl7070 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__RelExpr__Group_1__1__Impl_in_rule__RelExpr__Group_1__17100 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleaddExpr_in_rule__RelExpr__Group_1__1__Impl7127 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__AddExpr__Group__0__Impl_in_rule__AddExpr__Group__07160 = new BitSet(new long[]{0x0000000000C00002L});
+    public static final BitSet FOLLOW_rule__AddExpr__Group__1_in_rule__AddExpr__Group__07163 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulemulExpr_in_rule__AddExpr__Group__0__Impl7190 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__AddExpr__Group__1__Impl_in_rule__AddExpr__Group__17219 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__AddExpr__Group_1__0_in_rule__AddExpr__Group__1__Impl7246 = new BitSet(new long[]{0x0000000000C00002L});
+    public static final BitSet FOLLOW_rule__AddExpr__Group_1__0__Impl_in_rule__AddExpr__Group_1__07281 = new BitSet(new long[]{0x0000200020000050L});
+    public static final BitSet FOLLOW_rule__AddExpr__Group_1__1_in_rule__AddExpr__Group_1__07284 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__AddExpr__Alternatives_1_0_in_rule__AddExpr__Group_1__0__Impl7311 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__AddExpr__Group_1__1__Impl_in_rule__AddExpr__Group_1__17341 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulemulExpr_in_rule__AddExpr__Group_1__1__Impl7368 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__MulExpr__Group__0__Impl_in_rule__MulExpr__Group__07401 = new BitSet(new long[]{0x0000000007000002L});
+    public static final BitSet FOLLOW_rule__MulExpr__Group__1_in_rule__MulExpr__Group__07404 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleatom_in_rule__MulExpr__Group__0__Impl7431 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__MulExpr__Group__1__Impl_in_rule__MulExpr__Group__17460 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__MulExpr__Group_1__0_in_rule__MulExpr__Group__1__Impl7487 = new BitSet(new long[]{0x0000000007000002L});
+    public static final BitSet FOLLOW_rule__MulExpr__Group_1__0__Impl_in_rule__MulExpr__Group_1__07522 = new BitSet(new long[]{0x0000200020000050L});
+    public static final BitSet FOLLOW_rule__MulExpr__Group_1__1_in_rule__MulExpr__Group_1__07525 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__MulExpr__Alternatives_1_0_in_rule__MulExpr__Group_1__0__Impl7552 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__MulExpr__Group_1__1__Impl_in_rule__MulExpr__Group_1__17582 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleatom_in_rule__MulExpr__Group_1__1__Impl7609 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atom__Group_0__0__Impl_in_rule__Atom__Group_0__07642 = new BitSet(new long[]{0x0000200020000050L});
+    public static final BitSet FOLLOW_rule__Atom__Group_0__1_in_rule__Atom__Group_0__07645 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_45_in_rule__Atom__Group_0__0__Impl7673 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atom__Group_0__1__Impl_in_rule__Atom__Group_0__17704 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleatom_in_rule__Atom__Group_0__1__Impl7731 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atom__Group_1__0__Impl_in_rule__Atom__Group_1__07764 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_rule__Atom__Group_1__1_in_rule__Atom__Group_1__07767 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_29_in_rule__Atom__Group_1__0__Impl7795 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atom__Group_1__1__Impl_in_rule__Atom__Group_1__17826 = new BitSet(new long[]{0x0000200020000050L});
+    public static final BitSet FOLLOW_rule__Atom__Group_1__2_in_rule__Atom__Group_1__17829 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_SIGN_in_rule__Atom__Group_1__1__Impl7856 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atom__Group_1__2__Impl_in_rule__Atom__Group_1__27885 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_rule__Atom__Group_1__3_in_rule__Atom__Group_1__27888 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleexpr_in_rule__Atom__Group_1__2__Impl7915 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atom__Group_1__3__Impl_in_rule__Atom__Group_1__37944 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_30_in_rule__Atom__Group_1__3__Impl7972 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atom__Group_2__0__Impl_in_rule__Atom__Group_2__08011 = new BitSet(new long[]{0x0000000000C00000L});
+    public static final BitSet FOLLOW_rule__Atom__Group_2__1_in_rule__Atom__Group_2__08014 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_29_in_rule__Atom__Group_2__0__Impl8042 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atom__Group_2__1__Impl_in_rule__Atom__Group_2__18073 = new BitSet(new long[]{0x0000200020000050L});
+    public static final BitSet FOLLOW_rule__Atom__Group_2__2_in_rule__Atom__Group_2__18076 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atom__Alternatives_2_1_in_rule__Atom__Group_2__1__Impl8103 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atom__Group_2__2__Impl_in_rule__Atom__Group_2__28133 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_rule__Atom__Group_2__3_in_rule__Atom__Group_2__28136 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleexpr_in_rule__Atom__Group_2__2__Impl8163 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atom__Group_2__3__Impl_in_rule__Atom__Group_2__38192 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_30_in_rule__Atom__Group_2__3__Impl8220 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atom__Group_3__0__Impl_in_rule__Atom__Group_3__08259 = new BitSet(new long[]{0x0000200020000050L});
+    public static final BitSet FOLLOW_rule__Atom__Group_3__1_in_rule__Atom__Group_3__08262 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_29_in_rule__Atom__Group_3__0__Impl8290 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atom__Group_3__1__Impl_in_rule__Atom__Group_3__18321 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_rule__Atom__Group_3__2_in_rule__Atom__Group_3__18324 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleexpr_in_rule__Atom__Group_3__1__Impl8351 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Atom__Group_3__2__Impl_in_rule__Atom__Group_3__28380 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_30_in_rule__Atom__Group_3__2__Impl8408 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group__0__Impl_in_rule__PostfixExpr__Group__08445 = new BitSet(new long[]{0x0000C00020000002L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group__1_in_rule__PostfixExpr__Group__08448 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__PostfixExpr__Group__0__Impl8475 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group__1__Impl_in_rule__PostfixExpr__Group__18504 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Alternatives_1_in_rule__PostfixExpr__Group__1__Impl8531 = new BitSet(new long[]{0x0000C00020000002L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_0__0__Impl_in_rule__PostfixExpr__Group_1_0__08566 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_0__1_in_rule__PostfixExpr__Group_1_0__08569 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_46_in_rule__PostfixExpr__Group_1_0__0__Impl8597 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_0__1__Impl_in_rule__PostfixExpr__Group_1_0__18628 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__PostfixExpr__Group_1_0__1__Impl8655 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1__0__Impl_in_rule__PostfixExpr__Group_1_1__08688 = new BitSet(new long[]{0x0000200060000050L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1__1_in_rule__PostfixExpr__Group_1_1__08691 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_29_in_rule__PostfixExpr__Group_1_1__0__Impl8719 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1__1__Impl_in_rule__PostfixExpr__Group_1_1__18750 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1__2_in_rule__PostfixExpr__Group_1_1__18753 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_1__0_in_rule__PostfixExpr__Group_1_1__1__Impl8780 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1__2__Impl_in_rule__PostfixExpr__Group_1_1__28811 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_30_in_rule__PostfixExpr__Group_1_1__2__Impl8839 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_1__0__Impl_in_rule__PostfixExpr__Group_1_1_1__08876 = new BitSet(new long[]{0x0000000008000002L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_1__1_in_rule__PostfixExpr__Group_1_1_1__08879 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleexpr_in_rule__PostfixExpr__Group_1_1_1__0__Impl8906 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_1__1__Impl_in_rule__PostfixExpr__Group_1_1_1__18935 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_1_1__0_in_rule__PostfixExpr__Group_1_1_1__1__Impl8962 = new BitSet(new long[]{0x0000000008000002L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_1_1__0__Impl_in_rule__PostfixExpr__Group_1_1_1_1__08997 = new BitSet(new long[]{0x0000200020000050L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_1_1__1_in_rule__PostfixExpr__Group_1_1_1_1__09000 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_27_in_rule__PostfixExpr__Group_1_1_1_1__0__Impl9028 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_1_1_1__1__Impl_in_rule__PostfixExpr__Group_1_1_1_1__19059 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleexpr_in_rule__PostfixExpr__Group_1_1_1_1__1__Impl9086 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_2__0__Impl_in_rule__PostfixExpr__Group_1_2__09119 = new BitSet(new long[]{0x0000200020000050L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_2__1_in_rule__PostfixExpr__Group_1_2__09122 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_47_in_rule__PostfixExpr__Group_1_2__0__Impl9150 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_2__1__Impl_in_rule__PostfixExpr__Group_1_2__19181 = new BitSet(new long[]{0x0001000000000000L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_2__2_in_rule__PostfixExpr__Group_1_2__19184 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleexpr_in_rule__PostfixExpr__Group_1_2__1__Impl9211 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__PostfixExpr__Group_1_2__2__Impl_in_rule__PostfixExpr__Group_1_2__29240 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_48_in_rule__PostfixExpr__Group_1_2__2__Impl9268 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulefunctionDefinition_in_rule__Model__FunctionsAssignment_1_09310 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulemainFunction_in_rule__Model__MainAssignment_1_19341 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__FunctionDefinition__NameAssignment_09372 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleformalParams_in_rule__FunctionDefinition__FormalParamsAssignment_29403 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruletype_in_rule__FunctionDefinition__ReturnTypeAssignment_4_19434 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleblock_in_rule__FunctionDefinition__BlocksAssignment_59465 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleformalParams_in_rule__MainFunction__FormalParamsAssignment_19496 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleblock_in_rule__MainFunction__BlocksAssignment_39527 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleparam_in_rule__FormalParams__ParamsAssignment_09558 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleparam_in_rule__FormalParams__ParamsAssignment_1_19589 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__Param__NameAssignment_19620 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulestatement_in_rule__Block__StatementsAssignment_29651 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__Type__TypeAssignment_1_09686 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulestatement_in_rule__Statement__StatementsAssignment_4_4_19721 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulestatement_in_rule__Statement__StatementsAssignment_5_59752 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruletype_in_rule__Declaration__VariableTypeAssignment_0_09783 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__Declaration__NameAssignment_19814 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_0__0_in_synpred41309 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_1__0_in_synpred51327 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_2__0_in_synpred61345 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Statement__Group_4_4__0_in_synpred344776 = new BitSet(new long[]{0x0000000000000002L});
 
 }

@@ -30,13 +30,15 @@
     <genClasses ecoreClass="MyDsl.ecore#//param"/>
     <genClasses ecoreClass="MyDsl.ecore#//block"/>
     <genClasses ecoreClass="MyDsl.ecore#//type">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//type/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MyDsl.ecore#//type/type"/>
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//statement">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//statement/statements"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MyDsl.ecore#//statement/types"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//statement/name"/>
     </genClasses>
-    <genClasses ecoreClass="MyDsl.ecore#//declaration"/>
+    <genClasses ecoreClass="MyDsl.ecore#//declaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//declaration/variableType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//declaration/name"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

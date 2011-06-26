@@ -24,6 +24,7 @@ import org.xtext.example.mydsl1.myDsl.type;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.typeImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.typeImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
@@ -32,6 +33,26 @@ import org.xtext.example.mydsl1.myDsl.type;
  */
 public class typeImpl extends paramImpl implements type
 {
+  /**
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getType() <em>Type</em>}' reference.
    * <!-- begin-user-doc -->
@@ -61,6 +82,29 @@ public class typeImpl extends paramImpl implements type
   protected EClass eStaticClass()
   {
     return MyDslPackage.Literals.TYPE;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.TYPE__NAME, oldName, name));
   }
 
   /**
@@ -116,6 +160,8 @@ public class typeImpl extends paramImpl implements type
   {
     switch (featureID)
     {
+      case MyDslPackage.TYPE__NAME:
+        return getName();
       case MyDslPackage.TYPE__TYPE:
         if (resolve) return getType();
         return basicGetType();
@@ -133,6 +179,9 @@ public class typeImpl extends paramImpl implements type
   {
     switch (featureID)
     {
+      case MyDslPackage.TYPE__NAME:
+        setName((String)newValue);
+        return;
       case MyDslPackage.TYPE__TYPE:
         setType((declaration)newValue);
         return;
@@ -150,6 +199,9 @@ public class typeImpl extends paramImpl implements type
   {
     switch (featureID)
     {
+      case MyDslPackage.TYPE__NAME:
+        setName(NAME_EDEFAULT);
+        return;
       case MyDslPackage.TYPE__TYPE:
         setType((declaration)null);
         return;
@@ -167,10 +219,29 @@ public class typeImpl extends paramImpl implements type
   {
     switch (featureID)
     {
+      case MyDslPackage.TYPE__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case MyDslPackage.TYPE__TYPE:
         return type != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
   }
 
 } //typeImpl

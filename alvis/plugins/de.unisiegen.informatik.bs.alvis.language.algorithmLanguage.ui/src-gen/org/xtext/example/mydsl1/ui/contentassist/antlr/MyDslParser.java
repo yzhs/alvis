@@ -44,9 +44,9 @@ public class MyDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAddExprAccess().getAlternatives_1_0(), "rule__AddExpr__Alternatives_1_0");
 					put(grammarAccess.getMulExprAccess().getAlternatives_1_0(), "rule__MulExpr__Alternatives_1_0");
 					put(grammarAccess.getAtomAccess().getAlternatives(), "rule__Atom__Alternatives");
-					put(grammarAccess.getAtomAccess().getAlternatives_1_1(), "rule__Atom__Alternatives_1_1");
-					put(grammarAccess.getPostfixExprAccess().getAlternatives(), "rule__PostfixExpr__Alternatives");
-					put(grammarAccess.getPostfixExprAccess().getAlternatives_1_1(), "rule__PostfixExpr__Alternatives_1_1");
+					put(grammarAccess.getAtomAccess().getAlternatives_2_1(), "rule__Atom__Alternatives_2_1");
+					put(grammarAccess.getPostfixExprAccess().getAlternatives_1(), "rule__PostfixExpr__Alternatives_1");
+					put(grammarAccess.getEndExprAccess().getAlternatives(), "rule__EndExpr__Alternatives");
 					put(grammarAccess.getModelAccess().getGroup(), "rule__Model__Group__0");
 					put(grammarAccess.getModelAccess().getGroup_1(), "rule__Model__Group_1__0");
 					put(grammarAccess.getFunctionDefinitionAccess().getGroup(), "rule__FunctionDefinition__Group__0");
@@ -65,10 +65,9 @@ public class MyDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getStatementAccess().getGroup_4_4(), "rule__Statement__Group_4_4__0");
 					put(grammarAccess.getStatementAccess().getGroup_5(), "rule__Statement__Group_5__0");
 					put(grammarAccess.getStatementAccess().getGroup_6(), "rule__Statement__Group_6__0");
-					put(grammarAccess.getStatementAccess().getGroup_8(), "rule__Statement__Group_8__0");
-					put(grammarAccess.getStatementAccess().getGroup_9(), "rule__Statement__Group_9__0");
-					put(grammarAccess.getStatementAccess().getGroup_10(), "rule__Statement__Group_10__0");
 					put(grammarAccess.getDeclarationAccess().getGroup(), "rule__Declaration__Group__0");
+					put(grammarAccess.getDeclarationAccess().getGroup_0(), "rule__Declaration__Group_0__0");
+					put(grammarAccess.getDeclarationAccess().getGroup_2(), "rule__Declaration__Group_2__0");
 					put(grammarAccess.getAssignmentAccess().getGroup(), "rule__Assignment__Group__0");
 					put(grammarAccess.getExprAccess().getGroup(), "rule__Expr__Group__0");
 					put(grammarAccess.getExprAccess().getGroup_1(), "rule__Expr__Group_1__0");
@@ -85,13 +84,13 @@ public class MyDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAtomAccess().getGroup_0(), "rule__Atom__Group_0__0");
 					put(grammarAccess.getAtomAccess().getGroup_1(), "rule__Atom__Group_1__0");
 					put(grammarAccess.getAtomAccess().getGroup_2(), "rule__Atom__Group_2__0");
-					put(grammarAccess.getPostfixExprAccess().getGroup_0(), "rule__PostfixExpr__Group_0__0");
-					put(grammarAccess.getPostfixExprAccess().getGroup_1(), "rule__PostfixExpr__Group_1__0");
-					put(grammarAccess.getPostfixExprAccess().getGroup_1_1_0(), "rule__PostfixExpr__Group_1_1_0__0");
+					put(grammarAccess.getAtomAccess().getGroup_3(), "rule__Atom__Group_3__0");
+					put(grammarAccess.getPostfixExprAccess().getGroup(), "rule__PostfixExpr__Group__0");
+					put(grammarAccess.getPostfixExprAccess().getGroup_1_0(), "rule__PostfixExpr__Group_1_0__0");
+					put(grammarAccess.getPostfixExprAccess().getGroup_1_1(), "rule__PostfixExpr__Group_1_1__0");
 					put(grammarAccess.getPostfixExprAccess().getGroup_1_1_1(), "rule__PostfixExpr__Group_1_1_1__0");
 					put(grammarAccess.getPostfixExprAccess().getGroup_1_1_1_1(), "rule__PostfixExpr__Group_1_1_1_1__0");
-					put(grammarAccess.getPostfixExprAccess().getGroup_1_1_1_1_1(), "rule__PostfixExpr__Group_1_1_1_1_1__0");
-					put(grammarAccess.getPostfixExprAccess().getGroup_1_1_2(), "rule__PostfixExpr__Group_1_1_2__0");
+					put(grammarAccess.getPostfixExprAccess().getGroup_1_2(), "rule__PostfixExpr__Group_1_2__0");
 					put(grammarAccess.getModelAccess().getFunctionsAssignment_1_0(), "rule__Model__FunctionsAssignment_1_0");
 					put(grammarAccess.getModelAccess().getMainAssignment_1_1(), "rule__Model__MainAssignment_1_1");
 					put(grammarAccess.getFunctionDefinitionAccess().getNameAssignment_0(), "rule__FunctionDefinition__NameAssignment_0");
@@ -107,12 +106,8 @@ public class MyDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTypeAccess().getTypeAssignment_1_0(), "rule__Type__TypeAssignment_1_0");
 					put(grammarAccess.getStatementAccess().getStatementsAssignment_4_4_1(), "rule__Statement__StatementsAssignment_4_4_1");
 					put(grammarAccess.getStatementAccess().getStatementsAssignment_5_5(), "rule__Statement__StatementsAssignment_5_5");
-					put(grammarAccess.getStatementAccess().getTypesAssignment_8_0(), "rule__Statement__TypesAssignment_8_0");
-					put(grammarAccess.getStatementAccess().getNameAssignment_8_1(), "rule__Statement__NameAssignment_8_1");
-					put(grammarAccess.getStatementAccess().getTypesAssignment_9_0(), "rule__Statement__TypesAssignment_9_0");
-					put(grammarAccess.getStatementAccess().getNameAssignment_9_1(), "rule__Statement__NameAssignment_9_1");
-					put(grammarAccess.getStatementAccess().getNameAssignment_10_1(), "rule__Statement__NameAssignment_10_1");
-					put(grammarAccess.getDeclarationAccess().getNameAssignment_0(), "rule__Declaration__NameAssignment_0");
+					put(grammarAccess.getDeclarationAccess().getVariableTypeAssignment_0_0(), "rule__Declaration__VariableTypeAssignment_0_0");
+					put(grammarAccess.getDeclarationAccess().getNameAssignment_1(), "rule__Declaration__NameAssignment_1");
 				}
 			};
 		}

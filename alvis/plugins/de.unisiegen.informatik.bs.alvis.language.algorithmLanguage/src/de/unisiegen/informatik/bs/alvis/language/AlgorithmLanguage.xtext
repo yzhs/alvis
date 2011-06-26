@@ -21,25 +21,21 @@ block  : {block}'begin' statements+=statement* 'end' ;
 type: {type}((type=[declaration])|'String'|'Integer'|'Boolean');
 
 
-statement : 
+statement :
 	declaration endExpr
-    | expr endExpr
-    | assignment endExpr
-    | 'return' expr? endExpr
+    |{statement}  expr endExpr
+    |{statement}  assignment endExpr
+    |{statement} 'return' expr? endExpr
     | 'if' expr ':' statement ('else' statements+=statement)?
     | 'for' param 'in' expr ':' statements+=statement
     | 'while' expr ':' statement
-    | block
-    |types=[functionDefinition] name=ID
-    |types = [statement] name=ID
-    |'mains'  name=ID;
+    | block;
+//    |types=[functionDefinition] name=ID
+//    |variableType=type name=ID;
    
-//thissone : {thissone} [thisone];
-   
-//    ;
 
 declaration
-    : name=ID '=' expr;
+    : (variableType+=type ('[]')?)+  name=ID  ('=' expr)?;
 
 assignment
     : postfixExpr '=' expr
@@ -70,7 +66,7 @@ mulExpr
     ;
 
 atom: '!' atom
-//    | '(' sign expr ')'
+    | '(' sign expr ')'
 	| '(' ('+'|'-') expr ')'
     | '(' expr ')'
     | postfixExpr
@@ -78,36 +74,31 @@ atom: '!' atom
     ;
 
 postfixExpr
-    : 'PRINT' '(' expr ')'
-    | ID
-      ( '.' ID 
+     : ID ( '.' ID  // to change
       | '(' (expr (',' expr)*)? ')' 
-      | '[' expr ']'   
-      )*
+      | '[' expr ']' )*
     ;
 
 
 //String geht im moment nicht richtig
 terminal constant
-//    : 'BOOL'
+// BOOL
 	: 'true'|'false'
-//    | 'FLOAT'
+// FLOAT
 	| '0'..'9'+'.'('0'..'9')*
-//    | INT
+// INT
 	| ('0'..'9')+
-    | 'STRING'
-//    | '"' ( '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') | ~('\\'|'"') )* '"' 
-//    | ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
-//    | 'NULL'
+// STRING
+
+	| STRING
+// NULL and INFINITY
 	| 'null'
-//    | 'INFTY'
-	| 'infty'
-    ;
+	| 'infty';
     
-terminal endExpr
-	: (',' | ';') ;
+endExpr
+	: (',' | ';') ; //war vorher terminal
 
 
-//terminal sign: '+' | '-' ;
+terminal sign: '+' | '-' ;
  
 terminal ID  : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')* ; 

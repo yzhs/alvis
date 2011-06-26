@@ -237,31 +237,13 @@ public interface MyDslPackage extends EPackage
   int STATEMENT__STATEMENTS = 0;
 
   /**
-   * The feature id for the '<em><b>Types</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATEMENT__TYPES = 1;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int STATEMENT__NAME = 2;
-
-  /**
    * The number of structural features of the '<em>statement</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int STATEMENT_FEATURE_COUNT = 3;
+  int STATEMENT_FEATURE_COUNT = 1;
 
   /**
    * The meta object id for the '{@link org.xtext.example.mydsl1.myDsl.impl.paramImpl <em>param</em>}' class.
@@ -281,24 +263,6 @@ public interface MyDslPackage extends EPackage
    * @ordered
    */
   int PARAM__STATEMENTS = STATEMENT__STATEMENTS;
-
-  /**
-   * The feature id for the '<em><b>Types</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PARAM__TYPES = STATEMENT__TYPES;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PARAM__NAME = STATEMENT__NAME;
 
   /**
    * The number of structural features of the '<em>param</em>' class.
@@ -329,24 +293,6 @@ public interface MyDslPackage extends EPackage
   int BLOCK__STATEMENTS = STATEMENT__STATEMENTS;
 
   /**
-   * The feature id for the '<em><b>Types</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int BLOCK__TYPES = STATEMENT__TYPES;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int BLOCK__NAME = STATEMENT__NAME;
-
-  /**
    * The number of structural features of the '<em>block</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -375,22 +321,13 @@ public interface MyDslPackage extends EPackage
   int TYPE__STATEMENTS = PARAM__STATEMENTS;
 
   /**
-   * The feature id for the '<em><b>Types</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int TYPE__TYPES = PARAM__TYPES;
-
-  /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TYPE__NAME = PARAM__NAME;
+  int TYPE__NAME = PARAM_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' reference.
@@ -399,7 +336,7 @@ public interface MyDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TYPE__TYPE = PARAM_FEATURE_COUNT + 0;
+  int TYPE__TYPE = PARAM_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>type</em>' class.
@@ -408,7 +345,7 @@ public interface MyDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TYPE_FEATURE_COUNT = PARAM_FEATURE_COUNT + 1;
+  int TYPE_FEATURE_COUNT = PARAM_FEATURE_COUNT + 2;
 
   /**
    * The meta object id for the '{@link org.xtext.example.mydsl1.myDsl.impl.declarationImpl <em>declaration</em>}' class.
@@ -430,13 +367,13 @@ public interface MyDslPackage extends EPackage
   int DECLARATION__STATEMENTS = STATEMENT__STATEMENTS;
 
   /**
-   * The feature id for the '<em><b>Types</b></em>' reference.
+   * The feature id for the '<em><b>Variable Type</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DECLARATION__TYPES = STATEMENT__TYPES;
+  int DECLARATION__VARIABLE_TYPE = STATEMENT_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -445,7 +382,7 @@ public interface MyDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DECLARATION__NAME = STATEMENT__NAME;
+  int DECLARATION__NAME = STATEMENT_FEATURE_COUNT + 1;
 
   /**
    * The number of structural features of the '<em>declaration</em>' class.
@@ -454,7 +391,7 @@ public interface MyDslPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DECLARATION_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 0;
+  int DECLARATION_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 2;
 
 
   /**
@@ -627,6 +564,17 @@ public interface MyDslPackage extends EPackage
   EClass gettype();
 
   /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl1.myDsl.type#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.xtext.example.mydsl1.myDsl.type#getName()
+   * @see #gettype()
+   * @generated
+   */
+  EAttribute gettype_Name();
+
+  /**
    * Returns the meta object for the reference '{@link org.xtext.example.mydsl1.myDsl.type#getType <em>Type</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -659,28 +607,6 @@ public interface MyDslPackage extends EPackage
   EReference getstatement_Statements();
 
   /**
-   * Returns the meta object for the reference '{@link org.xtext.example.mydsl1.myDsl.statement#getTypes <em>Types</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Types</em>'.
-   * @see org.xtext.example.mydsl1.myDsl.statement#getTypes()
-   * @see #getstatement()
-   * @generated
-   */
-  EReference getstatement_Types();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl1.myDsl.statement#getName <em>Name</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.xtext.example.mydsl1.myDsl.statement#getName()
-   * @see #getstatement()
-   * @generated
-   */
-  EAttribute getstatement_Name();
-
-  /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl1.myDsl.declaration <em>declaration</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -689,6 +615,28 @@ public interface MyDslPackage extends EPackage
    * @generated
    */
   EClass getdeclaration();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl1.myDsl.declaration#getVariableType <em>Variable Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Variable Type</em>'.
+   * @see org.xtext.example.mydsl1.myDsl.declaration#getVariableType()
+   * @see #getdeclaration()
+   * @generated
+   */
+  EReference getdeclaration_VariableType();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.xtext.example.mydsl1.myDsl.declaration#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.xtext.example.mydsl1.myDsl.declaration#getName()
+   * @see #getdeclaration()
+   * @generated
+   */
+  EAttribute getdeclaration_Name();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -856,6 +804,14 @@ public interface MyDslPackage extends EPackage
     EClass TYPE = eINSTANCE.gettype();
 
     /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TYPE__NAME = eINSTANCE.gettype_Name();
+
+    /**
      * The meta object literal for the '<em><b>Type</b></em>' reference feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -882,22 +838,6 @@ public interface MyDslPackage extends EPackage
     EReference STATEMENT__STATEMENTS = eINSTANCE.getstatement_Statements();
 
     /**
-     * The meta object literal for the '<em><b>Types</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference STATEMENT__TYPES = eINSTANCE.getstatement_Types();
-
-    /**
-     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute STATEMENT__NAME = eINSTANCE.getstatement_Name();
-
-    /**
      * The meta object literal for the '{@link org.xtext.example.mydsl1.myDsl.impl.declarationImpl <em>declaration</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -906,6 +846,22 @@ public interface MyDslPackage extends EPackage
      * @generated
      */
     EClass DECLARATION = eINSTANCE.getdeclaration();
+
+    /**
+     * The meta object literal for the '<em><b>Variable Type</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference DECLARATION__VARIABLE_TYPE = eINSTANCE.getdeclaration_VariableType();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute DECLARATION__NAME = eINSTANCE.getdeclaration_Name();
 
   }
 

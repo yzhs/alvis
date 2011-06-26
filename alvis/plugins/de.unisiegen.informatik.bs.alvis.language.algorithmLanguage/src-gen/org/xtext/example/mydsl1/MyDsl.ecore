@@ -31,13 +31,16 @@
   <eClassifiers xsi:type="ecore:EClass" name="param" eSuperTypes="#//statement"/>
   <eClassifiers xsi:type="ecore:EClass" name="block" eSuperTypes="#//statement"/>
   <eClassifiers xsi:type="ecore:EClass" name="type" eSuperTypes="#//param">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//declaration"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="statement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
         eType="#//statement" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="types" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="declaration" eSuperTypes="#//statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variableType" upperBound="-1"
+        eType="#//type" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="declaration" eSuperTypes="#//statement"/>
 </ecore:EPackage>
