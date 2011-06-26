@@ -2,12 +2,19 @@ package de.unisiegen.informatik.bs.alvis;
 
 import java.util.ArrayList;
 
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtension;
+import org.eclipse.core.runtime.IExtensionPoint;
+import org.eclipse.core.runtime.IExtensionRegistry;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import de.unisiegen.informatik.bs.alvis.editors.AlgorithmPartitionScanner;
 import de.unisiegen.informatik.bs.alvis.export.Export;
+import de.unisiegen.informatik.bs.alvis.extensionpoints.IDatatypeList;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
@@ -193,6 +200,44 @@ public class Activator extends AbstractUIPlugin {
 		// Add all this to VM.
 		return vm.addAlgoToVM("algo", pathToFile, fileName);
 		 //			return vm.addAlgoToVM("first", pathToAlgoInJava); //$NON-NLS-1$
+	}
+	
+	/**
+	 * Get an instance of each datatype that is used in some plug-in.
+	 * With this instance you can get informations about the datatypes.
+	 * @return a list from all datatypes in the plug-ins
+	 */
+	public ArrayList<PCObject> getAllDatatypes() {
+		ArrayList<PCObject> allDatatypes = new ArrayList<PCObject>();
+		
+        IExtensionRegistry registry = Platform.getExtensionRegistry();
+        IExtensionPoint extensionPoint = registry.getExtensionPoint(
+        		"de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist"); //$NON-NLS-1$
+        IExtension[] extensions = extensionPoint.getExtensions();
+
+        //     * For all Extensions that contribute:
+        for (int i = 0; i < extensions.length; i++)
+        {
+            IExtension extension = extensions[i];
+            IConfigurationElement[] elements = extension.getConfigurationElements();
+            for (int j = 0; j < elements.length; j++)
+            {
+                try
+                {
+                    IConfigurationElement element = elements[j];
+                    IDatatypeList datatypes = (IDatatypeList)element.
+                        createExecutableExtension("class"); //$NON-NLS-1$
+                    // Save the found datatypes in allDatatypes
+                    allDatatypes.addAll(datatypes.getAllDatatypesInThisPlugin());
+                }
+                catch (CoreException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+        }
+        // The list with all found datatypes
+		return allDatatypes;
 	}
 
 }

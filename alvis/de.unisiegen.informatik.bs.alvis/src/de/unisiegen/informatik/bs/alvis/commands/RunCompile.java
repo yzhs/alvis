@@ -43,8 +43,12 @@ public class RunCompile extends AbstractHandler{
 		// Instantiate IEditorInput
 		IEditorInput input = null;
 		
-		for(PCObject obj : getAllDatatypes()) {
-			System.out.println(obj.getClass());
+		// Hier sind alle Datentypen
+		for(PCObject obj : Activator.getDefault().getAllDatatypes()) {
+//			System.out.println(obj.getClass());
+//			System.out.println(obj.getTypeName());
+//			System.out.println(obj.toString());
+//			System.out.println();
 		}
 		
 		try {
@@ -58,7 +62,7 @@ public class RunCompile extends AbstractHandler{
 				getEditorInput();
 		}
 		catch(NullPointerException e) {
-			
+			e.printStackTrace();
 		}
 
 		//Instantiate a new Run object
@@ -126,38 +130,7 @@ public class RunCompile extends AbstractHandler{
 		return null;
 	}
 	
-	private ArrayList<PCObject> getAllDatatypes() {
-		ArrayList<PCObject> allDatatypes = new ArrayList<PCObject>();
-		
-        IExtensionRegistry registry = Platform.getExtensionRegistry();
-        IExtensionPoint extensionPoint = registry.getExtensionPoint(
-        		"de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist"); //$NON-NLS-1$
-        IExtension[] extensions = extensionPoint.getExtensions();
 
-        //     * For all Extensions that contribute:
-        for (int i = 0; i < extensions.length; i++)
-        {
-            IExtension extension = extensions[i];
-            IConfigurationElement[] elements = extension.getConfigurationElements();
-            for (int j = 0; j < elements.length; j++)
-            {
-                try
-                {
-                    IConfigurationElement element = elements[j];
-                    IDatatypeList datatypes = (IDatatypeList)element.
-                        createExecutableExtension("class"); //$NON-NLS-1$
-                    allDatatypes.addAll(datatypes.getAllDatatypesInThisPlugin());
-                    // Save the found IRunVisualizer in a list
-                    // HIER ALLE Objekte aus datatypes in deiner Globale Liste speichern
-                }
-                catch (CoreException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        }
-		return allDatatypes;
-	}
 	
 	private Run getPreferencesByDialog() {
 		
