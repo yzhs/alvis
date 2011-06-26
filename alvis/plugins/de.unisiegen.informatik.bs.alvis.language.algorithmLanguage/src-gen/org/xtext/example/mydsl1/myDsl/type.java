@@ -16,7 +16,7 @@ package org.xtext.example.mydsl1.myDsl;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.xtext.example.mydsl1.myDsl.type#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.mydsl1.myDsl.type#getType <em>Type</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl1.myDsl.type#getTypes <em>Types</em>}</li>
  * </ul>
  * </p>
  *
@@ -53,29 +53,29 @@ public interface type extends param
   void setName(String value);
 
   /**
-   * Returns the value of the '<em><b>Type</b></em>' reference.
+   * Returns the value of the '<em><b>Types</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Type</em>' reference isn't clear,
+   * If the meaning of the '<em>Types</em>' attribute isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Type</em>' reference.
-   * @see #setType(declaration)
-   * @see org.xtext.example.mydsl1.myDsl.MyDslPackage#gettype_Type()
+   * @return the value of the '<em>Types</em>' attribute.
+   * @see #setTypes(String)
+   * @see org.xtext.example.mydsl1.myDsl.MyDslPackage#gettype_Types()
    * @model
    * @generated
    */
-  declaration getType();
+  String getTypes();
 
   /**
-   * Sets the value of the '{@link org.xtext.example.mydsl1.myDsl.type#getType <em>Type</em>}' reference.
+   * Sets the value of the '{@link org.xtext.example.mydsl1.myDsl.type#getTypes <em>Types</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Type</em>' reference.
-   * @see #getType()
+   * @param value the new value of the '<em>Types</em>' attribute.
+   * @see #getTypes()
    * @generated
    */
-  void setType(declaration value);
+  void setTypes(String value);
 
 } // type

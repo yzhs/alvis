@@ -8,51 +8,48 @@ package org.xtext.example.mydsl1.myDsl.impl;
 
 import java.util.Collection;
 
-import org.eclipse.emf.common.notify.NotificationChain;
-
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
+import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 import org.xtext.example.mydsl1.myDsl.MyDslPackage;
-import org.xtext.example.mydsl1.myDsl.param;
-import org.xtext.example.mydsl1.myDsl.statement;
+import org.xtext.example.mydsl1.myDsl.real;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>param</b></em>'.
+ * An implementation of the model object '<em><b>real</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.paramImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.realImpl#getReal <em>Real</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class paramImpl extends statementImpl implements param
+public class realImpl extends MinimalEObjectImpl.Container implements real
 {
   /**
-   * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
+   * The cached value of the '{@link #getReal() <em>Real</em>}' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStatements()
+   * @see #getReal()
    * @generated
    * @ordered
    */
-  protected EList<statement> statements;
+  protected EList<Integer> real;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected paramImpl()
+  protected realImpl()
   {
     super();
   }
@@ -65,7 +62,7 @@ public class paramImpl extends statementImpl implements param
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.PARAM;
+    return MyDslPackage.Literals.REAL;
   }
 
   /**
@@ -73,29 +70,13 @@ public class paramImpl extends statementImpl implements param
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<statement> getStatements()
+  public EList<Integer> getReal()
   {
-    if (statements == null)
+    if (real == null)
     {
-      statements = new EObjectContainmentEList<statement>(statement.class, this, MyDslPackage.PARAM__STATEMENTS);
+      real = new EDataTypeEList<Integer>(Integer.class, this, MyDslPackage.REAL__REAL);
     }
-    return statements;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
-  {
-    switch (featureID)
-    {
-      case MyDslPackage.PARAM__STATEMENTS:
-        return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
-    }
-    return super.eInverseRemove(otherEnd, featureID, msgs);
+    return real;
   }
 
   /**
@@ -108,8 +89,8 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        return getStatements();
+      case MyDslPackage.REAL__REAL:
+        return getReal();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -125,9 +106,9 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        getStatements().clear();
-        getStatements().addAll((Collection<? extends statement>)newValue);
+      case MyDslPackage.REAL__REAL:
+        getReal().clear();
+        getReal().addAll((Collection<? extends Integer>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -143,8 +124,8 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        getStatements().clear();
+      case MyDslPackage.REAL__REAL:
+        getReal().clear();
         return;
     }
     super.eUnset(featureID);
@@ -160,10 +141,27 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        return statements != null && !statements.isEmpty();
+      case MyDslPackage.REAL__REAL:
+        return real != null && !real.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //paramImpl
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (real: ");
+    result.append(real);
+    result.append(')');
+    return result.toString();
+  }
+
+} //realImpl

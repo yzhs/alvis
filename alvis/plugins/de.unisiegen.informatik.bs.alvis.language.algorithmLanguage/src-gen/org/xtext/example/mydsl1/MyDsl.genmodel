@@ -21,24 +21,72 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//functionDefinition/blocks"/>
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//mainFunction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//mainFunction/main"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//mainFunction/formalParams"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//mainFunction/blocks"/>
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//formalParams">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//formalParams/params"/>
     </genClasses>
-    <genClasses ecoreClass="MyDsl.ecore#//param"/>
-    <genClasses ecoreClass="MyDsl.ecore#//block"/>
+    <genClasses ecoreClass="MyDsl.ecore#//param">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//param/statements"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//block">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//block/statements"/>
+    </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//type">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//type/name"/>
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MyDsl.ecore#//type/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//type/types"/>
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//statement">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//statement/statements"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//statement/postFixExpression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//statement/assignments"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//statement/exprs"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//functionCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MyDsl.ecore#//functionCall/function"/>
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//declaration">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//declaration/variableType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//declaration/name"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//assignment"/>
+    <genClasses ecoreClass="MyDsl.ecore#//expr">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//expr/statements"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//andExpr">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//andExpr/andExprs"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//eqExpr">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//eqExpr/eqExprs"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//relExpr">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//relExpr/relExprs"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//addExpr">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//addExpr/addExpr"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//mulExpr">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//mulExpr/mulExprs"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//mulExpr/atoms"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//atom">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//atom/constants"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//postfixExpr">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//postfixExpr/exprs"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MyDsl.ecore#//postfixExpr/existingVariable"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//postfixExpr/expressions"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//constant">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//constant/Real"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//constant/Integer"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//constant/String"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//constant/Null"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//constant/Infinity"/>
+    </genClasses>
+    <genClasses ecoreClass="MyDsl.ecore#//real">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//real/real"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

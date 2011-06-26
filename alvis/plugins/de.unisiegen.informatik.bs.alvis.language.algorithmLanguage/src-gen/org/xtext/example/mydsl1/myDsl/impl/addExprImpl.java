@@ -19,40 +19,39 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.xtext.example.mydsl1.myDsl.MyDslPackage;
-import org.xtext.example.mydsl1.myDsl.param;
-import org.xtext.example.mydsl1.myDsl.statement;
+import org.xtext.example.mydsl1.myDsl.addExpr;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>param</b></em>'.
+ * An implementation of the model object '<em><b>add Expr</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.paramImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.addExprImpl#getAddExpr <em>Add Expr</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class paramImpl extends statementImpl implements param
+public class addExprImpl extends relExprImpl implements addExpr
 {
   /**
-   * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
+   * The cached value of the '{@link #getAddExpr() <em>Add Expr</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStatements()
+   * @see #getAddExpr()
    * @generated
    * @ordered
    */
-  protected EList<statement> statements;
+  protected EList<addExpr> addExpr;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected paramImpl()
+  protected addExprImpl()
   {
     super();
   }
@@ -65,7 +64,7 @@ public class paramImpl extends statementImpl implements param
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.PARAM;
+    return MyDslPackage.Literals.ADD_EXPR;
   }
 
   /**
@@ -73,13 +72,13 @@ public class paramImpl extends statementImpl implements param
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<statement> getStatements()
+  public EList<addExpr> getAddExpr()
   {
-    if (statements == null)
+    if (addExpr == null)
     {
-      statements = new EObjectContainmentEList<statement>(statement.class, this, MyDslPackage.PARAM__STATEMENTS);
+      addExpr = new EObjectContainmentEList<addExpr>(addExpr.class, this, MyDslPackage.ADD_EXPR__ADD_EXPR);
     }
-    return statements;
+    return addExpr;
   }
 
   /**
@@ -92,8 +91,8 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
+      case MyDslPackage.ADD_EXPR__ADD_EXPR:
+        return ((InternalEList<?>)getAddExpr()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -108,8 +107,8 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        return getStatements();
+      case MyDslPackage.ADD_EXPR__ADD_EXPR:
+        return getAddExpr();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -125,9 +124,9 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        getStatements().clear();
-        getStatements().addAll((Collection<? extends statement>)newValue);
+      case MyDslPackage.ADD_EXPR__ADD_EXPR:
+        getAddExpr().clear();
+        getAddExpr().addAll((Collection<? extends addExpr>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -143,8 +142,8 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        getStatements().clear();
+      case MyDslPackage.ADD_EXPR__ADD_EXPR:
+        getAddExpr().clear();
         return;
     }
     super.eUnset(featureID);
@@ -160,10 +159,10 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        return statements != null && !statements.isEmpty();
+      case MyDslPackage.ADD_EXPR__ADD_EXPR:
+        return addExpr != null && !addExpr.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //paramImpl
+} //addExprImpl

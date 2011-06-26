@@ -34,6 +34,7 @@ import org.xtext.example.mydsl1.myDsl.mainFunction;
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.mainFunctionImpl#getMain <em>Main</em>}</li>
  *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.mainFunctionImpl#getFormalParams <em>Formal Params</em>}</li>
  *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.mainFunctionImpl#getBlocks <em>Blocks</em>}</li>
  * </ul>
@@ -43,6 +44,26 @@ import org.xtext.example.mydsl1.myDsl.mainFunction;
  */
 public class mainFunctionImpl extends MinimalEObjectImpl.Container implements mainFunction
 {
+  /**
+   * The default value of the '{@link #getMain() <em>Main</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getMain()
+   * @generated
+   * @ordered
+   */
+  protected static final String MAIN_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getMain() <em>Main</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getMain()
+   * @generated
+   * @ordered
+   */
+  protected String main = MAIN_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getFormalParams() <em>Formal Params</em>}' containment reference.
    * <!-- begin-user-doc -->
@@ -82,6 +103,29 @@ public class mainFunctionImpl extends MinimalEObjectImpl.Container implements ma
   protected EClass eStaticClass()
   {
     return MyDslPackage.Literals.MAIN_FUNCTION;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getMain()
+  {
+    return main;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setMain(String newMain)
+  {
+    String oldMain = main;
+    main = newMain;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.MAIN_FUNCTION__MAIN, oldMain, main));
   }
 
   /**
@@ -174,6 +218,8 @@ public class mainFunctionImpl extends MinimalEObjectImpl.Container implements ma
   {
     switch (featureID)
     {
+      case MyDslPackage.MAIN_FUNCTION__MAIN:
+        return getMain();
       case MyDslPackage.MAIN_FUNCTION__FORMAL_PARAMS:
         return getFormalParams();
       case MyDslPackage.MAIN_FUNCTION__BLOCKS:
@@ -193,6 +239,9 @@ public class mainFunctionImpl extends MinimalEObjectImpl.Container implements ma
   {
     switch (featureID)
     {
+      case MyDslPackage.MAIN_FUNCTION__MAIN:
+        setMain((String)newValue);
+        return;
       case MyDslPackage.MAIN_FUNCTION__FORMAL_PARAMS:
         setFormalParams((formalParams)newValue);
         return;
@@ -214,6 +263,9 @@ public class mainFunctionImpl extends MinimalEObjectImpl.Container implements ma
   {
     switch (featureID)
     {
+      case MyDslPackage.MAIN_FUNCTION__MAIN:
+        setMain(MAIN_EDEFAULT);
+        return;
       case MyDslPackage.MAIN_FUNCTION__FORMAL_PARAMS:
         setFormalParams((formalParams)null);
         return;
@@ -234,12 +286,31 @@ public class mainFunctionImpl extends MinimalEObjectImpl.Container implements ma
   {
     switch (featureID)
     {
+      case MyDslPackage.MAIN_FUNCTION__MAIN:
+        return MAIN_EDEFAULT == null ? main != null : !MAIN_EDEFAULT.equals(main);
       case MyDslPackage.MAIN_FUNCTION__FORMAL_PARAMS:
         return formalParams != null;
       case MyDslPackage.MAIN_FUNCTION__BLOCKS:
         return blocks != null && !blocks.isEmpty();
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (main: ");
+    result.append(main);
+    result.append(')');
+    return result.toString();
   }
 
 } //mainFunctionImpl

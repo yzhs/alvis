@@ -119,9 +119,69 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createstatementAdapter();
       }
       @Override
+      public Adapter casefunctionCall(functionCall object)
+      {
+        return createfunctionCallAdapter();
+      }
+      @Override
       public Adapter casedeclaration(declaration object)
       {
         return createdeclarationAdapter();
+      }
+      @Override
+      public Adapter caseassignment(assignment object)
+      {
+        return createassignmentAdapter();
+      }
+      @Override
+      public Adapter caseexpr(expr object)
+      {
+        return createexprAdapter();
+      }
+      @Override
+      public Adapter caseandExpr(andExpr object)
+      {
+        return createandExprAdapter();
+      }
+      @Override
+      public Adapter caseeqExpr(eqExpr object)
+      {
+        return createeqExprAdapter();
+      }
+      @Override
+      public Adapter caserelExpr(relExpr object)
+      {
+        return createrelExprAdapter();
+      }
+      @Override
+      public Adapter caseaddExpr(addExpr object)
+      {
+        return createaddExprAdapter();
+      }
+      @Override
+      public Adapter casemulExpr(mulExpr object)
+      {
+        return createmulExprAdapter();
+      }
+      @Override
+      public Adapter caseatom(atom object)
+      {
+        return createatomAdapter();
+      }
+      @Override
+      public Adapter casepostfixExpr(postfixExpr object)
+      {
+        return createpostfixExprAdapter();
+      }
+      @Override
+      public Adapter caseconstant(constant object)
+      {
+        return createconstantAdapter();
+      }
+      @Override
+      public Adapter casereal(real object)
+      {
+        return createrealAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -266,6 +326,21 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl1.myDsl.functionCall <em>function Call</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl1.myDsl.functionCall
+   * @generated
+   */
+  public Adapter createfunctionCallAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl1.myDsl.declaration <em>declaration</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -276,6 +351,171 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createdeclarationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl1.myDsl.assignment <em>assignment</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl1.myDsl.assignment
+   * @generated
+   */
+  public Adapter createassignmentAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl1.myDsl.expr <em>expr</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl1.myDsl.expr
+   * @generated
+   */
+  public Adapter createexprAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl1.myDsl.andExpr <em>and Expr</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl1.myDsl.andExpr
+   * @generated
+   */
+  public Adapter createandExprAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl1.myDsl.eqExpr <em>eq Expr</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl1.myDsl.eqExpr
+   * @generated
+   */
+  public Adapter createeqExprAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl1.myDsl.relExpr <em>rel Expr</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl1.myDsl.relExpr
+   * @generated
+   */
+  public Adapter createrelExprAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl1.myDsl.addExpr <em>add Expr</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl1.myDsl.addExpr
+   * @generated
+   */
+  public Adapter createaddExprAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl1.myDsl.mulExpr <em>mul Expr</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl1.myDsl.mulExpr
+   * @generated
+   */
+  public Adapter createmulExprAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl1.myDsl.atom <em>atom</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl1.myDsl.atom
+   * @generated
+   */
+  public Adapter createatomAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl1.myDsl.postfixExpr <em>postfix Expr</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl1.myDsl.postfixExpr
+   * @generated
+   */
+  public Adapter createpostfixExprAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl1.myDsl.constant <em>constant</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl1.myDsl.constant
+   * @generated
+   */
+  public Adapter createconstantAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl1.myDsl.real <em>real</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.xtext.example.mydsl1.myDsl.real
+   * @generated
+   */
+  public Adapter createrealAdapter()
   {
     return null;
   }

@@ -1,0 +1,45 @@
+/**
+ * <copyright>
+ * </copyright>
+ *
+
+ */
+package org.xtext.example.mydsl1.myDsl;
+
+import org.eclipse.emf.common.util.EList;
+
+/**
+ * <!-- begin-user-doc -->
+ * A representation of the model object '<em><b>eq Expr</b></em>'.
+ * <!-- end-user-doc -->
+ *
+ * <p>
+ * The following features are supported:
+ * <ul>
+ *   <li>{@link org.xtext.example.mydsl1.myDsl.eqExpr#getEqExprs <em>Eq Exprs</em>}</li>
+ * </ul>
+ * </p>
+ *
+ * @see org.xtext.example.mydsl1.myDsl.MyDslPackage#geteqExpr()
+ * @model
+ * @generated
+ */
+public interface eqExpr extends andExpr
+{
+  /**
+   * Returns the value of the '<em><b>Eq Exprs</b></em>' containment reference list.
+   * The list contents are of type {@link org.xtext.example.mydsl1.myDsl.eqExpr}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Eq Exprs</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Eq Exprs</em>' containment reference list.
+   * @see org.xtext.example.mydsl1.myDsl.MyDslPackage#geteqExpr_EqExprs()
+   * @model containment="true"
+   * @generated
+   */
+  EList<eqExpr> getEqExprs();
+
+} // eqExpr

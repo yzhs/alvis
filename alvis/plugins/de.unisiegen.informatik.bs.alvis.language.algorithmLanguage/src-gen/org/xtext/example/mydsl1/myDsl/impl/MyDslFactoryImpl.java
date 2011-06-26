@@ -76,7 +76,19 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
       case MyDslPackage.BLOCK: return createblock();
       case MyDslPackage.TYPE: return createtype();
       case MyDslPackage.STATEMENT: return createstatement();
+      case MyDslPackage.FUNCTION_CALL: return createfunctionCall();
       case MyDslPackage.DECLARATION: return createdeclaration();
+      case MyDslPackage.ASSIGNMENT: return createassignment();
+      case MyDslPackage.EXPR: return createexpr();
+      case MyDslPackage.AND_EXPR: return createandExpr();
+      case MyDslPackage.EQ_EXPR: return createeqExpr();
+      case MyDslPackage.REL_EXPR: return createrelExpr();
+      case MyDslPackage.ADD_EXPR: return createaddExpr();
+      case MyDslPackage.MUL_EXPR: return createmulExpr();
+      case MyDslPackage.ATOM: return createatom();
+      case MyDslPackage.POSTFIX_EXPR: return createpostfixExpr();
+      case MyDslPackage.CONSTANT: return createconstant();
+      case MyDslPackage.REAL: return createreal();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -175,10 +187,142 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * <!-- end-user-doc -->
    * @generated
    */
+  public functionCall createfunctionCall()
+  {
+    functionCallImpl functionCall = new functionCallImpl();
+    return functionCall;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public declaration createdeclaration()
   {
     declarationImpl declaration = new declarationImpl();
     return declaration;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public assignment createassignment()
+  {
+    assignmentImpl assignment = new assignmentImpl();
+    return assignment;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public expr createexpr()
+  {
+    exprImpl expr = new exprImpl();
+    return expr;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public andExpr createandExpr()
+  {
+    andExprImpl andExpr = new andExprImpl();
+    return andExpr;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public eqExpr createeqExpr()
+  {
+    eqExprImpl eqExpr = new eqExprImpl();
+    return eqExpr;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public relExpr createrelExpr()
+  {
+    relExprImpl relExpr = new relExprImpl();
+    return relExpr;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public addExpr createaddExpr()
+  {
+    addExprImpl addExpr = new addExprImpl();
+    return addExpr;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public mulExpr createmulExpr()
+  {
+    mulExprImpl mulExpr = new mulExprImpl();
+    return mulExpr;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public atom createatom()
+  {
+    atomImpl atom = new atomImpl();
+    return atom;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public postfixExpr createpostfixExpr()
+  {
+    postfixExprImpl postfixExpr = new postfixExprImpl();
+    return postfixExpr;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public constant createconstant()
+  {
+    constantImpl constant = new constantImpl();
+    return constant;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public real createreal()
+  {
+    realImpl real = new realImpl();
+    return real;
   }
 
   /**

@@ -19,40 +19,39 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.xtext.example.mydsl1.myDsl.MyDslPackage;
-import org.xtext.example.mydsl1.myDsl.param;
-import org.xtext.example.mydsl1.myDsl.statement;
+import org.xtext.example.mydsl1.myDsl.relExpr;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>param</b></em>'.
+ * An implementation of the model object '<em><b>rel Expr</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.paramImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.relExprImpl#getRelExprs <em>Rel Exprs</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class paramImpl extends statementImpl implements param
+public class relExprImpl extends eqExprImpl implements relExpr
 {
   /**
-   * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
+   * The cached value of the '{@link #getRelExprs() <em>Rel Exprs</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStatements()
+   * @see #getRelExprs()
    * @generated
    * @ordered
    */
-  protected EList<statement> statements;
+  protected EList<relExpr> relExprs;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected paramImpl()
+  protected relExprImpl()
   {
     super();
   }
@@ -65,7 +64,7 @@ public class paramImpl extends statementImpl implements param
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.PARAM;
+    return MyDslPackage.Literals.REL_EXPR;
   }
 
   /**
@@ -73,13 +72,13 @@ public class paramImpl extends statementImpl implements param
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<statement> getStatements()
+  public EList<relExpr> getRelExprs()
   {
-    if (statements == null)
+    if (relExprs == null)
     {
-      statements = new EObjectContainmentEList<statement>(statement.class, this, MyDslPackage.PARAM__STATEMENTS);
+      relExprs = new EObjectContainmentEList<relExpr>(relExpr.class, this, MyDslPackage.REL_EXPR__REL_EXPRS);
     }
-    return statements;
+    return relExprs;
   }
 
   /**
@@ -92,8 +91,8 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
+      case MyDslPackage.REL_EXPR__REL_EXPRS:
+        return ((InternalEList<?>)getRelExprs()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -108,8 +107,8 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        return getStatements();
+      case MyDslPackage.REL_EXPR__REL_EXPRS:
+        return getRelExprs();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -125,9 +124,9 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        getStatements().clear();
-        getStatements().addAll((Collection<? extends statement>)newValue);
+      case MyDslPackage.REL_EXPR__REL_EXPRS:
+        getRelExprs().clear();
+        getRelExprs().addAll((Collection<? extends relExpr>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -143,8 +142,8 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        getStatements().clear();
+      case MyDslPackage.REL_EXPR__REL_EXPRS:
+        getRelExprs().clear();
         return;
     }
     super.eUnset(featureID);
@@ -160,10 +159,10 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        return statements != null && !statements.isEmpty();
+      case MyDslPackage.REL_EXPR__REL_EXPRS:
+        return relExprs != null && !relExprs.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //paramImpl
+} //relExprImpl

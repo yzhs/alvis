@@ -15,44 +15,46 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
+
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.xtext.example.mydsl1.myDsl.MyDslPackage;
-import org.xtext.example.mydsl1.myDsl.param;
-import org.xtext.example.mydsl1.myDsl.statement;
+import org.xtext.example.mydsl1.myDsl.atom;
+import org.xtext.example.mydsl1.myDsl.constant;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>param</b></em>'.
+ * An implementation of the model object '<em><b>atom</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.paramImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.atomImpl#getConstants <em>Constants</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class paramImpl extends statementImpl implements param
+public class atomImpl extends MinimalEObjectImpl.Container implements atom
 {
   /**
-   * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
+   * The cached value of the '{@link #getConstants() <em>Constants</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStatements()
+   * @see #getConstants()
    * @generated
    * @ordered
    */
-  protected EList<statement> statements;
+  protected EList<constant> constants;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected paramImpl()
+  protected atomImpl()
   {
     super();
   }
@@ -65,7 +67,7 @@ public class paramImpl extends statementImpl implements param
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.PARAM;
+    return MyDslPackage.Literals.ATOM;
   }
 
   /**
@@ -73,13 +75,13 @@ public class paramImpl extends statementImpl implements param
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<statement> getStatements()
+  public EList<constant> getConstants()
   {
-    if (statements == null)
+    if (constants == null)
     {
-      statements = new EObjectContainmentEList<statement>(statement.class, this, MyDslPackage.PARAM__STATEMENTS);
+      constants = new EObjectContainmentEList<constant>(constant.class, this, MyDslPackage.ATOM__CONSTANTS);
     }
-    return statements;
+    return constants;
   }
 
   /**
@@ -92,8 +94,8 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
+      case MyDslPackage.ATOM__CONSTANTS:
+        return ((InternalEList<?>)getConstants()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -108,8 +110,8 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        return getStatements();
+      case MyDslPackage.ATOM__CONSTANTS:
+        return getConstants();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -125,9 +127,9 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        getStatements().clear();
-        getStatements().addAll((Collection<? extends statement>)newValue);
+      case MyDslPackage.ATOM__CONSTANTS:
+        getConstants().clear();
+        getConstants().addAll((Collection<? extends constant>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -143,8 +145,8 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        getStatements().clear();
+      case MyDslPackage.ATOM__CONSTANTS:
+        getConstants().clear();
         return;
     }
     super.eUnset(featureID);
@@ -160,10 +162,10 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        return statements != null && !statements.isEmpty();
+      case MyDslPackage.ATOM__CONSTANTS:
+        return constants != null && !constants.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //paramImpl
+} //atomImpl

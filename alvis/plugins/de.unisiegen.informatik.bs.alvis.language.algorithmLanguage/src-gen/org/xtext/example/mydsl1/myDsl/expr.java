@@ -10,21 +10,21 @@ import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
- * A representation of the model object '<em><b>block</b></em>'.
+ * A representation of the model object '<em><b>expr</b></em>'.
  * <!-- end-user-doc -->
  *
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.xtext.example.mydsl1.myDsl.block#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl1.myDsl.expr#getStatements <em>Statements</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.xtext.example.mydsl1.myDsl.MyDslPackage#getblock()
+ * @see org.xtext.example.mydsl1.myDsl.MyDslPackage#getexpr()
  * @model
  * @generated
  */
-public interface block extends statement
+public interface expr extends statement, atom
 {
   /**
    * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
@@ -36,10 +36,10 @@ public interface block extends statement
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Statements</em>' containment reference list.
-   * @see org.xtext.example.mydsl1.myDsl.MyDslPackage#getblock_Statements()
+   * @see org.xtext.example.mydsl1.myDsl.MyDslPackage#getexpr_Statements()
    * @model containment="true"
    * @generated
    */
   EList<statement> getStatements();
 
-} // block
+} // expr

@@ -18,7 +18,9 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.xtext.example.mydsl1.myDsl.statement#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl1.myDsl.statement#getPostFixExpression <em>Post Fix Expression</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl1.myDsl.statement#getAssignments <em>Assignments</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl1.myDsl.statement#getExprs <em>Exprs</em>}</li>
  * </ul>
  * </p>
  *
@@ -29,19 +31,51 @@ import org.eclipse.emf.ecore.EObject;
 public interface statement extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Statements</b></em>' containment reference list.
-   * The list contents are of type {@link org.xtext.example.mydsl1.myDsl.statement}.
+   * Returns the value of the '<em><b>Post Fix Expression</b></em>' containment reference list.
+   * The list contents are of type {@link org.xtext.example.mydsl1.myDsl.postfixExpr}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Statements</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Post Fix Expression</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Statements</em>' containment reference list.
-   * @see org.xtext.example.mydsl1.myDsl.MyDslPackage#getstatement_Statements()
+   * @return the value of the '<em>Post Fix Expression</em>' containment reference list.
+   * @see org.xtext.example.mydsl1.myDsl.MyDslPackage#getstatement_PostFixExpression()
    * @model containment="true"
    * @generated
    */
-  EList<statement> getStatements();
+  EList<postfixExpr> getPostFixExpression();
+
+  /**
+   * Returns the value of the '<em><b>Assignments</b></em>' containment reference list.
+   * The list contents are of type {@link org.xtext.example.mydsl1.myDsl.assignment}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Assignments</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Assignments</em>' containment reference list.
+   * @see org.xtext.example.mydsl1.myDsl.MyDslPackage#getstatement_Assignments()
+   * @model containment="true"
+   * @generated
+   */
+  EList<assignment> getAssignments();
+
+  /**
+   * Returns the value of the '<em><b>Exprs</b></em>' containment reference list.
+   * The list contents are of type {@link org.xtext.example.mydsl1.myDsl.expr}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Exprs</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Exprs</em>' containment reference list.
+   * @see org.xtext.example.mydsl1.myDsl.MyDslPackage#getstatement_Exprs()
+   * @model containment="true"
+   * @generated
+   */
+  EList<expr> getExprs();
 
 } // statement

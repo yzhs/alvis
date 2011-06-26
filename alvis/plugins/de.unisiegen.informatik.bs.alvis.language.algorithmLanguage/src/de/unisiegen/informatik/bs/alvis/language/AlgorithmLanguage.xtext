@@ -2,103 +2,122 @@ grammar org.xtext.example.mydsl1.MyDsl with org.eclipse.xtext.common.Terminals
 
 generate myDsl "de.unisiegen.informatik.bs.alvis.language.algorithmLanguage"
 
+// @author Eduard Boos
+// Grammar used to generate the algorithmLanguage Editor.
+
 
 Model:
-	{Model}(functions+=functionDefinition* main=mainFunction);
-//functionDefinition*
-//program    : functionDefinition*;
+	((functions+=functionDefinition)* main=mainFunction);
 
 functionDefinition : name=ID '(' (formalParams=formalParams)? ')' (':' returnType=type)? blocks+=block ;
 
-mainFunction   :'main('  formalParams=formalParams? ')' blocks+=block ;
+mainFunction   :main='main' '('  formalParams=formalParams? ')' blocks+=block ;
 
 formalParams  : params+=param (',' params+=param)*;
 
-param   : type name=ID;//((type=[declaration])|'String'|'Integer'|'Boolean') name=ID;
+param   : type name=ID;
  
 block  : {block}'begin' statements+=statement* 'end' ;
 
-type: {type}((type=[declaration])|'String'|'Integer'|'Boolean');
+type: types=('String'|'Integer'|'Boolean');
 
 
 statement :
 	declaration endExpr
-    |{statement}  expr endExpr
-    |{statement}  assignment endExpr
-    |{statement} 'return' expr? endExpr
-    | 'if' expr ':' statement ('else' statements+=statement)?
-    | 'for' param 'in' expr ':' statements+=statement
-    | 'while' expr ':' statement
+	| functionCall
+    |{statement}  postFixExpression+=postfixExpr endExpr
+    |{statement}  assignments+=assignment endExpr
+    |{statement} 'return' exprs+=expr? endExpr
+    | 'if' expr ':'statements+= statement ('else' statements+=statement)?
+    | 'for' param 'in' exprs+=expr ':' statements+=statement
+    | 'while' expr ':' statements+=statement
     | block;
-//    |types=[functionDefinition] name=ID
-//    |variableType=type name=ID;
+    
+functionCall
+	: function=[functionDefinition] '(' (exprs+=expr (',' exprs+=expr)*)? ')' endExpr ;
    
 
 declaration
-    : (variableType+=type ('[]')?)+  name=ID  ('=' expr)?;
+    : (variableType+=type ('[]')?)+  name=ID  ('=' exprs+=expr)?;
 
 assignment
-    : postfixExpr '=' expr
+    : postfixExpr '=' exprs+=expr
     ;
 
 expr
-    : andExpr ('||' andExpr)*
+    : andExpr ('||' andExprs+=andExpr)*
     ;
 
 andExpr
-    : eqExpr ('&&' eqExpr)*
+    : eqExpr ('&&' eqExprs+=eqExpr)*
     ;
 
 eqExpr
-    : relExpr (('=='|'!=') relExpr)*
+    : relExpr (('=='|'!=') relExprs+=relExpr)*
     ;
 
 relExpr
-    : addExpr (('<'|'>'|'<=' |'>=') addExpr)*
+    : addExpr (('<'|'>'|'<=' |'>=') addExpr+=addExpr)*
     ;
 
 addExpr
-    : mulExpr (('+' | '-') mulExpr)*
+    : mulExpr ((sign) mulExprs+=mulExpr)*
     ;
 
 mulExpr
-    : atom (('*' | '/' | '%' ) atom)*
+    : atoms+=atom (('*' | '/' | '%' ) atoms+=atom)*
     ;
 
 atom: '!' atom
     | '(' sign expr ')'
-	| '(' ('+'|'-') expr ')'
     | '(' expr ')'
     | postfixExpr
-    | constant
+    |{atom} constants+=constant
     ;
+
 
 postfixExpr
-     : ID ( '.' ID  // to change
-      | '(' (expr (',' expr)*)? ')' 
-      | '[' expr ']' )*
+     : {postfixExpr} (existingVariable=[declaration]|existingVariable=[param]) ( '.' ID  // to change
+      | '(' (expressions+=expr (',' expressions+=expr)*)? ')' 
+      | '[' expressions+=expr ']' )*
     ;
-
-
-//String geht im moment nicht richtig
-terminal constant
-// BOOL
-	: 'true'|'false'
-// FLOAT
-	| '0'..'9'+'.'('0'..'9')*
-// INT
-	| ('0'..'9')+
-// STRING
-
-	| STRING
-// NULL and INFINITY
-	| 'null'
-	| 'infty';
     
+constant
+// BOOL
+	:'true'|'false'
+// FLOAT(Real float cannot be used)
+	|Real+=real
+// INT and STRING
+	|Integer=INT
+	|String=STRING
+// NULL and INFINITY
+	| Null='null'
+	|Infinity='infty';
+    
+real
+	: real+=INT '.' (real+=INT)+;
 endExpr
 	: (',' | ';') ; //war vorher terminal
 
-
 terminal sign: '+' | '-' ;
- 
-terminal ID  : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')* ; 
+
+
+//END OF Grammar
+
+//Default Tokens from Xtext: ID,INT,STRING is used in our Grammar
+
+//terminal ID : 
+// '^'?('a'..'z'|'A'..'Z'|'_')('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+//terminal INT returns ecore::EInt: 
+// ('0'..'9')+;
+//terminal STRING    : 
+// '"' ( '\\'('b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\') | !('\\'|'"') )* '"' |
+// "'" ( '\\'('b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\') | !('\\'|"'") )* "'"; 
+//terminal ML_COMMENT    : 
+// '/*' -> '*/';
+//terminal SL_COMMENT : 
+// '//' !('\n'|'\r')* ('\r'? '\n')?;
+//terminal WS    : 
+// (' '|'\t'|'\r'|'\n')+;
+//terminal ANY_OTHER: 
+// .; 

@@ -19,40 +19,51 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.xtext.example.mydsl1.myDsl.MyDslPackage;
-import org.xtext.example.mydsl1.myDsl.param;
-import org.xtext.example.mydsl1.myDsl.statement;
+import org.xtext.example.mydsl1.myDsl.atom;
+import org.xtext.example.mydsl1.myDsl.mulExpr;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>param</b></em>'.
+ * An implementation of the model object '<em><b>mul Expr</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.paramImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.mulExprImpl#getMulExprs <em>Mul Exprs</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.mulExprImpl#getAtoms <em>Atoms</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class paramImpl extends statementImpl implements param
+public class mulExprImpl extends addExprImpl implements mulExpr
 {
   /**
-   * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
+   * The cached value of the '{@link #getMulExprs() <em>Mul Exprs</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStatements()
+   * @see #getMulExprs()
    * @generated
    * @ordered
    */
-  protected EList<statement> statements;
+  protected EList<mulExpr> mulExprs;
+
+  /**
+   * The cached value of the '{@link #getAtoms() <em>Atoms</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAtoms()
+   * @generated
+   * @ordered
+   */
+  protected EList<atom> atoms;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected paramImpl()
+  protected mulExprImpl()
   {
     super();
   }
@@ -65,7 +76,7 @@ public class paramImpl extends statementImpl implements param
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.PARAM;
+    return MyDslPackage.Literals.MUL_EXPR;
   }
 
   /**
@@ -73,13 +84,27 @@ public class paramImpl extends statementImpl implements param
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<statement> getStatements()
+  public EList<mulExpr> getMulExprs()
   {
-    if (statements == null)
+    if (mulExprs == null)
     {
-      statements = new EObjectContainmentEList<statement>(statement.class, this, MyDslPackage.PARAM__STATEMENTS);
+      mulExprs = new EObjectContainmentEList<mulExpr>(mulExpr.class, this, MyDslPackage.MUL_EXPR__MUL_EXPRS);
     }
-    return statements;
+    return mulExprs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<atom> getAtoms()
+  {
+    if (atoms == null)
+    {
+      atoms = new EObjectContainmentEList<atom>(atom.class, this, MyDslPackage.MUL_EXPR__ATOMS);
+    }
+    return atoms;
   }
 
   /**
@@ -92,8 +117,10 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
+      case MyDslPackage.MUL_EXPR__MUL_EXPRS:
+        return ((InternalEList<?>)getMulExprs()).basicRemove(otherEnd, msgs);
+      case MyDslPackage.MUL_EXPR__ATOMS:
+        return ((InternalEList<?>)getAtoms()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -108,8 +135,10 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        return getStatements();
+      case MyDslPackage.MUL_EXPR__MUL_EXPRS:
+        return getMulExprs();
+      case MyDslPackage.MUL_EXPR__ATOMS:
+        return getAtoms();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -125,9 +154,13 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        getStatements().clear();
-        getStatements().addAll((Collection<? extends statement>)newValue);
+      case MyDslPackage.MUL_EXPR__MUL_EXPRS:
+        getMulExprs().clear();
+        getMulExprs().addAll((Collection<? extends mulExpr>)newValue);
+        return;
+      case MyDslPackage.MUL_EXPR__ATOMS:
+        getAtoms().clear();
+        getAtoms().addAll((Collection<? extends atom>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -143,8 +176,11 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        getStatements().clear();
+      case MyDslPackage.MUL_EXPR__MUL_EXPRS:
+        getMulExprs().clear();
+        return;
+      case MyDslPackage.MUL_EXPR__ATOMS:
+        getAtoms().clear();
         return;
     }
     super.eUnset(featureID);
@@ -160,10 +196,12 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        return statements != null && !statements.isEmpty();
+      case MyDslPackage.MUL_EXPR__MUL_EXPRS:
+        return mulExprs != null && !mulExprs.isEmpty();
+      case MyDslPackage.MUL_EXPR__ATOMS:
+        return atoms != null && !atoms.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //paramImpl
+} //mulExprImpl

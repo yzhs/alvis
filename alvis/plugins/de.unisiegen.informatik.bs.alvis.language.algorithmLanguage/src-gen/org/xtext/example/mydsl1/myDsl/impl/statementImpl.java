@@ -21,6 +21,9 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.xtext.example.mydsl1.myDsl.MyDslPackage;
+import org.xtext.example.mydsl1.myDsl.assignment;
+import org.xtext.example.mydsl1.myDsl.expr;
+import org.xtext.example.mydsl1.myDsl.postfixExpr;
 import org.xtext.example.mydsl1.myDsl.statement;
 
 /**
@@ -30,7 +33,9 @@ import org.xtext.example.mydsl1.myDsl.statement;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.statementImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.statementImpl#getPostFixExpression <em>Post Fix Expression</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.statementImpl#getAssignments <em>Assignments</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.statementImpl#getExprs <em>Exprs</em>}</li>
  * </ul>
  * </p>
  *
@@ -39,14 +44,34 @@ import org.xtext.example.mydsl1.myDsl.statement;
 public class statementImpl extends MinimalEObjectImpl.Container implements statement
 {
   /**
-   * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
+   * The cached value of the '{@link #getPostFixExpression() <em>Post Fix Expression</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStatements()
+   * @see #getPostFixExpression()
    * @generated
    * @ordered
    */
-  protected EList<statement> statements;
+  protected EList<postfixExpr> postFixExpression;
+
+  /**
+   * The cached value of the '{@link #getAssignments() <em>Assignments</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAssignments()
+   * @generated
+   * @ordered
+   */
+  protected EList<assignment> assignments;
+
+  /**
+   * The cached value of the '{@link #getExprs() <em>Exprs</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getExprs()
+   * @generated
+   * @ordered
+   */
+  protected EList<expr> exprs;
 
   /**
    * <!-- begin-user-doc -->
@@ -74,13 +99,41 @@ public class statementImpl extends MinimalEObjectImpl.Container implements state
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<statement> getStatements()
+  public EList<postfixExpr> getPostFixExpression()
   {
-    if (statements == null)
+    if (postFixExpression == null)
     {
-      statements = new EObjectContainmentEList<statement>(statement.class, this, MyDslPackage.STATEMENT__STATEMENTS);
+      postFixExpression = new EObjectContainmentEList<postfixExpr>(postfixExpr.class, this, MyDslPackage.STATEMENT__POST_FIX_EXPRESSION);
     }
-    return statements;
+    return postFixExpression;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<assignment> getAssignments()
+  {
+    if (assignments == null)
+    {
+      assignments = new EObjectContainmentEList<assignment>(assignment.class, this, MyDslPackage.STATEMENT__ASSIGNMENTS);
+    }
+    return assignments;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<expr> getExprs()
+  {
+    if (exprs == null)
+    {
+      exprs = new EObjectContainmentEList<expr>(expr.class, this, MyDslPackage.STATEMENT__EXPRS);
+    }
+    return exprs;
   }
 
   /**
@@ -93,8 +146,12 @@ public class statementImpl extends MinimalEObjectImpl.Container implements state
   {
     switch (featureID)
     {
-      case MyDslPackage.STATEMENT__STATEMENTS:
-        return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
+      case MyDslPackage.STATEMENT__POST_FIX_EXPRESSION:
+        return ((InternalEList<?>)getPostFixExpression()).basicRemove(otherEnd, msgs);
+      case MyDslPackage.STATEMENT__ASSIGNMENTS:
+        return ((InternalEList<?>)getAssignments()).basicRemove(otherEnd, msgs);
+      case MyDslPackage.STATEMENT__EXPRS:
+        return ((InternalEList<?>)getExprs()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -109,8 +166,12 @@ public class statementImpl extends MinimalEObjectImpl.Container implements state
   {
     switch (featureID)
     {
-      case MyDslPackage.STATEMENT__STATEMENTS:
-        return getStatements();
+      case MyDslPackage.STATEMENT__POST_FIX_EXPRESSION:
+        return getPostFixExpression();
+      case MyDslPackage.STATEMENT__ASSIGNMENTS:
+        return getAssignments();
+      case MyDslPackage.STATEMENT__EXPRS:
+        return getExprs();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -126,9 +187,17 @@ public class statementImpl extends MinimalEObjectImpl.Container implements state
   {
     switch (featureID)
     {
-      case MyDslPackage.STATEMENT__STATEMENTS:
-        getStatements().clear();
-        getStatements().addAll((Collection<? extends statement>)newValue);
+      case MyDslPackage.STATEMENT__POST_FIX_EXPRESSION:
+        getPostFixExpression().clear();
+        getPostFixExpression().addAll((Collection<? extends postfixExpr>)newValue);
+        return;
+      case MyDslPackage.STATEMENT__ASSIGNMENTS:
+        getAssignments().clear();
+        getAssignments().addAll((Collection<? extends assignment>)newValue);
+        return;
+      case MyDslPackage.STATEMENT__EXPRS:
+        getExprs().clear();
+        getExprs().addAll((Collection<? extends expr>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -144,8 +213,14 @@ public class statementImpl extends MinimalEObjectImpl.Container implements state
   {
     switch (featureID)
     {
-      case MyDslPackage.STATEMENT__STATEMENTS:
-        getStatements().clear();
+      case MyDslPackage.STATEMENT__POST_FIX_EXPRESSION:
+        getPostFixExpression().clear();
+        return;
+      case MyDslPackage.STATEMENT__ASSIGNMENTS:
+        getAssignments().clear();
+        return;
+      case MyDslPackage.STATEMENT__EXPRS:
+        getExprs().clear();
         return;
     }
     super.eUnset(featureID);
@@ -161,8 +236,12 @@ public class statementImpl extends MinimalEObjectImpl.Container implements state
   {
     switch (featureID)
     {
-      case MyDslPackage.STATEMENT__STATEMENTS:
-        return statements != null && !statements.isEmpty();
+      case MyDslPackage.STATEMENT__POST_FIX_EXPRESSION:
+        return postFixExpression != null && !postFixExpression.isEmpty();
+      case MyDslPackage.STATEMENT__ASSIGNMENTS:
+        return assignments != null && !assignments.isEmpty();
+      case MyDslPackage.STATEMENT__EXPRS:
+        return exprs != null && !exprs.isEmpty();
     }
     return super.eIsSet(featureID);
   }

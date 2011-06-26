@@ -19,40 +19,39 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.xtext.example.mydsl1.myDsl.MyDslPackage;
-import org.xtext.example.mydsl1.myDsl.param;
-import org.xtext.example.mydsl1.myDsl.statement;
+import org.xtext.example.mydsl1.myDsl.eqExpr;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>param</b></em>'.
+ * An implementation of the model object '<em><b>eq Expr</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.paramImpl#getStatements <em>Statements</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.eqExprImpl#getEqExprs <em>Eq Exprs</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class paramImpl extends statementImpl implements param
+public class eqExprImpl extends andExprImpl implements eqExpr
 {
   /**
-   * The cached value of the '{@link #getStatements() <em>Statements</em>}' containment reference list.
+   * The cached value of the '{@link #getEqExprs() <em>Eq Exprs</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getStatements()
+   * @see #getEqExprs()
    * @generated
    * @ordered
    */
-  protected EList<statement> statements;
+  protected EList<eqExpr> eqExprs;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected paramImpl()
+  protected eqExprImpl()
   {
     super();
   }
@@ -65,7 +64,7 @@ public class paramImpl extends statementImpl implements param
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.PARAM;
+    return MyDslPackage.Literals.EQ_EXPR;
   }
 
   /**
@@ -73,13 +72,13 @@ public class paramImpl extends statementImpl implements param
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<statement> getStatements()
+  public EList<eqExpr> getEqExprs()
   {
-    if (statements == null)
+    if (eqExprs == null)
     {
-      statements = new EObjectContainmentEList<statement>(statement.class, this, MyDslPackage.PARAM__STATEMENTS);
+      eqExprs = new EObjectContainmentEList<eqExpr>(eqExpr.class, this, MyDslPackage.EQ_EXPR__EQ_EXPRS);
     }
-    return statements;
+    return eqExprs;
   }
 
   /**
@@ -92,8 +91,8 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        return ((InternalEList<?>)getStatements()).basicRemove(otherEnd, msgs);
+      case MyDslPackage.EQ_EXPR__EQ_EXPRS:
+        return ((InternalEList<?>)getEqExprs()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -108,8 +107,8 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        return getStatements();
+      case MyDslPackage.EQ_EXPR__EQ_EXPRS:
+        return getEqExprs();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -125,9 +124,9 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        getStatements().clear();
-        getStatements().addAll((Collection<? extends statement>)newValue);
+      case MyDslPackage.EQ_EXPR__EQ_EXPRS:
+        getEqExprs().clear();
+        getEqExprs().addAll((Collection<? extends eqExpr>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -143,8 +142,8 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        getStatements().clear();
+      case MyDslPackage.EQ_EXPR__EQ_EXPRS:
+        getEqExprs().clear();
         return;
     }
     super.eUnset(featureID);
@@ -160,10 +159,10 @@ public class paramImpl extends statementImpl implements param
   {
     switch (featureID)
     {
-      case MyDslPackage.PARAM__STATEMENTS:
-        return statements != null && !statements.isEmpty();
+      case MyDslPackage.EQ_EXPR__EQ_EXPRS:
+        return eqExprs != null && !eqExprs.isEmpty();
     }
     return super.eIsSet(featureID);
   }
 
-} //paramImpl
+} //eqExprImpl

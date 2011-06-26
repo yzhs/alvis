@@ -99,6 +99,15 @@ public interface MyDslFactory extends EFactory
   statement createstatement();
 
   /**
+   * Returns a new object of class '<em>function Call</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>function Call</em>'.
+   * @generated
+   */
+  functionCall createfunctionCall();
+
+  /**
    * Returns a new object of class '<em>declaration</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -106,6 +115,105 @@ public interface MyDslFactory extends EFactory
    * @generated
    */
   declaration createdeclaration();
+
+  /**
+   * Returns a new object of class '<em>assignment</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>assignment</em>'.
+   * @generated
+   */
+  assignment createassignment();
+
+  /**
+   * Returns a new object of class '<em>expr</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>expr</em>'.
+   * @generated
+   */
+  expr createexpr();
+
+  /**
+   * Returns a new object of class '<em>and Expr</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>and Expr</em>'.
+   * @generated
+   */
+  andExpr createandExpr();
+
+  /**
+   * Returns a new object of class '<em>eq Expr</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>eq Expr</em>'.
+   * @generated
+   */
+  eqExpr createeqExpr();
+
+  /**
+   * Returns a new object of class '<em>rel Expr</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>rel Expr</em>'.
+   * @generated
+   */
+  relExpr createrelExpr();
+
+  /**
+   * Returns a new object of class '<em>add Expr</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>add Expr</em>'.
+   * @generated
+   */
+  addExpr createaddExpr();
+
+  /**
+   * Returns a new object of class '<em>mul Expr</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>mul Expr</em>'.
+   * @generated
+   */
+  mulExpr createmulExpr();
+
+  /**
+   * Returns a new object of class '<em>atom</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>atom</em>'.
+   * @generated
+   */
+  atom createatom();
+
+  /**
+   * Returns a new object of class '<em>postfix Expr</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>postfix Expr</em>'.
+   * @generated
+   */
+  postfixExpr createpostfixExpr();
+
+  /**
+   * Returns a new object of class '<em>constant</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>constant</em>'.
+   * @generated
+   */
+  constant createconstant();
+
+  /**
+   * Returns a new object of class '<em>real</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>real</em>'.
+   * @generated
+   */
+  real createreal();
 
   /**
    * Returns the package supported by this factory.

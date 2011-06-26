@@ -9,12 +9,10 @@ package org.xtext.example.mydsl1.myDsl.impl;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.xtext.example.mydsl1.myDsl.MyDslPackage;
-import org.xtext.example.mydsl1.myDsl.declaration;
 import org.xtext.example.mydsl1.myDsl.type;
 
 /**
@@ -25,7 +23,7 @@ import org.xtext.example.mydsl1.myDsl.type;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.typeImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.typeImpl#getType <em>Type</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.typeImpl#getTypes <em>Types</em>}</li>
  * </ul>
  * </p>
  *
@@ -54,14 +52,24 @@ public class typeImpl extends paramImpl implements type
   protected String name = NAME_EDEFAULT;
 
   /**
-   * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+   * The default value of the '{@link #getTypes() <em>Types</em>}' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getType()
+   * @see #getTypes()
    * @generated
    * @ordered
    */
-  protected declaration type;
+  protected static final String TYPES_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getTypes() <em>Types</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getTypes()
+   * @generated
+   * @ordered
+   */
+  protected String types = TYPES_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -112,19 +120,9 @@ public class typeImpl extends paramImpl implements type
    * <!-- end-user-doc -->
    * @generated
    */
-  public declaration getType()
+  public String getTypes()
   {
-    if (type != null && type.eIsProxy())
-    {
-      InternalEObject oldType = (InternalEObject)type;
-      type = (declaration)eResolveProxy(oldType);
-      if (type != oldType)
-      {
-        if (eNotificationRequired())
-          eNotify(new ENotificationImpl(this, Notification.RESOLVE, MyDslPackage.TYPE__TYPE, oldType, type));
-      }
-    }
-    return type;
+    return types;
   }
 
   /**
@@ -132,22 +130,12 @@ public class typeImpl extends paramImpl implements type
    * <!-- end-user-doc -->
    * @generated
    */
-  public declaration basicGetType()
+  public void setTypes(String newTypes)
   {
-    return type;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setType(declaration newType)
-  {
-    declaration oldType = type;
-    type = newType;
+    String oldTypes = types;
+    types = newTypes;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.TYPE__TYPE, oldType, type));
+      eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.TYPE__TYPES, oldTypes, types));
   }
 
   /**
@@ -162,9 +150,8 @@ public class typeImpl extends paramImpl implements type
     {
       case MyDslPackage.TYPE__NAME:
         return getName();
-      case MyDslPackage.TYPE__TYPE:
-        if (resolve) return getType();
-        return basicGetType();
+      case MyDslPackage.TYPE__TYPES:
+        return getTypes();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -182,8 +169,8 @@ public class typeImpl extends paramImpl implements type
       case MyDslPackage.TYPE__NAME:
         setName((String)newValue);
         return;
-      case MyDslPackage.TYPE__TYPE:
-        setType((declaration)newValue);
+      case MyDslPackage.TYPE__TYPES:
+        setTypes((String)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -202,8 +189,8 @@ public class typeImpl extends paramImpl implements type
       case MyDslPackage.TYPE__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case MyDslPackage.TYPE__TYPE:
-        setType((declaration)null);
+      case MyDslPackage.TYPE__TYPES:
+        setTypes(TYPES_EDEFAULT);
         return;
     }
     super.eUnset(featureID);
@@ -221,8 +208,8 @@ public class typeImpl extends paramImpl implements type
     {
       case MyDslPackage.TYPE__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case MyDslPackage.TYPE__TYPE:
-        return type != null;
+      case MyDslPackage.TYPE__TYPES:
+        return TYPES_EDEFAULT == null ? types != null : !TYPES_EDEFAULT.equals(types);
     }
     return super.eIsSet(featureID);
   }
@@ -240,6 +227,8 @@ public class typeImpl extends paramImpl implements type
     StringBuffer result = new StringBuffer(super.toString());
     result.append(" (name: ");
     result.append(name);
+    result.append(", types: ");
+    result.append(types);
     result.append(')');
     return result.toString();
   }
