@@ -271,6 +271,9 @@ public class PdfExport extends Document {
 		stringToIndent = stringToIndent.replaceAll("\t", "    ");
 		stringToIndent = stringToIndent.replaceAll("    ", "\t");
 		
+		// in case someone meddled with weird windows text editors
+		stringToIndent = stringToIndent.replaceAll("\r\n", "\n");
+		
 		int indentationCounter = 0; // variable holding knowledge about how deep
 									// the current line has to be indented
 		int indentationDepth = 20;
