@@ -35,13 +35,6 @@ public final class DynaCode {
 
 	public DynaCode() {
 		this(DynaCode.class.getClassLoader());
-		System.out.println("DynaCode class loader: " + DynaCode.class.getClassLoader());
-//		this(Thread.currentThread().getContextClassLoader().getParent().getParent());
-//		System.out.println("CLASSLOADER: " + Thread.currentThread().getContextClassLoader().getParent().getParent());
-		System.out.println("Thread.currentThread().getContextClassLoader()" + Thread.currentThread().getContextClassLoader());
-//		System.out.println("active Count in system: "+ Thread.currentThread().getThreadGroup().getParent().activeCount());
-//		System.out.println("active GroupCount in system: " + Thread.currentThread().getThreadGroup().getParent());
-//		System.out.println("active threads: " + Thread.activeCount());
 
 	}
 
@@ -60,6 +53,13 @@ public final class DynaCode {
 	public DynaCode(String compileClasspath, ClassLoader parentClassLoader) {
 		this.compileClasspath = compileClasspath;
 		this.parentClassLoader = parentClassLoader;
+		
+		/*
+		 *  TODO: Method in the PseudoCode->Java-Compiler, which creates a list of needed data types
+		 *  From this list the paths to the data types must be extracted and added to the classpath.
+		 *  This is accomplished in hard code here. (Task for second alvis group?)
+		*/
+		
 		CompilerAccess compiler_DUMMY = new CompilerAccess(); // dummy to get
 																// the path to
 																// this file
@@ -94,14 +94,6 @@ public final class DynaCode {
 	 * @return true if the add is successful
 	 * @throws IOException
 	 */
-	// public boolean addSourceDir(File srcDir) {
-	// try {
-	// String dir = CompilerAccess.getAlgorithmPath();
-	// srcDir = new File(dir);
-	// System.out.println(dir.toString());
-	// } catch (IOException e) {
-	// e.printStackTrace();
-	// }
 	public boolean addSourceDir(String pathToFile, File srcDir) {
 		srcDir = new File(pathToFile);
 		synchronized (sourceDirs) {
@@ -141,7 +133,6 @@ public final class DynaCode {
 
 		// first access of a class
 		if (loadedClass == null) {
-			// System.out.println(className);
 			String resource = className.replace('.', '/') + ".java";
 			SourceDir src = locateResource(resource);
 			if (src == null) {
@@ -317,7 +308,6 @@ public final class DynaCode {
 			}
 			cl = cl.getParent();
 		}
-		System.out.println("buf: " + buf);
 
 		return buf.toString();
 	}
