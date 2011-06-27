@@ -170,9 +170,11 @@ public class RunAlgorithm extends ViewPart {
         "\tend\n" + //$NON-NLS-1$
         "end\n"; //$NON-NLS-1$
 		
+		
+		
 		text.setText(algorithm);
 		
-		updateText(algorithm);
+//		updateText(algorithm);
 		
 		text.redraw();		
 	}
