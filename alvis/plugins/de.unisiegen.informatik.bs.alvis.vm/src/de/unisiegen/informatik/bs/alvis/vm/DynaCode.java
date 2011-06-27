@@ -13,7 +13,7 @@ import de.unisiegen.informatik.bs.alvis.compiler.CompilerAccess;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.PCEdge;
 
-;
+
 
 /**
  * Class which handles the class path in order to be able to compile Java Code
@@ -34,7 +34,15 @@ public final class DynaCode {
 	private HashMap<String, LoadedClass> loadedClasses = new HashMap<String, LoadedClass>();
 
 	public DynaCode() {
-		this(Thread.currentThread().getContextClassLoader());
+		this(DynaCode.class.getClassLoader());
+		System.out.println("DynaCode class loader: " + DynaCode.class.getClassLoader());
+//		this(Thread.currentThread().getContextClassLoader().getParent().getParent());
+//		System.out.println("CLASSLOADER: " + Thread.currentThread().getContextClassLoader().getParent().getParent());
+		System.out.println("Thread.currentThread().getContextClassLoader()" + Thread.currentThread().getContextClassLoader());
+//		System.out.println("active Count in system: "+ Thread.currentThread().getThreadGroup().getParent().activeCount());
+//		System.out.println("active GroupCount in system: " + Thread.currentThread().getThreadGroup().getParent());
+//		System.out.println("active threads: " + Thread.activeCount());
+
 	}
 
 	public DynaCode(ClassLoader parentClassLoader) {
@@ -57,23 +65,24 @@ public final class DynaCode {
 																// this file
 		PCBoolean primitive_datatypes_DUMMY = new PCBoolean(true);
 		PCEdge graph_datatypes_DUMMY = new PCEdge();
+		
 		this.compileClasspath += System.getProperty("path.separator");
 		this.compileClasspath += this.getClass().getProtectionDomain()
 				.getCodeSource().getLocation().getFile().toString()
-				+ "src/"+System.getProperty("path.separator");
+				+ "src/" + System.getProperty("path.separator");
 		;
 		this.compileClasspath += compiler_DUMMY.getClass()
 				.getProtectionDomain().getCodeSource().getLocation().getFile()
 				.toString()
-				+ "src/"+System.getProperty("path.separator");
+				+ "src/" + System.getProperty("path.separator");
 		this.compileClasspath += primitive_datatypes_DUMMY.getClass()
 				.getProtectionDomain().getCodeSource().getLocation().getFile()
 				.toString()
-				+ "src/"+System.getProperty("path.separator");
+				+ "src/" + System.getProperty("path.separator");
 		this.compileClasspath += graph_datatypes_DUMMY.getClass()
 				.getProtectionDomain().getCodeSource().getLocation().getFile()
 				.toString()
-				+ "src/"+System.getProperty("path.separator");
+				+ "src/" + System.getProperty("path.separator");
 	}
 
 	/**
@@ -85,9 +94,16 @@ public final class DynaCode {
 	 * @return true if the add is successful
 	 * @throws IOException
 	 */
+	// public boolean addSourceDir(File srcDir) {
+	// try {
+	// String dir = CompilerAccess.getAlgorithmPath();
+	// srcDir = new File(dir);
+	// System.out.println(dir.toString());
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// }
 	public boolean addSourceDir(String pathToFile, File srcDir) {
 		srcDir = new File(pathToFile);
-
 		synchronized (sourceDirs) {
 
 			// check existence
@@ -125,6 +141,7 @@ public final class DynaCode {
 
 		// first access of a class
 		if (loadedClass == null) {
+			// System.out.println(className);
 			String resource = className.replace('.', '/') + ".java";
 			SourceDir src = locateResource(resource);
 			if (src == null) {
@@ -214,6 +231,7 @@ public final class DynaCode {
 						.toURL() }, parentClassLoader);
 			} catch (MalformedURLException e) {
 				// should not happen
+				e.printStackTrace();
 			}
 		}
 
@@ -299,6 +317,7 @@ public final class DynaCode {
 			}
 			cl = cl.getParent();
 		}
+		System.out.println("buf: " + buf);
 
 		return buf.toString();
 	}
