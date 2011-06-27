@@ -80,20 +80,37 @@ public class AlvisGraphNode extends GraphNode implements
 	}
 
 	public void markAsStartNode() {
-		setBackgroundColor(S_COLOR);
-		setText(START);
+		this.getDisplay().syncExec(
+				  new Runnable() {
+				    public void run(){
+						setBackgroundColor(S_COLOR);
+						setText(START);
+				    }
+				  });
 		graph.setSelection(null);
 	}
 
 	public void markAsEndNode() {
-		setBackgroundColor(E_COLOR);
-		setText(END);
+		this.getDisplay().syncExec(
+				  new Runnable() {
+				    public void run(){
+						setBackgroundColor(E_COLOR);
+						setText(END);
+				    }
+				  });
+//		setBackgroundColor(E_COLOR);
+//		setText(END);
 		graph.setSelection(null);
 	}
 
 	public void unmarkAsStartOrEndNode() {
-		setBackgroundColor(DEFAULT_COLOR);
-		setText(myText);
+		this.getDisplay().syncExec(
+				  new Runnable() {
+				    public void run(){
+						setBackgroundColor(DEFAULT_COLOR);
+						setText(myText);
+				    }
+				  });	
 	}
 
 	boolean addConnection(AlvisGraphConnection gc) {
@@ -262,10 +279,18 @@ public class AlvisGraphNode extends GraphNode implements
 	}
 
 	@Override
-	public void setColor(String color) {
-		Animation.markBegin();
-		setBackgroundColor(AlvisColor.getAlvisColor(color).color());
-		Animation.run(0);
+	public void setColor(final String color) {
+//		Animation.markBegin();
+		this.getDisplay().syncExec(
+				  new Runnable() {
+				    public void run(){
+				    	Animation.markBegin();
+				    	setBackgroundColor(AlvisColor.getAlvisColor(color).color());
+				    	Animation.run(0);
+				    }
+				  });
+//		setBackgroundColor(AlvisColor.getAlvisColor(color).color());
+//		Animation.run(0);
 	}
 
 	@Override
@@ -277,8 +302,13 @@ public class AlvisGraphNode extends GraphNode implements
 	}
 
 	@Override
-	public void setLabel(String label) {
-		setText(label);
+	public void setLabel(final String label) {
+		this.getDisplay().syncExec(
+				  new Runnable() {
+				    public void run(){
+						setText(label);
+				    }
+				  });
 	}
 
 }
