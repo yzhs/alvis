@@ -26,6 +26,10 @@ public class AlgorithmContainer extends ObservedObject {
 	private ArrayList<RecognitionException> warningLines = new ArrayList<RecognitionException>();
 	// The token for errors
 	private ArrayList<RecognitionException> errorLines	= new ArrayList<RecognitionException>();
+	// The currently highlited lines
+	private ArrayList<Integer> currentLines = new ArrayList<Integer>();
+	
+	
 	
 	public void setAlgorithm(String algorithm) {
 		this.algorithm = algorithm;
@@ -116,5 +120,17 @@ public class AlgorithmContainer extends ObservedObject {
 
 	public ArrayList<RecognitionException> getErrorLines() {
 		return errorLines;
+	}
+	public void addCurrentLine(int number) {
+		firePropertyChange("ADD_LINE", null, number);
+		this.currentLines.add(number);
+	}
+	public void removeCurrentLine(int number) {
+		firePropertyChange("REMOVE_LINE", number, null);
+		this.currentLines.remove((Integer)number);
+	}
+	public void removeAllCurrentLine() {
+		firePropertyChange("REMOVE_LINE_ALL", null, null);
+		this.currentLines.clear();
 	}
 }

@@ -17,6 +17,11 @@ public class RunNext extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
+//		Activator.getDefault().getAlgorithmContainer().removeAllCurrentLine();
+//		double line = Math.random()*14;
+//		int theLine = (int)Math.abs(Math.round(line));
+//		System.out.println(theLine);
+//		Activator.getDefault().getAlgorithmContainer().addCurrentLine(theLine);
 		Activator.getDefault().runNext();
 		return null;
 	}

@@ -3,6 +3,9 @@
  */
 package de.unisiegen.informatik.bs.alvis.views;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.antlr.runtime.ANTLRStringStream;
@@ -25,12 +28,14 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
 
 import de.uni_siegen.informatik.bs.alvic.TLexer;
+import de.unisiegen.informatik.bs.alvis.Activator;
+import de.unisiegen.informatik.bs.alvis.tools.IO;
 
 /**
  * @author simon
  *
  */
-public class RunAlgorithm extends ViewPart {
+public class RunAlgorithm extends ViewPart implements PropertyChangeListener{
 
 	public static final String ID = "de.unisiegen.informatik.bs.alvis.views.run.algorithm";
 	public static StyledText text;
@@ -174,8 +179,17 @@ public class RunAlgorithm extends ViewPart {
 		
 		text.setText(algorithm);
 		
-//		updateText(algorithm);
+		try {
+			byte[] bytesFromAlgoFile = IO.read(IO.pathToAlvisWorkspace() + Activator.getDefault().getActiveRun().getAlgorithmFile());
+			String textFromALgoFile = IO.byteToString(bytesFromAlgoFile);
+			text.setText(textFromALgoFile);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
+//		updateText(algorithm);
+		Activator.getDefault().getAlgorithmContainer().addPropertyChangeListener(this);
 		text.redraw();		
 	}
 	
@@ -212,6 +226,29 @@ public class RunAlgorithm extends ViewPart {
 
 	@Override
 	public void setFocus() {
+	}
+
+
+	@Override
+	public void propertyChange(PropertyChangeEvent event) {
+		Color orange = new Color(null, 231, 238, 244);
+		try {
+			if(event.getPropertyName().equals("ADD_LINE"))
+				text.setLineBackground((Integer) event.getNewValue(), 1, orange);
+			if(event.getPropertyName().equals("REMOVE_LINE"))
+				text.setLineBackground((Integer) event.getOldValue(), 1, null);
+			if(event.getPropertyName().equals("REMOVE_LINE_ALL")){
+				for(int i = 0; i<text.getLineCount(); i++)
+					text.setLineBackground(i, 1, null);
+			}
+		}
+		catch (IllegalArgumentException e) {
+			// The line to highlight did not exist.
+			// We do not do anything
+		}
+//		System.out.println(event.getPropertyName());
+//		System.out.println(event.getNewValue());
+//		System.out.println(event.getOldValue());
 	}
 
 }

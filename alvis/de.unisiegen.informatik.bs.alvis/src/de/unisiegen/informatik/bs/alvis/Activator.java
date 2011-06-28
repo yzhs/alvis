@@ -17,6 +17,7 @@ import de.unisiegen.informatik.bs.alvis.export.Export;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IDatatypeList;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
+import de.unisiegen.informatik.bs.alvis.views.AlgorithmContainer;
 import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
 
 /* Ein paar Notizen
@@ -101,7 +102,7 @@ public class Activator extends AbstractUIPlugin {
 	 * Attributes for a run.
 	 */
 	private Run activeRun;
-
+	private AlgorithmContainer algorithmContainer = new AlgorithmContainer();
 	private PCObject runObject;
 
 	public void setRunObject(PCObject runObject) {
@@ -239,6 +240,14 @@ public class Activator extends AbstractUIPlugin {
         }
         // The list with all found datatypes
 		return allDatatypes;
+	}
+
+	public void setAlgorithmContainer(AlgorithmContainer algorithmContainer) {
+		this.algorithmContainer = algorithmContainer;
+	}
+
+	public AlgorithmContainer getAlgorithmContainer() {
+		return algorithmContainer;
 	}
 
 }

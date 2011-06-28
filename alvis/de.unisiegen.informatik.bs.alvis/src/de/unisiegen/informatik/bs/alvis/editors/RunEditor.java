@@ -234,9 +234,12 @@ public class RunEditor extends EditorPart {
 		myAlgorithmFile.addVerifyListener(new VerifyListener() {
 			@Override
 			public void verifyText(VerifyEvent e) {
-				myRun.setAlgorithmFile(myAlgorithmFile.getText());
-				checkDirty();
+				if(myAlgorithmFile.getText() != "") {
+					myRun.setAlgorithmFile(myAlgorithmFile.getText());
+					checkDirty();
 				}
+				
+			}
 		});
 		xpndtmAlgorithm.setHeight(xpndtmAlgorithm.getControl().computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
 		
@@ -283,8 +286,10 @@ public class RunEditor extends EditorPart {
 		myExampleFile.addVerifyListener(new VerifyListener() {
 			@Override
 			public void verifyText(VerifyEvent e) {
-				myRun.setExampleFile(myExampleFile.getText());
-				checkDirty();
+				if(myExampleFile.getText() != "") {
+					myRun.setExampleFile(myExampleFile.getText());
+					checkDirty();
+				}
 			}
 		});
 		xpndtmExample.setHeight(xpndtmExample.getControl().computeSize(SWT.DEFAULT, SWT.DEFAULT).y);

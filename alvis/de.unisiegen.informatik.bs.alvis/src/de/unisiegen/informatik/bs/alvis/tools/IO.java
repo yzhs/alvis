@@ -10,6 +10,7 @@ import java.io.InputStream;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.widgets.Display;
@@ -20,6 +21,10 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import de.unisiegen.informatik.bs.alvis.Activator;
 
 public class IO {
+	
+	public static String pathToAlvisWorkspace() {
+		return Platform.getInstanceLocation().getURL().getPath();
+	}
 	
 	/**
 	 * Write a text into a file
@@ -40,8 +45,6 @@ public class IO {
 	 * @throws IOException I/O error
 	 */
 	public static void append(String fileName, String text) throws IOException {
-		//Java ist Mist, ein FileOutputStream ueberschreibt die Datei normalerweise
-		//Laesst sich mit Konstruktor FileOutputStream(String fileName, boolean append) loesen
 		FileOutputStream fos = new FileOutputStream(fileName, true);
 		fos.write(text.getBytes());
 		fos.close();
