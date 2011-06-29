@@ -106,28 +106,7 @@ public class RunVisualizer implements IRunVisualizer {
 			AlvisSerialize seri = (AlvisSerialize) deserialize(myInputFilePath);
 			myGraph = new AlvisGraph(myParent, SWT.NONE);
 			new AlvisSave(myGraph, seri);
-			/*
-			 * TODO (SIMON) Hier wurde der Graph erzeugt. Aus dem Object Graph
-			 * muss nun ein PCObject gemacht werden, dass der VM als Parameter
-			 * gereicht werden kann.
-			 * 
-			 * de.unisiegen.informatik.bs.alvis.Activator.getDefault().
-			 * getPseudoCodeList().add();
-			 * 
-			 * Da die VM aber noch mehr Parameter von dieser Visualisierung hier
-			 * gebrauchen kann sollten wir die irgentwie extrahieren. Vielleicht
-			 * in einer ArrayList speichern und dann hochgeben.
-			 * 
-			 * Die Frage ist, wo soll die Entscheidung fallen, welche benutzt
-			 * werden. Ich denke erstmal nach dem klick auf RunStart. Wie wir
-			 * (Dingel) schon besprochenhaben aus der Gesamtliste der Datentypen
-			 * alle Graphen aussuchen und dann alle knoten. Da nur ein Knoten
-			 * gebraucht wird aber viele vorhanden sind eine abfrage
-			 */
-			ArrayList<GraphicalRepresentationVertex> allVertex = myGraph
-			.getVertex();
-	ArrayList<GraphicalRepresentationEdge> allEdge = myGraph.getEdges();
-	codeGraph = new PCGraph(allVertex, allEdge);
+			codeGraph = new PCGraph(myGraph.getVertex(), myGraph.getEdges());
 			success = true;
 		} catch (ClassCastException e) {
 			return false;
