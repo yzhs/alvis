@@ -19,17 +19,12 @@ public class Algorithm implements AbstractAlgo {
 	}
 
 	public void run() {
-		System.out.println(s.toConsole() + " " + s.hashCode());
-//		for(int i = 0; i < G.getVertices().size(); i++) {
-//			vx = G.getVertices().get(i);
 		for (PCVertex v : G.getVertices()) {
-        	v.set("color", new PCString("white"));
+			v.set("color", new PCString("blue"));
         	v.set("distance", PCInteger.getInfty());
         	v.set("pi", PCVertex.getNull());
-            System.out.println(v.toConsole()+ " " + vx.hashCode());
         }
-		System.out.println(s.toConsole() + " " + s.hashCode());
-        s.set("color", new PCString("gray"));
+        s.set("color", new PCString("yellow"));
         reachedBreakPoint(7);
         s.set("distance", new PCInteger(0));
         PCQueue Q = new PCQueue();
@@ -38,9 +33,8 @@ public class Algorithm implements AbstractAlgo {
         	PCVertex u = null;
             u = (PCVertex) Q.dequeue();
             for (PCVertex v : u.getAdjacents()) {
-                System.out.println(v.toConsole());
-            	if (v.get("color").equals(new PCString("white"))) {
-            		v.set("color", new PCString("gray"));
+            	if (v.get("color").equals(new PCString("blue"))) {
+            		v.set("color", new PCString("yellow"));
                     reachedBreakPoint(17);
                     v.set("distance",((PCInteger) (u.get("distance"))).add(new PCInteger(1)));
                     v.set("pi", u);

@@ -41,6 +41,7 @@ public class RunVisualizer implements IRunVisualizer {
 	private AlvisGraph myGraph;
 	private Composite myParent;
 	private String myInputFilePath;
+	private PCGraph codeGraph;
 
 	/**
 	 * Adds the content of input to the parent
@@ -64,30 +65,31 @@ public class RunVisualizer implements IRunVisualizer {
 			 * to convert the Graph and all its containing to Objects of the
 			 * PseudoCode kind.
 			 */
-			
+
 			// Make a list that contains Nodes
-//			PCList<PCVertex> pseudoCodeVertexList = new PCList<PCVertex>();
+			// PCList<PCVertex> pseudoCodeVertexList = new PCList<PCVertex>();
 
-//			for (AlvisGraphNode node : myGraph.getAllNodes()) {
-//				pseudoCodeVertexList.add(codeGraph.getVertexFromGraphic(node));
-//			}
+			// for (AlvisGraphNode node : myGraph.getAllNodes()) {
+			// pseudoCodeVertexList.add(codeGraph.getVertexFromGraphic(node));
+			// }
 
-//			ArrayList allVertex = myGraph.getVertex();
-//			ArrayList allConnection = myGraph.getEdges();
-//			PCGraph codeGraph = new PCGraph(allVertex, allConnection);
-//			// Make a list that contains Edges
-//			PCList<PCEdge> pseudoCodeEdgeList = new PCList<PCEdge>();
+			// ArrayList allVertex = myGraph.getVertex();
+			// ArrayList allConnection = myGraph.getEdges();
+			// PCGraph codeGraph = new PCGraph(allVertex, allConnection);
+			// // Make a list that contains Edges
+			// PCList<PCEdge> pseudoCodeEdgeList = new PCList<PCEdge>();
 
-//			for (AlvisGraphConnection connecton : myGraph.getAllConnections()) {
-//				// TODO Dingel soll diese Methode überprüfen.
-//				// Groth sollte mal sagen was er damit meint... welche Methode,
-//				// welches Ergebnis?
-//			} 
+			// for (AlvisGraphConnection connecton :
+			// myGraph.getAllConnections()) {
+			// // TODO Dingel soll diese Methode überprüfen.
+			// // Groth sollte mal sagen was er damit meint... welche Methode,
+			// // welches Ergebnis?
+			// }
 
 			// Give the lists to the graph.
-//			codeGraph = new PCGraph(myGraph.getVertex(), myGraph.getEdges());
+			// codeGraph = new PCGraph(myGraph.getVertex(), myGraph.getEdges());
 
-//			Activator.getDefault().setRunObject(codeGraph);
+			// Activator.getDefault().setRunObject(codeGraph);
 		}
 
 		return true;
@@ -122,6 +124,10 @@ public class RunVisualizer implements IRunVisualizer {
 			 * alle Graphen aussuchen und dann alle knoten. Da nur ein Knoten
 			 * gebraucht wird aber viele vorhanden sind eine abfrage
 			 */
+			ArrayList<GraphicalRepresentationVertex> allVertex = myGraph
+			.getVertex();
+	ArrayList<GraphicalRepresentationEdge> allEdge = myGraph.getEdges();
+	codeGraph = new PCGraph(allVertex, allEdge);
 			success = true;
 		} catch (ClassCastException e) {
 			return false;
@@ -156,50 +162,45 @@ public class RunVisualizer implements IRunVisualizer {
 	@Override
 	public ArrayList<PCObject> chooseVariable(PCObject typ, String bezeichner) {
 		ArrayList<PCObject> result = new ArrayList<PCObject>();
-		ArrayList<GraphicalRepresentationVertex> allVertex = myGraph.getVertex();
-		ArrayList<GraphicalRepresentationEdge> allEdge = myGraph.getEdges();
-		PCGraph codeGraph = new PCGraph(allVertex, allEdge);
-		
+
 		// Temporär
-		if(typ == null && bezeichner.equals("G")) {
-			typ = new PCGraph(); 
+		if (typ == null && bezeichner.equals("G")) {
+			typ = new PCGraph();
 		}
-		if(typ == null && bezeichner.equals("V")) {
+		if (typ == null && bezeichner.equals("V")) {
 			typ = new PCVertex();
 		}
 		//
-		
-		if(typ instanceof PCGraph) {
+
+		if (typ instanceof PCGraph) {
 			result.add(codeGraph);
 		}
-		if(typ instanceof PCVertex) {
+		if (typ instanceof PCVertex) {
 			ArrayList<PCVertex> allPCVertex = new ArrayList<PCVertex>();
-			for(GraphicalRepresentationVertex node : allVertex) {
+			for (GraphicalRepresentationVertex node : myGraph.getVertex()) {
 				allPCVertex.add(codeGraph.getVertexFromGraphic(node));
 			}
-			CheckDialog getVertex = new CheckDialog(
-					myParent.getShell(), 
+			CheckDialog getVertex = new CheckDialog(myParent.getShell(),
 					allPCVertex, // From
 					result, // To
 					1, // How much
 					"Choose \"" + bezeichner + "\"", // window title
 					"Choose parameter", // Title
-					"Choose one parameter for \"" + bezeichner + "\""); // 
+					"Choose one parameter for \"" + bezeichner + "\""); //
 			getVertex.open();
 		}
-		if(typ instanceof PCEdge) {
+		if (typ instanceof PCEdge) {
 			ArrayList<PCEdge> allPCEdge = new ArrayList<PCEdge>();
-			for(GraphicalRepresentationEdge edge : allEdge) {
+			for (GraphicalRepresentationEdge edge : myGraph.getEdges()) {
 				allPCEdge.add(codeGraph.getEdgeFromGraphic(edge));
 			}
-			CheckDialog getEdge = new CheckDialog(
-					myParent.getShell(), 
+			CheckDialog getEdge = new CheckDialog(myParent.getShell(),
 					allPCEdge, // From
 					result, // To
 					1, // How much
 					"Choose \"" + bezeichner + "\"", // window title
 					"Choose parameter", // Title
-					"Choose one parameter for \"" + bezeichner + "\""); // 
+					"Choose one parameter for \"" + bezeichner + "\""); //
 			getEdge.open();
 		}
 		return result;

@@ -45,7 +45,6 @@ public class PCGraph extends PCObject {
 
 		edges = new PCList<PCEdge>();
 		vertices = new PCList<PCVertex>();
-		System.out.println(allgNodes.size());
 		for (GraphicalRepresentationVertex node : allgNodes) {
 			vertices.add(new PCVertex(node));
 		}

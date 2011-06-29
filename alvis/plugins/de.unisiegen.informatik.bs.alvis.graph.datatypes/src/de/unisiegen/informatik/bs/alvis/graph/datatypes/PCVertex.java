@@ -100,7 +100,7 @@ public class PCVertex extends PCObject {
 	@Override
 	public String toConsole() {
 		String result;
-		result = this.label.getLiteralValue() + ", color: " + this.color.toConsole() + ", instance: ";
+		result = this.label.getLiteralValue() + ", color: " + this.getColor().toConsole();
 		return result;
 	}
 
