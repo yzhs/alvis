@@ -1,18 +1,10 @@
 package de.unisiegen.informatik.bs.alvis.commands;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IExtension;
-import org.eclipse.core.runtime.IExtensionPoint;
-import org.eclipse.core.runtime.IExtensionRegistry;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
@@ -23,12 +15,10 @@ import org.eclipse.ui.part.FileEditorInput;
 import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.Run;
 import de.unisiegen.informatik.bs.alvis.compiler.CompilerAccess;
-import de.unisiegen.informatik.bs.alvis.extensionpoints.IDatatypeList;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.tools.IO;
 
-
-public class RunCompile extends AbstractHandler{
+public class RunCompile extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -39,6 +29,8 @@ public class RunCompile extends AbstractHandler{
 		getActiveWorkbenchWindow().
 		getActivePage().
 		saveAllEditors(true);
+		
+		new CloseRunPerspective().execute(event);
 		
 		// Instantiate IEditorInput
 		IEditorInput input = null;
@@ -129,40 +121,38 @@ public class RunCompile extends AbstractHandler{
 		
 		return null;
 	}
-	
 
-	
 	private Run getPreferencesByDialog() {
-		
+
 		Run seri = new Run();
-		while(seri.getAlgorithmFile().equals("") | seri.getExampleFile().equals("")) { //$NON-NLS-1$ //$NON-NLS-2$
+		while (seri.getAlgorithmFile().equals("") | seri.getExampleFile().equals("")) { //$NON-NLS-1$ //$NON-NLS-2$
 			ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(
-					PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), 
-					new WorkbenchLabelProvider(), 
+					PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+							.getShell(), new WorkbenchLabelProvider(),
 					new BaseWorkbenchContentProvider());
 			dialog.setTitle(Messages.RunCompile_7);
 			dialog.setMessage(Messages.RunCompile_8);
 			dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
 			dialog.open();
-			
-			if(dialog.getResult() != null) {
+
+			if (dialog.getResult() != null) {
 				String result = ""; //$NON-NLS-1$
-					for(Object o : dialog.getResult()) {
-						result = o.toString();
-					if(result.startsWith("L") & result.endsWith("graph")) { //$NON-NLS-1$ //$NON-NLS-2$
+				for (Object o : dialog.getResult()) {
+					result = o.toString();
+					if (result.startsWith("L") & result.endsWith("graph")) { //$NON-NLS-1$ //$NON-NLS-2$
 						result = result.substring(2); // cut the first two chars
 						seri.setExampleFile(result);
 					}
-					if(result.startsWith("L") & result.endsWith("algo")) { //$NON-NLS-1$ //$NON-NLS-2$
+					if (result.startsWith("L") & result.endsWith("algo")) { //$NON-NLS-1$ //$NON-NLS-2$
 						result = result.substring(2); // cut the first two chars
 						seri.setAlgorithmFile(result);
 					}
 				}
 			}
-			if(dialog.getReturnCode() == 1) // the user clicked cancel
+			if (dialog.getReturnCode() == 1) // the user clicked cancel
 				return null;
 		}
-		
+
 		return seri;
 	}
 

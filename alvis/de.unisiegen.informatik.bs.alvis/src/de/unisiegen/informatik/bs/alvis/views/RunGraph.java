@@ -19,11 +19,12 @@ import de.unisiegen.informatik.bs.alvis.extensionpoints.IRunVisualizer;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
 /**
- * @author simon We search for extensions for the extension point. We list all
- *         Objects that contribute this ext.point. We give our example and our
- *         parent to the extensions. If the extension feels responsible for the
- *         input then its addVisualizing method visualizes the input. If not the
- *         extension returns false and gets kicked out of the list.
+ * @author simon 
+ * We search for extensions for the extension point. We list all
+ * Objects that contribute this ext.point. We give our example and our
+ * parent to the extensions. If the extension feels responsible for the
+ * input then its addVisualizing method visualizes the input. If not the
+ * extension returns false and gets kicked out of the list.
  */
 public class RunGraph extends ViewPart {
 
@@ -74,6 +75,7 @@ public class RunGraph extends ViewPart {
 																// was benötigt
 																// wird
 			pcObjects.addAll(runviz.chooseVariable(null, "V")); // Currently
+			Activator.getDefault().getPseudoCodeList().clear();
 			Activator.getDefault().getPseudoCodeList().addAll(pcObjects);
 		}
 	}

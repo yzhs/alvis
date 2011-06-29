@@ -253,4 +253,11 @@ public class Activator extends AbstractUIPlugin {
 		return algorithmContainer;
 	}
 
+	public void resetEverythingThatHasToDoWithTheRun() {
+//		vm.clear();
+//		vm.removeAllBPListener();
+//		vm.stopAlgos();
+//		vm.clear();
+	}
+
 }
