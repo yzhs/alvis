@@ -20,7 +20,7 @@ public class Algorithm implements AbstractAlgo {
 
 	public void run() {
 		for (PCVertex v : G.getVertices()) {
-			v.set("color", new PCString("blue"));
+			v.set("color", new PCString("white"));
         	v.set("distance", PCInteger.getInfty());
         	v.set("pi", PCVertex.getNull());
         }
@@ -33,7 +33,7 @@ public class Algorithm implements AbstractAlgo {
         	PCVertex u = null;
             u = (PCVertex) Q.dequeue();
             for (PCVertex v : u.getAdjacents()) {
-            	if (v.get("color").equals(new PCString("blue"))) {
+            	if (v.get("color").equals(new PCString("white"))) {
             		v.set("color", new PCString("yellow"));
                     reachedBreakPoint(17);
                     v.set("distance",((PCInteger) (u.get("distance"))).add(new PCInteger(1)));
