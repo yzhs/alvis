@@ -14,6 +14,7 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCString;
  */
 
 public class PCVertex extends PCObject {
+	
 	protected static final String TYPENAME = "Vertex";
 
 	private PCList<PCEdge> edges;
@@ -51,7 +52,7 @@ public class PCVertex extends PCObject {
 	}
 
 	private void setColor(PCString color) {
-		this.color = color;
+		this.color.setLiteralValue(color.getLiteralValue());
 		if(this.isInBatchRun) {
 			commandsforGr.get(0).push(color);
 		}
@@ -94,6 +95,13 @@ public class PCVertex extends PCObject {
 	@Override
 	public String toString() {
 		return this.label.getLiteralValue();
+	}
+	
+	@Override
+	public String toConsole() {
+		String result;
+		result = this.label.getLiteralValue() + ", color: " + this.color.toConsole() + ", instance: ";
+		return result;
 	}
 
 	@Override

@@ -2,10 +2,8 @@ package de.unisiegen.informatik.bs.alvis.graph.datatypes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCList;
 
@@ -35,11 +33,6 @@ public class PCGraph extends PCObject {
 		vertices = new PCList<PCVertex>();
 	}
 
-	// TODO DUMMY Constructor
-	public PCGraph(GraphicalRepresentationGraph gr) {
-
-	}
-
 	/**
 	 * Creates new Graph from HashSet GraphicalRepresentation of Nodes and
 	 * Vertices
@@ -52,6 +45,7 @@ public class PCGraph extends PCObject {
 
 		edges = new PCList<PCEdge>();
 		vertices = new PCList<PCVertex>();
+		System.out.println(allgNodes.size());
 		for (GraphicalRepresentationVertex node : allgNodes) {
 			vertices.add(new PCVertex(node));
 		}
@@ -130,7 +124,7 @@ public class PCGraph extends PCObject {
 	public PCObject get(String memberName) {
 		// TODO check possible member access
 		if (memberName.equals("vertices")) {
-			return vertices;
+			return this.vertices;
 		}
 		return null;
 	}
@@ -143,8 +137,8 @@ public class PCGraph extends PCObject {
 	}
 
 	@Override
+	// TODO implement by comparing edges and vertices
 	public boolean equals(PCObject toCheckAgainst) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
@@ -153,15 +147,4 @@ public class PCGraph extends PCObject {
 		return PCGraph.TYPENAME;
 	}
 	
-	@Override
-	// TODO FIX ME
-	public void updateGR(GraphicalRepresentation gr) {
-		ArrayList<GraphicalRepresentationVertex> vlist = new ArrayList<GraphicalRepresentationVertex>();
-		//for()
-		//((GraphicalRepresentationGraph) gr).setVertices(vlist);
-		//((GraphicalRepresentationGraph) gr).setEdges(null);
-		
-	}
-
-
 }

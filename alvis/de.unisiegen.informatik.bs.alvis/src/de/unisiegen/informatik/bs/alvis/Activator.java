@@ -145,14 +145,15 @@ public class Activator extends AbstractUIPlugin {
 	private VirtualMachine vm = VirtualMachine.getInstance();;
 
 	public void runStart() {
-		ArrayList<PCObject> paras = new ArrayList<PCObject>();
+		vm.stopAlgos();
+//		ArrayList<PCObject> paras = new ArrayList<PCObject>();
 
 
 //		pseudoCodeList wurde in der Klasse RunGraph gefüllt.
-		for (PCObject pseudoObj : pseudoCodeList) {
-			paras.add(pseudoObj);
-		}
-		vm.setParameter("algo", paras); //$NON-NLS-1$
+//		for (PCObject pseudoObj : pseudoCodeList) {
+//			paras.add(pseudoObj);
+//		}
+		vm.setParameter("algo", pseudoCodeList); //$NON-NLS-1$
 		// if(this.runGraph.getStartNode() != null)
 		// vm.addParameter(gr.getVertexFromGraphic(
 		// this.runGraph.getStartNode()));
@@ -170,11 +171,13 @@ public class Activator extends AbstractUIPlugin {
 	}
 
 	public void runNext() {
-		vm.stepAlgoBackward("algo"); //$NON-NLS-1$
+		vm.stepAlgoForward();
+//		vm.stepAlgoBackward("algo"); //$NON-NLS-1$
 	}
 
 	public void runBack() {
-		vm.stepAlgoForward();
+		vm.stepAlgoBackward("algo");
+//		vm.stepAlgoForward();
 	}
 
 	public void registerExport(IExportItem item) {

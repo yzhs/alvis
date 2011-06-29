@@ -44,7 +44,7 @@ public class PCListIterator<E> implements Iterator<E> {
 	}
 	
 	/**
-	 * retrive next object, throws out of bound exception
+	 * retrieve next object, throws out of bound exception
 	 */
 	@Override
 	public E next() {
