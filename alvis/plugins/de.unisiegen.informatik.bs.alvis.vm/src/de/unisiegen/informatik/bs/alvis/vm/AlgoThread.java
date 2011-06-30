@@ -272,6 +272,7 @@ public class AlgoThread {
 			return;
 
 		this.createThread();
+		algoInst.setParameters(parameters);
 		lastCounter = (HashMap<Integer, Integer>) lineCounter.clone();
 		reduce(lastCounter);
 		lineCounter.clear();

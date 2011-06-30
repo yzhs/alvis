@@ -146,13 +146,6 @@ public class Activator extends AbstractUIPlugin {
 
 	public void runStart() {
 		vm.stopAlgos();
-//		ArrayList<PCObject> paras = new ArrayList<PCObject>();
-
-
-//		pseudoCodeList wurde in der Klasse RunGraph gefüllt.
-//		for (PCObject pseudoObj : pseudoCodeList) {
-//			paras.add(pseudoObj);
-//		}
 		vm.setParameter("algo", pseudoCodeList); //$NON-NLS-1$
 		// if(this.runGraph.getStartNode() != null)
 		// vm.addParameter(gr.getVertexFromGraphic(
@@ -172,12 +165,11 @@ public class Activator extends AbstractUIPlugin {
 
 	public void runNext() {
 		vm.stepAlgoForward();
-//		vm.stepAlgoBackward("algo"); //$NON-NLS-1$
 	}
 
 	public void runBack() {
+		// TODO change for multiple Algos
 		vm.stepAlgoBackward("algo");
-//		vm.stepAlgoForward();
 	}
 
 	public void registerExport(IExportItem item) {
