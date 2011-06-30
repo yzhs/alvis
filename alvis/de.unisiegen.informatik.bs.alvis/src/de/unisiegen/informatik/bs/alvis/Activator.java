@@ -13,7 +13,6 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import de.unisiegen.informatik.bs.alvis.editors.AlgorithmPartitionScanner;
-import de.unisiegen.informatik.bs.alvis.export.Export;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IDatatypeList;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
@@ -44,7 +43,7 @@ public class Activator extends AbstractUIPlugin {
 
 	private AlgorithmPartitionScanner fPartitionsScanner;
 
-	private Export myExport = new Export();
+	// private Export myExport = new Export();
 
 	/**
 	 * The constructor
@@ -180,12 +179,23 @@ public class Activator extends AbstractUIPlugin {
 		vm.stepAlgoBackward("algo");
 	}
 
-	public void registerExport(IExportItem item) {
-		myExport.register(item);
-	}
+	// public void registerExport(IExportItem item) {
+	// myExport.register(item);
+	// }
+	//
+	// public ArrayList<IExportItem> getExportItems() {
+	// return myExport.getExportItems();
+	// }
 
-	public ArrayList<IExportItem> getExportItems() {
-		return myExport.getExportItems();
+	/**
+	 * returns active editor as export item
+	 */
+	public IExportItem getActiveEditorToExport() throws ClassCastException {
+		IExportItem editor;
+		editor = (IExportItem) getWorkbench().getActiveWorkbenchWindow()
+				.getActivePage().getActiveEditor();
+
+		return editor;
 	}
 
 	/**
@@ -204,7 +214,7 @@ public class Activator extends AbstractUIPlugin {
 		// .java
 		// Add all this to VM.
 		return vm.addAlgoToVM("algo", pathToFile, fileName);
-		 //			return vm.addAlgoToVM("first", pathToAlgoInJava); //$NON-NLS-1$
+		//			return vm.addAlgoToVM("first", pathToAlgoInJava); //$NON-NLS-1$
 	}
 	
 	/**

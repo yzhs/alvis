@@ -29,7 +29,6 @@ import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditor;
 
-import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 
 /**
@@ -52,7 +51,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements IExp
 	 */
 	public AlgorithmEditor() {
 		
-		Activator.getDefault().registerExport(this);
+//		Activator.getDefault().registerExport(this);
 //		Activator.getDefault().getWorkbench().getEditorRegistry().
 		
 		PlatformUI.getWorkbench().getDisplay();

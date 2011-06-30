@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,6 +20,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtext.ui.editor.XtextEditor;
 
 import com.itextpdf.text.Anchor;
 import com.itextpdf.text.Chapter;
@@ -32,8 +32,6 @@ import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.html.simpleparser.HTMLWorker;
 import com.itextpdf.text.html.simpleparser.StyleSheet;
 import com.itextpdf.text.pdf.PdfWriter;
-
-import org.eclipse.xtext.ui.editor.XtextEditor;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.editors.AlgorithmEditor;
@@ -127,30 +125,30 @@ public class PdfExport extends Document {
 		anchor = new Anchor("anchor", catFont);
 		anchor.setName("anchor");
 
-		ArrayList<IExportItem> exportItems = Activator.getDefault()
-				.getExportItems();
+		// ArrayList<IExportItem> exportItems = Activator.getDefault()
+		// .getExportItems();
+		IExportItem exportItem = Activator.getDefault()
+				.getActiveEditorToExport();
 
-		// adding all source code parts:
+
 		chapter = new Chapter(new Paragraph(anchor), 1);
-		for (IExportItem exportItem : exportItems) {
-			String sourceCode = exportItem.getSourceCode();
-			if (sourceCode != null) {
-				paragraph = toParagraph(sourceCode);
-				chapter.add(paragraph);
-			}
+		
+		// adding source code:
+		String sourceCode = exportItem.getSourceCode();
+		if (sourceCode != null) {
+			paragraph = toParagraph(sourceCode);
+			chapter.add(paragraph);
+			add(chapter);
 		}
-		add(chapter);
 
-		// adding all images:
-		chapter = new Chapter(new Paragraph(anchor), 2);
-		for (IExportItem exportItem : exportItems) {
-			Image image = exportItem.getImage();
-			if (image != null) {
-				paragraph = toParagraph(image);
-				chapter.add(paragraph);
-			}
+		// adding image:
+		Image image = exportItem.getImage();
+		if (image != null) {
+			paragraph = toParagraph(image);
+			chapter.add(paragraph);
+			add(chapter);
 		}
-		add(chapter);
+
 	}
 
 	/**
@@ -385,6 +383,7 @@ public class PdfExport extends Document {
 			style = edit.getInternalSourceViewer().getTextWidget();
 		
 		if ((edit != null || part != null) && style != null) {
+
 			RGB rgb;
 			RGB black = new RGB(0,0,0);
 		    String text = style.getText(); 				// the complete text grabbed from the editor

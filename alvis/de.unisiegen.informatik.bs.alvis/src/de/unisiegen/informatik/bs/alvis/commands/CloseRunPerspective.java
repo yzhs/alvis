@@ -14,6 +14,7 @@ public class CloseRunPerspective extends AbstractHandler {
 	 * @author simon
 	 * Executing this method closes the RunPerspective, if open.
 	 */
+	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		IPerspectiveDescriptor runPerspective = null;
 		for (IPerspectiveDescriptor perspective : PlatformUI.getWorkbench()
