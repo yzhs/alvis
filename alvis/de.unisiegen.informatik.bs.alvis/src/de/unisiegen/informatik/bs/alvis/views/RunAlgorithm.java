@@ -234,7 +234,7 @@ public class RunAlgorithm extends ViewPart implements PropertyChangeListener {
 
 	@Override
 	public void propertyChange(final PropertyChangeEvent event) {
-		final Color orange = new Color(null, 230, 130, 30);
+		final Color orange = new Color(null, 204, 217, 232);
 		try {
 			if (event.getPropertyName().equals("ADD_LINE"))
 				text.getDisplay().syncExec(new Runnable() {
