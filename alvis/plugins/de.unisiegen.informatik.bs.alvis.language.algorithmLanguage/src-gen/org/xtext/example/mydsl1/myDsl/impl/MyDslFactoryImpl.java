@@ -76,7 +76,6 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
       case MyDslPackage.BLOCK: return createblock();
       case MyDslPackage.TYPE: return createtype();
       case MyDslPackage.STATEMENT: return createstatement();
-      case MyDslPackage.FUNCTION_CALL: return createfunctionCall();
       case MyDslPackage.DECLARATION: return createdeclaration();
       case MyDslPackage.ASSIGNMENT: return createassignment();
       case MyDslPackage.EXPR: return createexpr();
@@ -180,17 +179,6 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
   {
     statementImpl statement = new statementImpl();
     return statement;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public functionCall createfunctionCall()
-  {
-    functionCallImpl functionCall = new functionCallImpl();
-    return functionCall;
   }
 
   /**

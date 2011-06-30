@@ -26,7 +26,6 @@ import org.xtext.example.mydsl1.myDsl.declaration;
 import org.xtext.example.mydsl1.myDsl.eqExpr;
 import org.xtext.example.mydsl1.myDsl.expr;
 import org.xtext.example.mydsl1.myDsl.formalParams;
-import org.xtext.example.mydsl1.myDsl.functionCall;
 import org.xtext.example.mydsl1.myDsl.functionDefinition;
 import org.xtext.example.mydsl1.myDsl.mainFunction;
 import org.xtext.example.mydsl1.myDsl.mulExpr;
@@ -100,13 +99,6 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * @generated
    */
   private EClass statementEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass functionCallEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -510,26 +502,6 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getfunctionCall()
-  {
-    return functionCallEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getfunctionCall_Function()
-  {
-    return (EReference)functionCallEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getdeclaration()
   {
     return declarationEClass;
@@ -898,9 +870,6 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     createEReference(statementEClass, STATEMENT__ASSIGNMENTS);
     createEReference(statementEClass, STATEMENT__EXPRS);
 
-    functionCallEClass = createEClass(FUNCTION_CALL);
-    createEReference(functionCallEClass, FUNCTION_CALL__FUNCTION);
-
     declarationEClass = createEClass(DECLARATION);
     createEReference(declarationEClass, DECLARATION__VARIABLE_TYPE);
     createEAttribute(declarationEClass, DECLARATION__NAME);
@@ -977,7 +946,6 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     paramEClass.getESuperTypes().add(this.getstatement());
     blockEClass.getESuperTypes().add(this.getstatement());
     typeEClass.getESuperTypes().add(this.getparam());
-    functionCallEClass.getESuperTypes().add(this.getstatement());
     declarationEClass.getESuperTypes().add(this.getstatement());
     exprEClass.getESuperTypes().add(this.getstatement());
     exprEClass.getESuperTypes().add(this.getatom());
@@ -1022,9 +990,6 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     initEReference(getstatement_PostFixExpression(), this.getpostfixExpr(), null, "postFixExpression", null, 0, -1, statement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getstatement_Assignments(), this.getassignment(), null, "assignments", null, 0, -1, statement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getstatement_Exprs(), this.getexpr(), null, "exprs", null, 0, -1, statement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(functionCallEClass, functionCall.class, "functionCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getfunctionCall_Function(), this.getfunctionDefinition(), null, "function", null, 0, 1, functionCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(declarationEClass, declaration.class, "declaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getdeclaration_VariableType(), this.gettype(), null, "variableType", null, 0, -1, declaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

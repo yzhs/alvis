@@ -43,9 +43,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//statement/assignments"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//statement/exprs"/>
     </genClasses>
-    <genClasses ecoreClass="MyDsl.ecore#//functionCall">
-      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference MyDsl.ecore#//functionCall/function"/>
-    </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//declaration">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//declaration/variableType"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//declaration/name"/>

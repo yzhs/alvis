@@ -456,61 +456,6 @@ public interface MyDslPackage extends EPackage
   int TYPE_FEATURE_COUNT = PARAM_FEATURE_COUNT + 2;
 
   /**
-   * The meta object id for the '{@link org.xtext.example.mydsl1.myDsl.impl.functionCallImpl <em>function Call</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.xtext.example.mydsl1.myDsl.impl.functionCallImpl
-   * @see org.xtext.example.mydsl1.myDsl.impl.MyDslPackageImpl#getfunctionCall()
-   * @generated
-   */
-  int FUNCTION_CALL = 8;
-
-  /**
-   * The feature id for the '<em><b>Post Fix Expression</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FUNCTION_CALL__POST_FIX_EXPRESSION = STATEMENT__POST_FIX_EXPRESSION;
-
-  /**
-   * The feature id for the '<em><b>Assignments</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FUNCTION_CALL__ASSIGNMENTS = STATEMENT__ASSIGNMENTS;
-
-  /**
-   * The feature id for the '<em><b>Exprs</b></em>' containment reference list.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FUNCTION_CALL__EXPRS = STATEMENT__EXPRS;
-
-  /**
-   * The feature id for the '<em><b>Function</b></em>' reference.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FUNCTION_CALL__FUNCTION = STATEMENT_FEATURE_COUNT + 0;
-
-  /**
-   * The number of structural features of the '<em>function Call</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int FUNCTION_CALL_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
-
-  /**
    * The meta object id for the '{@link org.xtext.example.mydsl1.myDsl.impl.declarationImpl <em>declaration</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -518,7 +463,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl1.myDsl.impl.MyDslPackageImpl#getdeclaration()
    * @generated
    */
-  int DECLARATION = 9;
+  int DECLARATION = 8;
 
   /**
    * The feature id for the '<em><b>Post Fix Expression</b></em>' containment reference list.
@@ -582,7 +527,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl1.myDsl.impl.MyDslPackageImpl#getassignment()
    * @generated
    */
-  int ASSIGNMENT = 10;
+  int ASSIGNMENT = 9;
 
   /**
    * The number of structural features of the '<em>assignment</em>' class.
@@ -601,7 +546,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl1.myDsl.impl.MyDslPackageImpl#getexpr()
    * @generated
    */
-  int EXPR = 11;
+  int EXPR = 10;
 
   /**
    * The feature id for the '<em><b>Post Fix Expression</b></em>' containment reference list.
@@ -665,7 +610,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl1.myDsl.impl.MyDslPackageImpl#getandExpr()
    * @generated
    */
-  int AND_EXPR = 12;
+  int AND_EXPR = 11;
 
   /**
    * The feature id for the '<em><b>Post Fix Expression</b></em>' containment reference list.
@@ -738,7 +683,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl1.myDsl.impl.MyDslPackageImpl#geteqExpr()
    * @generated
    */
-  int EQ_EXPR = 13;
+  int EQ_EXPR = 12;
 
   /**
    * The feature id for the '<em><b>Post Fix Expression</b></em>' containment reference list.
@@ -820,7 +765,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl1.myDsl.impl.MyDslPackageImpl#getrelExpr()
    * @generated
    */
-  int REL_EXPR = 14;
+  int REL_EXPR = 13;
 
   /**
    * The feature id for the '<em><b>Post Fix Expression</b></em>' containment reference list.
@@ -911,7 +856,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl1.myDsl.impl.MyDslPackageImpl#getaddExpr()
    * @generated
    */
-  int ADD_EXPR = 15;
+  int ADD_EXPR = 14;
 
   /**
    * The feature id for the '<em><b>Post Fix Expression</b></em>' containment reference list.
@@ -1011,7 +956,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl1.myDsl.impl.MyDslPackageImpl#getmulExpr()
    * @generated
    */
-  int MUL_EXPR = 16;
+  int MUL_EXPR = 15;
 
   /**
    * The feature id for the '<em><b>Post Fix Expression</b></em>' containment reference list.
@@ -1129,7 +1074,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl1.myDsl.impl.MyDslPackageImpl#getatom()
    * @generated
    */
-  int ATOM = 17;
+  int ATOM = 16;
 
   /**
    * The feature id for the '<em><b>Constants</b></em>' containment reference list.
@@ -1157,7 +1102,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl1.myDsl.impl.MyDslPackageImpl#getpostfixExpr()
    * @generated
    */
-  int POSTFIX_EXPR = 18;
+  int POSTFIX_EXPR = 17;
 
   /**
    * The feature id for the '<em><b>Constants</b></em>' containment reference list.
@@ -1212,7 +1157,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl1.myDsl.impl.MyDslPackageImpl#getconstant()
    * @generated
    */
-  int CONSTANT = 19;
+  int CONSTANT = 18;
 
   /**
    * The feature id for the '<em><b>Real</b></em>' containment reference list.
@@ -1276,7 +1221,7 @@ public interface MyDslPackage extends EPackage
    * @see org.xtext.example.mydsl1.myDsl.impl.MyDslPackageImpl#getreal()
    * @generated
    */
-  int REAL = 20;
+  int REAL = 19;
 
   /**
    * The feature id for the '<em><b>Real</b></em>' attribute list.
@@ -1563,27 +1508,6 @@ public interface MyDslPackage extends EPackage
    * @generated
    */
   EReference getstatement_Exprs();
-
-  /**
-   * Returns the meta object for class '{@link org.xtext.example.mydsl1.myDsl.functionCall <em>function Call</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>function Call</em>'.
-   * @see org.xtext.example.mydsl1.myDsl.functionCall
-   * @generated
-   */
-  EClass getfunctionCall();
-
-  /**
-   * Returns the meta object for the reference '{@link org.xtext.example.mydsl1.myDsl.functionCall#getFunction <em>Function</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the reference '<em>Function</em>'.
-   * @see org.xtext.example.mydsl1.myDsl.functionCall#getFunction()
-   * @see #getfunctionCall()
-   * @generated
-   */
-  EReference getfunctionCall_Function();
 
   /**
    * Returns the meta object for class '{@link org.xtext.example.mydsl1.myDsl.declaration <em>declaration</em>}'.
@@ -2152,24 +2076,6 @@ public interface MyDslPackage extends EPackage
      * @generated
      */
     EReference STATEMENT__EXPRS = eINSTANCE.getstatement_Exprs();
-
-    /**
-     * The meta object literal for the '{@link org.xtext.example.mydsl1.myDsl.impl.functionCallImpl <em>function Call</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.xtext.example.mydsl1.myDsl.impl.functionCallImpl
-     * @see org.xtext.example.mydsl1.myDsl.impl.MyDslPackageImpl#getfunctionCall()
-     * @generated
-     */
-    EClass FUNCTION_CALL = eINSTANCE.getfunctionCall();
-
-    /**
-     * The meta object literal for the '<em><b>Function</b></em>' reference feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference FUNCTION_CALL__FUNCTION = eINSTANCE.getfunctionCall_Function();
 
     /**
      * The meta object literal for the '{@link org.xtext.example.mydsl1.myDsl.impl.declarationImpl <em>declaration</em>}' class.

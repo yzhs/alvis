@@ -99,15 +99,6 @@ public interface MyDslFactory extends EFactory
   statement createstatement();
 
   /**
-   * Returns a new object of class '<em>function Call</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>function Call</em>'.
-   * @generated
-   */
-  functionCall createfunctionCall();
-
-  /**
    * Returns a new object of class '<em>declaration</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

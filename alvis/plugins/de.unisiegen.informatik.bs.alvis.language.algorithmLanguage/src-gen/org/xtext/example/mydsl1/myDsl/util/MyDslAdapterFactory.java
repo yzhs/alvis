@@ -119,11 +119,6 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
         return createstatementAdapter();
       }
       @Override
-      public Adapter casefunctionCall(functionCall object)
-      {
-        return createfunctionCallAdapter();
-      }
-      @Override
       public Adapter casedeclaration(declaration object)
       {
         return createdeclarationAdapter();
@@ -321,21 +316,6 @@ public class MyDslAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createstatementAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.xtext.example.mydsl1.myDsl.functionCall <em>function Call</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.xtext.example.mydsl1.myDsl.functionCall
-   * @generated
-   */
-  public Adapter createfunctionCallAdapter()
   {
     return null;
   }

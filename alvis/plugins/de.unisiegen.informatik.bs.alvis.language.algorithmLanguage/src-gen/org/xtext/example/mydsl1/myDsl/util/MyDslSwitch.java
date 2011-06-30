@@ -156,14 +156,6 @@ public class MyDslSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MyDslPackage.FUNCTION_CALL:
-      {
-        functionCall functionCall = (functionCall)theEObject;
-        T result = casefunctionCall(functionCall);
-        if (result == null) result = casestatement(functionCall);
-        if (result == null) result = defaultCase(theEObject);
-        return result;
-      }
       case MyDslPackage.DECLARATION:
       {
         declaration declaration = (declaration)theEObject;
@@ -406,22 +398,6 @@ public class MyDslSwitch<T>
    * @generated
    */
   public T casestatement(statement object)
-  {
-    return null;
-  }
-
-  /**
-   * Returns the result of interpreting the object as an instance of '<em>function Call</em>'.
-   * <!-- begin-user-doc -->
-   * This implementation returns null;
-   * returning a non-null result will terminate the switch.
-   * <!-- end-user-doc -->
-   * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>function Call</em>'.
-   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-   * @generated
-   */
-  public T casefunctionCall(functionCall object)
   {
     return null;
   }

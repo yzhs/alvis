@@ -49,9 +49,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="exprs" upperBound="-1"
         eType="#//expr" containment="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="functionCall" eSuperTypes="#//statement">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="#//functionDefinition"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="declaration" eSuperTypes="#//statement">
     <eStructuralFeatures xsi:type="ecore:EReference" name="variableType" upperBound="-1"
         eType="#//type" containment="true"/>
