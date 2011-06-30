@@ -14,7 +14,7 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCString;
  */
 
 public class PCVertex extends PCObject {
-	
+
 	protected static final String TYPENAME = "Vertex";
 
 	private PCList<PCEdge> edges;
@@ -53,17 +53,16 @@ public class PCVertex extends PCObject {
 
 	private void setColor(PCString color) {
 		this.color.setLiteralValue(color.getLiteralValue());
-		if(this.isInBatchRun) {
+		if (this.isInBatchRun) {
 			commandsforGr.get(0).push(color);
-		}
-		else {
+		} else {
 			for (GraphicalRepresentation v : allGr) {
 				((GraphicalRepresentationVertex) v).setColor(color
 						.getLiteralValue());
 			}
 		}
 	}
-	
+
 	public void addEdge(PCEdge toAdd, PCVertex adjacent) {
 		this.edges.add(toAdd);
 		this.adjacants.add(adjacent);
@@ -96,11 +95,12 @@ public class PCVertex extends PCObject {
 	public String toString() {
 		return this.label.getLiteralValue();
 	}
-	
+
 	@Override
 	public String toConsole() {
 		String result;
-		result = this.label.getLiteralValue() + ", color: " + this.getColor().toConsole();
+		result = this.label.getLiteralValue() + ", color: "
+				+ this.getColor().toConsole();
 		return result;
 	}
 
@@ -173,9 +173,11 @@ public class PCVertex extends PCObject {
 	@Override
 	protected void runDelayedCommands() {
 		for (GraphicalRepresentation gr : allGr) {
-			((GraphicalRepresentationVertex) gr)
-					.setColor(((PCString) this.commandsforGr.get(0)
-							.pop()).getLiteralValue());
+			if (!this.commandsforGr.get(0).isEmpty()) {
+				((GraphicalRepresentationVertex) gr)
+						.setColor(((PCString) this.commandsforGr.get(0).pop())
+								.getLiteralValue());
+			}
 		}
 		this.commandsforGr.get(0).clear();
 	}

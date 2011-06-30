@@ -146,4 +146,26 @@ public class PCGraph extends PCObject {
 		return PCGraph.TYPENAME;
 	}
 	
+	/**
+	 * Enable/Disable the batch Modification every Change on the
+	 * GraphicalRepresentation will be delayed and only the last one will be
+	 * really executed
+	 * 
+	 * @param setBatchModification
+	 */
+	@Override
+	public void batchModification(boolean setBatchModification) {
+		// leaving batch mode, run all delayed commands
+		if (isInBatchRun == true && setBatchModification == false) {
+			runDelayedCommands();
+			for(PCVertex v : vertices) {
+				v.runDelayedCommands();	
+			}
+		}
+		isInBatchRun = setBatchModification;
+		for(PCVertex v : vertices) {
+			v.batchModification(setBatchModification);
+		}
+	}
+	
 }

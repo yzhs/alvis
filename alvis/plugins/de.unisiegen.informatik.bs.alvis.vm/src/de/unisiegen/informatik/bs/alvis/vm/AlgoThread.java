@@ -65,7 +65,7 @@ public class AlgoThread {
 		parameters = null;
 		onBreak = false;
 		lock = toLockOn;
-		loadAlgo(pathName,fileName);
+		loadAlgo(pathName, fileName);
 		createThread();
 	}
 
@@ -161,11 +161,13 @@ public class AlgoThread {
 	 * loads the Algo key from the file named fileName
 	 * 
 	 * @param pathToFile
-	 * @param fileName without .java postfix
+	 * @param fileName
+	 *            without .java postfix
 	 */
-	private void loadAlgo(String pathToFile, String fileName) throws ClassNotFoundException {
+	private void loadAlgo(String pathToFile, String fileName)
+			throws ClassNotFoundException {
 		DynaCode dynacode = new DynaCode();
-		
+
 		dynacode.addSourceDir(pathToFile, new File(fileName));
 		algoClass = dynacode.loadClass(fileName);
 	}
@@ -272,6 +274,12 @@ public class AlgoThread {
 			return;
 
 		this.createThread();
+
+		// active batch mode
+		for (PCObject obj : parameters) {
+			obj.batchModification(true);
+		}
+		
 		algoInst.setParameters(parameters);
 		lastCounter = (HashMap<Integer, Integer>) lineCounter.clone();
 		reduce(lastCounter);
@@ -294,6 +302,10 @@ public class AlgoThread {
 
 				// reached the previous state, great, so we are done
 				if (diff(lineCounter, lastCounter) == 0) {
+					// we are one state before the finishline, lets stop batch mode
+					for (PCObject obj : parameters) {
+						obj.batchModification(false);
+					}
 					reduce(lastCounter);
 					onBreak = true;
 					algoInst.addBPListener(new BPListener() {
