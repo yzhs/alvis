@@ -27,6 +27,8 @@ import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseWheelListener;
+import org.eclipse.swt.events.PaintEvent;
+import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
@@ -59,7 +61,6 @@ import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.editors.ImageCache;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.*;
-import de.unisiegen.informatik.bs.alvis.io.dialogs.CheckDialog;
 
 public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		IExportItem {
@@ -101,6 +102,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		// Get the absolute Path to the InstanceLocation
 		// String root = Platform.getInstanceLocation().getURL().getPath();
 		// Get the path to the file
+
 		if (myInput instanceof FileEditorInput) {
 			FileEditorInput fileInput = (FileEditorInput) myInput;
 			myInputFilePath = fileInput.getPath().toString();
@@ -176,7 +178,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		myInput = input;
 		oldCursor = myParent.getCursor();
 
-		Activator.getDefault().registerExport(this);
+		// Activator.getDefault().registerExport(this);
 
 		RowLayout rowLayout = new RowLayout();
 		rowLayout.type = SWT.VERTICAL;
@@ -264,8 +266,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 		setListeners();
 
-
-		
 		return parent;
 	}
 
@@ -430,9 +430,11 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 			@Override
 			public void handleEvent(Event event) {
 				if (event.widget.equals(bZoomIn)) {
-					myGraph.zoomIn();
+					if(myGraph.zoomIn())
+						checkDirty();
 				} else if (event.widget.equals(bZoomOut)) {
-					myGraph.zoomOut();
+					if(myGraph.zoomOut())
+						checkDirty();
 				}
 			}
 		};
@@ -444,21 +446,24 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 			@Override
 			public void handleEvent(Event event) {
 
-//				/* TEST */
-//				ArrayList<AlvisGraphNode> drain = new ArrayList<AlvisGraphNode>();
-//				ArrayList<AlvisGraphNode> source = new ArrayList<AlvisGraphNode>();
-//				source.addAll(myGraph.getAllNodes());
-//				CheckDialog dialog = new CheckDialog(
-//						myParent.getShell(), 
-//						source, 
-//						drain, 
-//						4, 
-//						"Alle Knoten", "Das sind alle Knoten", "Wählen Sie bis zu vier Knoten");
-//				dialog.open();
-//				for(Object o : drain) {
-//					System.out.println(o.toString());
-//				}
-				
+				// /* TEST */
+				// ArrayList<AlvisGraphNode> drain = new
+				// ArrayList<AlvisGraphNode>();
+				// ArrayList<AlvisGraphNode> source = new
+				// ArrayList<AlvisGraphNode>();
+				// source.addAll(myGraph.getAllNodes());
+				// CheckDialog dialog = new CheckDialog(
+				// myParent.getShell(),
+				// source,
+				// drain,
+				// 4,
+				// "Alle Knoten", "Das sind alle Knoten",
+				// "Wählen Sie bis zu vier Knoten");
+				// dialog.open();
+				// for(Object o : drain) {
+				// System.out.println(o.toString());
+				// }
+
 				myGraph.resetMarking();
 				if (event.widget.equals(bNode)) {
 					pressed = MODUS_NODE;
@@ -499,9 +504,11 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 			public void mouseScrolled(MouseEvent e) {
 				if (pressed == CTRL) {
 					if (e.count < 0) { // mouse wheel down
-						myGraph.zoom(e.x, e.y, false);
+						if(myGraph.zoom(e.x, e.y, false))
+							checkDirty();
 					} else { // mouse wheel up
-						myGraph.zoom(e.x, e.y, true);
+						if(myGraph.zoom(e.x, e.y, true))
+							checkDirty();
 					}
 				}
 			}
@@ -818,18 +825,19 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		int result = adw.open();
 		if (result == -1)
 			return;
-		
+
 		int depth = result % 65536 /* (2^16) */;
 		int width = result / 65536;
 
-		if(width == 0){
+		if (width == 0) {
 			myGraph.createCircle(depth);
 		} else {
 			myGraph.createTree(depth, width, null);
 		}
-		
+
 		setLayoutManager();
-		
+		checkDirty();
+
 	}
 
 	/**
@@ -865,6 +873,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	 */
 	public void setLayoutManager() {
 		myGraph.placeNodes();
+		checkDirty();
 	}
 
 	/**
@@ -972,7 +981,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	// }
 
 	public static Object deserialize(String filename) {
-//		System.out.println(filename);//TODO weg
+		// System.out.println(filename);//TODO weg
 		long filesize = new File(filename).length();
 		Object seri = null;
 		if (filesize > 7) {// TODO this is not so cool check it (SIMON)

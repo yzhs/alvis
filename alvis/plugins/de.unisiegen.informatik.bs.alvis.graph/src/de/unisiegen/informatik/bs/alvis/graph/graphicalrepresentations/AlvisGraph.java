@@ -371,38 +371,41 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	}
 
 	/**
-	 * returns connection that is currently marked
+	 * returns connections that are currently marked
 	 * 
-	 * @return connection that is currently marked
+	 * @return connections that are currently marked
 	 */
-	public AlvisGraphConnection getHighlightedConnection() {
+	public ArrayList<AlvisGraphConnection> getHighlightedConnections() {
 
-		if (getSelection().size() == 1) {
+		ArrayList<AlvisGraphConnection> selectedCons = new ArrayList<AlvisGraphConnection>();
+
+		for (Object object : getSelection()) {
 			try {
-				AlvisGraphConnection result = (AlvisGraphConnection) getSelection()
-						.get(0);
-				return result;
+				selectedCons.add((AlvisGraphConnection) object);
 			} catch (Exception e) {
 			}
 		}
-		return null;
+
+		return selectedCons;
 	}
 
 	/**
-	 * returns node that is currently marked
+	 * returns nodes that are currently marked
 	 * 
-	 * @return node that is currently marked
+	 * @return nodes that are currently marked
 	 */
-	public AlvisGraphNode getHighlightedNode() {
+	public ArrayList<AlvisGraphNode> getHighlightedNodes() {
 
-		if (getSelection().size() == 1) {
+		ArrayList<AlvisGraphNode> selectedNodes = new ArrayList<AlvisGraphNode>();
+
+		for (Object object : getSelection()) {
 			try {
-				AlvisGraphNode result = (AlvisGraphNode) getSelection().get(0);
-				return result;
+				selectedNodes.add((AlvisGraphNode) object);
 			} catch (Exception e) {
 			}
 		}
-		return null;
+
+		return selectedNodes;
 	}
 
 	/**
@@ -433,46 +436,49 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 
 	public void removeHighlightedConnection() {
 
-		AlvisGraphConnection con = getHighlightedConnection();
-		if (con == null)
-			return; // no connection selected
+		ArrayList<AlvisGraphConnection> cons = getHighlightedConnections();
 
 		setSelection(null);
 
-		con.getFirstNode().getConnections().remove(con);
-		con.getSecondNode().getConnections().remove(con);
+		for (AlvisGraphConnection con : cons) {
+			con.getFirstNode().getConnections().remove(con);
+			con.getSecondNode().getConnections().remove(con);
 
-		removeConnection(con);
-		con.dispose();
+			removeConnection(con);
+			con.dispose();
+
+		}
 	}
 
 	/**
 	 * removes currently highlighted node and all belonging connections
 	 */
 	public void removeHighlightedNode() {
-		AlvisGraphNode node = getHighlightedNode();
-		if (node == null)
-			return; // no node selected
+		ArrayList<AlvisGraphNode> nodes = getHighlightedNodes();
 
 		this.setSelection(null);
 
-		for (int i = node.getConnections().size() - 1; i >= 0; i--) {
-			AlvisGraphConnection gc = node.getConnections().get(i);
-			gc.getNextNode(node).getConnections().remove(gc);
-			removeConnection(gc);
-			gc.dispose();
+		for (AlvisGraphNode node : nodes) {
+
+			for (int i = node.getConnections().size() - 1; i >= 0; i--) {
+				AlvisGraphConnection gc = node.getConnections().get(i);
+				gc.getNextNode(node).getConnections().remove(gc);
+				removeConnection(gc);
+				gc.dispose();
+			}
+
+			removeNode(node);
+
+			if (getConnectNode() != null && getConnectNode().equals(node))
+				resetMarking();
+			if (getStartNode() != null && getStartNode().equals(node))
+				setStartNode(null);
+			if (getEndNode() != null && getEndNode().equals(node))
+				setEndNode(null);
+
+			node.dispose();
+
 		}
-
-		removeNode(node);
-
-		if (getConnectNode() != null && getConnectNode().equals(node))
-			resetMarking();
-		if (getStartNode() != null && getStartNode().equals(node))
-			setStartNode(null);
-		if (getEndNode() != null && getEndNode().equals(node))
-			setEndNode(null);
-
-		node.dispose();
 	}
 
 	/**
@@ -588,7 +594,6 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 			createTree(depth - 1, width, gn);
 		}
 
-
 	}
 
 	/**
@@ -626,7 +631,6 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		}
 		makeGraphConnection(one, start);
 
-		
 	}
 
 	/**
@@ -645,9 +649,11 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	/**
 	 * zooms out, i.e. pumps down the sizes and positions of graph nodes and
 	 * connections
+	 * 
+	 * @return true if graph has zoomed in
 	 */
-	public void zoomIn() {
-		zoom(0, 0, true);
+	public boolean zoomIn() {
+		return zoom(0, 0, true);
 	}
 
 	/**
@@ -661,18 +667,19 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	 *            the y mouse coordinate
 	 * @param zoomIn
 	 *            true if function is supposed to zoom in, false to zoom out
+	 * @return true if graph has zoomed
 	 * 
 	 */
-	public void zoom(int mouseX, int mouseY, boolean zoomIn) {
+	public boolean zoom(int mouseX, int mouseY, boolean zoomIn) {
 		double myZoomFactor;
 		if (zoomIn) {
 			if (getZoomCounter() >= 4)
-				return; // too far zoomed in already
+				return false; // too far zoomed in already
 			increaseZoomCounter();
 			myZoomFactor = zoomFactor;
 		} else {
 			if (getZoomCounter() <= -2)
-				return; // too far zoomed out already
+				return false; // too far zoomed out already
 			decreaseZoomCounter();
 			myZoomFactor = 1.0 / zoomFactor;
 		}
@@ -687,10 +694,10 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		for (AlvisGraphNode gn : getAllNodes()) {
 			int x = gn.getLocation().x;
 			int y = gn.getLocation().y;
-			gn.setLocation((x - mouseX) * myZoomFactor + mouseX,
-					(y - mouseY) * myZoomFactor + mouseY);
+			gn.setLocation((x - mouseX) * myZoomFactor + mouseX, (y - mouseY)
+					* myZoomFactor + mouseY);
 			gn.setFont(gnFont);
-			minX = Math.min(minX,x);
+			minX = Math.min(minX, x);
 			minY = Math.min(minY, y);
 		}
 
@@ -700,14 +707,17 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 					zoomFactor, getZoomCounter() + 2));
 		}
 		Animation.run(200);
+		return true;
 	}
 
 	/**
 	 * zooms out, i.e. pumps down the sizes and positions of graph nodes and
 	 * connections
+	 * 
+	 * @return true if graph has zoomed out
 	 */
-	public void zoomOut() {
-		zoom(0, 0, false);
+	public boolean zoomOut() {
+		return zoom(0, 0, false);
 	}
 
 	private AlvisGraphNode getConnectNode() {
@@ -849,4 +859,17 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	public void setEdges(ArrayList<GraphicalRepresentationEdge> edgeToSet) {
 		// TODO Auto-generated method stub
 	}
+
+	public AlvisGraphNode getHighlightedNode() {
+		if (getHighlightedNodes().isEmpty())
+			return null;
+		return getHighlightedNodes().get(0);
+	}
+
+	public AlvisGraphConnection getHighlightedConnection() {
+		if (getHighlightedConnections().isEmpty())
+			return null;
+		return getHighlightedConnections().get(0);
+	}
+
 }
