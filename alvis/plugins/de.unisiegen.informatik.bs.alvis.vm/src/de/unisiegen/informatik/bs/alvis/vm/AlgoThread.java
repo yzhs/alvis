@@ -306,6 +306,10 @@ public class AlgoThread {
 					for (PCObject obj : parameters) {
 						obj.batchModification(false);
 					}
+					// inform all registerd breakpoint listeners
+					for (BPListener toInform : bpListeners) {
+						toInform.onBreakPoint(BPNr);
+					}
 					reduce(lastCounter);
 					onBreak = true;
 					algoInst.addBPListener(new BPListener() {
