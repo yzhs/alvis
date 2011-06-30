@@ -18,6 +18,7 @@ import de.unisiegen.informatik.bs.alvis.extensionpoints.IDatatypeList;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.views.AlgorithmContainer;
+import de.unisiegen.informatik.bs.alvis.vm.BPListener;
 import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
 
 /* Ein paar Notizen
@@ -145,6 +146,7 @@ public class Activator extends AbstractUIPlugin {
 	private VirtualMachine vm = VirtualMachine.getInstance();;
 
 	public void runStart() {
+		vm.removeAllBPListener();
 		vm.stopAlgos();
 		vm.setParameter("algo", pseudoCodeList); //$NON-NLS-1$
 		// if(this.runGraph.getStartNode() != null)
@@ -159,7 +161,13 @@ public class Activator extends AbstractUIPlugin {
 		// if(this.runGraph.getEndNode() != null) {
 		// vm.addParameter(gr.getVertexFromGraphic(this.runGraph.getEndNode()));
 		// }
-
+		vm.addBPListener(new BPListener() {
+			@Override
+			public void onBreakPoint(int BreakPointNumber) {
+				Activator.getDefault().algorithmContainer.removeAllCurrentLine();
+				Activator.getDefault().algorithmContainer.addCurrentLine(BreakPointNumber);
+			}
+		});
 		vm.startAlgos();
 	}
 

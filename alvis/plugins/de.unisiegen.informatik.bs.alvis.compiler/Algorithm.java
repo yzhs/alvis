@@ -25,7 +25,7 @@ public class Algorithm implements AbstractAlgo {
         	v.set("pi", PCVertex.getNull());
         }
         s.set("color", new PCString("yellow"));
-        reachedBreakPoint(7);
+        reachedBreakPoint(6);
         s.set("distance", new PCInteger(0));
         PCQueue Q = new PCQueue();
         Q.enqueue(s);
@@ -35,7 +35,7 @@ public class Algorithm implements AbstractAlgo {
             for (PCVertex v : u.getAdjacents()) {
             	if (v.get("color").equals(new PCString("white"))) {
             		v.set("color", new PCString("yellow"));
-                    reachedBreakPoint(17);
+                    reachedBreakPoint(14);
                     v.set("distance",((PCInteger) (u.get("distance"))).add(new PCInteger(1)));
                     v.set("pi", u);
                     Q.enqueue(v);
