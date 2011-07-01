@@ -20,4 +20,11 @@ public class DatatypeList implements IDatatypeList {
 		return allDatatypesInThisPlugin;
 	}
 
+	@Override
+	public ArrayList<String> getDatatypePackagesInThisPlugin() {
+		ArrayList<String> allDatatypePackagesInThisPlugin = new ArrayList<String>();
+		allDatatypePackagesInThisPlugin.add("de.unisiegen.informatik.bs.alvis.primitive.datatypes");
+		return allDatatypePackagesInThisPlugin;
+	}
+
 }
