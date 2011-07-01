@@ -1,8 +1,8 @@
 package de.unisiegen.informatik.bs.alvis.graph.datatypes;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedList;
+import java.util.List;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCList;
@@ -129,9 +129,9 @@ public class PCGraph extends PCObject {
 	}
 
 	@Override
-	public Map<String, ? extends PCObject> getMembers() {
-		Map<String, PCObject> result = new HashMap<String, PCObject>();
-		result.put("vertices", this.vertices);
+	public List<String> getMembers() {
+		List<String> result = new LinkedList<String>();
+		result.add("vertices");
 		return result;
 	}
 

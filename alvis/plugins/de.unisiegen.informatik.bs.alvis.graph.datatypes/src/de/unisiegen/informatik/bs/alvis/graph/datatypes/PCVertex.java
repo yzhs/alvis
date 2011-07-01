@@ -1,6 +1,8 @@
 package de.unisiegen.informatik.bs.alvis.graph.datatypes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Stack;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
@@ -187,4 +189,9 @@ public class PCVertex extends PCObject {
 		return PCVertex.TYPENAME;
 	}
 
+	@Override
+	public List<String> getMembers() {
+		String[] attributes = { "color", "distance", "pi", "adj" };
+		return Arrays.asList(attributes);
+	}
 }
