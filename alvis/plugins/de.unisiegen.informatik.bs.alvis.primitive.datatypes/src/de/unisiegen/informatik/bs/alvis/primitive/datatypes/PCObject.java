@@ -4,9 +4,7 @@
 package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Stack;
 
 /**
@@ -18,7 +16,7 @@ import java.util.Stack;
 
 public abstract class PCObject {
 
-	public final static String TYPENAME = "Object";
+	protected final static String TYPENAME = "Object";
 	protected static PCObject localInfty;
 	protected static PCObject localNull;
 
@@ -159,31 +157,25 @@ public abstract class PCObject {
 	}
 	
 	/**
-	 * Returns the Members used for the compiler
+	 * Returns the Members used for the compiler.
 	 * 
-	 * will return emtpy map if nothing is there
+	 * Will return empty list if nothing is there.
 	 * 
-	 * @return a map contains the Membername and the Datatype Reference
+	 * @return a list that contains the member names
 	 */
-	public Map<String, ? extends PCObject> getMembers() {
-		Map<String, PCObject> result = new HashMap<String, PCObject>();
-		return result;
+	public List<String> getMembers() {
+		return new ArrayList<String>();
 	}
 
 	/**
-	 * Returns the Methods used for the compiler
+	 * Returns the Methods used for the compiler.
 	 * 
-	 * will return emtpy map if nothing is there
+	 * Will return empty list if nothing is there.
 	 * 
-	 * @return a map contains two Lists: -first List is the the Methodname and
-	 *         implementation Name - second List with Datatypes the first
-	 *         datatype is ALWAYS the return Datatype, can be Void, everything
-	 *         else will be parameters
+	 * @return a list that contains the method names
 	 */
-	// TODO change return value
-	public Map<List<String>, List<PCObject>> getMethods() {
-		Map<List<String>, List<PCObject>> result = new HashMap<List<String>, List<PCObject>>();
-		return result;
+	public List<String> getMethods() {
+		return new ArrayList<String>();
 	}
 
 	/**

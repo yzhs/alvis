@@ -3,6 +3,9 @@
  */
 package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
 
+import java.util.Arrays;
+import java.util.List;
+
 
 /**
  * @author Dominik Dingel
@@ -83,5 +86,10 @@ public class PCString extends PCObject {
 
 	public PCBoolean notEqual(PCString other) {
 		return this.equal(other).not();
+	}
+	
+	public List<String> getMethods() {
+		String[] methods = { "add", "equal", "notEqual" };
+		return Arrays.asList(methods);
 	}
 }

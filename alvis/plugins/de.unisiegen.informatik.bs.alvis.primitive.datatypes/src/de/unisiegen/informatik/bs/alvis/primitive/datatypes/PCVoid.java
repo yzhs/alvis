@@ -1,10 +1,5 @@
 package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-
 public class PCVoid extends PCObject {
 	protected static final String TYPENAME = "Void";
 	
@@ -37,20 +32,6 @@ public class PCVoid extends PCObject {
 	public PCObject get(String memberName) {
 		// Nothing to get
 		return null;
-	}
-
-	@Override
-	public Map<String, ? extends PCObject> getMembers() {
-		// no members, so return empty Map
-		Map<String, PCObject> result = new HashMap<String, PCObject>();
-		return result;
-	}
-
-	@Override
-	public Map<List<String>, List<PCObject>> getMethods() {
-		// no methods, so return empty Map
-		Map<List<String>, List<PCObject>> result = new HashMap<List<String>, List<PCObject>>();
-		return result;
 	}
 
 	@Override

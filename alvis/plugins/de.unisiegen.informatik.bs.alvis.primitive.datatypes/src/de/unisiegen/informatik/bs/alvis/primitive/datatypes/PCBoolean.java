@@ -1,5 +1,7 @@
 package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -152,5 +154,11 @@ public class PCBoolean extends PCObject {
 
 	public PCBoolean notEqual(PCBoolean other) {
 		return this.equal(other).not();
+	}
+
+	@Override
+	public List<String> getMethods() {
+		String[] methods = { "and", "or", "not", "equal", "notEqual" };
+		return Arrays.asList(methods);
 	}
 }

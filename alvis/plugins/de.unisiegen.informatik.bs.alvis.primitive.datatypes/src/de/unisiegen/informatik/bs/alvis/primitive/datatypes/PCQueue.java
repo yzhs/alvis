@@ -1,9 +1,8 @@
 package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -71,43 +70,17 @@ public class PCQueue<T extends PCObject> extends PCObject {
 	}
 	
 	@Override
-	public Map<List<String>, List<PCObject>> getMethods() {
-		Map<List<String>, List<PCObject>> result = new HashMap<List<String>, List<PCObject>>();
-		
-		ArrayList<String> namesEnq = new ArrayList<String>();
-		namesEnq.add("enqueue");
-		namesEnq.add("enqueue");
-		ArrayList<PCObject> dataEnq = new ArrayList<PCObject>();
-		dataEnq.add(PCObject.localNull);
-		dataEnq.add(PCObject.localNull);
-		
-		result.put(namesEnq, dataEnq);
-		
-		ArrayList<String> namesDeq = new ArrayList<String>();
-		namesDeq.add("dequeue");
-		namesDeq.add("dequeue");
-		ArrayList<PCObject> dataDeq = new ArrayList<PCObject>();
-		dataDeq.add(PCObject.localNull);
-		
-		result.put(namesDeq, dataDeq);
-		
-		ArrayList<String> nameIsEmp = new ArrayList<String>();
-		nameIsEmp.add("isEmpty");
-		nameIsEmp.add("isEmpty");
-		ArrayList<PCObject> dataIsEmp = new ArrayList<PCObject>();
-		dataIsEmp.add(PCBoolean.localNull);
-		
-		result.put(nameIsEmp, dataIsEmp);
-		
-		return result;
-	}
-
-	@Override
 	public String getTypeName() {
 		String result = PCQueue.TYPENAME;
 		result.concat("<");
 		result.concat(PCObject.localNull.getTypeName());
 		result.concat(">");
 		return result;
+	}
+	
+	@Override
+	public List<String> getMethods() {
+		String[] methods = { "enqueue", "dequeue", "isEmpty" };
+		return Arrays.asList(methods);
 	}
 }

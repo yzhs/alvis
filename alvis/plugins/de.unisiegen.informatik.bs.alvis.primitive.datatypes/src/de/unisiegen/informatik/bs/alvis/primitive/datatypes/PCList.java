@@ -7,7 +7,7 @@ import java.util.Iterator;
  * 
  * @author Dominik Dingel
  *
- * @param <E> Typ Parameter of the stored objects
+ * @param <E> Type Parameter of the stored objects
  */
 public class PCList<E> extends PCObject implements SortableCollection, Iterable<E> {
 	protected static final String TYPENAME = "List";

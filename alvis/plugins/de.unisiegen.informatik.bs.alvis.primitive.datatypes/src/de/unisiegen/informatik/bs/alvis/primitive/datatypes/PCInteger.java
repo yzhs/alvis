@@ -1,5 +1,7 @@
 package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
 
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Wrapper Class around java Integer
@@ -10,35 +12,34 @@ package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
 
 public class PCInteger extends PCObject {
 	protected static final String TYPENAME = "Integer";
-	
+
 	protected static PCInteger localNull;
 	protected static PCInteger localInfty;
-	
+
 	private int value;
 
 	synchronized public void inc() {
 		value++;
 	}
-	
+
 	synchronized public void dec() {
 		value--;
 	}
-	
-	
+
 	public static PCInteger getNull() {
-		if(localNull == null) {
-			localNull = new PCInteger(Integer.MAX_VALUE-1);
+		if (localNull == null) {
+			localNull = new PCInteger(Integer.MAX_VALUE - 1);
 		}
 		return localNull;
 	}
-	
+
 	public static PCInteger getInfty() {
-		if(localInfty == null) {
+		if (localInfty == null) {
 			localInfty = new PCInteger(Integer.MAX_VALUE);
 		}
 		return localInfty;
 	}
-	
+
 	/**
 	 * Create new PCInteger from literal
 	 * 
@@ -59,7 +60,7 @@ public class PCInteger extends PCObject {
 	public void setValue(PCInteger value) {
 		this.value = value.getLiteralValue();
 	}
-	
+
 	public void addTo(PCInteger value) {
 		this.value += value.getLiteralValue();
 	}
@@ -84,7 +85,7 @@ public class PCInteger extends PCObject {
 	@Override
 	public boolean equals(PCObject toCheckAgainst) {
 		try {
-			return ((PCInteger)toCheckAgainst).getLiteralValue() == this.value;
+			return ((PCInteger) toCheckAgainst).getLiteralValue() == this.value;
 		} catch (ClassCastException e) {
 			return false;
 		}
@@ -97,6 +98,10 @@ public class PCInteger extends PCObject {
 
 	public PCInteger add(PCInteger other) {
 		return new PCInteger(this.getLiteralValue() + other.getLiteralValue());
+	}
+
+	public PCString add(PCString other) {
+		return new PCString(this.getLiteralValue() + other.getLiteralValue());
 	}
 
 	public PCInteger sub(PCInteger other) {
@@ -141,5 +146,13 @@ public class PCInteger extends PCObject {
 
 	public PCInteger negate() {
 		return new PCInteger(-this.getLiteralValue());
+	}
+
+	@Override
+	public List<String> getMethods() {
+		String[] methods = { "add", "sub", "mul", "div", "mod", "equal",
+				"notEqual", "less", "greater", "lessOrEqual", "greaterOrEqual",
+				"negate" };
+		return Arrays.asList(methods);
 	}
 }

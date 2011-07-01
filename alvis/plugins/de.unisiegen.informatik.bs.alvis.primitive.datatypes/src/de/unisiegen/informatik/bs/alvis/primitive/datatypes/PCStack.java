@@ -1,9 +1,7 @@
 package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 
@@ -69,8 +67,11 @@ public class PCStack<T extends PCObject> extends PCObject {
 	}
 
 	@Override
-	public Map<List<String>, List<PCObject>> getMethods() {
-		Map<List<String>, List<PCObject>> result = new HashMap<List<String>, List<PCObject>>();
+	public List<String> getMethods() {
+		List<String> result = new ArrayList<String>();
+		result.add("isEmpty");
+		result.add("push");
+		result.add("pop");
 		return result;
 	}
 
