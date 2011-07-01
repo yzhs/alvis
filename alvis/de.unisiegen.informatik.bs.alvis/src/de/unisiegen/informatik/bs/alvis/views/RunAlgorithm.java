@@ -239,7 +239,8 @@ public class RunAlgorithm extends ViewPart implements PropertyChangeListener {
 			if (event.getPropertyName().equals("ADD_LINE"))
 				text.getDisplay().syncExec(new Runnable() {
 					public void run() {
-						text.setLineBackground((Integer) event.getNewValue(),
+						if(text.getLineCount() > (Integer) event.getNewValue())
+							text.setLineBackground((Integer) event.getNewValue(),
 								1, orange);
 					}
 				});
@@ -247,7 +248,8 @@ public class RunAlgorithm extends ViewPart implements PropertyChangeListener {
 			if (event.getPropertyName().equals("REMOVE_LINE"))
 				text.getDisplay().syncExec(new Runnable() {
 					public void run() {
-						text.setLineBackground((Integer) event.getOldValue(),
+						if(text.getLineCount() > (Integer) event.getNewValue())
+							text.setLineBackground((Integer) event.getOldValue(),
 								1, null);
 					}
 				});

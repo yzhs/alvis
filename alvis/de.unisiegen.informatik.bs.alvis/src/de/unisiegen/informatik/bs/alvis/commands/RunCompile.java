@@ -1,10 +1,16 @@
 package de.unisiegen.informatik.bs.alvis.commands;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
@@ -41,6 +47,8 @@ public class RunCompile extends AbstractHandler {
 				Activator.getDefault().getAllDatatypesInPlugIns());
 		CompilerAccess.getDefault().setDatatypePackages(
 				Activator.getDefault().getAllDatatypesPackagesInPlugIns());
+
+//		System.out.println(Platform.getInstanceLocation().getURL().getPath());
 //		CompilerAccess.getDefault().testDatatypes();
 
 		try {
@@ -86,7 +94,7 @@ public class RunCompile extends AbstractHandler {
 				// Translate the PseudoCode and get name of the translated file
 				// without extension.
 				String fileNameOfTheAlgorithm = CompilerAccess.getDefault()
-						.compileThisDummy("keinString", null); //$NON-NLS-1$
+						.compileThisDummy(seri.getAlgorithmFile()); //$NON-NLS-1$
 				// Get the path where the translated files are saved to.
 				String pathToTheAlgorithm = CompilerAccess.getDefault()
 						.getAlgorithmPath();
@@ -112,6 +120,10 @@ public class RunCompile extends AbstractHandler {
 			return null;
 		}
 
+//		 IResource.refreshLocal();
+		 
+		new RefreshWorkspace().execute(event);
+		
 		return null;
 	}
 
