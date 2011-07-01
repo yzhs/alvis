@@ -196,7 +196,7 @@ public class AlgoThread {
 					lineCounter.put(new Integer(BPNr), tmp);
 				}
 				onBreak = true;
-				// inform all registerd breakpoint listeners
+				// inform all registered breakpoint listeners
 				for (BPListener toInform : bpListeners) {
 					toInform.onBreakPoint(BPNr);
 				}

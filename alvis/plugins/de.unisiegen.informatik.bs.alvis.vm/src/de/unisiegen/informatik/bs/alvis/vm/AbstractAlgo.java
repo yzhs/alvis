@@ -13,7 +13,7 @@ public interface AbstractAlgo extends Runnable {
 
 	/**
 	 * 
-	 * @return Reference of all Variables, holded by the algo
+	 * @return Reference of all Variables, held by the algo
 	 */
 	public ArrayList<PCObject> getVariableReferences();
 

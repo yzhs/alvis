@@ -26,7 +26,7 @@ public class VirtualMachine {
 	// singleton pattern
 	private static VirtualMachine instance = new VirtualMachine();
 
-	// containg algos and threads
+	// containing algos and threads
 	private HashMap<String, AlgoThread> algos;
 
 	/**
