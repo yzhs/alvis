@@ -1,5 +1,6 @@
 package de.unisiegen.informatik.bs.alvis.commands;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
@@ -17,15 +18,13 @@ import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
 import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.ui.part.FileEditorInput;
-
+import org.antlr.runtime.RecognitionException;
 import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.Run;
 import de.unisiegen.informatik.bs.alvis.compiler.CompilerAccess;
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.tools.IO;
 
 public class RunCompile extends AbstractHandler {
-
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		// NOTE: event is null when executing from run editor.
@@ -66,7 +65,7 @@ public class RunCompile extends AbstractHandler {
 		 * GET THE RUN OBJECT
 		 */
 		// Check if the input is a FileEditorInput
-		if (input != null & input instanceof FileEditorInput) {
+		if (input != null && input instanceof FileEditorInput) {
 			// cast to FileEditorInput
 			FileEditorInput fileInput = (FileEditorInput) input;
 			// If the user has choosen a graph to run...
@@ -79,7 +78,6 @@ public class RunCompile extends AbstractHandler {
 				// ask for run settings
 				seri = getPreferencesByDialog();
 			}
-
 		} else {
 			// ask for run settings
 			seri = getPreferencesByDialog();
@@ -93,11 +91,14 @@ public class RunCompile extends AbstractHandler {
 			try {
 				// Translate the PseudoCode and get name of the translated file
 				// without extension.
-				String fileNameOfTheAlgorithm = CompilerAccess.getDefault()
-						.compileThisDummy(seri.getAlgorithmFile()); //$NON-NLS-1$
+				File javaCode = CompilerAccess.getDefault().compile(seri.getAlgorithmFile());
+				String fileNameOfTheAlgorithm = javaCode.getCanonicalPath().replaceAll("\\.java$", ""); //$NON-NLS-1$
 				// Get the path where the translated files are saved to.
-				String pathToTheAlgorithm = CompilerAccess.getDefault()
-						.getAlgorithmPath();
+				String pathToTheAlgorithm = javaCode.getParentFile().getCanonicalPath();
+
+				// System.out.println("Filename: " +
+				// algorithm.getCanonicalPath());
+				// System.out.println("Path: " + pathToTheAlgorithm);
 
 				// System.out.println("Filename: " + fileNameOfTheAlgorithm);
 				// System.out.println("Path: " + pathToTheAlgorithm);
@@ -115,6 +116,15 @@ public class RunCompile extends AbstractHandler {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+			} catch (RecognitionException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalArgumentException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		} else {
 			return null;
@@ -128,7 +138,6 @@ public class RunCompile extends AbstractHandler {
 	}
 
 	private Run getPreferencesByDialog() {
-
 		Run seri = new Run();
 		while (seri.getAlgorithmFile().equals("") | seri.getExampleFile().equals("")) { //$NON-NLS-1$ //$NON-NLS-2$
 			ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(
@@ -144,11 +153,11 @@ public class RunCompile extends AbstractHandler {
 				String result = ""; //$NON-NLS-1$
 				for (Object o : dialog.getResult()) {
 					result = o.toString();
-					if (result.startsWith("L") & result.endsWith("graph")) { //$NON-NLS-1$ //$NON-NLS-2$
+					if (result.startsWith("L") && result.endsWith("graph")) { //$NON-NLS-1$ //$NON-NLS-2$
 						result = result.substring(2); // cut the first two chars
 						seri.setExampleFile(result);
 					}
-					if (result.startsWith("L") & result.endsWith("algo")) { //$NON-NLS-1$ //$NON-NLS-2$
+					if (result.startsWith("L") && result.endsWith("algo")) { //$NON-NLS-1$ //$NON-NLS-2$
 						result = result.substring(2); // cut the first two chars
 						seri.setAlgorithmFile(result);
 					}

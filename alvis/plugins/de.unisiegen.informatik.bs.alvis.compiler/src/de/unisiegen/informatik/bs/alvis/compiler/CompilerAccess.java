@@ -1,24 +1,30 @@
-/**
- * 
- */
 package de.unisiegen.informatik.bs.alvis.compiler;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
+import org.antlr.runtime.RecognitionException;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 
 import de.unisiegen.informatik.bs.alvis.io.files.FileCopy;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
+import de.uni_siegen.informatik.bs.alvic.Compiler;
 
 /**
  * @author mays
- * 
+ * @author Colin
+ *
  */
 public class CompilerAccess {
-
+	private Compiler c;
+	private Collection<PCObject> datatypes;
+	private Collection<String> datatypePackages;
 	private static CompilerAccess instance;
 
 	public static CompilerAccess getDefault() {
@@ -39,16 +45,34 @@ public class CompilerAccess {
 	String algorithmPath = "";
 
 	/**
-	 * Returns the path to the algorithm file
 	 * 
-	 * @return
-	 * @throws IOException
+	 * @param path to the source code that
+	 * @param datatypes the data types that can be used in the code
+	 * @return path to the generated .java file if it exists, null otherwise
+	 * 
+	 * @throws IOException, RecognitionException
 	 */
+	public File compile(String code) throws IOException, RecognitionException {
+		c = new Compiler(datatypes, datatypePackages);
+		String javaCode = c.compile(code);
+		System.err.println("successfully compiled code");
+		File result = new File("Algorithm.java");
+		FileWriter fstream;
+		fstream = new FileWriter(result);
+		BufferedWriter out = new BufferedWriter(fstream);
+		out.write(javaCode);
+		out.close();
+		return result;
+
 	public String getAlgorithmPath() throws IOException {
 		String path = "";
 		path = FileLocator.getBundleFile(Activator.getDefault().getBundle())
 				.getCanonicalPath().toString();
 		return algorithmPath;
+	}
+
+	public List<Exception> getExceptions() {
+		return c.getExceptions();
 	}
 
 	/**
@@ -117,7 +141,7 @@ public class CompilerAccess {
 	 * @param datatypes
 	 *            the datatypes to set
 	 */
-	public void setDatatypes(ArrayList<PCObject> datatypes) {
+	public void setDatatypes(Collection<PCObject> datatypes) {
 		this.datatypes = datatypes;
 	}
 
@@ -125,7 +149,7 @@ public class CompilerAccess {
 	 * @param datatypePackages
 	 *            the datatypePackages to set
 	 */
-	public void setDatatypePackages(ArrayList<String> datatypePackages) {
+	public void setDatatypePackages(Collection<String> datatypePackages) {
 		this.datatypePackages = datatypePackages;
 	}
 
