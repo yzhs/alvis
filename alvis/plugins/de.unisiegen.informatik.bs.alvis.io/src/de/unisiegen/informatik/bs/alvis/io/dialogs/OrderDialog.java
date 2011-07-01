@@ -100,6 +100,7 @@ public class OrderDialog extends TitleAreaDialog {
 	/**
 	 * Saves the order that is shown in the window to the ArrayList ,,myOrder''
 	 */
+	@SuppressWarnings("unchecked")
 	private void order() {
 		// the Position the item was
 		int oldPosition = 0;
@@ -170,6 +171,8 @@ public class OrderDialog extends TitleAreaDialog {
 		// Add the items from the second list.
 		myOrder.addAll(secondList);
 
+//		printList(myOrder);
+		
 //		if(wasUPDOWN) {
 //			tree.removeAll();
 //			// Create the TreeItems
@@ -179,7 +182,7 @@ public class OrderDialog extends TitleAreaDialog {
 //			}
 //		}
 		
-		// printList(myOrder);
+
 	}
 
 	private void printList(ArrayList<Object> toPrint) {
@@ -187,10 +190,11 @@ public class OrderDialog extends TitleAreaDialog {
 			System.out.println(o.toString());
 		}
 	}
+	
+	int clickCount = 0;
 
 	protected Control createDialogArea(Composite parent) {
 		final Composite composite = (Composite) super.createDialogArea(parent);
-//		final Composite composite = new Composite(parent,SWT.NONE);
 		setTitle(myTitle);
 		setMessage(myMessage, SWT.ERROR);
 		if (myOrder == null) {
@@ -204,6 +208,9 @@ public class OrderDialog extends TitleAreaDialog {
 		Button btnUp = new Button(cmpstMenu, SWT.NONE);
 		btnUp.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
+				System.out.println("UP:");
+				System.out.println(orderItemText);
+				
 				if(orderItemText != null) {
 					newPosition = -10;
 					order();
@@ -215,9 +222,12 @@ public class OrderDialog extends TitleAreaDialog {
 		Button btnDown = new Button(cmpstMenu, SWT.NONE);
 		btnDown.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
+				System.out.println("DOWN:");
+				System.out.println(orderItemText);
+				
 				if(orderItemText != null) {
 					newPosition = -20;
-					order();	
+					order();
 				}
 			}
 		});
@@ -229,18 +239,16 @@ public class OrderDialog extends TitleAreaDialog {
 		Button btnRandom = new Button(cmpstMenu, SWT.NONE);
 		btnRandom.setText("Random");
 
+
+		
 		// Create the Tree
 		tree = new Tree(composite, SWT.BORDER);
 		tree.setLayoutData(new GridData(GridData.FILL_BOTH));
 	    tree.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event event) {
-				System.out.println(event.button);
-				System.out.println(event.type);
-				System.out.println(event.detail);
-				System.out.println(event.x);
-				System.out.println(event.y);
 				clckdTreeItem = ((TreeItem)event.item);
 				orderItemText = clckdTreeItem.getText();
+				System.out.println("clicked: " + orderItemText);
 			}
 		});
 	    
