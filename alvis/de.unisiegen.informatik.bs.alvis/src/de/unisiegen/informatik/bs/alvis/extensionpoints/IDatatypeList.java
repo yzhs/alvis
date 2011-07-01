@@ -14,8 +14,16 @@ public interface IDatatypeList {
 
 	/**
 	 * Returns all datatypes that are in this Plugin
-	 * @return
+	 * @return ArrayList with datatypes
+	 * @see Activator().getDefault().getAllDatatypes()
 	 */
 	public ArrayList<PCObject> getAllDatatypesInThisPlugin();
+	
+	/**
+	 * Returns the package-name where the datatypes are inside
+	 * @return names of packages the datatypes are inside
+	 * @see getAllDatatypesInThisPlugin()
+	 */
+	public ArrayList<String> getDatatypePackagesInThisPlugin();
 
 }

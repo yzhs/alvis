@@ -15,7 +15,14 @@ import org.osgi.framework.BundleContext;
 import de.unisiegen.informatik.bs.alvis.editors.AlgorithmPartitionScanner;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IDatatypeList;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCList;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCQueue;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCStack;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCString;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCVoid;
 import de.unisiegen.informatik.bs.alvis.views.AlgorithmContainer;
 import de.unisiegen.informatik.bs.alvis.vm.BPListener;
 import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
@@ -163,8 +170,10 @@ public class Activator extends AbstractUIPlugin {
 		vm.addBPListener(new BPListener() {
 			@Override
 			public void onBreakPoint(int BreakPointNumber) {
-				Activator.getDefault().algorithmContainer.removeAllCurrentLine();
-				Activator.getDefault().algorithmContainer.addCurrentLine(BreakPointNumber);
+				Activator.getDefault().algorithmContainer
+						.removeAllCurrentLine();
+				Activator.getDefault().algorithmContainer
+						.addCurrentLine(BreakPointNumber);
 			}
 		});
 		vm.startAlgos();
@@ -179,24 +188,7 @@ public class Activator extends AbstractUIPlugin {
 		vm.stepAlgoBackward("algo");
 	}
 
-	// public void registerExport(IExportItem item) {
-	// myExport.register(item);
-	// }
-	//
-	// public ArrayList<IExportItem> getExportItems() {
-	// return myExport.getExportItems();
-	// }
 
-	/**
-	 * returns active editor as export item
-	 */
-	public IExportItem getActiveEditorToExport() throws ClassCastException {
-		IExportItem editor;
-		editor = (IExportItem) getWorkbench().getActiveWorkbenchWindow()
-				.getActivePage().getActiveEditor();
-
-		return editor;
-	}
 
 	/**
 	 * Set the compiled .java algorithm path TODO @throws VMException
@@ -216,58 +208,143 @@ public class Activator extends AbstractUIPlugin {
 		return vm.addAlgoToVM("algo", pathToFile, fileName);
 		//			return vm.addAlgoToVM("first", pathToAlgoInJava); //$NON-NLS-1$
 	}
-	
-	/**
-	 * Get an instance of each datatype that is used in some plug-in.
-	 * With this instance you can get informations about the datatypes.
-	 * @return a list from all datatypes in the plug-ins
-	 */
-	public ArrayList<PCObject> getAllDatatypes() {
-		ArrayList<PCObject> allDatatypes = new ArrayList<PCObject>();
-		
-        IExtensionRegistry registry = Platform.getExtensionRegistry();
-        IExtensionPoint extensionPoint = registry.getExtensionPoint(
-        		"de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist"); //$NON-NLS-1$
-        IExtension[] extensions = extensionPoint.getExtensions();
 
-        //     * For all Extensions that contribute:
-        for (int i = 0; i < extensions.length; i++)
-        {
-            IExtension extension = extensions[i];
-            IConfigurationElement[] elements = extension.getConfigurationElements();
-            for (int j = 0; j < elements.length; j++)
-            {
-                try
-                {
-                    IConfigurationElement element = elements[j];
-                    IDatatypeList datatypes = (IDatatypeList)element.
-                        createExecutableExtension("class"); //$NON-NLS-1$
-                    // Save the found datatypes in allDatatypes
-                    allDatatypes.addAll(datatypes.getAllDatatypesInThisPlugin());
-                }
-                catch (CoreException e)
-                {
-                    e.printStackTrace();
-                }
-            }
-        }
-        // The list with all found datatypes
-		return allDatatypes;
+	
+	
+	/* ************************************************************************
+	 * DATATYPES AND PACKAGES OUT OF THE PLUGINS
+	 * ***********************************************************************
+	 */
+
+	private ArrayList<PCObject> allDatatypesInPlugIns = null;
+	private ArrayList<String> allDatatypesPackagesInPlugIns = null;
+
+	/**
+	 * Get an instance of each datatype, that is used in some plug-in. With this
+	 * instance you can get informations about the datatype.
+	 * 
+	 * @return a list with all datatypes in the plug-ins
+	 */
+	public ArrayList<PCObject> getAllDatatypesInPlugIns() {
+		if (allDatatypesInPlugIns == null)
+			registerAllDatatypes();
+		return allDatatypesInPlugIns;
 	}
 
+	/**
+	 * Get the names of the packages the datatypes from
+	 * getAllDatatypesInPlugIns() are in.
+	 * 
+	 * @return a list with all packagenames that contain datatypes in the
+	 *         plug-ins
+	 */
+	public ArrayList<String> getAllDatatypesPackagesInPlugIns() {
+		if (allDatatypesPackagesInPlugIns == null)
+			registerAllDatatypes();
+		return allDatatypesPackagesInPlugIns;
+	}
+
+	/**
+	 * Fill allDatatypesInPlugIns and allDatatypesPackagesInPlugIns with
+	 * datatypes and packagenames.
+	 */
+	private void registerAllDatatypes() {
+		// The list to add all known datatypes
+		allDatatypesInPlugIns = new ArrayList<PCObject>();
+		// The list to add all known packages that contain datatypes
+		allDatatypesPackagesInPlugIns = new ArrayList<String>();
+
+		/*
+		 * ADD DATATYPES AND PACKAGENAMES FROM ALVIS-PLUG-INS
+		 */
+		IExtensionRegistry registry = Platform.getExtensionRegistry();
+		IExtensionPoint extensionPoint = registry
+				.getExtensionPoint("de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist"); //$NON-NLS-1$
+		IExtension[] extensions = extensionPoint.getExtensions();
+
+		// * For all Extensions that contribute:
+		for (int i = 0; i < extensions.length; i++) {
+			IExtension extension = extensions[i];
+			IConfigurationElement[] elements = extension
+					.getConfigurationElements();
+			for (int j = 0; j < elements.length; j++) {
+				try {
+					IConfigurationElement element = elements[j];
+					IDatatypeList datatypes = (IDatatypeList) element
+							.createExecutableExtension("class"); //$NON-NLS-1$
+					// Save the found datatypes in allDatatypes
+					allDatatypesInPlugIns.addAll(datatypes
+							.getAllDatatypesInThisPlugin());
+					allDatatypesPackagesInPlugIns.addAll(datatypes
+							.getDatatypePackagesInThisPlugin());
+				} catch (CoreException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+		/*
+		 * ADD DATATYPES THAT COME WITH ALVIS
+		 */
+		allDatatypesInPlugIns.add(new PCBoolean(true));
+		allDatatypesInPlugIns.add(new PCInteger(0));
+		// allDatatypes.add(new PCListIterator(null));
+		allDatatypesInPlugIns.add(new PCList());
+		allDatatypesInPlugIns.add(new PCStack());
+		allDatatypesInPlugIns.add(new PCQueue());
+		allDatatypesInPlugIns.add(new PCString(""));
+		allDatatypesInPlugIns.add(new PCVoid());
+
+		/*
+		 * ADD THE DATATYPE-PACKAGENAMES THAT COME WITH ALVIS
+		 */
+		allDatatypesPackagesInPlugIns
+				.add("de.unisiegen.informatik.bs.alvis.primitive.datatypes");
+	}
+
+	
+	
+	/* ************************************************************************
+	 * RUNALGORITHM TOOLS
+	 * ************************************************************************/
+	/**
+	 * @param algorithmContainer
+	 */
 	public void setAlgorithmContainer(AlgorithmContainer algorithmContainer) {
 		this.algorithmContainer = algorithmContainer;
 	}
 
+	/**
+	 * Get the AlgorithmContainer. The AlgorithmContainer contains surroundings
+	 * for the graphical represenation of the Algorithm that is currently
+	 * running. You can highlight lines as an example.
+	 * 
+	 * @return
+	 */
 	public AlgorithmContainer getAlgorithmContainer() {
 		return algorithmContainer;
 	}
 
-	public void resetEverythingThatHasToDoWithTheRun() {
-//		vm.clear();
-//		vm.removeAllBPListener();
-//		vm.stopAlgos();
-//		vm.clear();
-	}
+	/* ************************************************************************
+	 * EXPORT
+	 * ************************************************************************/
+	
+	// public void registerExport(IExportItem item) {
+	// myExport.register(item);
+	// }
+	//
+	// public ArrayList<IExportItem> getExportItems() {
+	// return myExport.getExportItems();
+	// }
 
+	/**
+	 * returns active editor as export item
+	 */
+	public IExportItem getActiveEditorToExport() throws ClassCastException {
+		IExportItem editor;
+		editor = (IExportItem) getWorkbench().getActiveWorkbenchWindow()
+				.getActivePage().getActiveEditor();
+
+		return editor;
+	}
 }

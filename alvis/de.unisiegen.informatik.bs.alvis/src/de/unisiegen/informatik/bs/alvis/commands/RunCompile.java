@@ -23,93 +23,86 @@ public class RunCompile extends AbstractHandler {
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		// NOTE: event is null when executing from run editor.
-		
+
 		// Save all Editors
-		PlatformUI.getWorkbench().
-		getActiveWorkbenchWindow().
-		getActivePage().
-		saveAllEditors(true);
-		
+		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+				.saveAllEditors(true);
+
 		new CloseRunPerspective().execute(event);
-		
+
 		// Instantiate IEditorInput
 		IEditorInput input = null;
-		
-		// Hier sind alle Datentypen
-		for(PCObject obj : Activator.getDefault().getAllDatatypes()) {
-//			System.out.println(obj.getClass());
-//			System.out.println(obj.getTypeName());
-//			System.out.println(obj.toString());
-//			System.out.println();
-		}
-		
+
+		/*
+		 * Register datatypes and packagenames to the compiler This is important
+		 * for the compileing
+		 */
+		CompilerAccess.getDefault().setDatatypes(
+				Activator.getDefault().getAllDatatypesInPlugIns());
+		CompilerAccess.getDefault().setDatatypePackages(
+				Activator.getDefault().getAllDatatypesPackagesInPlugIns());
+		CompilerAccess.getDefault().testDatatypes();
+
 		try {
 			// What to run? get the input (filepath)
-			input = 
-				PlatformUI.
-				getWorkbench().
-				getActiveWorkbenchWindow().
-				getActivePage().
-				getActiveEditor().
-				getEditorInput();
-		}
-		catch(NullPointerException e) {
+			input = PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+					.getActivePage().getActiveEditor().getEditorInput();
+		} catch (NullPointerException e) {
 			e.printStackTrace();
 		}
 
-		//Instantiate a new Run object
+		// Instantiate a new Run object
 		Run seri = null;
-		
+
 		/*
 		 * GET THE RUN OBJECT
 		 */
 		// Check if the input is a FileEditorInput
-		if(input != null & input instanceof FileEditorInput) {
+		if (input != null & input instanceof FileEditorInput) {
 			// cast to FileEditorInput
 			FileEditorInput fileInput = (FileEditorInput) input;
 			// If the user has choosen a graph to run...
-			if(fileInput.getFile().getFileExtension().equals("run")) { //$NON-NLS-1$
+			if (fileInput.getFile().getFileExtension().equals("run")) { //$NON-NLS-1$
 				// get the path in system
-				String systemPath =
-					fileInput.getPath().toString();
+				String systemPath = fileInput.getPath().toString();
 				// and deserialize the saved run to seri
-				seri = (Run)IO.deserialize(systemPath);	
-			}
-			else {
+				seri = (Run) IO.deserialize(systemPath);
+			} else {
 				// ask for run settings
 				seri = getPreferencesByDialog();
 			}
-			
+
 		} else {
 			// ask for run settings
 			seri = getPreferencesByDialog();
 		}
 
 		// END OF GET THE RUN OBJECT
-		
-		if(seri != null) {
+
+		if (seri != null) {
 
 			// GET THE ALGORITHM AS STRING
 			try {
-				// Translate the PseudoCode and get name of the translated file without extension.
-				String fileNameOfTheAlgorithm = CompilerAccess.compileThisDummy("keinString", null); //$NON-NLS-1$
+				// Translate the PseudoCode and get name of the translated file
+				// without extension.
+				String fileNameOfTheAlgorithm = CompilerAccess.getDefault()
+						.compileThisDummy("keinString", null); //$NON-NLS-1$
 				// Get the path where the translated files are saved to.
-				String pathToTheAlgorithm = CompilerAccess.getAlgorithmPath();
-				
-//				System.out.println("Filename: " + fileNameOfTheAlgorithm);
-//				System.out.println("Path: " + pathToTheAlgorithm);
+				String pathToTheAlgorithm = CompilerAccess.getDefault()
+						.getAlgorithmPath();
+
+				// System.out.println("Filename: " + fileNameOfTheAlgorithm);
+				// System.out.println("Path: " + pathToTheAlgorithm);
 
 				// Register Algorithm to VM
-				if(Activator.getDefault().setJavaAlgorithmToVM(
-						pathToTheAlgorithm, 
-						fileNameOfTheAlgorithm)) {
+				if (Activator.getDefault().setJavaAlgorithmToVM(
+						pathToTheAlgorithm, fileNameOfTheAlgorithm)) {
 					Activator.getDefault().setActiveRun(seri);
 					// Then activate command SwitchToRunPerspective
 					new SwitchToRunPerspective().execute(event);
-				}
-				else {
+				} else {
 					System.out.println("Fehler"); //$NON-NLS-1$
-					//TODO FEHLER AUSGEBEN MIT WINDOWS
+					// TODO FEHLER AUSGEBEN MIT WINDOWS
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -118,7 +111,7 @@ public class RunCompile extends AbstractHandler {
 		} else {
 			return null;
 		}
-		
+
 		return null;
 	}
 
