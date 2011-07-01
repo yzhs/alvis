@@ -41,7 +41,7 @@ public class RunCompile extends AbstractHandler {
 				Activator.getDefault().getAllDatatypesInPlugIns());
 		CompilerAccess.getDefault().setDatatypePackages(
 				Activator.getDefault().getAllDatatypesPackagesInPlugIns());
-		CompilerAccess.getDefault().testDatatypes();
+//		CompilerAccess.getDefault().testDatatypes();
 
 		try {
 			// What to run? get the input (filepath)
