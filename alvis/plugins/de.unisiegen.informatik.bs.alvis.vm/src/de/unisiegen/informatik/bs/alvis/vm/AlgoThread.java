@@ -128,10 +128,10 @@ public class AlgoThread {
 
 	/**
 	 * Passes over the needed Parameter Types for the specific Algo
-	 * 
+	 * TODO update javadoc
 	 * @return ArrayList with PCObject ArrayList, should be never a nullpointer
 	 */
-	public ArrayList<PCObject> getParameterTypes() {
+	public HashMap<PCObject,String> getParameterTypes() {
 		return algoInst.getParameterTypes();
 	}
 

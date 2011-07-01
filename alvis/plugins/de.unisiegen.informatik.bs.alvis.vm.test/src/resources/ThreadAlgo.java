@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
+import java.util.HashMap;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
@@ -58,9 +59,9 @@ public class ThreadAlgo implements AbstractAlgo {
 	}
 
 	@Override
-	public ArrayList<PCObject> getParameterTypes() {
-		ArrayList<PCObject> result = new ArrayList<PCObject>();
-		result.add(PCInteger.getNull());
+	public HashMap<PCObject, String> getParameterTypes() {
+		HashMap<PCObject, String> result = new HashMap<PCObject, String>();
+		result.put(PCInteger.getNull(), "counter");
 		return result;
 	}
 

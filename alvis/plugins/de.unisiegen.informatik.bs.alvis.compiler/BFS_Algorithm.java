@@ -27,18 +27,18 @@ public class Algorithm implements AbstractAlgo {
         s.set("color", new PCString("yellow"));
         reachedBreakPoint(6);
         s.set("distance", new PCInteger(0));
-        PCStack S = new PCStack();
-        S.push(s);
-        while ((S.isEmpty().not()).getLiteralValue()) {
+        PCQueue Q = new PCQueue();
+        Q.enqueue(s);
+        while ((Q.isEmpty().not()).getLiteralValue()) {
         	PCVertex u = null;
-            u = (PCVertex) S.pop();
+            u = (PCVertex) Q.dequeue();
             for (PCVertex v : u.getAdjacents()) {
             	if (v.get("color").equals(new PCString("white"))) {
             		v.set("color", new PCString("yellow"));
                     reachedBreakPoint(14);
                     v.set("distance",((PCInteger) (u.get("distance"))).add(new PCInteger(1)));
                     v.set("pi", u);
-                    S.push(v);
+                    Q.enqueue(v);
                  }
             }
         }
@@ -77,7 +77,7 @@ public class Algorithm implements AbstractAlgo {
 	public HashMap<PCObject, String> getParameterTypes() {
 		HashMap<PCObject, String> result = new HashMap<PCObject, String>();
 		result.put(PCGraph.getNull(), "G");
-		result.put(PCVertex.getNull(), "s");
+		result.put(PCVertex.getNull, "s");
 		return result;
 	}
 

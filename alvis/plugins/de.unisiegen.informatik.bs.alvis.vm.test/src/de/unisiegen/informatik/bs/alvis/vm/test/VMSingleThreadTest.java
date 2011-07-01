@@ -82,8 +82,8 @@ public class VMSingleThreadTest {
 		VirtualMachine vm = VirtualMachine.getInstance();
 		vm.addAlgoToVM("algo", path + "/src/resources/", "ThreadAlgo");
 		Assert.assertEquals("Integer",
-				((PCInteger) vm.getParametersTypesAlgo("algo").get(0))
-						.getTypeName());
+				((PCInteger) (vm.getParametersTypesAlgo("algo").keySet()
+						.toArray())[0]).getTypeName());
 	}
 
 	@Test

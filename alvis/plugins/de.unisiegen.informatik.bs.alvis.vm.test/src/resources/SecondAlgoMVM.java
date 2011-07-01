@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
+import java.util.HashMap;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
@@ -57,8 +58,8 @@ public class SecondAlgoMVM implements AbstractAlgo {
 	}
 
 	@Override
-	public ArrayList<PCObject> getParameterTypes() {
-		return new ArrayList<PCObject>();
+	public HashMap<PCObject, String> getParameterTypes() {
+		return null;
 	}
 
 	@Override

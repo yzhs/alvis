@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
 import java.util.concurrent.locks.Lock;
@@ -57,7 +58,7 @@ public class G implements AbstractAlgo {
 	}
 
 	@Override
-	public ArrayList<PCObject> getParameterTypes() {
+	public HashMap<PCObject, String> getParameterTypes() {
 		return null;
 	}
 

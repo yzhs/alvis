@@ -4,6 +4,7 @@ package de.unisiegen.informatik.bs.alvis.vm;
  * @ author Sebastian Schmitz, Dominik Dingel
  */
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.concurrent.locks.Lock;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
@@ -17,11 +18,11 @@ public interface AbstractAlgo extends Runnable {
 	public ArrayList<PCObject> getVariableReferences();
 
 	/**
-	 * 
+	 * TODO update javadoc
 	 * @return Null Objects for all Datatypes the algo expects for the
 	 *         setParameters Call
 	 */
-	public ArrayList<PCObject> getParameterTypes();
+	public HashMap<PCObject, String> getParameterTypes();
 
 	/**
 	 * 

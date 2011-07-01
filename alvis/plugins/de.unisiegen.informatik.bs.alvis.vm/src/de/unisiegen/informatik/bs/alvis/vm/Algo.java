@@ -2,6 +2,7 @@ package de.unisiegen.informatik.bs.alvis.vm;
 
 import java.util.ArrayList;
 import java.util.concurrent.locks.Lock;
+import java.util.HashMap;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.vm.AbstractAlgo;
@@ -26,7 +27,7 @@ public class Algo implements AbstractAlgo {
 	 * dynamic code
 	 */
 	@Override
-	public ArrayList<PCObject> getParameterTypes() {
+	public HashMap<PCObject, String> getParameterTypes() {
 		return null;
 	}
 

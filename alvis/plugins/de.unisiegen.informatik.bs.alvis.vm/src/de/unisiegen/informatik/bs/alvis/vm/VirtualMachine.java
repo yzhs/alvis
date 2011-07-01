@@ -69,11 +69,11 @@ public class VirtualMachine {
 
 	/**
 	 * Method to get needed Parametertypes
-	 * 
+	 * TODO update javadoc
 	 * @param key
 	 * @return PCObject ArrayList to determine the types, for editor and view
 	 */
-	public ArrayList<PCObject> getParametersTypesAlgo(String key) {
+	public HashMap<PCObject, String> getParametersTypesAlgo(String key) {
 		return algos.get(key).getParameterTypes();
 	}
 
