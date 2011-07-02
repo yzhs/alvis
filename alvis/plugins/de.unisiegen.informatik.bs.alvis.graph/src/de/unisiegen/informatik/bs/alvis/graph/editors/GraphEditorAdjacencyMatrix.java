@@ -23,7 +23,6 @@ import org.eclipse.ui.part.FileEditorInput;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSerialize;
 
-
 public class GraphEditorAdjacencyMatrix extends EditorPart implements
 		PropertyChangeListener, IExportItem {
 	private Table table;
@@ -53,17 +52,19 @@ public class GraphEditorAdjacencyMatrix extends EditorPart implements
 	private IEditorInput myInput;
 	private String myInputFilePath;
 	private AlvisSerialize mySeri;
+
 	@Override
 	public void init(IEditorSite site, IEditorInput input)
 			throws PartInitException {
 		setSite(site);
 		setInput(input);
 		myInput = input;
-		
+
 		if (myInput instanceof FileEditorInput) {
 			FileEditorInput fileInput = (FileEditorInput) myInput;
 			myInputFilePath = fileInput.getPath().toString();
-			AlvisSerialize seri = (AlvisSerialize) GraphEditor.deserialize(myInputFilePath);
+			AlvisSerialize seri = (AlvisSerialize) GraphEditor
+					.deserialize(myInputFilePath);
 			if (seri != null) {
 				mySeri = seri;
 			}
@@ -82,62 +83,74 @@ public class GraphEditorAdjacencyMatrix extends EditorPart implements
 
 	private Composite myParent;
 	private static int y;
+
 	@Override
 	public void createPartControl(Composite parent) {
 		myParent = parent;
 		parent.setLayout(new FillLayout(SWT.HORIZONTAL));
 
 		// new TableViewer
-		TableViewer tableViewer = new TableViewer(myParent, SWT.BORDER | SWT.FULL_SELECTION);
+		TableViewer tableViewer = new TableViewer(myParent, SWT.BORDER
+				| SWT.FULL_SELECTION);
 		table = tableViewer.getTable();
-		// Settings 
+		// Settings
 		table.setLinesVisible(true);
 		table.setHeaderVisible(true);
-		
+
 		// ArrayContentProvider can be used, because matrix is a java collection
 		tableViewer.setContentProvider(ArrayContentProvider.getInstance());
-		
+
 		// The width of the colums
-		int columWidth = 20;
-		
+		int columWidth = 25;
+
 		// Array of TableViewerColumn's
-		TableViewerColumn[] tableViewerColumns = new TableViewerColumn[mySeri.getNodeId().length];
+		TableViewerColumn[] tableViewerColumns = new TableViewerColumn[mySeri
+				.getNodeId().length+1];
 		// Array of TableColumn's
-		TableColumn[] tblclmns = new TableColumn[mySeri.getNodeId().length];
+		TableColumn[] tblclmns = new TableColumn[mySeri.getNodeId().length+1];
 		// ArrayList of String Array's for the Input
 		ArrayList<String[]> matrix = new ArrayList<String[]>();
-		
+
 		// Iterate over all Nodes
-		for(y = 0; y<mySeri.getNodeId().length; y++) {
-			
+		for (y = 0; y < mySeri.getNodeId().length; y++) {
+			String title = "";
+			if(y == 0) {
+				tableViewerColumns[y] = new TableViewerColumn(tableViewer, SWT.NONE);
+				tblclmns[y] = tableViewerColumns[y].getColumn();
+				tblclmns[y].setWidth(columWidth);
+				tblclmns[y].setText("#");
+				tblclmns[y].setAlignment(SWT.CENTER);
+				tableViewerColumns[y].setLabelProvider(new DynamicCellLabelProvider(y));
+			}
 			// Create a TableColumn
-			tableViewerColumns[y] = new TableViewerColumn(tableViewer, SWT.NONE);
-			tblclmns[y] = tableViewerColumns[y].getColumn();
-			tblclmns[y].setWidth(columWidth);
-			tblclmns[y].setText("" + mySeri.getNodeId()[y]);
-			tableViewerColumns[y].setLabelProvider(new DynamicCellLabelProvider(y));
-			
+			tableViewerColumns[y+1] = new TableViewerColumn(tableViewer, SWT.NONE);
+			tblclmns[y+1] = tableViewerColumns[y+1].getColumn();
+			tblclmns[y+1].setWidth(columWidth);
+			tblclmns[y+1].setText("" + mySeri.getNodeId()[y]);
+			tblclmns[y+1].setAlignment(SWT.CENTER);
+			tableViewerColumns[y+1].setLabelProvider(new DynamicCellLabelProvider(y+1));
+
 			// Add Input for each row
-			String[] row = new String[mySeri.getNodeId().length];
-			for(int x = 0; x<mySeri.getNodeId().length; x++) {
-				if(x==0) {
+			String[] row = new String[mySeri.getNodeId().length+1];
+			for (int x = 0; x < mySeri.getNodeId().length; x++) {
+				if (x == 0) {
 					row[x] = "" + mySeri.getNodeId()[y];
 				}
-				if(checkConnect(x,y) || checkConnect(y,x))
-					row[x] = "" + 1;
+				if (checkConnect(x, y) || checkConnect(y, x))
+					row[x+1] = "" + 1;
 				else
-					row[x] = "" + 0;
+					row[x+1] = "" + 0;
 			}
 			matrix.add(row.clone());
 		}
-		
+
 		tableViewer.setInput(matrix);
 	}
 
 	private boolean checkConnect(int x, int y) {
-		for(int c = 0; c<mySeri.getConId().length; c++) {
-			if(mySeri.getConNode1()[c] == mySeri.getNodeId()[x]) {
-				if(mySeri.getConNode2()[c] == mySeri.getNodeId()[y]) {
+		for (int c = 0; c < mySeri.getConId().length; c++) {
+			if (mySeri.getConNode1()[c] == mySeri.getNodeId()[x]) {
+				if (mySeri.getConNode2()[c] == mySeri.getNodeId()[y]) {
 					return true;
 				}
 			}
