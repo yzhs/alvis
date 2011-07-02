@@ -35,6 +35,7 @@ public class VirtualMachine {
 	public static VirtualMachine getInstance() {
 		return instance;
 	}
+	
 
 	/**
 	 * private Method to create virtual Machine instance
@@ -85,10 +86,10 @@ public class VirtualMachine {
 	 * @param fileName
 	 * @return boolean with success
 	 */
-	public boolean addAlgoToVM(String key, String pathToFile, String fileName) {
+	public boolean addAlgoToVM(String key, String pathToFile, String fileName, ArrayList<Object> datatypesToAddToClasspath) {
 		AlgoThread tmp;
 		try {
-			tmp = new AlgoThread(pathToFile, fileName, lock);
+			tmp = new AlgoThread(pathToFile, fileName, lock, datatypesToAddToClasspath);
 		} catch (ClassNotFoundException e) {
 			// TODO possible case for the logger?
 			e.printStackTrace();
@@ -166,6 +167,10 @@ public class VirtualMachine {
 	 * @param para
 	 */
 	public void setParameter(String key, ArrayList<PCObject> para) {
+		if(algos.get(key) == null )
+			System.out.println("Algo ist null!"); // TODO weg damit
+		if(para == null)
+			System.out.println("Die Parameter sind leer!" ); // TODO weg damit
 		algos.get(key).setParameters(para);
 	}
 

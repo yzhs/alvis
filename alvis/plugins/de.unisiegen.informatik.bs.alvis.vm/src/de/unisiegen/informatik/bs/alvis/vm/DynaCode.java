@@ -8,11 +8,7 @@ import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-
-import de.unisiegen.informatik.bs.alvis.compiler.CompilerAccess;
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
-import de.unisiegen.informatik.bs.alvis.graph.datatypes.PCEdge;
-
+import java.util.TreeSet;
 
 
 /**
@@ -20,6 +16,9 @@ import de.unisiegen.informatik.bs.alvis.graph.datatypes.PCEdge;
  * at runtime
  * 
  * @author Sebastian Schmitz
+ * Disclaimer: This class and Javac are an adaption of the classes
+ * distributed by Li Yang in his tutorial "add dynamic Java Code
+ * to your application" published at www.javaworld.com
  */
 
 public final class DynaCode {
@@ -29,17 +28,20 @@ public final class DynaCode {
 	private ClassLoader parentClassLoader;
 
 	private ArrayList<SourceDir> sourceDirs = new ArrayList<SourceDir>();
+	
+	TreeSet<String> dynamicallyReferencedPackagesNeededToCompile; // what a long self-explanatory name!
 
 	// class name => LoadedClass
 	private HashMap<String, LoadedClass> loadedClasses = new HashMap<String, LoadedClass>();
 
-	public DynaCode() {
-		this(DynaCode.class.getClassLoader());
-
+	public DynaCode(ArrayList<Object> packagesToAddToClasspath) {
+		this(DynaCode.class.getClassLoader(), packagesToAddToClasspath);
 	}
 
-	public DynaCode(ClassLoader parentClassLoader) {
-		this(extractClasspath(parentClassLoader), parentClassLoader);
+	public DynaCode(ClassLoader parentClassLoader,
+			ArrayList<Object> packagesToAddToClasspath) {
+		this(extractClasspath(parentClassLoader), parentClassLoader,
+				packagesToAddToClasspath);
 
 	}
 
@@ -49,41 +51,29 @@ public final class DynaCode {
 	 * @param parentClassLoader
 	 *            the parent of the class loader that loads all the dynamic
 	 *            classes
+	 * @param List of datatypes used in Algorithm.java provided by the main (de.~.alvis) activator
 	 */
-	public DynaCode(String compileClasspath, ClassLoader parentClassLoader) {
+	public DynaCode(String compileClasspath, ClassLoader parentClassLoader,
+			ArrayList<Object> datatypesToAddToClasspath) {
 		this.compileClasspath = compileClasspath;
 		this.parentClassLoader = parentClassLoader;
+
+		// the compiler must know about the data types provided by the VM as well as the given ones
+		// so add this class to the datatypesToAddToClasspath and the method will extract the VM-package
+		datatypesToAddToClasspath.add(this);
 		
-		/*
-		 *  TODO: Method in the PseudoCode->Java-Compiler, which creates a list of needed data types
-		 *  From this list the paths to the data types must be extracted and added to the classpath.
-		 *  This is accomplished in hard code here. (Task for second alvis group?)
-		*/
+		// Cycle through the list of delivered data types and extract the package they belong to
+		// TreeSet is used so that every packages is only added once
+		dynamicallyReferencedPackagesNeededToCompile = new TreeSet<String>();
+		for(Object obj : datatypesToAddToClasspath)
+			dynamicallyReferencedPackagesNeededToCompile.add(
+					obj.getClass().getProtectionDomain().getCodeSource()
+					.getLocation().getFile().toString() + "src/");
 		
-		CompilerAccess compiler_DUMMY = new CompilerAccess(); // dummy to get
-																// the path to
-																// this file
-		PCBoolean primitive_datatypes_DUMMY = new PCBoolean(true);
-		PCEdge graph_datatypes_DUMMY = new PCEdge();
-		
-		this.compileClasspath += System.getProperty("path.separator");
-		this.compileClasspath += this.getClass().getProtectionDomain()
-				.getCodeSource().getLocation().getFile().toString()
-				+ "src/" + System.getProperty("path.separator");
-		;
-		this.compileClasspath += compiler_DUMMY.getClass()
-				.getProtectionDomain().getCodeSource().getLocation().getFile()
-				.toString()
-				+ "src/" + System.getProperty("path.separator");
-		this.compileClasspath += primitive_datatypes_DUMMY.getClass()
-				.getProtectionDomain().getCodeSource().getLocation().getFile()
-				.toString()
-				+ "src/" + System.getProperty("path.separator");
-		this.compileClasspath += graph_datatypes_DUMMY.getClass()
-				.getProtectionDomain().getCodeSource().getLocation().getFile()
-				.toString()
-				+ "src/" + System.getProperty("path.separator");
-	}
+		// add these packages to the classpath
+		for(String str : dynamicallyReferencedPackagesNeededToCompile)
+			this.compileClasspath += System.getProperty("path.separator") + str;
+		}
 
 	/**
 	 * Add a directory that contains the source of dynamic java code.

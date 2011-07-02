@@ -152,6 +152,7 @@ public class Activator extends AbstractUIPlugin {
 	private VirtualMachine vm = VirtualMachine.getInstance();;
 
 	public void runStart() {
+
 		vm.removeAllBPListener();
 		vm.stopAlgos();
 		vm.setParameter("algo", pseudoCodeList); //$NON-NLS-1$
@@ -195,17 +196,24 @@ public class Activator extends AbstractUIPlugin {
 	 * 
 	 * @param pathToAlgoInJava
 	 */
-	public boolean setJavaAlgorithmToVM(String pathToFile, String fileName) /*
+	public boolean setJavaAlgorithmToVM(String pathToFile, String fileName, ArrayList<PCObject> datatypesToAddToClasspathAsPCObjects) /*
 																			 * throws
 																			 * Exception
 																			 */{
+		
 		// TODO vm.addAlgo needs three arguments: key to identify algo (any
 		// given String it's just used to address this algo for mutliple
 		// operations ) , path to
 		// the java algo file, the java algo filename, without the typending
 		// .java
 		// Add all this to VM.
-		return vm.addAlgoToVM("algo", pathToFile, fileName);
+		
+		// Cast the PCObjects to Objects, so that class further down this stream are independent from PCObjects
+		ArrayList<Object> datatypesToAddToClasspath = new ArrayList<Object>();
+		for(PCObject obj : datatypesToAddToClasspathAsPCObjects)
+			datatypesToAddToClasspath.add((Object) obj);
+		
+		return vm.addAlgoToVM("algo", pathToFile, fileName, datatypesToAddToClasspath);
 		//			return vm.addAlgoToVM("first", pathToAlgoInJava); //$NON-NLS-1$
 	}
 

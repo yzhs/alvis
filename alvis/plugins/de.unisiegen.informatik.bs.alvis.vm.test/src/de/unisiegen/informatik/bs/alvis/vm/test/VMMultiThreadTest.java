@@ -8,17 +8,19 @@ import junit.framework.Assert;
 
 import org.testng.annotations.Test;
 
+import de.unisiegen.informatik.bs.alvis.graph.datatypes.PCEdge;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.vm.BPListener;
 import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
+
 
 /**
  * 
  * @author Dominik Dingel
  * 
  */
-
 public class VMMultiThreadTest {
 	@Test
 	public void multipleCounter() {
@@ -38,9 +40,19 @@ public class VMMultiThreadTest {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		
+		// Create list of packages (represented by datatypes belonging to them) for the Java Compiler
+		PCEdge graph_package_DUMMY = new PCEdge();
+		PCBoolean primitives_package_DUMMY = new PCBoolean(false);
+		
+		ArrayList<Object> listOfPackages = new ArrayList<Object>();
+		listOfPackages.add((Object) graph_package_DUMMY);
+		listOfPackages.add((Object)primitives_package_DUMMY);
+		
 		VirtualMachine vm = VirtualMachine.getInstance();
-		vm.addAlgoToVM("first", path + "/src/resources", "FirstAlgoMVM");
-		vm.addAlgoToVM("second", path + "/src/resources", "SecondAlgoMVM");
+		vm.addAlgoToVM("first", path + "/src/resources", "FirstAlgoMVM", listOfPackages);
+		vm.addAlgoToVM("second", path + "/src/resources", "SecondAlgoMVM", listOfPackages);
 
 		PCInteger tmp = new PCInteger(0);
 		ArrayList<PCObject> tmpl = new ArrayList<PCObject>();

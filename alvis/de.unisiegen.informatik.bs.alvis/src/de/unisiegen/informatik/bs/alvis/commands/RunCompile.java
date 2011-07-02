@@ -2,6 +2,10 @@ package de.unisiegen.informatik.bs.alvis.commands;
 
 import java.io.File;
 import java.io.IOException;
+
+import java.util.ArrayList;
+
+
 import java.net.URISyntaxException;
 import java.net.URL;
 
@@ -105,7 +109,7 @@ public class RunCompile extends AbstractHandler {
 
 				// Register Algorithm to VM
 				if (Activator.getDefault().setJavaAlgorithmToVM(
-						pathToTheAlgorithm, fileNameOfTheAlgorithm)) {
+				pathToTheAlgorithm, fileNameOfTheAlgorithm, Activator.getDefault().getAllDatatypesInPlugIns() )) {
 					Activator.getDefault().setActiveRun(seri);
 					// Then activate command SwitchToRunPerspective
 					new SwitchToRunPerspective().execute(event);

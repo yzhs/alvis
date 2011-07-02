@@ -11,6 +11,8 @@ import junit.framework.Assert;
 
 import org.testng.annotations.Test;
 
+import de.unisiegen.informatik.bs.alvis.graph.datatypes.PCEdge;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.vm.BPListener;
@@ -33,6 +35,15 @@ public class VMSingleThreadTest {
 	public void loadAlgoClassTrue() {
 		String path = new String();
 		File cdir = new File(".");
+		
+		// Create list of packages (represented by datatypes belonging to them) for the Java Compiler
+		PCEdge graph_package_DUMMY = new PCEdge();
+		PCBoolean primitives_package_DUMMY = new PCBoolean(false);
+		
+		ArrayList<Object> listOfPackages = new ArrayList<Object>();
+		listOfPackages.add((Object) graph_package_DUMMY);
+		listOfPackages.add((Object)primitives_package_DUMMY);
+		
 		try {
 			path = cdir.getCanonicalPath();
 		} catch (IOException e) {
@@ -40,13 +51,22 @@ public class VMSingleThreadTest {
 		}
 		VirtualMachine vm = VirtualMachine.getInstance();
 		Assert.assertEquals(true,
-				vm.addAlgoToVM("algo", path + "/src/resources", "FirstAlgo"));
+				vm.addAlgoToVM("algo", path + "/src/resources", "FirstAlgo", listOfPackages));
 	}
 
 	@Test
 	public void loadAlgoClassFalse() {
 		String path = new String();
 		File cdir = new File(".");
+		
+		// Create list of packages (represented by datatypes belonging to them) for the Java Compiler
+		PCEdge graph_package_DUMMY = new PCEdge();
+		PCBoolean primitives_package_DUMMY = new PCBoolean(false);
+		
+		ArrayList<Object> listOfPackages = new ArrayList<Object>();
+		listOfPackages.add((Object) graph_package_DUMMY);
+		listOfPackages.add((Object)primitives_package_DUMMY);
+		
 		try {
 			path = cdir.getCanonicalPath();
 		} catch (IOException e) {
@@ -54,33 +74,51 @@ public class VMSingleThreadTest {
 		}
 		VirtualMachine vm = VirtualMachine.getInstance();
 		Assert.assertEquals(false,
-				vm.addAlgoToVM("algo", path + "/src/resources", ""));
+				vm.addAlgoToVM("algo", path + "/src/resources", "", listOfPackages));
 	}
 
 	@Test
 	public void loadAlgoAndStartConstructor() {
 		String path = new String();
 		File cdir = new File(".");
+		
+		// Create list of packages (represented by datatypes belonging to them) for the Java Compiler
+		PCEdge graph_package_DUMMY = new PCEdge();
+		PCBoolean primitives_package_DUMMY = new PCBoolean(false);
+		
+		ArrayList<Object> listOfPackages = new ArrayList<Object>();
+		listOfPackages.add((Object) graph_package_DUMMY);
+		listOfPackages.add((Object)primitives_package_DUMMY);
+		
 		try {
 			path = cdir.getCanonicalPath();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		VirtualMachine vm = VirtualMachine.getInstance();
-		vm.addAlgoToVM("algo", path + "/src/resources", "FirstAlgo");
+		vm.addAlgoToVM("algo", path + "/src/resources", "FirstAlgo", listOfPackages);
 	}
 
 	@Test
 	public void getStartTypes() {
 		String path = new String();
 		File cdir = new File(".");
+		
+		// Create list of packages (represented by datatypes belonging to them) for the Java Compiler
+		PCEdge graph_package_DUMMY = new PCEdge();
+		PCBoolean primitives_package_DUMMY = new PCBoolean(false);
+		
+		ArrayList<Object> listOfPackages = new ArrayList<Object>();
+		listOfPackages.add((Object) graph_package_DUMMY);
+		listOfPackages.add((Object)primitives_package_DUMMY);
+		
 		try {
 			path = cdir.getCanonicalPath();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		VirtualMachine vm = VirtualMachine.getInstance();
-		vm.addAlgoToVM("algo", path + "/src/resources/", "ThreadAlgo");
+		vm.addAlgoToVM("algo", path + "/src/resources/", "ThreadAlgo", listOfPackages);
 		Assert.assertEquals("Integer",
 				((PCInteger) (vm.getParametersTypesAlgo("algo").keySet()
 						.toArray())[0]).getTypeName());
@@ -90,13 +128,22 @@ public class VMSingleThreadTest {
 	public void runThreadWithBPBackwardsOnTermination() {
 		String path = new String();
 		File cdir = new File(".");
+		
+		// Create list of packages (represented by datatypes belonging to them) for the Java Compiler
+		PCEdge graph_package_DUMMY = new PCEdge();
+		PCBoolean primitives_package_DUMMY = new PCBoolean(false);
+		
+		ArrayList<Object> listOfPackages = new ArrayList<Object>();
+		listOfPackages.add((Object) graph_package_DUMMY);
+		listOfPackages.add((Object)primitives_package_DUMMY);
+		
 		try {
 			path = cdir.getCanonicalPath();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		VirtualMachine vm = VirtualMachine.getInstance();
-		vm.addAlgoToVM("algo", path + "/src/resources/", "ThreadAlgo");
+		vm.addAlgoToVM("algo", path + "/src/resources/", "ThreadAlgo", listOfPackages);
 		Object lock = new Object();
 		vm.addBPListener(new BPListener() {
 			@Override
@@ -129,13 +176,22 @@ public class VMSingleThreadTest {
 	public void runThreadWithBPBackwards() {
 		String path = new String();
 		File cdir = new File(".");
+		
+		// Create list of packages (represented by datatypes belonging to them) for the Java Compiler
+		PCEdge graph_package_DUMMY = new PCEdge();
+		PCBoolean primitives_package_DUMMY = new PCBoolean(false);
+		
+		ArrayList<Object> listOfPackages = new ArrayList<Object>();
+		listOfPackages.add((Object) graph_package_DUMMY);
+		listOfPackages.add((Object)primitives_package_DUMMY);
+		
 		try {
 			path = cdir.getCanonicalPath();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		VirtualMachine vm = VirtualMachine.getInstance();
-		vm.addAlgoToVM("algo", path + "/src/resources/", "ThreadAlgo");
+		vm.addAlgoToVM("algo", path + "/src/resources/", "ThreadAlgo", listOfPackages);
 		Object lock = new Object();
 		vm.addBPListener(new BPListener() {
 			@Override
@@ -168,13 +224,22 @@ public class VMSingleThreadTest {
 	public void runThreadWithBPBackwardsError() {
 		String path = new String();
 		File cdir = new File(".");
+		
+		// Create list of packages (represented by datatypes belonging to them) for the Java Compiler
+		PCEdge graph_package_DUMMY = new PCEdge();
+		PCBoolean primitives_package_DUMMY = new PCBoolean(false);
+		
+		ArrayList<Object> listOfPackages = new ArrayList<Object>();
+		listOfPackages.add((Object) graph_package_DUMMY);
+		listOfPackages.add((Object)primitives_package_DUMMY);
+		
 		try {
 			path = cdir.getCanonicalPath();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		VirtualMachine vm = VirtualMachine.getInstance();
-		vm.addAlgoToVM("algo", path + "/src/resources/", "ThreadAlgo");
+		vm.addAlgoToVM("algo", path + "/src/resources/", "ThreadAlgo", listOfPackages);
 		Object lock = new Object();
 		vm.addBPListener(new BPListener() {
 			@Override
@@ -221,13 +286,22 @@ public class VMSingleThreadTest {
 	public void runThreadWithBPBackwardsTillBeginning() {
 		String path = new String();
 		File cdir = new File(".");
+		
+		// Create list of packages (represented by datatypes belonging to them) for the Java Compiler
+		PCEdge graph_package_DUMMY = new PCEdge();
+		PCBoolean primitives_package_DUMMY = new PCBoolean(false);
+		
+		ArrayList<Object> listOfPackages = new ArrayList<Object>();
+		listOfPackages.add((Object) graph_package_DUMMY);
+		listOfPackages.add((Object)primitives_package_DUMMY);
+		
 		try {
 			path = cdir.getCanonicalPath();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		VirtualMachine vm = VirtualMachine.getInstance();
-		vm.addAlgoToVM("algo", path + "/src/resources/", "ThreadAlgo");
+		vm.addAlgoToVM("algo", path + "/src/resources/", "ThreadAlgo", listOfPackages);
 		Object lock = new Object();
 		vm.addBPListener(new BPListener() {
 			@Override
@@ -270,13 +344,22 @@ public class VMSingleThreadTest {
 	public void runThreadWithBP() {
 		String path = new String();
 		File cdir = new File(".");
+		
+		// Create list of packages (represented by datatypes belonging to them) for the Java Compiler
+		PCEdge graph_package_DUMMY = new PCEdge();
+		PCBoolean primitives_package_DUMMY = new PCBoolean(false);
+		
+		ArrayList<Object> listOfPackages = new ArrayList<Object>();
+		listOfPackages.add((Object) graph_package_DUMMY);
+		listOfPackages.add((Object)primitives_package_DUMMY);
+		
 		try {
 			path = cdir.getCanonicalPath();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		VirtualMachine vm = VirtualMachine.getInstance();
-		vm.addAlgoToVM("algo", path + "/src/resources/", "ThreadAlgo");
+		vm.addAlgoToVM("algo", path + "/src/resources/", "ThreadAlgo", listOfPackages);
 		Object lock = new Object();
 		vm.addBPListener(new BPListener() {
 			@Override
@@ -343,13 +426,22 @@ public class VMSingleThreadTest {
 		}
 		String path = new String();
 		File cdir = new File(".");
+		
+		// Create list of packages (represented by datatypes belonging to them) for the Java Compiler
+		PCEdge graph_package_DUMMY = new PCEdge();
+		PCBoolean primitives_package_DUMMY = new PCBoolean(false);
+		
+		ArrayList<Object> listOfPackages = new ArrayList<Object>();
+		listOfPackages.add((Object) graph_package_DUMMY);
+		listOfPackages.add((Object)primitives_package_DUMMY);
+		
 		try {
 			path = cdir.getCanonicalPath();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		VirtualMachine vm = VirtualMachine.getInstance();
-		vm.addAlgoToVM("algo", path + "/src/resources/", fileName);
+		vm.addAlgoToVM("algo", path + "/src/resources/", fileName, listOfPackages);
 		Object lock = new Object();
 		vm.addBPListener(new BPListener() {
 			@Override
@@ -425,13 +517,22 @@ public class VMSingleThreadTest {
 		}
 		String path = new String();
 		File cdir = new File(".");
+		
+		// Create list of packages (represented by datatypes belonging to them) for the Java Compiler
+		PCEdge graph_package_DUMMY = new PCEdge();
+		PCBoolean primitives_package_DUMMY = new PCBoolean(false);
+		
+		ArrayList<Object> listOfPackages = new ArrayList<Object>();
+		listOfPackages.add((Object) graph_package_DUMMY);
+		listOfPackages.add((Object)primitives_package_DUMMY);
+		
 		try {
 			path = cdir.getCanonicalPath();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		VirtualMachine vm = VirtualMachine.getInstance();
-		vm.addAlgoToVM("algo", path + "/src/resources/", fileName);
+		vm.addAlgoToVM("algo", path + "/src/resources/", fileName, listOfPackages);
 		Object lock = new Object();
 		vm.addBPListener(new BPListener() {
 			@Override

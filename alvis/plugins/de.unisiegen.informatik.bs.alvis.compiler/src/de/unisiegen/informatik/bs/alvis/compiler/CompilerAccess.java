@@ -33,8 +33,8 @@ public class CompilerAccess {
 		return instance;
 	}
 
-	private ArrayList<PCObject> datatypes;
-	private ArrayList<String> datatypePackages;
+//	private ArrayList<PCObject> datatypes;
+//	private ArrayList<String> datatypePackages;
 
 	public boolean compile(String code, ArrayList<PCObject> datatypes) {
 		// TODO Compilieren
@@ -63,7 +63,7 @@ public class CompilerAccess {
 		out.write(javaCode);
 		out.close();
 		return result;
-
+	}
 	public String getAlgorithmPath() throws IOException {
 		String path = "";
 		path = FileLocator.getBundleFile(Activator.getDefault().getBundle())
