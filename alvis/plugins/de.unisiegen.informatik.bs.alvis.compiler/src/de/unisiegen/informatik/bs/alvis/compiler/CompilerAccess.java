@@ -54,8 +54,6 @@ public class CompilerAccess {
 	 */
 	public File compile(String path) throws FileNotFoundException, IOException, RecognitionException {
 		c = new Compiler(datatypes, datatypePackages);
-		System.out.println(readFile(Platform.getInstanceLocation().getURL()
-				.getPath() + path));
 		testDatatypes();
 		String javaCode = c.compile(readFile(Platform.getInstanceLocation().getURL()
 				.getPath() + path));
