@@ -17,8 +17,7 @@ public class PCVoid extends PCObject {
 		return result;
 	}
 
-	@Override
-	public String getTypeName() {
+	public static String getTypeName() {
 		return PCVoid.TYPENAME;
 	}
 

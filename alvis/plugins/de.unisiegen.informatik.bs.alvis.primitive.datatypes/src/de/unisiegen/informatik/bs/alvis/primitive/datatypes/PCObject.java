@@ -20,7 +20,7 @@ public abstract class PCObject {
 	protected static PCObject localInfty;
 	protected static PCObject localNull;
 
-	protected List<GraphicalRepresentation> allGr;
+	protected List<GraphicalRepresentation> allGr = new ArrayList<GraphicalRepresentation>();
 
 	protected boolean isInBatchRun;
 	protected List<Stack<Object>> commandsforGr;
@@ -31,7 +31,7 @@ public abstract class PCObject {
 	 */
 	public static PCObject getNull() {
 		// will be from PCObject always be null
-		return localNull; 
+		return localNull;
 	}
 	
 	/**
@@ -44,13 +44,6 @@ public abstract class PCObject {
 	}
 	
 	
-	/**
-	 * Constructor
-	 */
-	public PCObject() {
-		allGr = new ArrayList<GraphicalRepresentation>();
-		isInBatchRun = false;
-	}
 
 	/**
 	 * Enable/Disable the batch Modification every Change on the
@@ -126,7 +119,9 @@ public abstract class PCObject {
 	 * 
 	 * @return the used Pseudocode Typename
 	 */
-	public abstract String getTypeName();
+	public static String getTypeName() {
+		return TYPENAME;
+	}
 	
 	/**
 	 * Generic set-method used for the compiler

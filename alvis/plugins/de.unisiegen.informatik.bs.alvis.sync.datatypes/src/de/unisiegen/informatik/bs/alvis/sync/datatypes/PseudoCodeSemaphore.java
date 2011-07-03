@@ -45,8 +45,7 @@ public class PseudoCodeSemaphore extends PCObject {
 		return PseudoCodeSemaphore.TYPENAME +  name.getLiteralValue() + ": " + counter.getLiteralValue();
 	}
 
-	@Override
-	public String getTypeName() {
+	public static String getTypeName() {
 		return PseudoCodeSemaphore.TYPENAME;
 	}
 

@@ -73,8 +73,7 @@ public class PCList<E> extends PCObject implements SortableCollection, Iterable<
 		return false;
 	}
 
-	@Override
-	public String getTypeName() {
+	public static String getTypeName() {
 		return PCList.TYPENAME;
 	}
 

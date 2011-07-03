@@ -71,8 +71,7 @@ public class PCString extends PCObject {
 		}
 	}
 
-	@Override
-	public String getTypeName() {
+	public static String getTypeName() {
 		return PCString.TYPENAME;
 	}
 

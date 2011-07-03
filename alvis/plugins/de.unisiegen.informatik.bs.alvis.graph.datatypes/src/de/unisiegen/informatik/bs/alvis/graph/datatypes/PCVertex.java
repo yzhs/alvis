@@ -184,8 +184,7 @@ public class PCVertex extends PCObject {
 		this.commandsforGr.get(0).clear();
 	}
 
-	@Override
-	public String getTypeName() {
+	public static String getTypeName() {
 		return PCVertex.TYPENAME;
 	}
 

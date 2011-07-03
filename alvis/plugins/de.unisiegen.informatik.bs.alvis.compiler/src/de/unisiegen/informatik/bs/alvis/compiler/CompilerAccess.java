@@ -1,9 +1,13 @@
 package de.unisiegen.informatik.bs.alvis.compiler;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -33,9 +37,6 @@ public class CompilerAccess {
 		return instance;
 	}
 
-//	private ArrayList<PCObject> datatypes;
-//	private ArrayList<String> datatypePackages;
-
 	public boolean compile(String code, ArrayList<PCObject> datatypes) {
 		// TODO Compilieren
 		// CompilerManager manager = new CompilerManager();
@@ -46,16 +47,21 @@ public class CompilerAccess {
 
 	/**
 	 * 
-	 * @param path to the source code that
-	 * @param datatypes the data types that can be used in the code
+	 * @param path path to the source code that
 	 * @return path to the generated .java file if it exists, null otherwise
 	 * 
 	 * @throws IOException, RecognitionException
 	 */
-	public File compile(String code) throws IOException, RecognitionException {
+	public File compile(String path) throws FileNotFoundException, IOException, RecognitionException {
 		c = new Compiler(datatypes, datatypePackages);
-		String javaCode = c.compile(code);
-		System.err.println("successfully compiled code");
+		System.out.println(readFile(Platform.getInstanceLocation().getURL()
+				.getPath() + path));
+		testDatatypes();
+		String javaCode = c.compile(readFile(Platform.getInstanceLocation().getURL()
+				.getPath() + path));
+		if (null == javaCode)
+			return null;
+		
 		File result = new File("Algorithm.java");
 		FileWriter fstream;
 		fstream = new FileWriter(result);
@@ -64,11 +70,27 @@ public class CompilerAccess {
 		out.close();
 		return result;
 	}
+
 	public String getAlgorithmPath() throws IOException {
 		String path = "";
 		path = FileLocator.getBundleFile(Activator.getDefault().getBundle())
 				.getCanonicalPath().toString();
 		return algorithmPath;
+	}
+	
+	private String readFile(String fileName) throws FileNotFoundException
+	{
+		BufferedReader fstream = new BufferedReader(new FileReader(fileName));
+		String result = "";
+		
+		try {
+			while (fstream.ready())
+				result += fstream.readLine() + System.getProperty("line.separator");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 	public List<Exception> getExceptions() {
@@ -100,15 +122,12 @@ public class CompilerAccess {
 		File source = new File(pathWhereTheJavaIs + SLASH + "Algorithm.java");
 
 		// Get the path to algorithm and separate path and filename
-		String[] splitedPathToAlgorithm = pathToAlgorithm.split("\\/");
+		String[] splitedPathToAlgorithm = pathToAlgorithm.split("\\/"); //FIXME this will not work on Windows
 		ArrayList<String> partsOfAlgoPath = new ArrayList<String>();
 		for (String part : splitedPathToAlgorithm) {
 			partsOfAlgoPath.add(part);
 		}
 
-		// getFileName
-		String algoWorkSpaceFile = partsOfAlgoPath.remove(partsOfAlgoPath.size()-1);
-		
 		// getPath
 		String algoWorkSpacePath = "";
 		for (String part : partsOfAlgoPath) {
@@ -153,16 +172,31 @@ public class CompilerAccess {
 		this.datatypePackages = datatypePackages;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void testDatatypes() {
-		System.out.println("Compiler shows its datatypes:");
-		// Hier sind alle Datentypen
-		for (PCObject obj : datatypes) {
-			System.out.println(obj.getClass());
-		}
-		System.out.println("Compiler shows its packages:");
-		// Hier sind alle Packagenames
-		for (String obj : datatypePackages) {
-			System.out.println(obj);
+		try {
+			System.out.println("Compiler shows its datatypes:");
+			for (PCObject obj : datatypes) {
+				System.out.println(obj.getClass());
+				List<String> tmp = ((List<String>)obj.getClass().getMethod("getMembers").invoke(obj));
+				System.out.println("available attributes:" + (tmp==null ? "null" : tmp));
+				tmp = ((List<String>)obj.getClass().getMethod("getMethods").invoke(obj));
+				System.out.println("available methods:" + (tmp==null ? "null" : tmp));
+			}
+			System.out.println("Compiler shows its packages:");
+			for (String obj : datatypePackages) {
+				System.out.println(obj);
+			}
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
 		}
 	}
 

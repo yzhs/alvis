@@ -69,11 +69,10 @@ public class PCQueue<T extends PCObject> extends PCObject {
 		return false;
 	}
 	
-	@Override
-	public String getTypeName() {
+	public static String getTypeName() {
 		String result = PCQueue.TYPENAME;
 		result.concat("<");
-		result.concat(PCObject.localNull.getTypeName());
+		result.concat(PCObject.getTypeName());
 		result.concat(">");
 		return result;
 	}

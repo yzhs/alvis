@@ -141,8 +141,7 @@ public class PCGraph extends PCObject {
 		return false;
 	}
 
-	@Override
-	public String getTypeName() {
+	public static String getTypeName() {
 		return PCGraph.TYPENAME;
 	}
 	

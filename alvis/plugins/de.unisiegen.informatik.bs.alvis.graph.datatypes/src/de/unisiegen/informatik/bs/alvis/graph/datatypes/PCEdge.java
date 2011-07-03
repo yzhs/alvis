@@ -115,8 +115,7 @@ public class PCEdge extends PCObject {
 		return false;
 	}
 
-	@Override
-	public String getTypeName() {
+	public static String getTypeName() {
 		return PCEdge.TYPENAME;
 	}
 

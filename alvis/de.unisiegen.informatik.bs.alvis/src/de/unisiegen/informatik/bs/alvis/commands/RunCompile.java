@@ -96,9 +96,12 @@ public class RunCompile extends AbstractHandler {
 				// Translate the PseudoCode and get name of the translated file
 				// without extension.
 				File javaCode = CompilerAccess.getDefault().compile(seri.getAlgorithmFile());
+				if (null == javaCode)
+					return null;
 				String fileNameOfTheAlgorithm = javaCode.getCanonicalPath().replaceAll("\\.java$", ""); //$NON-NLS-1$
 				// Get the path where the translated files are saved to.
-				String pathToTheAlgorithm = javaCode.getParentFile().getCanonicalPath();
+				System.out.println(javaCode);
+				String pathToTheAlgorithm = "";//javaCode.getParentFile().getCanonicalPath();
 
 				// System.out.println("Filename: " +
 				// algorithm.getCanonicalPath());

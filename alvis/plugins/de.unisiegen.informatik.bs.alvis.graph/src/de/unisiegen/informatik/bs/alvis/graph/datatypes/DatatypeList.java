@@ -23,7 +23,7 @@ public class DatatypeList implements IDatatypeList {
 	@Override
 	public ArrayList<String> getDatatypePackagesInThisPlugin() {
 		ArrayList<String> allDatatypePackagesInThisPlugin = new ArrayList<String>();
-		allDatatypePackagesInThisPlugin.add("de.unisiegen.informatik.bs.alvis.primitive.datatypes");
+		allDatatypePackagesInThisPlugin.add("de.unisiegen.informatik.bs.alvis.graph.datatypes");
 		return allDatatypePackagesInThisPlugin;
 	}
 

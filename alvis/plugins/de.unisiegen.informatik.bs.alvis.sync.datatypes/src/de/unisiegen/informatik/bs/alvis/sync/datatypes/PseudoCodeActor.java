@@ -36,8 +36,7 @@ public class PseudoCodeActor extends PCObject {
 		return TYPENAME + name.getLiteralValue() + ": " + (isBlocked.getLiteralValue() ? "" : "not") + " blocked.";
 	}
 
-	@Override
-	public String getTypeName() {
+	public static String getTypeName() {
 		return TYPENAME;
 	}
 

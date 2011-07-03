@@ -91,8 +91,7 @@ public class PCInteger extends PCObject {
 		}
 	}
 
-	@Override
-	public String getTypeName() {
+	public static String getTypeName() {
 		return PCInteger.TYPENAME;
 	}
 

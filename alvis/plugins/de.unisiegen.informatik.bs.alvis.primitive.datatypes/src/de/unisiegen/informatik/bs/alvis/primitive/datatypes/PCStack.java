@@ -75,11 +75,10 @@ public class PCStack<T extends PCObject> extends PCObject {
 		return result;
 	}
 
-	@Override
-	public String getTypeName() {
+	public static String getTypeName() {
 		String result = PCStack.TYPENAME;
 		result.concat("<");
-		result.concat(PCObject.localNull.getTypeName());
+		result.concat(PCObject.getTypeName());
 		result.concat(">");
 		return result;
 	}

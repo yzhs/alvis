@@ -131,8 +131,7 @@ public class PCBoolean extends PCObject {
 		}
 	}
 
-	@Override
-	public String getTypeName() {
+	public static String getTypeName() {
 		return PCBoolean.TYPENAME;
 	}
 

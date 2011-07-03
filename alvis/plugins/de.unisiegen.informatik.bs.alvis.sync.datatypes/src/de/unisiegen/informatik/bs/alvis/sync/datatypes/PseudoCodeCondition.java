@@ -52,8 +52,7 @@ public class PseudoCodeCondition extends PCObject {
 		return TYPENAME + name.getLiteralValue() + ": " + waiting.getLiteralValue() + " waiting, monitor "  + (i.lessOrEqual(new PCInteger(0)).getLiteralValue() ? "locked." : "unlocked.");
 	}
 
-	@Override
-	public String getTypeName() {
+	public static String getTypeName() {
 		return TYPENAME;
 	}
 
