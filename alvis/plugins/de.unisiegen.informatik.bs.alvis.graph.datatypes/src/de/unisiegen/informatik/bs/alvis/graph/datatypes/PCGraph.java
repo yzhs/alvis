@@ -130,7 +130,7 @@ public class PCGraph extends PCObject {
 
 	@Override
 	public List<String> getMembers() {
-		List<String> result = new LinkedList<String>();
+		List<String> result = new ArrayList<String>();
 		result.add("vertices");
 		return result;
 	}

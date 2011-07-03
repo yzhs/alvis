@@ -20,7 +20,7 @@ public class PCVertex extends PCObject {
 	protected static final String TYPENAME = "Vertex";
 
 	private PCList<PCEdge> edges;
-	private PCList<PCVertex> adjacants;
+	private PCList<PCVertex> adjacents;
 
 	private PCInteger distance;
 	private PCString color;
@@ -42,7 +42,7 @@ public class PCVertex extends PCObject {
 	}
 
 	public PCList<PCVertex> getAdjacents() {
-		return this.adjacants;
+		return this.adjacents;
 	}
 
 	public void setParentId(PCVertex parentId) {
@@ -67,12 +67,12 @@ public class PCVertex extends PCObject {
 
 	public void addEdge(PCEdge toAdd, PCVertex adjacent) {
 		this.edges.add(toAdd);
-		this.adjacants.add(adjacent);
+		this.adjacents.add(adjacent);
 	}
 
 	public PCVertex(GraphicalRepresentationVertex graphical) {
 		allGr.add(graphical);
-		this.adjacants = new PCList<PCVertex>();
+		this.adjacents = new PCList<PCVertex>();
 		this.edges = new PCList<PCEdge>();
 		this.distance = new PCInteger(0);
 		this.parentId = (PCVertex) PCObject.localNull;
@@ -83,7 +83,7 @@ public class PCVertex extends PCObject {
 	}
 
 	public PCVertex() {
-		this.adjacants = new PCList<PCVertex>();
+		this.adjacents = new PCList<PCVertex>();
 		this.edges = new PCList<PCEdge>();
 		this.distance = new PCInteger(0);
 		this.color = new PCString("");
@@ -138,7 +138,7 @@ public class PCVertex extends PCObject {
 		if (memberName.equals("pi")) {
 			return this.getParentID();
 		}
-		if (memberName.equals("adj")) {
+		if (memberName.equals("adjacents")) {
 			return this.getAdjacents();
 		}
 		if (memberName.equals("label")) {
@@ -190,7 +190,7 @@ public class PCVertex extends PCObject {
 
 	@Override
 	public List<String> getMembers() {
-		String[] attributes = { "color", "distance", "pi", "adj" };
+		String[] attributes = { "color", "distance", "parentId", "adjacents" };
 		return Arrays.asList(attributes);
 	}
 }
