@@ -103,7 +103,7 @@ public class CompilerAccess {
 	 *            relative to Alvis-workspace e.g.: "project/src/Algorithm.algo"
 	 * @return Name of the Java Algorithm file
 	 */
-	public String compileThisDummy(String pathToAlgorithm) {
+	public File compileThisDummy(String pathToAlgorithm) {
 		String SLASH = System.getProperty("file.separator");
 
 		// the path were the translated java file is.
@@ -126,6 +126,9 @@ public class CompilerAccess {
 			partsOfAlgoPath.add(part);
 		}
 
+		// get and remove the filename
+		String algoWorkSpaceFile = partsOfAlgoPath.remove(partsOfAlgoPath.size()-1);
+		
 		// getPath
 		String algoWorkSpacePath = "";
 		for (String part : partsOfAlgoPath) {
@@ -148,7 +151,7 @@ public class CompilerAccess {
 
 		// Still hard Coded.
 		String javaFilePath = "Algorithm"; // TODO HARD CODED!
-		return javaFilePath;
+		return destination;
 	}
 
 	/* ******************************************
