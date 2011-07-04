@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 
-
 import java.net.URISyntaxException;
 import java.net.URL;
 
@@ -51,8 +50,8 @@ public class RunCompile extends AbstractHandler {
 		CompilerAccess.getDefault().setDatatypePackages(
 				Activator.getDefault().getAllDatatypesPackagesInPlugIns());
 
-//		System.out.println(Platform.getInstanceLocation().getURL().getPath());
-//		CompilerAccess.getDefault().testDatatypes();
+		// System.out.println(Platform.getInstanceLocation().getURL().getPath());
+		// CompilerAccess.getDefault().testDatatypes();
 
 		try {
 			// What to run? get the input (filepath)
@@ -93,26 +92,39 @@ public class RunCompile extends AbstractHandler {
 
 			// GET THE ALGORITHM AS STRING
 			try {
-				// Translate the PseudoCode and get name of the translated file
-				// without extension.
-				File javaCode = CompilerAccess.getDefault().compile(seri.getAlgorithmFile());
-				if (null == javaCode)
-					return null;
-				String fileNameOfTheAlgorithm = javaCode.getCanonicalPath().replaceAll("\\.java$", ""); //$NON-NLS-1$
+				// Translate the PseudoCode and get the translated file
+				File javaCode = null;
+
+				// try to compile with compiler
+				javaCode = CompilerAccess.getDefault().compile(
+						seri.getAlgorithmFile());
+				
+				// if fails
+				if (null == javaCode) // compile with dummy
+					javaCode = CompilerAccess.getDefault().compileThisDummy(
+							seri.getAlgorithmFile());
+				
+				// Kill the extension
+				String fileNameOfTheAlgorithm = javaCode.getCanonicalPath()
+						.replaceAll("\\.java$", ""); //$NON-NLS-1$
+
 				// Get the path where the translated files are saved to.
-				System.out.println(javaCode);
-				String pathToTheAlgorithm = "";//javaCode.getParentFile().getCanonicalPath();
-
-				// System.out.println("Filename: " +
-				// algorithm.getCanonicalPath());
-				// System.out.println("Path: " + pathToTheAlgorithm);
-
-				// System.out.println("Filename: " + fileNameOfTheAlgorithm);
-				// System.out.println("Path: " + pathToTheAlgorithm);
+				String pathToTheAlgorithm = javaCode.getParentFile()
+						.getCanonicalPath();
 
 				// Register Algorithm to VM
+				
+				// TODO Warning, if we change the name of the translated file
+				// this here will crash
+				fileNameOfTheAlgorithm = "Algorithm";
+
+				// setJavaAlgorithmToVM has 2 parameter 1. is the path 2. is the filename
+				// if /usr/alvis/src/Algorithm.java then
+				// 1.: /usr/alvis/src
+				// 2.: Algorithm
 				if (Activator.getDefault().setJavaAlgorithmToVM(
-				pathToTheAlgorithm, fileNameOfTheAlgorithm, Activator.getDefault().getAllDatatypesInPlugIns() )) {
+						pathToTheAlgorithm, fileNameOfTheAlgorithm,
+						Activator.getDefault().getAllDatatypesInPlugIns())) {
 					Activator.getDefault().setActiveRun(seri);
 					// Then activate command SwitchToRunPerspective
 					new SwitchToRunPerspective().execute(event);
@@ -123,13 +135,13 @@ public class RunCompile extends AbstractHandler {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			} catch (RecognitionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			} catch (IllegalArgumentException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			} catch (SecurityException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (RecognitionException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -137,10 +149,10 @@ public class RunCompile extends AbstractHandler {
 			return null;
 		}
 
-//		 IResource.refreshLocal();
-		 
+		// IResource.refreshLocal();
+
 		new RefreshWorkspace().execute(event);
-		
+
 		return null;
 	}
 
