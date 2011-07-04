@@ -1,6 +1,8 @@
 package de.unisiegen.informatik.bs.alvis.vm;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.HashMap;
 
@@ -19,7 +21,7 @@ public class Algo implements AbstractAlgo {
 	 * dynamic code
 	 */
 	@Override
-	public ArrayList<PCObject> getVariableReferences() {
+	public List<PCObject> getVariableReferences() {
 		return null;
 	}
 
@@ -27,7 +29,7 @@ public class Algo implements AbstractAlgo {
 	 * dynamic code
 	 */
 	@Override
-	public HashMap<PCObject, String> getParameterTypes() {
+	public Map<PCObject, String> getParameterTypes() {
 		return null;
 	}
 
@@ -35,7 +37,7 @@ public class Algo implements AbstractAlgo {
 	 * dynamic code
 	 */
 	@Override
-	public void setParameters(ArrayList<PCObject> paras) {
+	public void setParameters(List<PCObject> paras) {
 	}
 
 	/**

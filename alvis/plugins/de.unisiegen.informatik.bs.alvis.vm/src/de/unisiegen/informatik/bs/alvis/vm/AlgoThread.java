@@ -4,6 +4,8 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.locks.Lock;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
@@ -132,7 +134,7 @@ public class AlgoThread {
 	 * TODO update javadoc
 	 * @return ArrayList with PCObject ArrayList, should be never a nullpointer
 	 */
-	public HashMap<PCObject,String> getParameterTypes() {
+	public Map<PCObject,String> getParameterTypes() {
 		return algoInst.getParameterTypes();
 	}
 
@@ -258,7 +260,7 @@ public class AlgoThread {
 	 * 
 	 * @return List of PCObjects of used Variables
 	 */
-	public ArrayList<PCObject> returnReferences() {
+	public List<PCObject> returnReferences() {
 		return algoInst.getVariableReferences();
 	}
 

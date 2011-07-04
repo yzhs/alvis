@@ -2,6 +2,8 @@ package de.unisiegen.informatik.bs.alvis.vm;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -74,7 +76,7 @@ public class VirtualMachine {
 	 * @param key
 	 * @return PCObject ArrayList to determine the types, for editor and view
 	 */
-	public HashMap<PCObject, String> getParametersTypesAlgo(String key) {
+	public Map<PCObject, String> getParametersTypesAlgo(String key) {
 		return algos.get(key).getParameterTypes();
 	}
 
@@ -240,7 +242,7 @@ public class VirtualMachine {
 	 * @param key
 	 * @return
 	 */
-	public ArrayList<PCObject> getRunningReferences(String key) {
+	public List<PCObject> getRunningReferences(String key) {
 		return algos.get(key).returnReferences();
 	}
 
@@ -249,8 +251,8 @@ public class VirtualMachine {
 	 * 
 	 * @return a ArrayList of all ArrayLists containing the specific PC Objects
 	 */
-	public ArrayList<ArrayList<PCObject>> getRunningReferences() {
-		ArrayList<ArrayList<PCObject>> result = new ArrayList<ArrayList<PCObject>>();
+	public List<List<PCObject>> getRunningReferences() {
+		List<List<PCObject>> result = new ArrayList<List<PCObject>>();
 		for (AlgoThread algo : algos.values()) {
 			result.add(algo.returnReferences());
 		}

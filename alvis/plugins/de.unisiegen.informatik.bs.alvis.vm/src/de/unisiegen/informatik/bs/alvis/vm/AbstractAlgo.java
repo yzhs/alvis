@@ -3,8 +3,8 @@ package de.unisiegen.informatik.bs.alvis.vm;
 /**
  * @ author Sebastian Schmitz, Dominik Dingel
  */
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
+import java.util.List;
 import java.util.concurrent.locks.Lock;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
@@ -15,14 +15,14 @@ public interface AbstractAlgo extends Runnable {
 	 * 
 	 * @return Reference of all Variables, held by the algo
 	 */
-	public ArrayList<PCObject> getVariableReferences();
+	public List<PCObject> getVariableReferences();
 
 	/**
 	 * TODO update javadoc
 	 * @return Null Objects for all Datatypes the algo expects for the
 	 *         setParameters Call
 	 */
-	public HashMap<PCObject, String> getParameterTypes();
+	public Map<PCObject, String> getParameterTypes();
 
 	/**
 	 * 
@@ -30,7 +30,7 @@ public interface AbstractAlgo extends Runnable {
 	 *            are the Startparameters of the algo, have to passed like
 	 *            specified in getParameterTypes
 	 */
-	public void setParameters(ArrayList<PCObject> paras);
+	public void setParameters(List<PCObject> paras);
 
 	/**
 	 * 
