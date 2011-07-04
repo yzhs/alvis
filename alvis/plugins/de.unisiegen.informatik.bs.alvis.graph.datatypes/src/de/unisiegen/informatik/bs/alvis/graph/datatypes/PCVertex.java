@@ -53,7 +53,7 @@ public class PCVertex extends PCObject {
 		this.distance = distance;
 	}
 
-	private void setColor(PCString color) {
+	public void setColor(PCString color) {
 		this.color.setLiteralValue(color.getLiteralValue());
 		if (this.isInBatchRun) {
 			commandsforGr.get(0).push(color);
@@ -148,19 +148,19 @@ public class PCVertex extends PCObject {
 		return null;
 	}
 
-	private PCObject getLabel() {
+	public PCObject getLabel() {
 		return label;
 	}
 
-	private PCVertex getParentID() {
+	public PCVertex getParentID() {
 		return parentId;
 	}
 
-	private PCInteger getDistance() {
+	public PCInteger getDistance() {
 		return distance;
 	}
 
-	private PCString getColor() {
+	public PCString getColor() {
 		return color;
 	}
 
@@ -192,5 +192,9 @@ public class PCVertex extends PCObject {
 	public List<String> getMembers() {
 		String[] attributes = { "color", "distance", "parentId", "adjacents" };
 		return Arrays.asList(attributes);
+	}
+	
+	public static PCVertex getNull() {
+		return new PCVertex(null);
 	}
 }

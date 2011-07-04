@@ -82,4 +82,8 @@ public class PCStack<T extends PCObject> extends PCObject {
 		result.concat(">");
 		return result;
 	}
+	
+	public static boolean isGenericType() {
+		return true;
+	}
 }

@@ -180,4 +180,8 @@ public abstract class PCObject {
 	 *         object
 	 */
 	public abstract boolean equals(PCObject toCheckAgainst);
+	
+	public static boolean isGenericType() {
+		return false;
+	}
 }

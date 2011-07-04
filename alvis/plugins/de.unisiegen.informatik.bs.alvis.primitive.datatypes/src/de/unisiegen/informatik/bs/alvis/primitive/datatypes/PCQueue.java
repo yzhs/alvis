@@ -82,4 +82,8 @@ public class PCQueue<T extends PCObject> extends PCObject {
 		String[] methods = { "enqueue", "dequeue", "isEmpty" };
 		return Arrays.asList(methods);
 	}
+	
+	public static boolean isGenericType() {
+		return true;
+	}
 }
