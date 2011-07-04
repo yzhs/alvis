@@ -60,7 +60,10 @@ public class CompilerAccess {
 		if (null == javaCode)
 			return null;
 		
-		File result = new File("Algorithm.java");
+		
+		File result = new File(Platform.getInstanceLocation().getURL()
+				.getPath()
+				+ getWorkspacePath(path)  + "Algorithm.java");
 		FileWriter fstream;
 		fstream = new FileWriter(result);
 		BufferedWriter out = new BufferedWriter(fstream);
@@ -69,6 +72,27 @@ public class CompilerAccess {
 		return result;
 	}
 
+	private String getWorkspacePath(String fileWithPath) {
+		String[] splitedPathToAlgorithm = fileWithPath.split("\\/"); //FIXME this will not work on Windows
+		ArrayList<String> partsOfAlgoPath = new ArrayList<String>();
+		for (String part : splitedPathToAlgorithm) {
+			partsOfAlgoPath.add(part);
+		}
+
+		// get and remove the filename
+		String algoWorkSpaceFile = partsOfAlgoPath.remove(partsOfAlgoPath.size()-1);
+		
+		String SLASH = System.getProperty("file.separator");
+		
+		// getPath
+		String algoWorkSpacePath = "";
+		for (String part : partsOfAlgoPath) {
+			algoWorkSpacePath += part + SLASH;
+		}
+		
+		return algoWorkSpacePath;
+	}
+	
 	public String getAlgorithmPath() throws IOException {
 		String path = "";
 		path = FileLocator.getBundleFile(Activator.getDefault().getBundle())
