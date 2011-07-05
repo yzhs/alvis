@@ -15,6 +15,7 @@ import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.widgets.Button;
@@ -667,11 +668,6 @@ public class RunEditor extends EditorPart implements IExportItem {
 	@Override
 	public void setFocus() {
 
-	}
-
-	@Override
-	public String getSourceCode() {
-		return null;
 	}
 
 	@Override

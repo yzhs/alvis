@@ -1,6 +1,8 @@
 package de.unisiegen.informatik.bs.alvis.extensionpoints;
 
-
+/**
+ * @author Frank Weiler
+ */
 import org.eclipse.swt.graphics.Image;
 
 /**
@@ -11,16 +13,6 @@ import org.eclipse.swt.graphics.Image;
  *              this
  */
 public interface IExportItem {
-
-	// TODO not only a string should be returned, but formated strings with font
-	// styles etc
-	/**
-	 * returns source code for export
-	 * 
-	 * @return source code for export, null if object does not contain any
-	 *         source code (e.g. graph files)
-	 */
-	public String getSourceCode();
 
 	/**
 	 * returns image for export

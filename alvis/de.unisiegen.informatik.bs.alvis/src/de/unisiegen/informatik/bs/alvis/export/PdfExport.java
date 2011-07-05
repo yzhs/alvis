@@ -133,18 +133,23 @@ public class PdfExport extends Document {
 
 		// ArrayList<IExportItem> exportItems = Activator.getDefault()
 		// .getExportItems();
-		IExportItem exportItem = Activator.getDefault().getActivePartToExport();
+		IExportItem exportItem;
+		try {
+			exportItem = Activator.getDefault().getActivePartToExport();
+		} catch (ClassCastException cce) {
+			exportItem = null;
+		}
 
 		chapter = new Chapter(new Paragraph(anchor), 1);
 
-		if (exportItem.isRun()) { // export run
+		if (exportItem != null && exportItem.isRun()) { // export run
 
 			System.out.println("LALALA");// TODO weg damit
 
 		} else { // export single editor
 
 			// adding source code:
-			String sourceCode = exportItem.getSourceCode();
+			StyledText sourceCode = getStyledText();
 			if (sourceCode != null) {
 				paragraph = toParagraph(sourceCode);
 				chapter.add(paragraph);
@@ -174,11 +179,17 @@ public class PdfExport extends Document {
 	 * @throws DocumentException
 	 *             will be thrown when new paragraph could not have been added
 	 */
-	private Paragraph toParagraph(String sourceCode) throws DocumentException {
+	private Paragraph toParagraph(StyledText sourceCode)
+			throws DocumentException {
 		if (sourceCode == null)
 			return null;
 
-		String content = highlightStyleTextinHTML(getStyledText()); // returnt den nicht eingerückten, aber gehighlighteten Code
+		String content = highlightStyleTextinHTML(sourceCode); // returnt den
+																// nicht
+																// eingerückten,
+																// aber
+																// gehighlighteten
+																// Code
 
 		Paragraph paragraph = new Paragraph(Messages.getLabel("sourceCode")
 				+ ":\n", subFont);
@@ -355,17 +366,15 @@ public class PdfExport extends Document {
 	 *         advised!
 	 * @return content of the editor
 	 */
-
-	private String highlightStyleTextinHTML( StyledText style) {
+	private String highlightStyleTextinHTML(StyledText style) {
 		String codeWithHTMLStyleTags = "";
-		
+
 		XtextEditor edit = getXTextEditor();
 
-//		StyledText style = null;
+		// StyledText style = null;
 		if (edit != null) {
 			style = edit.getInternalSourceViewer().getTextWidget();
-		}
-		else
+		} else
 			info("The XTextEditor could not be fetched");
 
 		if (style != null) {
@@ -439,8 +448,8 @@ public class PdfExport extends Document {
 			return "0" + toFormat;
 		return toFormat;
 	}
-	
-	public XtextEditor getXTextEditor(){
+
+	public XtextEditor getXTextEditor() {
 		XtextEditor edit = null;
 
 		// Get open pages
@@ -465,13 +474,13 @@ public class PdfExport extends Document {
 		}
 		return edit;
 	}
-	
-	private void info(String str){
+
+	private void info(String str) {
 		// Method to log error messages
 		System.out.println(str);
 	}
-	
-	public StyledText getStyledText(){
+
+	public StyledText getStyledText() {
 		return getXTextEditor().getInternalSourceViewer().getTextWidget();
 	}
 

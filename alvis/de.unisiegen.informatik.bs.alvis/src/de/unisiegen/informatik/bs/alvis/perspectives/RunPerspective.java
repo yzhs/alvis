@@ -1,5 +1,6 @@
 package de.unisiegen.informatik.bs.alvis.perspectives;
 
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;
@@ -34,12 +35,6 @@ public class RunPerspective implements IPerspectiveFactory, IExportItem {
 		layout.getViewLayout(RunGraph.ID).setCloseable(false);
 
 
-	}
-
-	@Override
-	public String getSourceCode() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

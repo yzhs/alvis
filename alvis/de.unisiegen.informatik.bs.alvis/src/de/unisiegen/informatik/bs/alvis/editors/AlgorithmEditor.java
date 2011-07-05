@@ -223,12 +223,6 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements IExp
 	}
 
 	@Override
-	public String getSourceCode() {
-		String sourceCode = "TODO change in AlgorithmEditor.java";//TODO change
-		return sourceCode;
-	}
-
-	@Override
 	public Image getImage() {
 		// no image in this editor
 		return null;
