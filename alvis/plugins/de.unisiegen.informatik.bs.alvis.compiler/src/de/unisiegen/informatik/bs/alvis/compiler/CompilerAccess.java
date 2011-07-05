@@ -63,7 +63,7 @@ public class CompilerAccess {
 		
 		File result = new File(Platform.getInstanceLocation().getURL()
 				.getPath()
-				+ getWorkspacePath(path)  + "Algorithm.java");//new File(path).getName().toString().replaceAll("\\.[^.]*$", ".java"));
+				+ getWorkspacePath(path)  + "/Algorithm.java");//new File(path).getName().toString().replaceAll("\\.[^.]*$", ".java"));
 		FileWriter fstream;
 		fstream = new FileWriter(result);
 		BufferedWriter out = new BufferedWriter(fstream);
