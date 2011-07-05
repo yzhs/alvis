@@ -63,15 +63,16 @@ public class PdfExport extends Document {
 	 * to save the file
 	 * 
 	 * @throws DocumentException
+	 * @throws IOException
 	 */
 	public PdfExport() throws DocumentException, IOException {
 
-		FileDialog saveDialog = MyFileDialog.getExportDialog();
-
-		String path = MyFileDialog.open(saveDialog);
 		try {
 
+			FileDialog saveDialog = MyFileDialog.getExportDialog();
+			String path = MyFileDialog.open(saveDialog);
 			PdfWriter.getInstance(this, new FileOutputStream(path));
+
 			open();
 
 			addMetaData();
@@ -127,26 +128,31 @@ public class PdfExport extends Document {
 
 		// ArrayList<IExportItem> exportItems = Activator.getDefault()
 		// .getExportItems();
-		IExportItem exportItem = Activator.getDefault()
-				.getActiveEditorToExport();
-
+		IExportItem exportItem = Activator.getDefault().getActivePartToExport();
 
 		chapter = new Chapter(new Paragraph(anchor), 1);
-		
-		// adding source code:
-		String sourceCode = exportItem.getSourceCode();
-		if (sourceCode != null) {
-			paragraph = toParagraph(sourceCode);
-			chapter.add(paragraph);
-			add(chapter);
-		}
 
-		// adding image:
-		Image image = exportItem.getImage();
-		if (image != null) {
-			paragraph = toParagraph(image);
-			chapter.add(paragraph);
-			add(chapter);
+		if (exportItem.isRun()) { // export run
+
+			System.out.println("LALALA");// TODO weg damit
+
+		} else { // export single editor
+
+			// adding source code:
+			String sourceCode = exportItem.getSourceCode();
+			if (sourceCode != null) {
+				paragraph = toParagraph(sourceCode);
+				chapter.add(paragraph);
+				add(chapter);
+			}
+
+			// adding image:
+			Image image = exportItem.getImage();
+			if (image != null) {
+				paragraph = toParagraph(image);
+				chapter.add(paragraph);
+				add(chapter);
+			}
 		}
 
 	}
@@ -264,21 +270,22 @@ public class PdfExport extends Document {
 	 */
 	private String indentCode(String stringToIndent) {
 		String line = ""; // storage for the lines
-		
-		// Support for different styles of indendation (four spaces, eight spaces and tabs):
+
+		// Support for different styles of indendation (four spaces, eight
+		// spaces and tabs):
 		stringToIndent = stringToIndent.replaceAll("\t", "    ");
 		stringToIndent = stringToIndent.replaceAll("    ", "\t");
-		
+
 		// in case someone meddled with weird windows text editors
 		stringToIndent = stringToIndent.replaceAll("\r\n", "\n");
-		
+
 		int indentationCounter = 0; // variable holding knowledge about how deep
 									// the current line has to be indented
 		int indentationDepth = 20;
 		boolean onlyWhiteSpacesYet = true; // tabs after the first char that's
 											// not a white space are ignored
 		String toReturn = "";
-		for(Character curr : stringToIndent.toCharArray()){
+		for (Character curr : stringToIndent.toCharArray()) {
 			if (curr == '\t' && onlyWhiteSpacesYet == true) // if we are at the
 															// beginning of a
 															// line, we want to
@@ -289,11 +296,12 @@ public class PdfExport extends Document {
 														// it to the line
 				onlyWhiteSpacesYet = false;
 				line += curr;
-			}
-			else if (line.isEmpty() && (curr == '\n' || curr == '\r')){ // Support for empty lines
+			} else if (line.isEmpty() && (curr == '\n' || curr == '\r')) { // Support
+																			// for
+																			// empty
+																			// lines
 				toReturn += "<br/>";
-			}
-			else {
+			} else {
 				// the line is complete. Surround it with "tabs" and append it
 				// to the returned String
 				toReturn += "<p style=\"padding-left:" + indentationCounter
@@ -345,101 +353,114 @@ public class PdfExport extends Document {
 
 	private String getContentFromAlgoEditor() {
 		String codeWithHTMLStyleTags = "";
-		AlgorithmEditor part = null; // TODO: weg damit! AlgorithmEditor is obsolete. XTextEditor is the futuer!
+		AlgorithmEditor part = null; // TODO: weg damit! AlgorithmEditor is
+										// obsolete. XTextEditor is the futuer!
 		XtextEditor edit = null;
-		
+
 		// Get open pages
 		IWorkbenchPage pages[] = PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getPages();
 		// Cycle through these pages
 		for (IWorkbenchPage page : pages) {
 			// Cycle through every page's editors
-			for(IEditorReference ref : page.getEditorReferences()){
+			for (IEditorReference ref : page.getEditorReferences()) {
 				String title = ref.getTitle();
 				IEditorPart refpart = ref.getEditor(true);
 				// Get algo-editor
 				if (title.contains(".algo")) {
 					if (refpart.getAdapter(refpart.getClass()) instanceof XtextEditor)
-						edit = (XtextEditor) ref.getEditor(true).getAdapter(XtextEditor.class);
-					if(refpart.getAdapter(refpart.getClass()) instanceof AlgorithmEditor)
-						part = (AlgorithmEditor) ref.getEditor(true).getAdapter(
-								AlgorithmEditor.class);
+						edit = (XtextEditor) ref.getEditor(true).getAdapter(
+								XtextEditor.class);
+					if (refpart.getAdapter(refpart.getClass()) instanceof AlgorithmEditor)
+						part = (AlgorithmEditor) ref.getEditor(true)
+								.getAdapter(AlgorithmEditor.class);
 				}
 
 			}
 
 		}
 		/*
-		 *  The AlgorithmEditor is only still included for compatibility reasons
-		 *  If you don't have the language-Plugins (de.~.alvis.language.*) you're 
-		 *  still using the obsolete AlgorithmEditor. This will be changed!
-		 *  The AlgorithmEditor will not be used in the release build and all 
-		 *  references to it in this class will be erased.
+		 * The AlgorithmEditor is only still included for compatibility reasons
+		 * If you don't have the language-Plugins (de.~.alvis.language.*) you're
+		 * still using the obsolete AlgorithmEditor. This will be changed! The
+		 * AlgorithmEditor will not be used in the release build and all
+		 * references to it in this class will be erased.
 		 */
 		StyledText style = null;
-		if(part != null)
+		if (part != null)
 			style = part.getTextWidget();
-		if(edit != null)
+		if (edit != null)
 			style = edit.getInternalSourceViewer().getTextWidget();
-		
+
 		if ((edit != null || part != null) && style != null) {
 
 			RGB rgb;
-			RGB black = new RGB(0,0,0);
-		    String text = style.getText(); 				// the complete text grabbed from the editor
-		    StyleRange[] range = style.getStyleRanges();// ranges declaring the styles of each part of the text
+			RGB black = new RGB(0, 0, 0);
+			String text = style.getText(); // the complete text grabbed from the
+											// editor
+			StyleRange[] range = style.getStyleRanges();// ranges declaring the
+														// styles of each part
+														// of the text
 
-		    for(StyleRange ran : range){				// cycle through these ranges and style them using HTML
-		    	String word = "";
-		    	for(int i = ran.start; i < ran.start+ran.length; i++){
-		    		if (text.charAt(i) == '<') // Replace "<" and ">" otherwise they will be interpreted and thus erased by the HTMLWorker
-		    			word += "&lt;";
-		    		else if (text.charAt(i) == '>')
-		    			word += "&gt;";
-		    		else
-		    			word += text.charAt(i);  // if the character is neither "<" nor ">" append it to the current word
-		    	}
-		    	Color col = ran.foreground;
-		    	if(col == null){ // color must not be null
-		    		rgb = black;
-		    	}
-		    	else
-		    		rgb = col.getRGB();
-		    	if(!rgb.equals(black)) // black is assumed as standard color, other color will be included here.
-		    		word = 	"<font color=\"#"+
-								FormatStringCorrectly(Integer.toHexString(rgb.red))+
-								FormatStringCorrectly(Integer.toHexString(rgb.green))+
-								FormatStringCorrectly(Integer.toHexString(rgb.blue))+
-							"\">" + word + "</font>";
-		    	// add font style to the current word
-//		    	if (ran.fontStyle == 0)
-//		    		word = "<u>" + word + "</u>";
-		    	if(ran.fontStyle == 1)
-		    		word = "<b>" + word + "</b>";
-		    	if(ran.fontStyle == 2){
-		    		word = "<i>" + word + "</i>";
-		    	}
-		    	codeWithHTMLStyleTags += word;
-		    	
-		    	
-		    }		    
-		    return codeWithHTMLStyleTags + "\n";
+			for (StyleRange ran : range) { // cycle through these ranges and
+											// style them using HTML
+				String word = "";
+				for (int i = ran.start; i < ran.start + ran.length; i++) {
+					if (text.charAt(i) == '<') // Replace "<" and ">" otherwise
+												// they will be interpreted and
+												// thus erased by the HTMLWorker
+						word += "&lt;";
+					else if (text.charAt(i) == '>')
+						word += "&gt;";
+					else
+						word += text.charAt(i); // if the character is neither
+												// "<" nor ">" append it to the
+												// current word
+				}
+				Color col = ran.foreground;
+				if (col == null) { // color must not be null
+					rgb = black;
+				} else
+					rgb = col.getRGB();
+				if (!rgb.equals(black)) // black is assumed as standard color,
+										// other color will be included here.
+					word = "<font color=\"#"
+							+ FormatStringCorrectly(Integer
+									.toHexString(rgb.red))
+							+ FormatStringCorrectly(Integer
+									.toHexString(rgb.green))
+							+ FormatStringCorrectly(Integer
+									.toHexString(rgb.blue)) + "\">" + word
+							+ "</font>";
+				// add font style to the current word
+				// if (ran.fontStyle == 0)
+				// word = "<u>" + word + "</u>";
+				if (ran.fontStyle == 1)
+					word = "<b>" + word + "</b>";
+				if (ran.fontStyle == 2) {
+					word = "<i>" + word + "</i>";
+				}
+				codeWithHTMLStyleTags += word;
 
-		}
-		else
+			}
+			return codeWithHTMLStyleTags + "\n";
+
+		} else
 			System.out.println("ERROR: No Editor could be found");
 		return null;
 	}
+
 	/**
-	 * Adds a '0' character in front a string.
-	 * Important for color values: "0" instead of "00" or "f" instead of "0f"
-	 *  would be misinterpreted by the HTMLParser
+	 * Adds a '0' character in front a string. Important for color values: "0"
+	 * instead of "00" or "f" instead of "0f" would be misinterpreted by the
+	 * HTMLParser
+	 * 
 	 * @param toFormat
 	 * @return formatted String
 	 */
-	private String FormatStringCorrectly(String toFormat){
+	private String FormatStringCorrectly(String toFormat) {
 		if (toFormat.length() == 1)
-			return "0"+toFormat;
+			return "0" + toFormat;
 		return toFormat;
 	}
 

@@ -28,5 +28,11 @@ public interface IExportItem {
 	 * @return image for export, null if object does not contain any image
 	 */
 	public Image getImage();
+	
+	/**
+	 * returns true if export item is a run, which implies a more complex export, false otherwise
+	 * @return true if export item is a run, false otherwise
+	 */
+	public boolean isRun();
 
 }

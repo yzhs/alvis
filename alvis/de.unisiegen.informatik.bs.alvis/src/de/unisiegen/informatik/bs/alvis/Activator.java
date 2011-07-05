@@ -346,13 +346,14 @@ public class Activator extends AbstractUIPlugin {
 	// }
 
 	/**
-	 * returns active editor as export item
+	 * returns active part as export item
+	 * @return active part as export item
 	 */
-	public IExportItem getActiveEditorToExport() throws ClassCastException {
-		IExportItem editor;
-		editor = (IExportItem) getWorkbench().getActiveWorkbenchWindow()
-				.getActivePage().getActiveEditor();
+	public IExportItem getActivePartToExport() throws ClassCastException {
+		IExportItem part;
+		part = (IExportItem) getWorkbench().getActiveWorkbenchWindow()
+				.getActivePage().getActivePart();
 
-		return editor;
+		return part;
 	}
 }

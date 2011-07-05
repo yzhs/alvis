@@ -1,13 +1,15 @@
 package de.unisiegen.informatik.bs.alvis.perspectives;
 
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
 
+import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 import de.unisiegen.informatik.bs.alvis.views.RunAlgorithm;
 import de.unisiegen.informatik.bs.alvis.views.RunGraph;
 
-public class RunPerspective implements IPerspectiveFactory {
+public class RunPerspective implements IPerspectiveFactory, IExportItem {
 
 	public static final String ID = "de.unisiegen.informatik.bs.alvis.perspective.run";
 	
@@ -31,8 +33,24 @@ public class RunPerspective implements IPerspectiveFactory {
 		folder1.addView(RunGraph.ID);
 		layout.getViewLayout(RunGraph.ID).setCloseable(false);
 
-			
 
+	}
+
+	@Override
+	public String getSourceCode() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Image getImage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isRun() {
+		return true;
 	}
 
 }

@@ -236,4 +236,9 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements IExp
 	public AnnotationModel getAnnotationModel(){
 		return annotationModel;
 	}
+
+	@Override
+	public boolean isRun() {
+		return false;
+	}
 }

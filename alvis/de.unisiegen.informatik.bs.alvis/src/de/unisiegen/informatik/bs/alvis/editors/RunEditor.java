@@ -19,6 +19,7 @@ import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
@@ -38,6 +39,7 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.Run;
 import de.unisiegen.informatik.bs.alvis.commands.RunCompile;
+import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IRunPreferences;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.tools.IO;
@@ -51,23 +53,27 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.GridData;
 
 /**
- * Editor to edit the run preferences
- * Note: This class has been made with (google)WindowBuilder Eclipse Plugin
+ * Editor to edit the run preferences Note: This class has been made with
+ * (google)WindowBuilder Eclipse Plugin
+ * 
  * @author simon
  */
-public class RunEditor extends EditorPart {
+public class RunEditor extends EditorPart implements IExportItem {
 	public RunEditor() {
 	}
-	
+
 	private Run myRun;
 	private String myInputFilePath;
 	private Boolean myDirty;
 	private Text myAlgorithmFile;
-	private Text myExampleFile;	
+	private Text myExampleFile;
 	private Composite composite_1;
 	private ExpandBar expandBar;
 	private ExpandItem xpndtmExample;
@@ -76,7 +82,7 @@ public class RunEditor extends EditorPart {
 	private Group grpStartTheRun;
 	private ExpandItem xpndtmAlgorithm;
 	private Group grpAlgorithmFile;
-	
+
 	@Override
 	public void doSave(final IProgressMonitor monitor) {
 		myRun.setAlgorithmFile(myAlgorithmFile.getText());
@@ -94,8 +100,6 @@ public class RunEditor extends EditorPart {
 		checkDirty();
 	}
 
-
-
 	/**
 	 * isSaveAsAllowed? Currently not!
 	 */
@@ -103,9 +107,9 @@ public class RunEditor extends EditorPart {
 	public boolean isSaveAsAllowed() {
 		return false;
 	}
+
 	/**
-	 * Save the Graph as...
-	 * Currently not allowed
+	 * Save the Graph as... Currently not allowed
 	 */
 	@Override
 	public void doSaveAs() {
@@ -120,12 +124,12 @@ public class RunEditor extends EditorPart {
 		setSite(site);
 		setInput(input);
 		setPartName(input.getName());
-		FileEditorInput fileInput = (FileEditorInput)input;
+		FileEditorInput fileInput = (FileEditorInput) input;
 		myInputFilePath = fileInput.getPath().toString();
 		myRun = loadRun();
 		checkDirty();
 	}
-	
+
 	@Override
 	public boolean isDirty() {
 		return myDirty;
@@ -133,42 +137,41 @@ public class RunEditor extends EditorPart {
 
 	/**
 	 * Loads the run at myInputFilePath
+	 * 
 	 * @return deserialized Run
 	 */
 	private Run loadRun() {
 		Run tempRun = null;
-		
-		tempRun = (Run)IO.deserialize(myInputFilePath);
-		
-		if(tempRun == null)		
+
+		tempRun = (Run) IO.deserialize(myInputFilePath);
+
+		if (tempRun == null)
 			tempRun = new Run();
 		return tempRun;
 	}
-	
+
 	/**
 	 * Has something changed?
 	 */
 	private void checkDirty() {
-		if(!loadRun().equals(myRun)) {
+		if (!loadRun().equals(myRun)) {
 			setDirty(true);
-		}
-		else
+		} else
 			setDirty(false);
 	}
 
-
-
 	/**
-	 * Sets the current state of dirty
-	 * firesPropertyChange
-	 * @param b the state of dirty
+	 * Sets the current state of dirty firesPropertyChange
+	 * 
+	 * @param b
+	 *            the state of dirty
 	 */
 	private void setDirty(boolean b) {
 		this.myDirty = b;
 		firePropertyChange(PROP_DIRTY);
 	}
-	
-	// TODO diese Arraylist wird durch den button Preferences mit datentypen für 
+
+	// TODO diese Arraylist wird durch den button Preferences mit datentypen für
 	// die VM gefüllt. nachschauen, was damit passieren kann.
 	private ArrayList<PCObject> pseudoCodeObjects;
 
@@ -177,31 +180,34 @@ public class RunEditor extends EditorPart {
 	private EBreakPoint myBreakPoint = EBreakPoint.STOP;
 
 	private boolean myLimitSteps = true;
-	
+
 	@Override
 	public void createPartControl(Composite parent) {
-		
+
 		composite_1 = new Composite(parent, SWT.NONE);
-		composite_1.setFont(SWTResourceManager.getFont("Calibri", 10, SWT.BOLD)); //$NON-NLS-1$
+		composite_1
+				.setFont(SWTResourceManager.getFont("Calibri", 10, SWT.BOLD)); //$NON-NLS-1$
 		composite_1.setLayout(new FillLayout(SWT.HORIZONTAL));
-		
+
 		expandBar = new ExpandBar(composite_1, SWT.NONE);
-		expandBar.setFont(SWTResourceManager.getFont("Calibri", 10, SWT.NORMAL)); //$NON-NLS-1$
+		expandBar
+				.setFont(SWTResourceManager.getFont("Calibri", 10, SWT.NORMAL)); //$NON-NLS-1$
 		expandBar.setSpacing(10);
-		expandBar.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_RED));
+		expandBar
+				.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_RED));
 		expandBar.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
-		
+
 		xpndtmAlgorithm = new ExpandItem(expandBar, SWT.NONE);
 		xpndtmAlgorithm.setExpanded(true);
 		xpndtmAlgorithm.setText(Messages.RunEditor_2);
-		
+
 		grpAlgorithmFile = new Group(expandBar, SWT.NONE);
 		xpndtmAlgorithm.setControl(grpAlgorithmFile);
 		grpAlgorithmFile.setText(Messages.RunEditor_3);
 		grpAlgorithmFile.setLayout(new FillLayout(SWT.HORIZONTAL));
 		myAlgorithmFile = new Text(grpAlgorithmFile, SWT.NONE);
 		myAlgorithmFile.setToolTipText(Messages.RunEditor_4);
-		
+
 		Button btnselectAlgorithmFile = new Button(grpAlgorithmFile, SWT.NONE);
 		btnselectAlgorithmFile.setToolTipText(Messages.RunEditor_5);
 		btnselectAlgorithmFile.setText(Messages.RunEditor_6);
@@ -209,20 +215,19 @@ public class RunEditor extends EditorPart {
 
 			@Override
 			public void handleEvent(Event event) {
-				ElementTreeSelectionDialog dialog = 
-					new ElementTreeSelectionDialog(
-							PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), 
-							new WorkbenchLabelProvider(), 
-							new BaseWorkbenchContentProvider());
+				ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(
+						PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+								.getShell(), new WorkbenchLabelProvider(),
+						new BaseWorkbenchContentProvider());
 				dialog.setTitle(Messages.RunEditor_7);
 				dialog.setMessage(Messages.RunEditor_8);
 				dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
 				dialog.open();
-				if(dialog.getResult() != null) {
+				if (dialog.getResult() != null) {
 					String result = ""; //$NON-NLS-1$
-					for(Object o : dialog.getResult()) 
+					for (Object o : dialog.getResult())
 						result = o.toString();
-					if(result.startsWith("L") & result.endsWith("algo")) { //$NON-NLS-1$ //$NON-NLS-2$
+					if (result.startsWith("L") & result.endsWith("algo")) { //$NON-NLS-1$ //$NON-NLS-2$
 						result = result.substring(2); // cut the first two chars
 						myAlgorithmFile.setText(result);
 						setDirty(true);
@@ -230,50 +235,50 @@ public class RunEditor extends EditorPart {
 				}
 			}
 		});
-		
+
 		myAlgorithmFile.addVerifyListener(new VerifyListener() {
 			@Override
 			public void verifyText(VerifyEvent e) {
-				if(myAlgorithmFile.getText() != "") {
+				if (myAlgorithmFile.getText() != "") {
 					myRun.setAlgorithmFile(myAlgorithmFile.getText());
 					checkDirty();
 				}
-				
+
 			}
 		});
-		xpndtmAlgorithm.setHeight(xpndtmAlgorithm.getControl().computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
-		
+		xpndtmAlgorithm.setHeight(xpndtmAlgorithm.getControl().computeSize(
+				SWT.DEFAULT, SWT.DEFAULT).y);
+
 		xpndtmExample = new ExpandItem(expandBar, SWT.NONE);
 		xpndtmExample.setExpanded(true);
 		xpndtmExample.setText(Messages.RunEditor_12);
-		
+
 		grpExampleFile = new Group(expandBar, SWT.SHADOW_OUT);
 		grpExampleFile.setText(Messages.RunEditor_13);
 		xpndtmExample.setControl(grpExampleFile);
 		grpExampleFile.setLayout(new FillLayout(SWT.HORIZONTAL));
 		myExampleFile = new Text(grpExampleFile, SWT.NONE);
 		myExampleFile.setToolTipText(Messages.RunEditor_14);
-		
+
 		Button btnSelectExampleFile = new Button(grpExampleFile, SWT.NONE);
 		btnSelectExampleFile.setToolTipText(Messages.RunEditor_15);
 		btnSelectExampleFile.setText(Messages.RunEditor_16);
 		btnSelectExampleFile.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
-				ElementTreeSelectionDialog dialog = 
-					new ElementTreeSelectionDialog(
-							PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell(), 
-							new WorkbenchLabelProvider(), 
-							new BaseWorkbenchContentProvider());
+				ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(
+						PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+								.getShell(), new WorkbenchLabelProvider(),
+						new BaseWorkbenchContentProvider());
 				dialog.setTitle(Messages.RunEditor_17);
 				dialog.setMessage(Messages.RunEditor_18);
 				dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
 				dialog.open();
-				if(dialog.getResult() != null) {
+				if (dialog.getResult() != null) {
 					String result = ""; //$NON-NLS-1$
-					for(Object o : dialog.getResult()) 
+					for (Object o : dialog.getResult())
 						result = o.toString();
-					if(result.startsWith("L") & result.endsWith("graph")) { //$NON-NLS-1$ //$NON-NLS-2$
+					if (result.startsWith("L") & result.endsWith("graph")) { //$NON-NLS-1$ //$NON-NLS-2$
 						result = result.substring(2); // cut the first two chars
 						myExampleFile.setText(result);
 						setDirty(true);
@@ -281,28 +286,28 @@ public class RunEditor extends EditorPart {
 				}
 			}
 		});
-		
-		
+
 		myExampleFile.addVerifyListener(new VerifyListener() {
 			@Override
 			public void verifyText(VerifyEvent e) {
-				if(myExampleFile.getText() != "") {
+				if (myExampleFile.getText() != "") {
 					myRun.setExampleFile(myExampleFile.getText());
 					checkDirty();
 				}
 			}
 		});
-		xpndtmExample.setHeight(xpndtmExample.getControl().computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
-		
+		xpndtmExample.setHeight(xpndtmExample.getControl().computeSize(
+				SWT.DEFAULT, SWT.DEFAULT).y);
+
 		xpndtmRun = new ExpandItem(expandBar, SWT.NONE);
 		xpndtmRun.setExpanded(true);
 		xpndtmRun.setText(Messages.RunEditor_22);
-		
+
 		grpStartTheRun = new Group(expandBar, SWT.NONE);
 		grpStartTheRun.setText(Messages.RunEditor_23);
 		xpndtmRun.setControl(grpStartTheRun);
 		grpStartTheRun.setLayout(new FillLayout(SWT.HORIZONTAL));
-		
+
 		Button run = new Button(grpStartTheRun, SWT.CENTER);
 		run.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -312,74 +317,80 @@ public class RunEditor extends EditorPart {
 		run.setToolTipText(Messages.RunEditor_24);
 		run.setImage(ImageCache.getImage("icons/extension/ext_run.png")); //$NON-NLS-1$
 		run.setFont(SWTResourceManager.getFont("Calibri", 14, SWT.NORMAL)); //$NON-NLS-1$
-		run.addListener(SWT.Selection, new Listener(){
+		run.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
 				try {
-					// Compile the PCode in the algorithm file and set the run as activeRun in the activator
+					// Compile the PCode in the algorithm file and set the run
+					// as activeRun in the activator
 					new RunCompile().execute(null);
 				} catch (ExecutionException e) {
 					e.printStackTrace();
 				}
 			}
 		});
-		xpndtmRun.setHeight(xpndtmRun.getControl().computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
-		
+		xpndtmRun.setHeight(xpndtmRun.getControl().computeSize(SWT.DEFAULT,
+				SWT.DEFAULT).y);
+
 		ExpandItem xpndtmSettings = new ExpandItem(expandBar, SWT.NONE);
 		xpndtmSettings.setExpanded(true);
 		xpndtmSettings.setText(Messages.RunEditor_27);
-		
+
 		TabFolder tabFolder = new TabFolder(expandBar, SWT.NONE);
 		xpndtmSettings.setControl(tabFolder);
-		
+
 		TabItem tbtmRun = new TabItem(tabFolder, SWT.NONE);
 		tbtmRun.setText(Messages.RunEditor_28);
-		
+
 		Group grpRun = new Group(tabFolder, SWT.NONE);
 		tbtmRun.setControl(grpRun);
 		grpRun.setText(Messages.RunEditor_29);
-		
+
 		/*
-		 * This section asks the plugins for parameters to add to the run. 
+		 * This section asks the plugins for parameters to add to the run.
 		 */
 		pseudoCodeObjects = new ArrayList<PCObject>();
 		grpRun.setLayout(new GridLayout(3, false));
-		
+
 		Label lblNewLabel = new Label(grpRun, SWT.NONE);
-		lblNewLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 3, 1));
-		lblNewLabel.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
+		lblNewLabel.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false,
+				false, 3, 1));
+		lblNewLabel
+				.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
 		lblNewLabel.setText(Messages.RunEditor_31);
-		
+
 		Button btn_startpoint_rand = new Button(grpRun, SWT.RADIO);
 		btn_startpoint_rand.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				//TODO STARTPOINT_RAND
+				// TODO STARTPOINT_RAND
 				myStartPoint = EStartPoint.RAND;
 				myRun.setOnStartPoint(myStartPoint);
 				checkDirty();
 			}
 		});
-		btn_startpoint_rand.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
+		btn_startpoint_rand.setFont(SWTResourceManager.getFont(
+				"Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
 		btn_startpoint_rand.setText(Messages.RunEditor_33);
-		
+
 		Label lblLetThe_1 = new Label(grpRun, SWT.NONE);
 		lblLetThe_1.setText(Messages.RunEditor_34);
 		new Label(grpRun, SWT.NONE);
-		
+
 		Button btn_startpoint_decide = new Button(grpRun, SWT.RADIO);
-		btn_startpoint_decide.setFont(SWTResourceManager.getFont(Messages.RunEditor_35, 9, SWT.BOLD));
+		btn_startpoint_decide.setFont(SWTResourceManager.getFont(
+				Messages.RunEditor_35, 9, SWT.BOLD));
 		btn_startpoint_decide.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				//TODO STARTPOINT_DECIDE
+				// TODO STARTPOINT_DECIDE
 				myStartPoint = EStartPoint.DECIDE;
 				myRun.setOnStartPoint(myStartPoint);
 				checkDirty();
 			}
 		});
 		btn_startpoint_decide.setText(Messages.RunEditor_36);
-		
+
 		Label lblSetThe = new Label(grpRun, SWT.NONE);
 		lblSetThe.setText(Messages.RunEditor_37);
 		new Label(grpRun, SWT.NONE);
@@ -389,70 +400,73 @@ public class RunEditor extends EditorPart {
 			public void widgetSelected(SelectionEvent e) {
 			}
 		});
-		btnSetPreferences.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
+		btnSetPreferences.setFont(SWTResourceManager.getFont(
+				"Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
 		btnSetPreferences.setToolTipText(Messages.RunEditor_39);
-		btnSetPreferences.addListener(SWT.Selection, new Listener () {
+		btnSetPreferences.addListener(SWT.Selection, new Listener() {
 
 			@Override
 			public void handleEvent(Event event) {
-				if(!myExampleFile.getText().equals("")) { //$NON-NLS-1$
-			        IExtensionRegistry registry = Platform.getExtensionRegistry();
-			        IExtensionPoint extensionPoint = registry.getExtensionPoint(
-			        		"de.unisiegen.informatik.bs.alvis.extensions.runpreferences"); //$NON-NLS-1$
-			        IExtension[] extensions = extensionPoint.getExtensions();
-			        
-			        //	 * For all Extensions that contribute:
-			        for (int i = 0; i < extensions.length; i++)
-			        {
-			            IExtension extension = extensions[i];
-			            IConfigurationElement[] elements = extension.getConfigurationElements();
-			            for (int j = 0; j < elements.length; j++)
-			            {
-			                try
-			                {
-			                    IConfigurationElement element = elements[j];
-			                    IRunPreferences myRunPreferences = (IRunPreferences)element.
-			                    	createExecutableExtension("class"); //$NON-NLS-1$
-			                    
-			                    // Get the PseudoCodeObjects the user choosed as Parameters
-			                    ArrayList<PCObject> returnedPseudoCodeObjects = 
-			                    	myRunPreferences.getRunPreferences(
-			                    			Platform.getInstanceLocation()
-			                    				.getURL().getPath() + 
-			                    				myExampleFile.getText());
-			                    // Add all PseudoCodeObjects to the Run.
-			                    for(PCObject pseudo : returnedPseudoCodeObjects) {
-			                    	Activator.getDefault().getPseudoCodeList().add(pseudo);
-			                    }
-			                }
-			                catch (CoreException e)
-			                {
-			                	e.printStackTrace();
-			                }
-			            }
-			        }
+				if (!myExampleFile.getText().equals("")) { //$NON-NLS-1$
+					IExtensionRegistry registry = Platform
+							.getExtensionRegistry();
+					IExtensionPoint extensionPoint = registry
+							.getExtensionPoint("de.unisiegen.informatik.bs.alvis.extensions.runpreferences"); //$NON-NLS-1$
+					IExtension[] extensions = extensionPoint.getExtensions();
+
+					// * For all Extensions that contribute:
+					for (int i = 0; i < extensions.length; i++) {
+						IExtension extension = extensions[i];
+						IConfigurationElement[] elements = extension
+								.getConfigurationElements();
+						for (int j = 0; j < elements.length; j++) {
+							try {
+								IConfigurationElement element = elements[j];
+								IRunPreferences myRunPreferences = (IRunPreferences) element
+										.createExecutableExtension("class"); //$NON-NLS-1$
+
+								// Get the PseudoCodeObjects the user choosed as
+								// Parameters
+								ArrayList<PCObject> returnedPseudoCodeObjects = myRunPreferences
+										.getRunPreferences(Platform
+												.getInstanceLocation().getURL()
+												.getPath()
+												+ myExampleFile.getText());
+								// Add all PseudoCodeObjects to the Run.
+								for (PCObject pseudo : returnedPseudoCodeObjects) {
+									Activator.getDefault().getPseudoCodeList()
+											.add(pseudo);
+								}
+							} catch (CoreException e) {
+								e.printStackTrace();
+							}
+						}
+					}
 				}
 			}
-			
+
 		});
 		btnSetPreferences.setText(Messages.RunEditor_43);
 		new Label(grpRun, SWT.NONE);
 		new Label(grpRun, SWT.NONE);
-		
+
 		TabItem tbtmDecisionPoint = new TabItem(tabFolder, SWT.NONE);
 		tbtmDecisionPoint.setText(Messages.RunEditor_44);
-		
+
 		Group grpDecisionPointSettings = new Group(tabFolder, SWT.NONE);
 		tbtmDecisionPoint.setControl(grpDecisionPointSettings);
 		grpDecisionPointSettings.setText(Messages.RunEditor_45);
 		grpDecisionPointSettings.setLayout(new GridLayout(2, false));
-		
+
 		Label lblHowDoYou = new Label(grpDecisionPointSettings, SWT.NONE);
-		lblHowDoYou.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
-		lblHowDoYou.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
+		lblHowDoYou
+				.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
+		lblHowDoYou.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false,
+				false, 2, 1));
 		lblHowDoYou.setText(Messages.RunEditor_47);
-		
-		Button btn_decisionpoint_rand = new Button(grpDecisionPointSettings, SWT.RADIO);
+
+		Button btn_decisionpoint_rand = new Button(grpDecisionPointSettings,
+				SWT.RADIO);
 		btn_decisionpoint_rand.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -462,14 +476,16 @@ public class RunEditor extends EditorPart {
 				checkDirty();
 			}
 		});
-		btn_decisionpoint_rand.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
+		btn_decisionpoint_rand.setFont(SWTResourceManager.getFont(
+				"Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
 		btn_decisionpoint_rand.setToolTipText(Messages.RunEditor_49);
 		btn_decisionpoint_rand.setText(Messages.RunEditor_50);
-		
+
 		Label lblLetThe = new Label(grpDecisionPointSettings, SWT.NONE);
 		lblLetThe.setText(Messages.RunEditor_51);
-		
-		Button btn_decisionpoint_once = new Button(grpDecisionPointSettings, SWT.RADIO);
+
+		Button btn_decisionpoint_once = new Button(grpDecisionPointSettings,
+				SWT.RADIO);
 		btn_decisionpoint_once.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -479,14 +495,16 @@ public class RunEditor extends EditorPart {
 				checkDirty();
 			}
 		});
-		btn_decisionpoint_once.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
+		btn_decisionpoint_once.setFont(SWTResourceManager.getFont(
+				"Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
 		btn_decisionpoint_once.setToolTipText(Messages.RunEditor_53);
 		btn_decisionpoint_once.setText(Messages.RunEditor_54);
-		
+
 		Label lblChooseAn = new Label(grpDecisionPointSettings, SWT.NONE);
 		lblChooseAn.setText(Messages.RunEditor_55);
-		
-		Button btn_decisionpoint_always = new Button(grpDecisionPointSettings, SWT.RADIO);
+
+		Button btn_decisionpoint_always = new Button(grpDecisionPointSettings,
+				SWT.RADIO);
 		btn_decisionpoint_always.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -496,26 +514,29 @@ public class RunEditor extends EditorPart {
 				checkDirty();
 			}
 		});
-		btn_decisionpoint_always.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
+		btn_decisionpoint_always.setFont(SWTResourceManager.getFont(
+				"Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
 		btn_decisionpoint_always.setToolTipText(Messages.RunEditor_57);
 		btn_decisionpoint_always.setText(Messages.RunEditor_58);
-		
+
 		Label lblDecideWhat = new Label(grpDecisionPointSettings, SWT.NONE);
 		lblDecideWhat.setText(Messages.RunEditor_59);
-		
+
 		TabItem tbtmBreakPoint = new TabItem(tabFolder, SWT.NONE);
 		tbtmBreakPoint.setText(Messages.RunEditor_60);
-		
+
 		Group grpBreakPoint = new Group(tabFolder, SWT.NONE);
 		tbtmBreakPoint.setControl(grpBreakPoint);
 		grpBreakPoint.setText(Messages.RunEditor_61);
 		grpBreakPoint.setLayout(new GridLayout(2, false));
-		
+
 		Label lblWhatShallHappen = new Label(grpBreakPoint, SWT.NONE);
-		lblWhatShallHappen.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
-		lblWhatShallHappen.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
+		lblWhatShallHappen.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER,
+				false, false, 2, 1));
+		lblWhatShallHappen.setFont(SWTResourceManager.getFont(
+				"Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
 		lblWhatShallHappen.setText(Messages.RunEditor_63);
-		
+
 		Button btn_breakpoint_stop = new Button(grpBreakPoint, SWT.RADIO);
 		btn_breakpoint_stop.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -526,12 +547,13 @@ public class RunEditor extends EditorPart {
 				checkDirty();
 			}
 		});
-		btn_breakpoint_stop.setFont(SWTResourceManager.getFont(Messages.RunEditor_64, 9, SWT.BOLD));
+		btn_breakpoint_stop.setFont(SWTResourceManager.getFont(
+				Messages.RunEditor_64, 9, SWT.BOLD));
 		btn_breakpoint_stop.setText(Messages.RunEditor_65);
-		
+
 		Label lblStopOnEvery = new Label(grpBreakPoint, SWT.NONE);
 		lblStopOnEvery.setText(Messages.RunEditor_66);
-		
+
 		Button btn_breakpoint_run = new Button(grpBreakPoint, SWT.RADIO);
 		btn_breakpoint_run.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -542,25 +564,28 @@ public class RunEditor extends EditorPart {
 				checkDirty();
 			}
 		});
-		btn_breakpoint_run.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
+		btn_breakpoint_run.setFont(SWTResourceManager.getFont(
+				"Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
 		btn_breakpoint_run.setText(Messages.RunEditor_68);
-		
+
 		Label lblThroughEvery = new Label(grpBreakPoint, SWT.NONE);
 		lblThroughEvery.setText(Messages.RunEditor_69);
-		
+
 		TabItem tbtmSecurity = new TabItem(tabFolder, SWT.NONE);
 		tbtmSecurity.setText(Messages.RunEditor_70);
-		
+
 		Group grpSecurity = new Group(tabFolder, SWT.NONE);
 		grpSecurity.setText(Messages.RunEditor_71);
 		tbtmSecurity.setControl(grpSecurity);
 		grpSecurity.setLayout(new GridLayout(2, false));
-		
+
 		Label lblIfTheAlgorithm = new Label(grpSecurity, SWT.NONE);
-		lblIfTheAlgorithm.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
-		lblIfTheAlgorithm.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
+		lblIfTheAlgorithm.setFont(SWTResourceManager.getFont(
+				"Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
+		lblIfTheAlgorithm.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER,
+				false, false, 2, 1));
 		lblIfTheAlgorithm.setText(Messages.RunEditor_73);
-		
+
 		Button btnLimitTo = new Button(grpSecurity, SWT.CHECK);
 		btnLimitTo.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -573,70 +598,67 @@ public class RunEditor extends EditorPart {
 		});
 		btnLimitTo.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
 		btnLimitTo.setText(Messages.RunEditor_75);
-		
+
 		Label lblStepsIn = new Label(grpSecurity, SWT.NONE);
 		lblStepsIn.setText(Messages.RunEditor_76);
 		xpndtmSettings.setHeight(140);
-		
+
 		ExpandItem xpndtmInformations = new ExpandItem(expandBar, SWT.NONE);
 		xpndtmInformations.setText(Messages.RunEditor_77);
-		
+
 		Group grpI = new Group(expandBar, SWT.NONE);
 		grpI.setText(Messages.RunEditor_78);
 		xpndtmInformations.setControl(grpI);
 		grpI.setLayout(new FillLayout(SWT.HORIZONTAL));
-		
+
 		Label label = new Label(grpI, SWT.HORIZONTAL);
-		label.setText(Messages.RunEditor_79 +
-				Messages.RunEditor_80 +
-				Messages.RunEditor_81 +
-				Messages.RunEditor_82 +
-				Messages.RunEditor_83 +
-				Messages.RunEditor_84);
+		label.setText(Messages.RunEditor_79 + Messages.RunEditor_80
+				+ Messages.RunEditor_81 + Messages.RunEditor_82
+				+ Messages.RunEditor_83 + Messages.RunEditor_84);
 		label.setFont(SWTResourceManager.getFont("Calibri", 9, SWT.NORMAL)); //$NON-NLS-1$
-		xpndtmInformations.setHeight(xpndtmInformations.getControl().computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
-		
+		xpndtmInformations.setHeight(xpndtmInformations.getControl()
+				.computeSize(SWT.DEFAULT, SWT.DEFAULT).y);
+
 		/*
 		 * INITIAL ALL FIELDS
 		 */
-		if(myRun.getAlgorithmFile() != null) 
+		if (myRun.getAlgorithmFile() != null)
 			myAlgorithmFile.setText(myRun.getAlgorithmFile());
-		if(myRun.getExampleFile() != null) 
+		if (myRun.getExampleFile() != null)
 			myExampleFile.setText(myRun.getExampleFile());
-		
-		if(myRun.getOnStartPoint().equals(EStartPoint.RAND)) {
+
+		if (myRun.getOnStartPoint().equals(EStartPoint.RAND)) {
 			btn_startpoint_rand.setSelection(true);
 			myStartPoint = EStartPoint.RAND;
 		}
-		if(myRun.getOnStartPoint().equals(EStartPoint.DECIDE)) {
+		if (myRun.getOnStartPoint().equals(EStartPoint.DECIDE)) {
 			btn_startpoint_decide.setSelection(true);
 			myStartPoint = EStartPoint.DECIDE;
 		}
-		if(myRun.getOnDecisionPoint().equals(EDecisionPoint.RAND)) {
+		if (myRun.getOnDecisionPoint().equals(EDecisionPoint.RAND)) {
 			btn_decisionpoint_rand.setSelection(true);
 			myDecisionPoint = EDecisionPoint.RAND;
 		}
-		if(myRun.getOnDecisionPoint().equals(EDecisionPoint.ONCE)) {
+		if (myRun.getOnDecisionPoint().equals(EDecisionPoint.ONCE)) {
 			btn_decisionpoint_once.setSelection(true);
 			myDecisionPoint = EDecisionPoint.ONCE;
 		}
-		if(myRun.getOnDecisionPoint().equals(EDecisionPoint.ALWAYS)) {
+		if (myRun.getOnDecisionPoint().equals(EDecisionPoint.ALWAYS)) {
 			btn_decisionpoint_always.setSelection(true);
 			myDecisionPoint = EDecisionPoint.ALWAYS;
 		}
-		if(myRun.getOnBreakPoint().equals(EBreakPoint.STOP)) {
+		if (myRun.getOnBreakPoint().equals(EBreakPoint.STOP)) {
 			btn_breakpoint_stop.setSelection(true);
 			myBreakPoint = EBreakPoint.STOP;
 		}
-		if(myRun.getOnBreakPoint().equals(EBreakPoint.RUN)) {
+		if (myRun.getOnBreakPoint().equals(EBreakPoint.RUN)) {
 			btn_breakpoint_run.setSelection(true);
 			myBreakPoint = EBreakPoint.RUN;
 		}
-		if(myRun.isLimitSteps() == true) {
+		if (myRun.isLimitSteps() == true) {
 			btnLimitTo.setSelection(true);
 			myLimitSteps = true;
-		}
-		else {
+		} else {
 			btnLimitTo.setSelection(false);
 			myLimitSteps = false;
 		}
@@ -645,5 +667,39 @@ public class RunEditor extends EditorPart {
 	@Override
 	public void setFocus() {
 
+	}
+
+	@Override
+	public String getSourceCode() {
+		return null;
+	}
+
+	@Override
+	public Image getImage() {
+		Image screenshot;
+		int width = Activator.getDefault().getWorkbench()
+				.getActiveWorkbenchWindow().getActivePage().getActiveEditor()
+				.getEditorSite().getShell().getSize().x;
+		int height = Activator.getDefault().getWorkbench()
+				.getActiveWorkbenchWindow().getActivePage().getActiveEditor()
+				.getEditorSite().getShell().getSize().y;
+		GC gc = new GC(Activator.getDefault().getWorkbench()
+				.getActiveWorkbenchWindow().getActivePage().getActiveEditor()
+				.getEditorSite().getShell());
+		gc.drawText("Created by Alvis", 5, 5);
+		gc.drawRectangle(new Rectangle(0, 0, width - 1, height - 1));
+		screenshot = new Image(Display.getCurrent(), width, height);
+		gc.copyArea(screenshot, 0, 0);
+
+		gc.dispose();
+		Activator.getDefault().getWorkbench().getActiveWorkbenchWindow()
+				.getShell().redraw();
+
+		return screenshot;
+	}
+
+	@Override
+	public boolean isRun() {
+		return false;
 	}
 }
