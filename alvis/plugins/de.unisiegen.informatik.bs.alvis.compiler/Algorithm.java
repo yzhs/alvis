@@ -1,5 +1,7 @@
 import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.*;
 import de.unisiegen.informatik.bs.alvis.vm.*;
@@ -27,18 +29,18 @@ public class Algorithm implements AbstractAlgo {
         s.set("color", new PCString("yellow"));
         reachedBreakPoint(6);
         s.set("distance", new PCInteger(0));
-        PCStack S = new PCStack();
-        S.push(s);
-        while ((S.isEmpty().not()).getLiteralValue()) {
+        PCQueue Q = new PCQueue();
+        Q.enqueue(s);
+        while ((Q.isEmpty().not()).getLiteralValue()) {
         	PCVertex u = null;
-            u = (PCVertex) S.pop();
+            u = (PCVertex) Q.dequeue();
             for (PCVertex v : u.getAdjacents()) {
             	if (v.get("color").equals(new PCString("white"))) {
             		v.set("color", new PCString("yellow"));
                     reachedBreakPoint(14);
                     v.set("distance",((PCInteger) (u.get("distance"))).add(new PCInteger(1)));
                     v.set("pi", u);
-                    S.push(v);
+                    Q.enqueue(v);
                  }
             }
         }
@@ -70,20 +72,20 @@ public class Algorithm implements AbstractAlgo {
 	private void insertBreakpoint(int lin) {
 	} // for testing purposes only
 
-	public ArrayList<PCObject> getVariableReferences() {
+	public List<PCObject> getVariableReferences() {
 		return null;
 	}
 
-	public HashMap<PCObject, String> getParameterTypes() {
+	public Map<PCObject, String> getParameterTypes() {
 		HashMap<PCObject, String> result = new HashMap<PCObject, String>();
 		result.put(PCGraph.getNull(), "G");
 		result.put(PCVertex.getNull(), "s");
 		return result;
 	}
 
-	public void setParameters(ArrayList<PCObject> params) {
-		this.G = (PCGraph) params.get(0);
-		this.s = (PCVertex) params.get(1);
+	public void setParameters(List<PCObject> paras) {
+		this.G = (PCGraph) paras.get(0);
+		this.s = (PCVertex) paras.get(1);
 	}
 
 	@Override
