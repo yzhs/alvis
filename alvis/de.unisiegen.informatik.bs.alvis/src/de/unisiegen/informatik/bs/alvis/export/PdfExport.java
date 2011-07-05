@@ -33,13 +33,13 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.html.simpleparser.HTMLWorker;
 import com.itextpdf.text.html.simpleparser.StyleSheet;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
-import de.unisiegen.informatik.bs.alvis.editors.AlgorithmEditor;
 import de.unisiegen.informatik.bs.alvis.editors.Messages;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 
@@ -50,8 +50,9 @@ import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
  */
 public class PdfExport extends Document {
 
-	private static Font titleFont = new Font(Font.FontFamily.TIMES_ROMAN, 32,
-			Font.BOLD);
+	private static Font titleFont = FontFactory.getFont("Calibri");
+	// private static Font titleFont = new Font(Font.FontFamily.TIMES_ROMAN, 32,
+	// Font.BOLD);
 	private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
 			Font.BOLD);
 	private static Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 16,
@@ -83,8 +84,7 @@ public class PdfExport extends Document {
 			addMetaData();
 			addTitle();
 			addContent();
-
-			addContentOutsideParagraph();
+			// addContentOutsideParagraph();
 
 			close();
 
@@ -367,72 +367,66 @@ public class PdfExport extends Document {
 	 * @return content of the editor
 	 */
 	private String highlightStyleTextinHTML(StyledText style) {
+		if (style == null) {
+			info("The style could not be grabbed from the Editor");
+			return null;
+		}
+
 		String codeWithHTMLStyleTags = "";
 
-		XtextEditor edit = getXTextEditor();
+//		XtextEditor edit = getXTextEditor();
+//		if (edit == null) {
+//			info("The XTextEditor could not be fetched");
+//		}
 
-		// StyledText style = null;
-		if (edit != null) {
-			style = edit.getInternalSourceViewer().getTextWidget();
-		} else
-			info("The XTextEditor could not be fetched");
+		RGB rgb;
+		RGB black = new RGB(0, 0, 0);
+		String text = style.getText(); // the complete text grabbed from the
+										// editor
+		StyleRange[] range = style.getStyleRanges();// ranges declaring the
+													// styles of each part
+													// of the text
 
-		if (style != null) {
-
-			RGB rgb;
-			RGB black = new RGB(0, 0, 0);
-			String text = style.getText(); // the complete text grabbed from the
-											// editor
-			StyleRange[] range = style.getStyleRanges();// ranges declaring the
-														// styles of each part
-														// of the text
-
-			for (StyleRange ran : range) { // cycle through these ranges and
-											// style them using HTML
-				String word = "";
-				for (int i = ran.start; i < ran.start + ran.length; i++) {
-					if (text.charAt(i) == '<') // Replace "<" and ">" otherwise
-												// they will be interpreted and
-												// thus erased by the HTMLWorker
-						word += "&lt;";
-					else if (text.charAt(i) == '>')
-						word += "&gt;";
-					else
-						word += text.charAt(i); // if the character is neither
-												// "<" nor ">" append it to the
-												// current word
-				}
-				Color col = ran.foreground;
-				if (col == null) { // color must not be null
-					rgb = black;
-				} else
-					rgb = col.getRGB();
-				if (!rgb.equals(black)) // black is assumed as standard color,
-										// other color will be included here.
-					word = "<font color=\"#"
-							+ FormatStringCorrectly(Integer
-									.toHexString(rgb.red))
-							+ FormatStringCorrectly(Integer
-									.toHexString(rgb.green))
-							+ FormatStringCorrectly(Integer
-									.toHexString(rgb.blue)) + "\">" + word
-							+ "</font>";
-				// add font style to the current word
-				// if (ran.fontStyle == 0)
-				// word = "<u>" + word + "</u>";
-				if (ran.fontStyle == 1)
-					word = "<b>" + word + "</b>";
-				if (ran.fontStyle == 2) {
-					word = "<i>" + word + "</i>";
-				}
-				codeWithHTMLStyleTags += word;
-
+		for (StyleRange ran : range) { // cycle through these ranges and
+										// style them using HTML
+			String word = "";
+			for (int i = ran.start; i < ran.start + ran.length; i++) {
+				if (text.charAt(i) == '<') // Replace "<" and ">" otherwise
+											// they will be interpreted and
+											// thus erased by the HTMLWorker
+					word += "&lt;";
+				else if (text.charAt(i) == '>')
+					word += "&gt;";
+				else
+					word += text.charAt(i); // if the character is neither
+											// "<" nor ">" append it to the
+											// current word
 			}
-			return codeWithHTMLStyleTags + "\n";
+			Color col = ran.foreground;
+			if (col == null) { // color must not be null
+				rgb = black;
+			} else
+				rgb = col.getRGB();
+			if (!rgb.equals(black)) // black is assumed as standard color,
+									// other color will be included here.
+				word = "<font color=\"#"
+						+ FormatStringCorrectly(Integer.toHexString(rgb.red))
+						+ FormatStringCorrectly(Integer.toHexString(rgb.green))
+						+ FormatStringCorrectly(Integer.toHexString(rgb.blue))
+						+ "\">" + word + "</font>";
+			// add font style to the current word
+			// if (ran.fontStyle == 0)
+			// word = "<u>" + word + "</u>";
+			if (ran.fontStyle == 1)
+				word = "<b>" + word + "</b>";
+			if (ran.fontStyle == 2) {
+				word = "<i>" + word + "</i>";
+			}
+			codeWithHTMLStyleTags += word;
 
-		} else
-			info("The style could not be grabbed from the Editor");
-		return null;
+		}
+		return codeWithHTMLStyleTags + "\n";
+
 	}
 
 	/**
