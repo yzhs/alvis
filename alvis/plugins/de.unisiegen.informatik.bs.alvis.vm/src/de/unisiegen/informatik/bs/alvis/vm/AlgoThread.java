@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.concurrent.locks.Lock;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.SortableCollection;
 
 /**
  * Class capsulating Algo with all Information needed for handling plus methods
@@ -50,6 +51,9 @@ public class AlgoThread {
 
 	// helper to decide if we are currently on break, or moving backwards
 	private boolean onBreak;
+	
+	// reference to dplistener
+	private DPListener dpListen;
 
 	/**
 	 * Creates new AlgoThread, will directly load the fileName, create the Class
@@ -102,6 +106,12 @@ public class AlgoThread {
 			return;
 		}
 		bpListeners.add(wantsToListen);
+	}
+	
+	
+	// TODO javadoc + clean
+	public void addDPListener(DPListener toListen) {
+		dpListen = toListen;
 	}
 
 	/**
@@ -203,6 +213,11 @@ public class AlgoThread {
 				for (BPListener toInform : bpListeners) {
 					toInform.onBreakPoint(BPNr);
 				}
+			}
+		});
+		algoInst.addDPListener(new DPListener() {
+			@Override
+			public void onDecisionPoint(int DPNr, SortableCollection toSort) {
 			}
 		});
 		algoThread.start();

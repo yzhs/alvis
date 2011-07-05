@@ -38,7 +38,29 @@ public class VirtualMachine {
 		return instance;
 	}
 	
+	// Decision Points only for one Algo
+	// TODO change this to support multiple Algos/Threads for BS Sync
+	private DPListener dpListen;
+	
+	/**
+	 * Inform listener about DecisionPoint, only if AlgoThread can't handle it by it self
+	 * @param toListen
+	 */
+	public void addDPListener(DPListener toListen) {
+		dpListen = toListen;
+		for(AlgoThread alg : algos.values()) {
+			alg.addDPListener(dpListen);
+		}
+	}
 
+	/**
+	 * remove the registered DPListener
+	 */
+	public void removeDPListener() {
+		dpListen = null;
+	}
+	
+	
 	/**
 	 * private Method to create virtual Machine instance
 	 */
@@ -288,20 +310,6 @@ public class VirtualMachine {
 		if (everyoneDone == false) {
 			waitForBreakPoint();
 		}
-		/*
-		 * boolean everyOneDone = false; while (!everyOneDone) { everyOneDone =
-		 * true; for (AlgoThread algo : algos.values()) { everyOneDone =
-		 * everyOneDone && (algo.getCurrentThreadState().equals(
-		 * Thread.State.TIMED_WAITING) || algo .getCurrentThreadState().equals(
-		 * Thread.State.NEW));
-		 * 
-		 * if (!(algo.getCurrentThreadState().equals(
-		 * Thread.State.TIMED_WAITING) || algo
-		 * .getCurrentThreadState().equals(Thread.State.NEW))) {
-		 * algo.waitForBreakpoint(); }
-		 * 
-		 * } }
-		 */
 	}
 
 	/**
