@@ -176,4 +176,9 @@ public class GraphEditorAdjacencyMatrix extends EditorPart implements
 		return null;
 	}
 
+	@Override
+	public boolean isRun() {
+		return false;
+	}
+
 }

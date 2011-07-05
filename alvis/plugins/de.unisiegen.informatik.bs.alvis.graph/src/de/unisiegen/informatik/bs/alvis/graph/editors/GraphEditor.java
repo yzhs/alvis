@@ -75,9 +75,9 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	public static final int CTRL = SWT.CTRL;// SWT -> ctrl
 	private int pressed;
 
-	private Button bNode, bConnection, bStartNode, bEndNode, bHand, bDelete,
-			bZoomIn, bZoomOut;
-	private Button bChangeLayout, bDeleteAll, bScreenShot;
+//	private Button bNode, bConnection, bStartNode, bEndNode, bHand, bDelete,
+//			bZoomIn, bZoomOut;
+//	private Button bChangeLayout, bDeleteAll, bScreenShot;
 	public AlvisGraph myGraph;
 	private Composite myParent;
 	private Cursor oldCursor;
@@ -203,66 +203,66 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		pressed = MODUS_STANDARD;
 		setGraphModus(MODUS_STANDARD);
 
-		Group tools = new Group(parent, SWT.NONE);
-		tools.setText(Messages.getLabel("group_tools"));
-		tools.setLayout(new GridLayout(8, false));
-
-		GridData gdTools = new GridData();
-		gdTools.horizontalAlignment = SWT.FILL;
-		gdTools.grabExcessHorizontalSpace = true;
-		tools.setLayoutData(gdTools);
-
-		bZoomOut = new Button(tools, SWT.NONE);
-		bZoomOut.setText("-");
-
-		bZoomIn = new Button(tools, SWT.NONE);
-		bZoomIn.setText("+");
-
-		bHand = new Button(tools, SWT.NONE);
-		bHand.setImage(ImageCache.getImage("icons/editor/graph_move.png")); //$NON-NLS-1$
-		bHand.setToolTipText(Messages.getLabel("button_move"));
-
-		bNode = new Button(tools, SWT.NONE);
-		bNode.setImage(ImageCache.getImage("icons/editor/graph_add.png")); //$NON-NLS-1$
-		bNode.setToolTipText(Messages.getLabel("button_add"));
-
-		bConnection = new Button(tools, SWT.NONE);
-		bConnection.setImage(ImageCache
-				.getImage("icons/editor/graph_connection.png")); //$NON-NLS-1$
-		bConnection.setToolTipText(Messages.getLabel("button_connection"));
-
-		bStartNode = new Button(tools, SWT.NONE);
-		bStartNode.setImage(ImageCache
-				.getImage("icons/editor/graph_startnode.png")); //$NON-NLS-1$
-		bStartNode.setToolTipText(Messages.getLabel("button_startnode"));
-
-		bEndNode = new Button(tools, SWT.NONE);
-		bEndNode.setImage(ImageCache.getImage("icons/editor/graph_endnode.png")); //$NON-NLS-1$
-		bEndNode.setToolTipText(Messages.getLabel("button_endnode"));
-
-		bDelete = new Button(tools, SWT.NONE);
-		bDelete.setImage(ImageCache.getImage("icons/editor/graph_delete.png"));
-		bDelete.setToolTipText(Messages.getLabel("button_deletenode"));
-
-		Group autofill = new Group(parent, SWT.NONE);
-		autofill.setText(Messages.getLabel("button_autofill"));
-		autofill.setLayout(new GridLayout(9, false));
-
-		GridData gdAutoFill = new GridData();
-		gdAutoFill.horizontalAlignment = SWT.FILL;
-		gdAutoFill.grabExcessHorizontalSpace = true;
-		autofill.setLayoutData(gdAutoFill);
-
-		bChangeLayout = new Button(autofill, SWT.NONE);
-		bChangeLayout.setText(Messages.getLabel("button_change_layout"));
-
-		bDeleteAll = new Button(autofill, SWT.NONE);
-		bDeleteAll.setText(Messages.getLabel("button_delete_all"));
-
-		bScreenShot = new Button(autofill, SWT.NONE);
-		bScreenShot.setText(Messages.getLabel("screenshot"));
-
-		autofill.pack();
+//		Group tools = new Group(parent, SWT.NONE);
+//		tools.setText(Messages.getLabel("group_tools"));
+//		tools.setLayout(new GridLayout(8, false));
+//
+//		GridData gdTools = new GridData();
+//		gdTools.horizontalAlignment = SWT.FILL;
+//		gdTools.grabExcessHorizontalSpace = true;
+//		tools.setLayoutData(gdTools);
+//
+//		bZoomOut = new Button(tools, SWT.NONE);
+//		bZoomOut.setText("-");
+//
+//		bZoomIn = new Button(tools, SWT.NONE);
+//		bZoomIn.setText("+");
+//
+//		bHand = new Button(tools, SWT.NONE);
+//		bHand.setImage(ImageCache.getImage("icons/editor/graph_move.png")); //$NON-NLS-1$
+//		bHand.setToolTipText(Messages.getLabel("button_move"));
+//
+//		bNode = new Button(tools, SWT.NONE);
+//		bNode.setImage(ImageCache.getImage("icons/editor/graph_add.png")); //$NON-NLS-1$
+//		bNode.setToolTipText(Messages.getLabel("button_add"));
+//
+//		bConnection = new Button(tools, SWT.NONE);
+//		bConnection.setImage(ImageCache
+//				.getImage("icons/editor/graph_connection.png")); //$NON-NLS-1$
+//		bConnection.setToolTipText(Messages.getLabel("button_connection"));
+//
+//		bStartNode = new Button(tools, SWT.NONE);
+//		bStartNode.setImage(ImageCache
+//				.getImage("icons/editor/graph_startnode.png")); //$NON-NLS-1$
+//		bStartNode.setToolTipText(Messages.getLabel("button_startnode"));
+//
+//		bEndNode = new Button(tools, SWT.NONE);
+//		bEndNode.setImage(ImageCache.getImage("icons/editor/graph_endnode.png")); //$NON-NLS-1$
+//		bEndNode.setToolTipText(Messages.getLabel("button_endnode"));
+//
+//		bDelete = new Button(tools, SWT.NONE);
+//		bDelete.setImage(ImageCache.getImage("icons/editor/graph_delete.png"));
+//		bDelete.setToolTipText(Messages.getLabel("button_deletenode"));
+//
+//		Group autofill = new Group(parent, SWT.NONE);
+//		autofill.setText(Messages.getLabel("button_autofill"));
+//		autofill.setLayout(new GridLayout(9, false));
+//
+//		GridData gdAutoFill = new GridData();
+//		gdAutoFill.horizontalAlignment = SWT.FILL;
+//		gdAutoFill.grabExcessHorizontalSpace = true;
+//		autofill.setLayoutData(gdAutoFill);
+//
+//		bChangeLayout = new Button(autofill, SWT.NONE);
+//		bChangeLayout.setText(Messages.getLabel("button_change_layout"));
+//
+//		bDeleteAll = new Button(autofill, SWT.NONE);
+//		bDeleteAll.setText(Messages.getLabel("button_delete_all"));
+//
+//		bScreenShot = new Button(autofill, SWT.NONE);
+//		bScreenShot.setText(Messages.getLabel("screenshot"));
+//
+//		autofill.pack();
 
 		setListeners();
 
@@ -426,78 +426,78 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 			}
 		});
 
-		Listener zoomer = new Listener() {
-			@Override
-			public void handleEvent(Event event) {
-				if (event.widget.equals(bZoomIn)) {
-					if(myGraph.zoomIn())
-						checkDirty();
-				} else if (event.widget.equals(bZoomOut)) {
-					if(myGraph.zoomOut())
-						checkDirty();
-				}
-			}
-		};
-
-		bZoomIn.addListener(SWT.Selection, zoomer);
-		bZoomOut.addListener(SWT.Selection, zoomer);
-
-		Listener listener = new Listener() {
-			@Override
-			public void handleEvent(Event event) {
-
-				// /* TEST */
-				// ArrayList<AlvisGraphNode> drain = new
-				// ArrayList<AlvisGraphNode>();
-				// ArrayList<AlvisGraphNode> source = new
-				// ArrayList<AlvisGraphNode>();
-				// source.addAll(myGraph.getAllNodes());
-				// CheckDialog dialog = new CheckDialog(
-				// myParent.getShell(),
-				// source,
-				// drain,
-				// 4,
-				// "Alle Knoten", "Das sind alle Knoten",
-				// "Wählen Sie bis zu vier Knoten");
-				// dialog.open();
-				// for(Object o : drain) {
-				// System.out.println(o.toString());
-				// }
-
-				myGraph.resetMarking();
-				if (event.widget.equals(bNode)) {
-					pressed = MODUS_NODE;
-				} else if (event.widget.equals(bConnection)) {
-					pressed = MODUS_CONNECTION;
-				} else if (event.widget.equals(bStartNode)) {
-					pressed = MODUS_START;
-				} else if (event.widget.equals(bEndNode)) {
-					pressed = MODUS_END;
-				} else if (event.widget.equals(bHand)) {
-					pressed = MODUS_STANDARD;
-				} else if (event.widget.equals(bChangeLayout)) {
-					setLayoutManager();
-				} else if (event.widget.equals(bDelete)) {
-					pressed = MODUS_DELETE;
-				} else if (event.widget.equals(bDeleteAll)) {
-					clearGraph();
-				} else if (event.widget.equals(bScreenShot)) {
-					saveScreenshotToImg();
-				}
-				setGraphModus(pressed);
-
-			}
-		};
-
-		bHand.addListener(SWT.Selection, listener);
-		bNode.addListener(SWT.Selection, listener);
-		bConnection.addListener(SWT.Selection, listener);
-		bStartNode.addListener(SWT.Selection, listener);
-		bEndNode.addListener(SWT.Selection, listener);
-		bChangeLayout.addListener(SWT.Selection, listener);
-		bDelete.addListener(SWT.Selection, listener);
-		bDeleteAll.addListener(SWT.Selection, listener);
-		bScreenShot.addListener(SWT.Selection, listener);
+//		Listener zoomer = new Listener() {
+//			@Override
+//			public void handleEvent(Event event) {
+//				if (event.widget.equals(bZoomIn)) {
+//					if(myGraph.zoomIn())
+//						checkDirty();
+//				} else if (event.widget.equals(bZoomOut)) {
+//					if(myGraph.zoomOut())
+//						checkDirty();
+//				}
+//			}
+//		};
+//
+//		bZoomIn.addListener(SWT.Selection, zoomer);
+//		bZoomOut.addListener(SWT.Selection, zoomer);
+//
+//		Listener listener = new Listener() {
+//			@Override
+//			public void handleEvent(Event event) {
+//
+//				// /* TEST */
+//				// ArrayList<AlvisGraphNode> drain = new
+//				// ArrayList<AlvisGraphNode>();
+//				// ArrayList<AlvisGraphNode> source = new
+//				// ArrayList<AlvisGraphNode>();
+//				// source.addAll(myGraph.getAllNodes());
+//				// CheckDialog dialog = new CheckDialog(
+//				// myParent.getShell(),
+//				// source,
+//				// drain,
+//				// 4,
+//				// "Alle Knoten", "Das sind alle Knoten",
+//				// "Wählen Sie bis zu vier Knoten");
+//				// dialog.open();
+//				// for(Object o : drain) {
+//				// System.out.println(o.toString());
+//				// }
+//
+//				myGraph.resetMarking();
+//				if (event.widget.equals(bNode)) {
+//					pressed = MODUS_NODE;
+//				} else if (event.widget.equals(bConnection)) {
+//					pressed = MODUS_CONNECTION;
+//				} else if (event.widget.equals(bStartNode)) {
+//					pressed = MODUS_START;
+//				} else if (event.widget.equals(bEndNode)) {
+//					pressed = MODUS_END;
+//				} else if (event.widget.equals(bHand)) {
+//					pressed = MODUS_STANDARD;
+//				} else if (event.widget.equals(bChangeLayout)) {
+//					setLayoutManager();
+//				} else if (event.widget.equals(bDelete)) {
+//					pressed = MODUS_DELETE;
+//				} else if (event.widget.equals(bDeleteAll)) {
+//					clearGraph();
+//				} else if (event.widget.equals(bScreenShot)) {
+//					saveScreenshotToImg();
+//				}
+//				setGraphModus(pressed);
+//
+//			}
+//		};
+//
+//		bHand.addListener(SWT.Selection, listener);
+//		bNode.addListener(SWT.Selection, listener);
+//		bConnection.addListener(SWT.Selection, listener);
+//		bStartNode.addListener(SWT.Selection, listener);
+//		bEndNode.addListener(SWT.Selection, listener);
+//		bChangeLayout.addListener(SWT.Selection, listener);
+//		bDelete.addListener(SWT.Selection, listener);
+//		bDeleteAll.addListener(SWT.Selection, listener);
+//		bScreenShot.addListener(SWT.Selection, listener);
 
 		myGraph.addMouseWheelListener(new MouseWheelListener() {
 			@Override
@@ -635,7 +635,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		Image screenshot;
 		int width = myGraph.getSize().x;
 		int height = myGraph.getSize().y;
-		GC gc = new GC(myGraph.getGraphModel());
+		GC gc = new GC(myGraph);
 		gc.drawText("Created by Alvis", 5, 5);
 		gc.drawRectangle(new Rectangle(0, 0, width - 1, height - 1));
 		screenshot = new Image(Display.getCurrent(), width, height);
@@ -1003,6 +1003,11 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 			}
 		}
 		return seri;
+	}
+
+	@Override
+	public boolean isRun() {
+		return false;
 	}
 
 }
