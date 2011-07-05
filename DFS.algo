@@ -1,0 +1,18 @@
+DFS(Graph G, Vertex s, Integer dist) begin
+	s.color = "black";
+	s.distance = dist,
+	for Vertex v in s.adjacents:
+		if v.color == "white": begin
+			v.parentId = s,
+			DFS(G, v, dist+1),
+		end
+end
+
+main(Graph G, Vertex s) begin
+	for Vertex x in G.vertices: begin
+		x.color = "white",
+		x.distance = infty,
+		x.parentId = null,
+	end
+	DFS(G, s, 0),
+end
