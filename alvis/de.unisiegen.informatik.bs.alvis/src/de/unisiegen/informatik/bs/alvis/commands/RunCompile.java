@@ -28,10 +28,13 @@ import de.unisiegen.informatik.bs.alvis.compiler.CompilerAccess;
 import de.unisiegen.informatik.bs.alvis.tools.IO;
 
 public class RunCompile extends AbstractHandler {
-	@Override
+	
+	Run seri;
+	ExecutionEvent myEvent;
+	
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		// NOTE: event is null when executing from run editor.
-
+		myEvent = event;
 		// Save all Editors
 		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage()
 				.saveAllEditors(true);
@@ -62,7 +65,7 @@ public class RunCompile extends AbstractHandler {
 		}
 
 		// Instantiate a new Run object
-		Run seri = null;
+		seri = null;
 
 		/*
 		 * GET THE RUN OBJECT
@@ -90,6 +93,10 @@ public class RunCompile extends AbstractHandler {
 
 		if (seri != null) {
 
+			
+			
+			
+		
 			// GET THE ALGORITHM AS STRING
 			try {
 				// Translate the PseudoCode and get the translated file
@@ -145,6 +152,10 @@ public class RunCompile extends AbstractHandler {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			
+	
+		
 		} else {
 			return null;
 		}

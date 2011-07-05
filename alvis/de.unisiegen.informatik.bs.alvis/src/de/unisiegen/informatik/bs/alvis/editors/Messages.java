@@ -87,6 +87,10 @@ public class Messages extends NLS {
 	public static String RunEditor_82;
 	public static String RunEditor_83;
 	public static String RunEditor_84;
+	public static String RunEditor_btnO_text;
+	public static String RunEditor_btnO_1_text;
+	public static String RunEditor_btnOpenExample_toolTipText;
+	public static String RunEditor_btnOpenEditorAlgorithm_toolTipText;
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);

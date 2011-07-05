@@ -1,18 +1,24 @@
 package de.unisiegen.informatik.bs.alvis.editors;
 
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IExtensionRegistry;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
@@ -24,8 +30,12 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
+import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
@@ -205,13 +215,44 @@ public class RunEditor extends EditorPart implements IExportItem {
 		grpAlgorithmFile = new Group(expandBar, SWT.NONE);
 		xpndtmAlgorithm.setControl(grpAlgorithmFile);
 		grpAlgorithmFile.setText(Messages.RunEditor_3);
-		grpAlgorithmFile.setLayout(new FillLayout(SWT.HORIZONTAL));
+		grpAlgorithmFile.setLayout(new GridLayout(3, false));
 		myAlgorithmFile = new Text(grpAlgorithmFile, SWT.NONE);
+		myAlgorithmFile.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
+				false, 1, 1));
 		myAlgorithmFile.setToolTipText(Messages.RunEditor_4);
 
 		Button btnselectAlgorithmFile = new Button(grpAlgorithmFile, SWT.NONE);
 		btnselectAlgorithmFile.setToolTipText(Messages.RunEditor_5);
 		btnselectAlgorithmFile.setText(Messages.RunEditor_6);
+
+		Button btnOpenEditorAlgorithm = new Button(grpAlgorithmFile, SWT.NONE);
+		btnOpenEditorAlgorithm.setToolTipText(Messages.RunEditor_btnOpenEditorAlgorithm_toolTipText);
+		btnOpenEditorAlgorithm.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				if (myAlgorithmFile.getText().equals(""))
+					return;
+				IWorkbenchPage page = PlatformUI.getWorkbench()
+						.getActiveWorkbenchWindow().getActivePage();
+				File file = new File("/" + myAlgorithmFile.getText());
+				IWorkspace workspace = ResourcesPlugin.getWorkspace();
+				IPath location = Path.fromOSString(file.getAbsolutePath());
+				IFile iFile = workspace.getRoot().getFile(location);
+				// end of getting IFile
+				IEditorDescriptor desc = PlatformUI.getWorkbench()
+						.getEditorRegistry().getDefaultEditor(file.getName());
+				try {
+					System.out.println(iFile.getFullPath());
+					IEditorPart editor = page.openEditor(new FileEditorInput(
+							iFile), desc.getId());
+				} catch (PartInitException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnOpenEditorAlgorithm.setImage(ImageCache
+				.getImage("icons/runeditor/box_open.png")); //$NON-NLS-1$
 		btnselectAlgorithmFile.addListener(SWT.Selection, new Listener() {
 
 			@Override
@@ -257,13 +298,45 @@ public class RunEditor extends EditorPart implements IExportItem {
 		grpExampleFile = new Group(expandBar, SWT.SHADOW_OUT);
 		grpExampleFile.setText(Messages.RunEditor_13);
 		xpndtmExample.setControl(grpExampleFile);
-		grpExampleFile.setLayout(new FillLayout(SWT.HORIZONTAL));
+		grpExampleFile.setLayout(new GridLayout(3, false));
 		myExampleFile = new Text(grpExampleFile, SWT.NONE);
+		myExampleFile.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true,
+				false, 1, 1));
 		myExampleFile.setToolTipText(Messages.RunEditor_14);
 
 		Button btnSelectExampleFile = new Button(grpExampleFile, SWT.NONE);
 		btnSelectExampleFile.setToolTipText(Messages.RunEditor_15);
 		btnSelectExampleFile.setText(Messages.RunEditor_16);
+
+		Button btnOpenExample = new Button(grpExampleFile, SWT.NONE);
+		btnOpenExample.setToolTipText(Messages.RunEditor_btnOpenExample_toolTipText);
+		btnOpenExample.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				if (myExampleFile.getText().equals(""))
+					return;
+
+				IWorkbenchPage page = PlatformUI.getWorkbench()
+						.getActiveWorkbenchWindow().getActivePage();
+				File file = new File("/" + myExampleFile.getText());
+				IWorkspace workspace = ResourcesPlugin.getWorkspace();
+				IPath location = Path.fromOSString(file.getAbsolutePath());
+				IFile iFile = workspace.getRoot().getFile(location);
+				// end of getting IFile
+				IEditorDescriptor desc = PlatformUI.getWorkbench()
+						.getEditorRegistry().getDefaultEditor(file.getName());
+				try {
+					System.out.println(iFile.getFullPath());
+					IEditorPart editor = page.openEditor(new FileEditorInput(
+							iFile), desc.getId());
+				} catch (PartInitException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+
+			}
+		});
+		btnOpenExample.setImage(ImageCache
+				.getImage("icons/runeditor/box_open.png")); //$NON-NLS-1$
 		btnSelectExampleFile.addListener(SWT.Selection, new Listener() {
 			@Override
 			public void handleEvent(Event event) {
@@ -394,61 +467,6 @@ public class RunEditor extends EditorPart implements IExportItem {
 
 		Label lblSetThe = new Label(grpRun, SWT.NONE);
 		lblSetThe.setText(Messages.RunEditor_37);
-		new Label(grpRun, SWT.NONE);
-		Button btnSetPreferences = new Button(grpRun, SWT.NONE);
-		btnSetPreferences.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-			}
-		});
-		btnSetPreferences.setFont(SWTResourceManager.getFont(
-				"Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
-		btnSetPreferences.setToolTipText(Messages.RunEditor_39);
-		btnSetPreferences.addListener(SWT.Selection, new Listener() {
-
-			@Override
-			public void handleEvent(Event event) {
-				if (!myExampleFile.getText().equals("")) { //$NON-NLS-1$
-					IExtensionRegistry registry = Platform
-							.getExtensionRegistry();
-					IExtensionPoint extensionPoint = registry
-							.getExtensionPoint("de.unisiegen.informatik.bs.alvis.extensions.runpreferences"); //$NON-NLS-1$
-					IExtension[] extensions = extensionPoint.getExtensions();
-
-					// * For all Extensions that contribute:
-					for (int i = 0; i < extensions.length; i++) {
-						IExtension extension = extensions[i];
-						IConfigurationElement[] elements = extension
-								.getConfigurationElements();
-						for (int j = 0; j < elements.length; j++) {
-							try {
-								IConfigurationElement element = elements[j];
-								IRunPreferences myRunPreferences = (IRunPreferences) element
-										.createExecutableExtension("class"); //$NON-NLS-1$
-
-								// Get the PseudoCodeObjects the user choosed as
-								// Parameters
-								ArrayList<PCObject> returnedPseudoCodeObjects = myRunPreferences
-										.getRunPreferences(Platform
-												.getInstanceLocation().getURL()
-												.getPath()
-												+ myExampleFile.getText());
-								// Add all PseudoCodeObjects to the Run.
-								for (PCObject pseudo : returnedPseudoCodeObjects) {
-									Activator.getDefault().getPseudoCodeList()
-											.add(pseudo);
-								}
-							} catch (CoreException e) {
-								e.printStackTrace();
-							}
-						}
-					}
-				}
-			}
-
-		});
-		btnSetPreferences.setText(Messages.RunEditor_43);
-		new Label(grpRun, SWT.NONE);
 		new Label(grpRun, SWT.NONE);
 
 		TabItem tbtmDecisionPoint = new TabItem(tabFolder, SWT.NONE);

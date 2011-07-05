@@ -39,7 +39,6 @@ import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
  * The activator class controls the plug-in life cycle
  */
 public class Activator extends AbstractUIPlugin {
-
 	// The plug-in ID
 	public static final String PLUGIN_ID = "de.unisiegen.informatik.bs.alvis"; //$NON-NLS-1$
 	/** Naming convention of partitioning */
