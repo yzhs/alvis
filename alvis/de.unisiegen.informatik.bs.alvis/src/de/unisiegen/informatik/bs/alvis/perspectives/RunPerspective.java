@@ -48,4 +48,10 @@ public class RunPerspective implements IPerspectiveFactory, IExportItem {
 		return true;
 	}
 
+	@Override
+	public StyledText getSourceCode() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

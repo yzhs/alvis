@@ -3,6 +3,7 @@ package de.unisiegen.informatik.bs.alvis.extensionpoints;
 /**
  * @author Frank Weiler
  */
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Image;
 
 /**
@@ -20,7 +21,14 @@ public interface IExportItem {
 	 * @return image for export, null if object does not contain any image
 	 */
 	public Image getImage();
+
+	/**
+	 * returns styled text for exporting source code
+	 * 
+	 * @return styled text for exporting source code
+	 */
 	
+	public StyledText getSourceCode();
 	/**
 	 * returns true if export item is a run, which implies a more complex export, false otherwise
 	 * @return true if export item is a run, false otherwise

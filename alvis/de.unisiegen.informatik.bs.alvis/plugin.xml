@@ -159,6 +159,12 @@
                   style="push">
             </command>
             <command
+                  commandId="de.unisiegen.informatik.bs.alvis.commands.ExportTo"
+                  icon="icons/menubar/pdf.png"
+                  label="Save as PDF"
+                  style="push">
+            </command>
+            <command
                   commandId="org.eclipse.ui.file.openWorkspace"
                   label="%file.openworkspace"
                   style="push">
@@ -175,7 +181,7 @@
                   style="push">
             </command>
             <command
-                  commandId="de.unisiegen.informatik.bs.alvis.commands.ExportTo"
+                  commandId="org.eclipse.ui.file.export"
                   label="%file.export"
                   style="push">
             </command>

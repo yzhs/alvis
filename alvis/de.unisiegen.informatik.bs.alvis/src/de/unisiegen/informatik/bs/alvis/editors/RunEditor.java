@@ -716,4 +716,9 @@ public class RunEditor extends EditorPart implements IExportItem {
 	public boolean isRun() {
 		return false;
 	}
+
+	@Override
+	public StyledText getSourceCode() {
+		return null;
+	}
 }

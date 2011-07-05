@@ -25,9 +25,13 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditor;
+import org.eclipse.xtext.ui.editor.XtextEditor;
 
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 
@@ -35,7 +39,8 @@ import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
  * @author Eduard Boos
  * 
  */
-public class AlgorithmEditor extends AbstractDecoratedTextEditor implements IExportItem {
+public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
+		IExportItem {
 
 	/**
 	 * 
@@ -50,10 +55,10 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements IExp
 	 * 
 	 */
 	public AlgorithmEditor() {
-		
-//		Activator.getDefault().registerExport(this);
-//		Activator.getDefault().getWorkbench().getEditorRegistry().
-		
+
+		// Activator.getDefault().registerExport(this);
+		// Activator.getDefault().getWorkbench().getEditorRegistry().
+
 		PlatformUI.getWorkbench().getDisplay();
 		Color highlightColor = new Color(Display.getCurrent(), new RGB(111, 33,
 				152));
@@ -78,12 +83,13 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements IExp
 		setSourceViewerConfiguration(sourceViewerConfiguration);
 		setDocumentProvider(new AlgorithmDocumentProvider());
 	}
-	
+
 	/**
 	 * Returns the Editors TextWidget
+	 * 
 	 * @return the StyledText represented by the TextWidget
 	 */
-	public StyledText  getTextWidget() {
+	public StyledText getTextWidget() {
 		return getSourceViewer().getTextWidget();
 	}
 
@@ -119,7 +125,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements IExp
 		// TODO rethink the calling of these two methods, to better "timings"
 		calculatePositions();
 		markErrors();
-	
+
 	}
 
 	/**
@@ -227,12 +233,18 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements IExp
 		// no image in this editor
 		return null;
 	}
-	public AnnotationModel getAnnotationModel(){
+
+	public AnnotationModel getAnnotationModel() {
 		return annotationModel;
 	}
 
 	@Override
 	public boolean isRun() {
 		return false;
+	}
+
+	@Override
+	public StyledText getSourceCode() {
+		return null;
 	}
 }

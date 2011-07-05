@@ -50,7 +50,8 @@ import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
  */
 public class PdfExport extends Document {
 
-	private static Font titleFont = FontFactory.getFont("Calibri");
+	private static Font titleFont = FontFactory.getFont("Calibri", 32,
+			Font.BOLD);
 	// private static Font titleFont = new Font(Font.FontFamily.TIMES_ROMAN, 32,
 	// Font.BOLD);
 	private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
@@ -86,12 +87,11 @@ public class PdfExport extends Document {
 			addContent();
 			// addContentOutsideParagraph();
 
-			close();
-
 		} catch (NullPointerException npe) {
 		} catch (FileNotFoundException fnfe) {
+		} finally {
+			close();
 		}
-
 	}
 
 	/**
@@ -142,27 +142,28 @@ public class PdfExport extends Document {
 
 		chapter = new Chapter(new Paragraph(anchor), 1);
 
-		if (exportItem != null && exportItem.isRun()) { // export run
+		if (exportItem != null) {
+			if (exportItem.isRun()) { // export run
 
-			System.out.println("LALALA");// TODO weg damit
+				System.out.println("LALALA");// TODO weg damit
 
-		} else { // export single editor
+			} else { // export single editor
 
-			// adding source code:
-			StyledText sourceCode = getStyledText();
-			if (sourceCode != null) {
-				paragraph = toParagraph(sourceCode);
-				chapter.add(paragraph);
-				add(chapter);
+				// adding image:
+				Image image = exportItem.getImage();
+				if (image != null) {
+					paragraph = toParagraph(image);
+					chapter.add(paragraph);
+					add(chapter);
+				}
 			}
-
-			// adding image:
-			Image image = exportItem.getImage();
-			if (image != null) {
-				paragraph = toParagraph(image);
-				chapter.add(paragraph);
-				add(chapter);
-			}
+		}
+		// adding source code:
+		StyledText sourceCode = getStyledText();
+		if (sourceCode != null) {
+			paragraph = toParagraph(sourceCode);
+			chapter.add(paragraph);
+			add(chapter);
 		}
 
 	}
@@ -289,8 +290,11 @@ public class PdfExport extends Document {
 
 		// Support for different styles of indendation (four spaces, eight
 		// spaces and tabs):
-		stringToIndent = stringToIndent.replaceAll("\t", "    ");
-		stringToIndent = stringToIndent.replaceAll("    ", "\t");
+		// stringToIndent = stringToIndent.replaceAll("\t", "    ");
+		// stringToIndent = stringToIndent.replaceAll("    ", "\t");
+
+		stringToIndent = stringToIndent.replaceAll("    ", "\u00A0");
+		stringToIndent = stringToIndent.replaceAll("\t", "\u00A0");
 
 		// in case someone meddled with weird windows text editors
 		stringToIndent = stringToIndent.replaceAll("\r\n", "\n");
@@ -374,10 +378,10 @@ public class PdfExport extends Document {
 
 		String codeWithHTMLStyleTags = "";
 
-//		XtextEditor edit = getXTextEditor();
-//		if (edit == null) {
-//			info("The XTextEditor could not be fetched");
-//		}
+		// XtextEditor edit = getXTextEditor();
+		// if (edit == null) {
+		// info("The XTextEditor could not be fetched");
+		// }
 
 		RGB rgb;
 		RGB black = new RGB(0, 0, 0);
@@ -443,39 +447,46 @@ public class PdfExport extends Document {
 		return toFormat;
 	}
 
-	public XtextEditor getXTextEditor() {
-		XtextEditor edit = null;
-
-		// Get open pages
-		IWorkbenchPage pages[] = PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow().getPages();
-		// Cycle through these pages
-		for (IWorkbenchPage page : pages) {
-			// Cycle through every page's editors
-			for (IEditorReference ref : page.getEditorReferences()) {
-				String title = ref.getTitle();
-				IEditorPart refpart = ref.getEditor(true);
-				// Get algo-editor
-				if (title.contains(".algo")) {
-					if (refpart.getAdapter(refpart.getClass()) instanceof XtextEditor) {
-						edit = (XtextEditor) ref.getEditor(true).getAdapter(
-								XtextEditor.class);
-					}
-				}
-
-			}
-
-		}
-		return edit;
-	}
-
 	private void info(String str) {
 		// Method to log error messages
 		System.out.println(str);
 	}
 
-	public StyledText getStyledText() {
-		return getXTextEditor().getInternalSourceViewer().getTextWidget();
+	private StyledText getStyledText() {
+
+		XtextEditor edit = null;
+
+		// Get active page:
+		IWorkbenchPage page = PlatformUI.getWorkbench()
+				.getActiveWorkbenchWindow().getActivePage();
+		try {
+			edit = (XtextEditor) page.getActiveEditor();
+		} catch (ClassCastException ccee) {
+		}
+
+		// XtextEditor edit = null;
+		// // Get open pages
+		// IWorkbenchPage pages[] = PlatformUI.getWorkbench()
+		// .getActiveWorkbenchWindow().getPages();
+		// // Cycle through these pages
+		// for (IWorkbenchPage page : pages) {
+		// // Cycle through every page's editors
+		// for (IEditorReference ref : page.getEditorReferences()) {
+		// String title = ref.getTitle();
+		// IEditorPart refpart = ref.getEditor(true);
+		// // Get algo-editor
+		// if (title.contains(".algo")) {
+		// if (refpart.getAdapter(refpart.getClass()) instanceof XtextEditor) {
+		// edit = (XtextEditor) ref.getEditor(true).getAdapter(
+		// XtextEditor.class);
+		// }
+		// }
+		//
+		// }
+		//
+		// }
+
+		return edit.getInternalSourceViewer().getTextWidget();
 	}
 
 }
