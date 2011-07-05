@@ -91,7 +91,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 	private boolean nodeMovement;
 	private Point nodeRemMousePos;
-	private AlvisGraphNode nodeToBeMoved;
+	private int amountToBeMoved;
 
 	/**
 	 * Loads the file from input and creates a new AlvisGraph from it.
@@ -116,6 +116,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 				new AlvisSave(myGraph, seri);
 		}
 		rename = false;
+		amountToBeMoved = 0;
 
 		doSave(null);
 	}
@@ -551,9 +552,8 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 				// check if node gets moved:
 				if (nodeRemMousePos.x != e.x && nodeRemMousePos.y != e.y
-						&& nodeToBeMoved != null
-						&& nodeToBeMoved.equals(myGraph.getHighlightedNode())) {
-					nodeToBeMoved = null;
+						&& amountToBeMoved > 0) {
+					amountToBeMoved = 0;
 					nodeRemMousePos = null;
 					checkDirty();
 				}
@@ -570,7 +570,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 				// check if node gets moved:
 				nodeRemMousePos = new Point(e.x, e.y);
-				nodeToBeMoved = myGraph.getHighlightedNode();
+				amountToBeMoved = myGraph.getHighlightedNodes().size();
 			}
 
 			@Override
@@ -1028,6 +1028,11 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	 */
 	private void myCheckDirty() {
 
+	}
+
+	@Override
+	public StyledText getSourceCode() {
+		return null;
 	}
 
 }

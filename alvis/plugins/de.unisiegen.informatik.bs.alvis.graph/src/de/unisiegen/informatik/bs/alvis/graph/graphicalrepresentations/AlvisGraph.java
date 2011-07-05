@@ -586,7 +586,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 			if (getStartNode() != null) {
 				getStartNode().unmarkAsStartOrEndNode();
 			}
-			setStartNode(gn);
+//			setStartNode(gn);
 		} else
 			makeGraphConnection(gn, parent);
 

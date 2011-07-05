@@ -176,4 +176,9 @@ public class GraphEditorAdjacencyMatrix extends EditorPart implements
 		return false;
 	}
 
+	@Override
+	public StyledText getSourceCode() {
+		return null;
+	}
+
 }
