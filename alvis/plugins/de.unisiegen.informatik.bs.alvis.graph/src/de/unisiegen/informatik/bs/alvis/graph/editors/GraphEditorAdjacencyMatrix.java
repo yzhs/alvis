@@ -9,6 +9,7 @@ import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -162,12 +163,6 @@ public class GraphEditorAdjacencyMatrix extends EditorPart implements
 	public void setFocus() {
 		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public String getSourceCode() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override

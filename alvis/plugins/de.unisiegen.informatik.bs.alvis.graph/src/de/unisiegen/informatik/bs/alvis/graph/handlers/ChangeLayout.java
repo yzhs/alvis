@@ -16,21 +16,21 @@ import de.unisiegen.informatik.bs.alvis.graph.editors.GraphEditor;
 
 /**
  * Change the layout of the graph in the GraphEditor
+ * 
  * @author simon
- *
  */
 public class ChangeLayout extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		IEditorPart editor = Activator.getDefault().getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();
-//		Try to cast the active editor to GraphEditor.
+		IEditorPart editor = Activator.getDefault().getWorkbench()
+				.getActiveWorkbenchWindow().getActivePage().getActiveEditor();
+		// Try to cast the active editor to GraphEditor.
 		try {
-			GraphEditor grapheditor = (GraphEditor)editor;
-				grapheditor.myGraph.placeNodes();
-		}
-		catch(ClassCastException e) {
-//			TODO Sinnvolle Fehlermeldung.
+			GraphEditor grapheditor = (GraphEditor) editor;
+			grapheditor.setLayoutManager();
+		} catch (ClassCastException e) {
+			// TODO Sinnvolle Fehlermeldung.
 		}
 		return null;
 

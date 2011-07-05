@@ -9,9 +9,10 @@ import org.eclipse.swt.graphics.Color;
 public enum AlvisColor {
 	white(255, 255, 255), black(0, 0, 0), gray(216, 228, 248), grey(216, 228,
 			248), green(0, 255, 0), lime(50, 205, 50), yellow(255, 255, 0), orange(
-			255, 165, 0), red(255, 0, 0), pink(255, 192, 203), crimson(220, 20,
-			60), magenta(255, 0, 255), violet(127, 0, 255), purple(127, 0, 127), blue(
-			0, 0, 255), cyan(0, 255, 255), turquoise(0, 255, 255);
+			255, 165, 0), red(255, 0, 0), penis(254, 246, 225), pink(255, 192,
+			203), crimson(220, 20, 60), magenta(255, 0, 255), violet(127, 0,
+			255), purple(127, 0, 127), blue(0, 0, 255), cyan(0, 255, 255), turquoise(
+			0, 255, 255);
 
 	public final int R, G, B;
 
