@@ -7,6 +7,8 @@ import java.io.StringReader;
 import java.util.Date;
 import java.util.List;
 
+import org.eclipse.jface.text.TextViewer;
+import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
@@ -20,6 +22,9 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.texteditor.AbstractDecoratedTextEditor;
+import org.eclipse.ui.texteditor.AbstractTextEditor;
+
 import org.eclipse.xtext.ui.editor.XtextEditor;
 
 import com.itextpdf.text.Anchor;
@@ -173,13 +178,13 @@ public class PdfExport extends Document {
 		if (sourceCode == null)
 			return null;
 
-		String content = getContentFromAlgoEditor();
+		String content = getContentFromAlgoEditor(); // returnt den nicht eingerückten, aber gehighlighteten Code
 
 		Paragraph paragraph = new Paragraph(Messages.getLabel("sourceCode")
 				+ ":\n", subFont);
 
 		if (content != null) {
-			content = indentCode(content);
+			content = indentCode(content); // rückt den Code ein
 
 			List<Element> bodyText;
 			StyleSheet styles = new StyleSheet();
@@ -353,46 +358,17 @@ public class PdfExport extends Document {
 
 	private String getContentFromAlgoEditor() {
 		String codeWithHTMLStyleTags = "";
-		AlgorithmEditor part = null; // TODO: weg damit! AlgorithmEditor is
-										// obsolete. XTextEditor is the futuer!
-		XtextEditor edit = null;
+		
+		XtextEditor edit = getXTextEditor();
 
-		// Get open pages
-		IWorkbenchPage pages[] = PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow().getPages();
-		// Cycle through these pages
-		for (IWorkbenchPage page : pages) {
-			// Cycle through every page's editors
-			for (IEditorReference ref : page.getEditorReferences()) {
-				String title = ref.getTitle();
-				IEditorPart refpart = ref.getEditor(true);
-				// Get algo-editor
-				if (title.contains(".algo")) {
-					if (refpart.getAdapter(refpart.getClass()) instanceof XtextEditor)
-						edit = (XtextEditor) ref.getEditor(true).getAdapter(
-								XtextEditor.class);
-					if (refpart.getAdapter(refpart.getClass()) instanceof AlgorithmEditor)
-						part = (AlgorithmEditor) ref.getEditor(true)
-								.getAdapter(AlgorithmEditor.class);
-				}
-
-			}
-
-		}
-		/*
-		 * The AlgorithmEditor is only still included for compatibility reasons
-		 * If you don't have the language-Plugins (de.~.alvis.language.*) you're
-		 * still using the obsolete AlgorithmEditor. This will be changed! The
-		 * AlgorithmEditor will not be used in the release build and all
-		 * references to it in this class will be erased.
-		 */
 		StyledText style = null;
-		if (part != null)
-			style = part.getTextWidget();
-		if (edit != null)
+		if (edit != null) {
 			style = edit.getInternalSourceViewer().getTextWidget();
+		}
+		else
+			info("The XTextEditor could not be fetched");
 
-		if ((edit != null || part != null) && style != null) {
+		if (style != null) {
 
 			RGB rgb;
 			RGB black = new RGB(0, 0, 0);
@@ -446,7 +422,7 @@ public class PdfExport extends Document {
 			return codeWithHTMLStyleTags + "\n";
 
 		} else
-			System.out.println("ERROR: No Editor could be found");
+			info("The style could not be grabbed from the Editor");
 		return null;
 	}
 
@@ -462,6 +438,41 @@ public class PdfExport extends Document {
 		if (toFormat.length() == 1)
 			return "0" + toFormat;
 		return toFormat;
+	}
+	
+	public XtextEditor getXTextEditor(){
+		XtextEditor edit = null;
+
+		// Get open pages
+		IWorkbenchPage pages[] = PlatformUI.getWorkbench()
+				.getActiveWorkbenchWindow().getPages();
+		// Cycle through these pages
+		for (IWorkbenchPage page : pages) {
+			// Cycle through every page's editors
+			for (IEditorReference ref : page.getEditorReferences()) {
+				String title = ref.getTitle();
+				IEditorPart refpart = ref.getEditor(true);
+				// Get algo-editor
+				if (title.contains(".algo")) {
+					if (refpart.getAdapter(refpart.getClass()) instanceof XtextEditor) {
+						edit = (XtextEditor) ref.getEditor(true).getAdapter(
+								XtextEditor.class);
+					}
+				}
+
+			}
+
+		}
+		return edit;
+	}
+	
+	private void info(String str){
+		// Method to log error messages
+		System.out.println(str);
+	}
+	
+	public StyledText getStyledText(){
+		return getXTextEditor().getInternalSourceViewer().getTextWidget();
 	}
 
 }
