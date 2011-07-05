@@ -178,7 +178,7 @@ public class PdfExport extends Document {
 		if (sourceCode == null)
 			return null;
 
-		String content = getContentFromAlgoEditor(); // returnt den nicht eingerückten, aber gehighlighteten Code
+		String content = highlightStyleTextinHTML(getStyledText()); // returnt den nicht eingerückten, aber gehighlighteten Code
 
 		Paragraph paragraph = new Paragraph(Messages.getLabel("sourceCode")
 				+ ":\n", subFont);
@@ -334,7 +334,7 @@ public class PdfExport extends Document {
 		List<Element> bodyText;
 		StyleSheet styles = new StyleSheet();
 		styles.loadTagStyle("ol", "leading", "16,0");
-		String pseudoCode = getContentFromAlgoEditor();
+		String pseudoCode = highlightStyleTextinHTML(getStyledText());
 
 		if (pseudoCode != null) {
 			bodyText = HTMLWorker.parseToList(new StringReader(
@@ -356,12 +356,12 @@ public class PdfExport extends Document {
 	 * @return content of the editor
 	 */
 
-	private String getContentFromAlgoEditor() {
+	private String highlightStyleTextinHTML( StyledText style) {
 		String codeWithHTMLStyleTags = "";
 		
 		XtextEditor edit = getXTextEditor();
 
-		StyledText style = null;
+//		StyledText style = null;
 		if (edit != null) {
 			style = edit.getInternalSourceViewer().getTextWidget();
 		}
