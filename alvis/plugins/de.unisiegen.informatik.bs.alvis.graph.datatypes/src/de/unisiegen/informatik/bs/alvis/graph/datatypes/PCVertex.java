@@ -139,7 +139,7 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 			return this.getDistance();
 		}
 		if (memberName.equals("pi")) {
-			return this.getParentID();
+			return this.getParentId();
 		}
 		if (memberName.equals("adjacents")) {
 			return this.getAdjacents();
@@ -155,7 +155,7 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 		return label;
 	}
 
-	public PCVertex getParentID() {
+	public PCVertex getParentId() {
 		return parentId;
 	}
 
