@@ -174,10 +174,6 @@ public class PCVertex extends PCObject {
 		}
 		return false;
 	}
-	
-	public PCBoolean equal(PCVertex toCheck) {
-		return new PCBoolean(this.equals(toCheck));
-	}
 
 	@Override
 	protected void runDelayedCommands() {
@@ -203,11 +199,19 @@ public class PCVertex extends PCObject {
 
 	@Override
 	public List<String> getMethods() {
-		String[] attributes = { "equal" };
+		String[] attributes = { "equal", "notEqual" };
 		return Arrays.asList(attributes);
 	}
 	
 	public static PCVertex getNull() {
 		return new PCVertex(null);
+	}
+	
+	public PCBoolean equal(PCVertex other) {
+		return new PCBoolean(this.equals(other));
+	}
+	
+	public PCBoolean notEqual(PCVertex other) {
+		return this.equal(other).not();
 	}
 }
