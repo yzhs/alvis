@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
@@ -173,6 +174,10 @@ public class PCVertex extends PCObject {
 		}
 		return false;
 	}
+	
+	public PCBoolean equal(PCVertex toCheck) {
+		return new PCBoolean(this.equals(toCheck));
+	}
 
 	@Override
 	protected void runDelayedCommands() {
@@ -196,6 +201,12 @@ public class PCVertex extends PCObject {
 		return Arrays.asList(attributes);
 	}
 
+	@Override
+	public List<String> getMethods() {
+		String[] attributes = { "equal" };
+		return Arrays.asList(attributes);
+	}
+	
 	public static PCVertex getNull() {
 		return new PCVertex(null);
 	}
