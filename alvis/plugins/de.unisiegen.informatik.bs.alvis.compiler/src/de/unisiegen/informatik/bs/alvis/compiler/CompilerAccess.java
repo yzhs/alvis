@@ -23,7 +23,7 @@ import de.uni_siegen.informatik.bs.alvic.Compiler;
 /**
  * @author mays
  * @author Colin
- *
+ * 
  */
 public class CompilerAccess {
 	private Compiler c;
@@ -47,72 +47,81 @@ public class CompilerAccess {
 
 	/**
 	 * 
-	 * @param path path to the source code that
+	 * @param path
+	 *            path to the source code that
 	 * @return path to the generated .java file if it exists, null otherwise
 	 * 
-	 * @throws IOException, RecognitionException
+	 * @throws IOException
+	 *             , RecognitionException
 	 */
-	public File compile(String path) throws FileNotFoundException, IOException, RecognitionException {
+	public File compile(String path) throws IOException,
+			RecognitionException {
 		c = new Compiler(datatypes, datatypePackages);
-//		testDatatypes();
-		String javaCode = c.compile(readFile(Platform.getInstanceLocation().getURL()
-				.getPath() + path));
+		// testDatatypes();
+		String javaCode = c.compile(readFile(Platform.getInstanceLocation()
+				.getURL().getPath()
+				+ path));
 		if (null == javaCode)
 			return null;
-		
-		
+
 		File result = new File(Platform.getInstanceLocation().getURL()
 				.getPath()
-				+ getWorkspacePath(path)  + "/Algorithm.java");//new File(path).getName().toString().replaceAll("\\.[^.]*$", ".java"));
+				+ getWorkspacePath(path) + "/Algorithm.java");// new
+																// File(path).getName().toString().replaceAll("\\.[^.]*$",
+																// ".java"));
 		FileWriter fstream;
 		fstream = new FileWriter(result);
 		BufferedWriter out = new BufferedWriter(fstream);
-//		out.write(javaCode.replaceAll("#ALGORITHM_NAME#", result.getName().replaceAll("\\.java", "")));
+		// out.write(javaCode.replaceAll("#ALGORITHM_NAME#",
+		// result.getName().replaceAll("\\.java", "")));
 		out.write(javaCode.replaceAll("#ALGORITHM_NAME#", "Algorithm"));
 		out.close();
 		return result;
 	}
 
 	private String getWorkspacePath(String fileWithPath) {
-		String[] splitedPathToAlgorithm = fileWithPath.split("\\/"); //FIXME this will not work on Windows
+		String[] splitedPathToAlgorithm = fileWithPath.split("\\/"); // FIXME
+																		// this
+																		// will
+																		// not
+																		// work
+																		// on
+																		// Windows
 		ArrayList<String> partsOfAlgoPath = new ArrayList<String>();
 		for (String part : splitedPathToAlgorithm) {
 			partsOfAlgoPath.add(part);
 		}
 
 		// get and remove the filename
-		String algoWorkSpaceFile = partsOfAlgoPath.remove(partsOfAlgoPath.size()-1);
-		
+		String algoWorkSpaceFile = partsOfAlgoPath.remove(partsOfAlgoPath
+				.size() - 1);
+
 		String SLASH = System.getProperty("file.separator");
-		
+
 		// getPath
 		String algoWorkSpacePath = "";
 		for (String part : partsOfAlgoPath) {
 			algoWorkSpacePath += part + SLASH;
 		}
-		
+
 		return algoWorkSpacePath;
 	}
-	
+
 	public String getAlgorithmPath() throws IOException {
 		String path = "";
 		path = FileLocator.getBundleFile(Activator.getDefault().getBundle())
 				.getCanonicalPath().toString();
 		return algorithmPath;
 	}
-	
-	private String readFile(String fileName) throws FileNotFoundException
-	{
+
+	private String readFile(String fileName) throws IOException {
 		BufferedReader fstream = new BufferedReader(new FileReader(fileName));
 		String result = "";
-		
-		try {
-			while (fstream.ready())
-				result += fstream.readLine() + System.getProperty("line.separator");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+
+		while (fstream.ready())
+				result += fstream.readLine()
+						+ System.getProperty("line.separator");
+
 		return result;
 	}
 
@@ -122,8 +131,9 @@ public class CompilerAccess {
 
 	/**
 	 * This method copies the Dummy Algorithm file next to the PCAlgorithm file
-	 * that is written by the user.
-	 * To get the path of the created file see getAlgorithmPath().
+	 * that is written by the user. To get the path of the created file see
+	 * getAlgorithmPath().
+	 * 
 	 * @param pathToAlgorithm
 	 *            relative to Alvis-workspace e.g.: "project/src/Algorithm.algo"
 	 * @return Name of the Java Algorithm file
@@ -140,30 +150,37 @@ public class CompilerAccess {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+
 		// The compiled algorithm
 		File source = new File(pathWhereTheJavaIs + SLASH + "Algorithm.java");
 
 		// Get the path to algorithm and separate path and filename
-		String[] splitedPathToAlgorithm = pathToAlgorithm.split("\\/"); //FIXME this will not work on Windows
+		String[] splitedPathToAlgorithm = pathToAlgorithm.split("\\/"); // FIXME
+																		// this
+																		// will
+																		// not
+																		// work
+																		// on
+																		// Windows
 		ArrayList<String> partsOfAlgoPath = new ArrayList<String>();
 		for (String part : splitedPathToAlgorithm) {
 			partsOfAlgoPath.add(part);
 		}
 
 		// get and remove the filename
-		String algoWorkSpaceFile = partsOfAlgoPath.remove(partsOfAlgoPath.size()-1);
-		
+		String algoWorkSpaceFile = partsOfAlgoPath.remove(partsOfAlgoPath
+				.size() - 1);
+
 		// getPath
 		String algoWorkSpacePath = "";
 		for (String part : partsOfAlgoPath) {
 			algoWorkSpacePath += part + SLASH;
 		}
 
-//		for (String st : splitedPathToAlgorithm)
-//			System.out.println(st);
+		// for (String st : splitedPathToAlgorithm)
+		// System.out.println(st);
 
-		// Destination 
+		// Destination
 		File destination = new File(Platform.getInstanceLocation().getURL()
 				.getPath()
 				+ algoWorkSpacePath + "Algorithm.java");
@@ -204,10 +221,14 @@ public class CompilerAccess {
 			System.out.println("Compiler shows its datatypes:");
 			for (PCObject obj : datatypes) {
 				System.out.println(obj.getClass());
-				List<String> tmp = ((List<String>)obj.getClass().getMethod("getMembers").invoke(obj));
-				System.out.println("available attributes:" + (tmp==null ? "null" : tmp));
-				tmp = ((List<String>)obj.getClass().getMethod("getMethods").invoke(obj));
-				System.out.println("available methods:" + (tmp==null ? "null" : tmp));
+				List<String> tmp = ((List<String>) obj.getClass()
+						.getMethod("getMembers").invoke(obj));
+				System.out.println("available attributes:"
+						+ (tmp == null ? "null" : tmp));
+				tmp = ((List<String>) obj.getClass().getMethod("getMethods")
+						.invoke(obj));
+				System.out.println("available methods:"
+						+ (tmp == null ? "null" : tmp));
 			}
 			System.out.println("Compiler shows its packages:");
 			for (String obj : datatypePackages) {
