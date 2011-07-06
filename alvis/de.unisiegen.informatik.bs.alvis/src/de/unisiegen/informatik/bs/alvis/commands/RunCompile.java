@@ -1,6 +1,7 @@
 package de.unisiegen.informatik.bs.alvis.commands;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.util.ArrayList;
@@ -14,7 +15,11 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.FileLocator;
+import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.dialogs.ErrorDialog;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
@@ -25,13 +30,14 @@ import org.antlr.runtime.RecognitionException;
 import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.Run;
 import de.unisiegen.informatik.bs.alvis.compiler.CompilerAccess;
+import de.unisiegen.informatik.bs.alvis.exceptions.VirtualMachineException;
 import de.unisiegen.informatik.bs.alvis.tools.IO;
 
 public class RunCompile extends AbstractHandler {
-	
+
 	Run seri;
 	ExecutionEvent myEvent;
-	
+
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		// NOTE: event is null when executing from run editor.
 		myEvent = event;
@@ -93,10 +99,6 @@ public class RunCompile extends AbstractHandler {
 
 		if (seri != null) {
 
-			
-			
-			
-		
 			// GET THE ALGORITHM AS STRING
 			try {
 				// Translate the PseudoCode and get the translated file
@@ -105,12 +107,12 @@ public class RunCompile extends AbstractHandler {
 				// try to compile with compiler
 				javaCode = CompilerAccess.getDefault().compile(
 						seri.getAlgorithmFile());
-				
+
 				// if fails
 				if (null == javaCode) // compile with dummy
 					javaCode = CompilerAccess.getDefault().compileThisDummy(
 							seri.getAlgorithmFile());
-				
+
 				// Kill the extension
 				String fileNameOfTheAlgorithm = javaCode.getCanonicalPath()
 						.replaceAll("\\.java$", ""); //$NON-NLS-1$
@@ -120,42 +122,40 @@ public class RunCompile extends AbstractHandler {
 						.getCanonicalPath();
 
 				// Register Algorithm to VM
-				
+
 				// TODO Warning, if we change the name of the translated file
 				// this here will crash
 				fileNameOfTheAlgorithm = "Algorithm";
 
-				// setJavaAlgorithmToVM has 2 parameter 1. is the path 2. is the filename
+				// setJavaAlgorithmToVM has 2 parameter 1. is the path 2. is the
+				// filename
 				// if /usr/alvis/src/Algorithm.java then
 				// 1.: /usr/alvis/src
 				// 2.: Algorithm
-				if (Activator.getDefault().setJavaAlgorithmToVM(
-						pathToTheAlgorithm, fileNameOfTheAlgorithm,
-						Activator.getDefault().getAllDatatypesInPlugIns())) {
-					Activator.getDefault().setActiveRun(seri);
-					// Then activate command SwitchToRunPerspective
-					new SwitchToRunPerspective().execute(event);
-				} else {
-					System.out.println("Fehler"); //$NON-NLS-1$
-					// TODO FEHLER AUSGEBEN MIT WINDOWS
-				}
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
+				Activator.getDefault().setJavaAlgorithmToVM(pathToTheAlgorithm,
+						fileNameOfTheAlgorithm,
+						Activator.getDefault().getAllDatatypesInPlugIns());
+
+				Activator.getDefault().setActiveRun(seri);
+				// Then activate command SwitchToRunPerspective
+				new SwitchToRunPerspective().execute(event);
+			} catch (Exception e) {
+				// Create the required Status object
+				Status status = new Status(IStatus.ERROR, "My Plug-in ID", 0,
+						e.getMessage(), null);
+
+				// Display the dialog
+				ErrorDialog
+						.openError(
+								Display.getCurrent().getActiveShell(),
+								"Error starting the Run",
+								"An Error has occurred so the Run could not start. Read the message shown below to solve the problem.",
+								status);
 				e.printStackTrace();
-			} catch (IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (SecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (RecognitionException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			} finally {
+
 			}
-			
-			
-	
-		
+
 		} else {
 			return null;
 		}

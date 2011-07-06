@@ -13,6 +13,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import de.unisiegen.informatik.bs.alvis.editors.AlgorithmPartitionScanner;
+import de.unisiegen.informatik.bs.alvis.exceptions.VirtualMachineException;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IDatatypeList;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
@@ -188,36 +189,34 @@ public class Activator extends AbstractUIPlugin {
 		vm.stepAlgoBackward("algo");
 	}
 
-
-
 	/**
 	 * Set the compiled .java algorithm path TODO @throws VMException
 	 * 
 	 * @param pathToAlgoInJava
 	 */
-	public boolean setJavaAlgorithmToVM(String pathToFile, String fileName, ArrayList<PCObject> datatypesToAddToClasspathAsPCObjects) /*
-																			 * throws
-																			 * Exception
-																			 */{
-		
+	public void setJavaAlgorithmToVM(String pathToFile, String fileName,
+			ArrayList<PCObject> datatypesToAddToClasspathAsPCObjects)
+			throws VirtualMachineException {
+
 		// TODO vm.addAlgo needs three arguments: key to identify algo (any
 		// given String it's just used to address this algo for mutliple
 		// operations ) , path to
 		// the java algo file, the java algo filename, without the typending
 		// .java
 		// Add all this to VM.
-		
-		// Cast the PCObjects to Objects, so that class further down this stream are independent from PCObjects
+
+		// Cast the PCObjects to Objects, so that class further down this stream
+		// are independent from PCObjects
 		ArrayList<Object> datatypesToAddToClasspath = new ArrayList<Object>();
-		for(PCObject obj : datatypesToAddToClasspathAsPCObjects)
+		for (PCObject obj : datatypesToAddToClasspathAsPCObjects)
 			datatypesToAddToClasspath.add((Object) obj);
-		
-		return vm.addAlgoToVM("algo", pathToFile, fileName, datatypesToAddToClasspath);
+
+		if(!vm.addAlgoToVM("algo", pathToFile, fileName,datatypesToAddToClasspath))
+			throw new VirtualMachineException("Adding the algorithm to the Virtual Machine failed.");
+				
 		//			return vm.addAlgoToVM("first", pathToAlgoInJava); //$NON-NLS-1$
 	}
 
-	
-	
 	/* ************************************************************************
 	 * DATATYPES AND PACKAGES OUT OF THE PLUGINS
 	 * ***********************************************************************
@@ -309,11 +308,10 @@ public class Activator extends AbstractUIPlugin {
 				.add("de.unisiegen.informatik.bs.alvis.primitive.datatypes");
 	}
 
-	
-	
 	/* ************************************************************************
 	 * RUNALGORITHM TOOLS
-	 * ************************************************************************/
+	 * ***********************************************************************
+	 */
 	/**
 	 * @param algorithmContainer
 	 */
@@ -334,8 +332,9 @@ public class Activator extends AbstractUIPlugin {
 
 	/* ************************************************************************
 	 * EXPORT
-	 * ************************************************************************/
-	
+	 * ***********************************************************************
+	 */
+
 	// public void registerExport(IExportItem item) {
 	// myExport.register(item);
 	// }
@@ -346,6 +345,7 @@ public class Activator extends AbstractUIPlugin {
 
 	/**
 	 * returns active part as export item
+	 * 
 	 * @return active part as export item
 	 */
 	public IExportItem getActivePartToExport() throws ClassCastException {
