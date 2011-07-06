@@ -1,5 +1,7 @@
 package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
 
+import java.util.List;
+
 /**
  * 
  * @author Dominik Dingel
@@ -7,7 +9,7 @@ package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
  *         a Decision Point where the order of a Dataset is important
  * 
  */
-public interface SortableCollection {
+public interface SortableCollection<E> extends List<E> {
 
 	/**
 	 * shuffles the List to generated a complete random result

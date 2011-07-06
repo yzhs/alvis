@@ -11,7 +11,9 @@ import java.util.concurrent.locks.Lock;
 public class Algorithm implements AbstractAlgo {
 	private Lock lock;
 	private boolean onBreak;
+	private boolean onDecision;
 	private BPListener bplisten;
+	private DPListener dplisten;
 
 	private PCGraph G;
 	private PCVertex s;
@@ -19,9 +21,25 @@ public class Algorithm implements AbstractAlgo {
 
 	public Algorithm() {
 	}
+	
+	/**
+	 * static code
+	 * 
+	 * @param BPNr
+	 *            set breakpoint field, inform breakpoint listener, sleeps
+	 *            current thread
+	 */
+	private SortableCollection reachedDecisionPoint(int DPNr,PCObject from ,SortableCollection toSort) {
+		if(toSort.size() <= 1) {
+			return toSort;
+		}
+		dplisten.onDecisionPoint(DPNr, from, toSort);
+		return toSort;
+	}
 
 	public void run() {
-		for (PCVertex v : G.getVertices()) {
+		SortableCollection<PCVertex> vertices = reachedDecisionPoint(1, G, G.getVertices());
+		for (PCVertex v : vertices) {
 			v.set("color", new PCString("white"));
         	v.set("distance", PCInteger.getInfty());
         	v.set("pi", PCVertex.getNull());
@@ -34,7 +52,8 @@ public class Algorithm implements AbstractAlgo {
         while ((Q.isEmpty().not()).getLiteralValue()) {
         	PCVertex u = null;
             u = (PCVertex) Q.dequeue();
-            for (PCVertex v : u.getAdjacents()) {
+            SortableCollection<PCVertex> adjacents = reachedDecisionPoint(12, u, u.getAdjacents());
+            for (PCVertex v : adjacents) {
             	if (v.get("color").equals(new PCString("white"))) {
             		v.set("color", new PCString("yellow"));
                     reachedBreakPoint(14);
@@ -94,6 +113,7 @@ public class Algorithm implements AbstractAlgo {
 	}
 
 	public void addDPListener(DPListener wantToListen) {
+		dplisten = wantToListen;
 	}
 
 	@Override

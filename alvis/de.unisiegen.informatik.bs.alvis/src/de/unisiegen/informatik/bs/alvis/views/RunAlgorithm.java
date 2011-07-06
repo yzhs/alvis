@@ -235,13 +235,22 @@ public class RunAlgorithm extends ViewPart implements PropertyChangeListener {
 	@Override
 	public void propertyChange(final PropertyChangeEvent event) {
 		final Color orange = new Color(null, 240, 200, 120);
+		final Color yellow = new Color(null, 255, 255, 150);
 		try {
-			if (event.getPropertyName().equals("ADD_LINE"))
+			if (event.getPropertyName().equals("ADD_BP"))
 				text.getDisplay().syncExec(new Runnable() {
 					public void run() {
 						if(text.getLineCount() > (Integer) event.getNewValue())
 							text.setLineBackground((Integer) event.getNewValue(),
 								1, orange);
+					}
+				});
+			if (event.getPropertyName().equals("ADD_DP"))
+				text.getDisplay().syncExec(new Runnable() {
+					public void run() {
+						if(text.getLineCount() > (Integer) event.getNewValue())
+							text.setLineBackground((Integer) event.getNewValue(),
+								1, yellow);
 					}
 				});
 

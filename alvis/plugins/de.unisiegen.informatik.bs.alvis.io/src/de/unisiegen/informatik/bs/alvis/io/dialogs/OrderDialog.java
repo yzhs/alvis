@@ -1,6 +1,7 @@
 package de.unisiegen.informatik.bs.alvis.io.dialogs;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
@@ -46,7 +47,7 @@ public class OrderDialog extends TitleAreaDialog {
 
 	private Shell myParent;
 	@SuppressWarnings("rawtypes")
-	private ArrayList myOrder;
+	private List myOrder;
 	private String myWindowTitle;
 	private String myTitle;
 	private String myMessage;
@@ -78,7 +79,7 @@ public class OrderDialog extends TitleAreaDialog {
 	 *            normally SWT.ERROR
 	 * @wbp.parser.constructor
 	 */
-	public OrderDialog(Shell parentShell, ArrayList toOrder,
+	public OrderDialog(Shell parentShell, List toOrder,
 			String windowTitle, String title, String message) {
 		super(parentShell);
 		myParent = parentShell;

@@ -4,8 +4,10 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.concurrent.locks.Lock;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
@@ -54,6 +56,11 @@ public class AlgoThread {
 	
 	// reference to dplistener
 	private DPListener dpListen;
+	private HashMap<Integer, Queue<SortableCollection>> dPoints;
+	// walinkg back
+	private HashMap<Integer, Queue<SortableCollection>> dPointsTemp;
+	
+	
 
 	/**
 	 * Creates new AlgoThread, will directly load the fileName, create the Class
@@ -69,6 +76,7 @@ public class AlgoThread {
 		bpListeners = new ArrayList<BPListener>();
 		lineCounter = new HashMap<Integer, Integer>();
 		lastCounter = new HashMap<Integer, Integer>();
+		dPoints = new HashMap<Integer, Queue<SortableCollection>>();
 		parameters = null;
 		onBreak = false;
 		lock = toLockOn;
@@ -107,7 +115,6 @@ public class AlgoThread {
 		}
 		bpListeners.add(wantsToListen);
 	}
-	
 	
 	// TODO javadoc + clean
 	public void addDPListener(DPListener toListen) {
@@ -217,7 +224,16 @@ public class AlgoThread {
 		});
 		algoInst.addDPListener(new DPListener() {
 			@Override
-			public void onDecisionPoint(int DPNr, SortableCollection toSort) {
+			public void onDecisionPoint(int DPNr, PCObject from, SortableCollection toSort) {
+				Integer key = new Integer(DPNr);
+				dpListen.onDecisionPoint(DPNr, from, toSort);
+				if (dPoints.containsKey(key)) {
+					dPoints.get(key).add(toSort);
+				}
+				else {
+					dPoints.put(key, new LinkedList<SortableCollection>());
+					dPoints.get(key).add(toSort);
+				}
 			}
 		});
 		algoThread.start();
@@ -284,6 +300,8 @@ public class AlgoThread {
 	 */
 	@SuppressWarnings("unchecked")
 	public void stepBackward() {
+		// saving temp list for walking back
+		dPointsTemp = (HashMap<Integer, Queue<SortableCollection>>) dPoints.clone();
 		HashMap<Integer, Integer> tmp = new HashMap<Integer, Integer>();
 		tmp.put(new Integer(0), new Integer(1));
 		// we are already on the first step, there is no way we can step more
@@ -303,6 +321,15 @@ public class AlgoThread {
 		reduce(lastCounter);
 		lineCounter.clear();
 		onBreak = false;
+		// TODO won't forget any decisions made, fix me to support removing from one
+		algoInst.addDPListener(new DPListener() {
+			@Override
+			public void onDecisionPoint(int DPNr, PCObject from, SortableCollection toSort) {
+				Integer key = new Integer(DPNr);
+				toSort = dPointsTemp.get(key).poll();
+			}
+		});
+		
 		algoInst.addBPListener(new BPListener() {
 			@Override
 			public void onBreakPoint(int BPNr) {
@@ -351,6 +378,21 @@ public class AlgoThread {
 							}
 						}
 					});
+					algoInst.addDPListener(new DPListener() {
+						@Override
+						public void onDecisionPoint(int DPNr, PCObject from, SortableCollection toSort) {
+							Integer key = new Integer(DPNr);
+							dpListen.onDecisionPoint(DPNr, from, toSort);
+							if (dPoints.containsKey(key)) {
+								dPoints.get(key).add(toSort);
+							}
+							else {
+								dPoints.put(key, new LinkedList<SortableCollection>());
+								dPoints.get(key).add(toSort);
+							}
+						}
+					});
+					
 				} else {
 					synchronized (algoThread) {
 						algoInst.stopBreak();

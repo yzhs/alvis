@@ -1,6 +1,7 @@
 package de.unisiegen.informatik.bs.alvis.vm;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.SortableCollection;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
 /**
  * 
@@ -14,5 +15,5 @@ public interface DPListener {
 	 * @param DPNr to identify Decision Point
 	 * @param toSort, on which SortableCollection should we act
 	 */
-	void onDecisionPoint(int DPNr, SortableCollection toSort);
+	void onDecisionPoint(int DPNr,PCObject from, SortableCollection toSort);
 }

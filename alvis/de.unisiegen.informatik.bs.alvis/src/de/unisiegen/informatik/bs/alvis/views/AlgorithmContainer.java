@@ -9,8 +9,8 @@ import org.antlr.runtime.RecognitionException;
 
 /**
  * @author simon
- * This Class saves all nessesary information about the algorithm text
- * This are the text itself, the token to highlight, the token for content assist,
+ * This Class saves all necessary information about the algorithm text
+ * This is the text itself, the token to highlight, the token for content assist,
  * the token for auto-complete
  */
 public class AlgorithmContainer extends ObservedObject {
@@ -121,10 +121,19 @@ public class AlgorithmContainer extends ObservedObject {
 	public ArrayList<RecognitionException> getErrorLines() {
 		return errorLines;
 	}
-	public void addCurrentLine(int number) {
-		firePropertyChange("ADD_LINE", null, number);
+//	public void addCurrentLine(int number) {
+//		firePropertyChange("ADD_LINE", null, number);
+//		this.currentLines.add(number);
+//	}
+	public void addCurrentBP(int number) {
+		firePropertyChange("ADD_BP", null, number);
 		this.currentLines.add(number);
 	}
+	public void addCurrentDP(int number) {
+		firePropertyChange("ADD_DP", null, number);
+		this.currentLines.add(number);
+	}
+	
 	public void removeCurrentLine(int number) {
 		firePropertyChange("REMOVE_LINE", number, null);
 		this.currentLines.remove((Integer)number);

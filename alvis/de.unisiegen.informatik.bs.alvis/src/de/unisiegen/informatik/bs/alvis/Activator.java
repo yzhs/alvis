@@ -9,6 +9,9 @@ import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -24,9 +27,13 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCQueue;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCStack;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCString;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCVoid;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.SortableCollection;
 import de.unisiegen.informatik.bs.alvis.views.AlgorithmContainer;
 import de.unisiegen.informatik.bs.alvis.vm.BPListener;
+import de.unisiegen.informatik.bs.alvis.vm.DPListener;
 import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
+
+import de.unisiegen.informatik.bs.alvis.io.dialogs.*;
 
 /* Ein paar Notizen
  * 
@@ -141,6 +148,8 @@ public class Activator extends AbstractUIPlugin {
 
 	private ArrayList<PCObject> pseudoCodeList = new ArrayList<PCObject>();
 
+	Shell shellContainer;
+
 	public void setPseudoCodeList(ArrayList<PCObject> pseudoCodeList) {
 		this.pseudoCodeList = pseudoCodeList;
 	}
@@ -149,7 +158,12 @@ public class Activator extends AbstractUIPlugin {
 		return pseudoCodeList;
 	}
 
-	private VirtualMachine vm = VirtualMachine.getInstance();;
+	private VirtualMachine vm = VirtualMachine.getInstance();
+
+	// Storage for Decision Points
+	public int DPNr;
+	public SortableCollection toSort;
+	public PCObject from;
 
 	public void runStart() {
 
@@ -174,9 +188,42 @@ public class Activator extends AbstractUIPlugin {
 				Activator.getDefault().algorithmContainer
 						.removeAllCurrentLine();
 				Activator.getDefault().algorithmContainer
-						.addCurrentLine(BreakPointNumber);
+						.addCurrentBP(BreakPointNumber);
 			}
 		});
+		vm.addDPListener(new DPListener() {
+			@Override
+			public void onDecisionPoint(int DPNr, PCObject from, SortableCollection toSort) {
+				Activator.getDefault().DPNr = DPNr;
+				Activator.getDefault().toSort = toSort;
+				Activator.getDefault().from = from;
+				
+				Runnable progress = new Runnable() {
+					public void run() {
+						Activator.getDefault().shellContainer = Display.getDefault().getActiveShell();
+						
+						// TODO: Change color of the DP highlight
+						Activator.getDefault().algorithmContainer.removeAllCurrentLine();
+						Activator.getDefault().algorithmContainer.addCurrentDP(Activator.getDefault().DPNr);
+						
+						String name = Activator.getDefault().from.toString();
+
+						// TODO: Internationalisierung für übergebene Strings einbauen
+						if (Display.getDefault() != null) {
+							OrderDialog toOrder = new OrderDialog(
+									shellContainer,
+									Activator.getDefault().toSort,
+									"Legen Sie eine Reihenfolge fest", "Sie sind bei " + name,
+									"Wohin wollen sie in den nächsten Schritten gehen?");
+							toOrder.open();
+						}
+					}
+				};
+				Display.getDefault().syncExec(progress);
+
+			}
+		});
+
 		vm.startAlgos();
 	}
 

@@ -17,7 +17,8 @@ Require-Bundle: org.eclipse.ui,
  de.unisiegen.informatik.bs.alvis.ui.navigator;bundle-version="1.0.0",
  de.unisiegen.informatik.bs.alvis.vm;bundle-version="1.0.0",
  de.unisiegen.informatik.bs.alvis.compiler;bundle-version="1.0.0",
- org.eclipse.xtext.ui
+ org.eclipse.xtext.ui,
+ de.unisiegen.informatik.bs.alvis.io
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.eclipse.core.resources,
