@@ -75,7 +75,7 @@ public class CompilerAccess {
 	}
 
 	private String getWorkspacePath(String fileWithPath) {
-		String[] splitPathToAlgorithm = fileWithPath.split(Pattern.quote(File.separator));
+		String[] splitPathToAlgorithm = fileWithPath.split("/");
 		
 		ArrayList<String> partsOfAlgoPath = new ArrayList<String>();
 		for (String part : splitPathToAlgorithm) {
