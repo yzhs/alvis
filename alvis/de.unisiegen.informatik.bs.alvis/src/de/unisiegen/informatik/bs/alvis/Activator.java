@@ -194,6 +194,7 @@ public class Activator extends AbstractUIPlugin {
 		vm.addDPListener(new DPListener() {
 			@Override
 			public void onDecisionPoint(int DPNr, PCObject from, SortableCollection toSort) {
+				toSort.sort();
 				Activator.getDefault().DPNr = DPNr;
 				Activator.getDefault().toSort = toSort;
 				Activator.getDefault().from = from;
