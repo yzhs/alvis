@@ -6,7 +6,7 @@ import org.eclipse.swt.widgets.Composite;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
-public interface IRunVisualizer {
+public interface IRunVisualizer extends IExportItem{
 
 	/**
 	 * Adds all necessary elements to the parent of the run view.

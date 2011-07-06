@@ -10,7 +10,7 @@ import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 import de.unisiegen.informatik.bs.alvis.views.RunAlgorithm;
 import de.unisiegen.informatik.bs.alvis.views.RunGraph;
 
-public class RunPerspective implements IPerspectiveFactory, IExportItem {
+public class RunPerspective implements IPerspectiveFactory {
 
 	public static final String ID = "de.unisiegen.informatik.bs.alvis.perspective.run";
 	
@@ -35,23 +35,6 @@ public class RunPerspective implements IPerspectiveFactory, IExportItem {
 		layout.getViewLayout(RunGraph.ID).setCloseable(false);
 
 
-	}
-
-	@Override
-	public Image getImage() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public boolean isRun() {
-		return true;
-	}
-
-	@Override
-	public StyledText getSourceCode() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

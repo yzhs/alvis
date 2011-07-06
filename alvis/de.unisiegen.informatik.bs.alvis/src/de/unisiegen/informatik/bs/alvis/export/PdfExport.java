@@ -52,17 +52,13 @@ public class PdfExport extends Document {
 
 	private static Font titleFont = FontFactory.getFont("Calibri", 32,
 			Font.BOLD);
-	// private static Font titleFont = new Font(Font.FontFamily.TIMES_ROMAN, 32,
-	// Font.BOLD);
-	private static Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
-			Font.BOLD);
-	private static Font subFont = new Font(Font.FontFamily.TIMES_ROMAN, 16,
-			Font.BOLD);
-	private static Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12,
+	private static Font catFont = FontFactory.getFont("Calibri", 18, Font.BOLD);
+	private static Font subFont = FontFactory.getFont("Calibri", 16, Font.BOLD);
+	private static Font smallBold = FontFactory.getFont("Calibri", 12,
 			Font.BOLD);
 
-	private Anchor anchor;
-	private Chapter chapter;
+//	private Anchor anchor;
+//	private Chapter chapter;
 	private Paragraph paragraph;
 
 	/**
@@ -128,11 +124,9 @@ public class PdfExport extends Document {
 
 	private void addContent() throws DocumentException {
 
-		anchor = new Anchor("anchor", catFont);
-		anchor.setName("anchor");
+//		anchor = new Anchor("anchor", catFont);
+//		anchor.setName("anchor");
 
-		// ArrayList<IExportItem> exportItems = Activator.getDefault()
-		// .getExportItems();
 		IExportItem exportItem;
 		try {
 			exportItem = Activator.getDefault().getActivePartToExport();
@@ -140,7 +134,7 @@ public class PdfExport extends Document {
 			exportItem = null;
 		}
 
-		chapter = new Chapter(new Paragraph(anchor), 1);
+//		chapter = new Chapter(new Paragraph(anchor), 1);
 
 		if (exportItem != null) {
 			if (exportItem.isRun()) { // export run
@@ -153,8 +147,9 @@ public class PdfExport extends Document {
 				Image image = exportItem.getImage();
 				if (image != null) {
 					paragraph = toParagraph(image);
-					chapter.add(paragraph);
-					add(chapter);
+//					chapter.add(paragraph);
+//					add(chapter);
+					add(paragraph);
 				}
 			}
 		}
@@ -162,8 +157,9 @@ public class PdfExport extends Document {
 		StyledText sourceCode = getStyledText();
 		if (sourceCode != null) {
 			paragraph = toParagraph(sourceCode);
-			chapter.add(paragraph);
-			add(chapter);
+//			chapter.add(paragraph);
+//			add(chapter);
+			add(paragraph);
 		}
 
 	}
@@ -205,6 +201,8 @@ public class PdfExport extends Document {
 				bodyText = HTMLWorker.parseToList(new StringReader(content),
 						styles);
 
+				paragraph.setFont(FontFactory.getFont("Courier", 10,
+						Font.NORMAL));
 				for (Element elem : bodyText) {
 					paragraph.add(elem);
 				}
@@ -293,8 +291,8 @@ public class PdfExport extends Document {
 		// stringToIndent = stringToIndent.replaceAll("\t", "    ");
 		// stringToIndent = stringToIndent.replaceAll("    ", "\t");
 
-		stringToIndent = stringToIndent.replaceAll("    ", "\u00A0");
-		stringToIndent = stringToIndent.replaceAll("\t", "\u00A0");
+		stringToIndent = stringToIndent.replaceAll("    ", "\u00A0\u00A0");
+		stringToIndent = stringToIndent.replaceAll("\t", "\u00A0\u00A0");
 
 		// in case someone meddled with weird windows text editors
 		stringToIndent = stringToIndent.replaceAll("\r\n", "\n");

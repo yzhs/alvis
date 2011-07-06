@@ -145,7 +145,6 @@ public class RunGraph extends ViewPart implements IExportItem{
 
 	@Override
 	public boolean isRun() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 }
