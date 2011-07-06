@@ -76,6 +76,7 @@ public class OrderDialog extends TitleAreaDialog {
 	 *            the message
 	 * @param layout
 	 *            normally SWT.ERROR
+	 * @wbp.parser.constructor
 	 */
 	public OrderDialog(Shell parentShell, ArrayList toOrder,
 			String windowTitle, String title, String message) {
@@ -200,7 +201,7 @@ public class OrderDialog extends TitleAreaDialog {
 		if (myOrder == null) {
 			return composite;
 		}
-		
+		/*
 		Composite cmpstMenu = new Composite(composite, SWT.NONE);
 		cmpstMenu.setLayout(new FillLayout(SWT.HORIZONTAL));
 		cmpstMenu.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
@@ -238,7 +239,7 @@ public class OrderDialog extends TitleAreaDialog {
 		
 		Button btnRandom = new Button(cmpstMenu, SWT.NONE);
 		btnRandom.setText("Random");
-
+		*/
 
 		
 		// Create the Tree
@@ -248,7 +249,7 @@ public class OrderDialog extends TitleAreaDialog {
 			public void handleEvent(Event event) {
 				clckdTreeItem = ((TreeItem)event.item);
 				orderItemText = clckdTreeItem.getText();
-				System.out.println("clicked: " + orderItemText);
+//				System.out.println("clicked: " + orderItemText);
 			}
 		});
 	    
