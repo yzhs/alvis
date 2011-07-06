@@ -136,7 +136,7 @@ public class RunCompile extends AbstractHandler {
 						.openError(
 								Display.getCurrent().getActiveShell(),
 								"Error starting the Run",
-								"An Error has occurred so the Run could not start. Read the message shown below to solve the problem.",
+								"An Error has occurred. The run could not start. Read the message shown below to solve the problem.",
 								status);
 				e.printStackTrace();
 			} finally {

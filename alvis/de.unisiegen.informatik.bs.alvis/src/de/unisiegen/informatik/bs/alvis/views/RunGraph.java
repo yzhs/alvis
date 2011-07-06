@@ -4,6 +4,7 @@
 package de.unisiegen.informatik.bs.alvis.views;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -20,6 +21,7 @@ import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IRunVisualizer;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
+import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
 
 /**
  * @author simon 
@@ -69,18 +71,25 @@ public class RunGraph extends ViewPart implements IExportItem{
 	}
 
 	public void setParameters() {
+		Map<PCObject, String> parameters = VirtualMachine.getInstance().getParametersTypesAlgo("algo"); // TODO
 		ArrayList<PCObject> pcObjects = new ArrayList<PCObject>();
-		// For all registered extensions
-		for (IRunVisualizer runviz : myRunVisualizers) {
-			pcObjects.addAll(runviz.chooseVariable(null, "G")); // Nur derzeit
-																// so sollte von
-																// der VM kommen
-																// was benötigt
-																// wird
-			pcObjects.addAll(runviz.chooseVariable(null, "V")); // Currently
-			Activator.getDefault().getPseudoCodeList().clear();
-			Activator.getDefault().getPseudoCodeList().addAll(pcObjects);
+		
+		for(PCObject para : parameters.keySet()) {
+			for (IRunVisualizer runviz : myRunVisualizers) {
+				pcObjects.addAll(runviz.chooseVariable(para, parameters.get(para)));
+//				
+//				// Nur derzeit
+//																	// so sollte von
+//																	// der VM kommen
+//																	// was benötigt
+//																	// wird
+//				pcObjects.addAll(runviz.chooseVariable(null, "V")); // Currently
+//				Activator.getDefault().getPseudoCodeList().clear();
+//				Activator.getDefault().getPseudoCodeList().addAll(pcObjects);
+			}
 		}
+		Activator.getDefault().getPseudoCodeList().clear();
+		Activator.getDefault().getPseudoCodeList().addAll(pcObjects);
 	}
 
 	/**
