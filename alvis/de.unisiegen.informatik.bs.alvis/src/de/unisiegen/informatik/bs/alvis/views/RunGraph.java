@@ -11,10 +11,13 @@ import org.eclipse.core.runtime.IExtension;
 import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
+import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.part.ViewPart;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
+import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IRunVisualizer;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
@@ -26,7 +29,7 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
  * input then its addVisualizing method visualizes the input. If not the
  * extension returns false and gets kicked out of the list.
  */
-public class RunGraph extends ViewPart {
+public class RunGraph extends ViewPart implements IExportItem{
 
 	ArrayList<IRunVisualizer> myRunVisualizers = new ArrayList<IRunVisualizer>();
 
@@ -126,5 +129,23 @@ public class RunGraph extends ViewPart {
 	/* Methods we do not use */
 	@Override
 	public void setFocus() {
+	}
+
+	@Override
+	public Image getImage() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public StyledText getSourceCode() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isRun() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

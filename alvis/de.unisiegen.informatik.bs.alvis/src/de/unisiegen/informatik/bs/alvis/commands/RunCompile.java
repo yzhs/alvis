@@ -1,22 +1,11 @@
 package de.unisiegen.informatik.bs.alvis.commands;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-
-import java.util.ArrayList;
-
-import java.net.URISyntaxException;
-import java.net.URL;
-
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.swt.widgets.Display;
@@ -26,11 +15,9 @@ import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
 import org.eclipse.ui.model.BaseWorkbenchContentProvider;
 import org.eclipse.ui.model.WorkbenchLabelProvider;
 import org.eclipse.ui.part.FileEditorInput;
-import org.antlr.runtime.RecognitionException;
 import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.Run;
 import de.unisiegen.informatik.bs.alvis.compiler.CompilerAccess;
-import de.unisiegen.informatik.bs.alvis.exceptions.VirtualMachineException;
 import de.unisiegen.informatik.bs.alvis.tools.IO;
 
 public class RunCompile extends AbstractHandler {
