@@ -1160,13 +1160,13 @@ public interface MyDslPackage extends EPackage
   int CONSTANT = 18;
 
   /**
-   * The feature id for the '<em><b>Real</b></em>' containment reference list.
+   * The feature id for the '<em><b>Float</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int CONSTANT__REAL = 0;
+  int CONSTANT__FLOAT = 0;
 
   /**
    * The feature id for the '<em><b>Integer</b></em>' attribute.
@@ -1214,32 +1214,32 @@ public interface MyDslPackage extends EPackage
   int CONSTANT_FEATURE_COUNT = 5;
 
   /**
-   * The meta object id for the '{@link org.xtext.example.mydsl1.myDsl.impl.realImpl <em>real</em>}' class.
+   * The meta object id for the '{@link org.xtext.example.mydsl1.myDsl.impl.FLOATImpl <em>FLOAT</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.xtext.example.mydsl1.myDsl.impl.realImpl
-   * @see org.xtext.example.mydsl1.myDsl.impl.MyDslPackageImpl#getreal()
+   * @see org.xtext.example.mydsl1.myDsl.impl.FLOATImpl
+   * @see org.xtext.example.mydsl1.myDsl.impl.MyDslPackageImpl#getFLOAT()
    * @generated
    */
-  int REAL = 19;
+  int FLOAT = 19;
 
   /**
-   * The feature id for the '<em><b>Real</b></em>' attribute list.
+   * The feature id for the '<em><b>FLOAT</b></em>' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REAL__REAL = 0;
+  int FLOAT__FLOAT = 0;
 
   /**
-   * The number of structural features of the '<em>real</em>' class.
+   * The number of structural features of the '<em>FLOAT</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int REAL_FEATURE_COUNT = 1;
+  int FLOAT_FEATURE_COUNT = 1;
 
 
   /**
@@ -1763,15 +1763,15 @@ public interface MyDslPackage extends EPackage
   EClass getconstant();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl1.myDsl.constant#getReal <em>Real</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.xtext.example.mydsl1.myDsl.constant#getFloat <em>Float</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Real</em>'.
-   * @see org.xtext.example.mydsl1.myDsl.constant#getReal()
+   * @return the meta object for the containment reference list '<em>Float</em>'.
+   * @see org.xtext.example.mydsl1.myDsl.constant#getFloat()
    * @see #getconstant()
    * @generated
    */
-  EReference getconstant_Real();
+  EReference getconstant_Float();
 
   /**
    * Returns the meta object for the attribute '{@link org.xtext.example.mydsl1.myDsl.constant#getInteger <em>Integer</em>}'.
@@ -1818,25 +1818,25 @@ public interface MyDslPackage extends EPackage
   EAttribute getconstant_Infinity();
 
   /**
-   * Returns the meta object for class '{@link org.xtext.example.mydsl1.myDsl.real <em>real</em>}'.
+   * Returns the meta object for class '{@link org.xtext.example.mydsl1.myDsl.FLOAT <em>FLOAT</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for class '<em>real</em>'.
-   * @see org.xtext.example.mydsl1.myDsl.real
+   * @return the meta object for class '<em>FLOAT</em>'.
+   * @see org.xtext.example.mydsl1.myDsl.FLOAT
    * @generated
    */
-  EClass getreal();
+  EClass getFLOAT();
 
   /**
-   * Returns the meta object for the attribute list '{@link org.xtext.example.mydsl1.myDsl.real#getReal <em>Real</em>}'.
+   * Returns the meta object for the attribute list '{@link org.xtext.example.mydsl1.myDsl.FLOAT#getFLOAT <em>FLOAT</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Real</em>'.
-   * @see org.xtext.example.mydsl1.myDsl.real#getReal()
-   * @see #getreal()
+   * @return the meta object for the attribute list '<em>FLOAT</em>'.
+   * @see org.xtext.example.mydsl1.myDsl.FLOAT#getFLOAT()
+   * @see #getFLOAT()
    * @generated
    */
-  EAttribute getreal_Real();
+  EAttribute getFLOAT_FLOAT();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -2292,12 +2292,12 @@ public interface MyDslPackage extends EPackage
     EClass CONSTANT = eINSTANCE.getconstant();
 
     /**
-     * The meta object literal for the '<em><b>Real</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Float</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference CONSTANT__REAL = eINSTANCE.getconstant_Real();
+    EReference CONSTANT__FLOAT = eINSTANCE.getconstant_Float();
 
     /**
      * The meta object literal for the '<em><b>Integer</b></em>' attribute feature.
@@ -2332,22 +2332,22 @@ public interface MyDslPackage extends EPackage
     EAttribute CONSTANT__INFINITY = eINSTANCE.getconstant_Infinity();
 
     /**
-     * The meta object literal for the '{@link org.xtext.example.mydsl1.myDsl.impl.realImpl <em>real</em>}' class.
+     * The meta object literal for the '{@link org.xtext.example.mydsl1.myDsl.impl.FLOATImpl <em>FLOAT</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.xtext.example.mydsl1.myDsl.impl.realImpl
-     * @see org.xtext.example.mydsl1.myDsl.impl.MyDslPackageImpl#getreal()
+     * @see org.xtext.example.mydsl1.myDsl.impl.FLOATImpl
+     * @see org.xtext.example.mydsl1.myDsl.impl.MyDslPackageImpl#getFLOAT()
      * @generated
      */
-    EClass REAL = eINSTANCE.getreal();
+    EClass FLOAT = eINSTANCE.getFLOAT();
 
     /**
-     * The meta object literal for the '<em><b>Real</b></em>' attribute list feature.
+     * The meta object literal for the '<em><b>FLOAT</b></em>' attribute list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute REAL__REAL = eINSTANCE.getreal_Real();
+    EAttribute FLOAT__FLOAT = eINSTANCE.getFLOAT_FLOAT();
 
   }
 

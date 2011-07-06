@@ -88,20 +88,20 @@
   <eClassifiers xsi:type="ecore:EClass" name="postfixExpr" eSuperTypes="#//assignment #//atom">
     <eStructuralFeatures xsi:type="ecore:EReference" name="exprs" upperBound="-1"
         eType="#//expr" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="existingVariable" eType="#//statement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="existingVariable" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="expressions" upperBound="-1"
         eType="#//expr" containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="constant">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="Real" upperBound="-1" eType="#//real"
-        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="Float" upperBound="-1"
+        eType="#//FLOAT" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Integer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="String" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Null" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="Infinity" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="real">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="real" unique="false" upperBound="-1"
+  <eClassifiers xsi:type="ecore:EClass" name="FLOAT">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="FLOAT" unique="false" upperBound="-1"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -263,10 +263,10 @@ public class MyDslSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case MyDslPackage.REAL:
+      case MyDslPackage.FLOAT:
       {
-        real real = (real)theEObject;
-        T result = casereal(real);
+        FLOAT float_ = (FLOAT)theEObject;
+        T result = caseFLOAT(float_);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -579,17 +579,17 @@ public class MyDslSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>real</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>FLOAT</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>real</em>'.
+   * @return the result of interpreting the object as an instance of '<em>FLOAT</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T casereal(real object)
+  public T caseFLOAT(FLOAT object)
   {
     return null;
   }

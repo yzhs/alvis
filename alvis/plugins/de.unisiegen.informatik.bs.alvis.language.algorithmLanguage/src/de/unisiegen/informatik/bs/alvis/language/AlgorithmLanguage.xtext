@@ -19,12 +19,12 @@ param   : type name=ID;
  
 block  : {block}'begin' statements+=statement* 'end' ;
 
-type: types=('String'|'Integer'|'Boolean');
+type: types=('String'|'Integer'|'Boolean'|'Graph'|'Vertex'|'Edge');
 
 
 statement :
-	declaration endExpr
-    |{statement}  postFixExpression+=postfixExpr endExpr
+    {statement}  postFixExpression+=postfixExpr endExpr
+    | declaration endExpr
     |{statement}  assignments+=assignment endExpr
     |{statement} 'return' exprs+=expr? endExpr
     | 'if' expr ':'statements+= statement ('else' statements+=statement)?
@@ -74,7 +74,7 @@ atom: '!' atom
 
 
 postfixExpr
-     : {postfixExpr} (existingVariable=[declaration]|existingVariable=[param]) ( '.' ID  // to change
+     : ((existingVariable=[declaration]|existingVariable=[param]|existingVariable=[functionDefinition])) ( '.' ID  // to change
       | '(' (expressions+=expr (',' expressions+=expr)*)? ')' 
       | '[' expressions+=expr ']' )*
     ;
@@ -83,7 +83,7 @@ constant
 // BOOL
 	:{constant}'true'|{constant}'false'
 // FLOAT(Real float cannot be used)
-	|Real+=real
+	|Float+=FLOAT
 // INT and STRING
 	|Integer=INT
 	|String=STRING
@@ -91,8 +91,8 @@ constant
 	|Null='null'
 	|Infinity='infty';
     
-real
-	: real+=INT '.' (real+=INT)+;
+FLOAT
+	: FLOAT+=INT '.' (FLOAT+=INT)+;
 endExpr
 	: (',' | ';') ; //war vorher terminal
 

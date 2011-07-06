@@ -31,7 +31,6 @@ import org.xtext.example.mydsl1.myDsl.mainFunction;
 import org.xtext.example.mydsl1.myDsl.mulExpr;
 import org.xtext.example.mydsl1.myDsl.param;
 import org.xtext.example.mydsl1.myDsl.postfixExpr;
-import org.xtext.example.mydsl1.myDsl.real;
 import org.xtext.example.mydsl1.myDsl.relExpr;
 import org.xtext.example.mydsl1.myDsl.statement;
 import org.xtext.example.mydsl1.myDsl.type;
@@ -182,7 +181,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  private EClass realEClass = null;
+  private EClass floatEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -742,7 +741,7 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getconstant_Real()
+  public EReference getconstant_Float()
   {
     return (EReference)constantEClass.getEStructuralFeatures().get(0);
   }
@@ -792,9 +791,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getreal()
+  public EClass getFLOAT()
   {
-    return realEClass;
+    return floatEClass;
   }
 
   /**
@@ -802,9 +801,9 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getreal_Real()
+  public EAttribute getFLOAT_FLOAT()
   {
-    return (EAttribute)realEClass.getEStructuralFeatures().get(0);
+    return (EAttribute)floatEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -904,14 +903,14 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
     createEReference(postfixExprEClass, POSTFIX_EXPR__EXPRESSIONS);
 
     constantEClass = createEClass(CONSTANT);
-    createEReference(constantEClass, CONSTANT__REAL);
+    createEReference(constantEClass, CONSTANT__FLOAT);
     createEAttribute(constantEClass, CONSTANT__INTEGER);
     createEAttribute(constantEClass, CONSTANT__STRING);
     createEAttribute(constantEClass, CONSTANT__NULL);
     createEAttribute(constantEClass, CONSTANT__INFINITY);
 
-    realEClass = createEClass(REAL);
-    createEAttribute(realEClass, REAL__REAL);
+    floatEClass = createEClass(FLOAT);
+    createEAttribute(floatEClass, FLOAT__FLOAT);
   }
 
   /**
@@ -1021,18 +1020,18 @@ public class MyDslPackageImpl extends EPackageImpl implements MyDslPackage
 
     initEClass(postfixExprEClass, postfixExpr.class, "postfixExpr", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getpostfixExpr_Exprs(), this.getexpr(), null, "exprs", null, 0, -1, postfixExpr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEReference(getpostfixExpr_ExistingVariable(), this.getstatement(), null, "existingVariable", null, 0, 1, postfixExpr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getpostfixExpr_ExistingVariable(), ecorePackage.getEObject(), null, "existingVariable", null, 0, 1, postfixExpr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getpostfixExpr_Expressions(), this.getexpr(), null, "expressions", null, 0, -1, postfixExpr.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(constantEClass, constant.class, "constant", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getconstant_Real(), this.getreal(), null, "Real", null, 0, -1, constant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getconstant_Float(), this.getFLOAT(), null, "Float", null, 0, -1, constant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getconstant_Integer(), ecorePackage.getEInt(), "Integer", null, 0, 1, constant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getconstant_String(), ecorePackage.getEString(), "String", null, 0, 1, constant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getconstant_Null(), ecorePackage.getEString(), "Null", null, 0, 1, constant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getconstant_Infinity(), ecorePackage.getEString(), "Infinity", null, 0, 1, constant.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-    initEClass(realEClass, real.class, "real", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getreal_Real(), ecorePackage.getEInt(), "real", null, 0, -1, real.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEClass(floatEClass, org.xtext.example.mydsl1.myDsl.FLOAT.class, "FLOAT", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getFLOAT_FLOAT(), ecorePackage.getEInt(), "FLOAT", null, 0, -1, org.xtext.example.mydsl1.myDsl.FLOAT.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

@@ -22,9 +22,9 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.xtext.example.mydsl1.myDsl.FLOAT;
 import org.xtext.example.mydsl1.myDsl.MyDslPackage;
 import org.xtext.example.mydsl1.myDsl.constant;
-import org.xtext.example.mydsl1.myDsl.real;
 
 /**
  * <!-- begin-user-doc -->
@@ -33,7 +33,7 @@ import org.xtext.example.mydsl1.myDsl.real;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.constantImpl#getReal <em>Real</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.constantImpl#getFloat <em>Float</em>}</li>
  *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.constantImpl#getInteger <em>Integer</em>}</li>
  *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.constantImpl#getString <em>String</em>}</li>
  *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.constantImpl#getNull <em>Null</em>}</li>
@@ -46,14 +46,14 @@ import org.xtext.example.mydsl1.myDsl.real;
 public class constantImpl extends MinimalEObjectImpl.Container implements constant
 {
   /**
-   * The cached value of the '{@link #getReal() <em>Real</em>}' containment reference list.
+   * The cached value of the '{@link #getFloat() <em>Float</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getReal()
+   * @see #getFloat()
    * @generated
    * @ordered
    */
-  protected EList<real> real;
+  protected EList<FLOAT> float_;
 
   /**
    * The default value of the '{@link #getInteger() <em>Integer</em>}' attribute.
@@ -161,13 +161,13 @@ public class constantImpl extends MinimalEObjectImpl.Container implements consta
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<real> getReal()
+  public EList<FLOAT> getFloat()
   {
-    if (real == null)
+    if (float_ == null)
     {
-      real = new EObjectContainmentEList<real>(real.class, this, MyDslPackage.CONSTANT__REAL);
+      float_ = new EObjectContainmentEList<FLOAT>(FLOAT.class, this, MyDslPackage.CONSTANT__FLOAT);
     }
-    return real;
+    return float_;
   }
 
   /**
@@ -272,8 +272,8 @@ public class constantImpl extends MinimalEObjectImpl.Container implements consta
   {
     switch (featureID)
     {
-      case MyDslPackage.CONSTANT__REAL:
-        return ((InternalEList<?>)getReal()).basicRemove(otherEnd, msgs);
+      case MyDslPackage.CONSTANT__FLOAT:
+        return ((InternalEList<?>)getFloat()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -288,8 +288,8 @@ public class constantImpl extends MinimalEObjectImpl.Container implements consta
   {
     switch (featureID)
     {
-      case MyDslPackage.CONSTANT__REAL:
-        return getReal();
+      case MyDslPackage.CONSTANT__FLOAT:
+        return getFloat();
       case MyDslPackage.CONSTANT__INTEGER:
         return getInteger();
       case MyDslPackage.CONSTANT__STRING:
@@ -313,9 +313,9 @@ public class constantImpl extends MinimalEObjectImpl.Container implements consta
   {
     switch (featureID)
     {
-      case MyDslPackage.CONSTANT__REAL:
-        getReal().clear();
-        getReal().addAll((Collection<? extends real>)newValue);
+      case MyDslPackage.CONSTANT__FLOAT:
+        getFloat().clear();
+        getFloat().addAll((Collection<? extends FLOAT>)newValue);
         return;
       case MyDslPackage.CONSTANT__INTEGER:
         setInteger((Integer)newValue);
@@ -343,8 +343,8 @@ public class constantImpl extends MinimalEObjectImpl.Container implements consta
   {
     switch (featureID)
     {
-      case MyDslPackage.CONSTANT__REAL:
-        getReal().clear();
+      case MyDslPackage.CONSTANT__FLOAT:
+        getFloat().clear();
         return;
       case MyDslPackage.CONSTANT__INTEGER:
         setInteger(INTEGER_EDEFAULT);
@@ -372,8 +372,8 @@ public class constantImpl extends MinimalEObjectImpl.Container implements consta
   {
     switch (featureID)
     {
-      case MyDslPackage.CONSTANT__REAL:
-        return real != null && !real.isEmpty();
+      case MyDslPackage.CONSTANT__FLOAT:
+        return float_ != null && !float_.isEmpty();
       case MyDslPackage.CONSTANT__INTEGER:
         return integer != INTEGER_EDEFAULT;
       case MyDslPackage.CONSTANT__STRING:

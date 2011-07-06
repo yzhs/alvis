@@ -14,6 +14,7 @@ import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
@@ -26,7 +27,6 @@ import org.xtext.example.mydsl1.myDsl.atom;
 import org.xtext.example.mydsl1.myDsl.constant;
 import org.xtext.example.mydsl1.myDsl.expr;
 import org.xtext.example.mydsl1.myDsl.postfixExpr;
-import org.xtext.example.mydsl1.myDsl.statement;
 
 /**
  * <!-- begin-user-doc -->
@@ -74,7 +74,7 @@ public class postfixExprImpl extends assignmentImpl implements postfixExpr
    * @generated
    * @ordered
    */
-  protected statement existingVariable;
+  protected EObject existingVariable;
 
   /**
    * The cached value of the '{@link #getExpressions() <em>Expressions</em>}' containment reference list.
@@ -140,12 +140,12 @@ public class postfixExprImpl extends assignmentImpl implements postfixExpr
    * <!-- end-user-doc -->
    * @generated
    */
-  public statement getExistingVariable()
+  public EObject getExistingVariable()
   {
     if (existingVariable != null && existingVariable.eIsProxy())
     {
       InternalEObject oldExistingVariable = (InternalEObject)existingVariable;
-      existingVariable = (statement)eResolveProxy(oldExistingVariable);
+      existingVariable = eResolveProxy(oldExistingVariable);
       if (existingVariable != oldExistingVariable)
       {
         if (eNotificationRequired())
@@ -160,7 +160,7 @@ public class postfixExprImpl extends assignmentImpl implements postfixExpr
    * <!-- end-user-doc -->
    * @generated
    */
-  public statement basicGetExistingVariable()
+  public EObject basicGetExistingVariable()
   {
     return existingVariable;
   }
@@ -170,9 +170,9 @@ public class postfixExprImpl extends assignmentImpl implements postfixExpr
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setExistingVariable(statement newExistingVariable)
+  public void setExistingVariable(EObject newExistingVariable)
   {
-    statement oldExistingVariable = existingVariable;
+    EObject oldExistingVariable = existingVariable;
     existingVariable = newExistingVariable;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, MyDslPackage.POSTFIX_EXPR__EXISTING_VARIABLE, oldExistingVariable, existingVariable));
@@ -255,7 +255,7 @@ public class postfixExprImpl extends assignmentImpl implements postfixExpr
         getExprs().addAll((Collection<? extends expr>)newValue);
         return;
       case MyDslPackage.POSTFIX_EXPR__EXISTING_VARIABLE:
-        setExistingVariable((statement)newValue);
+        setExistingVariable((EObject)newValue);
         return;
       case MyDslPackage.POSTFIX_EXPR__EXPRESSIONS:
         getExpressions().clear();
@@ -282,7 +282,7 @@ public class postfixExprImpl extends assignmentImpl implements postfixExpr
         getExprs().clear();
         return;
       case MyDslPackage.POSTFIX_EXPR__EXISTING_VARIABLE:
-        setExistingVariable((statement)null);
+        setExistingVariable((EObject)null);
         return;
       case MyDslPackage.POSTFIX_EXPR__EXPRESSIONS:
         getExpressions().clear();

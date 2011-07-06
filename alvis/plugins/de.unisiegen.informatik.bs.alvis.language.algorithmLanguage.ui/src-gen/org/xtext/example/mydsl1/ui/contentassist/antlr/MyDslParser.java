@@ -43,8 +43,8 @@ public class MyDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getRelExprAccess().getAlternatives_1_0(), "rule__RelExpr__Alternatives_1_0");
 					put(grammarAccess.getMulExprAccess().getAlternatives_1_0(), "rule__MulExpr__Alternatives_1_0");
 					put(grammarAccess.getAtomAccess().getAlternatives(), "rule__Atom__Alternatives");
+					put(grammarAccess.getPostfixExprAccess().getAlternatives_0(), "rule__PostfixExpr__Alternatives_0");
 					put(grammarAccess.getPostfixExprAccess().getAlternatives_1(), "rule__PostfixExpr__Alternatives_1");
-					put(grammarAccess.getPostfixExprAccess().getAlternatives_2(), "rule__PostfixExpr__Alternatives_2");
 					put(grammarAccess.getConstantAccess().getAlternatives(), "rule__Constant__Alternatives");
 					put(grammarAccess.getEndExprAccess().getAlternatives(), "rule__EndExpr__Alternatives");
 					put(grammarAccess.getModelAccess().getGroup(), "rule__Model__Group__0");
@@ -84,14 +84,14 @@ public class MyDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAtomAccess().getGroup_2(), "rule__Atom__Group_2__0");
 					put(grammarAccess.getAtomAccess().getGroup_4(), "rule__Atom__Group_4__0");
 					put(grammarAccess.getPostfixExprAccess().getGroup(), "rule__PostfixExpr__Group__0");
-					put(grammarAccess.getPostfixExprAccess().getGroup_2_0(), "rule__PostfixExpr__Group_2_0__0");
-					put(grammarAccess.getPostfixExprAccess().getGroup_2_1(), "rule__PostfixExpr__Group_2_1__0");
-					put(grammarAccess.getPostfixExprAccess().getGroup_2_1_1(), "rule__PostfixExpr__Group_2_1_1__0");
-					put(grammarAccess.getPostfixExprAccess().getGroup_2_1_1_1(), "rule__PostfixExpr__Group_2_1_1_1__0");
-					put(grammarAccess.getPostfixExprAccess().getGroup_2_2(), "rule__PostfixExpr__Group_2_2__0");
+					put(grammarAccess.getPostfixExprAccess().getGroup_1_0(), "rule__PostfixExpr__Group_1_0__0");
+					put(grammarAccess.getPostfixExprAccess().getGroup_1_1(), "rule__PostfixExpr__Group_1_1__0");
+					put(grammarAccess.getPostfixExprAccess().getGroup_1_1_1(), "rule__PostfixExpr__Group_1_1_1__0");
+					put(grammarAccess.getPostfixExprAccess().getGroup_1_1_1_1(), "rule__PostfixExpr__Group_1_1_1_1__0");
+					put(grammarAccess.getPostfixExprAccess().getGroup_1_2(), "rule__PostfixExpr__Group_1_2__0");
 					put(grammarAccess.getConstantAccess().getGroup_0(), "rule__Constant__Group_0__0");
 					put(grammarAccess.getConstantAccess().getGroup_1(), "rule__Constant__Group_1__0");
-					put(grammarAccess.getRealAccess().getGroup(), "rule__Real__Group__0");
+					put(grammarAccess.getFLOATAccess().getGroup(), "rule__FLOAT__Group__0");
 					put(grammarAccess.getModelAccess().getFunctionsAssignment_0(), "rule__Model__FunctionsAssignment_0");
 					put(grammarAccess.getModelAccess().getMainAssignment_1(), "rule__Model__MainAssignment_1");
 					put(grammarAccess.getFunctionDefinitionAccess().getNameAssignment_0(), "rule__FunctionDefinition__NameAssignment_0");
@@ -106,7 +106,7 @@ public class MyDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getParamAccess().getNameAssignment_1(), "rule__Param__NameAssignment_1");
 					put(grammarAccess.getBlockAccess().getStatementsAssignment_2(), "rule__Block__StatementsAssignment_2");
 					put(grammarAccess.getTypeAccess().getTypesAssignment(), "rule__Type__TypesAssignment");
-					put(grammarAccess.getStatementAccess().getPostFixExpressionAssignment_1_1(), "rule__Statement__PostFixExpressionAssignment_1_1");
+					put(grammarAccess.getStatementAccess().getPostFixExpressionAssignment_0_1(), "rule__Statement__PostFixExpressionAssignment_0_1");
 					put(grammarAccess.getStatementAccess().getAssignmentsAssignment_2_1(), "rule__Statement__AssignmentsAssignment_2_1");
 					put(grammarAccess.getStatementAccess().getExprsAssignment_3_2(), "rule__Statement__ExprsAssignment_3_2");
 					put(grammarAccess.getStatementAccess().getStatementsAssignment_4_3(), "rule__Statement__StatementsAssignment_4_3");
@@ -126,18 +126,19 @@ public class MyDslParser extends AbstractContentAssistParser {
 					put(grammarAccess.getMulExprAccess().getAtomsAssignment_0(), "rule__MulExpr__AtomsAssignment_0");
 					put(grammarAccess.getMulExprAccess().getAtomsAssignment_1_1(), "rule__MulExpr__AtomsAssignment_1_1");
 					put(grammarAccess.getAtomAccess().getConstantsAssignment_4_1(), "rule__Atom__ConstantsAssignment_4_1");
-					put(grammarAccess.getPostfixExprAccess().getExistingVariableAssignment_1_0(), "rule__PostfixExpr__ExistingVariableAssignment_1_0");
-					put(grammarAccess.getPostfixExprAccess().getExistingVariableAssignment_1_1(), "rule__PostfixExpr__ExistingVariableAssignment_1_1");
-					put(grammarAccess.getPostfixExprAccess().getExpressionsAssignment_2_1_1_0(), "rule__PostfixExpr__ExpressionsAssignment_2_1_1_0");
-					put(grammarAccess.getPostfixExprAccess().getExpressionsAssignment_2_1_1_1_1(), "rule__PostfixExpr__ExpressionsAssignment_2_1_1_1_1");
-					put(grammarAccess.getPostfixExprAccess().getExpressionsAssignment_2_2_1(), "rule__PostfixExpr__ExpressionsAssignment_2_2_1");
-					put(grammarAccess.getConstantAccess().getRealAssignment_2(), "rule__Constant__RealAssignment_2");
+					put(grammarAccess.getPostfixExprAccess().getExistingVariableAssignment_0_0(), "rule__PostfixExpr__ExistingVariableAssignment_0_0");
+					put(grammarAccess.getPostfixExprAccess().getExistingVariableAssignment_0_1(), "rule__PostfixExpr__ExistingVariableAssignment_0_1");
+					put(grammarAccess.getPostfixExprAccess().getExistingVariableAssignment_0_2(), "rule__PostfixExpr__ExistingVariableAssignment_0_2");
+					put(grammarAccess.getPostfixExprAccess().getExpressionsAssignment_1_1_1_0(), "rule__PostfixExpr__ExpressionsAssignment_1_1_1_0");
+					put(grammarAccess.getPostfixExprAccess().getExpressionsAssignment_1_1_1_1_1(), "rule__PostfixExpr__ExpressionsAssignment_1_1_1_1_1");
+					put(grammarAccess.getPostfixExprAccess().getExpressionsAssignment_1_2_1(), "rule__PostfixExpr__ExpressionsAssignment_1_2_1");
+					put(grammarAccess.getConstantAccess().getFloatAssignment_2(), "rule__Constant__FloatAssignment_2");
 					put(grammarAccess.getConstantAccess().getIntegerAssignment_3(), "rule__Constant__IntegerAssignment_3");
 					put(grammarAccess.getConstantAccess().getStringAssignment_4(), "rule__Constant__StringAssignment_4");
 					put(grammarAccess.getConstantAccess().getNullAssignment_5(), "rule__Constant__NullAssignment_5");
 					put(grammarAccess.getConstantAccess().getInfinityAssignment_6(), "rule__Constant__InfinityAssignment_6");
-					put(grammarAccess.getRealAccess().getRealAssignment_0(), "rule__Real__RealAssignment_0");
-					put(grammarAccess.getRealAccess().getRealAssignment_2(), "rule__Real__RealAssignment_2");
+					put(grammarAccess.getFLOATAccess().getFLOATAssignment_0(), "rule__FLOAT__FLOATAssignment_0");
+					put(grammarAccess.getFLOATAccess().getFLOATAssignment_2(), "rule__FLOAT__FLOATAssignment_2");
 				}
 			};
 		}

@@ -87,7 +87,7 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
       case MyDslPackage.ATOM: return createatom();
       case MyDslPackage.POSTFIX_EXPR: return createpostfixExpr();
       case MyDslPackage.CONSTANT: return createconstant();
-      case MyDslPackage.REAL: return createreal();
+      case MyDslPackage.FLOAT: return createFLOAT();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -307,10 +307,10 @@ public class MyDslFactoryImpl extends EFactoryImpl implements MyDslFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  public real createreal()
+  public FLOAT createFLOAT()
   {
-    realImpl real = new realImpl();
-    return real;
+    FLOATImpl float_ = new FLOATImpl();
+    return float_;
   }
 
   /**

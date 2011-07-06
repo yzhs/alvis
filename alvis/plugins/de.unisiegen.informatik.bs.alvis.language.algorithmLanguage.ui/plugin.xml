@@ -11,7 +11,7 @@
             default="true"
             extensions="algo"
             id="org.xtext.example.mydsl1.MyDsl"
-            name="MyDsl Editor">
+            name="Algorithm Editor">
         </editor>
     </extension>
     <extension
@@ -74,7 +74,7 @@
         point="org.eclipse.ui.keywords">
         <keyword
             id="org.xtext.example.mydsl1.ui.keyword_MyDsl"
-            label="MyDsl"/>
+            label="AlgorithmEditor"/>
     </extension>
     <extension
          point="org.eclipse.ui.commands">

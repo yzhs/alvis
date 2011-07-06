@@ -16,40 +16,40 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 
+import org.xtext.example.mydsl1.myDsl.FLOAT;
 import org.xtext.example.mydsl1.myDsl.MyDslPackage;
-import org.xtext.example.mydsl1.myDsl.real;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>real</b></em>'.
+ * An implementation of the model object '<em><b>FLOAT</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.realImpl#getReal <em>Real</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl1.myDsl.impl.FLOATImpl#getFLOAT <em>FLOAT</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class realImpl extends MinimalEObjectImpl.Container implements real
+public class FLOATImpl extends MinimalEObjectImpl.Container implements FLOAT
 {
   /**
-   * The cached value of the '{@link #getReal() <em>Real</em>}' attribute list.
+   * The cached value of the '{@link #getFLOAT() <em>FLOAT</em>}' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getReal()
+   * @see #getFLOAT()
    * @generated
    * @ordered
    */
-  protected EList<Integer> real;
+  protected EList<Integer> float_;
 
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    */
-  protected realImpl()
+  protected FLOATImpl()
   {
     super();
   }
@@ -62,7 +62,7 @@ public class realImpl extends MinimalEObjectImpl.Container implements real
   @Override
   protected EClass eStaticClass()
   {
-    return MyDslPackage.Literals.REAL;
+    return MyDslPackage.Literals.FLOAT;
   }
 
   /**
@@ -70,13 +70,13 @@ public class realImpl extends MinimalEObjectImpl.Container implements real
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Integer> getReal()
+  public EList<Integer> getFLOAT()
   {
-    if (real == null)
+    if (float_ == null)
     {
-      real = new EDataTypeEList<Integer>(Integer.class, this, MyDslPackage.REAL__REAL);
+      float_ = new EDataTypeEList<Integer>(Integer.class, this, MyDslPackage.FLOAT__FLOAT);
     }
-    return real;
+    return float_;
   }
 
   /**
@@ -89,8 +89,8 @@ public class realImpl extends MinimalEObjectImpl.Container implements real
   {
     switch (featureID)
     {
-      case MyDslPackage.REAL__REAL:
-        return getReal();
+      case MyDslPackage.FLOAT__FLOAT:
+        return getFLOAT();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -106,9 +106,9 @@ public class realImpl extends MinimalEObjectImpl.Container implements real
   {
     switch (featureID)
     {
-      case MyDslPackage.REAL__REAL:
-        getReal().clear();
-        getReal().addAll((Collection<? extends Integer>)newValue);
+      case MyDslPackage.FLOAT__FLOAT:
+        getFLOAT().clear();
+        getFLOAT().addAll((Collection<? extends Integer>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -124,8 +124,8 @@ public class realImpl extends MinimalEObjectImpl.Container implements real
   {
     switch (featureID)
     {
-      case MyDslPackage.REAL__REAL:
-        getReal().clear();
+      case MyDslPackage.FLOAT__FLOAT:
+        getFLOAT().clear();
         return;
     }
     super.eUnset(featureID);
@@ -141,8 +141,8 @@ public class realImpl extends MinimalEObjectImpl.Container implements real
   {
     switch (featureID)
     {
-      case MyDslPackage.REAL__REAL:
-        return real != null && !real.isEmpty();
+      case MyDslPackage.FLOAT__FLOAT:
+        return float_ != null && !float_.isEmpty();
     }
     return super.eIsSet(featureID);
   }
@@ -158,10 +158,10 @@ public class realImpl extends MinimalEObjectImpl.Container implements real
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (real: ");
-    result.append(real);
+    result.append(" (FLOAT: ");
+    result.append(float_);
     result.append(')');
     return result.toString();
   }
 
-} //realImpl
+} //FLOATImpl

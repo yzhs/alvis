@@ -76,14 +76,14 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//postfixExpr/expressions"/>
     </genClasses>
     <genClasses ecoreClass="MyDsl.ecore#//constant">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//constant/Real"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference MyDsl.ecore#//constant/Float"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//constant/Integer"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//constant/String"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//constant/Null"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//constant/Infinity"/>
     </genClasses>
-    <genClasses ecoreClass="MyDsl.ecore#//real">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//real/real"/>
+    <genClasses ecoreClass="MyDsl.ecore#//FLOAT">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute MyDsl.ecore#//FLOAT/FLOAT"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

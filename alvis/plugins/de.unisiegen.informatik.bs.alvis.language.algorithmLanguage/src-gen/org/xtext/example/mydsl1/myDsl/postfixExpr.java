@@ -8,6 +8,8 @@ package org.xtext.example.mydsl1.myDsl;
 
 import org.eclipse.emf.common.util.EList;
 
+import org.eclipse.emf.ecore.EObject;
+
 /**
  * <!-- begin-user-doc -->
  * A representation of the model object '<em><b>postfix Expr</b></em>'.
@@ -53,12 +55,12 @@ public interface postfixExpr extends assignment, atom
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Existing Variable</em>' reference.
-   * @see #setExistingVariable(statement)
+   * @see #setExistingVariable(EObject)
    * @see org.xtext.example.mydsl1.myDsl.MyDslPackage#getpostfixExpr_ExistingVariable()
    * @model
    * @generated
    */
-  statement getExistingVariable();
+  EObject getExistingVariable();
 
   /**
    * Sets the value of the '{@link org.xtext.example.mydsl1.myDsl.postfixExpr#getExistingVariable <em>Existing Variable</em>}' reference.
@@ -68,7 +70,7 @@ public interface postfixExpr extends assignment, atom
    * @see #getExistingVariable()
    * @generated
    */
-  void setExistingVariable(statement value);
+  void setExistingVariable(EObject value);
 
   /**
    * Returns the value of the '<em><b>Expressions</b></em>' containment reference list.

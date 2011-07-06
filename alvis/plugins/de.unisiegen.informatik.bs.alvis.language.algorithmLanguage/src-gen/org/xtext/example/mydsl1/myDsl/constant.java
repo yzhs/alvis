@@ -18,7 +18,7 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.xtext.example.mydsl1.myDsl.constant#getReal <em>Real</em>}</li>
+ *   <li>{@link org.xtext.example.mydsl1.myDsl.constant#getFloat <em>Float</em>}</li>
  *   <li>{@link org.xtext.example.mydsl1.myDsl.constant#getInteger <em>Integer</em>}</li>
  *   <li>{@link org.xtext.example.mydsl1.myDsl.constant#getString <em>String</em>}</li>
  *   <li>{@link org.xtext.example.mydsl1.myDsl.constant#getNull <em>Null</em>}</li>
@@ -33,20 +33,20 @@ import org.eclipse.emf.ecore.EObject;
 public interface constant extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Real</b></em>' containment reference list.
-   * The list contents are of type {@link org.xtext.example.mydsl1.myDsl.real}.
+   * Returns the value of the '<em><b>Float</b></em>' containment reference list.
+   * The list contents are of type {@link org.xtext.example.mydsl1.myDsl.FLOAT}.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Real</em>' containment reference list isn't clear,
+   * If the meaning of the '<em>Float</em>' containment reference list isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Real</em>' containment reference list.
-   * @see org.xtext.example.mydsl1.myDsl.MyDslPackage#getconstant_Real()
+   * @return the value of the '<em>Float</em>' containment reference list.
+   * @see org.xtext.example.mydsl1.myDsl.MyDslPackage#getconstant_Float()
    * @model containment="true"
    * @generated
    */
-  EList<real> getReal();
+  EList<FLOAT> getFloat();
 
   /**
    * Returns the value of the '<em><b>Integer</b></em>' attribute.

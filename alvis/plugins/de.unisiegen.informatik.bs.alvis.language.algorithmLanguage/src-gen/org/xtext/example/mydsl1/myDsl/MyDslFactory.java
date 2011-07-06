@@ -198,13 +198,13 @@ public interface MyDslFactory extends EFactory
   constant createconstant();
 
   /**
-   * Returns a new object of class '<em>real</em>'.
+   * Returns a new object of class '<em>FLOAT</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return a new object of class '<em>real</em>'.
+   * @return a new object of class '<em>FLOAT</em>'.
    * @generated
    */
-  real createreal();
+  FLOAT createFLOAT();
 
   /**
    * Returns the package supported by this factory.
