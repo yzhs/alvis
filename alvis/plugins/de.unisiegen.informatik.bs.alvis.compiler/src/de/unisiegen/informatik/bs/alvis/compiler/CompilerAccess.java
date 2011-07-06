@@ -3,7 +3,6 @@ package de.unisiegen.informatik.bs.alvis.compiler;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,6 +10,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.core.runtime.FileLocator;
@@ -37,13 +37,7 @@ public class CompilerAccess {
 		return instance;
 	}
 
-	public boolean compile(String code, ArrayList<PCObject> datatypes) {
-		// TODO Compilieren
-		// CompilerManager manager = new CompilerManager();
-		return true;
-	}
-
-	String algorithmPath = "";
+	String algorithmPath = null;
 
 	/**
 	 * 
@@ -54,21 +48,18 @@ public class CompilerAccess {
 	 * @throws IOException
 	 *             , RecognitionException
 	 */
-	public File compile(String path) throws IOException,
-			RecognitionException {
+	public File compile(String path) throws IOException, RecognitionException {
 		c = new Compiler(datatypes, datatypePackages);
 		// testDatatypes();
-		String javaCode = c.compile(readFile(Platform.getInstanceLocation()
-				.getURL().getPath()
-				+ path));
-		if (null == javaCode)
+		String javaCode = c.compile(readFile(currentPath() + path));
+		if (null == javaCode) {
+			System.err.println("Compiling code from " + currentPath() + path + " failed");
 			return null;
+		}
 
-		File result = new File(Platform.getInstanceLocation().getURL()
-				.getPath()
-				+ getWorkspacePath(path) + "/Algorithm.java");// new
-																// File(path).getName().toString().replaceAll("\\.[^.]*$",
-																// ".java"));
+		File result = new File(currentPath() + getWorkspacePath(path)
+				+ "Algorithm.java");
+		// new File(path).getName().toString().replaceAll("\\.[^.]*$", ".java"));
 		FileWriter fstream;
 		fstream = new FileWriter(result);
 		BufferedWriter out = new BufferedWriter(fstream);
@@ -78,36 +69,32 @@ public class CompilerAccess {
 		out.close();
 		return result;
 	}
+	
+	private String currentPath() {
+		return Platform.getInstanceLocation().getURL().getPath();
+	}
 
 	private String getWorkspacePath(String fileWithPath) {
-		String[] splitedPathToAlgorithm = fileWithPath.split("\\/"); // FIXME
-																		// this
-																		// will
-																		// not
-																		// work
-																		// on
-																		// Windows
+		String[] splitPathToAlgorithm = fileWithPath.split(Pattern.quote(File.separator));
+		
 		ArrayList<String> partsOfAlgoPath = new ArrayList<String>();
-		for (String part : splitedPathToAlgorithm) {
+		for (String part : splitPathToAlgorithm) {
 			partsOfAlgoPath.add(part);
 		}
 
-		// get and remove the filename
-		String algoWorkSpaceFile = partsOfAlgoPath.remove(partsOfAlgoPath
-				.size() - 1);
-
-		String SLASH = System.getProperty("file.separator");
+		partsOfAlgoPath.remove(partsOfAlgoPath.size() - 1);
 
 		// getPath
 		String algoWorkSpacePath = "";
 		for (String part : partsOfAlgoPath) {
-			algoWorkSpacePath += part + SLASH;
+			algoWorkSpacePath += part + File.separator;
 		}
 
 		return algoWorkSpacePath;
 	}
 
-	public String getAlgorithmPath() throws IOException {
+	private String getAlgorithmPath() throws IOException {
+		//FIXME is this correct? path is created but algorithmPath is used instead
 		String path = "";
 		path = FileLocator.getBundleFile(Activator.getDefault().getBundle())
 				.getCanonicalPath().toString();
@@ -122,6 +109,7 @@ public class CompilerAccess {
 				result += fstream.readLine()
 						+ System.getProperty("line.separator");
 
+		System.out.println("read file " + fileName);
 		return result;
 	}
 
@@ -139,7 +127,7 @@ public class CompilerAccess {
 	 * @return Name of the Java Algorithm file
 	 */
 	public File compileThisDummy(String pathToAlgorithm) {
-		String SLASH = System.getProperty("file.separator");
+		String SLASH = File.separator;
 
 		// the path were the translated java file is.
 		String pathWhereTheJavaIs = "";
@@ -155,21 +143,14 @@ public class CompilerAccess {
 		File source = new File(pathWhereTheJavaIs + SLASH + "Algorithm.java");
 
 		// Get the path to algorithm and separate path and filename
-		String[] splitedPathToAlgorithm = pathToAlgorithm.split("\\/"); // FIXME
-																		// this
-																		// will
-																		// not
-																		// work
-																		// on
-																		// Windows
+		String[] splitedPathToAlgorithm = pathToAlgorithm.split(Pattern.quote(File.separator));
+		
 		ArrayList<String> partsOfAlgoPath = new ArrayList<String>();
 		for (String part : splitedPathToAlgorithm) {
 			partsOfAlgoPath.add(part);
 		}
 
-		// get and remove the filename
-		String algoWorkSpaceFile = partsOfAlgoPath.remove(partsOfAlgoPath
-				.size() - 1);
+		partsOfAlgoPath.remove(partsOfAlgoPath.size() - 1);
 
 		// getPath
 		String algoWorkSpacePath = "";
@@ -181,9 +162,8 @@ public class CompilerAccess {
 		// System.out.println(st);
 
 		// Destination
-		File destination = new File(Platform.getInstanceLocation().getURL()
-				.getPath()
-				+ algoWorkSpacePath + "Algorithm.java");
+		File destination = new File(currentPath() + algoWorkSpacePath
+				+ "Algorithm.java");
 		algorithmPath = Platform.getInstanceLocation().getURL().getPath()
 				+ algoWorkSpacePath + SLASH;
 
