@@ -12,6 +12,11 @@ import java.util.List;
 public interface SortableCollection<E> extends List<E> {
 
 	/**
+	 * will sort based on the comparator in E
+	 */
+	public void sort();
+	
+	/**
 	 * shuffles the List to generated a complete random result
 	 */
 	public void shuffle();
@@ -22,12 +27,12 @@ public interface SortableCollection<E> extends List<E> {
 	 * 
 	 * @param toSortFrom
 	 */
-	public void sortOn(SortableCollection toSortFrom);
+	public void sortOn(SortableCollection<E> toSortFrom);
 	
 	/**
 	 * 
 	 * @return the SortableCollection the VM will safe after a Decision was made
 	 */
-	public SortableCollection storeInformation();
+	public SortableCollection<E> storeInformation();
 	
 }

@@ -33,6 +33,7 @@ public class Algorithm implements AbstractAlgo {
 		if(toSort.size() <= 1) {
 			return toSort;
 		}
+		toSort.sort();
 		dplisten.onDecisionPoint(DPNr, from, toSort);
 		return toSort;
 	}

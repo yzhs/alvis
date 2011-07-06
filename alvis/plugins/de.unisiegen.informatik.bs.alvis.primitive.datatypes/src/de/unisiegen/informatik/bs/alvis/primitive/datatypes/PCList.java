@@ -1,6 +1,7 @@
 package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
@@ -9,8 +10,9 @@ import java.util.ListIterator;
 /**
  * 
  * @author Dominik Dingel
- *
- * @param <E> Type Parameter of the stored Es
+ * 
+ * @param <E>
+ *            Type Parameter of the stored Es
  */
 public class PCList<E> extends PCObject implements SortableCollection<E> {
 	protected static final String TYPENAME = "List";
@@ -31,7 +33,7 @@ public class PCList<E> extends PCObject implements SortableCollection<E> {
 	public PCList() {
 		items = new ArrayList<E>();
 	}
-	
+
 	public PCList(List<E> list) {
 		items = list;
 	}
@@ -39,11 +41,11 @@ public class PCList<E> extends PCObject implements SortableCollection<E> {
 	public E get(int index) {
 		return items.get(index);
 	}
-	
+
 	public boolean isEmtpy() {
 		return items.isEmpty();
 	}
-	
+
 	public int size() {
 		return items.size();
 	}
@@ -52,8 +54,8 @@ public class PCList<E> extends PCObject implements SortableCollection<E> {
 	public Iterator<E> iterator() {
 		PCListIterator<E> it = new PCListIterator<E>(this);
 		return it;
-	}	
-	
+	}
+
 	@Override
 	public void shuffle() {
 	}
@@ -88,7 +90,7 @@ public class PCList<E> extends PCObject implements SortableCollection<E> {
 	@Override
 	public void add(int index, E element) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	/**
@@ -97,7 +99,7 @@ public class PCList<E> extends PCObject implements SortableCollection<E> {
 	@Override
 	public boolean addAll(Collection<? extends E> c) {
 		boolean result = true;
-		for(E item : c) {
+		for (E item : c) {
 			result = result && items.add(item);
 		}
 		return result;
@@ -206,7 +208,20 @@ public class PCList<E> extends PCObject implements SortableCollection<E> {
 	@Override
 	public void sortOn(SortableCollection toSortFrom) {
 		// TODO Auto-generated method stub
-		
+	}
+
+	@Override
+	public void sort() { 
+		@SuppressWarnings("unchecked")
+		E tmp[] = (E[]) items.toArray();
+		Arrays.sort(tmp);
+		if (tmp != null) {
+			items = new ArrayList<E>();
+			for (int i = 0; i < tmp.length; i++) {
+				items.add(tmp[i]);
+			}
+		}
+
 	}
 
 	@Override

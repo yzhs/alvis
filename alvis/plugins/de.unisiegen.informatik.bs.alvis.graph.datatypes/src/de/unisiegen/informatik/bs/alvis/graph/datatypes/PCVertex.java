@@ -16,7 +16,7 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCString;
  * @author Dominik Dingel
  */
 
-public class PCVertex extends PCObject {
+public class PCVertex extends PCObject implements Comparable<PCVertex> {
 
 	protected static final String TYPENAME = "Vertex";
 
@@ -202,9 +202,27 @@ public class PCVertex extends PCObject {
 		String[] attributes = { "equal", "notEqual" };
 		return Arrays.asList(attributes);
 	}
-	
+
 	public static PCVertex getNull() {
 		return new PCVertex(null);
+	}
+
+	@Override
+	public int compareTo(PCVertex arg0) {
+		// if same label return 0
+		if (arg0.label.toString().equals(this.label.toString())) {
+			return 0;
+		}
+		Integer tLabel, aLabel;
+		// try making it to numbers
+		try {
+			tLabel = new Integer(this.label.toString());
+			aLabel = new Integer(arg0.label.toString());
+			return (tLabel.intValue() - aLabel.intValue());
+		} catch (NumberFormatException e) {
+		}
+		// return string
+		return this.label.toString().compareTo(arg0.label.toString());
 	}
 	
 	public PCBoolean equal(PCVertex other) {
