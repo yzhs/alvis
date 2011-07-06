@@ -85,7 +85,9 @@ public class GraphEditorAdjacencyMatrix extends EditorPart implements
 	private Composite myParent;
 	private static int y;
 
-	@Override
+	String[] titleLine;
+	ArrayList<String[]> matrix;
+	
 	public void createPartControl(Composite parent) {
 		myParent = parent;
 		parent.setLayout(new FillLayout(SWT.HORIZONTAL));
@@ -110,8 +112,10 @@ public class GraphEditorAdjacencyMatrix extends EditorPart implements
 		// Array of TableColumn's
 		TableColumn[] tblclmns = new TableColumn[mySeri.getNodeId().length+1];
 		// ArrayList of String Array's for the Input
-		ArrayList<String[]> matrix = new ArrayList<String[]>();
-
+		matrix = new ArrayList<String[]>();
+		
+		titleLine = new String[mySeri.getNodeId().length+1];
+		
 		// Iterate over all Nodes
 		for (y = 0; y < mySeri.getNodeId().length; y++) {
 			String title = "";
@@ -120,6 +124,7 @@ public class GraphEditorAdjacencyMatrix extends EditorPart implements
 				tblclmns[y] = tableViewerColumns[y].getColumn();
 				tblclmns[y].setWidth(columWidth);
 				tblclmns[y].setText("#");
+				titleLine[y] = "#";
 				tblclmns[y].setAlignment(SWT.CENTER);
 				tableViewerColumns[y].setLabelProvider(new DynamicCellLabelProvider(y));
 			}
@@ -128,6 +133,7 @@ public class GraphEditorAdjacencyMatrix extends EditorPart implements
 			tblclmns[y+1] = tableViewerColumns[y+1].getColumn();
 			tblclmns[y+1].setWidth(columWidth);
 			tblclmns[y+1].setText("" + mySeri.getNodeId()[y]);
+			titleLine[y+1] = "" + mySeri.getNodeId()[y];
 			tblclmns[y+1].setAlignment(SWT.CENTER);
 			tableViewerColumns[y+1].setLabelProvider(new DynamicCellLabelProvider(y+1));
 
@@ -145,6 +151,8 @@ public class GraphEditorAdjacencyMatrix extends EditorPart implements
 			matrix.add(row.clone());
 		}
 
+//		System.out.println(matrix);
+//		
 		tableViewer.setInput(matrix);
 	}
 
@@ -178,6 +186,16 @@ public class GraphEditorAdjacencyMatrix extends EditorPart implements
 
 	@Override
 	public StyledText getSourceCode() {
+		for(String tit : titleLine) {
+			System.out.print(tit + ";");
+		}
+		System.out.println();
+		for(String[] zeile : matrix) {
+			for(String tit : zeile) {
+				System.out.print(tit + ";");
+			}
+			System.out.println();
+		}
 		return null;
 	}
 
