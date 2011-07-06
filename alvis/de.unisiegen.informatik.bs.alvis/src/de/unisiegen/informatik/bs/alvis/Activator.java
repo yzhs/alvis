@@ -11,7 +11,6 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -203,19 +202,20 @@ public class Activator extends AbstractUIPlugin {
 					public void run() {
 						Activator.getDefault().shellContainer = Display.getDefault().getActiveShell();
 						
-						// TODO: Change color of the DP highlight
 						Activator.getDefault().algorithmContainer.removeAllCurrentLine();
 						Activator.getDefault().algorithmContainer.addCurrentDP(Activator.getDefault().DPNr);
 						
 						String name = Activator.getDefault().from.toString();
+						if(name == null)
+							name = "Anfang des Algorithmus";
 
 						// TODO: Internationalisierung für übergebene Strings einbauen
 						if (Display.getDefault() != null) {
 							OrderDialog toOrder = new OrderDialog(
 									shellContainer,
 									Activator.getDefault().toSort,
-									"Legen Sie eine Reihenfolge fest", "Sie sind bei " + name,
-									"Wohin wollen sie in den nächsten Schritten gehen?");
+									"Legen Sie eine Reihenfolge fest", "Sie sind bei: " + name,
+									"Bewegen Sie die Daten per Drag&Drop\n");
 							toOrder.open();
 						}
 					}
