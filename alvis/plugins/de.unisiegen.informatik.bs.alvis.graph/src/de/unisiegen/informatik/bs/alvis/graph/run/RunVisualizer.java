@@ -11,7 +11,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -183,6 +188,37 @@ public class RunVisualizer implements IRunVisualizer {
 			getEdge.open();
 		}
 		return result;
+	}
+
+	@Override
+	public Image getImage() {
+		Image screenshot;
+		int width = myGraph.getSize().x;
+		int height = myGraph.getSize().y;
+		GC gc = new GC(myGraph);
+		gc.drawText("Created by Alvis", 5, 5);
+		gc.drawRectangle(new Rectangle(0, 0, width - 1, height - 1));
+		screenshot = new Image(Display.getCurrent(), width, height);
+		gc.copyArea(screenshot, 0, 0);
+
+		gc.dispose();
+		myGraph.redraw();
+
+		System.out.println("LALA");//TODO weg
+		
+		return screenshot;
+
+	}
+
+	@Override
+	public StyledText getSourceCode() {
+		//no source code from here
+		return null;
+	}
+
+	@Override
+	public boolean isRun() {
+		return true;
 	}
 
 }

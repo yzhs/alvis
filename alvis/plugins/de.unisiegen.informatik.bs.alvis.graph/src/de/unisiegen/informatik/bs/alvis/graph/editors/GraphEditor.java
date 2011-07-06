@@ -15,6 +15,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Set;
 
 import javax.imageio.ImageIO;
 
@@ -56,6 +57,8 @@ import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.zest.core.widgets.GraphItem;
+
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
@@ -90,7 +93,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	AlvisGraphConnection actCon;
 
 	private boolean nodeMovement;
-	private Point nodeRemMousePos;
+	private Point remMousePos;
 	private int amountToBeMoved;
 
 	/**
@@ -119,6 +122,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		amountToBeMoved = 0;
 
 		doSave(null);
+
 	}
 
 	private boolean dirty = false;
@@ -546,16 +550,22 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 					} else if (pressed == MODUS_CONNECTION) {
 						clickNewConnection(actNode);
 					}
+
+					// check if node gets moved:
+					if (remMousePos != null) {
+						if (remMousePos.x != e.x && remMousePos.y != e.y) {
+							if (amountToBeMoved > 0) {
+								amountToBeMoved = 0;
+								remMousePos = null;
+								checkDirty();
+							} else {
+								markNodesInFrame(e);
+							}
+						}
+					}
+
 				} else {
-
-				}
-
-				// check if node gets moved:
-				if (nodeRemMousePos.x != e.x && nodeRemMousePos.y != e.y
-						&& amountToBeMoved > 0) {
-					amountToBeMoved = 0;
-					nodeRemMousePos = null;
-					checkDirty();
+					// implement rename
 				}
 
 			}
@@ -569,7 +579,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 				}
 
 				// check if node gets moved:
-				nodeRemMousePos = new Point(e.x, e.y);
+				remMousePos = new Point(e.x, e.y);
 				amountToBeMoved = myGraph.getHighlightedNodes().size();
 			}
 
@@ -595,6 +605,34 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 			}
 		});
 
+	}
+
+	/**
+	 * marks nodes within rectangle(remMousePos;e)
+	 * @param e the mouse event to get the mouse location from
+	 */
+	protected void markNodesInFrame(MouseEvent e) {
+		Set<AlvisGraphNode> gns = myGraph.getAllNodes();
+		GraphItem[] gnsa = new GraphItem[gns.size()];
+		int i = 0;
+		int xMin = Math.min(e.x, remMousePos.x);
+		int xMax = Math.max(e.x, remMousePos.x);
+		int yMin = Math.min(e.y, remMousePos.y);
+		int yMax = Math.max(e.y, remMousePos.y);
+		try {
+			for (AlvisGraphNode gn : gns) {
+				if ((gn.getLocation().x + gn.getSize().width) > xMin
+						&& gn.getLocation().x < xMax
+						&& (gn.getLocation().y + gn
+								.getSize().height) > yMin
+						&& gn.getLocation().y < yMax)
+					gnsa[i] = (GraphItem) gn;
+				i++;
+			}
+			myGraph.setSelection(gnsa);
+		} catch (ClassCastException cce) {
+		}
+		remMousePos = null;
 	}
 
 	/**
