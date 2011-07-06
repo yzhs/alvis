@@ -217,23 +217,33 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "block");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Action cBlockAction_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cBeginKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Keyword cBeginKeyword_1_0 = (Keyword)cAlternatives_1.eContents().get(0);
+		private final Keyword cLeftCurlyBracketKeyword_1_1 = (Keyword)cAlternatives_1.eContents().get(1);
 		private final Assignment cStatementsAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final RuleCall cStatementsStatementParserRuleCall_2_0 = (RuleCall)cStatementsAssignment_2.eContents().get(0);
-		private final Keyword cEndKeyword_3 = (Keyword)cGroup.eContents().get(3);
+		private final Alternatives cAlternatives_3 = (Alternatives)cGroup.eContents().get(3);
+		private final Keyword cEndKeyword_3_0 = (Keyword)cAlternatives_3.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_3_1 = (Keyword)cAlternatives_3.eContents().get(1);
 		
 		//block:
-		//	{block} "begin" statements+=statement* "end";
+		//	{block} ("begin" | "{") statements+=statement* ("end" | "}");
 		public ParserRule getRule() { return rule; }
 
-		//{block} "begin" statements+=statement* "end"
+		//{block} ("begin" | "{") statements+=statement* ("end" | "}")
 		public Group getGroup() { return cGroup; }
 
 		//{block}
 		public Action getBlockAction_0() { return cBlockAction_0; }
 
+		//"begin" | "{"
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
 		//"begin"
-		public Keyword getBeginKeyword_1() { return cBeginKeyword_1; }
+		public Keyword getBeginKeyword_1_0() { return cBeginKeyword_1_0; }
+
+		//"{"
+		public Keyword getLeftCurlyBracketKeyword_1_1() { return cLeftCurlyBracketKeyword_1_1; }
 
 		//statements+=statement*
 		public Assignment getStatementsAssignment_2() { return cStatementsAssignment_2; }
@@ -241,8 +251,14 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		//statement
 		public RuleCall getStatementsStatementParserRuleCall_2_0() { return cStatementsStatementParserRuleCall_2_0; }
 
+		//"end" | "}"
+		public Alternatives getAlternatives_3() { return cAlternatives_3; }
+
 		//"end"
-		public Keyword getEndKeyword_3() { return cEndKeyword_3; }
+		public Keyword getEndKeyword_3_0() { return cEndKeyword_3_0; }
+
+		//"}"
+		public Keyword getRightCurlyBracketKeyword_3_1() { return cRightCurlyBracketKeyword_3_1; }
 	}
 
 	public class TypeElements extends AbstractParserRuleElementFinder {
@@ -1259,7 +1275,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//block:
-	//	{block} "begin" statements+=statement* "end";
+	//	{block} ("begin" | "{") statements+=statement* ("end" | "}");
 	public BlockElements getBlockAccess() {
 		return (pBlock != null) ? pBlock : (pBlock = new BlockElements());
 	}

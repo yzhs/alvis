@@ -994,11 +994,11 @@ protected class Param_NameAssignment_1 extends AssignmentToken  {
 /************ begin Rule block ****************
  *
  * block:
- * 	{block} "begin" statements+=statement* "end";
+ * 	{block} ("begin" | "{") statements+=statement* ("end" | "}");
  *
  **/
 
-// {block} "begin" statements+=statement* "end"
+// {block} ("begin" | "{") statements+=statement* ("end" | "}")
 protected class Block_Group extends GroupToken {
 	
 	public Block_Group(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1013,7 +1013,7 @@ protected class Block_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
-			case 0: return new Block_EndKeyword_3(lastRuleCallOrigin, this, 0, inst);
+			case 0: return new Block_Alternatives_3(lastRuleCallOrigin, this, 0, inst);
 			default: return null;
 		}	
 	}
@@ -1053,16 +1053,38 @@ protected class Block_BlockAction_0 extends ActionToken  {
 	}
 }
 
-// "begin"
-protected class Block_BeginKeyword_1 extends KeywordToken  {
+// "begin" | "{"
+protected class Block_Alternatives_1 extends AlternativesToken {
+
+	public Block_Alternatives_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
 	
-	public Block_BeginKeyword_1(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getBlockAccess().getAlternatives_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Block_BeginKeyword_1_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "begin"
+protected class Block_BeginKeyword_1_0 extends KeywordToken  {
+	
+	public Block_BeginKeyword_1_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getBlockAccess().getBeginKeyword_1();
+		return grammarAccess.getBlockAccess().getBeginKeyword_1_0();
 	}
 
     @Override
@@ -1074,6 +1096,7 @@ protected class Block_BeginKeyword_1 extends KeywordToken  {
 	}
 
 }
+
 
 // statements+=statement*
 protected class Block_StatementsAssignment_2 extends AssignmentToken  {
@@ -1116,34 +1139,57 @@ protected class Block_StatementsAssignment_2 extends AssignmentToken  {
 		if(value == inst.getEObject() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new Block_StatementsAssignment_2(lastRuleCallOrigin, next, actIndex, consumed);
-			case 1: return new Block_BeginKeyword_1(lastRuleCallOrigin, next, actIndex, consumed);
+			case 1: return new Block_Alternatives_1(lastRuleCallOrigin, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
 }
 
-// "end"
-protected class Block_EndKeyword_3 extends KeywordToken  {
+// "end" | "}"
+protected class Block_Alternatives_3 extends AlternativesToken {
+
+	public Block_Alternatives_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
+	}
 	
-	public Block_EndKeyword_3(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getBlockAccess().getAlternatives_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
+		switch(index) {
+			case 0: return new Block_EndKeyword_3_0(lastRuleCallOrigin, this, 0, inst);
+			default: return null;
+		}	
+	}
+
+}
+
+// "end"
+protected class Block_EndKeyword_3_0 extends KeywordToken  {
+	
+	public Block_EndKeyword_3_0(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
 		super(lastRuleCallOrigin, next, transitionIndex, eObjectConsumer);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getBlockAccess().getEndKeyword_3();
+		return grammarAccess.getBlockAccess().getEndKeyword_3_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IEObjectConsumer inst) {
 		switch(index) {
 			case 0: return new Block_StatementsAssignment_2(lastRuleCallOrigin, this, 0, inst);
-			case 1: return new Block_BeginKeyword_1(lastRuleCallOrigin, this, 1, inst);
+			case 1: return new Block_Alternatives_1(lastRuleCallOrigin, this, 1, inst);
 			default: return null;
 		}	
 	}
 
 }
+
 
 
 /************ end Rule block ****************/

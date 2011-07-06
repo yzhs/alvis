@@ -17,7 +17,7 @@ formalParams  : params+=param (',' params+=param)*;
 
 param   : type name=ID;
  
-block  : {block}'begin' statements+=statement* 'end' ;
+block  : {block}('begin'|'{') statements+=statement* ('end'|'}');
 
 type: types=('String'|'Integer'|'Boolean'|'Graph'|'Vertex'|'Edge'|'Queue');
 

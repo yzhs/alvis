@@ -545,16 +545,21 @@ ruleblock returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-)	'begin' 
+)(	'begin' 
     {
-        createLeafNode(grammarAccess.getBlockAccess().getBeginKeyword_1(), null); 
+        createLeafNode(grammarAccess.getBlockAccess().getBeginKeyword_1_0(), null); 
     }
-(
+
+    |	'{' 
+    {
+        createLeafNode(grammarAccess.getBlockAccess().getLeftCurlyBracketKeyword_1_1(), null); 
+    }
+)(
 (
 		{ 
 	        currentNode=createCompositeNode(grammarAccess.getBlockAccess().getStatementsStatementParserRuleCall_2_0(), currentNode); 
 	    }
-		lv_statements_2_0=rulestatement		{
+		lv_statements_3_0=rulestatement		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getBlockRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -563,7 +568,7 @@ ruleblock returns [EObject current=null]
 	       		add(
 	       			$current, 
 	       			"statements",
-	        		lv_statements_2_0, 
+	        		lv_statements_3_0, 
 	        		"statement", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -573,11 +578,16 @@ ruleblock returns [EObject current=null]
 	    }
 
 )
-)*	'end' 
+)*(	'end' 
     {
-        createLeafNode(grammarAccess.getBlockAccess().getEndKeyword_3(), null); 
+        createLeafNode(grammarAccess.getBlockAccess().getEndKeyword_3_0(), null); 
     }
-)
+
+    |	'}' 
+    {
+        createLeafNode(grammarAccess.getBlockAccess().getRightCurlyBracketKeyword_3_1(), null); 
+    }
+))
 ;
 
 

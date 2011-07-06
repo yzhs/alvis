@@ -96,11 +96,17 @@
             <classifier xsi:type="ecore:EClass" href="de.unisiegen.informatik.bs.alvis.language.algorithmLanguage#//block"/>
           </type>
         </elements>
-        <elements xsi:type="xtext:Keyword" value="begin"/>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Keyword" value="begin"/>
+          <elements xsi:type="xtext:Keyword" value="{"/>
+        </elements>
         <elements xsi:type="xtext:Assignment" cardinality="*" feature="statements" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
         </elements>
-        <elements xsi:type="xtext:Keyword" value="end"/>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Keyword" value="end"/>
+          <elements xsi:type="xtext:Keyword" value="}"/>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="type">
