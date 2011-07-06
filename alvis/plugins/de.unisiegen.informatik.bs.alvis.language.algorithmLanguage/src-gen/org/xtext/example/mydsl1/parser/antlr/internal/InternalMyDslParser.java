@@ -25,7 +25,7 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalMyDslParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_SIGN", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'('", "')'", "':'", "'main'", "','", "'begin'", "'end'", "'String'", "'Integer'", "'Boolean'", "'Graph'", "'Vertex'", "'Edge'", "'return'", "'if'", "'else'", "'for'", "'in'", "'while'", "'[]'", "'='", "'||'", "'&&'", "'=='", "'!='", "'<'", "'>'", "'<='", "'>='", "'*'", "'/'", "'%'", "'!'", "'.'", "'['", "']'", "'true'", "'false'", "'null'", "'infty'", "';'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ID", "RULE_SIGN", "RULE_INT", "RULE_STRING", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'('", "')'", "':'", "'main'", "','", "'begin'", "'end'", "'String'", "'Integer'", "'Boolean'", "'Graph'", "'Vertex'", "'Edge'", "'Queue'", "'return'", "'if'", "'else'", "'for'", "'in'", "'while'", "'[]'", "'='", "'||'", "'&&'", "'=='", "'!='", "'<'", "'>'", "'<='", "'>='", "'*'", "'/'", "'%'", "'!'", "'.'", "'['", "']'", "'true'", "'false'", "'null'", "'infty'", "';'"
     };
     public static final int RULE_ID=4;
     public static final int RULE_STRING=7;
@@ -39,7 +39,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
         public InternalMyDslParser(TokenStream input) {
             super(input);
-            ruleMemo = new HashMap[96+1];
+            ruleMemo = new HashMap[97+1];
          }
         
 
@@ -368,7 +368,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
             int alt2=2;
             int LA2_0 = input.LA(1);
 
-            if ( ((LA2_0>=19 && LA2_0<=24)) ) {
+            if ( ((LA2_0>=19 && LA2_0<=25)) ) {
                 alt2=1;
             }
             switch (alt2) {
@@ -650,7 +650,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
             int alt4=2;
             int LA4_0 = input.LA(1);
 
-            if ( ((LA4_0>=19 && LA4_0<=24)) ) {
+            if ( ((LA4_0>=19 && LA4_0<=25)) ) {
                 alt4=1;
             }
             switch (alt4) {
@@ -1188,7 +1188,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                 int alt6=2;
                 int LA6_0 = input.LA(1);
 
-                if ( (LA6_0==RULE_ID||LA6_0==17||(LA6_0>=19 && LA6_0<=26)||LA6_0==28||LA6_0==30) ) {
+                if ( (LA6_0==RULE_ID||LA6_0==17||(LA6_0>=19 && LA6_0<=27)||LA6_0==29||LA6_0==31) ) {
                     alt6=1;
                 }
 
@@ -1310,7 +1310,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruletype
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:597:1: ruletype returns [EObject current=null] : ( ( (lv_types_0_1= 'String' | lv_types_0_2= 'Integer' | lv_types_0_3= 'Boolean' | lv_types_0_4= 'Graph' | lv_types_0_5= 'Vertex' | lv_types_0_6= 'Edge' ) ) ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:597:1: ruletype returns [EObject current=null] : ( ( (lv_types_0_1= 'String' | lv_types_0_2= 'Integer' | lv_types_0_3= 'Boolean' | lv_types_0_4= 'Graph' | lv_types_0_5= 'Vertex' | lv_types_0_6= 'Edge' | lv_types_0_7= 'Queue' ) ) ) ;
     public final EObject ruletype() throws RecognitionException {
         EObject current = null;
 
@@ -1320,21 +1320,22 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
         Token lv_types_0_4=null;
         Token lv_types_0_5=null;
         Token lv_types_0_6=null;
+        Token lv_types_0_7=null;
 
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:602:6: ( ( ( (lv_types_0_1= 'String' | lv_types_0_2= 'Integer' | lv_types_0_3= 'Boolean' | lv_types_0_4= 'Graph' | lv_types_0_5= 'Vertex' | lv_types_0_6= 'Edge' ) ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:603:1: ( ( (lv_types_0_1= 'String' | lv_types_0_2= 'Integer' | lv_types_0_3= 'Boolean' | lv_types_0_4= 'Graph' | lv_types_0_5= 'Vertex' | lv_types_0_6= 'Edge' ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:602:6: ( ( ( (lv_types_0_1= 'String' | lv_types_0_2= 'Integer' | lv_types_0_3= 'Boolean' | lv_types_0_4= 'Graph' | lv_types_0_5= 'Vertex' | lv_types_0_6= 'Edge' | lv_types_0_7= 'Queue' ) ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:603:1: ( ( (lv_types_0_1= 'String' | lv_types_0_2= 'Integer' | lv_types_0_3= 'Boolean' | lv_types_0_4= 'Graph' | lv_types_0_5= 'Vertex' | lv_types_0_6= 'Edge' | lv_types_0_7= 'Queue' ) ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:603:1: ( ( (lv_types_0_1= 'String' | lv_types_0_2= 'Integer' | lv_types_0_3= 'Boolean' | lv_types_0_4= 'Graph' | lv_types_0_5= 'Vertex' | lv_types_0_6= 'Edge' ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:604:1: ( (lv_types_0_1= 'String' | lv_types_0_2= 'Integer' | lv_types_0_3= 'Boolean' | lv_types_0_4= 'Graph' | lv_types_0_5= 'Vertex' | lv_types_0_6= 'Edge' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:603:1: ( ( (lv_types_0_1= 'String' | lv_types_0_2= 'Integer' | lv_types_0_3= 'Boolean' | lv_types_0_4= 'Graph' | lv_types_0_5= 'Vertex' | lv_types_0_6= 'Edge' | lv_types_0_7= 'Queue' ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:604:1: ( (lv_types_0_1= 'String' | lv_types_0_2= 'Integer' | lv_types_0_3= 'Boolean' | lv_types_0_4= 'Graph' | lv_types_0_5= 'Vertex' | lv_types_0_6= 'Edge' | lv_types_0_7= 'Queue' ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:604:1: ( (lv_types_0_1= 'String' | lv_types_0_2= 'Integer' | lv_types_0_3= 'Boolean' | lv_types_0_4= 'Graph' | lv_types_0_5= 'Vertex' | lv_types_0_6= 'Edge' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:605:1: (lv_types_0_1= 'String' | lv_types_0_2= 'Integer' | lv_types_0_3= 'Boolean' | lv_types_0_4= 'Graph' | lv_types_0_5= 'Vertex' | lv_types_0_6= 'Edge' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:604:1: ( (lv_types_0_1= 'String' | lv_types_0_2= 'Integer' | lv_types_0_3= 'Boolean' | lv_types_0_4= 'Graph' | lv_types_0_5= 'Vertex' | lv_types_0_6= 'Edge' | lv_types_0_7= 'Queue' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:605:1: (lv_types_0_1= 'String' | lv_types_0_2= 'Integer' | lv_types_0_3= 'Boolean' | lv_types_0_4= 'Graph' | lv_types_0_5= 'Vertex' | lv_types_0_6= 'Edge' | lv_types_0_7= 'Queue' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:605:1: (lv_types_0_1= 'String' | lv_types_0_2= 'Integer' | lv_types_0_3= 'Boolean' | lv_types_0_4= 'Graph' | lv_types_0_5= 'Vertex' | lv_types_0_6= 'Edge' )
-            int alt7=6;
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:605:1: (lv_types_0_1= 'String' | lv_types_0_2= 'Integer' | lv_types_0_3= 'Boolean' | lv_types_0_4= 'Graph' | lv_types_0_5= 'Vertex' | lv_types_0_6= 'Edge' | lv_types_0_7= 'Queue' )
+            int alt7=7;
             switch ( input.LA(1) ) {
             case 19:
                 {
@@ -1366,10 +1367,15 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                 alt7=6;
                 }
                 break;
+            case 25:
+                {
+                alt7=7;
+                }
+                break;
             default:
                 if (backtracking>0) {failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("605:1: (lv_types_0_1= 'String' | lv_types_0_2= 'Integer' | lv_types_0_3= 'Boolean' | lv_types_0_4= 'Graph' | lv_types_0_5= 'Vertex' | lv_types_0_6= 'Edge' )", 7, 0, input);
+                    new NoViableAltException("605:1: (lv_types_0_1= 'String' | lv_types_0_2= 'Integer' | lv_types_0_3= 'Boolean' | lv_types_0_4= 'Graph' | lv_types_0_5= 'Vertex' | lv_types_0_6= 'Edge' | lv_types_0_7= 'Queue' )", 7, 0, input);
 
                 throw nvae;
             }
@@ -1537,6 +1543,33 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
                     }
                     break;
+                case 7 :
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:714:8: lv_types_0_7= 'Queue'
+                    {
+                    lv_types_0_7=(Token)input.LT(1);
+                    match(input,25,FOLLOW_25_in_ruletype1146); if (failed) return current;
+                    if ( backtracking==0 ) {
+
+                              createLeafNode(grammarAccess.getTypeAccess().getTypesQueueKeyword_0_6(), "types"); 
+                          
+                    }
+                    if ( backtracking==0 ) {
+
+                      	        if (current==null) {
+                      	            current = factory.create(grammarAccess.getTypeRule().getType().getClassifier());
+                      	            associateNodeWithAstElement(currentNode, current);
+                      	        }
+                      	        
+                      	        try {
+                      	       		set(current, "types", lv_types_0_7, null, lastConsumedNode);
+                      	        } catch (ValueConverterException vce) {
+                      				handleValueConverterException(vce);
+                      	        }
+                      	    
+                    }
+
+                    }
+                    break;
 
             }
 
@@ -1568,7 +1601,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRulestatement
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:725:1: entryRulestatement returns [EObject current=null] : iv_rulestatement= rulestatement EOF ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:743:1: entryRulestatement returns [EObject current=null] : iv_rulestatement= rulestatement EOF ;
     public final EObject entryRulestatement() throws RecognitionException {
         EObject current = null;
 
@@ -1576,20 +1609,20 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:726:2: (iv_rulestatement= rulestatement EOF )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:727:2: iv_rulestatement= rulestatement EOF
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:744:2: (iv_rulestatement= rulestatement EOF )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:745:2: iv_rulestatement= rulestatement EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getStatementRule(), currentNode); 
             }
-            pushFollow(FOLLOW_rulestatement_in_entryRulestatement1168);
+            pushFollow(FOLLOW_rulestatement_in_entryRulestatement1197);
             iv_rulestatement=rulestatement();
             _fsp--;
             if (failed) return current;
             if ( backtracking==0 ) {
                current =iv_rulestatement; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRulestatement1178); if (failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRulestatement1207); if (failed) return current;
 
             }
 
@@ -1607,7 +1640,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start rulestatement
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:734:1: rulestatement returns [EObject current=null] : ( ( () ( (lv_postFixExpression_1_0= rulepostfixExpr ) ) ruleendExpr ) | (this_declaration_3= ruledeclaration ruleendExpr ) | ( () ( (lv_assignments_6_0= ruleassignment ) ) ruleendExpr ) | ( () 'return' ( (lv_exprs_10_0= ruleexpr ) )? ruleendExpr ) | ( 'if' this_expr_13= ruleexpr ':' ( (lv_statements_15_0= rulestatement ) ) ( 'else' ( (lv_statements_17_0= rulestatement ) ) )? ) | ( 'for' this_param_19= ruleparam 'in' ( (lv_exprs_21_0= ruleexpr ) ) ':' ( (lv_statements_23_0= rulestatement ) ) ) | ( 'while' this_expr_25= ruleexpr ':' ( (lv_statements_27_0= rulestatement ) ) ) | this_block_28= ruleblock ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:752:1: rulestatement returns [EObject current=null] : ( ( () ( (lv_postFixExpression_1_0= rulepostfixExpr ) ) ruleendExpr ) | (this_declaration_3= ruledeclaration ruleendExpr ) | ( () ( (lv_assignments_6_0= ruleassignment ) ) ruleendExpr ) | ( () 'return' ( (lv_exprs_10_0= ruleexpr ) )? ruleendExpr ) | ( 'if' this_expr_13= ruleexpr ':' ( (lv_statements_15_0= rulestatement ) ) ( 'else' ( (lv_statements_17_0= rulestatement ) ) )? ) | ( 'for' this_param_19= ruleparam 'in' ( (lv_exprs_21_0= ruleexpr ) ) ':' ( (lv_statements_23_0= rulestatement ) ) ) | ( 'while' this_expr_25= ruleexpr ':' ( (lv_statements_27_0= rulestatement ) ) ) | this_block_28= ruleblock ) ;
     public final EObject rulestatement() throws RecognitionException {
         EObject current = null;
 
@@ -1641,26 +1674,26 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:739:6: ( ( ( () ( (lv_postFixExpression_1_0= rulepostfixExpr ) ) ruleendExpr ) | (this_declaration_3= ruledeclaration ruleendExpr ) | ( () ( (lv_assignments_6_0= ruleassignment ) ) ruleendExpr ) | ( () 'return' ( (lv_exprs_10_0= ruleexpr ) )? ruleendExpr ) | ( 'if' this_expr_13= ruleexpr ':' ( (lv_statements_15_0= rulestatement ) ) ( 'else' ( (lv_statements_17_0= rulestatement ) ) )? ) | ( 'for' this_param_19= ruleparam 'in' ( (lv_exprs_21_0= ruleexpr ) ) ':' ( (lv_statements_23_0= rulestatement ) ) ) | ( 'while' this_expr_25= ruleexpr ':' ( (lv_statements_27_0= rulestatement ) ) ) | this_block_28= ruleblock ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:740:1: ( ( () ( (lv_postFixExpression_1_0= rulepostfixExpr ) ) ruleendExpr ) | (this_declaration_3= ruledeclaration ruleendExpr ) | ( () ( (lv_assignments_6_0= ruleassignment ) ) ruleendExpr ) | ( () 'return' ( (lv_exprs_10_0= ruleexpr ) )? ruleendExpr ) | ( 'if' this_expr_13= ruleexpr ':' ( (lv_statements_15_0= rulestatement ) ) ( 'else' ( (lv_statements_17_0= rulestatement ) ) )? ) | ( 'for' this_param_19= ruleparam 'in' ( (lv_exprs_21_0= ruleexpr ) ) ':' ( (lv_statements_23_0= rulestatement ) ) ) | ( 'while' this_expr_25= ruleexpr ':' ( (lv_statements_27_0= rulestatement ) ) ) | this_block_28= ruleblock )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:757:6: ( ( ( () ( (lv_postFixExpression_1_0= rulepostfixExpr ) ) ruleendExpr ) | (this_declaration_3= ruledeclaration ruleendExpr ) | ( () ( (lv_assignments_6_0= ruleassignment ) ) ruleendExpr ) | ( () 'return' ( (lv_exprs_10_0= ruleexpr ) )? ruleendExpr ) | ( 'if' this_expr_13= ruleexpr ':' ( (lv_statements_15_0= rulestatement ) ) ( 'else' ( (lv_statements_17_0= rulestatement ) ) )? ) | ( 'for' this_param_19= ruleparam 'in' ( (lv_exprs_21_0= ruleexpr ) ) ':' ( (lv_statements_23_0= rulestatement ) ) ) | ( 'while' this_expr_25= ruleexpr ':' ( (lv_statements_27_0= rulestatement ) ) ) | this_block_28= ruleblock ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:758:1: ( ( () ( (lv_postFixExpression_1_0= rulepostfixExpr ) ) ruleendExpr ) | (this_declaration_3= ruledeclaration ruleendExpr ) | ( () ( (lv_assignments_6_0= ruleassignment ) ) ruleendExpr ) | ( () 'return' ( (lv_exprs_10_0= ruleexpr ) )? ruleendExpr ) | ( 'if' this_expr_13= ruleexpr ':' ( (lv_statements_15_0= rulestatement ) ) ( 'else' ( (lv_statements_17_0= rulestatement ) ) )? ) | ( 'for' this_param_19= ruleparam 'in' ( (lv_exprs_21_0= ruleexpr ) ) ':' ( (lv_statements_23_0= rulestatement ) ) ) | ( 'while' this_expr_25= ruleexpr ':' ( (lv_statements_27_0= rulestatement ) ) ) | this_block_28= ruleblock )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:740:1: ( ( () ( (lv_postFixExpression_1_0= rulepostfixExpr ) ) ruleendExpr ) | (this_declaration_3= ruledeclaration ruleendExpr ) | ( () ( (lv_assignments_6_0= ruleassignment ) ) ruleendExpr ) | ( () 'return' ( (lv_exprs_10_0= ruleexpr ) )? ruleendExpr ) | ( 'if' this_expr_13= ruleexpr ':' ( (lv_statements_15_0= rulestatement ) ) ( 'else' ( (lv_statements_17_0= rulestatement ) ) )? ) | ( 'for' this_param_19= ruleparam 'in' ( (lv_exprs_21_0= ruleexpr ) ) ':' ( (lv_statements_23_0= rulestatement ) ) ) | ( 'while' this_expr_25= ruleexpr ':' ( (lv_statements_27_0= rulestatement ) ) ) | this_block_28= ruleblock )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:758:1: ( ( () ( (lv_postFixExpression_1_0= rulepostfixExpr ) ) ruleendExpr ) | (this_declaration_3= ruledeclaration ruleendExpr ) | ( () ( (lv_assignments_6_0= ruleassignment ) ) ruleendExpr ) | ( () 'return' ( (lv_exprs_10_0= ruleexpr ) )? ruleendExpr ) | ( 'if' this_expr_13= ruleexpr ':' ( (lv_statements_15_0= rulestatement ) ) ( 'else' ( (lv_statements_17_0= rulestatement ) ) )? ) | ( 'for' this_param_19= ruleparam 'in' ( (lv_exprs_21_0= ruleexpr ) ) ':' ( (lv_statements_23_0= rulestatement ) ) ) | ( 'while' this_expr_25= ruleexpr ':' ( (lv_statements_27_0= rulestatement ) ) ) | this_block_28= ruleblock )
             int alt10=8;
             switch ( input.LA(1) ) {
             case RULE_ID:
                 {
                 int LA10_1 = input.LA(2);
 
-                if ( (synpred12()) ) {
+                if ( (synpred13()) ) {
                     alt10=1;
                 }
-                else if ( (synpred14()) ) {
+                else if ( (synpred15()) ) {
                     alt10=3;
                 }
                 else {
                     if (backtracking>0) {failed=true; return current;}
                     NoViableAltException nvae =
-                        new NoViableAltException("740:1: ( ( () ( (lv_postFixExpression_1_0= rulepostfixExpr ) ) ruleendExpr ) | (this_declaration_3= ruledeclaration ruleendExpr ) | ( () ( (lv_assignments_6_0= ruleassignment ) ) ruleendExpr ) | ( () 'return' ( (lv_exprs_10_0= ruleexpr ) )? ruleendExpr ) | ( 'if' this_expr_13= ruleexpr ':' ( (lv_statements_15_0= rulestatement ) ) ( 'else' ( (lv_statements_17_0= rulestatement ) ) )? ) | ( 'for' this_param_19= ruleparam 'in' ( (lv_exprs_21_0= ruleexpr ) ) ':' ( (lv_statements_23_0= rulestatement ) ) ) | ( 'while' this_expr_25= ruleexpr ':' ( (lv_statements_27_0= rulestatement ) ) ) | this_block_28= ruleblock )", 10, 1, input);
+                        new NoViableAltException("758:1: ( ( () ( (lv_postFixExpression_1_0= rulepostfixExpr ) ) ruleendExpr ) | (this_declaration_3= ruledeclaration ruleendExpr ) | ( () ( (lv_assignments_6_0= ruleassignment ) ) ruleendExpr ) | ( () 'return' ( (lv_exprs_10_0= ruleexpr ) )? ruleendExpr ) | ( 'if' this_expr_13= ruleexpr ':' ( (lv_statements_15_0= rulestatement ) ) ( 'else' ( (lv_statements_17_0= rulestatement ) ) )? ) | ( 'for' this_param_19= ruleparam 'in' ( (lv_exprs_21_0= ruleexpr ) ) ':' ( (lv_statements_23_0= rulestatement ) ) ) | ( 'while' this_expr_25= ruleexpr ':' ( (lv_statements_27_0= rulestatement ) ) ) | this_block_28= ruleblock )", 10, 1, input);
 
                     throw nvae;
                 }
@@ -1672,26 +1705,27 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
             case 22:
             case 23:
             case 24:
+            case 25:
                 {
                 alt10=2;
                 }
                 break;
-            case 25:
+            case 26:
                 {
                 alt10=4;
                 }
                 break;
-            case 26:
+            case 27:
                 {
                 alt10=5;
                 }
                 break;
-            case 28:
+            case 29:
                 {
                 alt10=6;
                 }
                 break;
-            case 30:
+            case 31:
                 {
                 alt10=7;
                 }
@@ -1704,20 +1738,20 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
             default:
                 if (backtracking>0) {failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("740:1: ( ( () ( (lv_postFixExpression_1_0= rulepostfixExpr ) ) ruleendExpr ) | (this_declaration_3= ruledeclaration ruleendExpr ) | ( () ( (lv_assignments_6_0= ruleassignment ) ) ruleendExpr ) | ( () 'return' ( (lv_exprs_10_0= ruleexpr ) )? ruleendExpr ) | ( 'if' this_expr_13= ruleexpr ':' ( (lv_statements_15_0= rulestatement ) ) ( 'else' ( (lv_statements_17_0= rulestatement ) ) )? ) | ( 'for' this_param_19= ruleparam 'in' ( (lv_exprs_21_0= ruleexpr ) ) ':' ( (lv_statements_23_0= rulestatement ) ) ) | ( 'while' this_expr_25= ruleexpr ':' ( (lv_statements_27_0= rulestatement ) ) ) | this_block_28= ruleblock )", 10, 0, input);
+                    new NoViableAltException("758:1: ( ( () ( (lv_postFixExpression_1_0= rulepostfixExpr ) ) ruleendExpr ) | (this_declaration_3= ruledeclaration ruleendExpr ) | ( () ( (lv_assignments_6_0= ruleassignment ) ) ruleendExpr ) | ( () 'return' ( (lv_exprs_10_0= ruleexpr ) )? ruleendExpr ) | ( 'if' this_expr_13= ruleexpr ':' ( (lv_statements_15_0= rulestatement ) ) ( 'else' ( (lv_statements_17_0= rulestatement ) ) )? ) | ( 'for' this_param_19= ruleparam 'in' ( (lv_exprs_21_0= ruleexpr ) ) ':' ( (lv_statements_23_0= rulestatement ) ) ) | ( 'while' this_expr_25= ruleexpr ':' ( (lv_statements_27_0= rulestatement ) ) ) | this_block_28= ruleblock )", 10, 0, input);
 
                 throw nvae;
             }
 
             switch (alt10) {
                 case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:740:2: ( () ( (lv_postFixExpression_1_0= rulepostfixExpr ) ) ruleendExpr )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:758:2: ( () ( (lv_postFixExpression_1_0= rulepostfixExpr ) ) ruleendExpr )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:740:2: ( () ( (lv_postFixExpression_1_0= rulepostfixExpr ) ) ruleendExpr )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:740:3: () ( (lv_postFixExpression_1_0= rulepostfixExpr ) ) ruleendExpr
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:758:2: ( () ( (lv_postFixExpression_1_0= rulepostfixExpr ) ) ruleendExpr )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:758:3: () ( (lv_postFixExpression_1_0= rulepostfixExpr ) ) ruleendExpr
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:740:3: ()
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:741:2: 
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:758:3: ()
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:759:2: 
                     {
                     if ( backtracking==0 ) {
                        
@@ -1739,18 +1773,18 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:754:2: ( (lv_postFixExpression_1_0= rulepostfixExpr ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:755:1: (lv_postFixExpression_1_0= rulepostfixExpr )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:772:2: ( (lv_postFixExpression_1_0= rulepostfixExpr ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:773:1: (lv_postFixExpression_1_0= rulepostfixExpr )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:755:1: (lv_postFixExpression_1_0= rulepostfixExpr )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:756:3: lv_postFixExpression_1_0= rulepostfixExpr
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:773:1: (lv_postFixExpression_1_0= rulepostfixExpr )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:774:3: lv_postFixExpression_1_0= rulepostfixExpr
                     {
                     if ( backtracking==0 ) {
                        
                       	        currentNode=createCompositeNode(grammarAccess.getStatementAccess().getPostFixExpressionPostfixExprParserRuleCall_0_1_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FOLLOW_rulepostfixExpr_in_rulestatement1237);
+                    pushFollow(FOLLOW_rulepostfixExpr_in_rulestatement1266);
                     lv_postFixExpression_1_0=rulepostfixExpr();
                     _fsp--;
                     if (failed) return current;
@@ -1789,7 +1823,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                               currentNode=createCompositeNode(grammarAccess.getStatementAccess().getEndExprParserRuleCall_0_2(), currentNode); 
                           
                     }
-                    pushFollow(FOLLOW_ruleendExpr_in_rulestatement1256);
+                    pushFollow(FOLLOW_ruleendExpr_in_rulestatement1285);
                     ruleendExpr();
                     _fsp--;
                     if (failed) return current;
@@ -1805,10 +1839,10 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:790:6: (this_declaration_3= ruledeclaration ruleendExpr )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:808:6: (this_declaration_3= ruledeclaration ruleendExpr )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:790:6: (this_declaration_3= ruledeclaration ruleendExpr )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:791:2: this_declaration_3= ruledeclaration ruleendExpr
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:808:6: (this_declaration_3= ruledeclaration ruleendExpr )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:809:2: this_declaration_3= ruledeclaration ruleendExpr
                     {
                     if ( backtracking==0 ) {
                        
@@ -1820,7 +1854,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                               currentNode=createCompositeNode(grammarAccess.getStatementAccess().getDeclarationParserRuleCall_1_0(), currentNode); 
                           
                     }
-                    pushFollow(FOLLOW_ruledeclaration_in_rulestatement1288);
+                    pushFollow(FOLLOW_ruledeclaration_in_rulestatement1317);
                     this_declaration_3=ruledeclaration();
                     _fsp--;
                     if (failed) return current;
@@ -1840,7 +1874,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                               currentNode=createCompositeNode(grammarAccess.getStatementAccess().getEndExprParserRuleCall_1_1(), currentNode); 
                           
                     }
-                    pushFollow(FOLLOW_ruleendExpr_in_rulestatement1306);
+                    pushFollow(FOLLOW_ruleendExpr_in_rulestatement1335);
                     ruleendExpr();
                     _fsp--;
                     if (failed) return current;
@@ -1856,13 +1890,13 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:814:6: ( () ( (lv_assignments_6_0= ruleassignment ) ) ruleendExpr )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:832:6: ( () ( (lv_assignments_6_0= ruleassignment ) ) ruleendExpr )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:814:6: ( () ( (lv_assignments_6_0= ruleassignment ) ) ruleendExpr )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:814:7: () ( (lv_assignments_6_0= ruleassignment ) ) ruleendExpr
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:832:6: ( () ( (lv_assignments_6_0= ruleassignment ) ) ruleendExpr )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:832:7: () ( (lv_assignments_6_0= ruleassignment ) ) ruleendExpr
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:814:7: ()
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:815:2: 
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:832:7: ()
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:833:2: 
                     {
                     if ( backtracking==0 ) {
                        
@@ -1884,18 +1918,18 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:828:2: ( (lv_assignments_6_0= ruleassignment ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:829:1: (lv_assignments_6_0= ruleassignment )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:846:2: ( (lv_assignments_6_0= ruleassignment ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:847:1: (lv_assignments_6_0= ruleassignment )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:829:1: (lv_assignments_6_0= ruleassignment )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:830:3: lv_assignments_6_0= ruleassignment
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:847:1: (lv_assignments_6_0= ruleassignment )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:848:3: lv_assignments_6_0= ruleassignment
                     {
                     if ( backtracking==0 ) {
                        
                       	        currentNode=createCompositeNode(grammarAccess.getStatementAccess().getAssignmentsAssignmentParserRuleCall_2_1_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FOLLOW_ruleassignment_in_rulestatement1346);
+                    pushFollow(FOLLOW_ruleassignment_in_rulestatement1375);
                     lv_assignments_6_0=ruleassignment();
                     _fsp--;
                     if (failed) return current;
@@ -1934,7 +1968,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                               currentNode=createCompositeNode(grammarAccess.getStatementAccess().getEndExprParserRuleCall_2_2(), currentNode); 
                           
                     }
-                    pushFollow(FOLLOW_ruleendExpr_in_rulestatement1365);
+                    pushFollow(FOLLOW_ruleendExpr_in_rulestatement1394);
                     ruleendExpr();
                     _fsp--;
                     if (failed) return current;
@@ -1950,13 +1984,13 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:864:6: ( () 'return' ( (lv_exprs_10_0= ruleexpr ) )? ruleendExpr )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:882:6: ( () 'return' ( (lv_exprs_10_0= ruleexpr ) )? ruleendExpr )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:864:6: ( () 'return' ( (lv_exprs_10_0= ruleexpr ) )? ruleendExpr )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:864:7: () 'return' ( (lv_exprs_10_0= ruleexpr ) )? ruleendExpr
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:882:6: ( () 'return' ( (lv_exprs_10_0= ruleexpr ) )? ruleendExpr )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:882:7: () 'return' ( (lv_exprs_10_0= ruleexpr ) )? ruleendExpr
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:864:7: ()
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:865:2: 
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:882:7: ()
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:883:2: 
                     {
                     if ( backtracking==0 ) {
                        
@@ -1978,32 +2012,32 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    match(input,25,FOLLOW_25_in_rulestatement1394); if (failed) return current;
+                    match(input,26,FOLLOW_26_in_rulestatement1423); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               createLeafNode(grammarAccess.getStatementAccess().getReturnKeyword_3_1(), null); 
                           
                     }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:882:1: ( (lv_exprs_10_0= ruleexpr ) )?
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:900:1: ( (lv_exprs_10_0= ruleexpr ) )?
                     int alt8=2;
                     int LA8_0 = input.LA(1);
 
-                    if ( (LA8_0==RULE_ID||(LA8_0>=RULE_INT && LA8_0<=RULE_STRING)||LA8_0==12||LA8_0==44||(LA8_0>=48 && LA8_0<=51)) ) {
+                    if ( (LA8_0==RULE_ID||(LA8_0>=RULE_INT && LA8_0<=RULE_STRING)||LA8_0==12||LA8_0==45||(LA8_0>=49 && LA8_0<=52)) ) {
                         alt8=1;
                     }
                     switch (alt8) {
                         case 1 :
-                            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:883:1: (lv_exprs_10_0= ruleexpr )
+                            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:901:1: (lv_exprs_10_0= ruleexpr )
                             {
-                            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:883:1: (lv_exprs_10_0= ruleexpr )
-                            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:884:3: lv_exprs_10_0= ruleexpr
+                            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:901:1: (lv_exprs_10_0= ruleexpr )
+                            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:902:3: lv_exprs_10_0= ruleexpr
                             {
                             if ( backtracking==0 ) {
                                
                               	        currentNode=createCompositeNode(grammarAccess.getStatementAccess().getExprsExprParserRuleCall_3_2_0(), currentNode); 
                               	    
                             }
-                            pushFollow(FOLLOW_ruleexpr_in_rulestatement1415);
+                            pushFollow(FOLLOW_ruleexpr_in_rulestatement1444);
                             lv_exprs_10_0=ruleexpr();
                             _fsp--;
                             if (failed) return current;
@@ -2045,7 +2079,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                               currentNode=createCompositeNode(grammarAccess.getStatementAccess().getEndExprParserRuleCall_3_3(), currentNode); 
                           
                     }
-                    pushFollow(FOLLOW_ruleendExpr_in_rulestatement1435);
+                    pushFollow(FOLLOW_ruleendExpr_in_rulestatement1464);
                     ruleendExpr();
                     _fsp--;
                     if (failed) return current;
@@ -2061,12 +2095,12 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:918:6: ( 'if' this_expr_13= ruleexpr ':' ( (lv_statements_15_0= rulestatement ) ) ( 'else' ( (lv_statements_17_0= rulestatement ) ) )? )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:936:6: ( 'if' this_expr_13= ruleexpr ':' ( (lv_statements_15_0= rulestatement ) ) ( 'else' ( (lv_statements_17_0= rulestatement ) ) )? )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:918:6: ( 'if' this_expr_13= ruleexpr ':' ( (lv_statements_15_0= rulestatement ) ) ( 'else' ( (lv_statements_17_0= rulestatement ) ) )? )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:918:8: 'if' this_expr_13= ruleexpr ':' ( (lv_statements_15_0= rulestatement ) ) ( 'else' ( (lv_statements_17_0= rulestatement ) ) )?
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:936:6: ( 'if' this_expr_13= ruleexpr ':' ( (lv_statements_15_0= rulestatement ) ) ( 'else' ( (lv_statements_17_0= rulestatement ) ) )? )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:936:8: 'if' this_expr_13= ruleexpr ':' ( (lv_statements_15_0= rulestatement ) ) ( 'else' ( (lv_statements_17_0= rulestatement ) ) )?
                     {
-                    match(input,26,FOLLOW_26_in_rulestatement1452); if (failed) return current;
+                    match(input,27,FOLLOW_27_in_rulestatement1481); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               createLeafNode(grammarAccess.getStatementAccess().getIfKeyword_4_0(), null); 
@@ -2082,7 +2116,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                               currentNode=createCompositeNode(grammarAccess.getStatementAccess().getExprParserRuleCall_4_1(), currentNode); 
                           
                     }
-                    pushFollow(FOLLOW_ruleexpr_in_rulestatement1477);
+                    pushFollow(FOLLOW_ruleexpr_in_rulestatement1506);
                     this_expr_13=ruleexpr();
                     _fsp--;
                     if (failed) return current;
@@ -2092,24 +2126,24 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                               currentNode = currentNode.getParent();
                           
                     }
-                    match(input,14,FOLLOW_14_in_rulestatement1486); if (failed) return current;
+                    match(input,14,FOLLOW_14_in_rulestatement1515); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               createLeafNode(grammarAccess.getStatementAccess().getColonKeyword_4_2(), null); 
                           
                     }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:938:1: ( (lv_statements_15_0= rulestatement ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:939:1: (lv_statements_15_0= rulestatement )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:956:1: ( (lv_statements_15_0= rulestatement ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:957:1: (lv_statements_15_0= rulestatement )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:939:1: (lv_statements_15_0= rulestatement )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:940:3: lv_statements_15_0= rulestatement
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:957:1: (lv_statements_15_0= rulestatement )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:958:3: lv_statements_15_0= rulestatement
                     {
                     if ( backtracking==0 ) {
                        
                       	        currentNode=createCompositeNode(grammarAccess.getStatementAccess().getStatementsStatementParserRuleCall_4_3_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FOLLOW_rulestatement_in_rulestatement1507);
+                    pushFollow(FOLLOW_rulestatement_in_rulestatement1536);
                     lv_statements_15_0=rulestatement();
                     _fsp--;
                     if (failed) return current;
@@ -2138,39 +2172,39 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:962:2: ( 'else' ( (lv_statements_17_0= rulestatement ) ) )?
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:980:2: ( 'else' ( (lv_statements_17_0= rulestatement ) ) )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
-                    if ( (LA9_0==27) ) {
+                    if ( (LA9_0==28) ) {
                         int LA9_1 = input.LA(2);
 
-                        if ( (synpred17()) ) {
+                        if ( (synpred18()) ) {
                             alt9=1;
                         }
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:962:4: 'else' ( (lv_statements_17_0= rulestatement ) )
+                            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:980:4: 'else' ( (lv_statements_17_0= rulestatement ) )
                             {
-                            match(input,27,FOLLOW_27_in_rulestatement1518); if (failed) return current;
+                            match(input,28,FOLLOW_28_in_rulestatement1547); if (failed) return current;
                             if ( backtracking==0 ) {
 
                                       createLeafNode(grammarAccess.getStatementAccess().getElseKeyword_4_4_0(), null); 
                                   
                             }
-                            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:966:1: ( (lv_statements_17_0= rulestatement ) )
-                            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:967:1: (lv_statements_17_0= rulestatement )
+                            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:984:1: ( (lv_statements_17_0= rulestatement ) )
+                            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:985:1: (lv_statements_17_0= rulestatement )
                             {
-                            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:967:1: (lv_statements_17_0= rulestatement )
-                            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:968:3: lv_statements_17_0= rulestatement
+                            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:985:1: (lv_statements_17_0= rulestatement )
+                            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:986:3: lv_statements_17_0= rulestatement
                             {
                             if ( backtracking==0 ) {
                                
                               	        currentNode=createCompositeNode(grammarAccess.getStatementAccess().getStatementsStatementParserRuleCall_4_4_1_0(), currentNode); 
                               	    
                             }
-                            pushFollow(FOLLOW_rulestatement_in_rulestatement1539);
+                            pushFollow(FOLLOW_rulestatement_in_rulestatement1568);
                             lv_statements_17_0=rulestatement();
                             _fsp--;
                             if (failed) return current;
@@ -2212,12 +2246,12 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:991:6: ( 'for' this_param_19= ruleparam 'in' ( (lv_exprs_21_0= ruleexpr ) ) ':' ( (lv_statements_23_0= rulestatement ) ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1009:6: ( 'for' this_param_19= ruleparam 'in' ( (lv_exprs_21_0= ruleexpr ) ) ':' ( (lv_statements_23_0= rulestatement ) ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:991:6: ( 'for' this_param_19= ruleparam 'in' ( (lv_exprs_21_0= ruleexpr ) ) ':' ( (lv_statements_23_0= rulestatement ) ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:991:8: 'for' this_param_19= ruleparam 'in' ( (lv_exprs_21_0= ruleexpr ) ) ':' ( (lv_statements_23_0= rulestatement ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1009:6: ( 'for' this_param_19= ruleparam 'in' ( (lv_exprs_21_0= ruleexpr ) ) ':' ( (lv_statements_23_0= rulestatement ) ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1009:8: 'for' this_param_19= ruleparam 'in' ( (lv_exprs_21_0= ruleexpr ) ) ':' ( (lv_statements_23_0= rulestatement ) )
                     {
-                    match(input,28,FOLLOW_28_in_rulestatement1559); if (failed) return current;
+                    match(input,29,FOLLOW_29_in_rulestatement1588); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               createLeafNode(grammarAccess.getStatementAccess().getForKeyword_5_0(), null); 
@@ -2233,7 +2267,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                               currentNode=createCompositeNode(grammarAccess.getStatementAccess().getParamParserRuleCall_5_1(), currentNode); 
                           
                     }
-                    pushFollow(FOLLOW_ruleparam_in_rulestatement1584);
+                    pushFollow(FOLLOW_ruleparam_in_rulestatement1613);
                     this_param_19=ruleparam();
                     _fsp--;
                     if (failed) return current;
@@ -2243,24 +2277,24 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                               currentNode = currentNode.getParent();
                           
                     }
-                    match(input,29,FOLLOW_29_in_rulestatement1593); if (failed) return current;
+                    match(input,30,FOLLOW_30_in_rulestatement1622); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               createLeafNode(grammarAccess.getStatementAccess().getInKeyword_5_2(), null); 
                           
                     }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1011:1: ( (lv_exprs_21_0= ruleexpr ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1012:1: (lv_exprs_21_0= ruleexpr )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1029:1: ( (lv_exprs_21_0= ruleexpr ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1030:1: (lv_exprs_21_0= ruleexpr )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1012:1: (lv_exprs_21_0= ruleexpr )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1013:3: lv_exprs_21_0= ruleexpr
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1030:1: (lv_exprs_21_0= ruleexpr )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1031:3: lv_exprs_21_0= ruleexpr
                     {
                     if ( backtracking==0 ) {
                        
                       	        currentNode=createCompositeNode(grammarAccess.getStatementAccess().getExprsExprParserRuleCall_5_3_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FOLLOW_ruleexpr_in_rulestatement1614);
+                    pushFollow(FOLLOW_ruleexpr_in_rulestatement1643);
                     lv_exprs_21_0=ruleexpr();
                     _fsp--;
                     if (failed) return current;
@@ -2289,24 +2323,24 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    match(input,14,FOLLOW_14_in_rulestatement1624); if (failed) return current;
+                    match(input,14,FOLLOW_14_in_rulestatement1653); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               createLeafNode(grammarAccess.getStatementAccess().getColonKeyword_5_4(), null); 
                           
                     }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1039:1: ( (lv_statements_23_0= rulestatement ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1040:1: (lv_statements_23_0= rulestatement )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1057:1: ( (lv_statements_23_0= rulestatement ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1058:1: (lv_statements_23_0= rulestatement )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1040:1: (lv_statements_23_0= rulestatement )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1041:3: lv_statements_23_0= rulestatement
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1058:1: (lv_statements_23_0= rulestatement )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1059:3: lv_statements_23_0= rulestatement
                     {
                     if ( backtracking==0 ) {
                        
                       	        currentNode=createCompositeNode(grammarAccess.getStatementAccess().getStatementsStatementParserRuleCall_5_5_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FOLLOW_rulestatement_in_rulestatement1645);
+                    pushFollow(FOLLOW_rulestatement_in_rulestatement1674);
                     lv_statements_23_0=rulestatement();
                     _fsp--;
                     if (failed) return current;
@@ -2342,12 +2376,12 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 7 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1064:6: ( 'while' this_expr_25= ruleexpr ':' ( (lv_statements_27_0= rulestatement ) ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1082:6: ( 'while' this_expr_25= ruleexpr ':' ( (lv_statements_27_0= rulestatement ) ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1064:6: ( 'while' this_expr_25= ruleexpr ':' ( (lv_statements_27_0= rulestatement ) ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1064:8: 'while' this_expr_25= ruleexpr ':' ( (lv_statements_27_0= rulestatement ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1082:6: ( 'while' this_expr_25= ruleexpr ':' ( (lv_statements_27_0= rulestatement ) ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1082:8: 'while' this_expr_25= ruleexpr ':' ( (lv_statements_27_0= rulestatement ) )
                     {
-                    match(input,30,FOLLOW_30_in_rulestatement1663); if (failed) return current;
+                    match(input,31,FOLLOW_31_in_rulestatement1692); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               createLeafNode(grammarAccess.getStatementAccess().getWhileKeyword_6_0(), null); 
@@ -2363,7 +2397,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                               currentNode=createCompositeNode(grammarAccess.getStatementAccess().getExprParserRuleCall_6_1(), currentNode); 
                           
                     }
-                    pushFollow(FOLLOW_ruleexpr_in_rulestatement1688);
+                    pushFollow(FOLLOW_ruleexpr_in_rulestatement1717);
                     this_expr_25=ruleexpr();
                     _fsp--;
                     if (failed) return current;
@@ -2373,24 +2407,24 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                               currentNode = currentNode.getParent();
                           
                     }
-                    match(input,14,FOLLOW_14_in_rulestatement1697); if (failed) return current;
+                    match(input,14,FOLLOW_14_in_rulestatement1726); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               createLeafNode(grammarAccess.getStatementAccess().getColonKeyword_6_2(), null); 
                           
                     }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1084:1: ( (lv_statements_27_0= rulestatement ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1085:1: (lv_statements_27_0= rulestatement )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1102:1: ( (lv_statements_27_0= rulestatement ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1103:1: (lv_statements_27_0= rulestatement )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1085:1: (lv_statements_27_0= rulestatement )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1086:3: lv_statements_27_0= rulestatement
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1103:1: (lv_statements_27_0= rulestatement )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1104:3: lv_statements_27_0= rulestatement
                     {
                     if ( backtracking==0 ) {
                        
                       	        currentNode=createCompositeNode(grammarAccess.getStatementAccess().getStatementsStatementParserRuleCall_6_3_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FOLLOW_rulestatement_in_rulestatement1718);
+                    pushFollow(FOLLOW_rulestatement_in_rulestatement1747);
                     lv_statements_27_0=rulestatement();
                     _fsp--;
                     if (failed) return current;
@@ -2426,7 +2460,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 8 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1110:2: this_block_28= ruleblock
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1128:2: this_block_28= ruleblock
                     {
                     if ( backtracking==0 ) {
                        
@@ -2438,7 +2472,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                               currentNode=createCompositeNode(grammarAccess.getStatementAccess().getBlockParserRuleCall_7(), currentNode); 
                           
                     }
-                    pushFollow(FOLLOW_ruleblock_in_rulestatement1750);
+                    pushFollow(FOLLOW_ruleblock_in_rulestatement1779);
                     this_block_28=ruleblock();
                     _fsp--;
                     if (failed) return current;
@@ -2476,7 +2510,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuledeclaration
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1129:1: entryRuledeclaration returns [EObject current=null] : iv_ruledeclaration= ruledeclaration EOF ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1147:1: entryRuledeclaration returns [EObject current=null] : iv_ruledeclaration= ruledeclaration EOF ;
     public final EObject entryRuledeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -2484,20 +2518,20 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1130:2: (iv_ruledeclaration= ruledeclaration EOF )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1131:2: iv_ruledeclaration= ruledeclaration EOF
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1148:2: (iv_ruledeclaration= ruledeclaration EOF )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1149:2: iv_ruledeclaration= ruledeclaration EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getDeclarationRule(), currentNode); 
             }
-            pushFollow(FOLLOW_ruledeclaration_in_entryRuledeclaration1785);
+            pushFollow(FOLLOW_ruledeclaration_in_entryRuledeclaration1814);
             iv_ruledeclaration=ruledeclaration();
             _fsp--;
             if (failed) return current;
             if ( backtracking==0 ) {
                current =iv_ruledeclaration; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuledeclaration1795); if (failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuledeclaration1824); if (failed) return current;
 
             }
 
@@ -2515,7 +2549,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruledeclaration
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1138:1: ruledeclaration returns [EObject current=null] : ( ( ( (lv_variableType_0_0= ruletype ) ) ( '[]' )? )+ ( (lv_name_2_0= RULE_ID ) ) ( '=' ( (lv_exprs_4_0= ruleexpr ) ) )? ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1156:1: ruledeclaration returns [EObject current=null] : ( ( ( (lv_variableType_0_0= ruletype ) ) ( '[]' )? )+ ( (lv_name_2_0= RULE_ID ) ) ( '=' ( (lv_exprs_4_0= ruleexpr ) ) )? ) ;
     public final EObject ruledeclaration() throws RecognitionException {
         EObject current = null;
 
@@ -2528,40 +2562,40 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1143:6: ( ( ( ( (lv_variableType_0_0= ruletype ) ) ( '[]' )? )+ ( (lv_name_2_0= RULE_ID ) ) ( '=' ( (lv_exprs_4_0= ruleexpr ) ) )? ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1144:1: ( ( ( (lv_variableType_0_0= ruletype ) ) ( '[]' )? )+ ( (lv_name_2_0= RULE_ID ) ) ( '=' ( (lv_exprs_4_0= ruleexpr ) ) )? )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1161:6: ( ( ( ( (lv_variableType_0_0= ruletype ) ) ( '[]' )? )+ ( (lv_name_2_0= RULE_ID ) ) ( '=' ( (lv_exprs_4_0= ruleexpr ) ) )? ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1162:1: ( ( ( (lv_variableType_0_0= ruletype ) ) ( '[]' )? )+ ( (lv_name_2_0= RULE_ID ) ) ( '=' ( (lv_exprs_4_0= ruleexpr ) ) )? )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1144:1: ( ( ( (lv_variableType_0_0= ruletype ) ) ( '[]' )? )+ ( (lv_name_2_0= RULE_ID ) ) ( '=' ( (lv_exprs_4_0= ruleexpr ) ) )? )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1144:2: ( ( (lv_variableType_0_0= ruletype ) ) ( '[]' )? )+ ( (lv_name_2_0= RULE_ID ) ) ( '=' ( (lv_exprs_4_0= ruleexpr ) ) )?
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1162:1: ( ( ( (lv_variableType_0_0= ruletype ) ) ( '[]' )? )+ ( (lv_name_2_0= RULE_ID ) ) ( '=' ( (lv_exprs_4_0= ruleexpr ) ) )? )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1162:2: ( ( (lv_variableType_0_0= ruletype ) ) ( '[]' )? )+ ( (lv_name_2_0= RULE_ID ) ) ( '=' ( (lv_exprs_4_0= ruleexpr ) ) )?
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1144:2: ( ( (lv_variableType_0_0= ruletype ) ) ( '[]' )? )+
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1162:2: ( ( (lv_variableType_0_0= ruletype ) ) ( '[]' )? )+
             int cnt12=0;
             loop12:
             do {
                 int alt12=2;
                 int LA12_0 = input.LA(1);
 
-                if ( ((LA12_0>=19 && LA12_0<=24)) ) {
+                if ( ((LA12_0>=19 && LA12_0<=25)) ) {
                     alt12=1;
                 }
 
 
                 switch (alt12) {
             	case 1 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1144:3: ( (lv_variableType_0_0= ruletype ) ) ( '[]' )?
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1162:3: ( (lv_variableType_0_0= ruletype ) ) ( '[]' )?
             	    {
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1144:3: ( (lv_variableType_0_0= ruletype ) )
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1145:1: (lv_variableType_0_0= ruletype )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1162:3: ( (lv_variableType_0_0= ruletype ) )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1163:1: (lv_variableType_0_0= ruletype )
             	    {
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1145:1: (lv_variableType_0_0= ruletype )
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1146:3: lv_variableType_0_0= ruletype
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1163:1: (lv_variableType_0_0= ruletype )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1164:3: lv_variableType_0_0= ruletype
             	    {
             	    if ( backtracking==0 ) {
             	       
             	      	        currentNode=createCompositeNode(grammarAccess.getDeclarationAccess().getVariableTypeTypeParserRuleCall_0_0_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FOLLOW_ruletype_in_ruledeclaration1842);
+            	    pushFollow(FOLLOW_ruletype_in_ruledeclaration1871);
             	    lv_variableType_0_0=ruletype();
             	    _fsp--;
             	    if (failed) return current;
@@ -2590,18 +2624,18 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1168:2: ( '[]' )?
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1186:2: ( '[]' )?
             	    int alt11=2;
             	    int LA11_0 = input.LA(1);
 
-            	    if ( (LA11_0==31) ) {
+            	    if ( (LA11_0==32) ) {
             	        alt11=1;
             	    }
             	    switch (alt11) {
             	        case 1 :
-            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1168:4: '[]'
+            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1186:4: '[]'
             	            {
-            	            match(input,31,FOLLOW_31_in_ruledeclaration1853); if (failed) return current;
+            	            match(input,32,FOLLOW_32_in_ruledeclaration1882); if (failed) return current;
             	            if ( backtracking==0 ) {
 
             	                      createLeafNode(grammarAccess.getDeclarationAccess().getLeftSquareBracketRightSquareBracketKeyword_0_1(), null); 
@@ -2627,14 +2661,14 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                 cnt12++;
             } while (true);
 
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1172:5: ( (lv_name_2_0= RULE_ID ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1173:1: (lv_name_2_0= RULE_ID )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1190:5: ( (lv_name_2_0= RULE_ID ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1191:1: (lv_name_2_0= RULE_ID )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1173:1: (lv_name_2_0= RULE_ID )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1174:3: lv_name_2_0= RULE_ID
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1191:1: (lv_name_2_0= RULE_ID )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1192:3: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruledeclaration1874); if (failed) return current;
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruledeclaration1903); if (failed) return current;
             if ( backtracking==0 ) {
 
               			createLeafNode(grammarAccess.getDeclarationAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
@@ -2664,35 +2698,35 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1196:2: ( '=' ( (lv_exprs_4_0= ruleexpr ) ) )?
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1214:2: ( '=' ( (lv_exprs_4_0= ruleexpr ) ) )?
             int alt13=2;
             int LA13_0 = input.LA(1);
 
-            if ( (LA13_0==32) ) {
+            if ( (LA13_0==33) ) {
                 alt13=1;
             }
             switch (alt13) {
                 case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1196:4: '=' ( (lv_exprs_4_0= ruleexpr ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1214:4: '=' ( (lv_exprs_4_0= ruleexpr ) )
                     {
-                    match(input,32,FOLLOW_32_in_ruledeclaration1890); if (failed) return current;
+                    match(input,33,FOLLOW_33_in_ruledeclaration1919); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               createLeafNode(grammarAccess.getDeclarationAccess().getEqualsSignKeyword_2_0(), null); 
                           
                     }
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1200:1: ( (lv_exprs_4_0= ruleexpr ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1201:1: (lv_exprs_4_0= ruleexpr )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1218:1: ( (lv_exprs_4_0= ruleexpr ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1219:1: (lv_exprs_4_0= ruleexpr )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1201:1: (lv_exprs_4_0= ruleexpr )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1202:3: lv_exprs_4_0= ruleexpr
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1219:1: (lv_exprs_4_0= ruleexpr )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1220:3: lv_exprs_4_0= ruleexpr
                     {
                     if ( backtracking==0 ) {
                        
                       	        currentNode=createCompositeNode(grammarAccess.getDeclarationAccess().getExprsExprParserRuleCall_2_1_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FOLLOW_ruleexpr_in_ruledeclaration1911);
+                    pushFollow(FOLLOW_ruleexpr_in_ruledeclaration1940);
                     lv_exprs_4_0=ruleexpr();
                     _fsp--;
                     if (failed) return current;
@@ -2752,7 +2786,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleassignment
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1232:1: entryRuleassignment returns [EObject current=null] : iv_ruleassignment= ruleassignment EOF ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1250:1: entryRuleassignment returns [EObject current=null] : iv_ruleassignment= ruleassignment EOF ;
     public final EObject entryRuleassignment() throws RecognitionException {
         EObject current = null;
 
@@ -2760,20 +2794,20 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1233:2: (iv_ruleassignment= ruleassignment EOF )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1234:2: iv_ruleassignment= ruleassignment EOF
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1251:2: (iv_ruleassignment= ruleassignment EOF )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1252:2: iv_ruleassignment= ruleassignment EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getAssignmentRule(), currentNode); 
             }
-            pushFollow(FOLLOW_ruleassignment_in_entryRuleassignment1949);
+            pushFollow(FOLLOW_ruleassignment_in_entryRuleassignment1978);
             iv_ruleassignment=ruleassignment();
             _fsp--;
             if (failed) return current;
             if ( backtracking==0 ) {
                current =iv_ruleassignment; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleassignment1959); if (failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleassignment1988); if (failed) return current;
 
             }
 
@@ -2791,7 +2825,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleassignment
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1241:1: ruleassignment returns [EObject current=null] : (this_postfixExpr_0= rulepostfixExpr '=' ( (lv_exprs_2_0= ruleexpr ) ) ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1259:1: ruleassignment returns [EObject current=null] : (this_postfixExpr_0= rulepostfixExpr '=' ( (lv_exprs_2_0= ruleexpr ) ) ) ;
     public final EObject ruleassignment() throws RecognitionException {
         EObject current = null;
 
@@ -2803,11 +2837,11 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1246:6: ( (this_postfixExpr_0= rulepostfixExpr '=' ( (lv_exprs_2_0= ruleexpr ) ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1247:1: (this_postfixExpr_0= rulepostfixExpr '=' ( (lv_exprs_2_0= ruleexpr ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1264:6: ( (this_postfixExpr_0= rulepostfixExpr '=' ( (lv_exprs_2_0= ruleexpr ) ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1265:1: (this_postfixExpr_0= rulepostfixExpr '=' ( (lv_exprs_2_0= ruleexpr ) ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1247:1: (this_postfixExpr_0= rulepostfixExpr '=' ( (lv_exprs_2_0= ruleexpr ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1248:2: this_postfixExpr_0= rulepostfixExpr '=' ( (lv_exprs_2_0= ruleexpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1265:1: (this_postfixExpr_0= rulepostfixExpr '=' ( (lv_exprs_2_0= ruleexpr ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1266:2: this_postfixExpr_0= rulepostfixExpr '=' ( (lv_exprs_2_0= ruleexpr ) )
             {
             if ( backtracking==0 ) {
                
@@ -2819,7 +2853,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                       currentNode=createCompositeNode(grammarAccess.getAssignmentAccess().getPostfixExprParserRuleCall_0(), currentNode); 
                   
             }
-            pushFollow(FOLLOW_rulepostfixExpr_in_ruleassignment2009);
+            pushFollow(FOLLOW_rulepostfixExpr_in_ruleassignment2038);
             this_postfixExpr_0=rulepostfixExpr();
             _fsp--;
             if (failed) return current;
@@ -2829,24 +2863,24 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                       currentNode = currentNode.getParent();
                   
             }
-            match(input,32,FOLLOW_32_in_ruleassignment2018); if (failed) return current;
+            match(input,33,FOLLOW_33_in_ruleassignment2047); if (failed) return current;
             if ( backtracking==0 ) {
 
                       createLeafNode(grammarAccess.getAssignmentAccess().getEqualsSignKeyword_1(), null); 
                   
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1263:1: ( (lv_exprs_2_0= ruleexpr ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1264:1: (lv_exprs_2_0= ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1281:1: ( (lv_exprs_2_0= ruleexpr ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1282:1: (lv_exprs_2_0= ruleexpr )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1264:1: (lv_exprs_2_0= ruleexpr )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1265:3: lv_exprs_2_0= ruleexpr
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1282:1: (lv_exprs_2_0= ruleexpr )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1283:3: lv_exprs_2_0= ruleexpr
             {
             if ( backtracking==0 ) {
                
               	        currentNode=createCompositeNode(grammarAccess.getAssignmentAccess().getExprsExprParserRuleCall_2_0(), currentNode); 
               	    
             }
-            pushFollow(FOLLOW_ruleexpr_in_ruleassignment2039);
+            pushFollow(FOLLOW_ruleexpr_in_ruleassignment2068);
             lv_exprs_2_0=ruleexpr();
             _fsp--;
             if (failed) return current;
@@ -2900,7 +2934,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleexpr
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1295:1: entryRuleexpr returns [EObject current=null] : iv_ruleexpr= ruleexpr EOF ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1313:1: entryRuleexpr returns [EObject current=null] : iv_ruleexpr= ruleexpr EOF ;
     public final EObject entryRuleexpr() throws RecognitionException {
         EObject current = null;
 
@@ -2908,20 +2942,20 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1296:2: (iv_ruleexpr= ruleexpr EOF )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1297:2: iv_ruleexpr= ruleexpr EOF
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1314:2: (iv_ruleexpr= ruleexpr EOF )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1315:2: iv_ruleexpr= ruleexpr EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getExprRule(), currentNode); 
             }
-            pushFollow(FOLLOW_ruleexpr_in_entryRuleexpr2075);
+            pushFollow(FOLLOW_ruleexpr_in_entryRuleexpr2104);
             iv_ruleexpr=ruleexpr();
             _fsp--;
             if (failed) return current;
             if ( backtracking==0 ) {
                current =iv_ruleexpr; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleexpr2085); if (failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleexpr2114); if (failed) return current;
 
             }
 
@@ -2939,7 +2973,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleexpr
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1304:1: ruleexpr returns [EObject current=null] : (this_andExpr_0= ruleandExpr ( '||' ( (lv_andExprs_2_0= ruleandExpr ) ) )* ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1322:1: ruleexpr returns [EObject current=null] : (this_andExpr_0= ruleandExpr ( '||' ( (lv_andExprs_2_0= ruleandExpr ) ) )* ) ;
     public final EObject ruleexpr() throws RecognitionException {
         EObject current = null;
 
@@ -2951,11 +2985,11 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1309:6: ( (this_andExpr_0= ruleandExpr ( '||' ( (lv_andExprs_2_0= ruleandExpr ) ) )* ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1310:1: (this_andExpr_0= ruleandExpr ( '||' ( (lv_andExprs_2_0= ruleandExpr ) ) )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1327:6: ( (this_andExpr_0= ruleandExpr ( '||' ( (lv_andExprs_2_0= ruleandExpr ) ) )* ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1328:1: (this_andExpr_0= ruleandExpr ( '||' ( (lv_andExprs_2_0= ruleandExpr ) ) )* )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1310:1: (this_andExpr_0= ruleandExpr ( '||' ( (lv_andExprs_2_0= ruleandExpr ) ) )* )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1311:2: this_andExpr_0= ruleandExpr ( '||' ( (lv_andExprs_2_0= ruleandExpr ) ) )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1328:1: (this_andExpr_0= ruleandExpr ( '||' ( (lv_andExprs_2_0= ruleandExpr ) ) )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1329:2: this_andExpr_0= ruleandExpr ( '||' ( (lv_andExprs_2_0= ruleandExpr ) ) )*
             {
             if ( backtracking==0 ) {
                
@@ -2967,7 +3001,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                       currentNode=createCompositeNode(grammarAccess.getExprAccess().getAndExprParserRuleCall_0(), currentNode); 
                   
             }
-            pushFollow(FOLLOW_ruleandExpr_in_ruleexpr2135);
+            pushFollow(FOLLOW_ruleandExpr_in_ruleexpr2164);
             this_andExpr_0=ruleandExpr();
             _fsp--;
             if (failed) return current;
@@ -2977,39 +3011,39 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                       currentNode = currentNode.getParent();
                   
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1322:1: ( '||' ( (lv_andExprs_2_0= ruleandExpr ) ) )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1340:1: ( '||' ( (lv_andExprs_2_0= ruleandExpr ) ) )*
             loop14:
             do {
                 int alt14=2;
                 int LA14_0 = input.LA(1);
 
-                if ( (LA14_0==33) ) {
+                if ( (LA14_0==34) ) {
                     alt14=1;
                 }
 
 
                 switch (alt14) {
             	case 1 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1322:3: '||' ( (lv_andExprs_2_0= ruleandExpr ) )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1340:3: '||' ( (lv_andExprs_2_0= ruleandExpr ) )
             	    {
-            	    match(input,33,FOLLOW_33_in_ruleexpr2145); if (failed) return current;
+            	    match(input,34,FOLLOW_34_in_ruleexpr2174); if (failed) return current;
             	    if ( backtracking==0 ) {
 
             	              createLeafNode(grammarAccess.getExprAccess().getVerticalLineVerticalLineKeyword_1_0(), null); 
             	          
             	    }
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1326:1: ( (lv_andExprs_2_0= ruleandExpr ) )
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1327:1: (lv_andExprs_2_0= ruleandExpr )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1344:1: ( (lv_andExprs_2_0= ruleandExpr ) )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1345:1: (lv_andExprs_2_0= ruleandExpr )
             	    {
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1327:1: (lv_andExprs_2_0= ruleandExpr )
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1328:3: lv_andExprs_2_0= ruleandExpr
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1345:1: (lv_andExprs_2_0= ruleandExpr )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1346:3: lv_andExprs_2_0= ruleandExpr
             	    {
             	    if ( backtracking==0 ) {
             	       
             	      	        currentNode=createCompositeNode(grammarAccess.getExprAccess().getAndExprsAndExprParserRuleCall_1_1_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FOLLOW_ruleandExpr_in_ruleexpr2166);
+            	    pushFollow(FOLLOW_ruleandExpr_in_ruleexpr2195);
             	    lv_andExprs_2_0=ruleandExpr();
             	    _fsp--;
             	    if (failed) return current;
@@ -3072,7 +3106,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleandExpr
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1358:1: entryRuleandExpr returns [EObject current=null] : iv_ruleandExpr= ruleandExpr EOF ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1376:1: entryRuleandExpr returns [EObject current=null] : iv_ruleandExpr= ruleandExpr EOF ;
     public final EObject entryRuleandExpr() throws RecognitionException {
         EObject current = null;
 
@@ -3080,20 +3114,20 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1359:2: (iv_ruleandExpr= ruleandExpr EOF )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1360:2: iv_ruleandExpr= ruleandExpr EOF
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1377:2: (iv_ruleandExpr= ruleandExpr EOF )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1378:2: iv_ruleandExpr= ruleandExpr EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getAndExprRule(), currentNode); 
             }
-            pushFollow(FOLLOW_ruleandExpr_in_entryRuleandExpr2204);
+            pushFollow(FOLLOW_ruleandExpr_in_entryRuleandExpr2233);
             iv_ruleandExpr=ruleandExpr();
             _fsp--;
             if (failed) return current;
             if ( backtracking==0 ) {
                current =iv_ruleandExpr; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleandExpr2214); if (failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleandExpr2243); if (failed) return current;
 
             }
 
@@ -3111,7 +3145,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleandExpr
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1367:1: ruleandExpr returns [EObject current=null] : (this_eqExpr_0= ruleeqExpr ( '&&' ( (lv_eqExprs_2_0= ruleeqExpr ) ) )* ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1385:1: ruleandExpr returns [EObject current=null] : (this_eqExpr_0= ruleeqExpr ( '&&' ( (lv_eqExprs_2_0= ruleeqExpr ) ) )* ) ;
     public final EObject ruleandExpr() throws RecognitionException {
         EObject current = null;
 
@@ -3123,11 +3157,11 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1372:6: ( (this_eqExpr_0= ruleeqExpr ( '&&' ( (lv_eqExprs_2_0= ruleeqExpr ) ) )* ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1373:1: (this_eqExpr_0= ruleeqExpr ( '&&' ( (lv_eqExprs_2_0= ruleeqExpr ) ) )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1390:6: ( (this_eqExpr_0= ruleeqExpr ( '&&' ( (lv_eqExprs_2_0= ruleeqExpr ) ) )* ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1391:1: (this_eqExpr_0= ruleeqExpr ( '&&' ( (lv_eqExprs_2_0= ruleeqExpr ) ) )* )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1373:1: (this_eqExpr_0= ruleeqExpr ( '&&' ( (lv_eqExprs_2_0= ruleeqExpr ) ) )* )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1374:2: this_eqExpr_0= ruleeqExpr ( '&&' ( (lv_eqExprs_2_0= ruleeqExpr ) ) )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1391:1: (this_eqExpr_0= ruleeqExpr ( '&&' ( (lv_eqExprs_2_0= ruleeqExpr ) ) )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1392:2: this_eqExpr_0= ruleeqExpr ( '&&' ( (lv_eqExprs_2_0= ruleeqExpr ) ) )*
             {
             if ( backtracking==0 ) {
                
@@ -3139,7 +3173,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                       currentNode=createCompositeNode(grammarAccess.getAndExprAccess().getEqExprParserRuleCall_0(), currentNode); 
                   
             }
-            pushFollow(FOLLOW_ruleeqExpr_in_ruleandExpr2264);
+            pushFollow(FOLLOW_ruleeqExpr_in_ruleandExpr2293);
             this_eqExpr_0=ruleeqExpr();
             _fsp--;
             if (failed) return current;
@@ -3149,39 +3183,39 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                       currentNode = currentNode.getParent();
                   
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1385:1: ( '&&' ( (lv_eqExprs_2_0= ruleeqExpr ) ) )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1403:1: ( '&&' ( (lv_eqExprs_2_0= ruleeqExpr ) ) )*
             loop15:
             do {
                 int alt15=2;
                 int LA15_0 = input.LA(1);
 
-                if ( (LA15_0==34) ) {
+                if ( (LA15_0==35) ) {
                     alt15=1;
                 }
 
 
                 switch (alt15) {
             	case 1 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1385:3: '&&' ( (lv_eqExprs_2_0= ruleeqExpr ) )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1403:3: '&&' ( (lv_eqExprs_2_0= ruleeqExpr ) )
             	    {
-            	    match(input,34,FOLLOW_34_in_ruleandExpr2274); if (failed) return current;
+            	    match(input,35,FOLLOW_35_in_ruleandExpr2303); if (failed) return current;
             	    if ( backtracking==0 ) {
 
             	              createLeafNode(grammarAccess.getAndExprAccess().getAmpersandAmpersandKeyword_1_0(), null); 
             	          
             	    }
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1389:1: ( (lv_eqExprs_2_0= ruleeqExpr ) )
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1390:1: (lv_eqExprs_2_0= ruleeqExpr )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1407:1: ( (lv_eqExprs_2_0= ruleeqExpr ) )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1408:1: (lv_eqExprs_2_0= ruleeqExpr )
             	    {
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1390:1: (lv_eqExprs_2_0= ruleeqExpr )
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1391:3: lv_eqExprs_2_0= ruleeqExpr
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1408:1: (lv_eqExprs_2_0= ruleeqExpr )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1409:3: lv_eqExprs_2_0= ruleeqExpr
             	    {
             	    if ( backtracking==0 ) {
             	       
             	      	        currentNode=createCompositeNode(grammarAccess.getAndExprAccess().getEqExprsEqExprParserRuleCall_1_1_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FOLLOW_ruleeqExpr_in_ruleandExpr2295);
+            	    pushFollow(FOLLOW_ruleeqExpr_in_ruleandExpr2324);
             	    lv_eqExprs_2_0=ruleeqExpr();
             	    _fsp--;
             	    if (failed) return current;
@@ -3244,7 +3278,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleeqExpr
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1421:1: entryRuleeqExpr returns [EObject current=null] : iv_ruleeqExpr= ruleeqExpr EOF ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1439:1: entryRuleeqExpr returns [EObject current=null] : iv_ruleeqExpr= ruleeqExpr EOF ;
     public final EObject entryRuleeqExpr() throws RecognitionException {
         EObject current = null;
 
@@ -3252,20 +3286,20 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1422:2: (iv_ruleeqExpr= ruleeqExpr EOF )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1423:2: iv_ruleeqExpr= ruleeqExpr EOF
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1440:2: (iv_ruleeqExpr= ruleeqExpr EOF )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1441:2: iv_ruleeqExpr= ruleeqExpr EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getEqExprRule(), currentNode); 
             }
-            pushFollow(FOLLOW_ruleeqExpr_in_entryRuleeqExpr2333);
+            pushFollow(FOLLOW_ruleeqExpr_in_entryRuleeqExpr2362);
             iv_ruleeqExpr=ruleeqExpr();
             _fsp--;
             if (failed) return current;
             if ( backtracking==0 ) {
                current =iv_ruleeqExpr; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleeqExpr2343); if (failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleeqExpr2372); if (failed) return current;
 
             }
 
@@ -3283,7 +3317,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleeqExpr
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1430:1: ruleeqExpr returns [EObject current=null] : (this_relExpr_0= rulerelExpr ( ( '==' | '!=' ) ( (lv_relExprs_3_0= rulerelExpr ) ) )* ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1448:1: ruleeqExpr returns [EObject current=null] : (this_relExpr_0= rulerelExpr ( ( '==' | '!=' ) ( (lv_relExprs_3_0= rulerelExpr ) ) )* ) ;
     public final EObject ruleeqExpr() throws RecognitionException {
         EObject current = null;
 
@@ -3295,11 +3329,11 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1435:6: ( (this_relExpr_0= rulerelExpr ( ( '==' | '!=' ) ( (lv_relExprs_3_0= rulerelExpr ) ) )* ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1436:1: (this_relExpr_0= rulerelExpr ( ( '==' | '!=' ) ( (lv_relExprs_3_0= rulerelExpr ) ) )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1453:6: ( (this_relExpr_0= rulerelExpr ( ( '==' | '!=' ) ( (lv_relExprs_3_0= rulerelExpr ) ) )* ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1454:1: (this_relExpr_0= rulerelExpr ( ( '==' | '!=' ) ( (lv_relExprs_3_0= rulerelExpr ) ) )* )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1436:1: (this_relExpr_0= rulerelExpr ( ( '==' | '!=' ) ( (lv_relExprs_3_0= rulerelExpr ) ) )* )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1437:2: this_relExpr_0= rulerelExpr ( ( '==' | '!=' ) ( (lv_relExprs_3_0= rulerelExpr ) ) )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1454:1: (this_relExpr_0= rulerelExpr ( ( '==' | '!=' ) ( (lv_relExprs_3_0= rulerelExpr ) ) )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1455:2: this_relExpr_0= rulerelExpr ( ( '==' | '!=' ) ( (lv_relExprs_3_0= rulerelExpr ) ) )*
             {
             if ( backtracking==0 ) {
                
@@ -3311,7 +3345,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                       currentNode=createCompositeNode(grammarAccess.getEqExprAccess().getRelExprParserRuleCall_0(), currentNode); 
                   
             }
-            pushFollow(FOLLOW_rulerelExpr_in_ruleeqExpr2393);
+            pushFollow(FOLLOW_rulerelExpr_in_ruleeqExpr2422);
             this_relExpr_0=rulerelExpr();
             _fsp--;
             if (failed) return current;
@@ -3321,43 +3355,43 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                       currentNode = currentNode.getParent();
                   
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1448:1: ( ( '==' | '!=' ) ( (lv_relExprs_3_0= rulerelExpr ) ) )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1466:1: ( ( '==' | '!=' ) ( (lv_relExprs_3_0= rulerelExpr ) ) )*
             loop17:
             do {
                 int alt17=2;
                 int LA17_0 = input.LA(1);
 
-                if ( ((LA17_0>=35 && LA17_0<=36)) ) {
+                if ( ((LA17_0>=36 && LA17_0<=37)) ) {
                     alt17=1;
                 }
 
 
                 switch (alt17) {
             	case 1 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1448:2: ( '==' | '!=' ) ( (lv_relExprs_3_0= rulerelExpr ) )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1466:2: ( '==' | '!=' ) ( (lv_relExprs_3_0= rulerelExpr ) )
             	    {
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1448:2: ( '==' | '!=' )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1466:2: ( '==' | '!=' )
             	    int alt16=2;
             	    int LA16_0 = input.LA(1);
 
-            	    if ( (LA16_0==35) ) {
+            	    if ( (LA16_0==36) ) {
             	        alt16=1;
             	    }
-            	    else if ( (LA16_0==36) ) {
+            	    else if ( (LA16_0==37) ) {
             	        alt16=2;
             	    }
             	    else {
             	        if (backtracking>0) {failed=true; return current;}
             	        NoViableAltException nvae =
-            	            new NoViableAltException("1448:2: ( '==' | '!=' )", 16, 0, input);
+            	            new NoViableAltException("1466:2: ( '==' | '!=' )", 16, 0, input);
 
             	        throw nvae;
             	    }
             	    switch (alt16) {
             	        case 1 :
-            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1448:4: '=='
+            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1466:4: '=='
             	            {
-            	            match(input,35,FOLLOW_35_in_ruleeqExpr2404); if (failed) return current;
+            	            match(input,36,FOLLOW_36_in_ruleeqExpr2433); if (failed) return current;
             	            if ( backtracking==0 ) {
 
             	                      createLeafNode(grammarAccess.getEqExprAccess().getEqualsSignEqualsSignKeyword_1_0_0(), null); 
@@ -3367,9 +3401,9 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
             	            }
             	            break;
             	        case 2 :
-            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1453:7: '!='
+            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1471:7: '!='
             	            {
-            	            match(input,36,FOLLOW_36_in_ruleeqExpr2420); if (failed) return current;
+            	            match(input,37,FOLLOW_37_in_ruleeqExpr2449); if (failed) return current;
             	            if ( backtracking==0 ) {
 
             	                      createLeafNode(grammarAccess.getEqExprAccess().getExclamationMarkEqualsSignKeyword_1_0_1(), null); 
@@ -3381,18 +3415,18 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1457:2: ( (lv_relExprs_3_0= rulerelExpr ) )
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1458:1: (lv_relExprs_3_0= rulerelExpr )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1475:2: ( (lv_relExprs_3_0= rulerelExpr ) )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1476:1: (lv_relExprs_3_0= rulerelExpr )
             	    {
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1458:1: (lv_relExprs_3_0= rulerelExpr )
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1459:3: lv_relExprs_3_0= rulerelExpr
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1476:1: (lv_relExprs_3_0= rulerelExpr )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1477:3: lv_relExprs_3_0= rulerelExpr
             	    {
             	    if ( backtracking==0 ) {
             	       
             	      	        currentNode=createCompositeNode(grammarAccess.getEqExprAccess().getRelExprsRelExprParserRuleCall_1_1_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FOLLOW_rulerelExpr_in_ruleeqExpr2442);
+            	    pushFollow(FOLLOW_rulerelExpr_in_ruleeqExpr2471);
             	    lv_relExprs_3_0=rulerelExpr();
             	    _fsp--;
             	    if (failed) return current;
@@ -3455,7 +3489,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRulerelExpr
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1489:1: entryRulerelExpr returns [EObject current=null] : iv_rulerelExpr= rulerelExpr EOF ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1507:1: entryRulerelExpr returns [EObject current=null] : iv_rulerelExpr= rulerelExpr EOF ;
     public final EObject entryRulerelExpr() throws RecognitionException {
         EObject current = null;
 
@@ -3463,20 +3497,20 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1490:2: (iv_rulerelExpr= rulerelExpr EOF )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1491:2: iv_rulerelExpr= rulerelExpr EOF
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1508:2: (iv_rulerelExpr= rulerelExpr EOF )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1509:2: iv_rulerelExpr= rulerelExpr EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getRelExprRule(), currentNode); 
             }
-            pushFollow(FOLLOW_rulerelExpr_in_entryRulerelExpr2480);
+            pushFollow(FOLLOW_rulerelExpr_in_entryRulerelExpr2509);
             iv_rulerelExpr=rulerelExpr();
             _fsp--;
             if (failed) return current;
             if ( backtracking==0 ) {
                current =iv_rulerelExpr; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRulerelExpr2490); if (failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRulerelExpr2519); if (failed) return current;
 
             }
 
@@ -3494,7 +3528,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start rulerelExpr
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1498:1: rulerelExpr returns [EObject current=null] : (this_addExpr_0= ruleaddExpr ( ( '<' | '>' | '<=' | '>=' ) ( (lv_addExpr_5_0= ruleaddExpr ) ) )* ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1516:1: rulerelExpr returns [EObject current=null] : (this_addExpr_0= ruleaddExpr ( ( '<' | '>' | '<=' | '>=' ) ( (lv_addExpr_5_0= ruleaddExpr ) ) )* ) ;
     public final EObject rulerelExpr() throws RecognitionException {
         EObject current = null;
 
@@ -3506,11 +3540,11 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1503:6: ( (this_addExpr_0= ruleaddExpr ( ( '<' | '>' | '<=' | '>=' ) ( (lv_addExpr_5_0= ruleaddExpr ) ) )* ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1504:1: (this_addExpr_0= ruleaddExpr ( ( '<' | '>' | '<=' | '>=' ) ( (lv_addExpr_5_0= ruleaddExpr ) ) )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1521:6: ( (this_addExpr_0= ruleaddExpr ( ( '<' | '>' | '<=' | '>=' ) ( (lv_addExpr_5_0= ruleaddExpr ) ) )* ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1522:1: (this_addExpr_0= ruleaddExpr ( ( '<' | '>' | '<=' | '>=' ) ( (lv_addExpr_5_0= ruleaddExpr ) ) )* )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1504:1: (this_addExpr_0= ruleaddExpr ( ( '<' | '>' | '<=' | '>=' ) ( (lv_addExpr_5_0= ruleaddExpr ) ) )* )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1505:2: this_addExpr_0= ruleaddExpr ( ( '<' | '>' | '<=' | '>=' ) ( (lv_addExpr_5_0= ruleaddExpr ) ) )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1522:1: (this_addExpr_0= ruleaddExpr ( ( '<' | '>' | '<=' | '>=' ) ( (lv_addExpr_5_0= ruleaddExpr ) ) )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1523:2: this_addExpr_0= ruleaddExpr ( ( '<' | '>' | '<=' | '>=' ) ( (lv_addExpr_5_0= ruleaddExpr ) ) )*
             {
             if ( backtracking==0 ) {
                
@@ -3522,7 +3556,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                       currentNode=createCompositeNode(grammarAccess.getRelExprAccess().getAddExprParserRuleCall_0(), currentNode); 
                   
             }
-            pushFollow(FOLLOW_ruleaddExpr_in_rulerelExpr2540);
+            pushFollow(FOLLOW_ruleaddExpr_in_rulerelExpr2569);
             this_addExpr_0=ruleaddExpr();
             _fsp--;
             if (failed) return current;
@@ -3532,40 +3566,40 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                       currentNode = currentNode.getParent();
                   
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1516:1: ( ( '<' | '>' | '<=' | '>=' ) ( (lv_addExpr_5_0= ruleaddExpr ) ) )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1534:1: ( ( '<' | '>' | '<=' | '>=' ) ( (lv_addExpr_5_0= ruleaddExpr ) ) )*
             loop19:
             do {
                 int alt19=2;
                 int LA19_0 = input.LA(1);
 
-                if ( ((LA19_0>=37 && LA19_0<=40)) ) {
+                if ( ((LA19_0>=38 && LA19_0<=41)) ) {
                     alt19=1;
                 }
 
 
                 switch (alt19) {
             	case 1 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1516:2: ( '<' | '>' | '<=' | '>=' ) ( (lv_addExpr_5_0= ruleaddExpr ) )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1534:2: ( '<' | '>' | '<=' | '>=' ) ( (lv_addExpr_5_0= ruleaddExpr ) )
             	    {
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1516:2: ( '<' | '>' | '<=' | '>=' )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1534:2: ( '<' | '>' | '<=' | '>=' )
             	    int alt18=4;
             	    switch ( input.LA(1) ) {
-            	    case 37:
+            	    case 38:
             	        {
             	        alt18=1;
             	        }
             	        break;
-            	    case 38:
+            	    case 39:
             	        {
             	        alt18=2;
             	        }
             	        break;
-            	    case 39:
+            	    case 40:
             	        {
             	        alt18=3;
             	        }
             	        break;
-            	    case 40:
+            	    case 41:
             	        {
             	        alt18=4;
             	        }
@@ -3573,16 +3607,16 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
             	    default:
             	        if (backtracking>0) {failed=true; return current;}
             	        NoViableAltException nvae =
-            	            new NoViableAltException("1516:2: ( '<' | '>' | '<=' | '>=' )", 18, 0, input);
+            	            new NoViableAltException("1534:2: ( '<' | '>' | '<=' | '>=' )", 18, 0, input);
 
             	        throw nvae;
             	    }
 
             	    switch (alt18) {
             	        case 1 :
-            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1516:4: '<'
+            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1534:4: '<'
             	            {
-            	            match(input,37,FOLLOW_37_in_rulerelExpr2551); if (failed) return current;
+            	            match(input,38,FOLLOW_38_in_rulerelExpr2580); if (failed) return current;
             	            if ( backtracking==0 ) {
 
             	                      createLeafNode(grammarAccess.getRelExprAccess().getLessThanSignKeyword_1_0_0(), null); 
@@ -3592,9 +3626,9 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
             	            }
             	            break;
             	        case 2 :
-            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1521:7: '>'
+            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1539:7: '>'
             	            {
-            	            match(input,38,FOLLOW_38_in_rulerelExpr2567); if (failed) return current;
+            	            match(input,39,FOLLOW_39_in_rulerelExpr2596); if (failed) return current;
             	            if ( backtracking==0 ) {
 
             	                      createLeafNode(grammarAccess.getRelExprAccess().getGreaterThanSignKeyword_1_0_1(), null); 
@@ -3604,9 +3638,9 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
             	            }
             	            break;
             	        case 3 :
-            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1526:7: '<='
+            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1544:7: '<='
             	            {
-            	            match(input,39,FOLLOW_39_in_rulerelExpr2583); if (failed) return current;
+            	            match(input,40,FOLLOW_40_in_rulerelExpr2612); if (failed) return current;
             	            if ( backtracking==0 ) {
 
             	                      createLeafNode(grammarAccess.getRelExprAccess().getLessThanSignEqualsSignKeyword_1_0_2(), null); 
@@ -3616,9 +3650,9 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
             	            }
             	            break;
             	        case 4 :
-            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1531:7: '>='
+            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1549:7: '>='
             	            {
-            	            match(input,40,FOLLOW_40_in_rulerelExpr2599); if (failed) return current;
+            	            match(input,41,FOLLOW_41_in_rulerelExpr2628); if (failed) return current;
             	            if ( backtracking==0 ) {
 
             	                      createLeafNode(grammarAccess.getRelExprAccess().getGreaterThanSignEqualsSignKeyword_1_0_3(), null); 
@@ -3630,18 +3664,18 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1535:2: ( (lv_addExpr_5_0= ruleaddExpr ) )
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1536:1: (lv_addExpr_5_0= ruleaddExpr )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1553:2: ( (lv_addExpr_5_0= ruleaddExpr ) )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1554:1: (lv_addExpr_5_0= ruleaddExpr )
             	    {
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1536:1: (lv_addExpr_5_0= ruleaddExpr )
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1537:3: lv_addExpr_5_0= ruleaddExpr
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1554:1: (lv_addExpr_5_0= ruleaddExpr )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1555:3: lv_addExpr_5_0= ruleaddExpr
             	    {
             	    if ( backtracking==0 ) {
             	       
             	      	        currentNode=createCompositeNode(grammarAccess.getRelExprAccess().getAddExprAddExprParserRuleCall_1_1_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FOLLOW_ruleaddExpr_in_rulerelExpr2621);
+            	    pushFollow(FOLLOW_ruleaddExpr_in_rulerelExpr2650);
             	    lv_addExpr_5_0=ruleaddExpr();
             	    _fsp--;
             	    if (failed) return current;
@@ -3704,7 +3738,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleaddExpr
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1567:1: entryRuleaddExpr returns [EObject current=null] : iv_ruleaddExpr= ruleaddExpr EOF ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1585:1: entryRuleaddExpr returns [EObject current=null] : iv_ruleaddExpr= ruleaddExpr EOF ;
     public final EObject entryRuleaddExpr() throws RecognitionException {
         EObject current = null;
 
@@ -3712,20 +3746,20 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1568:2: (iv_ruleaddExpr= ruleaddExpr EOF )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1569:2: iv_ruleaddExpr= ruleaddExpr EOF
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1586:2: (iv_ruleaddExpr= ruleaddExpr EOF )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1587:2: iv_ruleaddExpr= ruleaddExpr EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getAddExprRule(), currentNode); 
             }
-            pushFollow(FOLLOW_ruleaddExpr_in_entryRuleaddExpr2659);
+            pushFollow(FOLLOW_ruleaddExpr_in_entryRuleaddExpr2688);
             iv_ruleaddExpr=ruleaddExpr();
             _fsp--;
             if (failed) return current;
             if ( backtracking==0 ) {
                current =iv_ruleaddExpr; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleaddExpr2669); if (failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleaddExpr2698); if (failed) return current;
 
             }
 
@@ -3743,7 +3777,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleaddExpr
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1576:1: ruleaddExpr returns [EObject current=null] : (this_mulExpr_0= rulemulExpr ( RULE_SIGN ( (lv_mulExprs_2_0= rulemulExpr ) ) )* ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1594:1: ruleaddExpr returns [EObject current=null] : (this_mulExpr_0= rulemulExpr ( RULE_SIGN ( (lv_mulExprs_2_0= rulemulExpr ) ) )* ) ;
     public final EObject ruleaddExpr() throws RecognitionException {
         EObject current = null;
 
@@ -3755,11 +3789,11 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1581:6: ( (this_mulExpr_0= rulemulExpr ( RULE_SIGN ( (lv_mulExprs_2_0= rulemulExpr ) ) )* ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1582:1: (this_mulExpr_0= rulemulExpr ( RULE_SIGN ( (lv_mulExprs_2_0= rulemulExpr ) ) )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1599:6: ( (this_mulExpr_0= rulemulExpr ( RULE_SIGN ( (lv_mulExprs_2_0= rulemulExpr ) ) )* ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1600:1: (this_mulExpr_0= rulemulExpr ( RULE_SIGN ( (lv_mulExprs_2_0= rulemulExpr ) ) )* )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1582:1: (this_mulExpr_0= rulemulExpr ( RULE_SIGN ( (lv_mulExprs_2_0= rulemulExpr ) ) )* )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1583:2: this_mulExpr_0= rulemulExpr ( RULE_SIGN ( (lv_mulExprs_2_0= rulemulExpr ) ) )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1600:1: (this_mulExpr_0= rulemulExpr ( RULE_SIGN ( (lv_mulExprs_2_0= rulemulExpr ) ) )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1601:2: this_mulExpr_0= rulemulExpr ( RULE_SIGN ( (lv_mulExprs_2_0= rulemulExpr ) ) )*
             {
             if ( backtracking==0 ) {
                
@@ -3771,7 +3805,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                       currentNode=createCompositeNode(grammarAccess.getAddExprAccess().getMulExprParserRuleCall_0(), currentNode); 
                   
             }
-            pushFollow(FOLLOW_rulemulExpr_in_ruleaddExpr2719);
+            pushFollow(FOLLOW_rulemulExpr_in_ruleaddExpr2748);
             this_mulExpr_0=rulemulExpr();
             _fsp--;
             if (failed) return current;
@@ -3781,7 +3815,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                       currentNode = currentNode.getParent();
                   
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1594:1: ( RULE_SIGN ( (lv_mulExprs_2_0= rulemulExpr ) ) )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1612:1: ( RULE_SIGN ( (lv_mulExprs_2_0= rulemulExpr ) ) )*
             loop20:
             do {
                 int alt20=2;
@@ -3794,26 +3828,26 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt20) {
             	case 1 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1594:2: RULE_SIGN ( (lv_mulExprs_2_0= rulemulExpr ) )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1612:2: RULE_SIGN ( (lv_mulExprs_2_0= rulemulExpr ) )
             	    {
-            	    match(input,RULE_SIGN,FOLLOW_RULE_SIGN_in_ruleaddExpr2728); if (failed) return current;
+            	    match(input,RULE_SIGN,FOLLOW_RULE_SIGN_in_ruleaddExpr2757); if (failed) return current;
             	    if ( backtracking==0 ) {
             	       
             	          createLeafNode(grammarAccess.getAddExprAccess().getSignTerminalRuleCall_1_0(), null); 
             	          
             	    }
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1598:1: ( (lv_mulExprs_2_0= rulemulExpr ) )
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1599:1: (lv_mulExprs_2_0= rulemulExpr )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1616:1: ( (lv_mulExprs_2_0= rulemulExpr ) )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1617:1: (lv_mulExprs_2_0= rulemulExpr )
             	    {
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1599:1: (lv_mulExprs_2_0= rulemulExpr )
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1600:3: lv_mulExprs_2_0= rulemulExpr
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1617:1: (lv_mulExprs_2_0= rulemulExpr )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1618:3: lv_mulExprs_2_0= rulemulExpr
             	    {
             	    if ( backtracking==0 ) {
             	       
             	      	        currentNode=createCompositeNode(grammarAccess.getAddExprAccess().getMulExprsMulExprParserRuleCall_1_1_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FOLLOW_rulemulExpr_in_ruleaddExpr2748);
+            	    pushFollow(FOLLOW_rulemulExpr_in_ruleaddExpr2777);
             	    lv_mulExprs_2_0=rulemulExpr();
             	    _fsp--;
             	    if (failed) return current;
@@ -3876,7 +3910,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRulemulExpr
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1630:1: entryRulemulExpr returns [EObject current=null] : iv_rulemulExpr= rulemulExpr EOF ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1648:1: entryRulemulExpr returns [EObject current=null] : iv_rulemulExpr= rulemulExpr EOF ;
     public final EObject entryRulemulExpr() throws RecognitionException {
         EObject current = null;
 
@@ -3884,20 +3918,20 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1631:2: (iv_rulemulExpr= rulemulExpr EOF )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1632:2: iv_rulemulExpr= rulemulExpr EOF
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1649:2: (iv_rulemulExpr= rulemulExpr EOF )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1650:2: iv_rulemulExpr= rulemulExpr EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getMulExprRule(), currentNode); 
             }
-            pushFollow(FOLLOW_rulemulExpr_in_entryRulemulExpr2786);
+            pushFollow(FOLLOW_rulemulExpr_in_entryRulemulExpr2815);
             iv_rulemulExpr=rulemulExpr();
             _fsp--;
             if (failed) return current;
             if ( backtracking==0 ) {
                current =iv_rulemulExpr; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRulemulExpr2796); if (failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRulemulExpr2825); if (failed) return current;
 
             }
 
@@ -3915,7 +3949,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start rulemulExpr
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1639:1: rulemulExpr returns [EObject current=null] : ( ( (lv_atoms_0_0= ruleatom ) ) ( ( '*' | '/' | '%' ) ( (lv_atoms_4_0= ruleatom ) ) )* ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1657:1: rulemulExpr returns [EObject current=null] : ( ( (lv_atoms_0_0= ruleatom ) ) ( ( '*' | '/' | '%' ) ( (lv_atoms_4_0= ruleatom ) ) )* ) ;
     public final EObject rulemulExpr() throws RecognitionException {
         EObject current = null;
 
@@ -3927,24 +3961,24 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1644:6: ( ( ( (lv_atoms_0_0= ruleatom ) ) ( ( '*' | '/' | '%' ) ( (lv_atoms_4_0= ruleatom ) ) )* ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1645:1: ( ( (lv_atoms_0_0= ruleatom ) ) ( ( '*' | '/' | '%' ) ( (lv_atoms_4_0= ruleatom ) ) )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1662:6: ( ( ( (lv_atoms_0_0= ruleatom ) ) ( ( '*' | '/' | '%' ) ( (lv_atoms_4_0= ruleatom ) ) )* ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1663:1: ( ( (lv_atoms_0_0= ruleatom ) ) ( ( '*' | '/' | '%' ) ( (lv_atoms_4_0= ruleatom ) ) )* )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1645:1: ( ( (lv_atoms_0_0= ruleatom ) ) ( ( '*' | '/' | '%' ) ( (lv_atoms_4_0= ruleatom ) ) )* )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1645:2: ( (lv_atoms_0_0= ruleatom ) ) ( ( '*' | '/' | '%' ) ( (lv_atoms_4_0= ruleatom ) ) )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1663:1: ( ( (lv_atoms_0_0= ruleatom ) ) ( ( '*' | '/' | '%' ) ( (lv_atoms_4_0= ruleatom ) ) )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1663:2: ( (lv_atoms_0_0= ruleatom ) ) ( ( '*' | '/' | '%' ) ( (lv_atoms_4_0= ruleatom ) ) )*
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1645:2: ( (lv_atoms_0_0= ruleatom ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1646:1: (lv_atoms_0_0= ruleatom )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1663:2: ( (lv_atoms_0_0= ruleatom ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1664:1: (lv_atoms_0_0= ruleatom )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1646:1: (lv_atoms_0_0= ruleatom )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1647:3: lv_atoms_0_0= ruleatom
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1664:1: (lv_atoms_0_0= ruleatom )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1665:3: lv_atoms_0_0= ruleatom
             {
             if ( backtracking==0 ) {
                
               	        currentNode=createCompositeNode(grammarAccess.getMulExprAccess().getAtomsAtomParserRuleCall_0_0(), currentNode); 
               	    
             }
-            pushFollow(FOLLOW_ruleatom_in_rulemulExpr2842);
+            pushFollow(FOLLOW_ruleatom_in_rulemulExpr2871);
             lv_atoms_0_0=ruleatom();
             _fsp--;
             if (failed) return current;
@@ -3973,35 +4007,35 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1669:2: ( ( '*' | '/' | '%' ) ( (lv_atoms_4_0= ruleatom ) ) )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1687:2: ( ( '*' | '/' | '%' ) ( (lv_atoms_4_0= ruleatom ) ) )*
             loop22:
             do {
                 int alt22=2;
                 int LA22_0 = input.LA(1);
 
-                if ( ((LA22_0>=41 && LA22_0<=43)) ) {
+                if ( ((LA22_0>=42 && LA22_0<=44)) ) {
                     alt22=1;
                 }
 
 
                 switch (alt22) {
             	case 1 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1669:3: ( '*' | '/' | '%' ) ( (lv_atoms_4_0= ruleatom ) )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1687:3: ( '*' | '/' | '%' ) ( (lv_atoms_4_0= ruleatom ) )
             	    {
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1669:3: ( '*' | '/' | '%' )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1687:3: ( '*' | '/' | '%' )
             	    int alt21=3;
             	    switch ( input.LA(1) ) {
-            	    case 41:
+            	    case 42:
             	        {
             	        alt21=1;
             	        }
             	        break;
-            	    case 42:
+            	    case 43:
             	        {
             	        alt21=2;
             	        }
             	        break;
-            	    case 43:
+            	    case 44:
             	        {
             	        alt21=3;
             	        }
@@ -4009,16 +4043,16 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
             	    default:
             	        if (backtracking>0) {failed=true; return current;}
             	        NoViableAltException nvae =
-            	            new NoViableAltException("1669:3: ( '*' | '/' | '%' )", 21, 0, input);
+            	            new NoViableAltException("1687:3: ( '*' | '/' | '%' )", 21, 0, input);
 
             	        throw nvae;
             	    }
 
             	    switch (alt21) {
             	        case 1 :
-            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1669:5: '*'
+            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1687:5: '*'
             	            {
-            	            match(input,41,FOLLOW_41_in_rulemulExpr2854); if (failed) return current;
+            	            match(input,42,FOLLOW_42_in_rulemulExpr2883); if (failed) return current;
             	            if ( backtracking==0 ) {
 
             	                      createLeafNode(grammarAccess.getMulExprAccess().getAsteriskKeyword_1_0_0(), null); 
@@ -4028,9 +4062,9 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
             	            }
             	            break;
             	        case 2 :
-            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1674:7: '/'
+            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1692:7: '/'
             	            {
-            	            match(input,42,FOLLOW_42_in_rulemulExpr2870); if (failed) return current;
+            	            match(input,43,FOLLOW_43_in_rulemulExpr2899); if (failed) return current;
             	            if ( backtracking==0 ) {
 
             	                      createLeafNode(grammarAccess.getMulExprAccess().getSolidusKeyword_1_0_1(), null); 
@@ -4040,9 +4074,9 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
             	            }
             	            break;
             	        case 3 :
-            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1679:7: '%'
+            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1697:7: '%'
             	            {
-            	            match(input,43,FOLLOW_43_in_rulemulExpr2886); if (failed) return current;
+            	            match(input,44,FOLLOW_44_in_rulemulExpr2915); if (failed) return current;
             	            if ( backtracking==0 ) {
 
             	                      createLeafNode(grammarAccess.getMulExprAccess().getPercentSignKeyword_1_0_2(), null); 
@@ -4054,18 +4088,18 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1683:2: ( (lv_atoms_4_0= ruleatom ) )
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1684:1: (lv_atoms_4_0= ruleatom )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1701:2: ( (lv_atoms_4_0= ruleatom ) )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1702:1: (lv_atoms_4_0= ruleatom )
             	    {
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1684:1: (lv_atoms_4_0= ruleatom )
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1685:3: lv_atoms_4_0= ruleatom
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1702:1: (lv_atoms_4_0= ruleatom )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1703:3: lv_atoms_4_0= ruleatom
             	    {
             	    if ( backtracking==0 ) {
             	       
             	      	        currentNode=createCompositeNode(grammarAccess.getMulExprAccess().getAtomsAtomParserRuleCall_1_1_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FOLLOW_ruleatom_in_rulemulExpr2908);
+            	    pushFollow(FOLLOW_ruleatom_in_rulemulExpr2937);
             	    lv_atoms_4_0=ruleatom();
             	    _fsp--;
             	    if (failed) return current;
@@ -4128,7 +4162,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleatom
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1715:1: entryRuleatom returns [EObject current=null] : iv_ruleatom= ruleatom EOF ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1733:1: entryRuleatom returns [EObject current=null] : iv_ruleatom= ruleatom EOF ;
     public final EObject entryRuleatom() throws RecognitionException {
         EObject current = null;
 
@@ -4136,20 +4170,20 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1716:2: (iv_ruleatom= ruleatom EOF )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1717:2: iv_ruleatom= ruleatom EOF
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1734:2: (iv_ruleatom= ruleatom EOF )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1735:2: iv_ruleatom= ruleatom EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getAtomRule(), currentNode); 
             }
-            pushFollow(FOLLOW_ruleatom_in_entryRuleatom2946);
+            pushFollow(FOLLOW_ruleatom_in_entryRuleatom2975);
             iv_ruleatom=ruleatom();
             _fsp--;
             if (failed) return current;
             if ( backtracking==0 ) {
                current =iv_ruleatom; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleatom2956); if (failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleatom2985); if (failed) return current;
 
             }
 
@@ -4167,7 +4201,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleatom
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1724:1: ruleatom returns [EObject current=null] : ( ( '!' this_atom_1= ruleatom ) | ( '(' RULE_SIGN this_expr_4= ruleexpr ')' ) | ( '(' this_expr_7= ruleexpr ')' ) | this_postfixExpr_9= rulepostfixExpr | ( () ( (lv_constants_11_0= ruleconstant ) ) ) ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1742:1: ruleatom returns [EObject current=null] : ( ( '!' this_atom_1= ruleatom ) | ( '(' RULE_SIGN this_expr_4= ruleexpr ')' ) | ( '(' this_expr_7= ruleexpr ')' ) | this_postfixExpr_9= rulepostfixExpr | ( () ( (lv_constants_11_0= ruleconstant ) ) ) ) ;
     public final EObject ruleatom() throws RecognitionException {
         EObject current = null;
 
@@ -4185,13 +4219,13 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1729:6: ( ( ( '!' this_atom_1= ruleatom ) | ( '(' RULE_SIGN this_expr_4= ruleexpr ')' ) | ( '(' this_expr_7= ruleexpr ')' ) | this_postfixExpr_9= rulepostfixExpr | ( () ( (lv_constants_11_0= ruleconstant ) ) ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1730:1: ( ( '!' this_atom_1= ruleatom ) | ( '(' RULE_SIGN this_expr_4= ruleexpr ')' ) | ( '(' this_expr_7= ruleexpr ')' ) | this_postfixExpr_9= rulepostfixExpr | ( () ( (lv_constants_11_0= ruleconstant ) ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1747:6: ( ( ( '!' this_atom_1= ruleatom ) | ( '(' RULE_SIGN this_expr_4= ruleexpr ')' ) | ( '(' this_expr_7= ruleexpr ')' ) | this_postfixExpr_9= rulepostfixExpr | ( () ( (lv_constants_11_0= ruleconstant ) ) ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1748:1: ( ( '!' this_atom_1= ruleatom ) | ( '(' RULE_SIGN this_expr_4= ruleexpr ')' ) | ( '(' this_expr_7= ruleexpr ')' ) | this_postfixExpr_9= rulepostfixExpr | ( () ( (lv_constants_11_0= ruleconstant ) ) ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1730:1: ( ( '!' this_atom_1= ruleatom ) | ( '(' RULE_SIGN this_expr_4= ruleexpr ')' ) | ( '(' this_expr_7= ruleexpr ')' ) | this_postfixExpr_9= rulepostfixExpr | ( () ( (lv_constants_11_0= ruleconstant ) ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1748:1: ( ( '!' this_atom_1= ruleatom ) | ( '(' RULE_SIGN this_expr_4= ruleexpr ')' ) | ( '(' this_expr_7= ruleexpr ')' ) | this_postfixExpr_9= rulepostfixExpr | ( () ( (lv_constants_11_0= ruleconstant ) ) ) )
             int alt23=5;
             switch ( input.LA(1) ) {
-            case 44:
+            case 45:
                 {
                 alt23=1;
                 }
@@ -4203,13 +4237,13 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                 if ( (LA23_2==RULE_SIGN) ) {
                     alt23=2;
                 }
-                else if ( (LA23_2==RULE_ID||(LA23_2>=RULE_INT && LA23_2<=RULE_STRING)||LA23_2==12||LA23_2==44||(LA23_2>=48 && LA23_2<=51)) ) {
+                else if ( (LA23_2==RULE_ID||(LA23_2>=RULE_INT && LA23_2<=RULE_STRING)||LA23_2==12||LA23_2==45||(LA23_2>=49 && LA23_2<=52)) ) {
                     alt23=3;
                 }
                 else {
                     if (backtracking>0) {failed=true; return current;}
                     NoViableAltException nvae =
-                        new NoViableAltException("1730:1: ( ( '!' this_atom_1= ruleatom ) | ( '(' RULE_SIGN this_expr_4= ruleexpr ')' ) | ( '(' this_expr_7= ruleexpr ')' ) | this_postfixExpr_9= rulepostfixExpr | ( () ( (lv_constants_11_0= ruleconstant ) ) ) )", 23, 2, input);
+                        new NoViableAltException("1748:1: ( ( '!' this_atom_1= ruleatom ) | ( '(' RULE_SIGN this_expr_4= ruleexpr ')' ) | ( '(' this_expr_7= ruleexpr ')' ) | this_postfixExpr_9= rulepostfixExpr | ( () ( (lv_constants_11_0= ruleconstant ) ) ) )", 23, 2, input);
 
                     throw nvae;
                 }
@@ -4222,10 +4256,10 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                 break;
             case RULE_INT:
             case RULE_STRING:
-            case 48:
             case 49:
             case 50:
             case 51:
+            case 52:
                 {
                 alt23=5;
                 }
@@ -4233,19 +4267,19 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
             default:
                 if (backtracking>0) {failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("1730:1: ( ( '!' this_atom_1= ruleatom ) | ( '(' RULE_SIGN this_expr_4= ruleexpr ')' ) | ( '(' this_expr_7= ruleexpr ')' ) | this_postfixExpr_9= rulepostfixExpr | ( () ( (lv_constants_11_0= ruleconstant ) ) ) )", 23, 0, input);
+                    new NoViableAltException("1748:1: ( ( '!' this_atom_1= ruleatom ) | ( '(' RULE_SIGN this_expr_4= ruleexpr ')' ) | ( '(' this_expr_7= ruleexpr ')' ) | this_postfixExpr_9= rulepostfixExpr | ( () ( (lv_constants_11_0= ruleconstant ) ) ) )", 23, 0, input);
 
                 throw nvae;
             }
 
             switch (alt23) {
                 case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1730:2: ( '!' this_atom_1= ruleatom )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1748:2: ( '!' this_atom_1= ruleatom )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1730:2: ( '!' this_atom_1= ruleatom )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1730:4: '!' this_atom_1= ruleatom
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1748:2: ( '!' this_atom_1= ruleatom )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1748:4: '!' this_atom_1= ruleatom
                     {
-                    match(input,44,FOLLOW_44_in_ruleatom2992); if (failed) return current;
+                    match(input,45,FOLLOW_45_in_ruleatom3021); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               createLeafNode(grammarAccess.getAtomAccess().getExclamationMarkKeyword_0_0(), null); 
@@ -4261,7 +4295,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                               currentNode=createCompositeNode(grammarAccess.getAtomAccess().getAtomParserRuleCall_0_1(), currentNode); 
                           
                     }
-                    pushFollow(FOLLOW_ruleatom_in_ruleatom3017);
+                    pushFollow(FOLLOW_ruleatom_in_ruleatom3046);
                     this_atom_1=ruleatom();
                     _fsp--;
                     if (failed) return current;
@@ -4278,18 +4312,18 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1747:6: ( '(' RULE_SIGN this_expr_4= ruleexpr ')' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1765:6: ( '(' RULE_SIGN this_expr_4= ruleexpr ')' )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1747:6: ( '(' RULE_SIGN this_expr_4= ruleexpr ')' )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1747:8: '(' RULE_SIGN this_expr_4= ruleexpr ')'
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1765:6: ( '(' RULE_SIGN this_expr_4= ruleexpr ')' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1765:8: '(' RULE_SIGN this_expr_4= ruleexpr ')'
                     {
-                    match(input,12,FOLLOW_12_in_ruleatom3034); if (failed) return current;
+                    match(input,12,FOLLOW_12_in_ruleatom3063); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               createLeafNode(grammarAccess.getAtomAccess().getLeftParenthesisKeyword_1_0(), null); 
                           
                     }
-                    match(input,RULE_SIGN,FOLLOW_RULE_SIGN_in_ruleatom3043); if (failed) return current;
+                    match(input,RULE_SIGN,FOLLOW_RULE_SIGN_in_ruleatom3072); if (failed) return current;
                     if ( backtracking==0 ) {
                        
                           createLeafNode(grammarAccess.getAtomAccess().getSignTerminalRuleCall_1_1(), null); 
@@ -4305,7 +4339,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                               currentNode=createCompositeNode(grammarAccess.getAtomAccess().getExprParserRuleCall_1_2(), currentNode); 
                           
                     }
-                    pushFollow(FOLLOW_ruleexpr_in_ruleatom3067);
+                    pushFollow(FOLLOW_ruleexpr_in_ruleatom3096);
                     this_expr_4=ruleexpr();
                     _fsp--;
                     if (failed) return current;
@@ -4315,7 +4349,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                               currentNode = currentNode.getParent();
                           
                     }
-                    match(input,13,FOLLOW_13_in_ruleatom3076); if (failed) return current;
+                    match(input,13,FOLLOW_13_in_ruleatom3105); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               createLeafNode(grammarAccess.getAtomAccess().getRightParenthesisKeyword_1_3(), null); 
@@ -4328,12 +4362,12 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1772:6: ( '(' this_expr_7= ruleexpr ')' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1790:6: ( '(' this_expr_7= ruleexpr ')' )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1772:6: ( '(' this_expr_7= ruleexpr ')' )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1772:8: '(' this_expr_7= ruleexpr ')'
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1790:6: ( '(' this_expr_7= ruleexpr ')' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1790:8: '(' this_expr_7= ruleexpr ')'
                     {
-                    match(input,12,FOLLOW_12_in_ruleatom3094); if (failed) return current;
+                    match(input,12,FOLLOW_12_in_ruleatom3123); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               createLeafNode(grammarAccess.getAtomAccess().getLeftParenthesisKeyword_2_0(), null); 
@@ -4349,7 +4383,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                               currentNode=createCompositeNode(grammarAccess.getAtomAccess().getExprParserRuleCall_2_1(), currentNode); 
                           
                     }
-                    pushFollow(FOLLOW_ruleexpr_in_ruleatom3119);
+                    pushFollow(FOLLOW_ruleexpr_in_ruleatom3148);
                     this_expr_7=ruleexpr();
                     _fsp--;
                     if (failed) return current;
@@ -4359,7 +4393,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                               currentNode = currentNode.getParent();
                           
                     }
-                    match(input,13,FOLLOW_13_in_ruleatom3128); if (failed) return current;
+                    match(input,13,FOLLOW_13_in_ruleatom3157); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               createLeafNode(grammarAccess.getAtomAccess().getRightParenthesisKeyword_2_2(), null); 
@@ -4372,7 +4406,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1794:2: this_postfixExpr_9= rulepostfixExpr
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1812:2: this_postfixExpr_9= rulepostfixExpr
                     {
                     if ( backtracking==0 ) {
                        
@@ -4384,7 +4418,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                               currentNode=createCompositeNode(grammarAccess.getAtomAccess().getPostfixExprParserRuleCall_3(), currentNode); 
                           
                     }
-                    pushFollow(FOLLOW_rulepostfixExpr_in_ruleatom3160);
+                    pushFollow(FOLLOW_rulepostfixExpr_in_ruleatom3189);
                     this_postfixExpr_9=rulepostfixExpr();
                     _fsp--;
                     if (failed) return current;
@@ -4398,13 +4432,13 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1806:6: ( () ( (lv_constants_11_0= ruleconstant ) ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1824:6: ( () ( (lv_constants_11_0= ruleconstant ) ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1806:6: ( () ( (lv_constants_11_0= ruleconstant ) ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1806:7: () ( (lv_constants_11_0= ruleconstant ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1824:6: ( () ( (lv_constants_11_0= ruleconstant ) ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1824:7: () ( (lv_constants_11_0= ruleconstant ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1806:7: ()
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1807:2: 
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1824:7: ()
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1825:2: 
                     {
                     if ( backtracking==0 ) {
                        
@@ -4426,18 +4460,18 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1820:2: ( (lv_constants_11_0= ruleconstant ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1821:1: (lv_constants_11_0= ruleconstant )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1838:2: ( (lv_constants_11_0= ruleconstant ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1839:1: (lv_constants_11_0= ruleconstant )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1821:1: (lv_constants_11_0= ruleconstant )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1822:3: lv_constants_11_0= ruleconstant
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1839:1: (lv_constants_11_0= ruleconstant )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1840:3: lv_constants_11_0= ruleconstant
                     {
                     if ( backtracking==0 ) {
                        
                       	        currentNode=createCompositeNode(grammarAccess.getAtomAccess().getConstantsConstantParserRuleCall_4_1_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FOLLOW_ruleconstant_in_ruleatom3199);
+                    pushFollow(FOLLOW_ruleconstant_in_ruleatom3228);
                     lv_constants_11_0=ruleconstant();
                     _fsp--;
                     if (failed) return current;
@@ -4497,7 +4531,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRulepostfixExpr
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1852:1: entryRulepostfixExpr returns [EObject current=null] : iv_rulepostfixExpr= rulepostfixExpr EOF ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1870:1: entryRulepostfixExpr returns [EObject current=null] : iv_rulepostfixExpr= rulepostfixExpr EOF ;
     public final EObject entryRulepostfixExpr() throws RecognitionException {
         EObject current = null;
 
@@ -4505,20 +4539,20 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1853:2: (iv_rulepostfixExpr= rulepostfixExpr EOF )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1854:2: iv_rulepostfixExpr= rulepostfixExpr EOF
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1871:2: (iv_rulepostfixExpr= rulepostfixExpr EOF )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1872:2: iv_rulepostfixExpr= rulepostfixExpr EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getPostfixExprRule(), currentNode); 
             }
-            pushFollow(FOLLOW_rulepostfixExpr_in_entryRulepostfixExpr3236);
+            pushFollow(FOLLOW_rulepostfixExpr_in_entryRulepostfixExpr3265);
             iv_rulepostfixExpr=rulepostfixExpr();
             _fsp--;
             if (failed) return current;
             if ( backtracking==0 ) {
                current =iv_rulepostfixExpr; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRulepostfixExpr3246); if (failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRulepostfixExpr3275); if (failed) return current;
 
             }
 
@@ -4536,7 +4570,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start rulepostfixExpr
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1861:1: rulepostfixExpr returns [EObject current=null] : ( ( ( ( RULE_ID ) ) | ( ( RULE_ID ) ) | ( ( RULE_ID ) ) ) ( ( '.' RULE_ID ) | ( '(' ( ( (lv_expressions_6_0= ruleexpr ) ) ( ',' ( (lv_expressions_8_0= ruleexpr ) ) )* )? ')' ) | ( '[' ( (lv_expressions_11_0= ruleexpr ) ) ']' ) )* ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1879:1: rulepostfixExpr returns [EObject current=null] : ( ( ( ( RULE_ID ) ) | ( ( RULE_ID ) ) | ( ( RULE_ID ) ) ) ( ( '.' RULE_ID ) | ( '(' ( ( (lv_expressions_6_0= ruleexpr ) ) ( ',' ( (lv_expressions_8_0= ruleexpr ) ) )* )? ')' ) | ( '[' ( (lv_expressions_11_0= ruleexpr ) ) ']' ) )* ) ;
     public final EObject rulepostfixExpr() throws RecognitionException {
         EObject current = null;
 
@@ -4550,23 +4584,23 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1866:6: ( ( ( ( ( RULE_ID ) ) | ( ( RULE_ID ) ) | ( ( RULE_ID ) ) ) ( ( '.' RULE_ID ) | ( '(' ( ( (lv_expressions_6_0= ruleexpr ) ) ( ',' ( (lv_expressions_8_0= ruleexpr ) ) )* )? ')' ) | ( '[' ( (lv_expressions_11_0= ruleexpr ) ) ']' ) )* ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1867:1: ( ( ( ( RULE_ID ) ) | ( ( RULE_ID ) ) | ( ( RULE_ID ) ) ) ( ( '.' RULE_ID ) | ( '(' ( ( (lv_expressions_6_0= ruleexpr ) ) ( ',' ( (lv_expressions_8_0= ruleexpr ) ) )* )? ')' ) | ( '[' ( (lv_expressions_11_0= ruleexpr ) ) ']' ) )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1884:6: ( ( ( ( ( RULE_ID ) ) | ( ( RULE_ID ) ) | ( ( RULE_ID ) ) ) ( ( '.' RULE_ID ) | ( '(' ( ( (lv_expressions_6_0= ruleexpr ) ) ( ',' ( (lv_expressions_8_0= ruleexpr ) ) )* )? ')' ) | ( '[' ( (lv_expressions_11_0= ruleexpr ) ) ']' ) )* ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1885:1: ( ( ( ( RULE_ID ) ) | ( ( RULE_ID ) ) | ( ( RULE_ID ) ) ) ( ( '.' RULE_ID ) | ( '(' ( ( (lv_expressions_6_0= ruleexpr ) ) ( ',' ( (lv_expressions_8_0= ruleexpr ) ) )* )? ')' ) | ( '[' ( (lv_expressions_11_0= ruleexpr ) ) ']' ) )* )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1867:1: ( ( ( ( RULE_ID ) ) | ( ( RULE_ID ) ) | ( ( RULE_ID ) ) ) ( ( '.' RULE_ID ) | ( '(' ( ( (lv_expressions_6_0= ruleexpr ) ) ( ',' ( (lv_expressions_8_0= ruleexpr ) ) )* )? ')' ) | ( '[' ( (lv_expressions_11_0= ruleexpr ) ) ']' ) )* )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1867:2: ( ( ( RULE_ID ) ) | ( ( RULE_ID ) ) | ( ( RULE_ID ) ) ) ( ( '.' RULE_ID ) | ( '(' ( ( (lv_expressions_6_0= ruleexpr ) ) ( ',' ( (lv_expressions_8_0= ruleexpr ) ) )* )? ')' ) | ( '[' ( (lv_expressions_11_0= ruleexpr ) ) ']' ) )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1885:1: ( ( ( ( RULE_ID ) ) | ( ( RULE_ID ) ) | ( ( RULE_ID ) ) ) ( ( '.' RULE_ID ) | ( '(' ( ( (lv_expressions_6_0= ruleexpr ) ) ( ',' ( (lv_expressions_8_0= ruleexpr ) ) )* )? ')' ) | ( '[' ( (lv_expressions_11_0= ruleexpr ) ) ']' ) )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1885:2: ( ( ( RULE_ID ) ) | ( ( RULE_ID ) ) | ( ( RULE_ID ) ) ) ( ( '.' RULE_ID ) | ( '(' ( ( (lv_expressions_6_0= ruleexpr ) ) ( ',' ( (lv_expressions_8_0= ruleexpr ) ) )* )? ')' ) | ( '[' ( (lv_expressions_11_0= ruleexpr ) ) ']' ) )*
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1867:2: ( ( ( RULE_ID ) ) | ( ( RULE_ID ) ) | ( ( RULE_ID ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1885:2: ( ( ( RULE_ID ) ) | ( ( RULE_ID ) ) | ( ( RULE_ID ) ) )
             int alt24=3;
             int LA24_0 = input.LA(1);
 
             if ( (LA24_0==RULE_ID) ) {
                 int LA24_1 = input.LA(2);
 
-                if ( (synpred40()) ) {
+                if ( (synpred41()) ) {
                     alt24=1;
                 }
-                else if ( (synpred41()) ) {
+                else if ( (synpred42()) ) {
                     alt24=2;
                 }
                 else if ( (true) ) {
@@ -4575,7 +4609,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                 else {
                     if (backtracking>0) {failed=true; return current;}
                     NoViableAltException nvae =
-                        new NoViableAltException("1867:2: ( ( ( RULE_ID ) ) | ( ( RULE_ID ) ) | ( ( RULE_ID ) ) )", 24, 1, input);
+                        new NoViableAltException("1885:2: ( ( ( RULE_ID ) ) | ( ( RULE_ID ) ) | ( ( RULE_ID ) ) )", 24, 1, input);
 
                     throw nvae;
                 }
@@ -4583,52 +4617,15 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
             else {
                 if (backtracking>0) {failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("1867:2: ( ( ( RULE_ID ) ) | ( ( RULE_ID ) ) | ( ( RULE_ID ) ) )", 24, 0, input);
+                    new NoViableAltException("1885:2: ( ( ( RULE_ID ) ) | ( ( RULE_ID ) ) | ( ( RULE_ID ) ) )", 24, 0, input);
 
                 throw nvae;
             }
             switch (alt24) {
                 case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1867:3: ( ( RULE_ID ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1885:3: ( ( RULE_ID ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1867:3: ( ( RULE_ID ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1868:1: ( RULE_ID )
-                    {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1868:1: ( RULE_ID )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1869:3: RULE_ID
-                    {
-                    if ( backtracking==0 ) {
-                       
-                      		  /* */ 
-                      		
-                    }
-                    if ( backtracking==0 ) {
-
-                      			if (current==null) {
-                      	            current = factory.create(grammarAccess.getPostfixExprRule().getType().getClassifier());
-                      	            associateNodeWithAstElement(currentNode, current);
-                      	        }
-                              
-                    }
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_rulepostfixExpr3294); if (failed) return current;
-                    if ( backtracking==0 ) {
-
-                      		createLeafNode(grammarAccess.getPostfixExprAccess().getExistingVariableDeclarationCrossReference_0_0_0(), "existingVariable"); 
-                      	
-                    }
-
-                    }
-
-
-                    }
-
-
-                    }
-                    break;
-                case 2 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1885:6: ( ( RULE_ID ) )
-                    {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1885:6: ( ( RULE_ID ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1885:3: ( ( RULE_ID ) )
                     // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1886:1: ( RULE_ID )
                     {
                     // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1886:1: ( RULE_ID )
@@ -4647,10 +4644,10 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                       	        }
                               
                     }
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_rulepostfixExpr3322); if (failed) return current;
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_rulepostfixExpr3323); if (failed) return current;
                     if ( backtracking==0 ) {
 
-                      		createLeafNode(grammarAccess.getPostfixExprAccess().getExistingVariableParamCrossReference_0_1_0(), "existingVariable"); 
+                      		createLeafNode(grammarAccess.getPostfixExprAccess().getExistingVariableDeclarationCrossReference_0_0_0(), "existingVariable"); 
                       	
                     }
 
@@ -4662,7 +4659,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
                     }
                     break;
-                case 3 :
+                case 2 :
                     // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1903:6: ( ( RULE_ID ) )
                     {
                     // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1903:6: ( ( RULE_ID ) )
@@ -4684,7 +4681,44 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                       	        }
                               
                     }
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_rulepostfixExpr3350); if (failed) return current;
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_rulepostfixExpr3351); if (failed) return current;
+                    if ( backtracking==0 ) {
+
+                      		createLeafNode(grammarAccess.getPostfixExprAccess().getExistingVariableParamCrossReference_0_1_0(), "existingVariable"); 
+                      	
+                    }
+
+                    }
+
+
+                    }
+
+
+                    }
+                    break;
+                case 3 :
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1921:6: ( ( RULE_ID ) )
+                    {
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1921:6: ( ( RULE_ID ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1922:1: ( RULE_ID )
+                    {
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1922:1: ( RULE_ID )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1923:3: RULE_ID
+                    {
+                    if ( backtracking==0 ) {
+                       
+                      		  /* */ 
+                      		
+                    }
+                    if ( backtracking==0 ) {
+
+                      			if (current==null) {
+                      	            current = factory.create(grammarAccess.getPostfixExprRule().getType().getClassifier());
+                      	            associateNodeWithAstElement(currentNode, current);
+                      	        }
+                              
+                    }
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_rulepostfixExpr3379); if (failed) return current;
                     if ( backtracking==0 ) {
 
                       		createLeafNode(grammarAccess.getPostfixExprAccess().getExistingVariableFunctionDefinitionCrossReference_0_2_0(), "existingVariable"); 
@@ -4702,12 +4736,12 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1920:3: ( ( '.' RULE_ID ) | ( '(' ( ( (lv_expressions_6_0= ruleexpr ) ) ( ',' ( (lv_expressions_8_0= ruleexpr ) ) )* )? ')' ) | ( '[' ( (lv_expressions_11_0= ruleexpr ) ) ']' ) )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1938:3: ( ( '.' RULE_ID ) | ( '(' ( ( (lv_expressions_6_0= ruleexpr ) ) ( ',' ( (lv_expressions_8_0= ruleexpr ) ) )* )? ')' ) | ( '[' ( (lv_expressions_11_0= ruleexpr ) ) ']' ) )*
             loop27:
             do {
                 int alt27=4;
                 switch ( input.LA(1) ) {
-                case 45:
+                case 46:
                     {
                     alt27=1;
                     }
@@ -4717,7 +4751,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                     alt27=2;
                     }
                     break;
-                case 46:
+                case 47:
                     {
                     alt27=3;
                     }
@@ -4727,18 +4761,18 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt27) {
             	case 1 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1920:4: ( '.' RULE_ID )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1938:4: ( '.' RULE_ID )
             	    {
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1920:4: ( '.' RULE_ID )
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1920:6: '.' RULE_ID
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1938:4: ( '.' RULE_ID )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1938:6: '.' RULE_ID
             	    {
-            	    match(input,45,FOLLOW_45_in_rulepostfixExpr3363); if (failed) return current;
+            	    match(input,46,FOLLOW_46_in_rulepostfixExpr3392); if (failed) return current;
             	    if ( backtracking==0 ) {
 
             	              createLeafNode(grammarAccess.getPostfixExprAccess().getFullStopKeyword_1_0_0(), null); 
             	          
             	    }
-            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_rulepostfixExpr3372); if (failed) return current;
+            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_rulepostfixExpr3401); if (failed) return current;
             	    if ( backtracking==0 ) {
             	       
             	          createLeafNode(grammarAccess.getPostfixExprAccess().getIDTerminalRuleCall_1_0_1(), null); 
@@ -4751,40 +4785,40 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1929:6: ( '(' ( ( (lv_expressions_6_0= ruleexpr ) ) ( ',' ( (lv_expressions_8_0= ruleexpr ) ) )* )? ')' )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1947:6: ( '(' ( ( (lv_expressions_6_0= ruleexpr ) ) ( ',' ( (lv_expressions_8_0= ruleexpr ) ) )* )? ')' )
             	    {
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1929:6: ( '(' ( ( (lv_expressions_6_0= ruleexpr ) ) ( ',' ( (lv_expressions_8_0= ruleexpr ) ) )* )? ')' )
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1929:8: '(' ( ( (lv_expressions_6_0= ruleexpr ) ) ( ',' ( (lv_expressions_8_0= ruleexpr ) ) )* )? ')'
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1947:6: ( '(' ( ( (lv_expressions_6_0= ruleexpr ) ) ( ',' ( (lv_expressions_8_0= ruleexpr ) ) )* )? ')' )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1947:8: '(' ( ( (lv_expressions_6_0= ruleexpr ) ) ( ',' ( (lv_expressions_8_0= ruleexpr ) ) )* )? ')'
             	    {
-            	    match(input,12,FOLLOW_12_in_rulepostfixExpr3389); if (failed) return current;
+            	    match(input,12,FOLLOW_12_in_rulepostfixExpr3418); if (failed) return current;
             	    if ( backtracking==0 ) {
 
             	              createLeafNode(grammarAccess.getPostfixExprAccess().getLeftParenthesisKeyword_1_1_0(), null); 
             	          
             	    }
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1933:1: ( ( (lv_expressions_6_0= ruleexpr ) ) ( ',' ( (lv_expressions_8_0= ruleexpr ) ) )* )?
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1951:1: ( ( (lv_expressions_6_0= ruleexpr ) ) ( ',' ( (lv_expressions_8_0= ruleexpr ) ) )* )?
             	    int alt26=2;
             	    int LA26_0 = input.LA(1);
 
-            	    if ( (LA26_0==RULE_ID||(LA26_0>=RULE_INT && LA26_0<=RULE_STRING)||LA26_0==12||LA26_0==44||(LA26_0>=48 && LA26_0<=51)) ) {
+            	    if ( (LA26_0==RULE_ID||(LA26_0>=RULE_INT && LA26_0<=RULE_STRING)||LA26_0==12||LA26_0==45||(LA26_0>=49 && LA26_0<=52)) ) {
             	        alt26=1;
             	    }
             	    switch (alt26) {
             	        case 1 :
-            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1933:2: ( (lv_expressions_6_0= ruleexpr ) ) ( ',' ( (lv_expressions_8_0= ruleexpr ) ) )*
+            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1951:2: ( (lv_expressions_6_0= ruleexpr ) ) ( ',' ( (lv_expressions_8_0= ruleexpr ) ) )*
             	            {
-            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1933:2: ( (lv_expressions_6_0= ruleexpr ) )
-            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1934:1: (lv_expressions_6_0= ruleexpr )
+            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1951:2: ( (lv_expressions_6_0= ruleexpr ) )
+            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1952:1: (lv_expressions_6_0= ruleexpr )
             	            {
-            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1934:1: (lv_expressions_6_0= ruleexpr )
-            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1935:3: lv_expressions_6_0= ruleexpr
+            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1952:1: (lv_expressions_6_0= ruleexpr )
+            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1953:3: lv_expressions_6_0= ruleexpr
             	            {
             	            if ( backtracking==0 ) {
             	               
             	              	        currentNode=createCompositeNode(grammarAccess.getPostfixExprAccess().getExpressionsExprParserRuleCall_1_1_1_0_0(), currentNode); 
             	              	    
             	            }
-            	            pushFollow(FOLLOW_ruleexpr_in_rulepostfixExpr3411);
+            	            pushFollow(FOLLOW_ruleexpr_in_rulepostfixExpr3440);
             	            lv_expressions_6_0=ruleexpr();
             	            _fsp--;
             	            if (failed) return current;
@@ -4813,7 +4847,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
             	            }
 
-            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1957:2: ( ',' ( (lv_expressions_8_0= ruleexpr ) ) )*
+            	            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1975:2: ( ',' ( (lv_expressions_8_0= ruleexpr ) ) )*
             	            loop25:
             	            do {
             	                int alt25=2;
@@ -4826,26 +4860,26 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
             	                switch (alt25) {
             	            	case 1 :
-            	            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1957:4: ',' ( (lv_expressions_8_0= ruleexpr ) )
+            	            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1975:4: ',' ( (lv_expressions_8_0= ruleexpr ) )
             	            	    {
-            	            	    match(input,16,FOLLOW_16_in_rulepostfixExpr3422); if (failed) return current;
+            	            	    match(input,16,FOLLOW_16_in_rulepostfixExpr3451); if (failed) return current;
             	            	    if ( backtracking==0 ) {
 
             	            	              createLeafNode(grammarAccess.getPostfixExprAccess().getCommaKeyword_1_1_1_1_0(), null); 
             	            	          
             	            	    }
-            	            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1961:1: ( (lv_expressions_8_0= ruleexpr ) )
-            	            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1962:1: (lv_expressions_8_0= ruleexpr )
+            	            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1979:1: ( (lv_expressions_8_0= ruleexpr ) )
+            	            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1980:1: (lv_expressions_8_0= ruleexpr )
             	            	    {
-            	            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1962:1: (lv_expressions_8_0= ruleexpr )
-            	            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1963:3: lv_expressions_8_0= ruleexpr
+            	            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1980:1: (lv_expressions_8_0= ruleexpr )
+            	            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1981:3: lv_expressions_8_0= ruleexpr
             	            	    {
             	            	    if ( backtracking==0 ) {
             	            	       
             	            	      	        currentNode=createCompositeNode(grammarAccess.getPostfixExprAccess().getExpressionsExprParserRuleCall_1_1_1_1_1_0(), currentNode); 
             	            	      	    
             	            	    }
-            	            	    pushFollow(FOLLOW_ruleexpr_in_rulepostfixExpr3443);
+            	            	    pushFollow(FOLLOW_ruleexpr_in_rulepostfixExpr3472);
             	            	    lv_expressions_8_0=ruleexpr();
             	            	    _fsp--;
             	            	    if (failed) return current;
@@ -4889,7 +4923,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    match(input,13,FOLLOW_13_in_rulepostfixExpr3457); if (failed) return current;
+            	    match(input,13,FOLLOW_13_in_rulepostfixExpr3486); if (failed) return current;
             	    if ( backtracking==0 ) {
 
             	              createLeafNode(grammarAccess.getPostfixExprAccess().getRightParenthesisKeyword_1_1_2(), null); 
@@ -4902,29 +4936,29 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1990:6: ( '[' ( (lv_expressions_11_0= ruleexpr ) ) ']' )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2008:6: ( '[' ( (lv_expressions_11_0= ruleexpr ) ) ']' )
             	    {
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1990:6: ( '[' ( (lv_expressions_11_0= ruleexpr ) ) ']' )
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1990:8: '[' ( (lv_expressions_11_0= ruleexpr ) ) ']'
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2008:6: ( '[' ( (lv_expressions_11_0= ruleexpr ) ) ']' )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2008:8: '[' ( (lv_expressions_11_0= ruleexpr ) ) ']'
             	    {
-            	    match(input,46,FOLLOW_46_in_rulepostfixExpr3475); if (failed) return current;
+            	    match(input,47,FOLLOW_47_in_rulepostfixExpr3504); if (failed) return current;
             	    if ( backtracking==0 ) {
 
             	              createLeafNode(grammarAccess.getPostfixExprAccess().getLeftSquareBracketKeyword_1_2_0(), null); 
             	          
             	    }
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1994:1: ( (lv_expressions_11_0= ruleexpr ) )
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1995:1: (lv_expressions_11_0= ruleexpr )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2012:1: ( (lv_expressions_11_0= ruleexpr ) )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2013:1: (lv_expressions_11_0= ruleexpr )
             	    {
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1995:1: (lv_expressions_11_0= ruleexpr )
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1996:3: lv_expressions_11_0= ruleexpr
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2013:1: (lv_expressions_11_0= ruleexpr )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2014:3: lv_expressions_11_0= ruleexpr
             	    {
             	    if ( backtracking==0 ) {
             	       
             	      	        currentNode=createCompositeNode(grammarAccess.getPostfixExprAccess().getExpressionsExprParserRuleCall_1_2_1_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FOLLOW_ruleexpr_in_rulepostfixExpr3496);
+            	    pushFollow(FOLLOW_ruleexpr_in_rulepostfixExpr3525);
             	    lv_expressions_11_0=ruleexpr();
             	    _fsp--;
             	    if (failed) return current;
@@ -4953,7 +4987,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
             	    }
 
-            	    match(input,47,FOLLOW_47_in_rulepostfixExpr3506); if (failed) return current;
+            	    match(input,48,FOLLOW_48_in_rulepostfixExpr3535); if (failed) return current;
             	    if ( backtracking==0 ) {
 
             	              createLeafNode(grammarAccess.getPostfixExprAccess().getRightSquareBracketKeyword_1_2_2(), null); 
@@ -4996,7 +5030,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleconstant
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2030:1: entryRuleconstant returns [EObject current=null] : iv_ruleconstant= ruleconstant EOF ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2048:1: entryRuleconstant returns [EObject current=null] : iv_ruleconstant= ruleconstant EOF ;
     public final EObject entryRuleconstant() throws RecognitionException {
         EObject current = null;
 
@@ -5004,20 +5038,20 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2031:2: (iv_ruleconstant= ruleconstant EOF )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2032:2: iv_ruleconstant= ruleconstant EOF
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2049:2: (iv_ruleconstant= ruleconstant EOF )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2050:2: iv_ruleconstant= ruleconstant EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getConstantRule(), currentNode); 
             }
-            pushFollow(FOLLOW_ruleconstant_in_entryRuleconstant3545);
+            pushFollow(FOLLOW_ruleconstant_in_entryRuleconstant3574);
             iv_ruleconstant=ruleconstant();
             _fsp--;
             if (failed) return current;
             if ( backtracking==0 ) {
                current =iv_ruleconstant; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleconstant3555); if (failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleconstant3584); if (failed) return current;
 
             }
 
@@ -5035,7 +5069,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleconstant
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2039:1: ruleconstant returns [EObject current=null] : ( ( () 'true' ) | ( () 'false' ) | ( (lv_Float_4_0= ruleFLOAT ) ) | ( (lv_Integer_5_0= RULE_INT ) ) | ( (lv_String_6_0= RULE_STRING ) ) | ( (lv_Null_7_0= 'null' ) ) | ( (lv_Infinity_8_0= 'infty' ) ) ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2057:1: ruleconstant returns [EObject current=null] : ( ( () 'true' ) | ( () 'false' ) | ( (lv_Float_4_0= ruleFLOAT ) ) | ( (lv_Integer_5_0= RULE_INT ) ) | ( (lv_String_6_0= RULE_STRING ) ) | ( (lv_Null_7_0= 'null' ) ) | ( (lv_Infinity_8_0= 'infty' ) ) ) ;
     public final EObject ruleconstant() throws RecognitionException {
         EObject current = null;
 
@@ -5049,18 +5083,18 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2044:6: ( ( ( () 'true' ) | ( () 'false' ) | ( (lv_Float_4_0= ruleFLOAT ) ) | ( (lv_Integer_5_0= RULE_INT ) ) | ( (lv_String_6_0= RULE_STRING ) ) | ( (lv_Null_7_0= 'null' ) ) | ( (lv_Infinity_8_0= 'infty' ) ) ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2045:1: ( ( () 'true' ) | ( () 'false' ) | ( (lv_Float_4_0= ruleFLOAT ) ) | ( (lv_Integer_5_0= RULE_INT ) ) | ( (lv_String_6_0= RULE_STRING ) ) | ( (lv_Null_7_0= 'null' ) ) | ( (lv_Infinity_8_0= 'infty' ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2062:6: ( ( ( () 'true' ) | ( () 'false' ) | ( (lv_Float_4_0= ruleFLOAT ) ) | ( (lv_Integer_5_0= RULE_INT ) ) | ( (lv_String_6_0= RULE_STRING ) ) | ( (lv_Null_7_0= 'null' ) ) | ( (lv_Infinity_8_0= 'infty' ) ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2063:1: ( ( () 'true' ) | ( () 'false' ) | ( (lv_Float_4_0= ruleFLOAT ) ) | ( (lv_Integer_5_0= RULE_INT ) ) | ( (lv_String_6_0= RULE_STRING ) ) | ( (lv_Null_7_0= 'null' ) ) | ( (lv_Infinity_8_0= 'infty' ) ) )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2045:1: ( ( () 'true' ) | ( () 'false' ) | ( (lv_Float_4_0= ruleFLOAT ) ) | ( (lv_Integer_5_0= RULE_INT ) ) | ( (lv_String_6_0= RULE_STRING ) ) | ( (lv_Null_7_0= 'null' ) ) | ( (lv_Infinity_8_0= 'infty' ) ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2063:1: ( ( () 'true' ) | ( () 'false' ) | ( (lv_Float_4_0= ruleFLOAT ) ) | ( (lv_Integer_5_0= RULE_INT ) ) | ( (lv_String_6_0= RULE_STRING ) ) | ( (lv_Null_7_0= 'null' ) ) | ( (lv_Infinity_8_0= 'infty' ) ) )
             int alt28=7;
             switch ( input.LA(1) ) {
-            case 48:
+            case 49:
                 {
                 alt28=1;
                 }
                 break;
-            case 49:
+            case 50:
                 {
                 alt28=2;
                 }
@@ -5069,16 +5103,16 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                 {
                 int LA28_3 = input.LA(2);
 
-                if ( (LA28_3==45) ) {
+                if ( (LA28_3==46) ) {
                     alt28=3;
                 }
-                else if ( (LA28_3==EOF||LA28_3==RULE_SIGN||(LA28_3>=13 && LA28_3<=14)||LA28_3==16||(LA28_3>=33 && LA28_3<=43)||LA28_3==47||LA28_3==52) ) {
+                else if ( (LA28_3==EOF||LA28_3==RULE_SIGN||(LA28_3>=13 && LA28_3<=14)||LA28_3==16||(LA28_3>=34 && LA28_3<=44)||LA28_3==48||LA28_3==53) ) {
                     alt28=4;
                 }
                 else {
                     if (backtracking>0) {failed=true; return current;}
                     NoViableAltException nvae =
-                        new NoViableAltException("2045:1: ( ( () 'true' ) | ( () 'false' ) | ( (lv_Float_4_0= ruleFLOAT ) ) | ( (lv_Integer_5_0= RULE_INT ) ) | ( (lv_String_6_0= RULE_STRING ) ) | ( (lv_Null_7_0= 'null' ) ) | ( (lv_Infinity_8_0= 'infty' ) ) )", 28, 3, input);
+                        new NoViableAltException("2063:1: ( ( () 'true' ) | ( () 'false' ) | ( (lv_Float_4_0= ruleFLOAT ) ) | ( (lv_Integer_5_0= RULE_INT ) ) | ( (lv_String_6_0= RULE_STRING ) ) | ( (lv_Null_7_0= 'null' ) ) | ( (lv_Infinity_8_0= 'infty' ) ) )", 28, 3, input);
 
                     throw nvae;
                 }
@@ -5089,12 +5123,12 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                 alt28=5;
                 }
                 break;
-            case 50:
+            case 51:
                 {
                 alt28=6;
                 }
                 break;
-            case 51:
+            case 52:
                 {
                 alt28=7;
                 }
@@ -5102,20 +5136,20 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
             default:
                 if (backtracking>0) {failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("2045:1: ( ( () 'true' ) | ( () 'false' ) | ( (lv_Float_4_0= ruleFLOAT ) ) | ( (lv_Integer_5_0= RULE_INT ) ) | ( (lv_String_6_0= RULE_STRING ) ) | ( (lv_Null_7_0= 'null' ) ) | ( (lv_Infinity_8_0= 'infty' ) ) )", 28, 0, input);
+                    new NoViableAltException("2063:1: ( ( () 'true' ) | ( () 'false' ) | ( (lv_Float_4_0= ruleFLOAT ) ) | ( (lv_Integer_5_0= RULE_INT ) ) | ( (lv_String_6_0= RULE_STRING ) ) | ( (lv_Null_7_0= 'null' ) ) | ( (lv_Infinity_8_0= 'infty' ) ) )", 28, 0, input);
 
                 throw nvae;
             }
 
             switch (alt28) {
                 case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2045:2: ( () 'true' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2063:2: ( () 'true' )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2045:2: ( () 'true' )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2045:3: () 'true'
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2063:2: ( () 'true' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2063:3: () 'true'
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2045:3: ()
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2046:2: 
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2063:3: ()
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2064:2: 
                     {
                     if ( backtracking==0 ) {
                        
@@ -5137,7 +5171,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    match(input,48,FOLLOW_48_in_ruleconstant3603); if (failed) return current;
+                    match(input,49,FOLLOW_49_in_ruleconstant3632); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               createLeafNode(grammarAccess.getConstantAccess().getTrueKeyword_0_1(), null); 
@@ -5150,13 +5184,13 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2064:6: ( () 'false' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2082:6: ( () 'false' )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2064:6: ( () 'false' )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2064:7: () 'false'
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2082:6: ( () 'false' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2082:7: () 'false'
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2064:7: ()
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2065:2: 
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2082:7: ()
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2083:2: 
                     {
                     if ( backtracking==0 ) {
                        
@@ -5178,7 +5212,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    match(input,49,FOLLOW_49_in_ruleconstant3633); if (failed) return current;
+                    match(input,50,FOLLOW_50_in_ruleconstant3662); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               createLeafNode(grammarAccess.getConstantAccess().getFalseKeyword_1_1(), null); 
@@ -5191,20 +5225,20 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2083:6: ( (lv_Float_4_0= ruleFLOAT ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2101:6: ( (lv_Float_4_0= ruleFLOAT ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2083:6: ( (lv_Float_4_0= ruleFLOAT ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2084:1: (lv_Float_4_0= ruleFLOAT )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2101:6: ( (lv_Float_4_0= ruleFLOAT ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2102:1: (lv_Float_4_0= ruleFLOAT )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2084:1: (lv_Float_4_0= ruleFLOAT )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2085:3: lv_Float_4_0= ruleFLOAT
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2102:1: (lv_Float_4_0= ruleFLOAT )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2103:3: lv_Float_4_0= ruleFLOAT
                     {
                     if ( backtracking==0 ) {
                        
                       	        currentNode=createCompositeNode(grammarAccess.getConstantAccess().getFloatFLOATParserRuleCall_2_0(), currentNode); 
                       	    
                     }
-                    pushFollow(FOLLOW_ruleFLOAT_in_ruleconstant3661);
+                    pushFollow(FOLLOW_ruleFLOAT_in_ruleconstant3690);
                     lv_Float_4_0=ruleFLOAT();
                     _fsp--;
                     if (failed) return current;
@@ -5237,16 +5271,16 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2108:6: ( (lv_Integer_5_0= RULE_INT ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2126:6: ( (lv_Integer_5_0= RULE_INT ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2108:6: ( (lv_Integer_5_0= RULE_INT ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2109:1: (lv_Integer_5_0= RULE_INT )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2126:6: ( (lv_Integer_5_0= RULE_INT ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2127:1: (lv_Integer_5_0= RULE_INT )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2109:1: (lv_Integer_5_0= RULE_INT )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2110:3: lv_Integer_5_0= RULE_INT
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2127:1: (lv_Integer_5_0= RULE_INT )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2128:3: lv_Integer_5_0= RULE_INT
                     {
                     lv_Integer_5_0=(Token)input.LT(1);
-                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleconstant3684); if (failed) return current;
+                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleconstant3713); if (failed) return current;
                     if ( backtracking==0 ) {
 
                       			createLeafNode(grammarAccess.getConstantAccess().getIntegerINTTerminalRuleCall_3_0(), "Integer"); 
@@ -5280,16 +5314,16 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2133:6: ( (lv_String_6_0= RULE_STRING ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2151:6: ( (lv_String_6_0= RULE_STRING ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2133:6: ( (lv_String_6_0= RULE_STRING ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2134:1: (lv_String_6_0= RULE_STRING )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2151:6: ( (lv_String_6_0= RULE_STRING ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2152:1: (lv_String_6_0= RULE_STRING )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2134:1: (lv_String_6_0= RULE_STRING )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2135:3: lv_String_6_0= RULE_STRING
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2152:1: (lv_String_6_0= RULE_STRING )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2153:3: lv_String_6_0= RULE_STRING
                     {
                     lv_String_6_0=(Token)input.LT(1);
-                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleconstant3712); if (failed) return current;
+                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleconstant3741); if (failed) return current;
                     if ( backtracking==0 ) {
 
                       			createLeafNode(grammarAccess.getConstantAccess().getStringSTRINGTerminalRuleCall_4_0(), "String"); 
@@ -5323,16 +5357,16 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2158:6: ( (lv_Null_7_0= 'null' ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2176:6: ( (lv_Null_7_0= 'null' ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2158:6: ( (lv_Null_7_0= 'null' ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2159:1: (lv_Null_7_0= 'null' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2176:6: ( (lv_Null_7_0= 'null' ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2177:1: (lv_Null_7_0= 'null' )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2159:1: (lv_Null_7_0= 'null' )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2160:3: lv_Null_7_0= 'null'
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2177:1: (lv_Null_7_0= 'null' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2178:3: lv_Null_7_0= 'null'
                     {
                     lv_Null_7_0=(Token)input.LT(1);
-                    match(input,50,FOLLOW_50_in_ruleconstant3741); if (failed) return current;
+                    match(input,51,FOLLOW_51_in_ruleconstant3770); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               createLeafNode(grammarAccess.getConstantAccess().getNullNullKeyword_5_0(), "Null"); 
@@ -5362,16 +5396,16 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 7 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2180:6: ( (lv_Infinity_8_0= 'infty' ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2198:6: ( (lv_Infinity_8_0= 'infty' ) )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2180:6: ( (lv_Infinity_8_0= 'infty' ) )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2181:1: (lv_Infinity_8_0= 'infty' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2198:6: ( (lv_Infinity_8_0= 'infty' ) )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2199:1: (lv_Infinity_8_0= 'infty' )
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2181:1: (lv_Infinity_8_0= 'infty' )
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2182:3: lv_Infinity_8_0= 'infty'
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2199:1: (lv_Infinity_8_0= 'infty' )
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2200:3: lv_Infinity_8_0= 'infty'
                     {
                     lv_Infinity_8_0=(Token)input.LT(1);
-                    match(input,51,FOLLOW_51_in_ruleconstant3778); if (failed) return current;
+                    match(input,52,FOLLOW_52_in_ruleconstant3807); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               createLeafNode(grammarAccess.getConstantAccess().getInfinityInftyKeyword_6_0(), "Infinity"); 
@@ -5425,7 +5459,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleFLOAT
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2209:1: entryRuleFLOAT returns [EObject current=null] : iv_ruleFLOAT= ruleFLOAT EOF ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2227:1: entryRuleFLOAT returns [EObject current=null] : iv_ruleFLOAT= ruleFLOAT EOF ;
     public final EObject entryRuleFLOAT() throws RecognitionException {
         EObject current = null;
 
@@ -5433,20 +5467,20 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2210:2: (iv_ruleFLOAT= ruleFLOAT EOF )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2211:2: iv_ruleFLOAT= ruleFLOAT EOF
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2228:2: (iv_ruleFLOAT= ruleFLOAT EOF )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2229:2: iv_ruleFLOAT= ruleFLOAT EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getFLOATRule(), currentNode); 
             }
-            pushFollow(FOLLOW_ruleFLOAT_in_entryRuleFLOAT3827);
+            pushFollow(FOLLOW_ruleFLOAT_in_entryRuleFLOAT3856);
             iv_ruleFLOAT=ruleFLOAT();
             _fsp--;
             if (failed) return current;
             if ( backtracking==0 ) {
                current =iv_ruleFLOAT; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFLOAT3837); if (failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleFLOAT3866); if (failed) return current;
 
             }
 
@@ -5464,7 +5498,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleFLOAT
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2218:1: ruleFLOAT returns [EObject current=null] : ( ( (lv_FLOAT_0_0= RULE_INT ) ) '.' ( (lv_FLOAT_2_0= RULE_INT ) )+ ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2236:1: ruleFLOAT returns [EObject current=null] : ( ( (lv_FLOAT_0_0= RULE_INT ) ) '.' ( (lv_FLOAT_2_0= RULE_INT ) )+ ) ;
     public final EObject ruleFLOAT() throws RecognitionException {
         EObject current = null;
 
@@ -5474,20 +5508,20 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2223:6: ( ( ( (lv_FLOAT_0_0= RULE_INT ) ) '.' ( (lv_FLOAT_2_0= RULE_INT ) )+ ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2224:1: ( ( (lv_FLOAT_0_0= RULE_INT ) ) '.' ( (lv_FLOAT_2_0= RULE_INT ) )+ )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2241:6: ( ( ( (lv_FLOAT_0_0= RULE_INT ) ) '.' ( (lv_FLOAT_2_0= RULE_INT ) )+ ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2242:1: ( ( (lv_FLOAT_0_0= RULE_INT ) ) '.' ( (lv_FLOAT_2_0= RULE_INT ) )+ )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2224:1: ( ( (lv_FLOAT_0_0= RULE_INT ) ) '.' ( (lv_FLOAT_2_0= RULE_INT ) )+ )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2224:2: ( (lv_FLOAT_0_0= RULE_INT ) ) '.' ( (lv_FLOAT_2_0= RULE_INT ) )+
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2242:1: ( ( (lv_FLOAT_0_0= RULE_INT ) ) '.' ( (lv_FLOAT_2_0= RULE_INT ) )+ )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2242:2: ( (lv_FLOAT_0_0= RULE_INT ) ) '.' ( (lv_FLOAT_2_0= RULE_INT ) )+
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2224:2: ( (lv_FLOAT_0_0= RULE_INT ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2225:1: (lv_FLOAT_0_0= RULE_INT )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2242:2: ( (lv_FLOAT_0_0= RULE_INT ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2243:1: (lv_FLOAT_0_0= RULE_INT )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2225:1: (lv_FLOAT_0_0= RULE_INT )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2226:3: lv_FLOAT_0_0= RULE_INT
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2243:1: (lv_FLOAT_0_0= RULE_INT )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2244:3: lv_FLOAT_0_0= RULE_INT
             {
             lv_FLOAT_0_0=(Token)input.LT(1);
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleFLOAT3879); if (failed) return current;
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleFLOAT3908); if (failed) return current;
             if ( backtracking==0 ) {
 
               			createLeafNode(grammarAccess.getFLOATAccess().getFLOATINTTerminalRuleCall_0_0(), "FLOAT"); 
@@ -5517,13 +5551,13 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,45,FOLLOW_45_in_ruleFLOAT3894); if (failed) return current;
+            match(input,46,FOLLOW_46_in_ruleFLOAT3923); if (failed) return current;
             if ( backtracking==0 ) {
 
                       createLeafNode(grammarAccess.getFLOATAccess().getFullStopKeyword_1(), null); 
                   
             }
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2252:1: ( (lv_FLOAT_2_0= RULE_INT ) )+
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2270:1: ( (lv_FLOAT_2_0= RULE_INT ) )+
             int cnt29=0;
             loop29:
             do {
@@ -5537,13 +5571,13 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
                 switch (alt29) {
             	case 1 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2253:1: (lv_FLOAT_2_0= RULE_INT )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2271:1: (lv_FLOAT_2_0= RULE_INT )
             	    {
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2253:1: (lv_FLOAT_2_0= RULE_INT )
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2254:3: lv_FLOAT_2_0= RULE_INT
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2271:1: (lv_FLOAT_2_0= RULE_INT )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2272:3: lv_FLOAT_2_0= RULE_INT
             	    {
             	    lv_FLOAT_2_0=(Token)input.LT(1);
-            	    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleFLOAT3911); if (failed) return current;
+            	    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleFLOAT3940); if (failed) return current;
             	    if ( backtracking==0 ) {
 
             	      			createLeafNode(grammarAccess.getFLOATAccess().getFLOATINTTerminalRuleCall_2_0(), "FLOAT"); 
@@ -5609,7 +5643,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleendExpr
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2284:1: entryRuleendExpr returns [String current=null] : iv_ruleendExpr= ruleendExpr EOF ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2302:1: entryRuleendExpr returns [String current=null] : iv_ruleendExpr= ruleendExpr EOF ;
     public final String entryRuleendExpr() throws RecognitionException {
         String current = null;
 
@@ -5617,20 +5651,20 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2285:2: (iv_ruleendExpr= ruleendExpr EOF )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2286:2: iv_ruleendExpr= ruleendExpr EOF
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2303:2: (iv_ruleendExpr= ruleendExpr EOF )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2304:2: iv_ruleendExpr= ruleendExpr EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getEndExprRule(), currentNode); 
             }
-            pushFollow(FOLLOW_ruleendExpr_in_entryRuleendExpr3954);
+            pushFollow(FOLLOW_ruleendExpr_in_entryRuleendExpr3983);
             iv_ruleendExpr=ruleendExpr();
             _fsp--;
             if (failed) return current;
             if ( backtracking==0 ) {
                current =iv_ruleendExpr.getText(); 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleendExpr3965); if (failed) return current;
+            match(input,EOF,FOLLOW_EOF_in_entryRuleendExpr3994); if (failed) return current;
 
             }
 
@@ -5648,7 +5682,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleendExpr
-    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2293:1: ruleendExpr returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= ',' | kw= ';' ) ;
+    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2311:1: ruleendExpr returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= ',' | kw= ';' ) ;
     public final AntlrDatatypeRuleToken ruleendExpr() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -5657,32 +5691,32 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
          setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2298:6: ( (kw= ',' | kw= ';' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2299:1: (kw= ',' | kw= ';' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2316:6: ( (kw= ',' | kw= ';' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2317:1: (kw= ',' | kw= ';' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2299:1: (kw= ',' | kw= ';' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2317:1: (kw= ',' | kw= ';' )
             int alt30=2;
             int LA30_0 = input.LA(1);
 
             if ( (LA30_0==16) ) {
                 alt30=1;
             }
-            else if ( (LA30_0==52) ) {
+            else if ( (LA30_0==53) ) {
                 alt30=2;
             }
             else {
                 if (backtracking>0) {failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("2299:1: (kw= ',' | kw= ';' )", 30, 0, input);
+                    new NoViableAltException("2317:1: (kw= ',' | kw= ';' )", 30, 0, input);
 
                 throw nvae;
             }
             switch (alt30) {
                 case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2300:2: kw= ','
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2318:2: kw= ','
                     {
                     kw=(Token)input.LT(1);
-                    match(input,16,FOLLOW_16_in_ruleendExpr4003); if (failed) return current;
+                    match(input,16,FOLLOW_16_in_ruleendExpr4032); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               current.merge(kw);
@@ -5693,10 +5727,10 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2307:2: kw= ';'
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:2325:2: kw= ';'
                     {
                     kw=(Token)input.LT(1);
-                    match(input,52,FOLLOW_52_in_ruleendExpr4022); if (failed) return current;
+                    match(input,53,FOLLOW_53_in_ruleendExpr4051); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               current.merge(kw);
@@ -5729,16 +5763,16 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
     }
     // $ANTLR end ruleendExpr
 
-    // $ANTLR start synpred12
-    public final void synpred12_fragment() throws RecognitionException {   
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:740:2: ( ( () ( ( rulepostfixExpr ) ) ruleendExpr ) )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:740:2: ( () ( ( rulepostfixExpr ) ) ruleendExpr )
+    // $ANTLR start synpred13
+    public final void synpred13_fragment() throws RecognitionException {   
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:758:2: ( ( () ( ( rulepostfixExpr ) ) ruleendExpr ) )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:758:2: ( () ( ( rulepostfixExpr ) ) ruleendExpr )
         {
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:740:2: ( () ( ( rulepostfixExpr ) ) ruleendExpr )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:740:3: () ( ( rulepostfixExpr ) ) ruleendExpr
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:758:2: ( () ( ( rulepostfixExpr ) ) ruleendExpr )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:758:3: () ( ( rulepostfixExpr ) ) ruleendExpr
         {
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:740:3: ()
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:741:2: 
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:758:3: ()
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:759:2: 
         {
         if ( backtracking==0 ) {
            
@@ -5748,18 +5782,18 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
         }
 
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:754:2: ( ( rulepostfixExpr ) )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:755:1: ( rulepostfixExpr )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:772:2: ( ( rulepostfixExpr ) )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:773:1: ( rulepostfixExpr )
         {
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:755:1: ( rulepostfixExpr )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:756:3: rulepostfixExpr
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:773:1: ( rulepostfixExpr )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:774:3: rulepostfixExpr
         {
         if ( backtracking==0 ) {
            
           	        currentNode=createCompositeNode(grammarAccess.getStatementAccess().getPostFixExpressionPostfixExprParserRuleCall_0_1_0(), currentNode); 
           	    
         }
-        pushFollow(FOLLOW_rulepostfixExpr_in_synpred121237);
+        pushFollow(FOLLOW_rulepostfixExpr_in_synpred131266);
         rulepostfixExpr();
         _fsp--;
         if (failed) return ;
@@ -5769,7 +5803,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
         }
 
-        pushFollow(FOLLOW_ruleendExpr_in_synpred121256);
+        pushFollow(FOLLOW_ruleendExpr_in_synpred131285);
         ruleendExpr();
         _fsp--;
         if (failed) return ;
@@ -5779,18 +5813,18 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
         }
     }
-    // $ANTLR end synpred12
+    // $ANTLR end synpred13
 
-    // $ANTLR start synpred14
-    public final void synpred14_fragment() throws RecognitionException {   
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:814:6: ( ( () ( ( ruleassignment ) ) ruleendExpr ) )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:814:6: ( () ( ( ruleassignment ) ) ruleendExpr )
+    // $ANTLR start synpred15
+    public final void synpred15_fragment() throws RecognitionException {   
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:832:6: ( ( () ( ( ruleassignment ) ) ruleendExpr ) )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:832:6: ( () ( ( ruleassignment ) ) ruleendExpr )
         {
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:814:6: ( () ( ( ruleassignment ) ) ruleendExpr )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:814:7: () ( ( ruleassignment ) ) ruleendExpr
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:832:6: ( () ( ( ruleassignment ) ) ruleendExpr )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:832:7: () ( ( ruleassignment ) ) ruleendExpr
         {
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:814:7: ()
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:815:2: 
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:832:7: ()
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:833:2: 
         {
         if ( backtracking==0 ) {
            
@@ -5800,18 +5834,18 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
         }
 
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:828:2: ( ( ruleassignment ) )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:829:1: ( ruleassignment )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:846:2: ( ( ruleassignment ) )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:847:1: ( ruleassignment )
         {
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:829:1: ( ruleassignment )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:830:3: ruleassignment
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:847:1: ( ruleassignment )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:848:3: ruleassignment
         {
         if ( backtracking==0 ) {
            
           	        currentNode=createCompositeNode(grammarAccess.getStatementAccess().getAssignmentsAssignmentParserRuleCall_2_1_0(), currentNode); 
           	    
         }
-        pushFollow(FOLLOW_ruleassignment_in_synpred141346);
+        pushFollow(FOLLOW_ruleassignment_in_synpred151375);
         ruleassignment();
         _fsp--;
         if (failed) return ;
@@ -5821,7 +5855,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
         }
 
-        pushFollow(FOLLOW_ruleendExpr_in_synpred141365);
+        pushFollow(FOLLOW_ruleendExpr_in_synpred151394);
         ruleendExpr();
         _fsp--;
         if (failed) return ;
@@ -5831,26 +5865,26 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
         }
     }
-    // $ANTLR end synpred14
+    // $ANTLR end synpred15
 
-    // $ANTLR start synpred17
-    public final void synpred17_fragment() throws RecognitionException {   
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:962:4: ( 'else' ( ( rulestatement ) ) )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:962:4: 'else' ( ( rulestatement ) )
+    // $ANTLR start synpred18
+    public final void synpred18_fragment() throws RecognitionException {   
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:980:4: ( 'else' ( ( rulestatement ) ) )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:980:4: 'else' ( ( rulestatement ) )
         {
-        match(input,27,FOLLOW_27_in_synpred171518); if (failed) return ;
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:966:1: ( ( rulestatement ) )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:967:1: ( rulestatement )
+        match(input,28,FOLLOW_28_in_synpred181547); if (failed) return ;
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:984:1: ( ( rulestatement ) )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:985:1: ( rulestatement )
         {
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:967:1: ( rulestatement )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:968:3: rulestatement
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:985:1: ( rulestatement )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:986:3: rulestatement
         {
         if ( backtracking==0 ) {
            
           	        currentNode=createCompositeNode(grammarAccess.getStatementAccess().getStatementsStatementParserRuleCall_4_4_1_0(), currentNode); 
           	    
         }
-        pushFollow(FOLLOW_rulestatement_in_synpred171539);
+        pushFollow(FOLLOW_rulestatement_in_synpred181568);
         rulestatement();
         _fsp--;
         if (failed) return ;
@@ -5863,42 +5897,14 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
 
         }
     }
-    // $ANTLR end synpred17
-
-    // $ANTLR start synpred40
-    public final void synpred40_fragment() throws RecognitionException {   
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1867:3: ( ( ( RULE_ID ) ) )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1867:3: ( ( RULE_ID ) )
-        {
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1867:3: ( ( RULE_ID ) )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1868:1: ( RULE_ID )
-        {
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1868:1: ( RULE_ID )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1869:3: RULE_ID
-        {
-        if ( backtracking==0 ) {
-           
-          		  /* */ 
-          		
-        }
-        match(input,RULE_ID,FOLLOW_RULE_ID_in_synpred403294); if (failed) return ;
-
-        }
-
-
-        }
-
-
-        }
-    }
-    // $ANTLR end synpred40
+    // $ANTLR end synpred18
 
     // $ANTLR start synpred41
     public final void synpred41_fragment() throws RecognitionException {   
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1885:6: ( ( ( RULE_ID ) ) )
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1885:6: ( ( RULE_ID ) )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1885:3: ( ( ( RULE_ID ) ) )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1885:3: ( ( RULE_ID ) )
         {
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1885:6: ( ( RULE_ID ) )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1885:3: ( ( RULE_ID ) )
         // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1886:1: ( RULE_ID )
         {
         // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1886:1: ( RULE_ID )
@@ -5909,7 +5915,7 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
           		  /* */ 
           		
         }
-        match(input,RULE_ID,FOLLOW_RULE_ID_in_synpred413322); if (failed) return ;
+        match(input,RULE_ID,FOLLOW_RULE_ID_in_synpred413323); if (failed) return ;
 
         }
 
@@ -5921,11 +5927,39 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
     }
     // $ANTLR end synpred41
 
-    public final boolean synpred14() {
+    // $ANTLR start synpred42
+    public final void synpred42_fragment() throws RecognitionException {   
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1903:6: ( ( ( RULE_ID ) ) )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1903:6: ( ( RULE_ID ) )
+        {
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1903:6: ( ( RULE_ID ) )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1904:1: ( RULE_ID )
+        {
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1904:1: ( RULE_ID )
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage/src-gen/org/xtext/example/mydsl1/parser/antlr/internal/InternalMyDsl.g:1905:3: RULE_ID
+        {
+        if ( backtracking==0 ) {
+           
+          		  /* */ 
+          		
+        }
+        match(input,RULE_ID,FOLLOW_RULE_ID_in_synpred423351); if (failed) return ;
+
+        }
+
+
+        }
+
+
+        }
+    }
+    // $ANTLR end synpred42
+
+    public final boolean synpred18() {
         backtracking++;
         int start = input.mark();
         try {
-            synpred14_fragment(); // can never throw exception
+            synpred18_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -5935,11 +5969,11 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
         failed=false;
         return success;
     }
-    public final boolean synpred17() {
+    public final boolean synpred15() {
         backtracking++;
         int start = input.mark();
         try {
-            synpred17_fragment(); // can never throw exception
+            synpred15_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -5949,25 +5983,11 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
         failed=false;
         return success;
     }
-    public final boolean synpred40() {
+    public final boolean synpred42() {
         backtracking++;
         int start = input.mark();
         try {
-            synpred40_fragment(); // can never throw exception
-        } catch (RecognitionException re) {
-            System.err.println("impossible: "+re);
-        }
-        boolean success = !failed;
-        input.rewind(start);
-        backtracking--;
-        failed=false;
-        return success;
-    }
-    public final boolean synpred12() {
-        backtracking++;
-        int start = input.mark();
-        try {
-            synpred12_fragment(); // can never throw exception
+            synpred42_fragment(); // can never throw exception
         } catch (RecognitionException re) {
             System.err.println("impossible: "+re);
         }
@@ -5991,6 +6011,20 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
         failed=false;
         return success;
     }
+    public final boolean synpred13() {
+        backtracking++;
+        int start = input.mark();
+        try {
+            synpred13_fragment(); // can never throw exception
+        } catch (RecognitionException re) {
+            System.err.println("impossible: "+re);
+        }
+        boolean success = !failed;
+        input.rewind(start);
+        backtracking--;
+        failed=false;
+        return success;
+    }
 
 
  
@@ -6002,23 +6036,23 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_rulefunctionDefinition_in_entryRulefunctionDefinition195 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRulefunctionDefinition205 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_RULE_ID_in_rulefunctionDefinition247 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_rulefunctionDefinition262 = new BitSet(new long[]{0x0000000001F82000L});
+    public static final BitSet FOLLOW_12_in_rulefunctionDefinition262 = new BitSet(new long[]{0x0000000003F82000L});
     public static final BitSet FOLLOW_ruleformalParams_in_rulefunctionDefinition283 = new BitSet(new long[]{0x0000000000002000L});
     public static final BitSet FOLLOW_13_in_rulefunctionDefinition294 = new BitSet(new long[]{0x0000000000024000L});
-    public static final BitSet FOLLOW_14_in_rulefunctionDefinition305 = new BitSet(new long[]{0x0000000001F80000L});
+    public static final BitSet FOLLOW_14_in_rulefunctionDefinition305 = new BitSet(new long[]{0x0000000003F80000L});
     public static final BitSet FOLLOW_ruletype_in_rulefunctionDefinition326 = new BitSet(new long[]{0x0000000000020000L});
     public static final BitSet FOLLOW_ruleblock_in_rulefunctionDefinition349 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rulemainFunction_in_entryRulemainFunction385 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRulemainFunction395 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_15_in_rulemainFunction438 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_rulemainFunction461 = new BitSet(new long[]{0x0000000001F82000L});
+    public static final BitSet FOLLOW_12_in_rulemainFunction461 = new BitSet(new long[]{0x0000000003F82000L});
     public static final BitSet FOLLOW_ruleformalParams_in_rulemainFunction482 = new BitSet(new long[]{0x0000000000002000L});
     public static final BitSet FOLLOW_13_in_rulemainFunction493 = new BitSet(new long[]{0x0000000000020000L});
     public static final BitSet FOLLOW_ruleblock_in_rulemainFunction514 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleformalParams_in_entryRuleformalParams550 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleformalParams560 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleparam_in_ruleformalParams606 = new BitSet(new long[]{0x0000000000010002L});
-    public static final BitSet FOLLOW_16_in_ruleformalParams617 = new BitSet(new long[]{0x0000000001F80000L});
+    public static final BitSet FOLLOW_16_in_ruleformalParams617 = new BitSet(new long[]{0x0000000003F80000L});
     public static final BitSet FOLLOW_ruleparam_in_ruleformalParams638 = new BitSet(new long[]{0x0000000000010002L});
     public static final BitSet FOLLOW_ruleparam_in_entryRuleparam676 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleparam686 = new BitSet(new long[]{0x0000000000000002L});
@@ -6026,8 +6060,8 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_RULE_ID_in_ruleparam752 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruleblock_in_entryRuleblock793 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleblock803 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_ruleblock850 = new BitSet(new long[]{0x0000000057FE0010L});
-    public static final BitSet FOLLOW_rulestatement_in_ruleblock871 = new BitSet(new long[]{0x0000000057FE0010L});
+    public static final BitSet FOLLOW_17_in_ruleblock850 = new BitSet(new long[]{0x00000000AFFE0010L});
+    public static final BitSet FOLLOW_rulestatement_in_ruleblock871 = new BitSet(new long[]{0x00000000AFFE0010L});
     public static final BitSet FOLLOW_18_in_ruleblock882 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_ruletype_in_entryRuletype918 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuletype928 = new BitSet(new long[]{0x0000000000000002L});
@@ -6037,135 +6071,136 @@ public class InternalMyDslParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_22_in_ruletype1059 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_23_in_ruletype1088 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_24_in_ruletype1117 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulestatement_in_entryRulestatement1168 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulestatement1178 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulepostfixExpr_in_rulestatement1237 = new BitSet(new long[]{0x0010000000010000L});
-    public static final BitSet FOLLOW_ruleendExpr_in_rulestatement1256 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruledeclaration_in_rulestatement1288 = new BitSet(new long[]{0x0010000000010000L});
-    public static final BitSet FOLLOW_ruleendExpr_in_rulestatement1306 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleassignment_in_rulestatement1346 = new BitSet(new long[]{0x0010000000010000L});
-    public static final BitSet FOLLOW_ruleendExpr_in_rulestatement1365 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_25_in_rulestatement1394 = new BitSet(new long[]{0x001F1000000110D0L});
-    public static final BitSet FOLLOW_ruleexpr_in_rulestatement1415 = new BitSet(new long[]{0x0010000000010000L});
-    public static final BitSet FOLLOW_ruleendExpr_in_rulestatement1435 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_rulestatement1452 = new BitSet(new long[]{0x000F1000000010D0L});
-    public static final BitSet FOLLOW_ruleexpr_in_rulestatement1477 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_rulestatement1486 = new BitSet(new long[]{0x0000000057FA0010L});
-    public static final BitSet FOLLOW_rulestatement_in_rulestatement1507 = new BitSet(new long[]{0x0000000008000002L});
-    public static final BitSet FOLLOW_27_in_rulestatement1518 = new BitSet(new long[]{0x0000000057FA0010L});
-    public static final BitSet FOLLOW_rulestatement_in_rulestatement1539 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_rulestatement1559 = new BitSet(new long[]{0x0000000001F80000L});
-    public static final BitSet FOLLOW_ruleparam_in_rulestatement1584 = new BitSet(new long[]{0x0000000020000000L});
-    public static final BitSet FOLLOW_29_in_rulestatement1593 = new BitSet(new long[]{0x000F1000000010D0L});
-    public static final BitSet FOLLOW_ruleexpr_in_rulestatement1614 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_rulestatement1624 = new BitSet(new long[]{0x0000000057FA0010L});
-    public static final BitSet FOLLOW_rulestatement_in_rulestatement1645 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_30_in_rulestatement1663 = new BitSet(new long[]{0x000F1000000010D0L});
-    public static final BitSet FOLLOW_ruleexpr_in_rulestatement1688 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_rulestatement1697 = new BitSet(new long[]{0x0000000057FA0010L});
-    public static final BitSet FOLLOW_rulestatement_in_rulestatement1718 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleblock_in_rulestatement1750 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruledeclaration_in_entryRuledeclaration1785 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuledeclaration1795 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruletype_in_ruledeclaration1842 = new BitSet(new long[]{0x0000000081F80010L});
-    public static final BitSet FOLLOW_31_in_ruledeclaration1853 = new BitSet(new long[]{0x0000000001F80010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruledeclaration1874 = new BitSet(new long[]{0x0000000100000002L});
-    public static final BitSet FOLLOW_32_in_ruledeclaration1890 = new BitSet(new long[]{0x000F1000000010D0L});
-    public static final BitSet FOLLOW_ruleexpr_in_ruledeclaration1911 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleassignment_in_entryRuleassignment1949 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleassignment1959 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulepostfixExpr_in_ruleassignment2009 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_32_in_ruleassignment2018 = new BitSet(new long[]{0x000F1000000010D0L});
-    public static final BitSet FOLLOW_ruleexpr_in_ruleassignment2039 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleexpr_in_entryRuleexpr2075 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleexpr2085 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleandExpr_in_ruleexpr2135 = new BitSet(new long[]{0x0000000200000002L});
-    public static final BitSet FOLLOW_33_in_ruleexpr2145 = new BitSet(new long[]{0x000F1000000010D0L});
-    public static final BitSet FOLLOW_ruleandExpr_in_ruleexpr2166 = new BitSet(new long[]{0x0000000200000002L});
-    public static final BitSet FOLLOW_ruleandExpr_in_entryRuleandExpr2204 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleandExpr2214 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleeqExpr_in_ruleandExpr2264 = new BitSet(new long[]{0x0000000400000002L});
-    public static final BitSet FOLLOW_34_in_ruleandExpr2274 = new BitSet(new long[]{0x000F1000000010D0L});
-    public static final BitSet FOLLOW_ruleeqExpr_in_ruleandExpr2295 = new BitSet(new long[]{0x0000000400000002L});
-    public static final BitSet FOLLOW_ruleeqExpr_in_entryRuleeqExpr2333 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleeqExpr2343 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulerelExpr_in_ruleeqExpr2393 = new BitSet(new long[]{0x0000001800000002L});
-    public static final BitSet FOLLOW_35_in_ruleeqExpr2404 = new BitSet(new long[]{0x000F1000000010D0L});
-    public static final BitSet FOLLOW_36_in_ruleeqExpr2420 = new BitSet(new long[]{0x000F1000000010D0L});
-    public static final BitSet FOLLOW_rulerelExpr_in_ruleeqExpr2442 = new BitSet(new long[]{0x0000001800000002L});
-    public static final BitSet FOLLOW_rulerelExpr_in_entryRulerelExpr2480 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulerelExpr2490 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleaddExpr_in_rulerelExpr2540 = new BitSet(new long[]{0x000001E000000002L});
-    public static final BitSet FOLLOW_37_in_rulerelExpr2551 = new BitSet(new long[]{0x000F1000000010D0L});
-    public static final BitSet FOLLOW_38_in_rulerelExpr2567 = new BitSet(new long[]{0x000F1000000010D0L});
-    public static final BitSet FOLLOW_39_in_rulerelExpr2583 = new BitSet(new long[]{0x000F1000000010D0L});
-    public static final BitSet FOLLOW_40_in_rulerelExpr2599 = new BitSet(new long[]{0x000F1000000010D0L});
-    public static final BitSet FOLLOW_ruleaddExpr_in_rulerelExpr2621 = new BitSet(new long[]{0x000001E000000002L});
-    public static final BitSet FOLLOW_ruleaddExpr_in_entryRuleaddExpr2659 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleaddExpr2669 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulemulExpr_in_ruleaddExpr2719 = new BitSet(new long[]{0x0000000000000022L});
-    public static final BitSet FOLLOW_RULE_SIGN_in_ruleaddExpr2728 = new BitSet(new long[]{0x000F1000000010D0L});
+    public static final BitSet FOLLOW_25_in_ruletype1146 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulestatement_in_entryRulestatement1197 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulestatement1207 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulepostfixExpr_in_rulestatement1266 = new BitSet(new long[]{0x0020000000010000L});
+    public static final BitSet FOLLOW_ruleendExpr_in_rulestatement1285 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruledeclaration_in_rulestatement1317 = new BitSet(new long[]{0x0020000000010000L});
+    public static final BitSet FOLLOW_ruleendExpr_in_rulestatement1335 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleassignment_in_rulestatement1375 = new BitSet(new long[]{0x0020000000010000L});
+    public static final BitSet FOLLOW_ruleendExpr_in_rulestatement1394 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_rulestatement1423 = new BitSet(new long[]{0x003E2000000110D0L});
+    public static final BitSet FOLLOW_ruleexpr_in_rulestatement1444 = new BitSet(new long[]{0x0020000000010000L});
+    public static final BitSet FOLLOW_ruleendExpr_in_rulestatement1464 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_27_in_rulestatement1481 = new BitSet(new long[]{0x001E2000000010D0L});
+    public static final BitSet FOLLOW_ruleexpr_in_rulestatement1506 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_rulestatement1515 = new BitSet(new long[]{0x00000000AFFA0010L});
+    public static final BitSet FOLLOW_rulestatement_in_rulestatement1536 = new BitSet(new long[]{0x0000000010000002L});
+    public static final BitSet FOLLOW_28_in_rulestatement1547 = new BitSet(new long[]{0x00000000AFFA0010L});
+    public static final BitSet FOLLOW_rulestatement_in_rulestatement1568 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_29_in_rulestatement1588 = new BitSet(new long[]{0x0000000003F80000L});
+    public static final BitSet FOLLOW_ruleparam_in_rulestatement1613 = new BitSet(new long[]{0x0000000040000000L});
+    public static final BitSet FOLLOW_30_in_rulestatement1622 = new BitSet(new long[]{0x001E2000000010D0L});
+    public static final BitSet FOLLOW_ruleexpr_in_rulestatement1643 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_rulestatement1653 = new BitSet(new long[]{0x00000000AFFA0010L});
+    public static final BitSet FOLLOW_rulestatement_in_rulestatement1674 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_31_in_rulestatement1692 = new BitSet(new long[]{0x001E2000000010D0L});
+    public static final BitSet FOLLOW_ruleexpr_in_rulestatement1717 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_14_in_rulestatement1726 = new BitSet(new long[]{0x00000000AFFA0010L});
+    public static final BitSet FOLLOW_rulestatement_in_rulestatement1747 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleblock_in_rulestatement1779 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruledeclaration_in_entryRuledeclaration1814 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuledeclaration1824 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruletype_in_ruledeclaration1871 = new BitSet(new long[]{0x0000000103F80010L});
+    public static final BitSet FOLLOW_32_in_ruledeclaration1882 = new BitSet(new long[]{0x0000000003F80010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruledeclaration1903 = new BitSet(new long[]{0x0000000200000002L});
+    public static final BitSet FOLLOW_33_in_ruledeclaration1919 = new BitSet(new long[]{0x001E2000000010D0L});
+    public static final BitSet FOLLOW_ruleexpr_in_ruledeclaration1940 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleassignment_in_entryRuleassignment1978 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleassignment1988 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulepostfixExpr_in_ruleassignment2038 = new BitSet(new long[]{0x0000000200000000L});
+    public static final BitSet FOLLOW_33_in_ruleassignment2047 = new BitSet(new long[]{0x001E2000000010D0L});
+    public static final BitSet FOLLOW_ruleexpr_in_ruleassignment2068 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleexpr_in_entryRuleexpr2104 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleexpr2114 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleandExpr_in_ruleexpr2164 = new BitSet(new long[]{0x0000000400000002L});
+    public static final BitSet FOLLOW_34_in_ruleexpr2174 = new BitSet(new long[]{0x001E2000000010D0L});
+    public static final BitSet FOLLOW_ruleandExpr_in_ruleexpr2195 = new BitSet(new long[]{0x0000000400000002L});
+    public static final BitSet FOLLOW_ruleandExpr_in_entryRuleandExpr2233 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleandExpr2243 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleeqExpr_in_ruleandExpr2293 = new BitSet(new long[]{0x0000000800000002L});
+    public static final BitSet FOLLOW_35_in_ruleandExpr2303 = new BitSet(new long[]{0x001E2000000010D0L});
+    public static final BitSet FOLLOW_ruleeqExpr_in_ruleandExpr2324 = new BitSet(new long[]{0x0000000800000002L});
+    public static final BitSet FOLLOW_ruleeqExpr_in_entryRuleeqExpr2362 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleeqExpr2372 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulerelExpr_in_ruleeqExpr2422 = new BitSet(new long[]{0x0000003000000002L});
+    public static final BitSet FOLLOW_36_in_ruleeqExpr2433 = new BitSet(new long[]{0x001E2000000010D0L});
+    public static final BitSet FOLLOW_37_in_ruleeqExpr2449 = new BitSet(new long[]{0x001E2000000010D0L});
+    public static final BitSet FOLLOW_rulerelExpr_in_ruleeqExpr2471 = new BitSet(new long[]{0x0000003000000002L});
+    public static final BitSet FOLLOW_rulerelExpr_in_entryRulerelExpr2509 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulerelExpr2519 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleaddExpr_in_rulerelExpr2569 = new BitSet(new long[]{0x000003C000000002L});
+    public static final BitSet FOLLOW_38_in_rulerelExpr2580 = new BitSet(new long[]{0x001E2000000010D0L});
+    public static final BitSet FOLLOW_39_in_rulerelExpr2596 = new BitSet(new long[]{0x001E2000000010D0L});
+    public static final BitSet FOLLOW_40_in_rulerelExpr2612 = new BitSet(new long[]{0x001E2000000010D0L});
+    public static final BitSet FOLLOW_41_in_rulerelExpr2628 = new BitSet(new long[]{0x001E2000000010D0L});
+    public static final BitSet FOLLOW_ruleaddExpr_in_rulerelExpr2650 = new BitSet(new long[]{0x000003C000000002L});
+    public static final BitSet FOLLOW_ruleaddExpr_in_entryRuleaddExpr2688 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleaddExpr2698 = new BitSet(new long[]{0x0000000000000002L});
     public static final BitSet FOLLOW_rulemulExpr_in_ruleaddExpr2748 = new BitSet(new long[]{0x0000000000000022L});
-    public static final BitSet FOLLOW_rulemulExpr_in_entryRulemulExpr2786 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulemulExpr2796 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleatom_in_rulemulExpr2842 = new BitSet(new long[]{0x00000E0000000002L});
-    public static final BitSet FOLLOW_41_in_rulemulExpr2854 = new BitSet(new long[]{0x000F1000000010D0L});
-    public static final BitSet FOLLOW_42_in_rulemulExpr2870 = new BitSet(new long[]{0x000F1000000010D0L});
-    public static final BitSet FOLLOW_43_in_rulemulExpr2886 = new BitSet(new long[]{0x000F1000000010D0L});
-    public static final BitSet FOLLOW_ruleatom_in_rulemulExpr2908 = new BitSet(new long[]{0x00000E0000000002L});
-    public static final BitSet FOLLOW_ruleatom_in_entryRuleatom2946 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleatom2956 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_44_in_ruleatom2992 = new BitSet(new long[]{0x000F1000000010D0L});
-    public static final BitSet FOLLOW_ruleatom_in_ruleatom3017 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_ruleatom3034 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_SIGN_in_ruleatom3043 = new BitSet(new long[]{0x000F1000000010D0L});
-    public static final BitSet FOLLOW_ruleexpr_in_ruleatom3067 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleatom3076 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_ruleatom3094 = new BitSet(new long[]{0x000F1000000010D0L});
-    public static final BitSet FOLLOW_ruleexpr_in_ruleatom3119 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleatom3128 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulepostfixExpr_in_ruleatom3160 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleconstant_in_ruleatom3199 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulepostfixExpr_in_entryRulepostfixExpr3236 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRulepostfixExpr3246 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rulepostfixExpr3294 = new BitSet(new long[]{0x0000600000001002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rulepostfixExpr3322 = new BitSet(new long[]{0x0000600000001002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rulepostfixExpr3350 = new BitSet(new long[]{0x0000600000001002L});
-    public static final BitSet FOLLOW_45_in_rulepostfixExpr3363 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_rulepostfixExpr3372 = new BitSet(new long[]{0x0000600000001002L});
-    public static final BitSet FOLLOW_12_in_rulepostfixExpr3389 = new BitSet(new long[]{0x000F1000000030D0L});
-    public static final BitSet FOLLOW_ruleexpr_in_rulepostfixExpr3411 = new BitSet(new long[]{0x0000000000012000L});
-    public static final BitSet FOLLOW_16_in_rulepostfixExpr3422 = new BitSet(new long[]{0x000F1000000010D0L});
-    public static final BitSet FOLLOW_ruleexpr_in_rulepostfixExpr3443 = new BitSet(new long[]{0x0000000000012000L});
-    public static final BitSet FOLLOW_13_in_rulepostfixExpr3457 = new BitSet(new long[]{0x0000600000001002L});
-    public static final BitSet FOLLOW_46_in_rulepostfixExpr3475 = new BitSet(new long[]{0x000F1000000010D0L});
-    public static final BitSet FOLLOW_ruleexpr_in_rulepostfixExpr3496 = new BitSet(new long[]{0x0000800000000000L});
-    public static final BitSet FOLLOW_47_in_rulepostfixExpr3506 = new BitSet(new long[]{0x0000600000001002L});
-    public static final BitSet FOLLOW_ruleconstant_in_entryRuleconstant3545 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleconstant3555 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_48_in_ruleconstant3603 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_49_in_ruleconstant3633 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFLOAT_in_ruleconstant3661 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleconstant3684 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleconstant3712 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_50_in_ruleconstant3741 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_51_in_ruleconstant3778 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFLOAT_in_entryRuleFLOAT3827 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFLOAT3837 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleFLOAT3879 = new BitSet(new long[]{0x0000200000000000L});
-    public static final BitSet FOLLOW_45_in_ruleFLOAT3894 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleFLOAT3911 = new BitSet(new long[]{0x0000000000000042L});
-    public static final BitSet FOLLOW_ruleendExpr_in_entryRuleendExpr3954 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleendExpr3965 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_ruleendExpr4003 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_52_in_ruleendExpr4022 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rulepostfixExpr_in_synpred121237 = new BitSet(new long[]{0x0010000000010000L});
-    public static final BitSet FOLLOW_ruleendExpr_in_synpred121256 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleassignment_in_synpred141346 = new BitSet(new long[]{0x0010000000010000L});
-    public static final BitSet FOLLOW_ruleendExpr_in_synpred141365 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_synpred171518 = new BitSet(new long[]{0x0000000057FA0010L});
-    public static final BitSet FOLLOW_rulestatement_in_synpred171539 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_synpred403294 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_synpred413322 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_SIGN_in_ruleaddExpr2757 = new BitSet(new long[]{0x001E2000000010D0L});
+    public static final BitSet FOLLOW_rulemulExpr_in_ruleaddExpr2777 = new BitSet(new long[]{0x0000000000000022L});
+    public static final BitSet FOLLOW_rulemulExpr_in_entryRulemulExpr2815 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulemulExpr2825 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleatom_in_rulemulExpr2871 = new BitSet(new long[]{0x00001C0000000002L});
+    public static final BitSet FOLLOW_42_in_rulemulExpr2883 = new BitSet(new long[]{0x001E2000000010D0L});
+    public static final BitSet FOLLOW_43_in_rulemulExpr2899 = new BitSet(new long[]{0x001E2000000010D0L});
+    public static final BitSet FOLLOW_44_in_rulemulExpr2915 = new BitSet(new long[]{0x001E2000000010D0L});
+    public static final BitSet FOLLOW_ruleatom_in_rulemulExpr2937 = new BitSet(new long[]{0x00001C0000000002L});
+    public static final BitSet FOLLOW_ruleatom_in_entryRuleatom2975 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleatom2985 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_45_in_ruleatom3021 = new BitSet(new long[]{0x001E2000000010D0L});
+    public static final BitSet FOLLOW_ruleatom_in_ruleatom3046 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_ruleatom3063 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_SIGN_in_ruleatom3072 = new BitSet(new long[]{0x001E2000000010D0L});
+    public static final BitSet FOLLOW_ruleexpr_in_ruleatom3096 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleatom3105 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_ruleatom3123 = new BitSet(new long[]{0x001E2000000010D0L});
+    public static final BitSet FOLLOW_ruleexpr_in_ruleatom3148 = new BitSet(new long[]{0x0000000000002000L});
+    public static final BitSet FOLLOW_13_in_ruleatom3157 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulepostfixExpr_in_ruleatom3189 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleconstant_in_ruleatom3228 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulepostfixExpr_in_entryRulepostfixExpr3265 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRulepostfixExpr3275 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rulepostfixExpr3323 = new BitSet(new long[]{0x0000C00000001002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rulepostfixExpr3351 = new BitSet(new long[]{0x0000C00000001002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rulepostfixExpr3379 = new BitSet(new long[]{0x0000C00000001002L});
+    public static final BitSet FOLLOW_46_in_rulepostfixExpr3392 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_rulepostfixExpr3401 = new BitSet(new long[]{0x0000C00000001002L});
+    public static final BitSet FOLLOW_12_in_rulepostfixExpr3418 = new BitSet(new long[]{0x001E2000000030D0L});
+    public static final BitSet FOLLOW_ruleexpr_in_rulepostfixExpr3440 = new BitSet(new long[]{0x0000000000012000L});
+    public static final BitSet FOLLOW_16_in_rulepostfixExpr3451 = new BitSet(new long[]{0x001E2000000010D0L});
+    public static final BitSet FOLLOW_ruleexpr_in_rulepostfixExpr3472 = new BitSet(new long[]{0x0000000000012000L});
+    public static final BitSet FOLLOW_13_in_rulepostfixExpr3486 = new BitSet(new long[]{0x0000C00000001002L});
+    public static final BitSet FOLLOW_47_in_rulepostfixExpr3504 = new BitSet(new long[]{0x001E2000000010D0L});
+    public static final BitSet FOLLOW_ruleexpr_in_rulepostfixExpr3525 = new BitSet(new long[]{0x0001000000000000L});
+    public static final BitSet FOLLOW_48_in_rulepostfixExpr3535 = new BitSet(new long[]{0x0000C00000001002L});
+    public static final BitSet FOLLOW_ruleconstant_in_entryRuleconstant3574 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleconstant3584 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_49_in_ruleconstant3632 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_50_in_ruleconstant3662 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFLOAT_in_ruleconstant3690 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleconstant3713 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleconstant3741 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_51_in_ruleconstant3770 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_52_in_ruleconstant3807 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleFLOAT_in_entryRuleFLOAT3856 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleFLOAT3866 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleFLOAT3908 = new BitSet(new long[]{0x0000400000000000L});
+    public static final BitSet FOLLOW_46_in_ruleFLOAT3923 = new BitSet(new long[]{0x0000000000000040L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleFLOAT3940 = new BitSet(new long[]{0x0000000000000042L});
+    public static final BitSet FOLLOW_ruleendExpr_in_entryRuleendExpr3983 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleendExpr3994 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_ruleendExpr4032 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_53_in_ruleendExpr4051 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rulepostfixExpr_in_synpred131266 = new BitSet(new long[]{0x0020000000010000L});
+    public static final BitSet FOLLOW_ruleendExpr_in_synpred131285 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleassignment_in_synpred151375 = new BitSet(new long[]{0x0020000000010000L});
+    public static final BitSet FOLLOW_ruleendExpr_in_synpred151394 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_28_in_synpred181547 = new BitSet(new long[]{0x00000000AFFA0010L});
+    public static final BitSet FOLLOW_rulestatement_in_synpred181568 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_synpred413323 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_synpred423351 = new BitSet(new long[]{0x0000000000000002L});
 
 }

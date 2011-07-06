@@ -711,6 +711,24 @@ ruletype returns [EObject current=null]
 	        }
 	    }
 
+    |		lv_types_0_7=	'Queue' 
+    {
+        createLeafNode(grammarAccess.getTypeAccess().getTypesQueueKeyword_0_6(), "types"); 
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTypeRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "types", lv_types_0_7, null, lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
 )
 
 )

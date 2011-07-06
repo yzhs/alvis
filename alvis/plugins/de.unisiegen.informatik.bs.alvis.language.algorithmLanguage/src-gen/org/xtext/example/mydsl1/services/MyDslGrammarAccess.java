@@ -255,15 +255,16 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cTypesGraphKeyword_0_3 = (Keyword)cTypesAlternatives_0.eContents().get(3);
 		private final Keyword cTypesVertexKeyword_0_4 = (Keyword)cTypesAlternatives_0.eContents().get(4);
 		private final Keyword cTypesEdgeKeyword_0_5 = (Keyword)cTypesAlternatives_0.eContents().get(5);
+		private final Keyword cTypesQueueKeyword_0_6 = (Keyword)cTypesAlternatives_0.eContents().get(6);
 		
 		//type:
-		//	types=("String" | "Integer" | "Boolean" | "Graph" | "Vertex" | "Edge");
+		//	types=("String" | "Integer" | "Boolean" | "Graph" | "Vertex" | "Edge" | "Queue");
 		public ParserRule getRule() { return rule; }
 
-		//types=("String" | "Integer" | "Boolean" | "Graph" | "Vertex" | "Edge")
+		//types=("String" | "Integer" | "Boolean" | "Graph" | "Vertex" | "Edge" | "Queue")
 		public Assignment getTypesAssignment() { return cTypesAssignment; }
 
-		//"String" | "Integer" | "Boolean" | "Graph" | "Vertex" | "Edge"
+		//"String" | "Integer" | "Boolean" | "Graph" | "Vertex" | "Edge" | "Queue"
 		public Alternatives getTypesAlternatives_0() { return cTypesAlternatives_0; }
 
 		//"String"
@@ -283,6 +284,9 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"Edge"
 		public Keyword getTypesEdgeKeyword_0_5() { return cTypesEdgeKeyword_0_5; }
+
+		//"Queue"
+		public Keyword getTypesQueueKeyword_0_6() { return cTypesQueueKeyword_0_6; }
 	}
 
 	public class StatementElements extends AbstractParserRuleElementFinder {
@@ -1265,7 +1269,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//type:
-	//	types=("String" | "Integer" | "Boolean" | "Graph" | "Vertex" | "Edge");
+	//	types=("String" | "Integer" | "Boolean" | "Graph" | "Vertex" | "Edge" | "Queue");
 	public TypeElements getTypeAccess() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	}

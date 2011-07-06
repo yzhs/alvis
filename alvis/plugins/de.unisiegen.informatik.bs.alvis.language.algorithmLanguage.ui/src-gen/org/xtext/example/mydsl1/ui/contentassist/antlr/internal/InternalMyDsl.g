@@ -700,6 +700,14 @@ rule__Type__TypesAlternatives_0
 { after(grammarAccess.getTypeAccess().getTypesEdgeKeyword_0_5()); }
 )
 
+    |(
+{ before(grammarAccess.getTypeAccess().getTypesQueueKeyword_0_6()); }
+
+	'Queue' 
+
+{ after(grammarAccess.getTypeAccess().getTypesQueueKeyword_0_6()); }
+)
+
 ;
 finally {
 	restoreStackSize(stackSize);

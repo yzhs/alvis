@@ -40,7 +40,7 @@ public class InternalMyDslLexer extends Lexer {
     public static final int T48=48;
     public static final int RULE_SIGN=4;
     public static final int T43=43;
-    public static final int Tokens=53;
+    public static final int Tokens=54;
     public static final int RULE_SL_COMMENT=9;
     public static final int T42=42;
     public static final int T41=41;
@@ -61,6 +61,7 @@ public class InternalMyDslLexer extends Lexer {
     public static final int T51=51;
     public static final int T16=16;
     public static final int T17=17;
+    public static final int T53=53;
     public static final int T18=18;
     public static final int T19=19;
     public InternalMyDslLexer() {;} 
@@ -187,10 +188,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT18() throws RecognitionException {
         try {
             int _type = T18;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:16:5: ( '==' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:16:7: '=='
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:16:5: ( 'Queue' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:16:7: 'Queue'
             {
-            match("=="); 
+            match("Queue"); 
 
 
             }
@@ -206,10 +207,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT19() throws RecognitionException {
         try {
             int _type = T19;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:17:5: ( '!=' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:17:7: '!='
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:17:5: ( '==' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:17:7: '=='
             {
-            match("!="); 
+            match("=="); 
 
 
             }
@@ -225,10 +226,11 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT20() throws RecognitionException {
         try {
             int _type = T20;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:18:5: ( '<' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:18:7: '<'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:18:5: ( '!=' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:18:7: '!='
             {
-            match('<'); 
+            match("!="); 
+
 
             }
 
@@ -243,10 +245,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT21() throws RecognitionException {
         try {
             int _type = T21;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:19:5: ( '>' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:19:7: '>'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:19:5: ( '<' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:19:7: '<'
             {
-            match('>'); 
+            match('<'); 
 
             }
 
@@ -261,11 +263,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT22() throws RecognitionException {
         try {
             int _type = T22;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:20:5: ( '<=' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:20:7: '<='
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:20:5: ( '>' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:20:7: '>'
             {
-            match("<="); 
-
+            match('>'); 
 
             }
 
@@ -280,10 +281,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT23() throws RecognitionException {
         try {
             int _type = T23;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:21:5: ( '>=' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:21:7: '>='
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:21:5: ( '<=' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:21:7: '<='
             {
-            match(">="); 
+            match("<="); 
 
 
             }
@@ -299,10 +300,11 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT24() throws RecognitionException {
         try {
             int _type = T24;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:22:5: ( '*' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:22:7: '*'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:22:5: ( '>=' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:22:7: '>='
             {
-            match('*'); 
+            match(">="); 
+
 
             }
 
@@ -317,10 +319,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT25() throws RecognitionException {
         try {
             int _type = T25;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:23:5: ( '/' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:23:7: '/'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:23:5: ( '*' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:23:7: '*'
             {
-            match('/'); 
+            match('*'); 
 
             }
 
@@ -335,10 +337,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT26() throws RecognitionException {
         try {
             int _type = T26;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:24:5: ( '%' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:24:7: '%'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:24:5: ( '/' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:24:7: '/'
             {
-            match('%'); 
+            match('/'); 
 
             }
 
@@ -353,10 +355,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT27() throws RecognitionException {
         try {
             int _type = T27;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:25:5: ( ',' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:25:7: ','
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:25:5: ( '%' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:25:7: '%'
             {
-            match(','); 
+            match('%'); 
 
             }
 
@@ -371,10 +373,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT28() throws RecognitionException {
         try {
             int _type = T28;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:26:5: ( ';' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:26:7: ';'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:26:5: ( ',' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:26:7: ','
             {
-            match(';'); 
+            match(','); 
 
             }
 
@@ -389,10 +391,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT29() throws RecognitionException {
         try {
             int _type = T29;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:27:5: ( '(' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:27:7: '('
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:27:5: ( ';' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:27:7: ';'
             {
-            match('('); 
+            match(';'); 
 
             }
 
@@ -407,10 +409,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT30() throws RecognitionException {
         try {
             int _type = T30;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:28:5: ( ')' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:28:7: ')'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:28:5: ( '(' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:28:7: '('
             {
-            match(')'); 
+            match('('); 
 
             }
 
@@ -425,10 +427,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT31() throws RecognitionException {
         try {
             int _type = T31;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:29:5: ( ':' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:29:7: ':'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:29:5: ( ')' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:29:7: ')'
             {
-            match(':'); 
+            match(')'); 
 
             }
 
@@ -443,11 +445,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT32() throws RecognitionException {
         try {
             int _type = T32;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:30:5: ( 'begin' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:30:7: 'begin'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:30:5: ( ':' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:30:7: ':'
             {
-            match("begin"); 
-
+            match(':'); 
 
             }
 
@@ -462,10 +463,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT33() throws RecognitionException {
         try {
             int _type = T33;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:31:5: ( 'end' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:31:7: 'end'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:31:5: ( 'begin' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:31:7: 'begin'
             {
-            match("end"); 
+            match("begin"); 
 
 
             }
@@ -481,10 +482,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT34() throws RecognitionException {
         try {
             int _type = T34;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:32:5: ( 'return' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:32:7: 'return'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:32:5: ( 'end' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:32:7: 'end'
             {
-            match("return"); 
+            match("end"); 
 
 
             }
@@ -500,10 +501,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT35() throws RecognitionException {
         try {
             int _type = T35;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:33:5: ( 'if' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:33:7: 'if'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:33:5: ( 'return' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:33:7: 'return'
             {
-            match("if"); 
+            match("return"); 
 
 
             }
@@ -519,10 +520,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT36() throws RecognitionException {
         try {
             int _type = T36;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:34:5: ( 'else' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:34:7: 'else'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:34:5: ( 'if' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:34:7: 'if'
             {
-            match("else"); 
+            match("if"); 
 
 
             }
@@ -538,10 +539,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT37() throws RecognitionException {
         try {
             int _type = T37;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:35:5: ( 'for' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:35:7: 'for'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:35:5: ( 'else' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:35:7: 'else'
             {
-            match("for"); 
+            match("else"); 
 
 
             }
@@ -557,10 +558,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT38() throws RecognitionException {
         try {
             int _type = T38;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:36:5: ( 'in' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:36:7: 'in'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:36:5: ( 'for' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:36:7: 'for'
             {
-            match("in"); 
+            match("for"); 
 
 
             }
@@ -576,10 +577,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT39() throws RecognitionException {
         try {
             int _type = T39;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:37:5: ( 'while' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:37:7: 'while'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:37:5: ( 'in' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:37:7: 'in'
             {
-            match("while"); 
+            match("in"); 
 
 
             }
@@ -595,10 +596,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT40() throws RecognitionException {
         try {
             int _type = T40;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:38:5: ( '[]' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:38:7: '[]'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:38:5: ( 'while' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:38:7: 'while'
             {
-            match("[]"); 
+            match("while"); 
 
 
             }
@@ -614,10 +615,11 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT41() throws RecognitionException {
         try {
             int _type = T41;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:39:5: ( '=' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:39:7: '='
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:39:5: ( '[]' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:39:7: '[]'
             {
-            match('='); 
+            match("[]"); 
+
 
             }
 
@@ -632,11 +634,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT42() throws RecognitionException {
         try {
             int _type = T42;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:40:5: ( '||' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:40:7: '||'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:40:5: ( '=' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:40:7: '='
             {
-            match("||"); 
-
+            match('='); 
 
             }
 
@@ -651,10 +652,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT43() throws RecognitionException {
         try {
             int _type = T43;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:41:5: ( '&&' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:41:7: '&&'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:41:5: ( '||' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:41:7: '||'
             {
-            match("&&"); 
+            match("||"); 
 
 
             }
@@ -670,10 +671,11 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT44() throws RecognitionException {
         try {
             int _type = T44;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:42:5: ( '!' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:42:7: '!'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:42:5: ( '&&' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:42:7: '&&'
             {
-            match('!'); 
+            match("&&"); 
+
 
             }
 
@@ -688,10 +690,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT45() throws RecognitionException {
         try {
             int _type = T45;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:43:5: ( '.' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:43:7: '.'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:43:5: ( '!' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:43:7: '!'
             {
-            match('.'); 
+            match('!'); 
 
             }
 
@@ -706,10 +708,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT46() throws RecognitionException {
         try {
             int _type = T46;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:44:5: ( '[' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:44:7: '['
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:44:5: ( '.' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:44:7: '.'
             {
-            match('['); 
+            match('.'); 
 
             }
 
@@ -724,10 +726,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT47() throws RecognitionException {
         try {
             int _type = T47;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:45:5: ( ']' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:45:7: ']'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:45:5: ( '[' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:45:7: '['
             {
-            match(']'); 
+            match('['); 
 
             }
 
@@ -742,11 +744,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT48() throws RecognitionException {
         try {
             int _type = T48;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:46:5: ( 'true' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:46:7: 'true'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:46:5: ( ']' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:46:7: ']'
             {
-            match("true"); 
-
+            match(']'); 
 
             }
 
@@ -761,10 +762,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT49() throws RecognitionException {
         try {
             int _type = T49;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:47:5: ( 'false' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:47:7: 'false'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:47:5: ( 'true' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:47:7: 'true'
             {
-            match("false"); 
+            match("true"); 
 
 
             }
@@ -780,10 +781,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT50() throws RecognitionException {
         try {
             int _type = T50;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:48:5: ( 'main' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:48:7: 'main'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:48:5: ( 'false' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:48:7: 'false'
             {
-            match("main"); 
+            match("false"); 
 
 
             }
@@ -799,10 +800,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT51() throws RecognitionException {
         try {
             int _type = T51;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:49:5: ( 'null' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:49:7: 'null'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:49:5: ( 'main' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:49:7: 'main'
             {
-            match("null"); 
+            match("main"); 
 
 
             }
@@ -818,10 +819,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mT52() throws RecognitionException {
         try {
             int _type = T52;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:50:5: ( 'infty' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:50:7: 'infty'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:50:5: ( 'null' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:50:7: 'null'
             {
-            match("infty"); 
+            match("null"); 
 
 
             }
@@ -833,12 +834,31 @@ public class InternalMyDslLexer extends Lexer {
     }
     // $ANTLR end T52
 
+    // $ANTLR start T53
+    public final void mT53() throws RecognitionException {
+        try {
+            int _type = T53;
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:51:5: ( 'infty' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:51:7: 'infty'
+            {
+            match("infty"); 
+
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T53
+
     // $ANTLR start RULE_SIGN
     public final void mRULE_SIGN() throws RecognitionException {
         try {
             int _type = RULE_SIGN;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5563:11: ( ( '+' | '-' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5563:13: ( '+' | '-' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5571:11: ( ( '+' | '-' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5571:13: ( '+' | '-' )
             {
             if ( input.LA(1)=='+'||input.LA(1)=='-' ) {
                 input.consume();
@@ -864,10 +884,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5565:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5565:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5573:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5573:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5565:11: ( '^' )?
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5573:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -876,7 +896,7 @@ public class InternalMyDslLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5565:11: '^'
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5573:11: '^'
                     {
                     match('^'); 
 
@@ -895,7 +915,7 @@ public class InternalMyDslLexer extends Lexer {
                 recover(mse);    throw mse;
             }
 
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5565:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5573:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -943,10 +963,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mRULE_INT() throws RecognitionException {
         try {
             int _type = RULE_INT;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5567:10: ( ( '0' .. '9' )+ )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5567:12: ( '0' .. '9' )+
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5575:10: ( ( '0' .. '9' )+ )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5575:12: ( '0' .. '9' )+
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5567:12: ( '0' .. '9' )+
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5575:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -960,7 +980,7 @@ public class InternalMyDslLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5567:13: '0' .. '9'
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5575:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -990,10 +1010,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5569:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5569:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5577:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5577:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5569:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5577:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1005,16 +1025,16 @@ public class InternalMyDslLexer extends Lexer {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("5569:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )", 6, 0, input);
+                    new NoViableAltException("5577:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )", 6, 0, input);
 
                 throw nvae;
             }
             switch (alt6) {
                 case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5569:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5577:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5569:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5577:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -1030,7 +1050,7 @@ public class InternalMyDslLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5569:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+                    	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5577:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -1047,7 +1067,7 @@ public class InternalMyDslLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5569:62: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5577:62: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -1073,10 +1093,10 @@ public class InternalMyDslLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5569:82: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5577:82: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5569:87: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5577:87: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -1092,7 +1112,7 @@ public class InternalMyDslLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5569:88: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+                    	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5577:88: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -1109,7 +1129,7 @@ public class InternalMyDslLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5569:129: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5577:129: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -1151,12 +1171,12 @@ public class InternalMyDslLexer extends Lexer {
     public final void mRULE_ML_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_ML_COMMENT;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5571:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5571:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5579:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5579:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5571:24: ( options {greedy=false; } : . )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5579:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -1181,7 +1201,7 @@ public class InternalMyDslLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5571:52: .
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5579:52: .
             	    {
             	    matchAny(); 
 
@@ -1209,12 +1229,12 @@ public class InternalMyDslLexer extends Lexer {
     public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5573:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5573:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5581:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5581:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5573:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5581:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -1227,7 +1247,7 @@ public class InternalMyDslLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5573:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5581:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -1248,7 +1268,7 @@ public class InternalMyDslLexer extends Lexer {
                 }
             } while (true);
 
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5573:40: ( ( '\\r' )? '\\n' )?
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5581:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1257,9 +1277,9 @@ public class InternalMyDslLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5573:41: ( '\\r' )? '\\n'
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5581:41: ( '\\r' )? '\\n'
                     {
-                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5573:41: ( '\\r' )?
+                    // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5581:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -1268,7 +1288,7 @@ public class InternalMyDslLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5573:41: '\\r'
+                            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5581:41: '\\r'
                             {
                             match('\r'); 
 
@@ -1298,10 +1318,10 @@ public class InternalMyDslLexer extends Lexer {
     public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5575:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5575:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5583:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5583:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5575:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5583:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -1354,8 +1374,8 @@ public class InternalMyDslLexer extends Lexer {
     public final void mRULE_ANY_OTHER() throws RecognitionException {
         try {
             int _type = RULE_ANY_OTHER;
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5577:16: ( . )
-            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5577:18: .
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5585:16: ( . )
+            // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:5585:18: .
             {
             matchAny(); 
 
@@ -1369,266 +1389,290 @@ public class InternalMyDslLexer extends Lexer {
     // $ANTLR end RULE_ANY_OTHER
 
     public void mTokens() throws RecognitionException {
-        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1:8: ( T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | T35 | T36 | T37 | T38 | T39 | T40 | T41 | T42 | T43 | T44 | T45 | T46 | T47 | T48 | T49 | T50 | T51 | T52 | RULE_SIGN | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt12=49;
+        // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1:8: ( T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | T35 | T36 | T37 | T38 | T39 | T40 | T41 | T42 | T43 | T44 | T45 | T46 | T47 | T48 | T49 | T50 | T51 | T52 | T53 | RULE_SIGN | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        int alt12=50;
         int LA12_0 = input.LA(1);
 
         if ( (LA12_0=='S') ) {
             int LA12_1 = input.LA(2);
 
             if ( (LA12_1=='t') ) {
-                int LA12_41 = input.LA(3);
+                int LA12_42 = input.LA(3);
 
-                if ( (LA12_41=='r') ) {
-                    int LA12_88 = input.LA(4);
+                if ( (LA12_42=='r') ) {
+                    int LA12_90 = input.LA(4);
 
-                    if ( (LA12_88=='i') ) {
-                        int LA12_107 = input.LA(5);
+                    if ( (LA12_90=='i') ) {
+                        int LA12_110 = input.LA(5);
 
-                        if ( (LA12_107=='n') ) {
-                            int LA12_124 = input.LA(6);
+                        if ( (LA12_110=='n') ) {
+                            int LA12_128 = input.LA(6);
 
-                            if ( (LA12_124=='g') ) {
-                                int LA12_139 = input.LA(7);
+                            if ( (LA12_128=='g') ) {
+                                int LA12_144 = input.LA(7);
 
-                                if ( ((LA12_139>='0' && LA12_139<='9')||(LA12_139>='A' && LA12_139<='Z')||LA12_139=='_'||(LA12_139>='a' && LA12_139<='z')) ) {
-                                    alt12=43;
+                                if ( ((LA12_144>='0' && LA12_144<='9')||(LA12_144>='A' && LA12_144<='Z')||LA12_144=='_'||(LA12_144>='a' && LA12_144<='z')) ) {
+                                    alt12=44;
                                 }
                                 else {
                                     alt12=1;}
                             }
                             else {
-                                alt12=43;}
+                                alt12=44;}
                         }
                         else {
-                            alt12=43;}
+                            alt12=44;}
                     }
                     else {
-                        alt12=43;}
+                        alt12=44;}
                 }
                 else {
-                    alt12=43;}
+                    alt12=44;}
             }
             else {
-                alt12=43;}
+                alt12=44;}
         }
         else if ( (LA12_0=='I') ) {
             int LA12_2 = input.LA(2);
 
             if ( (LA12_2=='n') ) {
-                int LA12_43 = input.LA(3);
+                int LA12_44 = input.LA(3);
 
-                if ( (LA12_43=='t') ) {
-                    int LA12_89 = input.LA(4);
+                if ( (LA12_44=='t') ) {
+                    int LA12_91 = input.LA(4);
 
-                    if ( (LA12_89=='e') ) {
-                        int LA12_108 = input.LA(5);
+                    if ( (LA12_91=='e') ) {
+                        int LA12_111 = input.LA(5);
 
-                        if ( (LA12_108=='g') ) {
-                            int LA12_125 = input.LA(6);
+                        if ( (LA12_111=='g') ) {
+                            int LA12_129 = input.LA(6);
 
-                            if ( (LA12_125=='e') ) {
-                                int LA12_140 = input.LA(7);
+                            if ( (LA12_129=='e') ) {
+                                int LA12_145 = input.LA(7);
 
-                                if ( (LA12_140=='r') ) {
-                                    int LA12_150 = input.LA(8);
+                                if ( (LA12_145=='r') ) {
+                                    int LA12_156 = input.LA(8);
 
-                                    if ( ((LA12_150>='0' && LA12_150<='9')||(LA12_150>='A' && LA12_150<='Z')||LA12_150=='_'||(LA12_150>='a' && LA12_150<='z')) ) {
-                                        alt12=43;
+                                    if ( ((LA12_156>='0' && LA12_156<='9')||(LA12_156>='A' && LA12_156<='Z')||LA12_156=='_'||(LA12_156>='a' && LA12_156<='z')) ) {
+                                        alt12=44;
                                     }
                                     else {
                                         alt12=2;}
                                 }
                                 else {
-                                    alt12=43;}
+                                    alt12=44;}
                             }
                             else {
-                                alt12=43;}
+                                alt12=44;}
                         }
                         else {
-                            alt12=43;}
+                            alt12=44;}
                     }
                     else {
-                        alt12=43;}
+                        alt12=44;}
                 }
                 else {
-                    alt12=43;}
+                    alt12=44;}
             }
             else {
-                alt12=43;}
+                alt12=44;}
         }
         else if ( (LA12_0=='B') ) {
             int LA12_3 = input.LA(2);
 
             if ( (LA12_3=='o') ) {
-                int LA12_44 = input.LA(3);
+                int LA12_45 = input.LA(3);
 
-                if ( (LA12_44=='o') ) {
-                    int LA12_90 = input.LA(4);
+                if ( (LA12_45=='o') ) {
+                    int LA12_92 = input.LA(4);
 
-                    if ( (LA12_90=='l') ) {
-                        int LA12_109 = input.LA(5);
+                    if ( (LA12_92=='l') ) {
+                        int LA12_112 = input.LA(5);
 
-                        if ( (LA12_109=='e') ) {
-                            int LA12_126 = input.LA(6);
+                        if ( (LA12_112=='e') ) {
+                            int LA12_130 = input.LA(6);
 
-                            if ( (LA12_126=='a') ) {
-                                int LA12_141 = input.LA(7);
+                            if ( (LA12_130=='a') ) {
+                                int LA12_146 = input.LA(7);
 
-                                if ( (LA12_141=='n') ) {
-                                    int LA12_151 = input.LA(8);
+                                if ( (LA12_146=='n') ) {
+                                    int LA12_157 = input.LA(8);
 
-                                    if ( ((LA12_151>='0' && LA12_151<='9')||(LA12_151>='A' && LA12_151<='Z')||LA12_151=='_'||(LA12_151>='a' && LA12_151<='z')) ) {
-                                        alt12=43;
+                                    if ( ((LA12_157>='0' && LA12_157<='9')||(LA12_157>='A' && LA12_157<='Z')||LA12_157=='_'||(LA12_157>='a' && LA12_157<='z')) ) {
+                                        alt12=44;
                                     }
                                     else {
                                         alt12=3;}
                                 }
                                 else {
-                                    alt12=43;}
+                                    alt12=44;}
                             }
                             else {
-                                alt12=43;}
+                                alt12=44;}
                         }
                         else {
-                            alt12=43;}
+                            alt12=44;}
                     }
                     else {
-                        alt12=43;}
+                        alt12=44;}
                 }
                 else {
-                    alt12=43;}
+                    alt12=44;}
             }
             else {
-                alt12=43;}
+                alt12=44;}
         }
         else if ( (LA12_0=='G') ) {
             int LA12_4 = input.LA(2);
 
             if ( (LA12_4=='r') ) {
-                int LA12_45 = input.LA(3);
+                int LA12_46 = input.LA(3);
 
-                if ( (LA12_45=='a') ) {
-                    int LA12_91 = input.LA(4);
+                if ( (LA12_46=='a') ) {
+                    int LA12_93 = input.LA(4);
 
-                    if ( (LA12_91=='p') ) {
-                        int LA12_110 = input.LA(5);
+                    if ( (LA12_93=='p') ) {
+                        int LA12_113 = input.LA(5);
 
-                        if ( (LA12_110=='h') ) {
-                            int LA12_127 = input.LA(6);
+                        if ( (LA12_113=='h') ) {
+                            int LA12_131 = input.LA(6);
 
-                            if ( ((LA12_127>='0' && LA12_127<='9')||(LA12_127>='A' && LA12_127<='Z')||LA12_127=='_'||(LA12_127>='a' && LA12_127<='z')) ) {
-                                alt12=43;
+                            if ( ((LA12_131>='0' && LA12_131<='9')||(LA12_131>='A' && LA12_131<='Z')||LA12_131=='_'||(LA12_131>='a' && LA12_131<='z')) ) {
+                                alt12=44;
                             }
                             else {
                                 alt12=4;}
                         }
                         else {
-                            alt12=43;}
+                            alt12=44;}
                     }
                     else {
-                        alt12=43;}
+                        alt12=44;}
                 }
                 else {
-                    alt12=43;}
+                    alt12=44;}
             }
             else {
-                alt12=43;}
+                alt12=44;}
         }
         else if ( (LA12_0=='V') ) {
             int LA12_5 = input.LA(2);
 
             if ( (LA12_5=='e') ) {
-                int LA12_46 = input.LA(3);
+                int LA12_47 = input.LA(3);
 
-                if ( (LA12_46=='r') ) {
-                    int LA12_92 = input.LA(4);
+                if ( (LA12_47=='r') ) {
+                    int LA12_94 = input.LA(4);
 
-                    if ( (LA12_92=='t') ) {
-                        int LA12_111 = input.LA(5);
+                    if ( (LA12_94=='t') ) {
+                        int LA12_114 = input.LA(5);
 
-                        if ( (LA12_111=='e') ) {
-                            int LA12_128 = input.LA(6);
+                        if ( (LA12_114=='e') ) {
+                            int LA12_132 = input.LA(6);
 
-                            if ( (LA12_128=='x') ) {
-                                int LA12_143 = input.LA(7);
+                            if ( (LA12_132=='x') ) {
+                                int LA12_148 = input.LA(7);
 
-                                if ( ((LA12_143>='0' && LA12_143<='9')||(LA12_143>='A' && LA12_143<='Z')||LA12_143=='_'||(LA12_143>='a' && LA12_143<='z')) ) {
-                                    alt12=43;
+                                if ( ((LA12_148>='0' && LA12_148<='9')||(LA12_148>='A' && LA12_148<='Z')||LA12_148=='_'||(LA12_148>='a' && LA12_148<='z')) ) {
+                                    alt12=44;
                                 }
                                 else {
                                     alt12=5;}
                             }
                             else {
-                                alt12=43;}
+                                alt12=44;}
                         }
                         else {
-                            alt12=43;}
+                            alt12=44;}
                     }
                     else {
-                        alt12=43;}
+                        alt12=44;}
                 }
                 else {
-                    alt12=43;}
+                    alt12=44;}
             }
             else {
-                alt12=43;}
+                alt12=44;}
         }
         else if ( (LA12_0=='E') ) {
             int LA12_6 = input.LA(2);
 
             if ( (LA12_6=='d') ) {
-                int LA12_47 = input.LA(3);
+                int LA12_48 = input.LA(3);
 
-                if ( (LA12_47=='g') ) {
-                    int LA12_93 = input.LA(4);
+                if ( (LA12_48=='g') ) {
+                    int LA12_95 = input.LA(4);
 
-                    if ( (LA12_93=='e') ) {
-                        int LA12_112 = input.LA(5);
+                    if ( (LA12_95=='e') ) {
+                        int LA12_115 = input.LA(5);
 
-                        if ( ((LA12_112>='0' && LA12_112<='9')||(LA12_112>='A' && LA12_112<='Z')||LA12_112=='_'||(LA12_112>='a' && LA12_112<='z')) ) {
-                            alt12=43;
+                        if ( ((LA12_115>='0' && LA12_115<='9')||(LA12_115>='A' && LA12_115<='Z')||LA12_115=='_'||(LA12_115>='a' && LA12_115<='z')) ) {
+                            alt12=44;
                         }
                         else {
                             alt12=6;}
                     }
                     else {
-                        alt12=43;}
+                        alt12=44;}
                 }
                 else {
-                    alt12=43;}
+                    alt12=44;}
             }
             else {
-                alt12=43;}
+                alt12=44;}
         }
-        else if ( (LA12_0=='=') ) {
+        else if ( (LA12_0=='Q') ) {
             int LA12_7 = input.LA(2);
 
-            if ( (LA12_7=='=') ) {
-                alt12=7;
+            if ( (LA12_7=='u') ) {
+                int LA12_49 = input.LA(3);
+
+                if ( (LA12_49=='e') ) {
+                    int LA12_96 = input.LA(4);
+
+                    if ( (LA12_96=='u') ) {
+                        int LA12_116 = input.LA(5);
+
+                        if ( (LA12_116=='e') ) {
+                            int LA12_134 = input.LA(6);
+
+                            if ( ((LA12_134>='0' && LA12_134<='9')||(LA12_134>='A' && LA12_134<='Z')||LA12_134=='_'||(LA12_134>='a' && LA12_134<='z')) ) {
+                                alt12=44;
+                            }
+                            else {
+                                alt12=7;}
+                        }
+                        else {
+                            alt12=44;}
+                    }
+                    else {
+                        alt12=44;}
+                }
+                else {
+                    alt12=44;}
             }
             else {
-                alt12=30;}
+                alt12=44;}
         }
-        else if ( (LA12_0=='!') ) {
+        else if ( (LA12_0=='=') ) {
             int LA12_8 = input.LA(2);
 
             if ( (LA12_8=='=') ) {
                 alt12=8;
             }
             else {
-                alt12=33;}
+                alt12=31;}
         }
-        else if ( (LA12_0=='<') ) {
+        else if ( (LA12_0=='!') ) {
             int LA12_9 = input.LA(2);
 
             if ( (LA12_9=='=') ) {
-                alt12=11;
+                alt12=9;
             }
             else {
-                alt12=9;}
+                alt12=34;}
         }
-        else if ( (LA12_0=='>') ) {
+        else if ( (LA12_0=='<') ) {
             int LA12_10 = input.LA(2);
 
             if ( (LA12_10=='=') ) {
@@ -1637,198 +1681,196 @@ public class InternalMyDslLexer extends Lexer {
             else {
                 alt12=10;}
         }
+        else if ( (LA12_0=='>') ) {
+            int LA12_11 = input.LA(2);
+
+            if ( (LA12_11=='=') ) {
+                alt12=13;
+            }
+            else {
+                alt12=11;}
+        }
         else if ( (LA12_0=='*') ) {
-            alt12=13;
+            alt12=14;
         }
         else if ( (LA12_0=='/') ) {
             switch ( input.LA(2) ) {
             case '/':
                 {
-                alt12=47;
+                alt12=48;
                 }
                 break;
             case '*':
                 {
-                alt12=46;
+                alt12=47;
                 }
                 break;
             default:
-                alt12=14;}
+                alt12=15;}
 
         }
         else if ( (LA12_0=='%') ) {
-            alt12=15;
-        }
-        else if ( (LA12_0==',') ) {
             alt12=16;
         }
-        else if ( (LA12_0==';') ) {
+        else if ( (LA12_0==',') ) {
             alt12=17;
         }
-        else if ( (LA12_0=='(') ) {
+        else if ( (LA12_0==';') ) {
             alt12=18;
         }
-        else if ( (LA12_0==')') ) {
+        else if ( (LA12_0=='(') ) {
             alt12=19;
         }
-        else if ( (LA12_0==':') ) {
+        else if ( (LA12_0==')') ) {
             alt12=20;
         }
+        else if ( (LA12_0==':') ) {
+            alt12=21;
+        }
         else if ( (LA12_0=='b') ) {
-            int LA12_19 = input.LA(2);
+            int LA12_20 = input.LA(2);
 
-            if ( (LA12_19=='e') ) {
-                int LA12_66 = input.LA(3);
+            if ( (LA12_20=='e') ) {
+                int LA12_68 = input.LA(3);
 
-                if ( (LA12_66=='g') ) {
-                    int LA12_94 = input.LA(4);
+                if ( (LA12_68=='g') ) {
+                    int LA12_97 = input.LA(4);
 
-                    if ( (LA12_94=='i') ) {
-                        int LA12_113 = input.LA(5);
+                    if ( (LA12_97=='i') ) {
+                        int LA12_117 = input.LA(5);
 
-                        if ( (LA12_113=='n') ) {
-                            int LA12_130 = input.LA(6);
+                        if ( (LA12_117=='n') ) {
+                            int LA12_135 = input.LA(6);
 
-                            if ( ((LA12_130>='0' && LA12_130<='9')||(LA12_130>='A' && LA12_130<='Z')||LA12_130=='_'||(LA12_130>='a' && LA12_130<='z')) ) {
-                                alt12=43;
+                            if ( ((LA12_135>='0' && LA12_135<='9')||(LA12_135>='A' && LA12_135<='Z')||LA12_135=='_'||(LA12_135>='a' && LA12_135<='z')) ) {
+                                alt12=44;
                             }
                             else {
-                                alt12=21;}
+                                alt12=22;}
                         }
                         else {
-                            alt12=43;}
+                            alt12=44;}
                     }
                     else {
-                        alt12=43;}
+                        alt12=44;}
                 }
                 else {
-                    alt12=43;}
+                    alt12=44;}
             }
             else {
-                alt12=43;}
+                alt12=44;}
         }
         else if ( (LA12_0=='e') ) {
             switch ( input.LA(2) ) {
             case 'n':
                 {
-                int LA12_67 = input.LA(3);
+                int LA12_69 = input.LA(3);
 
-                if ( (LA12_67=='d') ) {
-                    int LA12_95 = input.LA(4);
+                if ( (LA12_69=='d') ) {
+                    int LA12_98 = input.LA(4);
 
-                    if ( ((LA12_95>='0' && LA12_95<='9')||(LA12_95>='A' && LA12_95<='Z')||LA12_95=='_'||(LA12_95>='a' && LA12_95<='z')) ) {
-                        alt12=43;
+                    if ( ((LA12_98>='0' && LA12_98<='9')||(LA12_98>='A' && LA12_98<='Z')||LA12_98=='_'||(LA12_98>='a' && LA12_98<='z')) ) {
+                        alt12=44;
                     }
                     else {
-                        alt12=22;}
+                        alt12=23;}
                 }
                 else {
-                    alt12=43;}
+                    alt12=44;}
                 }
                 break;
             case 'l':
                 {
-                int LA12_68 = input.LA(3);
+                int LA12_70 = input.LA(3);
 
-                if ( (LA12_68=='s') ) {
-                    int LA12_96 = input.LA(4);
+                if ( (LA12_70=='s') ) {
+                    int LA12_99 = input.LA(4);
 
-                    if ( (LA12_96=='e') ) {
-                        int LA12_115 = input.LA(5);
+                    if ( (LA12_99=='e') ) {
+                        int LA12_119 = input.LA(5);
 
-                        if ( ((LA12_115>='0' && LA12_115<='9')||(LA12_115>='A' && LA12_115<='Z')||LA12_115=='_'||(LA12_115>='a' && LA12_115<='z')) ) {
-                            alt12=43;
+                        if ( ((LA12_119>='0' && LA12_119<='9')||(LA12_119>='A' && LA12_119<='Z')||LA12_119=='_'||(LA12_119>='a' && LA12_119<='z')) ) {
+                            alt12=44;
                         }
                         else {
-                            alt12=25;}
+                            alt12=26;}
                     }
                     else {
-                        alt12=43;}
+                        alt12=44;}
                 }
                 else {
-                    alt12=43;}
+                    alt12=44;}
                 }
                 break;
             default:
-                alt12=43;}
+                alt12=44;}
 
         }
         else if ( (LA12_0=='r') ) {
-            int LA12_21 = input.LA(2);
+            int LA12_22 = input.LA(2);
 
-            if ( (LA12_21=='e') ) {
-                int LA12_69 = input.LA(3);
+            if ( (LA12_22=='e') ) {
+                int LA12_71 = input.LA(3);
 
-                if ( (LA12_69=='t') ) {
-                    int LA12_97 = input.LA(4);
+                if ( (LA12_71=='t') ) {
+                    int LA12_100 = input.LA(4);
 
-                    if ( (LA12_97=='u') ) {
-                        int LA12_116 = input.LA(5);
+                    if ( (LA12_100=='u') ) {
+                        int LA12_120 = input.LA(5);
 
-                        if ( (LA12_116=='r') ) {
-                            int LA12_132 = input.LA(6);
+                        if ( (LA12_120=='r') ) {
+                            int LA12_137 = input.LA(6);
 
-                            if ( (LA12_132=='n') ) {
-                                int LA12_145 = input.LA(7);
+                            if ( (LA12_137=='n') ) {
+                                int LA12_151 = input.LA(7);
 
-                                if ( ((LA12_145>='0' && LA12_145<='9')||(LA12_145>='A' && LA12_145<='Z')||LA12_145=='_'||(LA12_145>='a' && LA12_145<='z')) ) {
-                                    alt12=43;
+                                if ( ((LA12_151>='0' && LA12_151<='9')||(LA12_151>='A' && LA12_151<='Z')||LA12_151=='_'||(LA12_151>='a' && LA12_151<='z')) ) {
+                                    alt12=44;
                                 }
                                 else {
-                                    alt12=23;}
+                                    alt12=24;}
                             }
                             else {
-                                alt12=43;}
+                                alt12=44;}
                         }
                         else {
-                            alt12=43;}
+                            alt12=44;}
                     }
                     else {
-                        alt12=43;}
+                        alt12=44;}
                 }
                 else {
-                    alt12=43;}
+                    alt12=44;}
             }
             else {
-                alt12=43;}
+                alt12=44;}
         }
         else if ( (LA12_0=='i') ) {
             switch ( input.LA(2) ) {
-            case 'f':
-                {
-                int LA12_70 = input.LA(3);
-
-                if ( ((LA12_70>='0' && LA12_70<='9')||(LA12_70>='A' && LA12_70<='Z')||LA12_70=='_'||(LA12_70>='a' && LA12_70<='z')) ) {
-                    alt12=43;
-                }
-                else {
-                    alt12=24;}
-                }
-                break;
             case 'n':
                 {
                 switch ( input.LA(3) ) {
                 case 'f':
                     {
-                    int LA12_99 = input.LA(4);
+                    int LA12_101 = input.LA(4);
 
-                    if ( (LA12_99=='t') ) {
-                        int LA12_117 = input.LA(5);
+                    if ( (LA12_101=='t') ) {
+                        int LA12_121 = input.LA(5);
 
-                        if ( (LA12_117=='y') ) {
-                            int LA12_133 = input.LA(6);
+                        if ( (LA12_121=='y') ) {
+                            int LA12_138 = input.LA(6);
 
-                            if ( ((LA12_133>='0' && LA12_133<='9')||(LA12_133>='A' && LA12_133<='Z')||LA12_133=='_'||(LA12_133>='a' && LA12_133<='z')) ) {
-                                alt12=43;
+                            if ( ((LA12_138>='0' && LA12_138<='9')||(LA12_138>='A' && LA12_138<='Z')||LA12_138=='_'||(LA12_138>='a' && LA12_138<='z')) ) {
+                                alt12=44;
                             }
                             else {
-                                alt12=41;}
+                                alt12=42;}
                         }
                         else {
-                            alt12=43;}
+                            alt12=44;}
                     }
                     else {
-                        alt12=43;}
+                        alt12=44;}
                     }
                     break;
                 case '0':
@@ -1894,262 +1936,273 @@ public class InternalMyDslLexer extends Lexer {
                 case 'y':
                 case 'z':
                     {
-                    alt12=43;
+                    alt12=44;
                     }
                     break;
                 default:
-                    alt12=27;}
+                    alt12=28;}
 
                 }
                 break;
+            case 'f':
+                {
+                int LA12_73 = input.LA(3);
+
+                if ( ((LA12_73>='0' && LA12_73<='9')||(LA12_73>='A' && LA12_73<='Z')||LA12_73=='_'||(LA12_73>='a' && LA12_73<='z')) ) {
+                    alt12=44;
+                }
+                else {
+                    alt12=25;}
+                }
+                break;
             default:
-                alt12=43;}
+                alt12=44;}
 
         }
         else if ( (LA12_0=='f') ) {
             switch ( input.LA(2) ) {
             case 'o':
                 {
-                int LA12_72 = input.LA(3);
+                int LA12_74 = input.LA(3);
 
-                if ( (LA12_72=='r') ) {
-                    int LA12_101 = input.LA(4);
+                if ( (LA12_74=='r') ) {
+                    int LA12_104 = input.LA(4);
 
-                    if ( ((LA12_101>='0' && LA12_101<='9')||(LA12_101>='A' && LA12_101<='Z')||LA12_101=='_'||(LA12_101>='a' && LA12_101<='z')) ) {
-                        alt12=43;
+                    if ( ((LA12_104>='0' && LA12_104<='9')||(LA12_104>='A' && LA12_104<='Z')||LA12_104=='_'||(LA12_104>='a' && LA12_104<='z')) ) {
+                        alt12=44;
                     }
                     else {
-                        alt12=26;}
+                        alt12=27;}
                 }
                 else {
-                    alt12=43;}
+                    alt12=44;}
                 }
                 break;
             case 'a':
                 {
-                int LA12_73 = input.LA(3);
+                int LA12_75 = input.LA(3);
 
-                if ( (LA12_73=='l') ) {
-                    int LA12_102 = input.LA(4);
+                if ( (LA12_75=='l') ) {
+                    int LA12_105 = input.LA(4);
 
-                    if ( (LA12_102=='s') ) {
-                        int LA12_119 = input.LA(5);
+                    if ( (LA12_105=='s') ) {
+                        int LA12_123 = input.LA(5);
 
-                        if ( (LA12_119=='e') ) {
-                            int LA12_134 = input.LA(6);
+                        if ( (LA12_123=='e') ) {
+                            int LA12_139 = input.LA(6);
 
-                            if ( ((LA12_134>='0' && LA12_134<='9')||(LA12_134>='A' && LA12_134<='Z')||LA12_134=='_'||(LA12_134>='a' && LA12_134<='z')) ) {
-                                alt12=43;
+                            if ( ((LA12_139>='0' && LA12_139<='9')||(LA12_139>='A' && LA12_139<='Z')||LA12_139=='_'||(LA12_139>='a' && LA12_139<='z')) ) {
+                                alt12=44;
                             }
                             else {
-                                alt12=38;}
+                                alt12=39;}
                         }
                         else {
-                            alt12=43;}
+                            alt12=44;}
                     }
                     else {
-                        alt12=43;}
+                        alt12=44;}
                 }
                 else {
-                    alt12=43;}
+                    alt12=44;}
                 }
                 break;
             default:
-                alt12=43;}
+                alt12=44;}
 
         }
         else if ( (LA12_0=='w') ) {
-            int LA12_24 = input.LA(2);
-
-            if ( (LA12_24=='h') ) {
-                int LA12_74 = input.LA(3);
-
-                if ( (LA12_74=='i') ) {
-                    int LA12_103 = input.LA(4);
-
-                    if ( (LA12_103=='l') ) {
-                        int LA12_120 = input.LA(5);
-
-                        if ( (LA12_120=='e') ) {
-                            int LA12_135 = input.LA(6);
-
-                            if ( ((LA12_135>='0' && LA12_135<='9')||(LA12_135>='A' && LA12_135<='Z')||LA12_135=='_'||(LA12_135>='a' && LA12_135<='z')) ) {
-                                alt12=43;
-                            }
-                            else {
-                                alt12=28;}
-                        }
-                        else {
-                            alt12=43;}
-                    }
-                    else {
-                        alt12=43;}
-                }
-                else {
-                    alt12=43;}
-            }
-            else {
-                alt12=43;}
-        }
-        else if ( (LA12_0=='[') ) {
             int LA12_25 = input.LA(2);
 
-            if ( (LA12_25==']') ) {
-                alt12=29;
-            }
-            else {
-                alt12=35;}
-        }
-        else if ( (LA12_0=='|') ) {
-            int LA12_26 = input.LA(2);
+            if ( (LA12_25=='h') ) {
+                int LA12_76 = input.LA(3);
 
-            if ( (LA12_26=='|') ) {
-                alt12=31;
-            }
-            else {
-                alt12=49;}
-        }
-        else if ( (LA12_0=='&') ) {
-            int LA12_27 = input.LA(2);
-
-            if ( (LA12_27=='&') ) {
-                alt12=32;
-            }
-            else {
-                alt12=49;}
-        }
-        else if ( (LA12_0=='.') ) {
-            alt12=34;
-        }
-        else if ( (LA12_0==']') ) {
-            alt12=36;
-        }
-        else if ( (LA12_0=='t') ) {
-            int LA12_30 = input.LA(2);
-
-            if ( (LA12_30=='r') ) {
-                int LA12_81 = input.LA(3);
-
-                if ( (LA12_81=='u') ) {
-                    int LA12_104 = input.LA(4);
-
-                    if ( (LA12_104=='e') ) {
-                        int LA12_121 = input.LA(5);
-
-                        if ( ((LA12_121>='0' && LA12_121<='9')||(LA12_121>='A' && LA12_121<='Z')||LA12_121=='_'||(LA12_121>='a' && LA12_121<='z')) ) {
-                            alt12=43;
-                        }
-                        else {
-                            alt12=37;}
-                    }
-                    else {
-                        alt12=43;}
-                }
-                else {
-                    alt12=43;}
-            }
-            else {
-                alt12=43;}
-        }
-        else if ( (LA12_0=='m') ) {
-            int LA12_31 = input.LA(2);
-
-            if ( (LA12_31=='a') ) {
-                int LA12_82 = input.LA(3);
-
-                if ( (LA12_82=='i') ) {
-                    int LA12_105 = input.LA(4);
-
-                    if ( (LA12_105=='n') ) {
-                        int LA12_122 = input.LA(5);
-
-                        if ( ((LA12_122>='0' && LA12_122<='9')||(LA12_122>='A' && LA12_122<='Z')||LA12_122=='_'||(LA12_122>='a' && LA12_122<='z')) ) {
-                            alt12=43;
-                        }
-                        else {
-                            alt12=39;}
-                    }
-                    else {
-                        alt12=43;}
-                }
-                else {
-                    alt12=43;}
-            }
-            else {
-                alt12=43;}
-        }
-        else if ( (LA12_0=='n') ) {
-            int LA12_32 = input.LA(2);
-
-            if ( (LA12_32=='u') ) {
-                int LA12_83 = input.LA(3);
-
-                if ( (LA12_83=='l') ) {
+                if ( (LA12_76=='i') ) {
                     int LA12_106 = input.LA(4);
 
                     if ( (LA12_106=='l') ) {
-                        int LA12_123 = input.LA(5);
+                        int LA12_124 = input.LA(5);
 
-                        if ( ((LA12_123>='0' && LA12_123<='9')||(LA12_123>='A' && LA12_123<='Z')||LA12_123=='_'||(LA12_123>='a' && LA12_123<='z')) ) {
-                            alt12=43;
+                        if ( (LA12_124=='e') ) {
+                            int LA12_140 = input.LA(6);
+
+                            if ( ((LA12_140>='0' && LA12_140<='9')||(LA12_140>='A' && LA12_140<='Z')||LA12_140=='_'||(LA12_140>='a' && LA12_140<='z')) ) {
+                                alt12=44;
+                            }
+                            else {
+                                alt12=29;}
+                        }
+                        else {
+                            alt12=44;}
+                    }
+                    else {
+                        alt12=44;}
+                }
+                else {
+                    alt12=44;}
+            }
+            else {
+                alt12=44;}
+        }
+        else if ( (LA12_0=='[') ) {
+            int LA12_26 = input.LA(2);
+
+            if ( (LA12_26==']') ) {
+                alt12=30;
+            }
+            else {
+                alt12=36;}
+        }
+        else if ( (LA12_0=='|') ) {
+            int LA12_27 = input.LA(2);
+
+            if ( (LA12_27=='|') ) {
+                alt12=32;
+            }
+            else {
+                alt12=50;}
+        }
+        else if ( (LA12_0=='&') ) {
+            int LA12_28 = input.LA(2);
+
+            if ( (LA12_28=='&') ) {
+                alt12=33;
+            }
+            else {
+                alt12=50;}
+        }
+        else if ( (LA12_0=='.') ) {
+            alt12=35;
+        }
+        else if ( (LA12_0==']') ) {
+            alt12=37;
+        }
+        else if ( (LA12_0=='t') ) {
+            int LA12_31 = input.LA(2);
+
+            if ( (LA12_31=='r') ) {
+                int LA12_83 = input.LA(3);
+
+                if ( (LA12_83=='u') ) {
+                    int LA12_107 = input.LA(4);
+
+                    if ( (LA12_107=='e') ) {
+                        int LA12_125 = input.LA(5);
+
+                        if ( ((LA12_125>='0' && LA12_125<='9')||(LA12_125>='A' && LA12_125<='Z')||LA12_125=='_'||(LA12_125>='a' && LA12_125<='z')) ) {
+                            alt12=44;
+                        }
+                        else {
+                            alt12=38;}
+                    }
+                    else {
+                        alt12=44;}
+                }
+                else {
+                    alt12=44;}
+            }
+            else {
+                alt12=44;}
+        }
+        else if ( (LA12_0=='m') ) {
+            int LA12_32 = input.LA(2);
+
+            if ( (LA12_32=='a') ) {
+                int LA12_84 = input.LA(3);
+
+                if ( (LA12_84=='i') ) {
+                    int LA12_108 = input.LA(4);
+
+                    if ( (LA12_108=='n') ) {
+                        int LA12_126 = input.LA(5);
+
+                        if ( ((LA12_126>='0' && LA12_126<='9')||(LA12_126>='A' && LA12_126<='Z')||LA12_126=='_'||(LA12_126>='a' && LA12_126<='z')) ) {
+                            alt12=44;
                         }
                         else {
                             alt12=40;}
                     }
                     else {
-                        alt12=43;}
+                        alt12=44;}
                 }
                 else {
-                    alt12=43;}
+                    alt12=44;}
             }
             else {
-                alt12=43;}
+                alt12=44;}
+        }
+        else if ( (LA12_0=='n') ) {
+            int LA12_33 = input.LA(2);
+
+            if ( (LA12_33=='u') ) {
+                int LA12_85 = input.LA(3);
+
+                if ( (LA12_85=='l') ) {
+                    int LA12_109 = input.LA(4);
+
+                    if ( (LA12_109=='l') ) {
+                        int LA12_127 = input.LA(5);
+
+                        if ( ((LA12_127>='0' && LA12_127<='9')||(LA12_127>='A' && LA12_127<='Z')||LA12_127=='_'||(LA12_127>='a' && LA12_127<='z')) ) {
+                            alt12=44;
+                        }
+                        else {
+                            alt12=41;}
+                    }
+                    else {
+                        alt12=44;}
+                }
+                else {
+                    alt12=44;}
+            }
+            else {
+                alt12=44;}
         }
         else if ( (LA12_0=='+'||LA12_0=='-') ) {
-            alt12=42;
-        }
-        else if ( (LA12_0=='^') ) {
-            int LA12_34 = input.LA(2);
-
-            if ( ((LA12_34>='A' && LA12_34<='Z')||LA12_34=='_'||(LA12_34>='a' && LA12_34<='z')) ) {
-                alt12=43;
-            }
-            else {
-                alt12=49;}
-        }
-        else if ( (LA12_0=='A'||(LA12_0>='C' && LA12_0<='D')||LA12_0=='F'||LA12_0=='H'||(LA12_0>='J' && LA12_0<='R')||(LA12_0>='T' && LA12_0<='U')||(LA12_0>='W' && LA12_0<='Z')||LA12_0=='_'||LA12_0=='a'||(LA12_0>='c' && LA12_0<='d')||(LA12_0>='g' && LA12_0<='h')||(LA12_0>='j' && LA12_0<='l')||(LA12_0>='o' && LA12_0<='q')||LA12_0=='s'||(LA12_0>='u' && LA12_0<='v')||(LA12_0>='x' && LA12_0<='z')) ) {
             alt12=43;
         }
-        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {
-            alt12=44;
-        }
-        else if ( (LA12_0=='\"') ) {
-            int LA12_37 = input.LA(2);
+        else if ( (LA12_0=='^') ) {
+            int LA12_35 = input.LA(2);
 
-            if ( ((LA12_37>='\u0000' && LA12_37<='\uFFFE')) ) {
-                alt12=45;
+            if ( ((LA12_35>='A' && LA12_35<='Z')||LA12_35=='_'||(LA12_35>='a' && LA12_35<='z')) ) {
+                alt12=44;
             }
             else {
-                alt12=49;}
+                alt12=50;}
         }
-        else if ( (LA12_0=='\'') ) {
+        else if ( (LA12_0=='A'||(LA12_0>='C' && LA12_0<='D')||LA12_0=='F'||LA12_0=='H'||(LA12_0>='J' && LA12_0<='P')||LA12_0=='R'||(LA12_0>='T' && LA12_0<='U')||(LA12_0>='W' && LA12_0<='Z')||LA12_0=='_'||LA12_0=='a'||(LA12_0>='c' && LA12_0<='d')||(LA12_0>='g' && LA12_0<='h')||(LA12_0>='j' && LA12_0<='l')||(LA12_0>='o' && LA12_0<='q')||LA12_0=='s'||(LA12_0>='u' && LA12_0<='v')||(LA12_0>='x' && LA12_0<='z')) ) {
+            alt12=44;
+        }
+        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {
+            alt12=45;
+        }
+        else if ( (LA12_0=='\"') ) {
             int LA12_38 = input.LA(2);
 
             if ( ((LA12_38>='\u0000' && LA12_38<='\uFFFE')) ) {
-                alt12=45;
+                alt12=46;
             }
             else {
-                alt12=49;}
+                alt12=50;}
+        }
+        else if ( (LA12_0=='\'') ) {
+            int LA12_39 = input.LA(2);
+
+            if ( ((LA12_39>='\u0000' && LA12_39<='\uFFFE')) ) {
+                alt12=46;
+            }
+            else {
+                alt12=50;}
         }
         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {
-            alt12=48;
+            alt12=49;
         }
         else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||(LA12_0>='#' && LA12_0<='$')||(LA12_0>='?' && LA12_0<='@')||LA12_0=='\\'||LA12_0=='`'||LA12_0=='{'||(LA12_0>='}' && LA12_0<='\uFFFE')) ) {
-            alt12=49;
+            alt12=50;
         }
         else {
             NoViableAltException nvae =
-                new NoViableAltException("1:1: Tokens : ( T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | T35 | T36 | T37 | T38 | T39 | T40 | T41 | T42 | T43 | T44 | T45 | T46 | T47 | T48 | T49 | T50 | T51 | T52 | RULE_SIGN | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
+                new NoViableAltException("1:1: Tokens : ( T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | T25 | T26 | T27 | T28 | T29 | T30 | T31 | T32 | T33 | T34 | T35 | T36 | T37 | T38 | T39 | T40 | T41 | T42 | T43 | T44 | T45 | T46 | T47 | T48 | T49 | T50 | T51 | T52 | T53 | RULE_SIGN | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
 
             throw nvae;
         }
@@ -2442,56 +2495,63 @@ public class InternalMyDslLexer extends Lexer {
                 }
                 break;
             case 42 :
-                // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1:174: RULE_SIGN
+                // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1:174: T53
+                {
+                mT53(); 
+
+                }
+                break;
+            case 43 :
+                // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1:178: RULE_SIGN
                 {
                 mRULE_SIGN(); 
 
                 }
                 break;
-            case 43 :
-                // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1:184: RULE_ID
+            case 44 :
+                // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1:188: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
-            case 44 :
-                // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1:192: RULE_INT
+            case 45 :
+                // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1:196: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
-            case 45 :
-                // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1:201: RULE_STRING
+            case 46 :
+                // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1:205: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
-            case 46 :
-                // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1:213: RULE_ML_COMMENT
+            case 47 :
+                // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1:217: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
-            case 47 :
-                // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1:229: RULE_SL_COMMENT
+            case 48 :
+                // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1:233: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
-            case 48 :
-                // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1:245: RULE_WS
+            case 49 :
+                // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1:249: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 49 :
-                // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1:253: RULE_ANY_OTHER
+            case 50 :
+                // ../de.unisiegen.informatik.bs.alvis.language.algorithmLanguage.ui/src-gen/org/xtext/example/mydsl1/ui/contentassist/antlr/internal/InternalMyDsl.g:1:257: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 

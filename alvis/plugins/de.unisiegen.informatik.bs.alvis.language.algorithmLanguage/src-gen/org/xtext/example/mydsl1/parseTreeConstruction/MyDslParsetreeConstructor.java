@@ -1152,11 +1152,11 @@ protected class Block_EndKeyword_3 extends KeywordToken  {
 /************ begin Rule type ****************
  *
  * type:
- * 	types=("String" | "Integer" | "Boolean" | "Graph" | "Vertex" | "Edge");
+ * 	types=("String" | "Integer" | "Boolean" | "Graph" | "Vertex" | "Edge" | "Queue");
  *
  **/
 
-// types=("String" | "Integer" | "Boolean" | "Graph" | "Vertex" | "Edge")
+// types=("String" | "Integer" | "Boolean" | "Graph" | "Vertex" | "Edge" | "Queue")
 protected class Type_TypesAssignment extends AssignmentToken  {
 	
 	public Type_TypesAssignment(AbstractToken lastRuleCallOrigin, AbstractToken next, int transitionIndex, IEObjectConsumer eObjectConsumer) {
@@ -1209,6 +1209,11 @@ protected class Type_TypesAssignment extends AssignmentToken  {
 		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getTypeAccess().getTypesEdgeKeyword_0_5(), value, null)) {
 			type = AssignmentType.KEYWORD;
 			element = grammarAccess.getTypeAccess().getTypesEdgeKeyword_0_5();
+			return obj;
+		}
+		if(keywordSerializer.isValid(obj.getEObject(), grammarAccess.getTypeAccess().getTypesQueueKeyword_0_6(), value, null)) {
+			type = AssignmentType.KEYWORD;
+			element = grammarAccess.getTypeAccess().getTypesQueueKeyword_0_6();
 			return obj;
 		}
 		return null;
