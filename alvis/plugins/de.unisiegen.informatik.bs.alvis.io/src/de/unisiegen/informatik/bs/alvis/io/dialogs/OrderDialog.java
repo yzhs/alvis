@@ -45,6 +45,8 @@ public class OrderDialog extends TitleAreaDialog {
 
 	}
 
+	public static final int DoNotAsk = 12345;
+	private AskMeAgain myAsk;
 	private Shell myParent;
 	@SuppressWarnings("rawtypes")
 	private List myOrder;
@@ -62,8 +64,8 @@ public class OrderDialog extends TitleAreaDialog {
 	 * Note that all items need to have a different toString value, otherwise
 	 * the user and the order algorithm gets trouble.
 	 * 
-	 * The width of the window is 300px.
-	 * The height of the window is from 170px to 600px - the more elements the higher.
+	 * The width of the window is 300px. The height of the window is from 170px
+	 * to 600px - the more elements the higher.
 	 * 
 	 * @param parentShell
 	 *            Shell to show
@@ -79,14 +81,15 @@ public class OrderDialog extends TitleAreaDialog {
 	 *            normally SWT.ERROR
 	 * @wbp.parser.constructor
 	 */
-	public OrderDialog(Shell parentShell, List toOrder,
-			String windowTitle, String title, String message) {
+	public OrderDialog(Shell parentShell, List toOrder, AskMeAgain ask, String windowTitle,
+			String title, String message) {
 		super(parentShell);
 		myParent = parentShell;
 		myWindowTitle = windowTitle;
 		myTitle = title;
 		myMessage = message;
 		myOrder = toOrder;
+		myAsk = ask;
 	}
 
 	// Label of the moving Item
@@ -99,6 +102,7 @@ public class OrderDialog extends TitleAreaDialog {
 	private final int DOWN = -20;
 	private TreeItem clckdTreeItem;
 	Tree tree;
+
 	/**
 	 * Saves the order that is shown in the window to the ArrayList ,,myOrder''
 	 */
@@ -117,16 +121,15 @@ public class OrderDialog extends TitleAreaDialog {
 			}
 		}
 		boolean wasUPDOWN = false;
-		if(newPosition == UP) {
+		if (newPosition == UP) {
 			newPosition = Math.max(0, oldPosition - 1);
 			wasUPDOWN = true;
 		}
-		if(newPosition == DOWN) {
-			newPosition = Math.min(myOrder.size()-1, oldPosition + 1);
+		if (newPosition == DOWN) {
+			newPosition = Math.min(myOrder.size() - 1, oldPosition + 1);
 			wasUPDOWN = true;
 		}
-		
-		
+
 		// System.out.println("______________FIRST___________");
 		// System.out.println("Wollen " + orderItem + " an " + newPosition);
 		// Declare a List that contains all Elements that were before the
@@ -154,16 +157,16 @@ public class OrderDialog extends TitleAreaDialog {
 			secondList.remove(movingListItem);
 		}
 
-		if(wasUPDOWN) {
-//			clckdItem = null;
+		if (wasUPDOWN) {
+			// clckdItem = null;
 			clckdTreeItem.dispose();
 			clckdTreeItem = new TreeItem(tree, SWT.NONE, newPosition);
-//			clckdTreeItem = newItem;
+			// clckdTreeItem = newItem;
 			clckdTreeItem.setText(orderItemText);
 			tree.setSelection(clckdTreeItem);
 			orderItemText = clckdTreeItem.getText();
 		}
-		
+
 		// clear the old List
 		myOrder.clear();
 		// Add the items from the first list.
@@ -173,17 +176,16 @@ public class OrderDialog extends TitleAreaDialog {
 		// Add the items from the second list.
 		myOrder.addAll(secondList);
 
-//		printList(myOrder);
-		
-//		if(wasUPDOWN) {
-//			tree.removeAll();
-//			// Create the TreeItems
-//			for (Object orderobj : myOrder) {
-//				TreeItem item = new TreeItem(tree, SWT.NONE);
-//				item.setText(orderobj.toString());
-//			}
-//		}
-		
+		// printList(myOrder);
+
+		// if(wasUPDOWN) {
+		// tree.removeAll();
+		// // Create the TreeItems
+		// for (Object orderobj : myOrder) {
+		// TreeItem item = new TreeItem(tree, SWT.NONE);
+		// item.setText(orderobj.toString());
+		// }
+		// }
 
 	}
 
@@ -192,7 +194,7 @@ public class OrderDialog extends TitleAreaDialog {
 			System.out.println(o.toString());
 		}
 	}
-	
+
 	int clickCount = 0;
 
 	protected Control createDialogArea(Composite parent) {
@@ -203,72 +205,54 @@ public class OrderDialog extends TitleAreaDialog {
 			return composite;
 		}
 		/*
-		Composite cmpstMenu = new Composite(composite, SWT.NONE);
-		cmpstMenu.setLayout(new FillLayout(SWT.HORIZONTAL));
-		cmpstMenu.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
-		
-		Button btnUp = new Button(cmpstMenu, SWT.NONE);
-		btnUp.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				System.out.println("UP:");
-				System.out.println(orderItemText);
-				
-				if(orderItemText != null) {
-					newPosition = -10;
-					order();
-				}
-			}
-		});
-		btnUp.setText("Up");
-		
-		Button btnDown = new Button(cmpstMenu, SWT.NONE);
-		btnDown.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				System.out.println("DOWN:");
-				System.out.println(orderItemText);
-				
-				if(orderItemText != null) {
-					newPosition = -20;
-					order();
-				}
-			}
-		});
-		btnDown.setText("Down");
-		
-		Button btnSort = new Button(cmpstMenu, SWT.NONE);
-		btnSort.setText("Sort");
-		
-		Button btnRandom = new Button(cmpstMenu, SWT.NONE);
-		btnRandom.setText("Random");
-		*/
-
-		
-		// Create the Tree
-		tree = new Tree(composite, SWT.BORDER);
-		tree.setLayoutData(new GridData(GridData.FILL_BOTH));
-	    tree.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event event) {
-				clckdTreeItem = ((TreeItem)event.item);
-				orderItemText = clckdTreeItem.getText();
-//				System.out.println("clicked: " + orderItemText);
-			}
-		});
-	    
-		// Create the TreeItems
-		for (Object orderobj : myOrder) {
-			TreeItem item = new TreeItem(tree, SWT.NONE);
-			item.setText(orderobj.toString());
-		}
+		 * Composite cmpstMenu = new Composite(composite, SWT.NONE);
+		 * cmpstMenu.setLayout(new FillLayout(SWT.HORIZONTAL));
+		 * cmpstMenu.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false,
+		 * false, 1, 1));
+		 * 
+		 * Button btnUp = new Button(cmpstMenu, SWT.NONE);
+		 * btnUp.addSelectionListener(new SelectionAdapter() { public void
+		 * widgetSelected(SelectionEvent e) { System.out.println("UP:");
+		 * System.out.println(orderItemText);
+		 * 
+		 * if(orderItemText != null) { newPosition = -10; order(); } } });
+		 * btnUp.setText("Up");
+		 * 
+		 * Button btnDown = new Button(cmpstMenu, SWT.NONE);
+		 * btnDown.addSelectionListener(new SelectionAdapter() { public void
+		 * widgetSelected(SelectionEvent e) { System.out.println("DOWN:");
+		 * System.out.println(orderItemText);
+		 * 
+		 * if(orderItemText != null) { newPosition = -20; order(); } } });
+		 * btnDown.setText("Down");
+		 * 
+		 * Button btnSort = new Button(cmpstMenu, SWT.NONE);
+		 * btnSort.setText("Sort");
+		 * 
+		 * Button btnRandom = new Button(cmpstMenu, SWT.NONE);
+		 * btnRandom.setText("Random");
+		 */
 
 		Transfer[] types = new Transfer[] { TextTransfer.getInstance() };
 		int operations = DND.DROP_MOVE | DND.DROP_COPY | DND.DROP_LINK;
-
-		final DragSource source = new DragSource(tree, operations);
-		source.setTransfer(types);
 		final TreeItem[] dragSourceItem = new TreeItem[1];
 		/*
 		 * DRAG START
 		 */
+
+		// Create the Tree
+		tree = new Tree(composite, SWT.BORDER);
+		tree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
+		tree.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event event) {
+				clckdTreeItem = ((TreeItem) event.item);
+				orderItemText = clckdTreeItem.getText();
+				// System.out.println("clicked: " + orderItemText);
+			}
+		});
+
+		final DragSource source = new DragSource(tree, operations);
+		source.setTransfer(types);
 		source.addDragListener(new DragSourceListener() {
 			public void dragStart(DragSourceEvent event) {
 				TreeItem[] selection = tree.getSelection();
@@ -390,18 +374,45 @@ public class OrderDialog extends TitleAreaDialog {
 				}
 			}
 		});
+
+		Button btnDoNotAsk = new Button(composite, SWT.CHECK);
+		btnDoNotAsk
+				.setToolTipText("Hit this box and for this run Alvis will not bug you anymore with this window.");
+		btnDoNotAsk.setLayoutData(new GridData(SWT.RIGHT, SWT.BOTTOM, false,
+				false, 1, 1));
+		btnDoNotAsk.setSelection(!myAsk.getAsk());
+		btnDoNotAsk.addListener(SWT.Selection, new Listener() {
+
+			public void handleEvent(Event event) {
+				// TODO
+				myAsk.setAsk(!myAsk.getAsk());
+			}
+
+		});
+		btnDoNotAsk.setText("Do not ask me again.");
+
+		// Create the TreeItems
+		for (Object orderobj : myOrder) {
+			TreeItem item = new TreeItem(tree, SWT.NONE);
+			item.setText(orderobj.toString());
+		}
+
+		// Composite composite_1 = new Composite(composite, SWT.NONE);
+		// composite_1.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false,
+		// false, 1, 1));
+		// composite_1.setLayout(new GridLayout(1, false));
 		return composite;
 	}
 
 	@Override
 	protected Point getInitialSize() {
 		int height = 250;
-		if(myOrder != null) {
-			for(Object o : myOrder) {
+		if (myOrder != null) {
+			for (Object o : myOrder) {
 				height += 18;
 			}
 		}
-		
+
 		return new Point(400, Math.min(600, height));
 	}
 

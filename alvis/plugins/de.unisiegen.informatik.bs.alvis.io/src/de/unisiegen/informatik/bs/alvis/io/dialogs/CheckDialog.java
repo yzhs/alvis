@@ -1,6 +1,7 @@
 package de.unisiegen.informatik.bs.alvis.io.dialogs;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
@@ -44,13 +45,13 @@ public class CheckDialog extends TitleAreaDialog {
 
 	}
 
-	private ArrayList mySource;
-	private ArrayList myDrain;
+	private List mySource;
+	private List myDrain;
 	private int myLimit;
 	private String myWindowTitle;
 	private String myTitle;
 	private String myMessage;
-
+	private AskMeAgain myAsk;
 
 	/**
 	 * Shows an CheckDialog that offers the user to choose as much Objects as
@@ -59,16 +60,18 @@ public class CheckDialog extends TitleAreaDialog {
 	 * FirstInLastOut.
 	 * 
 	 * @param parentShell
-	 * @param source 
+	 * @param source
 	 * @param drain
-	 * @param limit - how much items can be chosen, -1 is unlimited.
+	 * @param limit
+	 *            - how much items can be chosen, -1 is unlimited.
 	 * @param windowTitle
 	 * @param messageTitle
 	 * @param message
+	 * @wbp.parser.constructor
 	 */
-	public CheckDialog(Shell parentShell, ArrayList source,
-			ArrayList drain, int limit, String windowTitle,
-			String messageTitle, String message) {
+	public CheckDialog(Shell parentShell, List source, List drain,
+			AskMeAgain ask, int limit, String windowTitle, String messageTitle,
+			String message) {
 		super(parentShell);
 		mySource = source;
 		myDrain = drain;
@@ -76,10 +79,12 @@ public class CheckDialog extends TitleAreaDialog {
 		myWindowTitle = windowTitle;
 		myTitle = messageTitle;
 		myMessage = message;
+		myAsk = ask;
 	}
 
 	private Tree tree;
 	private ArrayList<TreeItem> treeItems;
+
 	protected Control createDialogArea(Composite parent) {
 		setReturnCode(SWT.OK);
 		final Composite composite = (Composite) super.createDialogArea(parent);
@@ -89,11 +94,12 @@ public class CheckDialog extends TitleAreaDialog {
 			// TODO thorw nullpointer exception
 			return composite;
 		}
+		composite.setLayout(new GridLayout(1, false));
 
 		// Create the Tree
 		tree = new Tree(composite, SWT.CHECK | SWT.BORDER | SWT.V_SCROLL
 				| SWT.H_SCROLL);
-		tree.setLayoutData(new GridData(GridData.FILL_BOTH));
+		tree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		tree.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event event) {
 				TreeItem item = (TreeItem) event.item;
@@ -101,7 +107,7 @@ public class CheckDialog extends TitleAreaDialog {
 					item.setChecked(!item.getChecked());
 
 				// check if there is a limit
-				if(myLimit == -1) {
+				if (myLimit == -1) {
 					if (item.getChecked()) {
 						if (myDrain.contains(item.getData()))
 							myDrain.remove(item.getData());
@@ -109,8 +115,7 @@ public class CheckDialog extends TitleAreaDialog {
 					} else {
 						myDrain.remove(item.getData());
 					}
-				}
-				else { // there is a limit
+				} else { // there is a limit
 					if (item.getChecked()) {
 						if (myDrain.contains(item.getData()))
 							myDrain.remove(item.getData());
@@ -118,19 +123,35 @@ public class CheckDialog extends TitleAreaDialog {
 					} else {
 						myDrain.remove(item.getData());
 					}
-					try { // to deleted the last allowed item from drain and uncheck it.
-						for(TreeItem treeItem : treeItems) {
-							if(myDrain.get(myLimit).equals(treeItem.getData()))
+					try { // to deleted the last allowed item from drain and
+							// uncheck it.
+						for (TreeItem treeItem : treeItems) {
+							if (myDrain.get(myLimit).equals(treeItem.getData()))
 								treeItem.setChecked(false);
 						}
 						myDrain.remove(myLimit);
-					}
-					catch(IndexOutOfBoundsException e) {
+					} catch (IndexOutOfBoundsException e) {
 						// Do nothing because there is still space in myDrain
 					}
 				}
 			}
 		});
+
+		Button btnDoNotAsk = new Button(composite, SWT.CHECK);
+		btnDoNotAsk
+				.setToolTipText("Hit this box and for this run Alvis will not bug you anymore with this window.");
+		btnDoNotAsk.setLayoutData(new GridData(SWT.RIGHT, SWT.BOTTOM, false,
+				false, 1, 1));
+		btnDoNotAsk.setSelection(!myAsk.getAsk());
+		btnDoNotAsk.addListener(SWT.Selection, new Listener() {
+
+			public void handleEvent(Event event) {
+				// TODO
+				myAsk.setAsk(!myAsk.getAsk());
+			}
+
+		});
+		btnDoNotAsk.setText("Do not ask me again.");
 
 		treeItems = new ArrayList<TreeItem>();
 		// Create the TreeItems
