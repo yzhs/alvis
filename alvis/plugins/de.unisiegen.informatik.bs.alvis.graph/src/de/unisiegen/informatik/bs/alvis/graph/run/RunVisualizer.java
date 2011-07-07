@@ -22,6 +22,7 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
+import de.unisiegen.informatik.bs.alvis.editors.EStartPoint;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IRunVisualizer;
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.GraphicalRepresentationEdge;
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.GraphicalRepresentationVertex;
@@ -36,6 +37,7 @@ import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSeri
 import de.unisiegen.informatik.bs.alvis.io.dialogs.*;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCList;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.SortableCollection;
 
 /**
  * @author simon
@@ -148,44 +150,70 @@ public class RunVisualizer implements IRunVisualizer {
 		ArrayList<PCObject> result = new ArrayList<PCObject>();
 
 		// Temporär
-		if (typ == null && bezeichner.equals("G")) {
-			typ = new PCGraph();
-		}
-		if (typ == null && bezeichner.equals("V")) {
-			typ = new PCVertex();
-		}
+//		 if (typ == null && bezeichner.equals("G")) {
+//		 typ = new PCGraph();
+//		 }
+//		 if (typ == null && bezeichner.equals("V")) {
+//		 typ = new PCVertex();
+//		 }
 		//
 
 		if (typ instanceof PCGraph) {
 			result.add(codeGraph);
+			return result;
 		}
 		if (typ instanceof PCVertex) {
 			ArrayList<PCVertex> allPCVertex = new ArrayList<PCVertex>();
 			for (GraphicalRepresentationVertex node : myGraph.getVertex()) {
 				allPCVertex.add(codeGraph.getVertexFromGraphic(node));
 			}
-			CheckDialog getVertex = new CheckDialog(myParent.getShell(),
-					allPCVertex, // From
-					result, // To
-					1, // How much
-					"Choose \"" + bezeichner + "\"", // window title
-					"Choose parameter", // Title
-					"Choose one parameter for \"" + bezeichner + "\""); //
-			getVertex.open();
+			if (result.size() == 1
+					|| Activator.getDefault().getActiveRun().getOnStartPoint()
+							.equals(EStartPoint.RAND)) {
+				// Just return the first
+				result.add(allPCVertex.get(0));
+			} else {
+				// TODO SORT LIST HERE
+				AskMeAgain ask = new AskMeAgain(true);
+				CheckDialog getVertex = new CheckDialog(myParent.getShell(),
+						allPCVertex, // From
+						result, // To
+						ask, 1, // How much
+						"Choose \"" + bezeichner + "\"", // window title
+						"Choose parameter", // Title
+						"Choose one parameter for \"" + bezeichner + "\""); //
+				getVertex.open();
+				if (ask.getAsk() == false) {
+					Activator.getDefault().getActiveRun()
+							.setOnStartPoint(EStartPoint.RAND);
+				}
+			}
 		}
 		if (typ instanceof PCEdge) {
 			ArrayList<PCEdge> allPCEdge = new ArrayList<PCEdge>();
 			for (GraphicalRepresentationEdge edge : myGraph.getEdges()) {
 				allPCEdge.add(codeGraph.getEdgeFromGraphic(edge));
 			}
-			CheckDialog getEdge = new CheckDialog(myParent.getShell(),
-					allPCEdge, // From
-					result, // To
-					1, // How much
-					"Choose \"" + bezeichner + "\"", // window title
-					"Choose parameter", // Title
-					"Choose one parameter for \"" + bezeichner + "\""); //
-			getEdge.open();
+			if (result.size() == 1
+					|| Activator.getDefault().getActiveRun().getOnStartPoint()
+							.equals(EStartPoint.RAND)) {
+				// Just return the first
+				result.add(allPCEdge.get(0));
+			} else {
+				AskMeAgain ask = new AskMeAgain(true);
+				CheckDialog getEdge = new CheckDialog(myParent.getShell(),
+						allPCEdge, // From
+						result, // To
+						ask, 1, // How much
+						"Choose \"" + bezeichner + "\"", // window title
+						"Choose parameter", // Title
+						"Choose one parameter for \"" + bezeichner + "\""); //
+				getEdge.open();
+				if (ask.getAsk() == false) {
+					Activator.getDefault().getActiveRun()
+							.setOnStartPoint(EStartPoint.RAND);
+				}
+			}
 		}
 		return result;
 	}
@@ -204,15 +232,15 @@ public class RunVisualizer implements IRunVisualizer {
 		gc.dispose();
 		myGraph.redraw();
 
-		System.out.println("LALA");//TODO weg
-		
+		System.out.println("LALA");// TODO weg
+
 		return screenshot;
 
 	}
 
 	@Override
 	public StyledText getSourceCode() {
-		//no source code from here
+		// no source code from here
 		return null;
 	}
 
