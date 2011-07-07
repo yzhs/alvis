@@ -15,6 +15,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import de.unisiegen.informatik.bs.alvis.editors.AlgorithmPartitionScanner;
+import de.unisiegen.informatik.bs.alvis.editors.EDecisionPoint;
 import de.unisiegen.informatik.bs.alvis.exceptions.VirtualMachineException;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IDatatypeList;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
@@ -193,6 +194,9 @@ public class Activator extends AbstractUIPlugin {
 		vm.addDPListener(new DPListener() {
 			@Override
 			public void onDecisionPoint(int DPNr, PCObject from, SortableCollection toSort) {
+				// Check if the user wants to order the decisions
+				if(activeRun.getOnDecisionPoint().equals(EDecisionPoint.RAND))
+						return;
 				toSort.sort();
 				Activator.getDefault().DPNr = DPNr;
 				Activator.getDefault().toSort = toSort;
@@ -208,15 +212,22 @@ public class Activator extends AbstractUIPlugin {
 						String name = Activator.getDefault().from.toString();
 						if(name == null)
 							name = "Anfang des Algorithmus";
-
 						// TODO: Internationalisierung für übergebene Strings einbauen
 						if (Display.getDefault() != null) {
+							AskMeAgain ask = new AskMeAgain(true);
+							// OrderDialog can change the order of toSort
+							// or changes the attribute of ask.
 							OrderDialog toOrder = new OrderDialog(
 									shellContainer,
 									Activator.getDefault().toSort,
+									ask,
 									"Legen Sie eine Reihenfolge fest", "Sie sind bei: " + name,
 									"Bewegen Sie die Daten per Drag&Drop\n");
 							toOrder.open();
+							if(ask.getAsk() == false) {
+								// the user hit the box ,,Do not askme again''
+								getActiveRun().setOnDecisionPoint(EDecisionPoint.RAND);
+							}
 						}
 					}
 				};

@@ -87,8 +87,8 @@ public class RunAlgorithm extends ViewPart implements PropertyChangeListener {
 				rowLayout.type = SWT.VERTICAL;
 				parent.setLayout(new GridLayout(1, false));
 
-				text = new StyledText(parent, SWT.MULTI | SWT.BORDER | SWT.WRAP
-						| SWT.V_SCROLL);
+				text = new StyledText(parent, SWT.MULTI | SWT.BORDER
+						| SWT.V_SCROLL | SWT.H_SCROLL);
 				StyledText editorText = xtextEditor.getInternalSourceViewer()
 						.getTextWidget();
 
