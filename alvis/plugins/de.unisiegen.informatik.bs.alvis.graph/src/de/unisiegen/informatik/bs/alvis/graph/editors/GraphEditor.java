@@ -29,6 +29,7 @@ import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.events.MouseWheelListener;
 import org.eclipse.swt.events.PaintEvent;
 import org.eclipse.swt.events.PaintListener;
@@ -524,6 +525,26 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 			}
 		});
 
+		myGraph.addMouseMoveListener(new MouseMoveListener() {
+
+			@Override
+			public void mouseMove(MouseEvent e) {
+				if (remMousePos == null)
+					return;
+
+				if (remMousePos.x != e.x && remMousePos.y != e.y) {
+					if (amountToBeMoved > 0) {
+						amountToBeMoved = 0;
+						remMousePos = null;
+						checkDirty();
+					} else {
+						drawFrame(e);
+					}
+				}
+
+			}
+		});
+
 		myGraph.addMouseListener(new MouseListener() {
 
 			@Override
@@ -572,6 +593,12 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 			@Override
 			public void mouseDown(MouseEvent e) {
+				if (e.button != 1) {
+					pressed = MODUS_MOVE;
+					setModus(pressed);
+					return;
+				}
+
 				if (pressed == MODUS_STANDARD
 						&& !myGraph.getSelection().isEmpty()) {
 					pressed = MODUS_MOVE;
@@ -609,9 +636,13 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 	/**
 	 * marks nodes within rectangle(remMousePos;e)
-	 * @param e the mouse event to get the mouse location from
+	 * 
+	 * @param e
+	 *            the mouse event to get the mouse location from
 	 */
 	protected void markNodesInFrame(MouseEvent e) {
+		if (remMousePos == null)
+			return;
 		Set<AlvisGraphNode> gns = myGraph.getAllNodes();
 		GraphItem[] gnsa = new GraphItem[gns.size()];
 		int i = 0;
@@ -623,8 +654,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 			for (AlvisGraphNode gn : gns) {
 				if ((gn.getLocation().x + gn.getSize().width) > xMin
 						&& gn.getLocation().x < xMax
-						&& (gn.getLocation().y + gn
-								.getSize().height) > yMin
+						&& (gn.getLocation().y + gn.getSize().height) > yMin
 						&& gn.getLocation().y < yMax)
 					gnsa[i] = (GraphItem) gn;
 				i++;
@@ -633,6 +663,28 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		} catch (ClassCastException cce) {
 		}
 		remMousePos = null;
+	}
+
+	/**
+	 * draws frame around nodes to be marked
+	 * 
+	 * @param e
+	 *            the mouse event to get the mouse location from
+	 */
+	protected void drawFrame(MouseEvent e) {
+		if (remMousePos == null)
+			return;
+		
+		int i = 0;
+		int x = Math.min(e.x, remMousePos.x);
+		int y = Math.min(e.y, remMousePos.y);
+		int width = Math.abs(e.x - remMousePos.x);
+		int height = Math.abs(e.y - remMousePos.y);
+		
+		myGraph.redraw();
+		GC gc = new GC(myGraph);
+		gc.drawRectangle(x, y, width, height);
+//		myGraph.getGraphModel().drawBackground(gc, x, y, width, height);
 	}
 
 	/**
