@@ -64,8 +64,12 @@ public class PCString extends PCObject {
 
 	@Override
 	public boolean equals(PCObject toCheckAgainst) {
+		if (null == toCheckAgainst)
+			return false;
+
 		try {
-			return ((PCString) toCheckAgainst).value.equals(value);
+			PCString s = (PCString) toCheckAgainst;
+			return (value == null) ? s.value == null : s.value.equals(value);
 		} catch (ClassCastException e) {
 			return false;
 		}
