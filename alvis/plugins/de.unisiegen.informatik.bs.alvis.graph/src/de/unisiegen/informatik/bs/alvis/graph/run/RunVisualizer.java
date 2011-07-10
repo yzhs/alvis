@@ -150,12 +150,12 @@ public class RunVisualizer implements IRunVisualizer {
 		ArrayList<PCObject> result = new ArrayList<PCObject>();
 
 		// Temporär
-//		 if (typ == null && bezeichner.equals("G")) {
-//		 typ = new PCGraph();
-//		 }
-//		 if (typ == null && bezeichner.equals("V")) {
-//		 typ = new PCVertex();
-//		 }
+		// if (typ == null && bezeichner.equals("G")) {
+		// typ = new PCGraph();
+		// }
+		// if (typ == null && bezeichner.equals("V")) {
+		// typ = new PCVertex();
+		// }
 		//
 
 		if (typ instanceof PCGraph) {

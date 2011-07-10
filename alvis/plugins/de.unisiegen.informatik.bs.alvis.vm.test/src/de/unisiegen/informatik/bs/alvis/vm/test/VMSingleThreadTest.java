@@ -150,7 +150,8 @@ public class VMSingleThreadTest {
 			public void onBreakPoint(int BreakPointNumber) {
 			}
 		});
-		vm.setParameter("algo", new ArrayList<PCObject>());
+		// TODO Fix, signature to map <string, pcobject>
+//		vm.setParameter("algo", new ArrayList<PCObject>());
 		vm.startAlgos();
 		boolean toRun = true;
 		while (toRun) {
@@ -198,7 +199,9 @@ public class VMSingleThreadTest {
 			public void onBreakPoint(int BreakPointNumber) {
 			}
 		});
-		vm.setParameter("algo", new ArrayList<PCObject>());
+
+		// TODO Fix, signature to map <string, pcobject>
+//		vm.setParameter("algo", new ArrayList<PCObject>());
 		vm.startAlgos();
 		boolean toRun = true;
 		while (toRun) {
@@ -246,7 +249,8 @@ public class VMSingleThreadTest {
 			public void onBreakPoint(int BreakPointNumber) {
 			}
 		});
-		vm.setParameter("algo", new ArrayList<PCObject>());
+		// TODO Fix, signature to map <string, pcobject>
+//		vm.setParameter("algo", new ArrayList<PCObject>());
 		vm.startAlgos();
 		boolean toRun = true;
 		while (toRun) {
@@ -308,7 +312,8 @@ public class VMSingleThreadTest {
 			public void onBreakPoint(int BreakPointNumber) {
 			}
 		});
-		vm.setParameter("algo", new ArrayList<PCObject>());
+		// TODO Fix, signature to map <string, pcobject>
+//		vm.setParameter("algo", new ArrayList<PCObject>());
 		vm.startAlgos();
 		boolean toRun = true;
 		while (toRun) {
@@ -366,7 +371,8 @@ public class VMSingleThreadTest {
 			public void onBreakPoint(int BreakPointNumber) {
 			}
 		});
-		vm.setParameter("algo", new ArrayList<PCObject>());
+		// TODO Fix, signature to map <string, pcobject>
+//		vm.setParameter("algo", new ArrayList<PCObject>());
 		vm.startAlgos();
 		while (true) {
 			synchronized (lock) {
@@ -448,7 +454,8 @@ public class VMSingleThreadTest {
 			public void onBreakPoint(int BreakPointNumber) {
 			}
 		});
-		vm.setParameter("algo", new ArrayList<PCObject>());
+		// TODO Fix, signature to map <string, pcobject>
+//		vm.setParameter("algo", new ArrayList<PCObject>());
 		vm.startAlgos();
 		boolean toRun = true;
 		while (toRun) {
@@ -539,7 +546,8 @@ public class VMSingleThreadTest {
 			public void onBreakPoint(int BreakPointNumber) {
 			}
 		});
-		vm.setParameter("algo", new ArrayList<PCObject>());
+		// TODO Fix, signature to map <string, pcobject>
+//		vm.setParameter("algo", new ArrayList<PCObject>());
 		vm.startAlgos();
 		boolean toRun = true;
 		while (toRun) {

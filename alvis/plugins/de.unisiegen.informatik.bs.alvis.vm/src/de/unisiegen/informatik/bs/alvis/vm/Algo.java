@@ -29,7 +29,7 @@ public class Algo implements AbstractAlgo {
 	 * dynamic code
 	 */
 	@Override
-	public Map<PCObject, String> getParameterTypes() {
+	public Map<String, PCObject> getParameterTypes() {
 		return null;
 	}
 
@@ -37,7 +37,7 @@ public class Algo implements AbstractAlgo {
 	 * dynamic code
 	 */
 	@Override
-	public void setParameters(List<PCObject> paras) {
+	public void setParameters(Map<String, PCObject> paras) {
 	}
 
 	/**

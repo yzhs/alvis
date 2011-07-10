@@ -1,6 +1,7 @@
 package de.unisiegen.informatik.bs.alvis;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -146,16 +147,16 @@ public class Activator extends AbstractUIPlugin {
 		return fPartitionsScanner;
 	}
 
-	private ArrayList<PCObject> pseudoCodeList = new ArrayList<PCObject>();
+	private HashMap<String, PCObject> paraMap = new HashMap<String, PCObject>();
 
 	Shell shellContainer;
 
-	public void setPseudoCodeList(ArrayList<PCObject> pseudoCodeList) {
-		this.pseudoCodeList = pseudoCodeList;
+	public void setPseudoCodeList(HashMap<String, PCObject> para) {
+		this.paraMap = para;
 	}
 
-	public ArrayList<PCObject> getPseudoCodeList() {
-		return pseudoCodeList;
+	public HashMap<String, PCObject> getPseudoCodeList() {
+		return paraMap;
 	}
 
 	private VirtualMachine vm = VirtualMachine.getInstance();
@@ -169,7 +170,7 @@ public class Activator extends AbstractUIPlugin {
 
 		vm.removeAllBPListener();
 		vm.stopAlgos();
-		vm.setParameter("algo", pseudoCodeList); //$NON-NLS-1$
+		vm.setParameter("algo", paraMap); //$NON-NLS-1$
 		// if(this.runGraph.getStartNode() != null)
 		// vm.addParameter(gr.getVertexFromGraphic(
 		// this.runGraph.getStartNode()));

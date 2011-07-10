@@ -24,14 +24,13 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
 
 /**
- * @author simon 
- * We search for extensions for the extension point. We list all
- * Objects that contribute this ext.point. We give our example and our
- * parent to the extensions. If the extension feels responsible for the
- * input then its addVisualizing method visualizes the input. If not the
- * extension returns false and gets kicked out of the list.
+ * @author simon We search for extensions for the extension point. We list all
+ *         Objects that contribute this ext.point. We give our example and our
+ *         parent to the extensions. If the extension feels responsible for the
+ *         input then its addVisualizing method visualizes the input. If not the
+ *         extension returns false and gets kicked out of the list.
  */
-public class RunGraph extends ViewPart implements IExportItem{
+public class RunGraph extends ViewPart implements IExportItem {
 
 	ArrayList<IRunVisualizer> myRunVisualizers = new ArrayList<IRunVisualizer>();
 
@@ -71,25 +70,32 @@ public class RunGraph extends ViewPart implements IExportItem{
 	}
 
 	public void setParameters() {
-		Map<PCObject, String> parameters = VirtualMachine.getInstance().getParametersTypesAlgo("algo"); // TODO
-		ArrayList<PCObject> pcObjects = new ArrayList<PCObject>();
-		
-		for(PCObject para : parameters.keySet()) {
+		Map<String, PCObject> parameters = VirtualMachine.getInstance()
+				.getParametersTypesAlgo("algo");
+		Map<String, PCObject> toPass = Activator.getDefault()
+				.getPseudoCodeList();
+		toPass.clear();
+
+		for (String paraS : parameters.keySet()) {
 			for (IRunVisualizer runviz : myRunVisualizers) {
-				pcObjects.addAll(runviz.chooseVariable(para, parameters.get(para)));
-//				
-//				// Nur derzeit
-//																	// so sollte von
-//																	// der VM kommen
-//																	// was benötigt
-//																	// wird
-//				pcObjects.addAll(runviz.chooseVariable(null, "V")); // Currently
-//				Activator.getDefault().getPseudoCodeList().clear();
-//				Activator.getDefault().getPseudoCodeList().addAll(pcObjects);
+				// TODO should be not an complete arraylist
+				ArrayList<PCObject> tmp = runviz.chooseVariable(
+						parameters.get(paraS), paraS);
+				if (tmp.size() > 0) {
+					toPass.put(paraS, tmp.get(0));
+				}
+				//
+				// // Nur derzeit
+				// // so sollte von
+				// // der VM kommen
+				// // was benötigt
+				// // wird
+				// pcObjects.addAll(runviz.chooseVariable(null, "V")); //
+				// Currently
+				// Activator.getDefault().getPseudoCodeList().clear();
+				// Activator.getDefault().getPseudoCodeList().addAll(pcObjects);
 			}
 		}
-		Activator.getDefault().getPseudoCodeList().clear();
-		Activator.getDefault().getPseudoCodeList().addAll(pcObjects);
 	}
 
 	/**

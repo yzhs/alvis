@@ -166,5 +166,7 @@ public class PCGraph extends PCObject {
 			v.batchModification(setBatchModification);
 		}
 	}
-	
+	public static PCGraph getNull() {
+		return new PCGraph();
+	}
 }

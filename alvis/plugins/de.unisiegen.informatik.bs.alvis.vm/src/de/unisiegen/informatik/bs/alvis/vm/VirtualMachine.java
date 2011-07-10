@@ -98,7 +98,7 @@ public class VirtualMachine {
 	 * @param key
 	 * @return PCObject ArrayList to determine the types, for editor and view
 	 */
-	public Map<PCObject, String> getParametersTypesAlgo(String key) {
+	public Map<String, PCObject> getParametersTypesAlgo(String key) {
 		return algos.get(key).getParameterTypes();
 	}
 
@@ -190,7 +190,7 @@ public class VirtualMachine {
 	 * @param key
 	 * @param para
 	 */
-	public void setParameter(String key, ArrayList<PCObject> para) {
+	public void setParameter(String key, Map<String, PCObject> para) {
 		if(algos.get(key) == null )
 			System.out.println("Algo ist null!"); // TODO weg damit
 		if(para == null)

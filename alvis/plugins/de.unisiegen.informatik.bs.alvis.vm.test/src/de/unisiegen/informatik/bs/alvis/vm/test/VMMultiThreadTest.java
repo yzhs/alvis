@@ -104,10 +104,10 @@ public class VMMultiThreadTest {
 		});
 
 		
-		
-		vm.setParameter("first", tmpl);
-		vm.setParameter("second", tmpl);
-		vm.startAlgos();
+		// TODO change signature to map string, pcobject
+//		vm.setParameter("first", tmpl);
+//		vm.setParameter("second", tmpl);
+//		vm.startAlgos();
 		
 		vm.waitForBreakPoint();
 		

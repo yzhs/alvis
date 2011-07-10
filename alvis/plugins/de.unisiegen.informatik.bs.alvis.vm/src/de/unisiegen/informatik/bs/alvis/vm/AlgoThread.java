@@ -33,7 +33,7 @@ public class AlgoThread {
 	// a arraylist of pcobjects
 	// to be passed as start parameters, these can to enable shared access also
 	// be references to the PCObjects of an other Algo
-	private ArrayList<PCObject> parameters;
+	private Map<String, PCObject> parameters;
 
 	// Current Thread Object of the Algo
 	private Thread algoThread;
@@ -53,14 +53,12 @@ public class AlgoThread {
 
 	// helper to decide if we are currently on break, or moving backwards
 	private boolean onBreak;
-	
+
 	// reference to dplistener
 	private DPListener dpListen;
 	private HashMap<Integer, Queue<SortableCollection>> dPoints;
 	// walinkg back
 	private HashMap<Integer, Queue<SortableCollection>> dPointsTemp;
-	
-	
 
 	/**
 	 * Creates new AlgoThread, will directly load the fileName, create the Class
@@ -69,9 +67,10 @@ public class AlgoThread {
 	 * @param pathName
 	 * @param fileName
 	 * @param toLockOn
-	 * @param packagesToAddToClasspath 
+	 * @param packagesToAddToClasspath
 	 */
-	public AlgoThread(String pathName, String fileName, Lock toLockOn, ArrayList<Object> datatypesToAddToClasspath)
+	public AlgoThread(String pathName, String fileName, Lock toLockOn,
+			ArrayList<Object> datatypesToAddToClasspath)
 			throws ClassNotFoundException {
 		bpListeners = new ArrayList<BPListener>();
 		lineCounter = new HashMap<Integer, Integer>();
@@ -89,7 +88,7 @@ public class AlgoThread {
 	 * 
 	 * @param paras
 	 */
-	public void setParameters(ArrayList<PCObject> paras) {
+	public void setParameters(Map<String, PCObject> paras) {
 		algoInst.setParameters(paras);
 		parameters = paras;
 	}
@@ -115,7 +114,7 @@ public class AlgoThread {
 		}
 		bpListeners.add(wantsToListen);
 	}
-	
+
 	// TODO javadoc + clean
 	public void addDPListener(DPListener toListen) {
 		dpListen = toListen;
@@ -147,11 +146,12 @@ public class AlgoThread {
 	}
 
 	/**
-	 * Passes over the needed Parameter Types for the specific Algo
-	 * TODO update javadoc
+	 * Passes over the needed Parameter Types for the specific Algo TODO update
+	 * javadoc
+	 * 
 	 * @return ArrayList with PCObject ArrayList, should be never a nullpointer
 	 */
-	public Map<PCObject,String> getParameterTypes() {
+	public Map<String, PCObject> getParameterTypes() {
 		return algoInst.getParameterTypes();
 	}
 
@@ -184,7 +184,8 @@ public class AlgoThread {
 	 * @param fileName
 	 *            without .java postfix
 	 */
-	private void loadAlgo(String pathToFile, String fileName, ArrayList<Object> datatypesToAddToClasspath)
+	private void loadAlgo(String pathToFile, String fileName,
+			ArrayList<Object> datatypesToAddToClasspath)
 			throws ClassNotFoundException {
 		DynaCode dynacode = new DynaCode(datatypesToAddToClasspath);
 
@@ -224,13 +225,13 @@ public class AlgoThread {
 		});
 		algoInst.addDPListener(new DPListener() {
 			@Override
-			public void onDecisionPoint(int DPNr, PCObject from, SortableCollection toSort) {
+			public void onDecisionPoint(int DPNr, PCObject from,
+					SortableCollection toSort) {
 				Integer key = new Integer(DPNr);
 				dpListen.onDecisionPoint(DPNr, from, toSort);
 				if (dPoints.containsKey(key)) {
 					dPoints.get(key).add(toSort);
-				}
-				else {
+				} else {
 					dPoints.put(key, new LinkedList<SortableCollection>());
 					dPoints.get(key).add(toSort);
 				}
@@ -301,7 +302,8 @@ public class AlgoThread {
 	@SuppressWarnings("unchecked")
 	public void stepBackward() {
 		// saving temp list for walking back
-		dPointsTemp = (HashMap<Integer, Queue<SortableCollection>>) dPoints.clone();
+		dPointsTemp = (HashMap<Integer, Queue<SortableCollection>>) dPoints
+				.clone();
 		HashMap<Integer, Integer> tmp = new HashMap<Integer, Integer>();
 		tmp.put(new Integer(0), new Integer(1));
 		// we are already on the first step, there is no way we can step more
@@ -312,24 +314,26 @@ public class AlgoThread {
 		this.createThread();
 
 		// active batch mode
-		for (PCObject obj : parameters) {
+		for (PCObject obj : parameters.values()) {
 			obj.batchModification(true);
 		}
-		
+
 		algoInst.setParameters(parameters);
 		lastCounter = (HashMap<Integer, Integer>) lineCounter.clone();
 		reduce(lastCounter);
 		lineCounter.clear();
 		onBreak = false;
-		// TODO won't forget any decisions made, fix me to support removing from one
+		// TODO won't forget any decisions made, fix me to support removing from
+		// one
 		algoInst.addDPListener(new DPListener() {
 			@Override
-			public void onDecisionPoint(int DPNr, PCObject from, SortableCollection toSort) {
+			public void onDecisionPoint(int DPNr, PCObject from,
+					SortableCollection toSort) {
 				Integer key = new Integer(DPNr);
 				toSort = dPointsTemp.get(key).poll();
 			}
 		});
-		
+
 		algoInst.addBPListener(new BPListener() {
 			@Override
 			public void onBreakPoint(int BPNr) {
@@ -347,8 +351,9 @@ public class AlgoThread {
 
 				// reached the previous state, great, so we are done
 				if (diff(lineCounter, lastCounter) == 0) {
-					// we are one state before the finishline, lets stop batch mode
-					for (PCObject obj : parameters) {
+					// we are one state before the finishline, lets stop batch
+					// mode
+					for (PCObject obj : parameters.values()) {
 						obj.batchModification(false);
 					}
 					// inform all registerd breakpoint listeners
@@ -380,19 +385,20 @@ public class AlgoThread {
 					});
 					algoInst.addDPListener(new DPListener() {
 						@Override
-						public void onDecisionPoint(int DPNr, PCObject from, SortableCollection toSort) {
+						public void onDecisionPoint(int DPNr, PCObject from,
+								SortableCollection toSort) {
 							Integer key = new Integer(DPNr);
 							dpListen.onDecisionPoint(DPNr, from, toSort);
 							if (dPoints.containsKey(key)) {
 								dPoints.get(key).add(toSort);
-							}
-							else {
-								dPoints.put(key, new LinkedList<SortableCollection>());
+							} else {
+								dPoints.put(key,
+										new LinkedList<SortableCollection>());
 								dPoints.get(key).add(toSort);
 							}
 						}
 					});
-					
+
 				} else {
 					synchronized (algoThread) {
 						algoInst.stopBreak();

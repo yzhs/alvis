@@ -22,7 +22,7 @@ public interface AbstractAlgo extends Runnable {
 	 * @return Null Objects for all Datatypes the algo expects for the
 	 *         setParameters Call
 	 */
-	public Map<PCObject, String> getParameterTypes();
+	public Map<String, PCObject> getParameterTypes();
 
 	/**
 	 * 
@@ -30,7 +30,7 @@ public interface AbstractAlgo extends Runnable {
 	 *            are the Startparameters of the algo, have to passed like
 	 *            specified in getParameterTypes
 	 */
-	public void setParameters(List<PCObject> paras);
+	public void setParameters(Map<String, PCObject> paras);
 
 	/**
 	 * 
