@@ -19,7 +19,7 @@ param   : type name=ID;
  
 block  : {block}('begin'|'{') statements+=statement* ('end'|'}');
 
-type: types=('String'|'Integer'|'Boolean'|'Graph'|'Vertex'|'Edge'|'Queue');
+type: types=('String'|'Integer'|'Boolean'|'Graph'|'Vertex'|'Edge'|'Queue'|'Stack');
 
 
 statement :

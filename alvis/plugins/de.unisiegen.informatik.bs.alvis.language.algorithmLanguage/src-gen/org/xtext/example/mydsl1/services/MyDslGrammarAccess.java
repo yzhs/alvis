@@ -272,15 +272,16 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cTypesVertexKeyword_0_4 = (Keyword)cTypesAlternatives_0.eContents().get(4);
 		private final Keyword cTypesEdgeKeyword_0_5 = (Keyword)cTypesAlternatives_0.eContents().get(5);
 		private final Keyword cTypesQueueKeyword_0_6 = (Keyword)cTypesAlternatives_0.eContents().get(6);
+		private final Keyword cTypesStackKeyword_0_7 = (Keyword)cTypesAlternatives_0.eContents().get(7);
 		
 		//type:
-		//	types=("String" | "Integer" | "Boolean" | "Graph" | "Vertex" | "Edge" | "Queue");
+		//	types=("String" | "Integer" | "Boolean" | "Graph" | "Vertex" | "Edge" | "Queue" | "Stack");
 		public ParserRule getRule() { return rule; }
 
-		//types=("String" | "Integer" | "Boolean" | "Graph" | "Vertex" | "Edge" | "Queue")
+		//types=("String" | "Integer" | "Boolean" | "Graph" | "Vertex" | "Edge" | "Queue" | "Stack")
 		public Assignment getTypesAssignment() { return cTypesAssignment; }
 
-		//"String" | "Integer" | "Boolean" | "Graph" | "Vertex" | "Edge" | "Queue"
+		//"String" | "Integer" | "Boolean" | "Graph" | "Vertex" | "Edge" | "Queue" | "Stack"
 		public Alternatives getTypesAlternatives_0() { return cTypesAlternatives_0; }
 
 		//"String"
@@ -303,6 +304,9 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"Queue"
 		public Keyword getTypesQueueKeyword_0_6() { return cTypesQueueKeyword_0_6; }
+
+		//"Stack"
+		public Keyword getTypesStackKeyword_0_7() { return cTypesStackKeyword_0_7; }
 	}
 
 	public class StatementElements extends AbstractParserRuleElementFinder {
@@ -1285,7 +1289,7 @@ public class MyDslGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//type:
-	//	types=("String" | "Integer" | "Boolean" | "Graph" | "Vertex" | "Edge" | "Queue");
+	//	types=("String" | "Integer" | "Boolean" | "Graph" | "Vertex" | "Edge" | "Queue" | "Stack");
 	public TypeElements getTypeAccess() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	}
