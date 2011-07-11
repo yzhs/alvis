@@ -14,7 +14,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.Set;
 
 import javax.imageio.ImageIO;
@@ -31,8 +30,6 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.events.MouseWheelListener;
-import org.eclipse.swt.events.PaintEvent;
-import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
@@ -43,13 +40,10 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
@@ -64,9 +58,12 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
-import de.unisiegen.informatik.bs.alvis.editors.ImageCache;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
-import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.*;
+import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraph;
+import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraphConnection;
+import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraphNode;
+import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSave;
+import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSerialize;
 
 public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		IExportItem {
@@ -93,7 +90,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	AlvisGraphNode actNode;
 	AlvisGraphConnection actCon;
 
-	private boolean nodeMovement;
 	private Point remMousePos;
 	private int amountToBeMoved;
 
@@ -516,10 +512,10 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 				if (pressed == CTRL) {
 					if (e.count < 0) { // mouse wheel down
 						if (myGraph.zoom(e.x, e.y, false))
-							checkDirty();
+							setDirty(true);
 					} else { // mouse wheel up
 						if (myGraph.zoom(e.x, e.y, true))
-							checkDirty();
+							setDirty(true);
 					}
 				}
 			}
@@ -536,7 +532,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 					if (amountToBeMoved > 0) {
 						amountToBeMoved = 0;
 						remMousePos = null;
-						checkDirty();
+						setDirty(true);
 					} else {
 						drawFrame(e);
 					}
@@ -578,7 +574,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 							if (amountToBeMoved > 0) {
 								amountToBeMoved = 0;
 								remMousePos = null;
-								checkDirty();
+								setDirty(true);
 							} else {
 								markNodesInFrame(e);
 							}
@@ -846,7 +842,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		myGraph.resetMarking();
 		pressed = MODUS_STANDARD;
 		setGraphModus(pressed);
-		setLayoutManager();
+		setLayout();
 
 		// the graph might be changed
 		checkDirty();
@@ -938,7 +934,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 			myGraph.createTree(depth, width, null);
 		}
 
-		setLayoutManager();
+		setLayout();
 		checkDirty();
 
 	}
@@ -974,9 +970,13 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	/**
 	 * switches between layouts
 	 */
-	public void setLayoutManager() {
+	public void setLayout() {
 		myGraph.placeNodes();
 		checkDirty();
+	}
+	
+	public void fiToPage(){
+		myGraph.fiToPage();
 	}
 
 	/**

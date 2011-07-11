@@ -44,6 +44,13 @@
                   tooltip="%command.tooltip.changelayout">
             </command>
             <command
+                  commandId="de.unisiegen.informatik.bs.alvis.graph.commands.fitToPage"
+                  icon="icons/graph/graph_fitToPage.png"
+                  label="%command.label.fitToPage"
+                  style="push"
+                  tooltip="%command.tooltip.fitToPage">
+            </command>
+            <command
                   commandId="de.unisiegen.informatik.bs.alvis.graph.commands.zoomin"
                   icon="icons/graph/graph_zoom_in.png"
                   label="%command.label.zoomin"
@@ -128,6 +135,10 @@
             defaultHandler="de.unisiegen.informatik.bs.alvis.graph.newwizards.showNewGraphWizard"
             id="de.unisiegen.informatik.bs.alvis.commands.showNewGraphWizard"
             name="%command.name">
+      </command>
+      <command
+            id="de.unisiegen.informatik.bs.alvis.graph.commands.fitToPage"
+            name="FitToPage">
       </command>
    </extension>
    <extension
@@ -231,6 +242,18 @@
       <handler
             class="de.unisiegen.informatik.bs.alvis.graph.handlers.DeleteAll"
             commandId="de.unisiegen.informatik.bs.alvis.graph.deleteall">
+         <enabledWhen>
+            <with
+                  variable="activeEditorId">
+               <equals
+                     value="de.unisiegen.informatik.bs.alvis.graph.grapheditor">
+               </equals>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="de.unisiegen.informatik.bs.alvis.graph.handlers.FitToPage"
+            commandId="de.unisiegen.informatik.bs.alvis.graph.commands.fitToPage">
          <enabledWhen>
             <with
                   variable="activeEditorId">

@@ -416,7 +416,6 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	 */
 	public void markToBeConnected(AlvisGraphNode gn) {
 		if (gn == null) {
-			resetMarking();
 			return;
 		}
 		if (getConnectNode() == null) {
@@ -586,7 +585,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 			if (getStartNode() != null) {
 				getStartNode().unmarkAsStartOrEndNode();
 			}
-//			setStartNode(gn);
+			// setStartNode(gn);
 		} else
 			makeGraphConnection(gn, parent);
 
@@ -872,4 +871,29 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		return getHighlightedConnections().get(0);
 	}
 
+	// makes Graph fit to page
+	public void fiToPage() {
+		int gX = Math.max(getSize().x, 20), gY = Math.max(getSize().y, 20);
+		int minX = Integer.MAX_VALUE, minY = Integer.MAX_VALUE, maxX = 0, maxY = 0;
+		for (AlvisGraphNode gn : getAllNodes()) {
+			maxX = Math.max(maxX, (gn.getLocation().x + gn.getSize().width));
+			maxY = Math.max(maxY, (gn.getLocation().y + gn.getSize().height));
+			minX = Math.min(minX, gn.getLocation().x);
+			minY = Math.min(minY, gn.getLocation().y);
+		}
+		int actWidth = maxX - minX, actHeight = maxY - minY;
+		if (actWidth == 0 || actHeight == 0)
+			return;//avoid division by zero
+		
+		double relX = (double) gX / actWidth;
+		double relY = (double) gY / actHeight;
+		Animation.markBegin();
+		for (AlvisGraphNode gn : getAllNodes()) {
+			double x = (gn.getLocation().x - minX) * relX;
+			double y = (gn.getLocation().y - minY) * relY;
+			gn.setLocation(x, y);
+		}
+		Animation.run(500);
+
+	}
 }

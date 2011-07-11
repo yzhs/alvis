@@ -15,11 +15,11 @@ import de.unisiegen.informatik.bs.alvis.graph.editors.GraphEditor;
 //import de.unisiegen.informatik.bs.alvis.editors.GraphEditor;
 
 /**
- * Change the layout of the graph in the GraphEditor
+ * makes graph in GraphEditor fit to page
  * 
- * @author simon
+ * @author Frank Weiler
  */
-public class ChangeLayout extends AbstractHandler {
+public class FitToPage extends AbstractHandler {
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
@@ -28,7 +28,7 @@ public class ChangeLayout extends AbstractHandler {
 		// Try to cast the active editor to GraphEditor.
 		try {
 			GraphEditor grapheditor = (GraphEditor) editor;
-			grapheditor.setLayout();
+			grapheditor.fiToPage();
 		} catch (ClassCastException e) {
 			// TODO Sinnvolle Fehlermeldung.
 		}
