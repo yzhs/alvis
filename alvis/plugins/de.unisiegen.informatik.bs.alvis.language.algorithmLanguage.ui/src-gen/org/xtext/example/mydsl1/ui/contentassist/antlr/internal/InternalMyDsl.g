@@ -760,6 +760,14 @@ rule__Type__TypesAlternatives_0
 { after(grammarAccess.getTypeAccess().getTypesQueueKeyword_0_6()); }
 )
 
+    |(
+{ before(grammarAccess.getTypeAccess().getTypesStackKeyword_0_7()); }
+
+	'Stack' 
+
+{ after(grammarAccess.getTypeAccess().getTypesStackKeyword_0_7()); }
+)
+
 ;
 finally {
 	restoreStackSize(stackSize);
