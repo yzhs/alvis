@@ -18,6 +18,8 @@ import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.FileDialog;
+import org.eclipse.swt.widgets.MessageBox;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IWorkbenchPage;
@@ -57,8 +59,8 @@ public class PdfExport extends Document {
 	private static Font smallBold = FontFactory.getFont("Calibri", 12,
 			Font.BOLD);
 
-//	private Anchor anchor;
-//	private Chapter chapter;
+	// private Anchor anchor;
+	// private Chapter chapter;
 	private Paragraph paragraph;
 
 	/**
@@ -85,6 +87,10 @@ public class PdfExport extends Document {
 
 		} catch (NullPointerException npe) {
 		} catch (FileNotFoundException fnfe) {
+			MessageBox sure = new MessageBox(new Shell(), SWT.ICON_WARNING
+					| SWT.OK);
+			sure.setMessage(Messages.getLabel("FileProbablyopened"));
+			sure.open();
 		} finally {
 			close();
 		}
@@ -124,8 +130,8 @@ public class PdfExport extends Document {
 
 	private void addContent() throws DocumentException {
 
-//		anchor = new Anchor("anchor", catFont);
-//		anchor.setName("anchor");
+		// anchor = new Anchor("anchor", catFont);
+		// anchor.setName("anchor");
 
 		IExportItem exportItem;
 		try {
@@ -134,21 +140,26 @@ public class PdfExport extends Document {
 			exportItem = null;
 		}
 
-//		chapter = new Chapter(new Paragraph(anchor), 1);
+		// chapter = new Chapter(new Paragraph(anchor), 1);
 
 		if (exportItem != null) {
 			if (exportItem.isRun()) { // export run
 
-				System.out.println("LALALA");// TODO weg damit
-
+				Image image = exportItem.getImage();
+				if (image != null) {
+					paragraph = toParagraph(image);
+					// chapter.add(paragraph);
+					// add(chapter);
+					add(paragraph);
+				}
 			} else { // export single editor
 
 				// adding image:
 				Image image = exportItem.getImage();
 				if (image != null) {
 					paragraph = toParagraph(image);
-//					chapter.add(paragraph);
-//					add(chapter);
+					// chapter.add(paragraph);
+					// add(chapter);
 					add(paragraph);
 				}
 			}
@@ -157,8 +168,8 @@ public class PdfExport extends Document {
 		StyledText sourceCode = getStyledText();
 		if (sourceCode != null) {
 			paragraph = toParagraph(sourceCode);
-//			chapter.add(paragraph);
-//			add(chapter);
+			// chapter.add(paragraph);
+			// add(chapter);
 			add(paragraph);
 		}
 

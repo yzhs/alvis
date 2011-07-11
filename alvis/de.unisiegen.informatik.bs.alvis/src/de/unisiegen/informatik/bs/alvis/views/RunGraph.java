@@ -13,8 +13,12 @@ import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.graphics.Drawable;
+import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.part.ViewPart;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
@@ -113,15 +117,15 @@ public class RunGraph extends ViewPart implements IExportItem {
 			IConfigurationElement[] elements = extension
 					.getConfigurationElements();
 			for (int j = 0; j < elements.length; j++) {
-				try {
-					IConfigurationElement element = elements[j];
-					IRunVisualizer runvizual = (IRunVisualizer) element
-							.createExecutableExtension("class");
-					// Save the found IRunVisualizer in a list
-					myRunVisualizers.add(runvizual);
-				} catch (CoreException e) {
-					e.printStackTrace();
-				}
+//				try {
+//					IConfigurationElement element = elements[j];
+//					IRunVysualizer runvizual = (IRunVisualizer) element
+//							.createExecutableExtension("class");
+//					// Save the found IRunVisualizer in a list
+//					myRunVisualizers.add(runvizual);
+//				} catch (CoreException e) {
+//					e.printStackTrace();
+//				}
 			}
 		}
 	}
@@ -141,20 +145,49 @@ public class RunGraph extends ViewPart implements IExportItem {
 		}
 	}
 
-	/* Methods we do not use */
-	@Override
-	public void setFocus() {
-	}
-
 	@Override
 	public Image getImage() {
-		// TODO Auto-generated method stub
-		return null;
+		IExtension[] iext = Platform
+				.getExtensionRegistry()
+				.getExtensionPoint(
+						"de.unisiegen.informatik.bs.alvis.runvisualizer")
+				.getExtensions();
+		for (int i = 0; i < iext.length; i++) {
+			try {
+
+				Drawable drawable = (Drawable) Platform
+						.getExtensionRegistry()
+						.getExtensionPoint(
+								"de.unisiegen.informatik.bs.alvis.runvisualizer")
+						.getExtensions()[i];
+				System.out.println("yes! CastToDrawable");
+				// TODO weg damit
+			} catch (ClassCastException cce) {
+				System.out.println("noCastToDrawable");
+				// TODO weg damit
+			}
+		}
+		Image image = null;
+		// GC gc = new GC(this);
+		//
+		// int width = myGraph.getSize().x;
+		// int height = myGraph.getSize().y;
+		// GC gc = new GC(myGraph);
+		// gc.drawText("Created by Alvis", 5, 5);
+		// gc.drawRectangle(new Rectangle(0, 0, width - 1, height - 1));
+		// screenshot = new Image(Display.getCurrent(), width, height);
+		// gc.copyArea(screenshot, 0, 0);
+		//
+		// gc.dispose();
+		// myGraph.redraw();
+		//
+		// System.out.println("runImRunvisualizer->getImage()");//TODO weg
+
+		return image;
 	}
 
 	@Override
 	public StyledText getSourceCode() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -162,4 +195,10 @@ public class RunGraph extends ViewPart implements IExportItem {
 	public boolean isRun() {
 		return true;
 	}
+
+	/* Methods we do not use */
+	@Override
+	public void setFocus() {
+	}
+
 }
