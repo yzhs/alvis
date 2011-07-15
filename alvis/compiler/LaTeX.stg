@@ -1,0 +1,91 @@
+group T;
+program(functions) ::= <<\documentclass{report}
+%\usepackage{color}
+%\usepackage{xcolor}
+\usepackage{listings}
+
+\newcommand{\ident}[1]{#1}
+\newcommand{\type}[1]{#1}
+\newcommand{\keyword}[1]{\emph{#1}}
+
+\begin{document}
+
+\begin{verbatim}
+<functions; separator="
+">
+\end{verbatim}
+
+\end{document}
+>>
+
+mainFunction(params, code) ::= <<
+main(<params; separator=", ">) <code>
+>>
+function(name, params, code) ::= <<
+<name>(<params; separator=", ">) <code>
+>>
+
+type(name) ::= "<name>"
+array(base) ::= "<base>[]"
+ident(name) ::= "<name>"
+
+block(statements) ::= <<{
+    <statements; separator="
+">
+}
+>>
+
+param(type, ident) ::= "<type> <ident>"
+decl(type, ident) ::= "<type> <ident>,"
+declInit(type, ident, rhs) ::= "<type> <ident> = <rhs>,"
+assign(lhs, rhs) ::= "<lhs> = <rhs>,"
+attributeAssign(obj, lhs, rhs) ::= "<obj>.<lhs> = <rhs>"
+return(expr) ::= "return <expr>,"
+
+if(cond, then) ::= <<if <cond>:
+    <then>
+>>
+ifElse(cond, then, else) ::= <<
+if (<cond>)
+    <then>
+else
+    <else>
+>>
+for(lhs, rhs, body) ::= <<for <lhs> = <rhs>:
+    <body>
+>>
+while(cond, body) ::= <<while (<cond>)
+    <body>
+>>
+
+breakpoint(pseudoArgument) ::= ";"
+
+add(left, right) ::= "<left> + <right>"
+sub(left, right) ::= "<left> - <right>"
+mul(left, right) ::= "<left> * <right>"
+div(left, right) ::= "<left> / <right>"
+mod(left, right) ::= "<left> % <right>"
+and(left, right) ::= "<left> && <right>"
+or(left, right) ::= "<left> || <right>"
+equal(left, right) ::= "<left> == <right>"
+notEqual(left, right) ::= "<left> != <right>"
+lessThan(left, right) ::= "<left> \< <right>"
+greaterThan(left, right) ::= "<left> \> <right>"
+lessOrEqual(left, right) ::= "<left> \<= <right>"
+greaterOrEqual(left, right) ::= "<left> \>= <right>"
+
+not(arg) ::= "! <arg>"
+paren(arg) ::= "(<arg>)"
+plus(arg) ::= "+ <arg>"
+minus(arg) ::= "- <arg>"
+
+literal(text) ::= "<text>"
+
+call(function, args) ::= "<function>(<args; separator=\", \">)"
+
+dot(left, right) ::= "<left>.<right>"
+
+index(array, index) ::= "<array>[<index>]"
+
+semicolon(stat) ::= "<stat>,"
+breakBlock(stat) ::= "<stat>;"

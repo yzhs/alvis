@@ -1,0 +1,22 @@
+BFS(Graph G, Vertex s) begin
+        for Vertex v in G.vertices begin
+                v.color = "white",
+                v.distance = infty,
+                v.pi = null,
+        end
+        $s.color = "grey";
+        s.distance = 0,
+        Queue Q,
+        Q.enqueue(s),
+        while ! Q.isEmpty() begin
+                u = Q.dequeue(),
+                for Vertex v in u.adj() begin
+                        if v.color == "white" begin
+                                v.color = "grey";
+                                v.distance = u.distance + 1,
+                                v.pi = u,
+                                Q.enqueue(v),
+                        end
+                end
+        end
+end

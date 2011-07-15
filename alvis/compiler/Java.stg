@@ -1,0 +1,191 @@
+group Java;
+program(functions) ::= <<
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.concurrent.locks.Lock;
+import de.unisiegen.informatik.bs.alvis.vm.*;
+
+public class #ALGORITHM_NAME# implements AbstractAlgo {
+    private Lock lock;
+    private boolean onBreak;
+    private boolean onDecision;
+    private BPListener bplisten;
+    private DPListener dplisten;
+
+    <functions; separator="
+
+">
+
+    public static void print(Object o) {
+        System.out.println(o);
+    }
+
+    /** 
+     * static code
+     * 
+     * @param BPNr
+     *            set breakpoint field, inform breakpoint listener, sleeps
+     *            current thread
+     */
+    private SortableCollection reachedDecisionPoint(int DPNr,PCObject from ,SortableCollection toSort) {
+        if(toSort.size() \<= 1) { 
+            return toSort;
+        }
+        dplisten.onDecisionPoint(DPNr, from, toSort);
+        return toSort; 
+    } 
+
+    /**
+     * static code
+     * 
+     * @param BPNr
+     *            set breakpoint field, inform breakpoint listener, sleeps
+     *            current thread
+     */
+    private void reachedBreakPoint(int BPNr) {
+        onBreak = true;
+        if (bplisten != null) {
+                bplisten.onBreakPoint(BPNr);
+        }
+        synchronized (this) {
+            while (onBreak) {
+                try {
+                    wait(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+    
+    public List\<PCObject\> getVariableReferences() {
+        return null;
+    }
+    
+    @Override
+    public void addBPListener(BPListener wantToListen) {
+        bplisten = wantToListen;
+    }
+    
+    public void addDPListener(DPListener wantToListen) {
+        dplisten = wantToListen;
+    }
+    
+    @Override
+    public void stopBreak() {
+        onBreak = false;
+        synchronized (this) {
+            this.notify();
+        }
+    }
+    
+    public void setLock(Lock toLockOn) {
+        lock = toLockOn;
+    }
+}
+>>
+
+mainFunction(params, idents, types, code) ::= <<
+<params : {private <it>;
+}>
+public Algorithm() {}
+
+public void setParameters(Map\<String, PCObject\> params) {
+    <idents, types : {id, type | this.<id> = (<type>)params.get("<id>");
+}>
+}
+
+public Map\<String, PCObject\> getParameterTypes() {
+    Map\<String, PCObject\> result = new HashMap\<String, PCObject\>();
+
+    <idents, types : {id, type | result.put("<id>", <type>.getNull());
+}>
+    return result;
+}
+
+public void run() <code>
+>>
+function(name, type, params, code) ::= <<
+private <type> <name>(<params; separator=", ">) <code>
+>>
+
+type(name) ::= "<name>"
+array(base) ::= "HashMap\<Object,<base>\>"
+ident(name) ::= "<name>"
+
+block(statements) ::= <<{
+    <statements; separator="
+">
+}
+>>
+
+param(type, ident) ::= "<type> <ident>"
+decl(type, ident) ::= "<type> <ident> = new <type>();"
+declInit(type, ident, rhs) ::= "<type> <ident> = <rhs>;"
+assign(lhs, rhs) ::= "<lhs> = <rhs>;"
+attributeAssign(obj, lhs, rhs) ::= "<obj>.set<lhs>(<rhs>);"
+return(expr) ::= "return <expr>;"
+
+if(cond, then) ::= <<if ((<cond>).getLiteralValue())
+    <then>
+>>
+ifElse(cond, then, otherwise) ::= <<
+if ((<cond>).getLiteralValue())
+    <then>
+else
+    <otherwise>
+>>
+for(lhs, line, obj, type, rhs, body) ::= <<for (<lhs> : (<type>)reachedDecisionPoint(<line>, <obj>, <rhs>))
+    <body>
+>>
+while(cond, body) ::= <<while ((<cond>).getLiteralValue())
+    <body>
+>>
+
+breakpoint(lineNumber) ::= "reachedBreakPoint(<lineNumber>);"
+
+add(left, right) ::= "<left>.add(<right>)"
+sub(left, right) ::= "<left>.sub(<right>)"
+mul(left, right) ::= "<left>.mul(<right>)"
+div(left, right) ::= "<left>.div(<right>)"
+mod(left, right) ::= "<left>.mod(<right>)"
+and(left, right) ::= "<left>.and(<right>)"
+or(left, right) ::= "<left>.or(<right>)"
+equal(left, right) ::= "<left>.equal(<right>)"
+notEqual(left, right) ::= "<left>.notEqual(<right>)"
+lessThan(left, right) ::= "<left>.less(<right>)"
+greaterThan(left, right) ::= "<left>.greater(<right>)"
+lessOrEqual(left, right) ::= "<left>.lessOrEqual(<right>)"
+greaterOrEqual(left, right) ::= "<left>.greaterOrEqual(<right>)"
+
+not(arg) ::= "<arg>.not()"
+paren(arg) ::= "<arg>"
+plus(arg) ::= "<arg>"
+minus(arg) ::= "<arg>.negate()"
+
+boolean(literal) ::= "new PCBoolean(<literal>)"
+float(literal) ::= "new PCFloat(<literal>)"
+int(literal) ::= "new PCInteger(<literal>)"
+string(literal) ::= "new PCString(<literal>)"
+null(type) ::= "<type>.getNull()"
+infty(type) ::= "<type>.getInfty()"
+
+makeGetter(ident) ::= "get<ident>()"
+literal(text) ::= "<text>"
+generic(container, element) ::= "<container>\<<element>\>"
+
+call(function, args) ::= "<function>(<args; separator=\", \">)"
+
+dot(left, right) ::= "<left>.<right>"
+
+index(array, index) ::= "<array>[<index>]"
+
+semicolon(stat) ::= "<stat>;"
+breakBlock(stat, lineNumber) ::= <<{
+    <stat>
+    reachedBreakPoint(<lineNumber>);
+}
+>>
