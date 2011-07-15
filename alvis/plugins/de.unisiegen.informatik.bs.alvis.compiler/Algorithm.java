@@ -41,13 +41,13 @@ public class Algorithm implements AbstractAlgo {
 	public void run() {
 		SortableCollection<PCVertex> vertices = reachedDecisionPoint(1, G, G.getVertices());
 		for (PCVertex v : vertices) {
-			v.set("color", new PCString("white"));
-        	v.set("distance", PCInteger.getInfty());
-        	v.set("pi", PCVertex.getNull());
+			v.setColor(new PCString("white"));
+        	v.setDistance(PCInteger.getInfty());
+        	v.setParentId(PCVertex.getNull());
         }
-        s.set("color", new PCString("yellow"));
+        s.setColor(new PCString("yellow"));
         reachedBreakPoint(6);
-        s.set("distance", new PCInteger(0));
+        s.setDistance(new PCInteger(0));
         PCQueue Q = new PCQueue();
         Q.enqueue(s);
         while ((Q.isEmpty().not()).getLiteralValue()) {
@@ -55,11 +55,11 @@ public class Algorithm implements AbstractAlgo {
             u = (PCVertex) Q.dequeue();
             SortableCollection<PCVertex> adjacents = reachedDecisionPoint(12, u, u.getAdjacents());
             for (PCVertex v : adjacents) {
-            	if (v.get("color").equals(new PCString("white"))) {
-            		v.set("color", new PCString("yellow"));
+            	if (v.getColor().equals(new PCString("white"))) {
+            		v.setColor(new PCString("yellow"));
                     reachedBreakPoint(14);
-                    v.set("distance",((PCInteger) (u.get("distance"))).add(new PCInteger(1)));
-                    v.set("pi", u);
+                    v.setDistance(((PCInteger) (u.getDistance())).add(new PCInteger(1)));
+                    v.setParentId(u);
                     Q.enqueue(v);
                  }
             }
@@ -96,16 +96,16 @@ public class Algorithm implements AbstractAlgo {
 		return null;
 	}
 
-	public Map<PCObject, String> getParameterTypes() {
-		HashMap<PCObject, String> result = new HashMap<PCObject, String>();
-		result.put(PCGraph.getNull(), "G");
-		result.put(PCVertex.getNull(), "s");
+	public Map<String, PCObject> getParameterTypes() {
+		Map<String, PCObject> result = new HashMap<String, PCObject>();
+		result.put("G", PCGraph.getNull());
+		result.put("s", PCVertex.getNull());
 		return result;
 	}
 
-	public void setParameters(List<PCObject> paras) {
-		this.G = (PCGraph) paras.get(0);
-		this.s = (PCVertex) paras.get(1);
+	public void setParameters(Map<String, PCObject> paras) {
+		this.G = (PCGraph) paras.get("G");
+		this.s = (PCVertex) paras.get("s");
 	}
 
 	@Override

@@ -26,9 +26,27 @@ import de.uni_siegen.informatik.bs.alvic.Compiler;
  * 
  */
 public class CompilerAccess {
-	private Compiler c;
-	private Collection<PCObject> datatypes;
-	private Collection<String> datatypePackages;
+	/**
+	 * The compiler used to do all the real work.
+	 */
+	private Compiler compiler;
+
+	/**
+	 * These are the types the user may use.
+	 */
+	private Collection<PCObject> types;
+
+	/**
+	 * These are the packages available to the user. They will automatically be
+	 * imported by the compiler.
+	 */
+	private Collection<String> packages;
+
+	/**
+	 * This is the absolute path to the file that is to be compiled.
+	 */
+	private String algorithmPath = null;
+	
 	private static CompilerAccess instance;
 
 	public static CompilerAccess getDefault() {
@@ -37,46 +55,55 @@ public class CompilerAccess {
 		return instance;
 	}
 
-	String algorithmPath = null;
-
 	/**
+	 * Use the compiler to compile the source code found in the given file.
 	 * 
 	 * @param path
 	 *            path to the source code that
 	 * @return path to the generated .java file if it exists, null otherwise
 	 * 
 	 * @throws IOException
-	 *             , RecognitionException
+	 * @throws RecognitionException
 	 */
 	public File compile(String path) throws IOException, RecognitionException {
-		c = new Compiler(datatypes, datatypePackages);
-		// testDatatypes();
-		String javaCode = c.compile(readFile(currentPath() + path));
+		algorithmPath = currentPath() + path;
+
+		compiler = new Compiler(types, packages);
+		String javaCode = compiler.compile(readFile(algorithmPath));
+
 		if (null == javaCode) {
-			System.err.println("Compiling code from " + currentPath() + path + " failed");
+			System.err.println("Compiling code from " + algorithmPath
+					+ " failed");
 			return null;
 		}
 
-		File result = new File(currentPath() + getWorkspacePath(path)
-				+ "Algorithm.java");
-		// new File(path).getName().toString().replaceAll("\\.[^.]*$", ".java"));
-		FileWriter fstream;
-		fstream = new FileWriter(result);
-		BufferedWriter out = new BufferedWriter(fstream);
-		// out.write(javaCode.replaceAll("#ALGORITHM_NAME#",
-		// result.getName().replaceAll("\\.java", "")));
-		out.write(javaCode.replaceAll("#ALGORITHM_NAME#", "Algorithm"));
-		out.close();
+		File result = null;
+		BufferedWriter out = null;
+		try {
+			result = new File(currentPath() + getWorkspacePath(path)
+					+ "Algorithm.java");
+			// new File(path).getName().toString().replaceAll("\\.[^.]*$",
+			// ".java"));
+			FileWriter fstream;
+			fstream = new FileWriter(result);
+			out = new BufferedWriter(fstream);
+			// out.write(javaCode.replaceAll("#ALGORITHM_NAME#",
+			// result.getName().replaceAll("\\.java", "")));
+			out.write(javaCode.replaceAll("#ALGORITHM_NAME#", "Algorithm"));
+		} finally {
+			if (out != null)
+				out.close();
+		}
 		return result;
 	}
-	
+
 	private String currentPath() {
 		return Platform.getInstanceLocation().getURL().getPath();
 	}
 
 	private String getWorkspacePath(String fileWithPath) {
 		String[] splitPathToAlgorithm = fileWithPath.split("/");
-		
+
 		ArrayList<String> partsOfAlgoPath = new ArrayList<String>();
 		for (String part : splitPathToAlgorithm) {
 			partsOfAlgoPath.add(part);
@@ -93,28 +120,27 @@ public class CompilerAccess {
 		return algoWorkSpacePath;
 	}
 
-	private String getAlgorithmPath() throws IOException {
-		//FIXME is this correct? path is created but algorithmPath is used instead
-		String path = "";
-		path = FileLocator.getBundleFile(Activator.getDefault().getBundle())
-				.getCanonicalPath().toString();
-		return algorithmPath;
-	}
-
+	/**
+	 * Read a file given by its path into a String.
+	 * 
+	 * @param fileName
+	 *            the file to read
+	 * @return the contents of the file
+	 * @throws IOException
+	 */
 	private String readFile(String fileName) throws IOException {
 		BufferedReader fstream = new BufferedReader(new FileReader(fileName));
 		String result = "";
 
 		while (fstream.ready())
-				result += fstream.readLine()
-						+ System.getProperty("line.separator");
+			result += fstream.readLine() + System.getProperty("line.separator");
 
 		System.out.println("read file " + fileName);
 		return result;
 	}
 
 	public List<Exception> getExceptions() {
-		return c.getExceptions();
+		return compiler.getExceptions();
 	}
 
 	/**
@@ -143,10 +169,11 @@ public class CompilerAccess {
 		File source = new File(pathWhereTheJavaIs + SLASH + "Algorithm.java");
 
 		// Get the path to algorithm and separate path and filename
-		String[] splitedPathToAlgorithm = pathToAlgorithm.split(Pattern.quote(File.separator));
-		
+		String[] splitPathToAlgorithm = pathToAlgorithm.split(Pattern
+				.quote(File.separator));
+
 		ArrayList<String> partsOfAlgoPath = new ArrayList<String>();
-		for (String part : splitedPathToAlgorithm) {
+		for (String part : splitPathToAlgorithm) {
 			partsOfAlgoPath.add(part);
 		}
 
@@ -158,7 +185,7 @@ public class CompilerAccess {
 			algoWorkSpacePath += part + SLASH;
 		}
 
-		// for (String st : splitedPathToAlgorithm)
+		// for (String st : splitPathToAlgorithm)
 		// System.out.println(st);
 
 		// Destination
@@ -172,34 +199,43 @@ public class CompilerAccess {
 		fileCopy.copy(source, destination);
 
 		// Still hard Coded.
-		String javaFilePath = "Algorithm"; // TODO HARD CODED!
 		return destination;
 	}
 
 	/* ******************************************
-	 * The Datatypes and Packagenames *****************************************
+	 * The Datatypes and Packagenames
+	 * ******************************************
 	 */
 	/**
+	 * Tell the compiler which types are allowed.
+	 * 
 	 * @param datatypes
-	 *            the datatypes to set
+	 *            the types
 	 */
 	public void setDatatypes(Collection<PCObject> datatypes) {
-		this.datatypes = datatypes;
+		this.types = datatypes;
 	}
 
 	/**
+	 * Tell the compiler which packages the user can use. I.e. what packages the
+	 * compiler is supposed to import.
+	 * 
 	 * @param datatypePackages
-	 *            the datatypePackages to set
+	 *            the packages
 	 */
 	public void setDatatypePackages(Collection<String> datatypePackages) {
-		this.datatypePackages = datatypePackages;
+		this.packages = datatypePackages;
 	}
 
+	/**
+	 * Method for checking whether the compiler is informed correctly about
+	 * available packages and types.
+	 */
 	@SuppressWarnings("unchecked")
 	public void testDatatypes() {
 		try {
 			System.out.println("Compiler shows its datatypes:");
-			for (PCObject obj : datatypes) {
+			for (PCObject obj : types) {
 				System.out.println(obj.getClass());
 				List<String> tmp = ((List<String>) obj.getClass()
 						.getMethod("getMembers").invoke(obj));
@@ -211,7 +247,7 @@ public class CompilerAccess {
 						+ (tmp == null ? "null" : tmp));
 			}
 			System.out.println("Compiler shows its packages:");
-			for (String obj : datatypePackages) {
+			for (String obj : packages) {
 				System.out.println(obj);
 			}
 		} catch (IllegalArgumentException e) {
@@ -226,5 +262,4 @@ public class CompilerAccess {
 			e.printStackTrace();
 		}
 	}
-
 }
