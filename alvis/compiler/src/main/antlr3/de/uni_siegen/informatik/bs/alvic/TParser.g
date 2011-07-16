@@ -1,20 +1,23 @@
 parser grammar TParser;
 
 options {
-     output    = AST;
-     superClass = AbstractTParser;
-     tokenVocab = TLexer;
-     backtrack = true;
+     output       = AST;
+     superClass   = AbstractTParser;
+     tokenVocab   = TLexer;
+     backtrack    = true;
+     ASTLabelType = CommonTree;
 }
 
-tokens {    // tokens used for constructing the AST
-    PROG;   // parent for all functions in the program
+// tokens used for constructing the AST
+tokens {
+    PROG;   // The root node in the generated tree.
     FUNC;   // function definition
     BLOCK;
 
     TYPE;   // used to declare return types of functions
     ARRAY;  // array type declaration
-    COMPLEX;// used to declare types that use generics
+    COMPLEX;// used to declare types that use generics, such as "Integer Queue"
+    // which is translated to something like Java's "Queue<Integer>"
 
     DECL;   // variable declaration
     DECL_INIT; // variable declaration and initialization
@@ -22,15 +25,25 @@ tokens {    // tokens used for constructing the AST
     CALL;   // function or method call
     INDEX;  // array indexing operation
 
-    PAREN;  // parenthesized expression, not the parentheses of a function call
+    PAREN;  // parenthesized expression not the parentheses of a function call
+    //(this could be used for generating nice LaTeX output)
+
     SIGN;   // used do indicate unary usage of '+' or '-'
 
     PARAMS; // this is used to mark the formal parameters in function definitions
 
-    ASSIGN; // the assignment operator
+    ASSIGN; // the assignment operation
 
-    IF_ELSE;// if-then-else statement, as opposed to a simple if-then statement
+    IF_ELSE;// if-then-else statement, as opposed to a simple if-then statement without an else statement
     STAT;   // used to group code in 'then' and 'else' blocks
+    /*
+     * We need this because the user might write something like 'if foo: a=1;' in which case the generated code
+     * would look something like 'if (foo) { a = 1; reachedBreakPoint(currentLineNumber); }'.
+     * In this case we have to group the assignment and the breakpoint statement so it is clear where the else
+     * statement starts even when the user did not actually use a block.
+     * To solve this problem we could also simply use a block, but that would possibly create a block in the
+     * generated LaTeX code that was not in the original source code, i.e. not intended by the user.
+     */
 }
 
 @header {
@@ -50,6 +63,7 @@ functionDefinition
  * This is used so a program can be forced to have exaclty one main function but
  * arbitrarily many other functions. Also the main function does not allow
  * returning non-void.
+ * Treating the main-function seperately makes code generation.
  */
 mainFunction
     : MAIN LPAREN formalParams? RPAREN block
@@ -71,33 +85,53 @@ param
     : type ident -> ^(DECL type ident)
     ;
  
+/**
+ * Defined this way our code allows curly brackets and begin/end to be combined arbitrarily.
+ * For example the following is a valid block:
+ *   begin a = 1, }
+ * as is
+ *   {end
+ * as well as the obvious combinations "begin ... end" and "{ ... }".
+ */
 block
     : SCOPEL statement* SCOPER -> ^(BLOCK[$SCOPEL, "BLOCK"] statement*)
     ;
 
 type
     : (simpleType -> simpleType) (
-    (typeHelper -> ^(COMPLEX typeHelper $type))//This allows types like "Vertex Queue" which is translated as "Queue<Vertex>"
+    //This allows types like "Vertex Queue" which is translated to something like "Queue<Vertex>"
+    (typeHelper -> ^(COMPLEX typeHelper $type))
     | (LARRAY RARRAY -> ^(ARRAY[$LARRAY, "ARRAY"] $type))
     )*
     ;
 
-typeHelper
-    : type
-    ;
+/**
+ * This is needed to reference the parent rule $type unabiguously when generating ^(COMPLEX typeHelper $type).
+ */
+typeHelper : type ;
 
-simpleType
-    : {TLexer.isTypeName(input.LT(1).getText())}? ID
-    ;
+/**
+ * A simple type is just an ID that is stored in the list of the available types
+ */
+simpleType : {TLexer.isTypeName(input.LT(1).getText())}? ID ;
 
-ident
-    : {!TLexer.isTypeName(input.LT(1).getText())}? ID
-    ;
+/**
+ * and a valid identifier is an ID that is not stored in that list.
+ */
+ident : {!TLexer.isTypeName(input.LT(1).getText())}? ID ;
 
 statement
     : declaration terminator
     | postfixExpr terminator
+    // Java does not allow "variable" or "variable[index]" as statements, so we have to forbid those as well
+    { if (!$postfixExpr.isFunctionCall)
+        reportError(new InvalidStatementException($postfixExpr.tree.toString(), $postfixExpr.start.getLine(), $postfixExpr.start.getCharPositionInLine())); }
     | assignment terminator
+
+    /* There is no nice way to generate a breakpoint after a return statement.
+     * As there are only a few cases (when 'expr' has side effects) where this
+     * makes a difference, we simply ignore a semicolon after a return statement.
+     */
     | RETURN^ expr? terminator!
     | IF expr COLON t=statement
         ((ELSE)=> ELSE e=statement -> ^(IF_ELSE[$IF, "IF_ELSE"] expr ^(STAT $t) ^(STAT $e))
@@ -117,53 +151,51 @@ declaration
 
 assignment
     : postfixExpr EQUAL expr
-        { if ($postfixExpr.isFunctionCall)
-              throw new FailedPredicateException(input, "assignment", "!postfixExpr.isFunctionCall");
-        } -> ^(ASSIGN[$postfixExpr.start, "ASSIGN"] postfixExpr expr)
+    { if ($postfixExpr.isFunctionCall)
+        reportError(new InvalidAssignmentException($postfixExpr.tree.getText(),
+            $expr.tree.getText(), $EQUAL.line, $EQUAL.pos));
+    } -> ^(ASSIGN[$postfixExpr.start, "ASSIGN"] postfixExpr expr)
     ;
 
-expr
-    : andExpr (PIPEPIPE^ andExpr)*
-    ;
+/*
+ * Expressions with operator precedence as it is with the corresponding Java operators
+ */
+expr : andExpr (PIPEPIPE^ andExpr)* ;
 
-andExpr
-    : eqExpr (AMPAMP^ eqExpr)*
-    ;
+andExpr : eqExpr (AMPAMP^ eqExpr)* ;
 
-eqExpr
-    : relExpr ((EQEQ^|BANGEQ^) relExpr)*
-    ;
+eqExpr : relExpr ((EQEQ^|BANGEQ^) relExpr)* ;
 
-relExpr
-    : addExpr ((LESS^|GREATER^|LESSEQ^|GREATEREQ^) addExpr)*
-    ;
+relExpr : addExpr ((LESS^|GREATER^|LESSEQ^|GREATEREQ^) addExpr)* ;
 
-addExpr
-    : mulExpr ((PLUS^|MINUS^) mulExpr)*
-    ;
+addExpr : mulExpr ((PLUS^|MINUS^) mulExpr)* ;
 
-mulExpr
-    : atom ((STAR^|SLASH^|PERCENT^) atom)*
-    ;
+mulExpr : atom ((STAR^|SLASH^|PERCENT^) atom)* ;
 
+// Highest priority operators
 atom: BANG^ atom
     | LPAREN sign expr RPAREN
       -> ^(SIGN[$LPAREN, "SIGN"] sign expr)
-    | LPAREN expr RPAREN -> ^(PAREN[$LPAREN, "PAREN"] expr) // this is needed to make sure the output looks much like the input (for outputting LaTeX code for instance)
+    | LPAREN expr RPAREN -> ^(PAREN[$LPAREN, "PAREN"] expr) // This is needed to make sure the output looks like the input (for outputting LaTeX code for instance). Otherwise we would just use 'LPAREN expr RPAREN -> expr'.
     | postfixExpr
     | constant
     ;
 
 /**
- * This matches identifiers, function calls, attributes and method calls as well
- * as array indexing combined in every order.
+ * This matches identifiers, function calls, attributes, method calls and array
+ * indexing combined in every order.
+ *
+ * isFunctionCall is true if and only if the last part of a postfix expression
+ * parsed was a function or method call. We use this to decide whether a given
+ * postfix expression can be used as an l-value (i.e. on the left side of an
+ * assignment) and whether it can be used as a statement.
  */
-postfixExpr returns [boolean isFunctionCall, boolean isValidStatement]
-@init {$isFunctionCall = false; $isValidStatement = false;}
+postfixExpr returns [boolean isFunctionCall]
+@init {$isFunctionCall = false;}
     : (ident -> ident)
-      ( DOT right=ident                     {$isFunctionCall = false; $isValidStatement = false; }-> ^(DOT $postfixExpr $right)
-      | LPAREN (expr (COMMA expr)*)? RPAREN {$isFunctionCall = true;  $isValidStatement = true; } -> ^(CALL[$LPAREN, "CALL"] $postfixExpr expr*)
-      | LARRAY expr RARRAY                  {$isFunctionCall = false; $isValidStatement = false; }-> ^(INDEX[$LARRAY, "INDEX"] $postfixExpr expr)
+      ( DOT right=ident                     {$isFunctionCall = false; }-> ^(DOT $postfixExpr $right)
+      | LPAREN (expr (COMMA expr)*)? RPAREN {$isFunctionCall = true; } -> ^(CALL[$LPAREN, "CALL"] $postfixExpr expr*)
+      | LARRAY expr RARRAY                  {$isFunctionCall = false; }-> ^(INDEX[$LARRAY, "INDEX"] $postfixExpr expr)
       )*
     ;
 

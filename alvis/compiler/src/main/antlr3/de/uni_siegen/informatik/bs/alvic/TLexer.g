@@ -38,9 +38,9 @@ options {
 	}
 
 	/**
-	 * This is used to mark Java keywords we do not use as forbidden. With
-	 * so this all identifiers can be used in the compiled source as Java
-	 * identifiers.
+	 * This is used to mark Java keywords we do not use as forbidden so that they
+     * can not be used as identifiers. Therefore all of our identifiers can be used
+     * in the generated Java code as Java identifiers.
 	 * @return	List of all Tokens that are Java keywords, but not used in
 	 *		Alvis' language
 	 */
@@ -97,7 +97,6 @@ options {
 // '.' is used to access object's attributes and methods
 DOT : '.' ;
 
-
 /*
  * binary operators
  */
@@ -124,12 +123,10 @@ GREATEREQ: '>=';
 /*
  * unary operators
  */
-/* '+' and '-' are also used as binary operators. Therefore they are not added
- * here as well.
- */
+BANG : '!' ; // boolean not
+// '+' and '-' are also binary operators and have thus already been added.
 // PLUS : '+';
 // MINUS: '-';
-BANG : '!' ; // boolean not
 
 
 LPAREN : '(' ;
@@ -140,15 +137,13 @@ RARRAY : ']' ;
 // assignment operator
 EQUAL : '=' ;
 
-// terminates loop headers, conditions of if-statements and used to start the declaration of a function's return type
-COLON : ':' ;
-DOUBLECOLON : '::' ;
-
 /*
  * Statement terminators
  */
 SEMICOLON : ';' ;
 COMMA : ',' ;
+// terminates loop headers, conditions of if-statements and used to start the declaration of a function's return type
+COLON : ':' ;
 
 
 /*
@@ -164,7 +159,7 @@ RETURN: 'return' ;
 SCOPEL : 'begin' | '{' ;
 SCOPER : 'end'   | '}' ;
 
-// This is used to indicate that a function is the main function.
+// This is used as the name of the main function of an algorithm.
 MAIN: 'main' ;
 
 
@@ -175,26 +170,23 @@ INT : '0'..'9'+ ;
 
 FLOAT : '0'..'9'+'.'('0'..'9')* ;
 
-INFTY : 'infty' ;
-
 BOOL: 'true'|'false';
 
 STRING :  '"' ( ESC_SEQ | ~('\\'|'"') )* '"' ;
 
 NULL : 'null' ;
+INFTY : 'infty' ;
 
 /**
- * escape sequences
+ * escape sequences to be used in strings
  */
 fragment
-ESC_SEQ
-    :   '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\')
-    ;
+ESC_SEQ : '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') ;
 
 
 /* 
  * These keywords are not used, but have to be forbidden as identifiers, as they
- * can not be used in the resulting Java source.
+ * can not be used in the resulting Java code.
  */
 JAVAKEYWORD :
    ( 'abstract' | 'assert' | 'boolean' | 'byte' | 'catch' | 'class' | 'const' | 'default'
@@ -208,11 +200,9 @@ ID  : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')* ;
 
 
 COMMENT
-    : '//' ~('\n'|'\r')* ('\r'|'\n') { $channel=HIDDEN; }
-    | '/*' ( options {greedy=false;} : . )* '*/' { $channel=HIDDEN; }
+    : '//' ~('\n'|'\r')* ('\r'|'\n') { skip(); }
+    | '/*' ( options {greedy=false;} : . )* '*/' { skip(); }
     ;
 
-WHITESPACE
-    : (' '|'\t'|'\r'|'\n') { $channel=HIDDEN; }
-    ;
+WHITESPACE : (' '|'\t'|'\r'|'\n') { skip(); } ;
 

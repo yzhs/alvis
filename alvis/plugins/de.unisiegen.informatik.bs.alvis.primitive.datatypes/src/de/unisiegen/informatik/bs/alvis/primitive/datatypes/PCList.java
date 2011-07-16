@@ -89,8 +89,7 @@ public class PCList<E> extends PCObject implements SortableCollection<E> {
 
 	@Override
 	public void add(int index, E element) {
-		// TODO Auto-generated method stub
-
+		items.add(index, element);
 	}
 
 	/**
@@ -118,74 +117,62 @@ public class PCList<E> extends PCObject implements SortableCollection<E> {
 
 	@Override
 	public boolean contains(Object o) {
-		// TODO Auto-generated method stub
-		return false;
+		return items.contains(o);
 	}
 
 	@Override
 	public boolean containsAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+		return items.containsAll(c);
 	}
 
 	@Override
 	public int indexOf(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
+		return items.indexOf(o);
 	}
 
 	@Override
 	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
+		return items.isEmpty();
 	}
 
 	@Override
 	public int lastIndexOf(Object o) {
-		// TODO Auto-generated method stub
-		return 0;
+		return items.lastIndexOf(o);
 	}
 
 	@Override
 	public ListIterator<E> listIterator() {
-		// TODO Auto-generated method stub
-		return null;
+		return items.listIterator();
 	}
 
 	@Override
 	public ListIterator<E> listIterator(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return items.listIterator(index);
 	}
 
 	@Override
 	public boolean remove(Object o) {
-		// TODO Auto-generated method stub
-		return false;
+		return items.remove(o);
 	}
 
 	@Override
 	public E remove(int index) {
-		// TODO Auto-generated method stub
-		return null;
+		return items.remove(index);
 	}
 
 	@Override
 	public boolean removeAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+		return items.removeAll(c);
 	}
 
 	@Override
 	public boolean retainAll(Collection<?> c) {
-		// TODO Auto-generated method stub
-		return false;
+		return items.retainAll(c);
 	}
 
 	@Override
 	public E set(int index, E element) {
-		// TODO Auto-generated method stub
-		return null;
+		return items.set(index, element);
 	}
 
 	@Override
@@ -195,14 +182,12 @@ public class PCList<E> extends PCObject implements SortableCollection<E> {
 
 	@Override
 	public Object[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
+		return items.toArray();
 	}
 
 	@Override
 	public <T> T[] toArray(T[] a) {
-		// TODO Auto-generated method stub
-		return null;
+		return items.toArray(a);
 	}
 
 	@Override
@@ -211,7 +196,7 @@ public class PCList<E> extends PCObject implements SortableCollection<E> {
 	}
 
 	@Override
-	public void sort() { 
+	public void sort() {
 		@SuppressWarnings("unchecked")
 		E tmp[] = (E[]) items.toArray();
 		Arrays.sort(tmp);

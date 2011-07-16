@@ -1,12 +1,15 @@
 tree grammar TypeChecker;
 
 options {
-     output    = AST;
-     superClass = AbstractTypeChecker;
-     tokenVocab = TParser;
+     output       = AST;
+     superClass   = AbstractTypeChecker;
+     tokenVocab   = TParser;
      ASTLabelType = TypedTree;
 }
 
+// This is used to handle the scope of all identifiers. There is one level for
+// the whole program containing all function definitions encountered so far and
+// one for every layer of blocks we are currently in.
 scope Symbols {
     Map<String,Type> symbols;
 }
@@ -22,19 +25,28 @@ import java.util.HashMap;
 
 
 @members {
+	/**
+	 * Some shortcuts for commonly used types
+	 */
 	private Type integer  = SimpleType.create("Integer");
 	private Type bool     = SimpleType.create("Boolean");
 	private Type floating = SimpleType.create("Float");
 	private Type Void     = SimpleType.create("Void");
 	private Type any      = SimpleType.wildcard;
-    private Type Array    = ArrayType.wildcard;
-    private Type Function = FunctionType.wildcard;
+	private Type Array    = ArrayType.wildcard;
+	private Type Function = FunctionType.wildcard;
 
+	/**
+	 * This variable is used to keep track about which function we are currently
+	 * in. Using this we can decide whether there should be parameter for a
+	 * return statement, and if yes which type it is supposed to have.
+	 */
 	private String currentFunction = null;
 
 	/**
 	 * Get the type of a symbol from the symbol table if it is valid in the current
 	 * scope.
+	 *
 	 * @param id	The symbol's name
 	 * @return	The type the symbol has, or 'null' if it is not defined in the
 	 *		current scope
@@ -53,36 +65,40 @@ scope Symbols;
     $Symbols::symbols = new HashMap<String,Type>();
     List<Type> args = new ArrayList<Type>();
     args.add(any);
-    $Symbols::symbols.put("print", FunctionType.create(args, Void));
+    $Symbols::symbols.put("print", FunctionType.create(args, Void)); // TODO handle built-in functions more flexibly
 }
     : ^(PROG functionDefinition* mainFunction)
     ;
 
 functionDefinition
 @init { Type ret = Void; }
-    :
-    ^(FUNC ident ^(TYPE type? { ret = $type.t; }) ^(PARAMS p=formalParams?) {
+    : ^(FUNC ident ^(TYPE type? { ret = $type.t; }) ^(PARAMS p=formalParams?) {
         $Symbols::symbols.put($ident.text, FunctionType.create(null != $p.t ? $p.t : new ArrayList<Type>(), ret));
         currentFunction = $ident.text;
     } block { currentFunction = null; })
     ;
 
 mainFunction
-    :
-    ^(FUNC MAIN ^(PARAMS formalParams?) {
+    : ^(FUNC MAIN ^(PARAMS formalParams?) {
         $Symbols::symbols.put("main", FunctionType.create(new ArrayList<Type>(), Void));
         currentFunction = "main";
     }
     block { currentFunction = null; })
     ;
 
+/**
+ * Return a list of types of the paramaters a function takes.
+ */
 formalParams returns [List<Type> t]
 @init {$t = new ArrayList<Type>();}
     : (param {$t.add($param.t);})+
     ;
 
+/**
+ * Return what type a single parameter was declared as.
+ */
 param returns [Type t]
-    :  ^(DECL type ident) {
+    : ^(DECL type ident) {
         $t = $type.t;
         $Symbols::symbols.put($ident.text, $t);
     }
@@ -97,8 +113,8 @@ scope Symbols;
     ;
 
 type returns [Type t]
-    : ID                 { $t = SimpleType.create($ID.text); }
-    | ^(ARRAY base=type) { $t = ArrayType.create($base.t); }
+    : ID                                     { $t = SimpleType.create($ID.text); }
+    | ^(ARRAY base=type)                     { $t = ArrayType.create($base.t); }
     | ^(COMPLEX container=type element=type) { $t = SimpleType.create($container.t.toString(), $element.t);}
     ;
 
@@ -114,13 +130,16 @@ options { backtrack = true; }
     | ^(RETURN expr[((FunctionType)getTypeByName(currentFunction)).getReturnType()]?) {
       Type tmp = ((FunctionType)getTypeByName(currentFunction)).getReturnType();
       if (tmp.equals(Void) && $expr.text != null)
-          System.err.println("Trying to return non-void from void function: " + $RETURN.line + ", " + $RETURN.pos);
+          reportError(new InvalidReturnException(tmp, $expr.t, currentFunction,
+              $expr.tree.toString(), $expr.start.getLine(),
+              $expr.start.getCharPositionInLine()));
       else if (!tmp.equals(Void) && $expr.text == null)
-          System.err.println("Trying to return void from non-void function: " + $RETURN.line + ", " + $RETURN.pos);
+          reportError(new InvalidReturnException(tmp, null, currentFunction,
+          null, $RETURN.getLine(), $RETURN.getCharPositionInLine()));
     }
     | ^(IF_ELSE expr[bool] ^(STAT statement terminator?) ^(STAT statement terminator?))
     | ^(IF expr[bool] ^(STAT statement statement?))
-    | ^(FOR param expr[Array] statement)
+    | ^(FOR param expr[ArrayType.create($param.t)] statement)
     | ^(WHILE expr[bool] statement)
     | block
     | terminator
@@ -132,14 +151,8 @@ declaration returns [Type t]
     ;
 
 assignment
-    : ^(ASSIGN postfixExpr[any] expr[$postfixExpr.t]) {
-        if ($postfixExpr.isFunctionCall) {
-              throw new FailedPredicateException(input, "assignment", "!postfixExpr.isFunctionCall");
-        }
-    }
+    : ^(ASSIGN postfixExpr[any] expr[$postfixExpr.t])
     ;
-
-
 
 expr[Type expected] returns [Type t]
 @init { Type e = $expected; }

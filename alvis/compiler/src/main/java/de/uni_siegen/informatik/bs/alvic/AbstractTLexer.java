@@ -110,7 +110,7 @@ public abstract class AbstractTLexer extends Lexer {
 	}
 
 	/**
-	 * Lex the whole input stream. This is used to get a list of all tokens for auto completion.
+	 * Add all predefined types and keywords to a list. This is used for auto completion.
 	 */
 	abstract protected void allTokens();
 
