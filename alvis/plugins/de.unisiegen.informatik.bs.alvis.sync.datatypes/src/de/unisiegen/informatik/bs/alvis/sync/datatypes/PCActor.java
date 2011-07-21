@@ -5,7 +5,7 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCString;
 
-public class PseudoCodeActor extends PCObject {
+public class PCActor extends PCObject {
 	
 	protected static final String TYPENAME = "Actor";
 	private PCBoolean doStep;
@@ -57,7 +57,7 @@ public class PseudoCodeActor extends PCObject {
 	@Override
 	public boolean equals(PCObject toCheckAgainst) {
 		try {
-			PseudoCodeActor a = (PseudoCodeActor) toCheckAgainst;
+			PCActor a = (PCActor) toCheckAgainst;
 			if (a.get("doStep").equals(this.doStep) && a.get("isBlocked").equals(this.isBlocked)) {
 				return true;
 			} else {

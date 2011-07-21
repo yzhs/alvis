@@ -5,14 +5,14 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCString;
 
-public class PseudoCodeCondition extends PCObject {
+public class PCCondition extends PCObject {
 	
 	protected static final String TYPENAME = "Condition";
-	private PseudoCodeSemaphore sema;
+	private PCSemaphore sema;
 	private PCInteger waiting;
 	private PCString name;
 	
-	public void wait(PseudoCodeActor a) {
+	public void wait(PCActor a) {
 		synchronized (this) {
 			sema.V();
 			try {
@@ -59,7 +59,7 @@ public class PseudoCodeCondition extends PCObject {
 	@Override
 	public PCObject set(String memberName, PCObject value) {
 		if (memberName.equals("Semaphore")) {
-			PseudoCodeSemaphore s = (PseudoCodeSemaphore) value;
+			PCSemaphore s = (PCSemaphore) value;
 			sema = s;
 			return this;
 		} else if (memberName.equals("waiting")) {
@@ -73,7 +73,7 @@ public class PseudoCodeCondition extends PCObject {
 	@Override
 	public boolean equals(PCObject toCheckAgainst) {
 		try {
-			PseudoCodeCondition c = (PseudoCodeCondition) toCheckAgainst;
+			PCCondition c = (PCCondition) toCheckAgainst;
 			if ((c.get("semaphore").equals(this.sema)) && (c.get("waiting").equals(this.waiting))) {
 				return true;
 			} else {

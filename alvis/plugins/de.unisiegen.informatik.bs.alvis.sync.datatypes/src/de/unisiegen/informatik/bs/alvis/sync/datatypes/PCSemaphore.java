@@ -5,18 +5,18 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCString;
 
-public class PseudoCodeSemaphore extends PCObject {
+public class PCSemaphore extends PCObject {
 
 	protected static final String TYPENAME = "Semaphore";
 	private PCInteger counter;
 	private PCString name;
 
-	public PseudoCodeSemaphore(PCInteger counter, PCString name) {
+	public PCSemaphore(PCInteger counter, PCString name) {
 		this.counter = counter;
 		this.name = name;
 	}
 
-	public synchronized void P(PseudoCodeActor a) {
+	public synchronized void P(PCActor a) {
 		try {
 			counter.sub(new PCInteger(1));
 			// vis.setState(this.counterVis);
@@ -42,11 +42,11 @@ public class PseudoCodeSemaphore extends PCObject {
 
 	@Override
 	public String toString() {
-		return PseudoCodeSemaphore.TYPENAME +  name.getLiteralValue() + ": " + counter.getLiteralValue();
+		return PCSemaphore.TYPENAME +  name.getLiteralValue() + ": " + counter.getLiteralValue();
 	}
 
 	public static String getTypeName() {
-		return PseudoCodeSemaphore.TYPENAME;
+		return PCSemaphore.TYPENAME;
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class PseudoCodeSemaphore extends PCObject {
 
 	@Override
 	public boolean equals(PCObject toCheckAgainst) {
-		PseudoCodeSemaphore s = (PseudoCodeSemaphore) toCheckAgainst;
+		PCSemaphore s = (PCSemaphore) toCheckAgainst;
 		if ((((PCString) s.get("name")).equals((PCString) this.get("name")))
 				&& (((PCInteger) s.get("counter")).equals((PCInteger) this
 						.get("counter")))) {
