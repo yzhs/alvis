@@ -30,7 +30,7 @@ options {
 		tokenText.addAll(types);
 
 		// adding all identifiers for autocompletion
-		for (Token tok : this.getIdentifier()) {
+		for (Token tok : this.getIdentifiers()) {
 			if (!isKnownToken(tok)) {
 				tokenText.add(tok.getText());
 			}
@@ -81,7 +81,7 @@ options {
 	/**
 	 * @return List of all Tokens in the input stream that are identifiers
 	 */
-	public List<Token> getIdentifier() {
+	public List<Token> getIdentifiers() {
 		this.scan();
 		ArrayList<Token> result = new ArrayList<Token>();
 		

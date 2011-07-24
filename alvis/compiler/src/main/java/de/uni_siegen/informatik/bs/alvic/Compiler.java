@@ -202,6 +202,10 @@ public class Compiler {
 		return types.get(className);
 	}
 
+	public TLexer getLexer() {
+		return lexer;
+	}
+
 	public TParser getParser() {
 		return parser;
 	}

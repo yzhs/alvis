@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.Token;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 
@@ -230,6 +231,37 @@ public class CompilerAccess {
 	 */
 	public void setDatatypePackages(Collection<String> datatypePackages) {
 		this.packages = datatypePackages;
+	}
+
+	/**
+	 * Return probable completions for the given token.
+	 * 
+	 * @return List of String which could be useful
+	 */
+	public List<String> tryAutoCompletion(Token toComplete) {
+		return compiler.getLexer().tryAutoCompletion(toComplete);
+	}
+
+	/**
+	 * @return List of Tokens that are forbidden because they are Java keywords.
+	 */
+	public List<Token> getForbidden() {
+		return compiler.getLexer().getForbidden();
+	}
+
+	/**
+	 * @return List of all identifiers used in the code
+	 */
+	public List<Token> getIdentifiers() {
+		return compiler.getLexer().getIdentifiers();
+	}
+
+	/**
+	 * @return List of all keywords the compiler recognizes (e.g. 'if', 'else',
+	 *         ...)
+	 */
+	public List<Token> getKeywords() {
+		return compiler.getLexer().getKeywords();
 	}
 
 	/**

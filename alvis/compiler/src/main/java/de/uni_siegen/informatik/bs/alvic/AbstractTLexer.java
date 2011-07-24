@@ -229,7 +229,7 @@ public abstract class AbstractTLexer extends Lexer {
 	/**
 	 * @return List of all identifiers used in the code
 	 */
-	public abstract List<Token> getIdentifier();
+	public abstract List<Token> getIdentifiers();
 
 	/**
 	 * @return List of all keywords the compiler recognizes (e.g. 'if', 'else',
