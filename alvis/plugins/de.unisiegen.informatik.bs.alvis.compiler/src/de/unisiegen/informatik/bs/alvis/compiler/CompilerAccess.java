@@ -57,6 +57,9 @@ public class CompilerAccess {
 
 	/**
 	 * Use the compiler to compile the source code found in the given file.
+	 * Before calling this method you should provide the names of all packages
+	 * and classes that the user may use (using the setDatatypes and
+	 * setDatatypePackages methods).
 	 * 
 	 * @param path
 	 *            path to the source code that
