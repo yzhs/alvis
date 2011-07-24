@@ -32,6 +32,7 @@ import java.util.HashMap;
 	private Type bool     = SimpleType.create("Boolean");
 	private Type floating = SimpleType.create("Float");
 	private Type Void     = SimpleType.create("Void");
+	private Type str      = SimpleType.create("String");
 	private Type any      = SimpleType.wildcard;
 	private Type Array    = ArrayType.wildcard;
 	private Type Function = FunctionType.wildcard;
@@ -231,11 +232,11 @@ expr[Type expected] returns [Type t]
              |MINUS arg=expr[e]
              )) { $t = $arg.t; checkTypes(e, $t, $text, $start); $SIGN.tree.setVarType($t); } //TODO handle negate methods that change the type
     | postfixExpr[$expected] { $t=$postfixExpr.t; $postfixExpr.tree.setVarType($t); }
-    | BOOL   { $t = bool; checkTypes($expected, $t, $BOOL.text, $BOOL); $BOOL.tree.setVarType($t); }
-    | FLOAT  { $t = floating; checkTypes($expected, $t, $FLOAT.text, $FLOAT); $FLOAT.tree.setVarType($t); }
-    | INT    { $t = integer; checkTypes($expected, $t, $INT.text, $INT); $INT.tree.setVarType($t); }
-    | STRING { $t = SimpleType.create("String"); checkTypes($expected, $t, $STRING.text, $STRING); $STRING.tree.setVarType($t); }
-    | NULL   { $t = $expected; $NULL.tree.setVarType($expected); }
+    | BOOL   { $t = bool;     checkTypes($expected, $t,   $BOOL.text,   $BOOL);   $BOOL.tree.setVarType($t); }
+    | FLOAT  { $t = floating; checkTypes($expected, $t,  $FLOAT.text,  $FLOAT);  $FLOAT.tree.setVarType($t); }
+    | INT    { $t = integer;  checkTypes($expected, $t,    $INT.text,    $INT);    $INT.tree.setVarType($t); }
+    | STRING { $t = str;      checkTypes($expected, $t, $STRING.text, $STRING); $STRING.tree.setVarType($t); }
+    | NULL   { $t = $expected; $NULL.tree.setVarType($expected);  }
     | INFTY  { $t = $expected; $INFTY.tree.setVarType($expected); }
     ;
 
@@ -245,7 +246,7 @@ postfixExpr[Type expected] returns [boolean isFunctionCall, Type t]
     : left=ident {
         if (!isDefined($left.text)) {
             $t = SimpleType.create("# NoSuchIdentifier #");
-            throw new UnknownIdentifierException($left.text, $left.start.getLine(), $left.start.getCharPositionInLine());
+            reportError(new UnknownIdentifierException($left.text, $left.start.getLine(), $left.start.getCharPositionInLine()));
         } else
             $t = $left.t;
         $ident.tree.setVarType($t);

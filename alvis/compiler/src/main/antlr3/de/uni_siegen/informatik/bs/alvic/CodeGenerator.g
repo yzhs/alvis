@@ -1,11 +1,10 @@
 tree grammar CodeGenerator;
 
 options {
-    // Use the vocab from the parser (not the lexer)
-    tokenVocab = TParser;
+    tokenVocab   = TypeChecker;
+    output       = template;
+    k            = 0;
     ASTLabelType = TypedTree;
-    k = 0;
-    output = template;
 }
 
 // What package should the generated source exist in?
