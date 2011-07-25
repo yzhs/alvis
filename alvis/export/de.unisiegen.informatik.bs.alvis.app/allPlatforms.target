@@ -22,13 +22,6 @@
 <unit id="org.eclipse.zest.feature.group" version="1.2.0.v20100519-2050-67818yE6F-AA7P4B8I52322"/>
 <unit id="org.eclipse.zest.sdk.feature.group" version="1.2.0.v20100519-2050-67918COKNHAKQZIHNTdWQTdUL7UM"/>
 <unit id="org.eclipse.zest.source.feature.group" version="1.2.0.v20100519-2050-67818yE6F-AA7P4B8I52322"/>
-<unit id="org.eclipse.xtext.sdk.feature.group" version="1.0.2.v201102150722"/>
-<unit id="org.eclipse.emf.ecoretools.sdk.feature.group" version="0.10.0.v20100615-1639"/>
-<unit id="org.eclipse.emf.sdk.feature.group" version="2.6.1.v20100914-1218"/>
-<unit id="org.eclipse.emf.mwe2.language.sdk.feature.group" version="1.0.2.v201102151014"/>
-<unit id="org.eclipse.emf.mwe2.runtime.sdk.feature.group" version="1.0.2.v201102150556"/>
-<unit id="org.eclipse.emf.mwe.sdk.feature.group" version="1.0.2.v201102150556"/>
-<unit id="org.eclipse.xpand.sdk.feature.group" version="1.0.1.v201008251147"/>
 <repository location="http://download.eclipse.org/releases/helios"/>
 </location>
 <location includeAllPlatforms="true" includeMode="slicer" type="InstallableUnit">
