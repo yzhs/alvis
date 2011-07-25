@@ -70,8 +70,34 @@ public class CompilerAccess {
 	 * @throws RecognitionException
 	 */
 	public File compile(String path) throws IOException, RecognitionException {
-		algorithmPath = currentPath() + path;
-
+		return compile(path,false);
+		
+	}
+	
+	/**
+	 * Use the compiler to compile the source code found in the given file.
+	 * Before calling this method you should provide the names of all packages
+	 * and classes that the user may use (using the setDatatypes and
+	 * setDatatypePackages methods).
+	 * 
+	 * @param path
+	 *            path to the source code that
+	 * @param isAbsolutePath true if the path is absolute.
+	 * @return path to the generated .java file if it exists, null otherwise
+	 * 
+	 * @throws IOException
+	 * @throws RecognitionException
+	 */
+	public File compile(String path, Boolean isAbsolutePath) throws RecognitionException, IOException
+	{
+		if(isAbsolutePath)
+		{
+			algorithmPath = path;
+		}
+		else
+		{
+			algorithmPath = currentPath() + path;
+		}
 		compiler = new Compiler(types, packages);
 		String javaCode = compiler.compile(readFile(algorithmPath));
 
@@ -86,7 +112,7 @@ public class CompilerAccess {
 		File result = null;
 		BufferedWriter out = null;
 		try {
-			result = new File(currentPath() + getWorkspacePath(path)
+			result = new File(getWorkspacePath(algorithmPath)
 					+ "Algorithm.java");
 			// new File(path).getName().toString().replaceAll("\\.[^.]*$",
 			// ".java"));
@@ -100,7 +126,7 @@ public class CompilerAccess {
 			if (out != null)
 				out.close();
 		}
-		return result;
+		return result;		
 	}
 
 	private String currentPath() {
