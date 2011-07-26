@@ -26,9 +26,6 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditor;
 import org.eclipse.ui.texteditor.AbstractTextEditor;
-
-import org.eclipse.xtext.ui.editor.XtextEditor;
-
 import com.itextpdf.text.Anchor;
 import com.itextpdf.text.Chapter;
 import com.itextpdf.text.Document;
@@ -42,6 +39,7 @@ import com.itextpdf.text.html.simpleparser.StyleSheet;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
+import de.unisiegen.informatik.bs.alvis.editors.AlgorithmEditor;
 import de.unisiegen.informatik.bs.alvis.editors.Messages;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 
@@ -463,13 +461,13 @@ public class PdfExport extends Document {
 
 	private StyledText getStyledText() {
 
-		XtextEditor edit = null;
+		AlgorithmEditor edit = null;
 
 		// Get active page:
 		IWorkbenchPage page = PlatformUI.getWorkbench()
 				.getActiveWorkbenchWindow().getActivePage();
 		try {
-			edit = (XtextEditor) page.getActiveEditor();
+			edit = (AlgorithmEditor) page.getActiveEditor();
 		} catch (ClassCastException ccee) {
 		}
 
@@ -495,7 +493,7 @@ public class PdfExport extends Document {
 		//
 		// }
 
-		return edit.getInternalSourceViewer().getTextWidget();
+		return edit.getTextWidget();
 	}
 
 }

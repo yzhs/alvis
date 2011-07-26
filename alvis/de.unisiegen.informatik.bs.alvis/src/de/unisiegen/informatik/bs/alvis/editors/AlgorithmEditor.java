@@ -3,9 +3,12 @@
  */
 package de.unisiegen.informatik.bs.alvis.editors;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+
+import org.antlr.runtime.RecognitionException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.text.BadLocationException;
@@ -25,14 +28,12 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IFileEditorInput;
-import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditor;
-import org.eclipse.xtext.ui.editor.XtextEditor;
 
+import de.unisiegen.informatik.bs.alvis.Activator;
+import de.unisiegen.informatik.bs.alvis.compiler.CompilerAccess;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 
 /**
@@ -62,8 +63,8 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 		PlatformUI.getWorkbench().getDisplay();
 		Color highlightColor = new Color(Display.getCurrent(), new RGB(111, 33,
 				152));
+		/** filling Tokens to highlight */
 
-		/** filling with test highlight Tokens */
 		ArrayList<String> highlightTokens = new ArrayList<String>();
 		String[] proposals = { "abstract", "boolean", "break", "byte", "case",
 				"catch", "char", "class", "continue", "default", "do",
@@ -105,6 +106,19 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 		viewer.doOperation(ProjectionViewer.TOGGLE);
 
 		annotationModel = viewer.getProjectionAnnotationModel();
+//		CompilerAccess.getDefault().setDatatypePackages(Activator.getDefault().getAllDatatypesPackagesInPlugIns());
+//		CompilerAccess.getDefault().setDatatypes(Activator.getDefault().getAllDatatypesInPlugIns());
+//		IFileEditorInput input = (IFileEditorInput) getEditorInput();
+//		try {
+//			CompilerAccess.getDefault().compile(input.getFile().getRawLocation().toString(),true);
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (RecognitionException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+
 	}
 
 	@Override
@@ -124,7 +138,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 		super.doSave(progressMonitor);
 		// TODO rethink the calling of these two methods, to better "timings"
 		calculatePositions();
-		markErrors();
+		markErrors();		
 
 	}
 

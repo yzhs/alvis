@@ -10,7 +10,6 @@ import org.antlr.runtime.CharStream;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
@@ -32,10 +31,10 @@ import org.eclipse.ui.internal.PartPane;
 import org.eclipse.ui.internal.PartSite;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.ViewPart;
-import org.eclipse.xtext.ui.editor.XtextEditor;
 
 import de.uni_siegen.informatik.bs.alvic.TLexer;
 import de.unisiegen.informatik.bs.alvis.Activator;
+import de.unisiegen.informatik.bs.alvis.editors.AlgorithmEditor;
 import de.unisiegen.informatik.bs.alvis.tools.IO;
 
 /**
@@ -72,7 +71,7 @@ public class RunAlgorithm extends ViewPart implements PropertyChangeListener {
 		IWorkspaceRoot workspaceRoot = ResourcesPlugin.getWorkspace().getRoot();
 		IFile iFile = (IFile) workspaceRoot.findMember(p);
 
-		/** ENDOF Gettin IFile */
+		/** ENDOF Getting IFile */
 		IEditorDescriptor editorDescriptor = PlatformUI.getWorkbench()
 				.getEditorRegistry().getDefaultEditor(iFile.getName());
 		try {
@@ -80,17 +79,16 @@ public class RunAlgorithm extends ViewPart implements PropertyChangeListener {
 			IEditorPart editor = page.openEditor(new FileEditorInput(iFile),
 					editorDescriptor.getId());
 
-			/** get StyledText from Widget if it's an XtextEditor */
-			if (editor.getClass().getSimpleName().equals("XtextEditor")) {
-				XtextEditor xtextEditor = (XtextEditor) editor;
+			/** get StyledText from Widget if it's an AlgorithmEditor */
+			if (editor.getClass().getSimpleName().equals("AlgorithmEditor")) {
+				AlgorithmEditor algorithmEditor = (AlgorithmEditor) editor;
 				RowLayout rowLayout = new RowLayout();
 				rowLayout.type = SWT.VERTICAL;
 				parent.setLayout(new GridLayout(1, false));
 
 				text = new StyledText(parent, SWT.MULTI | SWT.BORDER
 						| SWT.V_SCROLL | SWT.H_SCROLL);
-				StyledText editorText = xtextEditor.getInternalSourceViewer()
-						.getTextWidget();
+				StyledText editorText = algorithmEditor.getTextWidget();
 
 				/** start copy styled Text */
 				text.setText(editorText.getText());
@@ -101,18 +99,12 @@ public class RunAlgorithm extends ViewPart implements PropertyChangeListener {
 				PlatformUI.getWorkbench().getActiveWorkbenchWindow()
 						.getActivePage().closeEditor(editor, false);
 				/** minimize Editor Area */
-				// TODO correct this please , it's just temporary nothing better
-				// found
-				PartPane currentEditorPartPane = ((PartSite) PlatformUI
-						.getWorkbench().getActiveWorkbenchWindow()
-						.getActivePage().getActiveEditor().getSite()).getPane();
-				currentEditorPartPane.getStack().setMinimized(true);
+
 
 				text.setParent(parent);
 				text.setEditable(false);
 				text.setFont(new Font(null, "Courier New", 12, SWT.NORMAL));
 				text.setBackground(new Color(null, 255, 255, 255));
-//				text.setLineBackground(2, 2, new Color(null, 255, 0 ,0));
 
 				Activator.getDefault().getAlgorithmContainer()
 				.addPropertyChangeListener(this);
@@ -129,6 +121,13 @@ public class RunAlgorithm extends ViewPart implements PropertyChangeListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		// TODO correct this please , it's just temporary nothing better
+		// found
+		PartPane currentEditorPartPane = ((PartSite) PlatformUI.getWorkbench()
+				.getActiveWorkbenchWindow().getActivePage().getActiveEditor()
+				.getSite()).getPane();
+		currentEditorPartPane.getStack().setMinimized(true);
 		//
 		// RowLayout rowLayout = new RowLayout();
 		// rowLayout.type = SWT.VERTICAL;

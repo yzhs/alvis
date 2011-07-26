@@ -35,10 +35,10 @@ import org.eclipse.ui.internal.PartPane;
 import org.eclipse.ui.internal.PartSite;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.ViewPart;
-import org.eclipse.xtext.ui.editor.XtextEditor;
 
 import de.uni_siegen.informatik.bs.alvic.TLexer;
 import de.unisiegen.informatik.bs.alvis.Activator;
+import de.unisiegen.informatik.bs.alvis.editors.AlgorithmEditor;
 import de.unisiegen.informatik.bs.alvis.tools.IO;
 
 /**
@@ -80,15 +80,14 @@ public class RunAlgorithmWithStyledText extends ViewPart implements PropertyChan
 
 			/** get StyledText from Widget if it's an XtextEditor */
 			if (editor.getClass().getSimpleName().equals("XtextEditor")) {
-				XtextEditor xtextEditor = (XtextEditor) editor;
+				AlgorithmEditor xtextEditor = (AlgorithmEditor) editor;
 				RowLayout rowLayout = new RowLayout();
 				rowLayout.type = SWT.VERTICAL;
 				parent.setLayout(new GridLayout(1, false));
 
 				text = new StyledText(parent, SWT.MULTI | SWT.BORDER | SWT.WRAP
 						| SWT.V_SCROLL);
-				StyledText editorText = xtextEditor.getInternalSourceViewer()
-						.getTextWidget();
+				StyledText editorText = xtextEditor.getTextWidget();
 
 				/** start copy styled Text */
 				text.setText(editorText.getText());

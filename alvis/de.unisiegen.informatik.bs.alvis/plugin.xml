@@ -93,7 +93,7 @@
             class="de.unisiegen.informatik.bs.alvis.editors.AlgorithmEditor"
             contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
             default="true"
-            extensions="algoAlt"
+            extensions="algo"
             icon="icons/extension/ext_algo.png"
             id="de.unisiegen.informatik.bs.alvis.editors.AlgorithmEditor"
             name="%editor.name">
