@@ -178,10 +178,10 @@ public class Compiler {
 		codeGenerator.setTemplateLib(readTemplates(templates));
 		CodeGenerator.prog_return r = codeGenerator.prog();
 		StringTemplate st = (StringTemplate) r.getTemplate();
-		if (st == null)
-			exceptions.add(new NullPointerException());
-		else
+		if (st != null)
 			result = imports() + st.toString();
+//		else
+//			exceptions.add(new NullPointerException());
 
 		if (0 != exceptions.size()) {
 			System.err.println(exceptions.size() + " exception(s) occured");
