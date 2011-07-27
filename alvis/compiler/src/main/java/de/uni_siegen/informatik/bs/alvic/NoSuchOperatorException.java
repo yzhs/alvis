@@ -1,5 +1,7 @@
 package de.uni_siegen.informatik.bs.alvic;
 
+import org.antlr.runtime.Token;
+
 import de.uni_siegen.informatik.bs.alvic.UnknownOperatorException;
 
 /**
@@ -25,29 +27,18 @@ public class NoSuchOperatorException extends UnknownOperatorException {
 	 * @param arguments
 	 *            The number of arguments the operator is supposed to take
 	 *            (should be 0 or 1)
-	 * @param line
-	 *            Line in which the operator is used.
-	 * @param column
-	 *            Column in which the operator is used.
+	 * @param token
+	 *            The operator token
 	 */
-	public NoSuchOperatorException(Type object, String op, int arguments,
-			int line, int column) {
-		super(object, op, line, column);
+	public NoSuchOperatorException(Type object, String op, int arguments, Token token) {
+		super(object, op, token);
 		this.arguments = arguments;
 	}
 
 	@Override
 	public String toString() {
-		return "Operator error ("
-				+ line
-				+ ":"
-				+ column
-				+ "): There is "
-				+ "no operator '"
-				+ member
-				+ "' for objects of type '"
-				+ object
-				+ "'"
+		return "Operator error " + getPos() + ": There is "
+				+ "no operator '" + member + "' for objects of type '" + object + "'"
 				+ ((arguments == 0) ? "." : (" taking exactly " + arguments
 						+ " arguments of a " + "subtype of '" + object + "'."));
 	}

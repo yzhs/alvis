@@ -1,6 +1,7 @@
 package de.uni_siegen.informatik.bs.alvic;
 
 import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.Token;
 
 /**
  * Implementations of this exception are used to handle all type checker
@@ -13,8 +14,13 @@ public abstract class TypeException extends RecognitionException {
 	
 	public abstract String toString();
 
-	protected TypeException(int line, int column) {
-		this.line = line;
-		this.charPositionInLine = column;
+	protected TypeException(Token token) {
+		this.token = token;
+		this.line = token.getLine();
+		this.charPositionInLine = token.getCharPositionInLine();
+	}
+
+	String getPos() {
+		return "(" + line + ":" + charPositionInLine + ")";
 	}
 }

@@ -132,11 +132,10 @@ options { backtrack = true; }
       Type tmp = ((FunctionType)getTypeByName(currentFunction)).getReturnType();
       if (tmp.equals(Void) && $expr.text != null)
           reportError(new InvalidReturnException(tmp, $expr.t, currentFunction,
-              $expr.tree.toString(), $expr.start.getLine(),
-              $expr.start.getCharPositionInLine()));
+              $expr.tree.toString(), $expr.start.getToken()));
       else if (!tmp.equals(Void) && $expr.text == null)
           reportError(new InvalidReturnException(tmp, null, currentFunction,
-          null, $RETURN.getLine(), $RETURN.getCharPositionInLine()));
+          null, $RETURN.getToken()));
     }
     | ^(IF_ELSE expr[bool] ^(STAT statement terminator?) ^(STAT statement terminator?))
     | ^(IF expr[bool] ^(STAT statement statement?))
@@ -246,7 +245,7 @@ postfixExpr[Type expected] returns [boolean isFunctionCall, Type t]
     : left=ident {
         if (!isDefined($left.text)) {
             $t = SimpleType.create("# NoSuchIdentifier #");
-            reportError(new UnknownIdentifierException($left.text, $left.start.getLine(), $left.start.getCharPositionInLine()));
+            reportError(new UnknownIdentifierException($left.text, $left.start.getToken()));
         } else
             $t = $left.t;
         $ident.tree.setVarType($t);

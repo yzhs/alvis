@@ -1,5 +1,7 @@
 package de.uni_siegen.informatik.bs.alvic;
 
+import org.antlr.runtime.Token;
+
 /**
  * This exception describes the problem that a function is called with the
  * wrong number of arguments.
@@ -24,16 +26,15 @@ public class ArgumentNumberException extends TypeException {
 	 */
 	protected int expected;
 
-	public ArgumentNumberException(String method, int expected, int given,
-	                               int line, int column) {
-		super(line, column);
+	public ArgumentNumberException(String method, int expected, int given, Token token) {
+		super(token);
 		this.method = method;
 		this.expected = expected;
 		this.given = given;
 	}
 
 	public String toString() {
-		return "Argument error (" + line + ":" + column + "): Method "
+		return "Argument error " + getPos() + ": Method "
 		    + " '" + method + "' expects " + expected + " parameters "
 		    + "but is called with " + given + " arguments.";
 	}

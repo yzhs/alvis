@@ -1,5 +1,7 @@
 package de.uni_siegen.informatik.bs.alvic;
 
+import org.antlr.runtime.Token;
+
 /**
  * This exception is used when the user writes something like 'x,', that is some
  * expression 'x' that is not a function call where a statement was expected.
@@ -16,18 +18,16 @@ public class InvalidStatementException extends TypeException {
 	/**
 	 * @param expr
 	 *            The expression that is no statement but used as one.
-	 * @param line
-	 *            The line of the expression.
-	 * @param column
-	 *            The column of the expression.
+	 * @param token
+	 *            A token of the expression.
 	 */
-	public InvalidStatementException(String expr, int line, int column) {
-		super(line, column);
+	public InvalidStatementException(String expr, Token token) {
+		super(token);
 		this.expr = expr;
 	}
 
 	public String toString() {
-		return "Syntax error ("	+ line + ":" + column + "): Found '" + expr
+		return "Syntax error " + getPos() + ": Found '" + expr
 				+ "' which is not a valid statement but used where a statement"
 				+ " was expected.";
 	}

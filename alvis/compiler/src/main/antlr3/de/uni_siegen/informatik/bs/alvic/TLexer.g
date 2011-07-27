@@ -72,6 +72,7 @@ options {
 			    token.getType() == SCOPEL ||
 			    token.getType() == SCOPER ||
 			    token.getType() == JAVAKEYWORD) {
+                System.out.println("found keyword " + token.toString());
 				result.add(token);
 			}
 		}

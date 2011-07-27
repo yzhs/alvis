@@ -1,6 +1,8 @@
 package de.uni_siegen.informatik.bs.alvic;
 
 import de.uni_siegen.informatik.bs.alvic.UnknownMemberException;
+import org.antlr.runtime.Token;
+
 
 /**
  * This exception describes the problem that the user tries to use an operator
@@ -15,19 +17,17 @@ public class UnknownOperatorException extends UnknownMemberException {
 	 * @param object
 	 *            The left argument of the operator.
 	 * @param op
-	 *            The operator that is not available with this left argument
-	 * @param line
-	 *            The line the operator occurs in.
-	 * @param column
-	 *            The column the operator occurs in.
+	 *            The operator that is not available with this left argument.
+	 * @param token
+	 *            The operator's token.
 	 */
-	public UnknownOperatorException(Type object, String op, int line, int column) {
-		super(object, op, line, column);
+	public UnknownOperatorException(Type object, String op, Token token) {
+		super(object, op, token);
 	}
 
 	@Override
 	public String toString() {
-		return "Operator error (" + line + ":" + column + "): Class '" + object
+		return "Operator error " + getPos() + ": Class '" + object
 				+ "' does not have any operator called '" + member + "'.";
 	}
 }

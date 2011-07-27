@@ -1,5 +1,7 @@
 package de.uni_siegen.informatik.bs.alvic;
 
+import org.antlr.runtime.Token;
+
 /**
  * This exception is thrown when encountering an identifier that was not defined
  * in the current scope.
@@ -20,18 +22,16 @@ public class UnknownIdentifierException extends TypeException {
 	 * 
 	 * @param identifier
 	 *            The name of the identifier in question.
-	 * @param line
-	 *            The line of the identifier.
-	 * @param column
-	 *            The column of the identifier.
+	 * @param token
+	 *            The identifier token.
 	 */
-	public UnknownIdentifierException(String identifier, int line, int column) {
-		super(line, column);
+	public UnknownIdentifierException(String identifier, Token token) {
+		super(token);
 		this.identifier = identifier;
 	}
 
 	public String toString() {
-		return "Type error (" + line + ":" + column + "): Identifier '"
+		return "Type error " + getPos() + ": Identifier '"
 				+ identifier + "' was used before being declared in the "
 				+ "current scope.";
 	}

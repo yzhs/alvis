@@ -125,7 +125,7 @@ statement
     | postfixExpr terminator
     // Java does not allow "variable" or "variable[index]" as statements, so we have to forbid those as well
     { if (!$postfixExpr.isFunctionCall)
-        reportError(new InvalidStatementException($postfixExpr.tree.toString(), $postfixExpr.start.getLine(), $postfixExpr.start.getCharPositionInLine())); }
+        reportError(new InvalidStatementException($postfixExpr.tree.toString(), $postfixExpr.start)); }
     | assignment terminator
 
     /* There is no nice way to generate a breakpoint after a return statement.
@@ -153,7 +153,7 @@ assignment
     : postfixExpr EQUAL expr
     { if ($postfixExpr.isFunctionCall)
         reportError(new InvalidAssignmentException($postfixExpr.tree.getText(),
-            $expr.tree.getText(), $EQUAL.line, $EQUAL.pos));
+            $expr.tree.getText(), $EQUAL));
     } -> ^(ASSIGN[$postfixExpr.start, "ASSIGN"] postfixExpr expr)
     ;
 

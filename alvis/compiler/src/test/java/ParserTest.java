@@ -447,7 +447,7 @@ public class ParserTest {
 	public void arrayIndexSucces() {
 		String algorithm = "main() begin\n" + //$NON-NLS-1$
 		                   "Integer[] a,\n" + //$NON-NLS-1$
-		                   "a[0],\n" + //$NON-NLS-1$
+		                   "a[1] = a[0],\n" + //$NON-NLS-1$
 		                   "end\n"; //$NON-NLS-1$
 		String stringTree = test(algorithm);
 		printAndAssert(stringTree, stringTree.contains("(INDEX a 0)")); //$NON-NLS-1$

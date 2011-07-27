@@ -1,5 +1,7 @@
 package de.uni_siegen.informatik.bs.alvic;
 
+import org.antlr.runtime.Token;
+
 /**
  * This exception is used when the user tries to return something of the wrong
  * type, a function with return-type void contains a return statement with a
@@ -39,14 +41,12 @@ public class InvalidReturnException extends TypeException {
 	 *            The function in question.
 	 * @param stat
 	 *            The actual return statement
-	 * @param line
-	 *            The line of the return statement.
-	 * @param column
-	 *            The column of the return statement.
+	 * @param token
+	 *            The return token.
 	 */
 	public InvalidReturnException(Type expected, Type given, String function,
-			String stat, int line, int column) {
-		super(line, column);
+			String stat, Token token) {
+		super(token);
 		this.expected = expected;
 		this.given = given;
 		this.function = function;
@@ -55,15 +55,14 @@ public class InvalidReturnException extends TypeException {
 
 	public String toString() {
 		if (expected.toString().equalsIgnoreCase("void"))
-			return "Type error (" + line + ":" + column
-					+ "): Trying to return " + "non-void value '" + stat
-					+ "' from function '" + function
+			return "Type error " + getPos() + ": Trying to return non-void "
+					+ "value '" + stat + "' from function '" + function
 					+ "' when an empty return statement was expected.";
 		if (given == null)
-			return "Type error (" + line + ":" + column
-					+ "): Trying to return " + " value of type '" + given
-					+ "' from non-void function '" + function + "'.";
-		return "Type error (" + line + ":" + column + "): Trying to return "
+			return "Type error " + getPos() + ": Trying to return  value of "
+					+ "type '" + given + "' from non-void function '"
+					+ function + "'.";
+		return "Type error " + getPos() + ": Trying to return "
 				+ "value '" + stat + "' of type '" + given
 				+ "' when a value of " + "type '" + expected
 				+ "' was expected.";

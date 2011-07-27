@@ -105,7 +105,7 @@ public class LexerTest {
 				"end\n"; //$NON-NLS-1$
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
-		List<Token> ids = lexer.getIdentifier();
+		List<Token> ids = lexer.getIdentifiers();
 		System.out.println("-----------------");
 		System.out.println(ids.get(1).getText());
 		System.out.println("-----------------");
@@ -174,7 +174,7 @@ public class LexerTest {
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
 		List<Token> keys = lexer.getKeywords();
-		List<Token> ids = lexer.getIdentifier();
+		List<Token> ids = lexer.getIdentifiers();
 		assert (!ids.isEmpty()) && (!keys.isEmpty());
 	}
 
