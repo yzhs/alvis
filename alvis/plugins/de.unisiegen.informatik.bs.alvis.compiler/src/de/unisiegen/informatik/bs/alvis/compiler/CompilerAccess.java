@@ -290,6 +290,14 @@ public class CompilerAccess {
 		return compiler.getLexer().getKeywords();
 	}
 
+	public List<String> allKeywords() {
+		return compiler.getLexer().allKeywords();
+	}
+
+	public List<String> allForbidden() {
+		return compiler.getLexer().allForbidden();
+	}
+
 	/**
 	 * Method for checking whether the compiler is informed correctly about
 	 * available packages and types.

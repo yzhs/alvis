@@ -18,14 +18,8 @@ options {
 	protected void allTokens() {
 		// TODO discuss, is there a nicer way to get all tokens?
 		tokenText = new ArrayList<String>();
-		tokenText.add("if");
-		tokenText.add("else");
-		tokenText.add("begin");
-		tokenText.add("end");
-
-		tokenText.add("for");
-		tokenText.add("while");
-		tokenText.add("in");
+        
+        tokenText.addAll(allKeywords());
 
 		tokenText.addAll(types);
 

@@ -1,5 +1,6 @@
 package de.uni_siegen.informatik.bs.alvic;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.ArrayList;
@@ -236,6 +237,22 @@ public abstract class AbstractTLexer extends Lexer {
 	 *         ...)
 	 */
 	public abstract List<Token> getKeywords();
+
+	public static List<String> allKeywords() {
+		String[] keywords = { "if", "else", "begin", "end", "for", "while", "in", "{", "}", ":" };
+		return Arrays.asList(keywords);
+	}
+
+	public static List<String> allForbidden() {
+		String[] forbidden = { "abstract", "assert", "boolean", "byte", "catch",
+		    "class", "const", "default", "double", "enum", "extends", "final",
+		    "finally", "float", "goto", "implements", "import", "int",
+		    "instanceof", "interface", "long", "native", "new", "package",
+		    "private", "protected", "public", "return", "short", "static",
+		    "strictfp", "super", "synchronized", "this", "throw", "transient",
+		    "try", "void", "volatile" };
+		return Arrays.asList(forbidden);
+	}
 
 	/**
 	 * Get a token given its position.
