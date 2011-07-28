@@ -7,8 +7,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import org.antlr.runtime.RecognitionException;
+import org.antlr.runtime.Token;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.text.BadLocationException;
@@ -61,27 +63,16 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 		// Activator.getDefault().getWorkbench().getEditorRegistry().
 
 		PlatformUI.getWorkbench().getDisplay();
+
+		/** filling Tokens to highlight */
 		Color highlightColor = new Color(Display.getCurrent(), new RGB(111, 33,
 				152));
-		/** filling Tokens to highlight */
-
 		ArrayList<String> highlightTokens = new ArrayList<String>();
-		String[] proposals = { "abstract", "boolean", "break", "byte", "case",
-				"catch", "char", "class", "continue", "default", "do",
-				"double", "else", "extends", "false", "final", "finally",
-				"float", "for", "if", "implements", "import", "instanceof",
-				"int", "interface", "long", "native", "new", "null", "package",
-				"private", "protected", "public", "return", "short", "static",
-				"super", "switch", "synchronized", "this", "throw", "throws",
-				"transient", "true", "try", "void", "volatile", "while" };
-		for (String proposal : proposals) {
-			highlightTokens.add(proposal);
-		}
-		/** endof filling */
-
+		highlightTokens.addAll(CompilerAccess.getDefault().allKeywords());
 		AlgorithmEditorSourceViewerConfiguration sourceViewerConfiguration = new AlgorithmEditorSourceViewerConfiguration(
 				highlightColor, highlightTokens);
 		setSourceViewerConfiguration(sourceViewerConfiguration);
+		/** endof filling */
 		setDocumentProvider(new AlgorithmDocumentProvider());
 	}
 
@@ -104,21 +95,23 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 
 		// turn projection mode on
 		viewer.doOperation(ProjectionViewer.TOGGLE);
-
 		annotationModel = viewer.getProjectionAnnotationModel();
-//		CompilerAccess.getDefault().setDatatypePackages(Activator.getDefault().getAllDatatypesPackagesInPlugIns());
-//		CompilerAccess.getDefault().setDatatypes(Activator.getDefault().getAllDatatypesInPlugIns());
-//		IFileEditorInput input = (IFileEditorInput) getEditorInput();
-//		try {
-//			CompilerAccess.getDefault().compile(input.getFile().getRawLocation().toString(),true);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (RecognitionException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
 
+		/** compile Algorithm first time */
+		CompilerAccess.getDefault().setDatatypePackages(
+				Activator.getDefault().getAllDatatypesPackagesInPlugIns());
+		CompilerAccess.getDefault().setDatatypes(
+				Activator.getDefault().getAllDatatypesInPlugIns());
+		IFileEditorInput input = (IFileEditorInput) getEditorInput();
+		try {
+			CompilerAccess.getDefault().compile(
+					input.getFile().getRawLocation().toString(), true);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		} catch (RecognitionException e) {
+			// TODO Auto-generated catch block
+		}
+		/** endof Compile Algorithm */
 	}
 
 	@Override
@@ -129,7 +122,6 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 
 		// ensure decoration support has been created and configured.
 		getSourceViewerDecorationSupport(viewer).install(getPreferenceStore());
-
 		return viewer;
 	}
 
@@ -138,7 +130,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 		super.doSave(progressMonitor);
 		// TODO rethink the calling of these two methods, to better "timings"
 		calculatePositions();
-		markErrors();		
+		markErrors();
 
 	}
 
@@ -194,7 +186,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 							Annotation currAnnotation = iter.next();
 							if (currAnnotation.getType().equals(
 									ProjectionAnnotation.TYPE))
-								;
+								
 							{
 								// this is how to get the information, whether
 								// folding area is collapsed(folded).
@@ -202,10 +194,35 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 										.isCollapsed();
 							}
 						}
-						fPositions.add(new Position(region.getOffset(), region
-								.getLength() + 1));
-						oldList.add(new Position(region.getOffset(), region
-								.getLength() + 1));
+						List<Token> keywordTokens = CompilerAccess.getDefault().getKeywords();
+						ArrayList<Token> beginTokens = new ArrayList<Token>();
+						ArrayList<Token> endTokens = new ArrayList<Token>();
+						for(Token token:keywordTokens)
+						{
+							System.out.println(token.getText());
+							if(token.getText().equals("begin") || token.getText().equals("begin") )
+							{
+								beginTokens.add(token);
+							}
+							else if(token.getText().equals("end") || token.getText().equals("}"))
+							{
+								endTokens.add(token);
+							}
+						}
+//						while(!beginTokens.isEmpty() && !endTokens.isEmpty())
+//						{
+//							fPositions.add(new Position(getOffset(beginTokens.get(0).getLine(), beginTokens.get(0).getCharPositionInLine()), getOffset(endTokens.get(endTokens.size()-1).getLine(), endTokens.get(endTokens.size()-1).getCharPositionInLine())));
+//							oldList.add(new Position(region.getOffset(), region
+//									.getLength()));
+//						}
+//						System.out.println("Region: " + region.getType());
+//						System.out.println("Offset: " + region.getOffset());
+//						System.out.println("Length: " + region.getLength());
+						
+//						fPositions.add(new Position(region.getOffset(), region
+//								.getLength()));
+//						oldList.add(new Position(region.getOffset(), region
+//								.getLength()));
 
 					}
 				}
@@ -260,5 +277,14 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 	@Override
 	public StyledText getSourceCode() {
 		return null;
+	}
+	public int getOffset(int line, int charPositionInLine)
+	{
+		
+		try {
+			return getSourceViewer().getDocument().getLineOffset(line)+charPositionInLine;
+		} catch (BadLocationException e) {
+			return -1;
+		}
 	}
 }

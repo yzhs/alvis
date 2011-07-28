@@ -42,7 +42,6 @@ public class AlgorithmEditorSourceViewerConfiguration extends
 		SourceViewerConfiguration {
 
 	private ArrayList<String> wordsToHighlight = new ArrayList<String>();
-
 	private Color highlightColor = PlatformUI.getWorkbench().getDisplay()
 			.getSystemColor(SWT.COLOR_BLACK);
 	private IWordDetector wordDetector;
@@ -97,6 +96,8 @@ public class AlgorithmEditorSourceViewerConfiguration extends
 		DefaultDamagerRepairer dr = new DefaultDamagerRepairer(getScanner());
 		reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
 		reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
+		reconciler.setDamager(dr, AlgorithmPartitionScanner.BEGIN_END);
+		reconciler.setRepairer(dr, AlgorithmPartitionScanner.BEGIN_END);
 
 		/** setting color for the Multiline_comment parts */
 		NonRuleBasedDamagerRepairer ndr = new NonRuleBasedDamagerRepairer(
@@ -112,7 +113,6 @@ public class AlgorithmEditorSourceViewerConfiguration extends
 		reconciler.setDamager(ndr, AlgorithmPartitionScanner.SINGLELINE_COMMENT);
 		reconciler
 				.setRepairer(ndr, AlgorithmPartitionScanner.SINGLELINE_COMMENT);
-
 		return reconciler;
 	}
 
@@ -210,6 +210,7 @@ public class AlgorithmEditorSourceViewerConfiguration extends
 			};
 		return whitespaceDetector;
 	}
+
 
 	/**
 	 * @return the wordsToHighlight
