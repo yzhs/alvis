@@ -19,6 +19,7 @@ import org.eclipse.core.runtime.Platform;
 
 import de.unisiegen.informatik.bs.alvis.io.files.FileCopy;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
+import de.uni_siegen.informatik.bs.alvic.AbstractTLexer;
 import de.uni_siegen.informatik.bs.alvic.Compiler;
 
 /**
@@ -291,11 +292,12 @@ public class CompilerAccess {
 	}
 
 	public List<String> allKeywords() {
-		return compiler.getLexer().allKeywords();
+
+		return AbstractTLexer.allKeywords();
 	}
 
 	public List<String> allForbidden() {
-		return compiler.getLexer().allForbidden();
+		return AbstractTLexer.allForbidden();
 	}
 
 	/**
