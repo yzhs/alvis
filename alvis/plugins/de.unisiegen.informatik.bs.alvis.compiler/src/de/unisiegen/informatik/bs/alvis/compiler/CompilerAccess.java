@@ -260,6 +260,10 @@ public class CompilerAccess {
 		this.packages = datatypePackages;
 	}
 
+	public void reLex() {
+		compiler.getLexer().scan();
+	}
+
 	/**
 	 * Return probable completions for the given token.
 	 * 
@@ -289,6 +293,14 @@ public class CompilerAccess {
 	 */
 	public List<Token> getKeywords() {
 		return compiler.getLexer().getKeywords();
+	}
+
+	public List<Token> beginBlock() {
+		return compiler.getLexer().beginBlock();
+	}
+
+	public List<Token> endBlock() {
+		return compiler.getLexer().endBlock();
 	}
 
 	public List<String> allKeywords() {

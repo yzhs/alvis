@@ -39,7 +39,6 @@ options {
 	 *		Alvis' language
 	 */
 	public List<Token> getForbidden() {
-		this.scan();
 		ArrayList<Token> result = new ArrayList<Token>();
 
 		for (Token token : tokens) {
@@ -54,7 +53,6 @@ options {
 	 * @return List of all Tokens in the input stream that are keywords
 	 */
 	public List<Token> getKeywords() {
-		this.scan();
 		ArrayList<Token> result = new ArrayList<Token>();
 
 		for (Token token : tokens) {
@@ -73,11 +71,26 @@ options {
 		return result;
 	}
 
+    public List<Token> beginBlock() {
+        List<Token> result = new ArrayList<Token>();
+        for (Token token : tokens)
+            if (token.getType() == SCOPEL)
+                result.add(token);
+        return result;
+    }
+
+    public List<Token> endBlock() {
+        List<Token> result = new ArrayList<Token>();
+        for (Token token : tokens)
+            if (token.getType() == SCOPER)
+                result.add(token);
+        return result;
+    }
+
 	/**
 	 * @return List of all Tokens in the input stream that are identifiers
 	 */
 	public List<Token> getIdentifiers() {
-		this.scan();
 		ArrayList<Token> result = new ArrayList<Token>();
 		
 		for (Token token : tokens) {

@@ -27,7 +27,7 @@ public abstract class AbstractTLexer extends Lexer {
 	/**
 	 * This is a list of all tokens the lexer encountered.
 	 */
-	protected List<Token> tokens;
+	protected List<Token> tokens = null;
 
 	/**
 	 * List of the content of all tokens. For each token there is exactly one
@@ -135,13 +135,11 @@ public abstract class AbstractTLexer extends Lexer {
 	 * Reads the input stream and adds all tokens that were recognized in the
 	 * process to 'tokens'.
 	 */
-	protected void scan() {
-		if (tokens == null) {
-			tokens = new ArrayList<Token>();
-			Token token = null;
-			while ((token = this.nextToken()) != Token.EOF_TOKEN)
-				tokens.add(token);
-		}
+	public void scan() {
+		tokens = new ArrayList<Token>();
+		Token token = null;
+		while ((token = this.nextToken()) != Token.EOF_TOKEN)
+			tokens.add(token);
 	}
 
 	/**
@@ -241,7 +239,7 @@ public abstract class AbstractTLexer extends Lexer {
 	public static List<String> allKeywords() {
 		String[] keywords = { "if", "else", "begin", "end", "for", "while", "in", "{", "}", ":" };
 		return Arrays.asList(keywords);
-	}
+	} 
 
 	public static List<String> allForbidden() {
 		String[] forbidden = { "abstract", "assert", "boolean", "byte", "catch",
@@ -264,7 +262,6 @@ public abstract class AbstractTLexer extends Lexer {
 	 * @return The Token at this position
 	 */
 	public Token getTokenByNumbers(int line, int position) {
-		this.scan();
 		Iterator<Token> it = tokens.iterator();
 		boolean notTheEnd = true;
 		Token next = null;

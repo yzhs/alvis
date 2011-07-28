@@ -105,11 +105,13 @@ public class LexerTest {
 				"end\n"; //$NON-NLS-1$
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
+		lexer.scan();
 		List<Token> ids = lexer.getIdentifiers();
 		System.out.println("-----------------");
 		System.out.println(ids.get(1).getText());
 		System.out.println("-----------------");
-		assert !ids.isEmpty() && ids.get(1).getText().equals("G");
+		assert !ids.isEmpty();
+		assert ids.get(1).getText().equals("G");
 	}
 
 	@Test
@@ -139,11 +141,13 @@ public class LexerTest {
 				"end\n"; //$NON-NLS-1$
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
+		lexer.scan();
 		List<Token> ids = lexer.getKeywords();
 		System.out.println("-----------------");
 		System.out.println(ids.get(0).getText());
 		System.out.println("-----------------");
-		assert !ids.isEmpty() && ids.get(0).getText().equals("begin");
+		assert !ids.isEmpty();
+		assert ids.get(0).getText().equals("begin");
 	}
 
 	@Test
@@ -173,9 +177,11 @@ public class LexerTest {
 				"end\n"; //$NON-NLS-1$
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
+		lexer.scan();
 		List<Token> keys = lexer.getKeywords();
 		List<Token> ids = lexer.getIdentifiers();
-		assert (!ids.isEmpty()) && (!keys.isEmpty());
+		assert !ids.isEmpty();
+		assert !keys.isEmpty();
 	}
 
 	@Test
@@ -184,6 +190,7 @@ public class LexerTest {
 				"BFS(Graph G, Vertex s) begin\n"; //$NON-NLS-1$
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
+		lexer.scan();
 		Token toGet = lexer.getTokenByNumbers(1, 0);
 		System.out.println(toGet);
 		assert (toGet.getText().equals("BFS"));
@@ -195,6 +202,7 @@ public class LexerTest {
 				"BFS(Graph G, Vertex s) begin\n"; //$NON-NLS-1$
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
+		lexer.scan();
 		Token toGet = lexer.getTokenByNumbers(1, 8);
 		System.out.println(toGet);
 		assert (toGet.getText().equals("Graph"));
@@ -206,6 +214,7 @@ public class LexerTest {
 				"BFS(Graph G, Vertex s) begin\n"; //$NON-NLS-1$
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
+		lexer.scan();
 		Token toGet = lexer.getTokenByNumbers(1, 24);
 		System.out.println(toGet);
 		assert (toGet.getText().equals("begin"));
@@ -222,6 +231,7 @@ public class LexerTest {
 				"\tend\n"; //$NON-NLS-1$
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
+		lexer.scan();
 		Token toGet = lexer.getTokenByNumbers(7, 24);
 		System.out.println(toGet);
 		assert (toGet == null);
@@ -239,6 +249,7 @@ public class LexerTest {
 		System.out.println("getTokenByNumbers5");
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
+		lexer.scan();
 		Token toGet = lexer.getTokenByNumbers(6, 1);
 		System.out.println(toGet);
 		assert (toGet.getText().equals("end"));
@@ -250,6 +261,7 @@ public class LexerTest {
 				"whil"; //$NON-NLS-1$
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
+		lexer.scan();
 		System.out.println("-----------");
 		System.out.println(lexer.tryAutoCompletion(lexer
 				.getTokenByNumbers(1, 0)));
@@ -265,6 +277,7 @@ public class LexerTest {
 				"wie viele Tok"; //$NON-NLS-1$
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
+		lexer.scan();
 		System.out.println("-----------");
 		System.out.println(lexer.getTokenByNumbers(2,11));
 		System.out.println(lexer.tryAutoCompletion(lexer
