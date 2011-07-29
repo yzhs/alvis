@@ -1,5 +1,5 @@
 /**
- * 
+ * Default handler for increasing the font size of the AlgorithmEditor.
  */
 package de.unisiegen.informatik.bs.alvis.editors;
 
@@ -9,7 +9,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.ui.PlatformUI;
 
 /**
- * @author eddy
+ * @author Eduard Boos
  *
  */
 public class IncreaseFontSizeHandler extends AbstractHandler {

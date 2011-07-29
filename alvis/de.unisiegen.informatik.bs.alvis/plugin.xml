@@ -432,6 +432,54 @@
                </visibleWhen>
             </command>
          </toolbar>
+         <toolbar
+               id="de.unisiegen.informatik.bs.alvis.various.toolbar">
+            <command
+                  commandId="de.unisiegen.informatik.bs.alvis.commands.editor.increaseFontSize"
+                  icon="icons/toolbar/text_increaseSize.png"
+                  style="push"
+                  tooltip="%commands.editor.increaseFontSize">
+               <visibleWhen
+                     checkEnabled="true">
+                  <with
+                        variable="activeEditorId">
+                     <equals
+                           value="de.unisiegen.informatik.bs.alvis.editors.AlgorithmEditor">
+                     </equals>
+                  </with>
+               </visibleWhen>
+            </command>
+            <command
+                  commandId="de.unisiegen.informatik.bs.alvis.commands.editor.decreaseFontSize"
+                  icon="icons/toolbar/text_decreaseSize.png"
+                  style="push"
+                  tooltip="%commands.editor.decreaseFontSize">
+               <visibleWhen
+                     checkEnabled="true">
+                  <with
+                        variable="activeEditorId">
+                     <equals
+                           value="de.unisiegen.informatik.bs.alvis.editors.AlgorithmEditor">
+                     </equals>
+                  </with>
+               </visibleWhen>
+            </command>
+            <command
+                  commandId="de.unisiegen.informatik.bs.alvis.commands.editor.editFont"
+                  icon="icons/toolbar/text_editFont.png"
+                  style="push"
+                  tooltip="%commands.editor.editFont">
+               <visibleWhen
+                     checkEnabled="true">
+                  <with
+                        variable="activeEditorId">
+                     <equals
+                           value="de.unisiegen.informatik.bs.alvis.editors.AlgorithmEditor">
+                     </equals>
+                  </with>
+               </visibleWhen>
+            </command>
+         </toolbar>
       </menuContribution>
    </extension>
    <extension
@@ -469,6 +517,21 @@
             defaultHandler="de.unisiegen.informatik.bs.alvis.commands.ExportTo"
             id="de.unisiegen.informatik.bs.alvis.commands.ExportTo"
             name="%command.name.5">
+      </command>
+      <command
+            defaultHandler="de.unisiegen.informatik.bs.alvis.editors.IncreaseFontSizeHandler"
+            id="de.unisiegen.informatik.bs.alvis.commands.editor.increaseFontSize"
+            name="%commands.editor.increaseFontSize">
+      </command>
+      <command
+            defaultHandler="de.unisiegen.informatik.bs.alvis.editors.DecreaseFontSizeHandler"
+            id="de.unisiegen.informatik.bs.alvis.commands.editor.decreaseFontSize"
+            name="%commands.editor.decreaseFontSize">
+      </command>
+      <command
+            defaultHandler="de.unisiegen.informatik.bs.alvis.editors.EditFontHandler"
+            id="de.unisiegen.informatik.bs.alvis.commands.editor.editFont"
+            name="%commands.editor.editFont">
       </command>
    </extension>
    <extension

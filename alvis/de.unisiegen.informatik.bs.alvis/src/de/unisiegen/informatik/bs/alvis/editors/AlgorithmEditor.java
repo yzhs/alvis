@@ -130,18 +130,10 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 	@Override
 	public void doSave(IProgressMonitor progressMonitor) {
 		super.doSave(progressMonitor);
-		// TODO rethink the calling of these two methods, to better "timings"
+		CompilerAccess.getDefault().reLex();
 		calculatePositions();
 		markErrors();
-		if(getCurrentTextSize()<44)
-		{
-			increaseFont();
-		}
-		else
-		{
-			setTextSize(12);
-		}
-		}
+	}
 
 	/**
 	 * this method is temporary for update the folding structure until the
@@ -195,7 +187,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 							Annotation currAnnotation = iter.next();
 							if (currAnnotation.getType().equals(
 									ProjectionAnnotation.TYPE))
-								
+
 							{
 								// this is how to get the information, whether
 								// folding area is collapsed(folded).
@@ -203,35 +195,28 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 										.isCollapsed();
 							}
 						}
-						List<Token> keywordTokens = CompilerAccess.getDefault().getKeywords();
-						ArrayList<Token> beginTokens = new ArrayList<Token>();
-						ArrayList<Token> endTokens = new ArrayList<Token>();
-						for(Token token:keywordTokens)
-						{
-							System.out.println(token.getText());
-							if(token.getText().equals("begin") || token.getText().equals("begin") )
-							{
-								beginTokens.add(token);
-							}
-							else if(token.getText().equals("end") || token.getText().equals("}"))
-							{
-								endTokens.add(token);
-							}
-						}
-//						while(!beginTokens.isEmpty() && !endTokens.isEmpty())
-//						{
-//							fPositions.add(new Position(getOffset(beginTokens.get(0).getLine(), beginTokens.get(0).getCharPositionInLine()), getOffset(endTokens.get(endTokens.size()-1).getLine(), endTokens.get(endTokens.size()-1).getCharPositionInLine())));
-//							oldList.add(new Position(region.getOffset(), region
-//									.getLength()));
-//						}
-//						System.out.println("Region: " + region.getType());
-//						System.out.println("Offset: " + region.getOffset());
-//						System.out.println("Length: " + region.getLength());
+						List<Token> beginTokens = CompilerAccess.getDefault().beginBlock();
+						List<Token> endTokens = CompilerAccess.getDefault().endBlock();
 						
-//						fPositions.add(new Position(region.getOffset(), region
-//								.getLength()));
-//						oldList.add(new Position(region.getOffset(), region
-//								.getLength()));
+						 while(!beginTokens.isEmpty() && !endTokens.isEmpty())
+						 {
+						 fPositions.add(new
+						 Position(getOffset(beginTokens.get(0).getLine(),
+						 beginTokens.get(0).getCharPositionInLine()),
+						 getOffset(endTokens.get(endTokens.size()-1).getLine(),
+						 endTokens.get(endTokens.size()-1).getCharPositionInLine())));
+						 oldList.add(new Position(region.getOffset(), region
+						 .getLength()));
+						 }
+						 System.out.println("Region: " + region.getType());
+						 System.out.println("Offset: " + region.getOffset());
+						 System.out.println("Length: " + region.getLength());
+						
+						 fPositions.add(new Position(region.getOffset(),
+						 region
+						 .getLength()));
+						 oldList.add(new Position(region.getOffset(), region
+						 .getLength()));
 
 					}
 				}
@@ -285,41 +270,62 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 
 	@Override
 	public StyledText getSourceCode() {
-		return null;
+		return getTextWidget();
 	}
-	public int getOffset(int line, int charPositionInLine)
-	{
-		
+
+	public int getOffset(int line, int charPositionInLine) {
+
 		try {
-			return getSourceViewer().getDocument().getLineOffset(line)+charPositionInLine;
+			return getSourceViewer().getDocument().getLineOffset(line)
+					+ charPositionInLine;
 		} catch (BadLocationException e) {
 			return -1;
 		}
 	}
-	public int getCurrentTextSize()
-	{
+
+	public int getCurrentFontSize() {
 		return getTextWidget().getFont().getFontData()[0].getHeight();
 	}
-	public int increaseFont()
-	{
-		int newFontSize = getCurrentTextSize() + 4;
-		setTextSize(newFontSize);
+	/**
+	 * Increases the current editor font-size by 4;
+	 * @return the increased font-size
+	 */
+	public int increaseFont() {
+		int newFontSize = getCurrentFontSize() + 4;
+		setFontSize(newFontSize);
 		return newFontSize;
 	}
-	public int decreaseFont()
-	{
-		int newFontSize = getCurrentTextSize() - 4;
-		setTextSize(newFontSize);
+
+	/**
+	 * Decreases the current editor font-size by 4;
+	 * @return the decreased font-size
+	 */
+	public int decreaseFont() {
+		int currentFontsize = getCurrentFontSize();
+		int newFontSize;
+		if (currentFontsize > 4) {
+			newFontSize = currentFontsize - 4;
+		} else {
+			newFontSize = currentFontsize;
+		}
+		setFontSize(newFontSize);
 		return newFontSize;
 	}
-	public boolean setTextSize(int size)
-	{
+
+	public boolean setFontSize(int size) {
 		FontData[] fontData = getTextWidget().getFont().getFontData();
 		for (int i = 0; i < fontData.length; i++) {
-		      fontData[i].setHeight(size);
-		    }
-		PreferenceConverter.setValue(getPreferenceStore(), getFontPropertyPreferenceKey(), fontData);
+			fontData[i].setHeight(size);
+		}
+		PreferenceConverter.setValue(getPreferenceStore(),
+				getFontPropertyPreferenceKey(), fontData);
 		getTextWidget().update();
 		return true;
+	}
+	public void setFont(FontData fd)
+	{
+		PreferenceConverter.setValue(getPreferenceStore(),
+				getFontPropertyPreferenceKey(), fd);
+		getTextWidget().update();
 	}
 }
