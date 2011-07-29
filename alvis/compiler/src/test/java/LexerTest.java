@@ -8,6 +8,35 @@ import org.antlr.runtime.*;
 
 @Test
 public class LexerTest {
+	private String algorithm = "" + //$NON-NLS-1$
+			"BFS(Graph G, Vertex s) begin\n" + //$NON-NLS-1$
+			"\tfor Vertex v in G.vertices begin\n" + //$NON-NLS-1$
+			"\t\tv.color = \"white\",\n" + //$NON-NLS-1$
+			"\t\tv.distance = infty,\n" + //$NON-NLS-1$
+			"\t\tv.pi = null,\n" + //$NON-NLS-1$
+			"\tend\n" + //$NON-NLS-1$
+			"\ts.color = \"grey\";\n" + //$NON-NLS-1$
+			"\ts.distance = 0,\n" + //$NON-NLS-1$
+			"\tQueue Q,\n" + //$NON-NLS-1$
+			"\tQ.enqueue(s),\n" + //$NON-NLS-1$
+			"\twhile ! Q.isEmpty() begin\n" + //$NON-NLS-1$
+			"\t\tu = Q.dequeue(),\n" + //$NON-NLS-1$
+			"\t\tfor Vertex v in u.adj() begin\n" + //$NON-NLS-1$
+			"\t\t\tif v.color == \"white\" begin\n" + //$NON-NLS-1$
+			"\t\t\t\tv.color = \"grey\";\n" + //$NON-NLS-1$
+			"\t\t\t\tv.distance = u.distance + 1,\n" + //$NON-NLS-1$
+			"\t\t\t\tv.pi = u,\n" + //$NON-NLS-1$
+			"\t\t\t\tQ.enqueue(v),\n" + //$NON-NLS-1$
+			"\t\t\tend\n" + //$NON-NLS-1$
+			"\t\tend\n" + //$NON-NLS-1$
+			"\tend\n" + //$NON-NLS-1$
+			"end\n"; //$NON-NLS-1$
+
+	private void printTestName() {
+		System.out.println(Thread.currentThread().getStackTrace()[2]
+				.getMethodName());
+	}
+
 	static {
 		List<String> types = new ArrayList<String>();
 		types.add("Boolean");
@@ -19,8 +48,10 @@ public class LexerTest {
 		types.add("Queue");
 		TLexer.addTypes(types);
 	}
+
 	@Test
 	public void loadValidCode() {
+		printTestName();
 		CharStream input = null;
 		try {
 			input = new ANTLRFileStream("target/test-classes/BFS.code");
@@ -28,11 +59,21 @@ public class LexerTest {
 			e.printStackTrace();
 		}
 		TLexer lexer = new TLexer(input);
-		assert lexer.getExceptions().isEmpty();
+		assert lexer.getExceptions().isEmpty() : "encountered an exception";
+	}
+
+	private String allTokens(TLexer lexer) {
+		Token token;
+		String result = "";
+		while ((token = lexer.nextToken()) != Token.EOF_TOKEN) {
+			result += token.getText() + "\n";
+		}
+		return result;
 	}
 
 	@Test
 	public void loadInvalidCode() {
+		printTestName();
 		CharStream input = null;
 		try {
 			input = new ANTLRFileStream(
@@ -41,187 +82,94 @@ public class LexerTest {
 			e.printStackTrace();
 		}
 		TLexer lexer = new TLexer(input);
-		Token token = null;
-		while ((token = lexer.nextToken()) != Token.EOF_TOKEN) {
-			System.out.println(token.getText());
-		}
-		assert !lexer.getExceptions().isEmpty();
+		String tok = allTokens(lexer);
+		assert !lexer.getExceptions().isEmpty() : "sucessfully lexed invalid code:\n"
+				+ tok;
 	}
 
 	@Test
 	public void lexString() {
-		String algorithm = "" + //$NON-NLS-1$
-				"BFS(Graph G, Vertex s) begin\n" + //$NON-NLS-1$
-				"\tfor Vertex v in G.vertices begin\n" + //$NON-NLS-1$
-				"\t\tv.color = \"white\",\n" + //$NON-NLS-1$
-				"\t\tv.distance = infty,\n" + //$NON-NLS-1$
-				"\t\tv.pi = null,\n" + //$NON-NLS-1$
-				"\tend\n" + //$NON-NLS-1$
-				"\ts.color = \"grey\";\n" + //$NON-NLS-1$
-				"\ts.distance = 0,\n" + //$NON-NLS-1$
-				"\tQueue Q,\n" + //$NON-NLS-1$
-				"\tQ.enqueue(s),\n" + //$NON-NLS-1$
-				"\twhile ! Q.isEmpty() begin\n" + //$NON-NLS-1$
-				"\t\tu = Q.dequeue(),\n" + //$NON-NLS-1$
-				"\t\tfor Vertex v in u.adj() begin\n" + //$NON-NLS-1$
-				"\t\t\tif v.color == \"white\" begin\n" + //$NON-NLS-1$
-				"\t\t\t\tv.color = \"grey\";\n" + //$NON-NLS-1$
-				"\t\t\t\tv.distance = u.distance + 1,\n" + //$NON-NLS-1$
-				"\t\t\t\tv.pi = u,\n" + //$NON-NLS-1$
-				"\t\t\t\tQ.enqueue(v),\n" + //$NON-NLS-1$
-				"\t\t\tend\n" + //$NON-NLS-1$
-				"\t\tend\n" + //$NON-NLS-1$
-				"\tend\n" + //$NON-NLS-1$
-				"end\n"; //$NON-NLS-1$
+		printTestName();
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
-		assert lexer.getExceptions().isEmpty();
+		assert lexer.getExceptions().isEmpty() : "encountered an exception";
 	}
 
 	@Test
 	public void sortTokensID() {
-		String algorithm = "" + //$NON-NLS-1$
-				"BFS(Graph G, Vertex s) begin\n" + //$NON-NLS-1$
-				"\tfor Vertex v in G.vertices begin\n" + //$NON-NLS-1$
-				"\t\tv.color = \"white\",\n" + //$NON-NLS-1$
-				"\t\tv.distance = infty,\n" + //$NON-NLS-1$
-				"\t\tv.pi = null,\n" + //$NON-NLS-1$
-				"\tend\n" + //$NON-NLS-1$
-				"\ts.color = \"grey\";\n" + //$NON-NLS-1$
-				"\ts.distance = 0,\n" + //$NON-NLS-1$
-				"\tQueue Q,\n" + //$NON-NLS-1$
-				"\tQ.enqueue(s),\n" + //$NON-NLS-1$
-				"\twhile ! Q.isEmpty() begin\n" + //$NON-NLS-1$
-				"\t\tu = Q.dequeue(),\n" + //$NON-NLS-1$
-				"\t\tfor Vertex v in u.adj() begin\n" + //$NON-NLS-1$
-				"\t\t\tif v.color == \"white\" begin\n" + //$NON-NLS-1$
-				"\t\t\t\tv.color = \"grey\";\n" + //$NON-NLS-1$
-				"\t\t\t\tv.distance = u.distance + 1,\n" + //$NON-NLS-1$
-				"\t\t\t\tv.pi = u,\n" + //$NON-NLS-1$
-				"\t\t\t\tQ.enqueue(v),\n" + //$NON-NLS-1$
-				"\t\t\tend\n" + //$NON-NLS-1$
-				"\t\tend\n" + //$NON-NLS-1$
-				"\tend\n" + //$NON-NLS-1$
-				"end\n"; //$NON-NLS-1$
+		printTestName();
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
 		lexer.scan();
 		List<Token> ids = lexer.getIdentifiers();
-		System.out.println("-----------------");
-		System.out.println(ids.get(1).getText());
-		System.out.println("-----------------");
-		assert !ids.isEmpty();
-		assert ids.get(1).getText().equals("G");
+		assert !ids.isEmpty() : "no identifiers found";
+		assert ids.get(1).getText().equals("G") : "found wrong identifier '"
+				+ ids.get(1).getText() + "' instead of the expected 'G'";
 	}
 
 	@Test
 	public void sortTokensKW() {
-		String algorithm = "" + //$NON-NLS-1$
-				"BFS(Graph G, Vertex s) begin\n" + //$NON-NLS-1$
-				"\tfor Vertex v in G.vertices begin\n" + //$NON-NLS-1$
-				"\t\tv.color = \"white\",\n" + //$NON-NLS-1$
-				"\t\tv.distance = infty,\n" + //$NON-NLS-1$
-				"\t\tv.pi = null,\n" + //$NON-NLS-1$
-				"\tend\n" + //$NON-NLS-1$
-				"\ts.color = \"grey\";\n" + //$NON-NLS-1$
-				"\ts.distance = 0,\n" + //$NON-NLS-1$
-				"\tQueue Q,\n" + //$NON-NLS-1$
-				"\tQ.enqueue(s),\n" + //$NON-NLS-1$
-				"\twhile ! Q.isEmpty() begin\n" + //$NON-NLS-1$
-				"\t\tu = Q.dequeue(),\n" + //$NON-NLS-1$
-				"\t\tfor Vertex v in u.adj() begin\n" + //$NON-NLS-1$
-				"\t\t\tif v.color == \"white\" begin\n" + //$NON-NLS-1$
-				"\t\t\t\tv.color = \"grey\";\n" + //$NON-NLS-1$
-				"\t\t\t\tv.distance = u.distance + 1,\n" + //$NON-NLS-1$
-				"\t\t\t\tv.pi = u,\n" + //$NON-NLS-1$
-				"\t\t\t\tQ.enqueue(v),\n" + //$NON-NLS-1$
-				"\t\t\tend\n" + //$NON-NLS-1$
-				"\t\tend\n" + //$NON-NLS-1$
-				"\tend\n" + //$NON-NLS-1$
-				"end\n"; //$NON-NLS-1$
+		printTestName();
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
 		lexer.scan();
-		List<Token> ids = lexer.getKeywords();
-		System.out.println("-----------------");
-		System.out.println(ids.get(0).getText());
-		System.out.println("-----------------");
-		assert !ids.isEmpty();
-		assert ids.get(0).getText().equals("begin");
+		List<Token> kwds = lexer.getKeywords();
+		assert !kwds.isEmpty() : "no keywords found";
+		assert kwds.get(0).getText().equals("begin") : "found wrong keyword '"
+				+ kwds.get(0).getText() + "' instead of 'begin'";
 	}
 
 	@Test
 	public void multipleRuns() {
-		String algorithm = "" + //$NON-NLS-1$
-				"BFS(Graph G, Vertex s) begin\n" + //$NON-NLS-1$
-				"\tfor Vertex v in G.vertices begin\n" + //$NON-NLS-1$
-				"\t\tv.color = \"white\",\n" + //$NON-NLS-1$
-				"\t\tv.distance = infty,\n" + //$NON-NLS-1$
-				"\t\tv.pi = null,\n" + //$NON-NLS-1$
-				"\tend\n" + //$NON-NLS-1$
-				"\ts.color = \"grey\";\n" + //$NON-NLS-1$
-				"\ts.distance = 0,\n" + //$NON-NLS-1$
-				"\tQueue Q,\n" + //$NON-NLS-1$
-				"\tQ.enqueue(s),\n" + //$NON-NLS-1$
-				"\twhile ! Q.isEmpty() begin\n" + //$NON-NLS-1$
-				"\t\tu = Q.dequeue(),\n" + //$NON-NLS-1$
-				"\t\tfor Vertex v in u.adj() begin\n" + //$NON-NLS-1$
-				"\t\t\tif v.color == \"white\" begin\n" + //$NON-NLS-1$
-				"\t\t\t\tv.color = \"grey\";\n" + //$NON-NLS-1$
-				"\t\t\t\tv.distance = u.distance + 1,\n" + //$NON-NLS-1$
-				"\t\t\t\tv.pi = u,\n" + //$NON-NLS-1$
-				"\t\t\t\tQ.enqueue(v),\n" + //$NON-NLS-1$
-				"\t\t\tend\n" + //$NON-NLS-1$
-				"\t\tend\n" + //$NON-NLS-1$
-				"\tend\n" + //$NON-NLS-1$
-				"end\n"; //$NON-NLS-1$
+		printTestName();
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
 		lexer.scan();
-		List<Token> keys = lexer.getKeywords();
+		List<Token> kwds = lexer.getKeywords();
 		List<Token> ids = lexer.getIdentifiers();
-		assert !ids.isEmpty();
-		assert !keys.isEmpty();
+		assert !ids.isEmpty() : "no identifiers found";
+		assert !kwds.isEmpty() : "no keywords found";
 	}
 
 	@Test
 	public void getTokenByNumbers1() {
-		String algorithm = "" + //$NON-NLS-1$
-				"BFS(Graph G, Vertex s) begin\n"; //$NON-NLS-1$
+		printTestName();
+		String algorithm = "BFS(Graph G, Vertex s) begin\n"; //$NON-NLS-1$
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
 		lexer.scan();
 		Token toGet = lexer.getTokenByNumbers(1, 0);
-		System.out.println(toGet);
-		assert (toGet.getText().equals("BFS"));
+		assert toGet.getText().equals("BFS") : "found wrong token '"
+				+ toGet.getText() + "' instead of 'BFS'";
 	}
 
 	@Test
 	public void getTokenByNumbers2() {
-		String algorithm = "" + //$NON-NLS-1$
-				"BFS(Graph G, Vertex s) begin\n"; //$NON-NLS-1$
+		printTestName();
+		String algorithm = "BFS(Graph G, Vertex s) begin\n"; //$NON-NLS-1$
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
 		lexer.scan();
 		Token toGet = lexer.getTokenByNumbers(1, 8);
-		System.out.println(toGet);
-		assert (toGet.getText().equals("Graph"));
+		assert toGet.getText().equals("Graph") : "found wrong token '"
+				+ toGet.getText() + "' instead of 'Graph'";
 	}
 
 	@Test
 	public void getTokenByNumbers3() {
-		String algorithm = "" + //$NON-NLS-1$
-				"BFS(Graph G, Vertex s) begin\n"; //$NON-NLS-1$
+		printTestName();
+		String algorithm = "BFS(Graph G, Vertex s) begin\n"; //$NON-NLS-1$
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
 		lexer.scan();
 		Token toGet = lexer.getTokenByNumbers(1, 24);
-		System.out.println(toGet);
-		assert (toGet.getText().equals("begin"));
+		assert toGet.getText().equals("begin") : "found wrong token '"
+				+ toGet.getText() + "' instead of 'begin'";
 	}
 
 	@Test
 	public void getTokenByNumbers4() {
+		printTestName();
 		String algorithm = "" + //$NON-NLS-1$
 				"BFS(Graph G, Vertex s) begin\n" + //$NON-NLS-1$
 				"\tfor Vertex v in G.vertices begin\n" + //$NON-NLS-1$
@@ -233,12 +181,13 @@ public class LexerTest {
 		TLexer lexer = new TLexer(cs);
 		lexer.scan();
 		Token toGet = lexer.getTokenByNumbers(7, 24);
-		System.out.println(toGet);
-		assert (toGet == null);
+		assert toGet == null : "found token '" + toGet.getText()
+				+ "' when expecting to find nothing";
 	}
 
 	@Test
 	public void getTokenByNumbers5() {
+		printTestName();
 		String algorithm = "" + //$NON-NLS-1$
 				"BFS(Graph G, Vertex s) begin\n" + //$NON-NLS-1$
 				"\tfor Vertex v in G.vertices begin\n" + //$NON-NLS-1$
@@ -246,61 +195,60 @@ public class LexerTest {
 				"\t\tv.distance = infty,\n" + //$NON-NLS-1$
 				"\t\tv.pi = null,\n" + //$NON-NLS-1$
 				"\tend\n"; //$NON-NLS-1$
-		System.out.println("getTokenByNumbers5");
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
 		lexer.scan();
 		Token toGet = lexer.getTokenByNumbers(6, 1);
-		System.out.println(toGet);
-		assert (toGet.getText().equals("end"));
+		assert toGet.getText().equals("end") : "found token '"
+				+ toGet.getText() + "' instead of 'end'";
 	}
 
 	@Test
 	public void autoCompletionKeyWords1() {
-		String algorithm = "" + //$NON-NLS-1$
-				"whil"; //$NON-NLS-1$
+		printTestName();
+		String algorithm = "whil"; //$NON-NLS-1$
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
 		lexer.scan();
-		System.out.println("-----------");
-		System.out.println(lexer.tryAutoCompletion(lexer
-				.getTokenByNumbers(1, 0)));
-		System.out.println("-----------");
-		assert (lexer.tryAutoCompletion(lexer.getTokenByNumbers(1, 0)).get(0)
-				.equals("while"));
+		assert lexer.tryAutoCompletion(lexer.getTokenByNumbers(1, 0)).get(0)
+				.equals("while") : "auto completion gave an unexpected result: "
+				+ lexer.tryAutoCompletion(lexer.getTokenByNumbers(1, 0))
+				+ " instead of some list starting with 'while'";
 	}
 
 	@Test
 	public void zautoCompletionKeyWords2() {
+		printTestName();
 		String algorithm = "" + //$NON-NLS-1$
 				"ganz viele tolle Tokens die hier dann stehen koennen \n" + //$NON-NLS-1$
 				"wie viele Tok"; //$NON-NLS-1$
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
 		lexer.scan();
-		System.out.println("-----------");
-		System.out.println(lexer.getTokenByNumbers(2,11));
-		System.out.println(lexer.tryAutoCompletion(lexer
-				.getTokenByNumbers(2, 11)));
-		System.out.println("-----------");
-		assert (lexer.tryAutoCompletion(lexer.getTokenByNumbers(2, 11)).get(0)
-				.equals("Tokens"));
+		assert lexer.tryAutoCompletion(lexer.getTokenByNumbers(2, 11)).get(0)
+				.equals("Tokens") : "expected to find 'Tokens' but found '"
+				+ lexer.tryAutoCompletion(lexer.getTokenByNumbers(2, 11))
+						.get(0) + "' when trying to complete '"
+				+ lexer.getTokenByNumbers(2, 11) + "'";
 	}
 
 	@Test
 	public void checkTypeNames() {
-		assert TLexer.isTypeName("Integer");
-		assert TLexer.isTypeName("Float");
-		assert TLexer.isTypeName("Boolean");
-		assert TLexer.isTypeName("String");
-		assert TLexer.isTypeName("Graph");
-		assert TLexer.isTypeName("Vertex");
-		assert TLexer.isTypeName("Queue");
+		printTestName();
+		assert TLexer.isTypeName("Integer") : "expected 'Integer' to be a type";
+		assert TLexer.isTypeName("Float") : "expected 'Float' to be a type";
+		assert TLexer.isTypeName("Boolean") : "expected 'Boolean' to be a type";
+		assert TLexer.isTypeName("String") : "expected 'String' to be a type";
+		assert TLexer.isTypeName("Graph") : "expected 'Graph' to be a type";
+		assert TLexer.isTypeName("Vertex") : "expected 'Vertex' to be a type";
+		assert TLexer.isTypeName("Queue") : "expected 'Queue' to be a type";
 	}
 
-	@Test public void checkIdentifiers() {
-		assert !TLexer.isTypeName("foo");
-		assert !TLexer.isTypeName("a");
-		assert !TLexer.isTypeName("if_");
+	@Test
+	public void checkIdentifiers() {
+		printTestName();
+		assert !TLexer.isTypeName("foo") : "expected 'foo' to be an identifier";
+		assert !TLexer.isTypeName("a") : "expected 'a' to be an identifier";
+		assert !TLexer.isTypeName("if_") : "expected 'if_' to be an identifier";
 	}
 }

@@ -27,7 +27,7 @@ public abstract class AbstractTLexer extends Lexer {
 	/**
 	 * This is a list of all tokens the lexer encountered.
 	 */
-	protected List<Token> tokens = null;
+	protected List<Token> tokens = new ArrayList<Token>();
 
 	/**
 	 * List of the content of all tokens. For each token there is exactly one
@@ -133,13 +133,24 @@ public abstract class AbstractTLexer extends Lexer {
 
 	/**
 	 * Reads the input stream and adds all tokens that were recognized in the
-	 * process to 'tokens'.
+	 * process to 'tokens'. This should only be used for testing as it consumes
+	 * the input stream.
 	 */
 	public void scan() {
-		tokens = new ArrayList<Token>();
-		Token token = null;
-		while ((token = this.nextToken()) != Token.EOF_TOKEN)
-			tokens.add(token);
+		while (this.nextToken() != Token.EOF_TOKEN)
+			;
+	}
+	
+	/**
+	 * Add a copy of every token found in the input stream to the tokens list.
+	 * 
+	 * @return The next token
+	 */
+	@Override
+	public Token nextToken() {
+		Token tmp = super.nextToken();
+		tokens.add(tmp);
+		return tmp;
 	}
 
 	/**
@@ -236,11 +247,23 @@ public abstract class AbstractTLexer extends Lexer {
 	 */
 	public abstract List<Token> getKeywords();
 
+	/**
+	 * Provides a list of all the keywords the pseudo code language uses.
+	 * 
+	 * @return list of all keywords
+	 */
 	public static List<String> allKeywords() {
 		String[] keywords = { "if", "else", "begin", "end", "for", "while", "in", "{", "}", ":" };
 		return Arrays.asList(keywords);
 	} 
 
+	/**
+	 * Provides a list of all Java keywords we do not use. These can not be
+	 * used as identifiers because that would cause syntax errors in the
+	 * generated Java code.
+	 * 
+	 * @return a list of all forbidden words
+	 */
 	public static List<String> allForbidden() {
 		String[] forbidden = { "abstract", "assert", "boolean", "byte", "catch",
 		    "class", "const", "default", "double", "enum", "extends", "final",

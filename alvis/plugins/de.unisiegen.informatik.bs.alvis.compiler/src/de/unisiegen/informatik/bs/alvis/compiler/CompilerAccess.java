@@ -260,6 +260,10 @@ public class CompilerAccess {
 		this.packages = datatypePackages;
 	}
 
+	/**
+	 * Tell the lexer to read the input stream so it can provide auto
+	 * completion and help for syntax highlighting.
+	 */
 	public void reLex() {
 		compiler.getLexer().scan();
 	}
@@ -295,19 +299,38 @@ public class CompilerAccess {
 		return compiler.getLexer().getKeywords();
 	}
 
+	/**
+	 * Create a list of all the tokens in the given source code that mark the
+	 * beginning of a block.
+	 * @return List of tokens that mark the beginning of a block
+	 */
 	public List<Token> beginBlock() {
 		return compiler.getLexer().beginBlock();
 	}
-
+	
+	/**
+	 * Create a list of all the tokens in the given source code that mark the
+	 * end of a block.
+	 * @return List of tokens that mark the end of a block
+	 */
 	public List<Token> endBlock() {
 		return compiler.getLexer().endBlock();
 	}
 
+	/**
+	 * @return List of all available keywords.
+	 */
 	public List<String> allKeywords() {
 
 		return AbstractTLexer.allKeywords();
 	}
 
+	/**
+	 * Return a list of all the Java keywords that the pseudo code does not
+	 * use.
+	 * 
+	 * @return List of forbidden words
+	 */
 	public List<String> allForbidden() {
 		return AbstractTLexer.allForbidden();
 	}
