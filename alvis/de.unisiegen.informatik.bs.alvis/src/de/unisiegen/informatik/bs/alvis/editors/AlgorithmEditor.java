@@ -13,6 +13,7 @@ import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.ITypedRegion;
 import org.eclipse.jface.text.Position;
@@ -26,6 +27,7 @@ import org.eclipse.jface.text.source.projection.ProjectionSupport;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
@@ -131,8 +133,15 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 		// TODO rethink the calling of these two methods, to better "timings"
 		calculatePositions();
 		markErrors();
-
-	}
+		if(getCurrentTextSize()<44)
+		{
+			increaseFont();
+		}
+		else
+		{
+			setTextSize(12);
+		}
+		}
 
 	/**
 	 * this method is temporary for update the folding structure until the
@@ -286,5 +295,31 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 		} catch (BadLocationException e) {
 			return -1;
 		}
+	}
+	public int getCurrentTextSize()
+	{
+		return getTextWidget().getFont().getFontData()[0].getHeight();
+	}
+	public int increaseFont()
+	{
+		int newFontSize = getCurrentTextSize() + 4;
+		setTextSize(newFontSize);
+		return newFontSize;
+	}
+	public int decreaseFont()
+	{
+		int newFontSize = getCurrentTextSize() - 4;
+		setTextSize(newFontSize);
+		return newFontSize;
+	}
+	public boolean setTextSize(int size)
+	{
+		FontData[] fontData = getTextWidget().getFont().getFontData();
+		for (int i = 0; i < fontData.length; i++) {
+		      fontData[i].setHeight(size);
+		    }
+		PreferenceConverter.setValue(getPreferenceStore(), getFontPropertyPreferenceKey(), fontData);
+		getTextWidget().update();
+		return true;
 	}
 }
