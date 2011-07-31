@@ -36,6 +36,9 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditor;
+
+import com.itextpdf.text.Document;
+
 import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.compiler.CompilerAccess;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
@@ -130,7 +133,15 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 	@Override
 	public void doSave(IProgressMonitor progressMonitor) {
 		super.doSave(progressMonitor);
-		CompilerAccess.getDefault().reLex();
+		try {
+			IFileEditorInput input = (IFileEditorInput) getEditorInput();
+			CompilerAccess.getDefault().compile(
+					input.getFile().getRawLocation().toString(), true);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		} catch (RecognitionException e) {
+			// TODO Auto-generated catch block
+		}
 		calculatePositions();
 		markErrors();
 	}
@@ -167,62 +178,96 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 	 */
 	protected void calculatePositions() {
 		final AlgorithmEditor editor = this;
+		fPositions = new ArrayList<Position>();
+		oldList = new ArrayList<Position>();
+		
+		ITypedRegion[] partitions;
 		try {
-			ITypedRegion[] partitions = getSourceViewer().getDocument()
-					.computePartitioning(0,
-							getSourceViewer().getDocument().getLength());
+			partitions = getSourceViewer().getDocument().computePartitioning(0,
+					getSourceViewer().getDocument().getLength());
 			for (ITypedRegion region : partitions) {
 				if (region.getType().equals(
-						AlgorithmPartitionScanner.MULTILINE_COMMENT)
-						|| region.getType().equals(
-								AlgorithmPartitionScanner.BEGIN_END)) {
-					if (fPositions.contains(region)) {
+						AlgorithmPartitionScanner.MULTILINE_COMMENT)) {
+					fPositions.add(new Position(region.getOffset(),region.getLength()));
+					oldList.add(new Position(region.getOffset(),region.getLength()));
 
-					} else {
-
-						@SuppressWarnings("unchecked")
-						Iterator<Annotation> iter = annotationModel
-								.getAnnotationIterator();
-						while (iter.hasNext()) {
-							Annotation currAnnotation = iter.next();
-							if (currAnnotation.getType().equals(
-									ProjectionAnnotation.TYPE))
-
-							{
-								// this is how to get the information, whether
-								// folding area is collapsed(folded).
-								((ProjectionAnnotation) currAnnotation)
-										.isCollapsed();
-							}
-						}
-//						List<Token> beginTokens = CompilerAccess.getDefault().beginBlock();
-//						List<Token> endTokens = CompilerAccess.getDefault().endBlock();
-//						
-//						 while(!beginTokens.isEmpty() && !endTokens.isEmpty())
-//						 {
-//							 System.out.println();
-//						 fPositions.add(new Position(getOffset(beginTokens.get(0).getLine(),
-//						 beginTokens.get(0).getCharPositionInLine()),
-//						 getOffset(endTokens.get(endTokens.size()-1).getLine(),
-//						 endTokens.get(endTokens.size()-1).getCharPositionInLine())));
-//						 oldList.add(new Position(region.getOffset(), region
-//						 .getLength()));
-//						 }
-//						 System.out.println("Region: " + region.getType());
-//						 System.out.println("Offset: " + region.getOffset());
-//						 System.out.println("Length: " + region.getLength());
-						
-						 fPositions.add(new Position(region.getOffset(),
-						 region
-						 .getLength()));
-						 oldList.add(new Position(region.getOffset(), region
-						 .getLength()));
-
-					}
 				}
 			}
 		} catch (BadLocationException e) {
+
 		}
+
+		// @SuppressWarnings("unchecked")
+		// Iterator<Annotation> iter = annotationModel
+		// .getAnnotationIterator();
+		// while (iter.hasNext()) {
+		// Annotation currAnnotation = iter.next();
+		// if (currAnnotation.getType().equals(
+		// ProjectionAnnotation.TYPE))
+		//
+		// {
+		// // this is how to get the information, whether
+		// // folding area is collapsed(folded).
+		// ((ProjectionAnnotation) currAnnotation)
+		// .isCollapsed();
+		// }
+		// }
+
+		List<Token> beginTokens = CompilerAccess.getDefault().beginBlock();
+		List<Token> endTokens = CompilerAccess.getDefault().endBlock();
+		while (!beginTokens.isEmpty() && !endTokens.isEmpty()) {
+			Token endToken = endTokens.get(0);
+			Token beginToken = null;
+			Iterator<Token> beginTokenIterator = beginTokens.iterator();
+			while (beginTokenIterator.hasNext()) {
+				Token tokenToTest = beginTokenIterator.next();
+				if (tokenToTest.getLine() < endToken.getLine()
+						|| (tokenToTest.getLine() == endToken.getLine() && tokenToTest
+								.getCharPositionInLine() < endToken
+								.getCharPositionInLine())) {
+					beginToken = tokenToTest;
+				} else {
+					break;
+				}
+			}
+		
+			// startOfBegin represents the last character
+			// Position in the line of begin
+			if (beginToken != null) {
+				int startOfBegin = (getOffset(beginToken.getLine()-1, beginToken.getCharPositionInLine()));
+				int endOfEnd = (getOffset(endToken.getLine() , 0));
+				System.out.println("Line+1: " + (endToken.getLine()) + "Document Lines: " + getSourceViewer().getDocument()
+						.getNumberOfLines());
+				if (endOfEnd<0) {
+					endOfEnd = getSourceViewer().getDocument().getLength();
+				}
+				int regionLength = endOfEnd - startOfBegin;
+				if (regionLength > 0) {
+					fPositions.add(new Position(startOfBegin, regionLength));
+					oldList.add(new Position(startOfBegin, regionLength));
+					
+				}
+				beginTokens.remove(beginToken);
+			}
+			endTokens.remove(0);
+		}
+
+		oldList = new ArrayList<Position>();
+		for (Position position : fPositions) {
+			for (Position currentTestPosition : fPositions) {
+				if (!position.equals(currentTestPosition)
+						&& position.overlapsWith(currentTestPosition.offset,
+								currentTestPosition.offset)) {
+					if (position.length > currentTestPosition.length) {
+						oldList.add(currentTestPosition);
+					} else {
+						oldList.add(position);
+					}
+				}
+			}
+		}
+		fPositions.removeAll(oldList);
+		oldList = fPositions;
 		Display.getDefault().asyncExec(new Runnable() {
 			@Override
 			public void run() {
@@ -286,8 +331,10 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 	public int getCurrentFontSize() {
 		return getTextWidget().getFont().getFontData()[0].getHeight();
 	}
+
 	/**
 	 * Increases the current editor font-size by 4;
+	 * 
 	 * @return the increased font-size
 	 */
 	public int increaseFont() {
@@ -298,6 +345,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 
 	/**
 	 * Decreases the current editor font-size by 4;
+	 * 
 	 * @return the decreased font-size
 	 */
 	public int decreaseFont() {
@@ -322,8 +370,8 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 		getTextWidget().update();
 		return true;
 	}
-	public void setFont(FontData fd)
-	{
+
+	public void setFont(FontData fd) {
 		PreferenceConverter.setValue(getPreferenceStore(),
 				getFontPropertyPreferenceKey(), fd);
 		getTextWidget().update();
