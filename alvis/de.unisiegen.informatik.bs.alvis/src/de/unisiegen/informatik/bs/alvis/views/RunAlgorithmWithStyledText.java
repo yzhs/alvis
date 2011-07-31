@@ -279,7 +279,8 @@ public class RunAlgorithmWithStyledText extends ViewPart implements PropertyChan
 	private void updateText(String algorithm) {
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
-		ArrayList<Token> keywords = lexer.getKeywords();
+		ArrayList<Token> keywords = new ArrayList<Token>();
+		keywords.addAll( lexer.getKeywords());
 
 		/*
 		 * Begin Highlight

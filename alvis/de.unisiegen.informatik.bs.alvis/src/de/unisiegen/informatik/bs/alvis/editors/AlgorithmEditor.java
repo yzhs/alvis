@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
 import org.eclipse.core.resources.IFile;
@@ -35,7 +36,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditor;
-
 import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.compiler.CompilerAccess;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
@@ -200,17 +200,17 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 						
 						 while(!beginTokens.isEmpty() && !endTokens.isEmpty())
 						 {
-						 fPositions.add(new
-						 Position(getOffset(beginTokens.get(0).getLine(),
-						 beginTokens.get(0).getCharPositionInLine()),
-						 getOffset(endTokens.get(endTokens.size()-1).getLine(),
-						 endTokens.get(endTokens.size()-1).getCharPositionInLine())));
-						 oldList.add(new Position(region.getOffset(), region
-						 .getLength()));
+							 System.out.println();
+//						 fPositions.add(new Position(getOffset(beginTokens.get(0).getLine(),
+//						 beginTokens.get(0).getCharPositionInLine()),
+//						 getOffset(endTokens.get(endTokens.size()-1).getLine(),
+//						 endTokens.get(endTokens.size()-1).getCharPositionInLine())));
+//						 oldList.add(new Position(region.getOffset(), region
+//						 .getLength()));
 						 }
-						 System.out.println("Region: " + region.getType());
-						 System.out.println("Offset: " + region.getOffset());
-						 System.out.println("Length: " + region.getLength());
+//						 System.out.println("Region: " + region.getType());
+//						 System.out.println("Offset: " + region.getOffset());
+//						 System.out.println("Length: " + region.getLength());
 						
 						 fPositions.add(new Position(region.getOffset(),
 						 region
