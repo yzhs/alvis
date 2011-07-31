@@ -195,19 +195,19 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 										.isCollapsed();
 							}
 						}
-						List<Token> beginTokens = CompilerAccess.getDefault().beginBlock();
-						List<Token> endTokens = CompilerAccess.getDefault().endBlock();
-						
-						 while(!beginTokens.isEmpty() && !endTokens.isEmpty())
-						 {
-							 System.out.println();
+//						List<Token> beginTokens = CompilerAccess.getDefault().beginBlock();
+//						List<Token> endTokens = CompilerAccess.getDefault().endBlock();
+//						
+//						 while(!beginTokens.isEmpty() && !endTokens.isEmpty())
+//						 {
+//							 System.out.println();
 //						 fPositions.add(new Position(getOffset(beginTokens.get(0).getLine(),
 //						 beginTokens.get(0).getCharPositionInLine()),
 //						 getOffset(endTokens.get(endTokens.size()-1).getLine(),
 //						 endTokens.get(endTokens.size()-1).getCharPositionInLine())));
 //						 oldList.add(new Position(region.getOffset(), region
 //						 .getLength()));
-						 }
+//						 }
 //						 System.out.println("Region: " + region.getType());
 //						 System.out.println("Offset: " + region.getOffset());
 //						 System.out.println("Length: " + region.getLength());
