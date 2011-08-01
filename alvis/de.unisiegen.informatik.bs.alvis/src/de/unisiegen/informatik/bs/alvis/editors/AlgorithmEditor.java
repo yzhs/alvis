@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import org.antlr.runtime.CommonToken;
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
 import org.eclipse.core.resources.IFile;
@@ -35,9 +34,8 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.internal.handlers.WizardHandler.New;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditor;
-
-import com.itextpdf.text.Document;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.compiler.CompilerAccess;
@@ -57,7 +55,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 	private ProjectionSupport projectionSupport;
 	private Annotation[] oldAnnotations;
 	private ArrayList<Position> fPositions = new ArrayList<Position>();
-	private ArrayList<Position> oldList = new ArrayList<Position>();
+	private Boolean[] isCollapsed;
 
 	/**
 	 * 
@@ -160,7 +158,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 		HashMap<ProjectionAnnotation, Position> newAnnotations = new HashMap<ProjectionAnnotation, Position>();
 
 		for (int i = 0; i < positions.size(); i++) {
-			ProjectionAnnotation annotation = new ProjectionAnnotation(true);
+			ProjectionAnnotation annotation = new ProjectionAnnotation(isCollapsed[i]);
 
 			newAnnotations.put(annotation, positions.get(i));
 
@@ -179,8 +177,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 	protected void calculatePositions() {
 		final AlgorithmEditor editor = this;
 		fPositions = new ArrayList<Position>();
-		oldList = new ArrayList<Position>();
-		
+
 		ITypedRegion[] partitions;
 		try {
 			partitions = getSourceViewer().getDocument().computePartitioning(0,
@@ -188,30 +185,14 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 			for (ITypedRegion region : partitions) {
 				if (region.getType().equals(
 						AlgorithmPartitionScanner.MULTILINE_COMMENT)) {
-					fPositions.add(new Position(region.getOffset(),region.getLength()));
-					oldList.add(new Position(region.getOffset(),region.getLength()));
+					fPositions.add(new Position(region.getOffset(), region
+							.getLength()));
 
 				}
 			}
 		} catch (BadLocationException e) {
 
 		}
-
-		// @SuppressWarnings("unchecked")
-		// Iterator<Annotation> iter = annotationModel
-		// .getAnnotationIterator();
-		// while (iter.hasNext()) {
-		// Annotation currAnnotation = iter.next();
-		// if (currAnnotation.getType().equals(
-		// ProjectionAnnotation.TYPE))
-		//
-		// {
-		// // this is how to get the information, whether
-		// // folding area is collapsed(folded).
-		// ((ProjectionAnnotation) currAnnotation)
-		// .isCollapsed();
-		// }
-		// }
 
 		List<Token> beginTokens = CompilerAccess.getDefault().beginBlock();
 		List<Token> endTokens = CompilerAccess.getDefault().endBlock();
@@ -230,48 +211,75 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 					break;
 				}
 			}
-		
+
 			// startOfBegin represents the last character
 			// Position in the line of begin
 			if (beginToken != null) {
-				int startOfBegin = (getOffset(beginToken.getLine()-1, beginToken.getCharPositionInLine()));
-				int endOfEnd = (getOffset(endToken.getLine() , 0));
-				System.out.println("Line+1: " + (endToken.getLine()) + "Document Lines: " + getSourceViewer().getDocument()
-						.getNumberOfLines());
-				if (endOfEnd<0) {
+				int startOfBegin = (getOffset(beginToken.getLine() - 1,
+						beginToken.getCharPositionInLine()));
+				int endOfEnd = (getOffset(endToken.getLine(), 0));
+				System.out.println("Line+1: " + (endToken.getLine())
+						+ "Document Lines: "
+						+ getSourceViewer().getDocument().getNumberOfLines());
+				if (endOfEnd < 0) {
 					endOfEnd = getSourceViewer().getDocument().getLength();
 				}
 				int regionLength = endOfEnd - startOfBegin;
 				if (regionLength > 0) {
 					fPositions.add(new Position(startOfBegin, regionLength));
-					oldList.add(new Position(startOfBegin, regionLength));
-					
+
 				}
 				beginTokens.remove(beginToken);
 			}
 			endTokens.remove(0);
 		}
 
-		oldList = new ArrayList<Position>();
+		ArrayList<Position> tempList = new ArrayList<Position>();
 		for (Position position : fPositions) {
 			for (Position currentTestPosition : fPositions) {
 				if (!position.equals(currentTestPosition)
 						&& position.overlapsWith(currentTestPosition.offset,
 								currentTestPosition.offset)) {
 					if (position.length > currentTestPosition.length) {
-						oldList.add(currentTestPosition);
+						tempList.add(currentTestPosition);
 					} else {
-						oldList.add(position);
+						tempList.add(position);
 					}
 				}
 			}
 		}
-		fPositions.removeAll(oldList);
-		oldList = fPositions;
+		fPositions.removeAll(tempList);
+		isCollapsed = new Boolean[fPositions.size()];
+		for(int i=0;i<fPositions.size();i++)
+		{
+			isCollapsed[i] = false;
+		}
+		
+		@SuppressWarnings("unchecked")
+		Iterator<Annotation> iter = annotationModel.getAnnotationIterator();
+		while (iter.hasNext()) {
+			Annotation currAnnotation = iter.next();
+			if (currAnnotation.getType().equals(ProjectionAnnotation.TYPE))
+
+			{
+				// this is how to get the information, whether
+				// folding area is collapsed(folded).
+				Position projPosition = annotationModel.getPosition(currAnnotation);
+				ProjectionAnnotation projAnnotation = (ProjectionAnnotation) currAnnotation;
+				for(int i=0;i<fPositions.size();i++)
+				{
+					Position positionToTest = fPositions.get(i);
+					if(positionToTest.overlapsWith(projPosition.offset, projPosition.length))
+					{
+						isCollapsed[i] = projAnnotation.isCollapsed();
+					}
+				}
+			}
+		}
 		Display.getDefault().asyncExec(new Runnable() {
 			@Override
 			public void run() {
-				editor.updateFoldingStructure(oldList);
+				editor.updateFoldingStructure(fPositions);
 			}
 
 		});
