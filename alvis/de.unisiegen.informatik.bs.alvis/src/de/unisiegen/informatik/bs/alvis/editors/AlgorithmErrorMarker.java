@@ -13,6 +13,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 
@@ -25,7 +26,6 @@ import de.unisiegen.informatik.bs.alvis.compiler.CompilerAccess;
  */
 public class AlgorithmErrorMarker {
 	private IFile file;
-	@SuppressWarnings("unused")
 	private IDocument document;
 	public static final String ERROR_MARKER_ID = "de.unisiegen.informatik.bs.alvis.markers.AlgorithmErrorMarker";
 
@@ -54,7 +54,6 @@ public class AlgorithmErrorMarker {
 			// not critical, will be deleted next time called
 		}
 		/** remark all errorMarkers */
-
 		// test mark the current Document, from start to position 50
 		// TODO implement method when Compiler front-end is created
 
@@ -63,15 +62,20 @@ public class AlgorithmErrorMarker {
 		for(Exception error:errors)
 		{
 			RecognitionException recognitionException = new RecognitionException();
+			String errorMessage = "";
 			if(error instanceof MismatchedTreeNodeException)
 			{
 				//TODO specific Exception Stuff here like, Error Message
 				recognitionException = (MismatchedTreeNodeException) error;
+				System.out.println(error);
+				errorMessage = "MismatchedTreeNode at " + recognitionException.line + ":" + recognitionException.charPositionInLine;
 			}
 			else if(error instanceof NoViableAltException)
 			{
 				//TODO specific Exception Stuff here like, Error Message
 				recognitionException = (NoViableAltException) error;
+		 		errorMessage = "No alternative given at " + (recognitionException.line) + ":" + recognitionException.charPositionInLine;
+				
 			}
 			else if(error instanceof RecognitionException)
 			{
@@ -79,44 +83,31 @@ public class AlgorithmErrorMarker {
 			}
 			else
 			{
-				System.out.println(recognitionException.getClass().getSimpleName());
-				System.out.println("Line: " + recognitionException.line + " Offeset: " + recognitionException.charPositionInLine);
+				System.out.println("NEW ERROR" +error);
 				continue;
 			}
 			MarkerUtilities.setLineNumber(map,recognitionException.line);
-			MarkerUtilities.setMessage(map, recognitionException.getLocalizedMessage());
-			System.out.println(recognitionException.c + " / " + recognitionException.charPositionInLine);
-			MarkerUtilities.setCharStart(map, recognitionException.c);
-			MarkerUtilities.setCharEnd(map, (recognitionException.charPositionInLine+1));
+			MarkerUtilities.setMessage(map, errorMessage);
+//			map.put(IMarker.MESSAGE, errorMessage);
+			int offset = -1;
+			try {
+				 offset = document.getLineOffset(recognitionException.line-1) + recognitionException.charPositionInLine;
+			} catch (BadLocationException e1) {
+				continue;
+			}
+			MarkerUtilities.setLineNumber(map, recognitionException.line-1);
+			MarkerUtilities.setCharStart(map, offset);
+			MarkerUtilities.setCharEnd(map, offset+1);
 			map.put(IMarker.SEVERITY, new Integer(IMarker.SEVERITY_ERROR));
 			map.put(IMarker.LOCATION, file.getFullPath().toString());
 			try {
 				MarkerUtilities.createMarker(file, map, ERROR_MARKER_ID);
 			} catch (CoreException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//ignore Error
 			}
 			
 		}
-//		MarkerUtilities.setLineNumber(map, 5);
-//		// document will be used to get the offset of the Error eg.
-//		document.getLength();
-//		MarkerUtilities.setMessage(map, "Test Error Message");
-//		map.put(IMarker.LOCATION, file.getFullPath().toString());
-//		Integer charStart = 0;
-//		if (charStart != null)
-//			map.put(IMarker.CHAR_START, charStart);
-//		Integer charEnd = 50;
-//		if (charEnd != null)
-//			map.put(IMarker.CHAR_END, charEnd);
-//
-//		map.put(IMarker.SEVERITY, new Integer(IMarker.SEVERITY_ERROR));
-//
-//		try {
-//			MarkerUtilities.createMarker(file, map, ERROR_MARKER_ID);
-//		} catch (CoreException ee) {
-//			// same like deleting, not critical
-//		}
+		
 	}
 
 }

@@ -65,8 +65,6 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 		// Activator.getDefault().registerExport(this);
 		// Activator.getDefault().getWorkbench().getEditorRegistry().
 
-		PlatformUI.getWorkbench().getDisplay();
-
 		/** filling Tokens to highlight */
 		Color highlightColor = new Color(Display.getCurrent(), new RGB(111, 33,
 				152));
@@ -136,8 +134,10 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 			CompilerAccess.getDefault().compile(
 					input.getFile().getRawLocation().toString(), true);
 		} catch (IOException e) {
+			System.out.println("IOException");
 			// TODO Auto-generated catch block
 		} catch (RecognitionException e) {
+			System.out.println("RecognitionException");
 			// TODO Auto-generated catch block
 		}
 		calculatePositions();
