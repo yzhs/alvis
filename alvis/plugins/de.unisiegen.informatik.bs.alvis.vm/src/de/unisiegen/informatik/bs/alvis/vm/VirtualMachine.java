@@ -4,9 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeSet;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+//import de.unisiegen.informatik.bs.alvis.io.logger.Logger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
 /**
@@ -109,16 +111,24 @@ public class VirtualMachine {
 	 * @param pathToFile
 	 * @param fileName
 	 * @return boolean with success
+	 * @throws ClassNotFoundException 
 	 */
-	public boolean addAlgoToVM(String key, String pathToFile, String fileName, ArrayList<Object> datatypesToAddToClasspath) {
+	public boolean addAlgoToVM(String key, String pathToFile, String fileName,TreeSet<String> dynamicallyReferencedPackagesNeededToCompile) throws ClassNotFoundException {
+		
+//		Logger.getInstance().log("de.~.alvis.vm", Logger.DEBUG, "addAlgoToVM with params:" +
+//				"\n Key: " + key +
+//				"\n pathToFile: " + pathToFile +
+//				"\n fileName: " + fileName +
+//				"\n datatypesToAddToClasspath: " + dynamicallyReferencedPackagesNeededToCompile);
+		
 		AlgoThread tmp;
-		try {
-			tmp = new AlgoThread(pathToFile, fileName, lock, datatypesToAddToClasspath);
-		} catch (ClassNotFoundException e) {
-			// TODO possible case for the logger?
-			e.printStackTrace();
-			return false;
-		}
+//		try {
+			tmp = new AlgoThread(pathToFile, fileName, lock, dynamicallyReferencedPackagesNeededToCompile);
+//		} catch (ClassNotFoundException e) {
+//			Logger.getInstance().log("VirtualMachine.addAlgoToVM", Logger.ERROR, "Begin");
+//			e.printStackTrace();
+//			return false;
+//		}
 		algos.put(key, tmp);
 		return true;
 	}

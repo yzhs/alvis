@@ -5,13 +5,11 @@ Bundle-SymbolicName: de.unisiegen.informatik.bs.alvis.vm;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: de.unisiegen.informatik.bs.alvis.vm.Activator
 Require-Bundle: org.eclipse.core.runtime,
- de.unisiegen.informatik.bs.alvis.primitive.datatypes;bundle-version="1.0.0",
- de.unisiegen.informatik.bs.alvis.graph.datatypes;bundle-version="1.0.0"
+ de.unisiegen.informatik.bs.alvis.primitive.datatypes;bundle-version="1.0.0"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: de.unisiegen.informatik.bs.alvis.vm
-Bundle-ClassPath: tools.jar,
+Bundle-ClassPath: src/de/unisiegen/informatik/bs/alvis/vm/tools.jar,
  .
 Import-Package: de.unisiegen.informatik.bs.alvis.compiler
 DynamicImport-Package: *
-

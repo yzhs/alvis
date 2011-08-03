@@ -8,8 +8,10 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.TreeSet;
 import java.util.concurrent.locks.Lock;
 
+//import de.unisiegen.informatik.bs.alvis.io.logger.Logger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.SortableCollection;
 
@@ -70,8 +72,13 @@ public class AlgoThread {
 	 * @param packagesToAddToClasspath
 	 */
 	public AlgoThread(String pathName, String fileName, Lock toLockOn,
-			ArrayList<Object> datatypesToAddToClasspath)
+			TreeSet<String> dynamicallyReferencedPackagesNeededToCompile)
 			throws ClassNotFoundException {
+//		Logger.getInstance().log("de.~.vm.AlgoThread", Logger.DEBUG, "AlgoThread(String pathName, String fileName, Lock toLockOn, ArrayList<Object> datatypesToAddToClasspath)" +
+//				"\n pathName: " + pathName +
+//				"\n fileName: " + fileName +
+//				"\n toLockOn: " + toLockOn +
+//				"\n datatypesToAddToClasspath: " + dynamicallyReferencedPackagesNeededToCompile);
 		bpListeners = new ArrayList<BPListener>();
 		lineCounter = new HashMap<Integer, Integer>();
 		lastCounter = new HashMap<Integer, Integer>();
@@ -79,7 +86,10 @@ public class AlgoThread {
 		parameters = null;
 		onBreak = false;
 		lock = toLockOn;
-		loadAlgo(pathName, fileName, datatypesToAddToClasspath);
+//		Logger.getInstance().log("de.~.vm.AlgoThread", Logger.DEBUG, "PRE - loading the class");
+		loadAlgo(pathName, fileName, dynamicallyReferencedPackagesNeededToCompile);
+//		Logger.getInstance().log("de.~.vm.AlgoThread", Logger.DEBUG, "POST - loading the class");
+
 		createThread();
 	}
 
@@ -185,12 +195,17 @@ public class AlgoThread {
 	 *            without .java postfix
 	 */
 	private void loadAlgo(String pathToFile, String fileName,
-			ArrayList<Object> datatypesToAddToClasspath)
+			TreeSet<String> dynamicallyReferencedPackagesNeededToCompile)
 			throws ClassNotFoundException {
-		DynaCode dynacode = new DynaCode(datatypesToAddToClasspath);
+//		Logger.getInstance().log("de.~.vm.AlgoThread.loadAlgo()", Logger.DEBUG, "new DynaCode()");
+		DynaCode dynacode = new DynaCode(dynamicallyReferencedPackagesNeededToCompile);
 
+//		Logger.getInstance().log("de.~.vm.AlgoThread.loadAlgo()", Logger.DEBUG, ".addSourceDir()");
 		dynacode.addSourceDir(pathToFile, new File(fileName));
+//		Logger.getInstance().log("DynaCode", Logger.DEBUG, "Source Dir added!");
+		
 		algoClass = dynacode.loadClass(fileName);
+//		Logger.getInstance().log("DynaCode", Logger.DEBUG, "Class loaded");
 	}
 
 	/**

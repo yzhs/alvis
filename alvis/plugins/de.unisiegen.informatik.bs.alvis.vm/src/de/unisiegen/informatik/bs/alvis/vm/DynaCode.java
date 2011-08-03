@@ -11,14 +11,14 @@ import java.util.Iterator;
 import java.util.TreeSet;
 
 
+
 /**
  * Class which handles the class path in order to be able to compile Java Code
  * at runtime
  * 
- * @author Sebastian Schmitz
- * Disclaimer: This class and Javac are an adaption of the classes
- * distributed by Li Yang in his tutorial "add dynamic Java Code
- * to your application" published at www.javaworld.com
+ * @author Sebastian Schmitz Disclaimer: This class and Javac are an adaption of
+ *         the classes distributed by Li Yang in his tutorial "add dynamic Java
+ *         Code to your application" published at www.javaworld.com
  */
 
 public final class DynaCode {
@@ -28,20 +28,23 @@ public final class DynaCode {
 	private ClassLoader parentClassLoader;
 
 	private ArrayList<SourceDir> sourceDirs = new ArrayList<SourceDir>();
-	
-	TreeSet<String> dynamicallyReferencedPackagesNeededToCompile; // what a long self-explanatory name!
+
+	TreeSet<String> dynamicallyReferencedPackagesNeededToCompile; // what a long
+																	// self-explanatory
+																	// name!
 
 	// class name => LoadedClass
 	private HashMap<String, LoadedClass> loadedClasses = new HashMap<String, LoadedClass>();
 
-	public DynaCode(ArrayList<Object> packagesToAddToClasspath) {
-		this(DynaCode.class.getClassLoader(), packagesToAddToClasspath);
+	public DynaCode(TreeSet<String> dynamicallyReferencedPackagesNeededToCompile) {
+		this(DynaCode.class.getClassLoader(),
+				dynamicallyReferencedPackagesNeededToCompile);
 	}
 
 	public DynaCode(ClassLoader parentClassLoader,
-			ArrayList<Object> packagesToAddToClasspath) {
+			TreeSet<String> dynamicallyReferencedPackagesNeededToCompile) {
 		this(extractClasspath(parentClassLoader), parentClassLoader,
-				packagesToAddToClasspath);
+				dynamicallyReferencedPackagesNeededToCompile);
 
 	}
 
@@ -51,29 +54,36 @@ public final class DynaCode {
 	 * @param parentClassLoader
 	 *            the parent of the class loader that loads all the dynamic
 	 *            classes
-	 * @param List of datatypes used in Algorithm.java provided by the main (de.~.alvis) activator
+	 * @param List
+	 *            of datatypes used in Algorithm.java provided by the main
+	 *            (de.~.alvis) activator
 	 */
 	public DynaCode(String compileClasspath, ClassLoader parentClassLoader,
-			ArrayList<Object> datatypesToAddToClasspath) {
+			TreeSet<String> dynamicallyReferencedPackagesNeededToCompile) {
+
+
 		this.compileClasspath = compileClasspath;
+
 		this.parentClassLoader = parentClassLoader;
 
-		// the compiler must know about the data types provided by the VM as well as the given ones
-		// so add this class to the datatypesToAddToClasspath and the method will extract the VM-package
-		datatypesToAddToClasspath.add(this);
-		
-		// Cycle through the list of delivered data types and extract the package they belong to
-		// TreeSet is used so that every packages is only added once
-		dynamicallyReferencedPackagesNeededToCompile = new TreeSet<String>();
-		for(Object obj : datatypesToAddToClasspath)
-			dynamicallyReferencedPackagesNeededToCompile.add(
-					obj.getClass().getProtectionDomain().getCodeSource()
-					.getLocation().getFile().toString() + "src/");
-		
+		// the compiler must know about the data types provided by the VM as
+		// well as the given ones
+		// so add this class to the datatypesToAddToClasspath and the method
+		// will extract the VM-package
+
+		String pathToVMPackage = this.getClass().getProtectionDomain()
+				.getCodeSource().getLocation().getFile().toString();
+		if (pathToVMPackage.endsWith(".jar"))
+			dynamicallyReferencedPackagesNeededToCompile.add(pathToVMPackage);
+		else
+			dynamicallyReferencedPackagesNeededToCompile.add(pathToVMPackage
+					+ "src/");
+
 		// add these packages to the classpath
-		for(String str : dynamicallyReferencedPackagesNeededToCompile)
+		for (String str : dynamicallyReferencedPackagesNeededToCompile) {
 			this.compileClasspath += System.getProperty("path.separator") + str;
 		}
+	}
 
 	/**
 	 * Add a directory that contains the source of dynamic java code.
@@ -128,7 +138,7 @@ public final class DynaCode {
 			if (src == null) {
 				throw new ClassNotFoundException("DynaCode class not found "
 						+ className);
-			}
+			} else
 
 			synchronized (this) {
 
@@ -191,6 +201,8 @@ public final class DynaCode {
 
 		URLClassLoader classLoader;
 
+		// ClassLoader classLoader;
+
 		SourceDir(File srcDir) {
 			this.srcDir = srcDir;
 
@@ -204,16 +216,17 @@ public final class DynaCode {
 
 			// class loader
 			recreateClassLoader();
+
 		}
 
 		void recreateClassLoader() {
 			try {
-				classLoader = new URLClassLoader(new URL[] { binDir.toURI()
-						.toURL() }, parentClassLoader);
+				classLoader = new URLClassLoader(
+						new URL[] { binDir.toURI().toURL() }, parentClassLoader);
 			} catch (MalformedURLException e) {
 				// should not happen
 				e.printStackTrace();
-			}
+			} 
 		}
 
 	}
@@ -239,7 +252,6 @@ public final class DynaCode {
 			String path = className.replace('.', '/');
 			this.srcFile = new File(src.srcDir, path + ".java");
 			this.binFile = new File(src.binDir, path + ".class");
-
 			compileAndLoadClass();
 		}
 
@@ -267,7 +279,6 @@ public final class DynaCode {
 			try {
 				// load class
 				clazz = srcDir.classLoader.loadClass(className);
-
 				// load class success, remember timestamp
 				lastModified = srcFile.lastModified();
 
@@ -277,6 +288,10 @@ public final class DynaCode {
 			}
 
 			info("Init " + clazz);
+		}
+		
+		public URLClassLoader getClassLoader(){
+			return srcDir.classLoader;
 		}
 	}
 
@@ -307,6 +322,10 @@ public final class DynaCode {
 	 */
 	private static void info(String msg) {
 		// System.out.println("[DynaCode] " + msg);
+	}
+	
+	public URLClassLoader getClassLoader(String classname){
+		return this.loadedClasses.get(classname).getClassLoader();
 	}
 
 }
