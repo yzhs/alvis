@@ -39,4 +39,12 @@ public class NotAnArrayException extends TypeException {
 				+ "Tried to index '" + expr + "', which has type '" + type
 				+ "', which is not an array type.";
 	}
+
+	public Type getType() {
+		return type;
+	}
+	
+	public String getExpr() {
+		return expr;
+	}
 }

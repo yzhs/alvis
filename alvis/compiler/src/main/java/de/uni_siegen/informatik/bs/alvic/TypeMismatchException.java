@@ -48,4 +48,16 @@ public class TypeMismatchException extends TypeException {
 				+ "' which has type '" + given + "', but expected "
 				+ "an expression of type '" + expected + "'.";
 	}
+
+	public Type getExpected() {
+		return expected;
+	}
+
+	public Type getGiven() {
+		return given;
+	}
+
+	public String getExpr() {
+		return expr;
+	}
 }

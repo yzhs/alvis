@@ -31,4 +31,8 @@ public class InvalidStatementException extends TypeException {
 				+ "' which is not a valid statement but used where a statement"
 				+ " was expected.";
 	}
+
+	public String getExpr() {
+		return expr;
+	}
 }

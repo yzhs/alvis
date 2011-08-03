@@ -35,4 +35,8 @@ public class UnknownIdentifierException extends TypeException {
 				+ identifier + "' was used before being declared in the "
 				+ "current scope.";
 	}
+
+	public String getIdentifier() {
+		return identifier;
+	}
 }

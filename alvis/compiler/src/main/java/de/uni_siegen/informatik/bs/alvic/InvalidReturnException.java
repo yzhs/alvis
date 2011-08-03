@@ -67,4 +67,20 @@ public class InvalidReturnException extends TypeException {
 				+ "' when a value of " + "type '" + expected
 				+ "' was expected.";
 	}
+
+	public Type getExpected() {
+		return expected;
+	}
+	
+	public Type getGiven() {
+		return given;
+	}
+
+	public String getFunction() {
+		return function;
+	}
+
+	public String getStat() {
+		return stat;
+	}
 }

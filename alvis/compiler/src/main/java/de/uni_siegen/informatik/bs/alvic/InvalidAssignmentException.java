@@ -41,4 +41,12 @@ public class InvalidAssignmentException extends TypeException {
 				+ right + "' is a function call and thus not "
 				+ "allowed in this place.";
 	}
+
+	public String getLeft() {
+		return left;
+	}
+
+	public String getRight() {
+		return right;
+	}
 }

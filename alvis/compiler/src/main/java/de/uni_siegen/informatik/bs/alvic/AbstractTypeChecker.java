@@ -241,7 +241,7 @@ public abstract class AbstractTypeChecker extends TreeParser {
 			return tmp.getReturnType();
 		}
 
-		reportError(new NoSuchOperatorException(left, op, 1, start.getToken()));
+		reportError(new NoSuchOperatorException(left, op, right, 1, start.getToken()));
 		return SimpleType.create("# NoSuchOperator #");
 	}
 
@@ -277,7 +277,7 @@ public abstract class AbstractTypeChecker extends TreeParser {
 				return tmp.getReturnType();
 		}
 
-		reportError(new NoSuchOperatorException(operand, op, 0, start.getToken()));
+		reportError(new NoSuchOperatorException(operand, op, null, 0, start.getToken()));
 		return SimpleType.create("# NoSuchOperator #");
 	}
 }

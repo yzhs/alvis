@@ -40,4 +40,12 @@ public class NotAFunctionException extends TypeException {
 				+ "Tried to call '" + expr + "', which has type '" + type
 				+ "', which is not a function type.";
 	}
+
+	public Type getType() {
+		return type;
+	}
+
+	public String getExpr() {
+		return expr;
+	}
 }

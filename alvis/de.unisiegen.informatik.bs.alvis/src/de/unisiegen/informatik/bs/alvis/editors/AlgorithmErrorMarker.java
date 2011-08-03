@@ -17,6 +17,7 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 
+import de.uni_siegen.informatik.bs.alvic.*;
 import de.unisiegen.informatik.bs.alvis.compiler.CompilerAccess;
 
 /**
@@ -59,43 +60,77 @@ public class AlgorithmErrorMarker {
 
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Exception> errors = CompilerAccess.getDefault().getExceptions();
-		for(Exception error:errors)
-		{
-			RecognitionException recognitionException = new RecognitionException();
+		for(Exception error : errors) {
 			String errorMessage = "";
-			if(error instanceof MismatchedTreeNodeException)
-			{
+			if (error instanceof MismatchedTreeNodeException) {
+				MismatchedTreeNodeException re = (MismatchedTreeNodeException)error;
 				//TODO specific Exception Stuff here like, Error Message
-				recognitionException = (MismatchedTreeNodeException) error;
 				System.out.println(error);
-				errorMessage = "MismatchedTreeNode at " + recognitionException.line + ":" + recognitionException.charPositionInLine;
-			}
-			else if(error instanceof NoViableAltException)
-			{
+				errorMessage = "MismatchedTreeNode at " + re.line + ":" + re.charPositionInLine;
+			} else if (error instanceof NoViableAltException) {
+				NoViableAltException re = (NoViableAltException)error;
 				//TODO specific Exception Stuff here like, Error Message
-				recognitionException = (NoViableAltException) error;
-		 		errorMessage = "No alternative given at " + (recognitionException.line) + ":" + recognitionException.charPositionInLine;
-				
-			}
-			else if(error instanceof RecognitionException)
-			{
-				recognitionException = (RecognitionException) error;
-			}
-			else
-			{
-				System.out.println("NEW ERROR" +error);
+		 		errorMessage = "No alternative given at " + re.line + ":" + re.charPositionInLine;
+			} else if (error instanceof ArgumentNumberException) {
+				ArgumentNumberException re = (ArgumentNumberException)error;
+				errorMessage = "Function called at " + re.line + ":" + re.charPositionInLine + " with the wrong number of arguments (" + " instead of the expected " + ")";
+			} else if (error instanceof ArgumentTypeException) {
+				ArgumentTypeException re = (ArgumentTypeException)error;
+				errorMessage = "Function called at " + re.line + ":" + re.charPositionInLine + " got an argument with the wrong type: argument #" + re.getArgumentNumber() + " is of type " + re.getGiven() + " but should be of type " + re.getExpected() + ".";
+			} else if (error instanceof InvalidAssignmentException) {
+				InvalidAssignmentException re = (InvalidAssignmentException)error;
+				errorMessage = "Tried to assign to " + re.getLeft() + " at " + re.line + ":" + re.charPositionInLine + " which is a function call and can thus not be assigned to.";
+			} else if (error instanceof InvalidReturnException) {
+				InvalidReturnException re = (InvalidReturnException)error;
+				if (re.getExpected().toString().equalsIgnoreCase("void"))
+					errorMessage = "Trying to return non-void result " + re.getStat() + " at " + re.line + ":" + re.charPositionInLine + " from void function " + re.getFunction() + ".";
+				else if (null == re.getGiven())
+					errorMessage = "Trying to return from function " + re.getFunction() + " at " + re.line + ":" + re.charPositionInLine + " without a return value where a return value of type " + re.getExpected() + " was expected.";
+				else
+					errorMessage = "Trying to return value " + re.getStat() + " from function " + re.getFunction() + " at " + re.line + ":" + re.charPositionInLine + " which has type " + re.getGiven() + " where an expression of type " + re.getExpected() + " was expected.";
+			} else if (error instanceof InvalidStatementException) {
+				InvalidStatementException re = (InvalidStatementException)error;
+				errorMessage = "Tried to use expression " + re.getExpr() + " where a statement was expected at " + re.line + ":" + re.charPositionInLine + ".";
+			} else if (error instanceof NoSuchOperatorException) {
+				NoSuchOperatorException re = (NoSuchOperatorException)error;
+				errorMessage = "Using non-existant operator " + re.getMember() +  "(" + re.getObject() + (re.getArguments() == 0 ? ")." : ", " + re.getArgType()+ ").");
+			} else if (error instanceof NotAFunctionException) {
+				NotAFunctionException re = (NotAFunctionException)error;
+				errorMessage = "Trying to call " + re.getExpr() + " at " + re.line + ":" + re.charPositionInLine + " which has type " + re.getType() + "and therefore is not a function.";
+			} else if (error instanceof NotAnArrayException) {
+				NotAnArrayException re = (NotAnArrayException)error;
+				errorMessage = "Trying to index " + re.getExpr() + " at " + re.line + ":" + re.charPositionInLine + " which has type " + re.getType() + " and therefore is not an array.";
+			} else if (error instanceof TypeMismatchException) {
+				TypeMismatchException re = (TypeMismatchException)error;
+				errorMessage = "Found expression " + re.getExpr() + " at " + re.line + ":" + re.charPositionInLine + " which has type " + re.getGiven() + " where an expression of type" + re.getExpected() + " was expected.";
+			} else if (error instanceof UnknownIdentifierException) {
+				UnknownIdentifierException re = (UnknownIdentifierException)error;
+				errorMessage = "Found identifier " + re.getIdentifier() + " at " + re.line + ":" + re.charPositionInLine + " which was not declared before being used.";
+			} else if (error instanceof UnknownOperatorException) {
+				UnknownOperatorException re = (UnknownOperatorException)error;
+				errorMessage = "Found operator " + re.getMember() + " at " + re.line + ":" + re.charPositionInLine + " with argument of type " + re.getObject() + " which is not defined.";
+			} else if (error instanceof UnknownMemberException) {
+				UnknownMemberException re = (UnknownMemberException)error;
+				errorMessage = "Found access to member " + re.getMember() + " of class " + re.getObject() + " at " + re.line + ":" + re.charPositionInLine + ". Such a member does not exist.";
+			} else if (error instanceof TypeException) {
+				errorMessage = error.toString();
+			} else if (error instanceof RecognitionException) {
+				errorMessage = error.toString();
+			} else {
+				System.out.println("NEW ERROR " + error);
 				continue;
 			}
-			MarkerUtilities.setLineNumber(map,recognitionException.line);
+			RecognitionException re = (RecognitionException)error;
+			MarkerUtilities.setLineNumber(map, re.line);
 			MarkerUtilities.setMessage(map, errorMessage);
 //			map.put(IMarker.MESSAGE, errorMessage);
 			int offset = -1;
 			try {
-				 offset = document.getLineOffset(recognitionException.line-1) + recognitionException.charPositionInLine;
+				 offset = document.getLineOffset(re.line-1) + re.charPositionInLine;
 			} catch (BadLocationException e1) {
 				continue;
 			}
-			MarkerUtilities.setLineNumber(map, recognitionException.line-1);
+			MarkerUtilities.setLineNumber(map, ((RecognitionException)error).line-1);
 			MarkerUtilities.setCharStart(map, offset);
 			MarkerUtilities.setCharEnd(map, offset+1);
 			map.put(IMarker.SEVERITY, new Integer(IMarker.SEVERITY_ERROR));

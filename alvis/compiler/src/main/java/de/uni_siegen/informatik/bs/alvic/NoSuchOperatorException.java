@@ -20,6 +20,11 @@ public class NoSuchOperatorException extends UnknownOperatorException {
 	protected int arguments;
 
 	/**
+	 * The type of the second argument or null if there is none.
+	 */
+	protected Type argType;
+
+	/**
 	 * @param object
 	 *            The object that does not have such an operator.
 	 * @param op
@@ -30,9 +35,10 @@ public class NoSuchOperatorException extends UnknownOperatorException {
 	 * @param token
 	 *            The operator token
 	 */
-	public NoSuchOperatorException(Type object, String op, int arguments, Token token) {
+	public NoSuchOperatorException(Type object, String op, Type argType, int arguments, Token token) {
 		super(object, op, token);
 		this.arguments = arguments;
+		this.argType = argType;
 	}
 
 	@Override
@@ -41,5 +47,13 @@ public class NoSuchOperatorException extends UnknownOperatorException {
 				+ "no operator '" + member + "' for objects of type '" + object + "'"
 				+ ((arguments == 0) ? "." : (" taking exactly " + arguments
 						+ " arguments of a " + "subtype of '" + object + "'."));
+	}
+
+	public int getArguments() {
+		return arguments;
+	}
+	
+	public Type getArgType() {
+		return argType;
 	}
 }

@@ -39,4 +39,12 @@ public class UnknownMemberException extends TypeException {
 		return "Attribute error " + getPos() + ": Class '"
 				+ object + "' does not have a member called '" + member + "'.";
 	}
+
+	public Type getObject() {
+		return object;
+	}
+
+	public String getMember() {
+		return member;
+	}
 }

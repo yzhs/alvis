@@ -28,4 +28,8 @@ public class ArgumentTypeException extends TypeMismatchException {
 		    + " of method '" + expr + "' is expected to be of type '"
 		    + expected + "' but is of type '" + given + "'.";
 	}
+
+	public int getArgumentNumber() {
+		return n;
+	}
 }

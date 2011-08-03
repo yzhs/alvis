@@ -105,8 +105,8 @@ public class CompilerAccess {
 		if (null == javaCode) {
 			System.err.println("Compiling code from " + algorithmPath
 					+ " failed");
-			for (Exception e : compiler.getExceptions())
-				e.printStackTrace();
+//			for (Exception e : compiler.getExceptions())
+//				e.printStackTrace();
 			return null;
 		}
 
