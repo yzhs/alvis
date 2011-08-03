@@ -117,15 +117,15 @@ public class RunGraph extends ViewPart implements IExportItem {
 			IConfigurationElement[] elements = extension
 					.getConfigurationElements();
 			for (int j = 0; j < elements.length; j++) {
-//				try {
-//					IConfigurationElement element = elements[j];
-//					IRunVysualizer runvizual = (IRunVisualizer) element
-//							.createExecutableExtension("class");
-//					// Save the found IRunVisualizer in a list
-//					myRunVisualizers.add(runvizual);
-//				} catch (CoreException e) {
-//					e.printStackTrace();
-//				}
+				try {
+					IConfigurationElement element = elements[j];
+					IRunVisualizer runvizual = (IRunVisualizer) element
+							.createExecutableExtension("class");
+					// Save the found IRunVisualizer in a list
+					myRunVisualizers.add(runvizual);
+				} catch (CoreException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
