@@ -168,6 +168,8 @@ public class Compiler {
 		program_return psrReturn = parser.program();
 		exceptions.addAll(lexer.getExceptions());
 		exceptions.addAll(parser.getExceptions());
+		if (0 != exceptions.size())
+			return null;
 
 		CommonTree tree = (CommonTree) psrReturn.getTree();
 		tree = runTreeParser(TypeChecker.class, tree);
