@@ -2,6 +2,7 @@ package de.unisiegen.informatik.bs.alvis;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.TreeSet;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
@@ -265,14 +266,34 @@ public class Activator extends AbstractUIPlugin {
 		// .java
 		// Add all this to VM.
 
+		
 		// Cast the PCObjects to Objects, so that class further down this stream
 		// are independent from PCObjects
-		ArrayList<Object> datatypesToAddToClasspath = new ArrayList<Object>();
-		for (PCObject obj : datatypesToAddToClasspathAsPCObjects)
-			datatypesToAddToClasspath.add((Object) obj);
+		//ArrayList<Object> datatypesToAddToClasspath = new ArrayList<Object>();
+		//for (PCObject obj : datatypesToAddToClasspathAsPCObjects)
+		//	datatypesToAddToClasspath.add((Object) obj);
+			
+		
+		// Cycle through the list of delivered data types and extract the
+		// package they belong to
+		// TreeSet is used so that every packages is only added once
+		TreeSet<String> dynamicallyReferencedPackagesNeededToCompile = new TreeSet<String>();	
+		for (Object obj : datatypesToAddToClasspathAsPCObjects) {
+			String path = obj.getClass().getProtectionDomain().getCodeSource()
+					.getLocation().getFile().toString();
+			if (path.endsWith(".jar"))
+				dynamicallyReferencedPackagesNeededToCompile.add(path);
+			else
+				dynamicallyReferencedPackagesNeededToCompile.add(path + "src/");
+		}
 
-		if(!vm.addAlgoToVM("algo", pathToFile, fileName,datatypesToAddToClasspath))
-			throw new VirtualMachineException("Adding the algorithm to the Virtual Machine failed.");
+		try {
+			if(!vm.addAlgoToVM("algo", pathToFile, fileName, dynamicallyReferencedPackagesNeededToCompile))
+				throw new VirtualMachineException("Adding the algorithm to the Virtual Machine failed.");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 				
 		//			return vm.addAlgoToVM("first", pathToAlgoInJava); //$NON-NLS-1$
 	}

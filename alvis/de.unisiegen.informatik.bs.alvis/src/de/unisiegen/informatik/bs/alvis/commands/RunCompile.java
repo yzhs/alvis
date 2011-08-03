@@ -39,7 +39,7 @@ public class RunCompile extends AbstractHandler {
 
 		/*
 		 * Register datatypes and packagenames to the compiler This is important
-		 * for the compileing
+		 * for compiling
 		 */
 		CompilerAccess.getDefault().setDatatypes(
 				Activator.getDefault().getAllDatatypesInPlugIns());

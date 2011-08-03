@@ -13,3 +13,5 @@ Export-Package: de.unisiegen.informatik.bs.alvis.vm
 Bundle-ClassPath: tools.jar,
  .
 Import-Package: de.unisiegen.informatik.bs.alvis.compiler
+DynamicImport-Package: *
+
