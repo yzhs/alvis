@@ -30,6 +30,7 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseMoveListener;
 import org.eclipse.swt.events.MouseWheelListener;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
@@ -40,6 +41,7 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
+import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
@@ -82,6 +84,8 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	// bZoomIn, bZoomOut;
 	// private Button bChangeLayout, bDeleteAll, bScreenShot;
 	public AlvisGraph myGraph;
+	public GC gc;
+
 	private Composite myParent;
 	private Cursor oldCursor;
 	private static IEditorInput myInput;
@@ -105,6 +109,8 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	private void createGraph(Composite parent, IEditorInput input) {
 
 		myGraph = new AlvisGraph(parent, SWT.NONE);
+		myGraph.setForeground(new Color(null, 128, 128, 128));
+
 		// Get the absolute Path to the InstanceLocation
 		// String root = Platform.getInstanceLocation().getURL().getPath();
 		// Get the path to the file
@@ -189,23 +195,19 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 		RowLayout rowLayout = new RowLayout();
 		rowLayout.type = SWT.VERTICAL;
-		parent.setLayout(new GridLayout(1, false));
+		parent.setLayout(new FillLayout());
 
-		Group graphGroup = new Group(parent, SWT.NONE);
-		graphGroup.setText(Messages.getLabel("editor"));
-		graphGroup.setLayout(new FillLayout());
-
-		GridData gdGraph = new GridData();
-		gdGraph.horizontalAlignment = SWT.FILL;
-		gdGraph.verticalAlignment = SWT.FILL;
-		gdGraph.grabExcessHorizontalSpace = true;
-		gdGraph.grabExcessVerticalSpace = true;
-		graphGroup.setLayoutData(gdGraph);
+		// GridData gdGraph = new GridData();
+		// gdGraph.horizontalAlignment = SWT.FILL;
+		// gdGraph.verticalAlignment = SWT.FILL;
+		// gdGraph.grabExcessHorizontalSpace = true;
+		// gdGraph.grabExcessVerticalSpace = true;
+		// parent.setLayoutData(gdGraph);
 
 		/*
 		 * Create the Graph from given input
 		 */
-		createGraph(graphGroup, myInput);
+		createGraph(parent, myInput);
 
 		pressed = MODUS_STANDARD;
 		setGraphModus(MODUS_STANDARD);
@@ -534,7 +536,9 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 						remMousePos = null;
 						setDirty(true);
 					} else {
-						drawFrame(e);
+						if (pressed == MODUS_STANDARD) {
+							drawFrame(e);
+						}
 					}
 				}
 
@@ -575,8 +579,9 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 								amountToBeMoved = 0;
 								remMousePos = null;
 								setDirty(true);
-							} else {
+							} else if (pressed == MODUS_STANDARD) {
 								markNodesInFrame(e);
+								remMousePos = null;
 							}
 						}
 					}
@@ -670,23 +675,23 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	protected void drawFrame(MouseEvent e) {
 		if (remMousePos == null)
 			return;
-		
-		int i = 0;
+
 		int x = Math.min(e.x, remMousePos.x);
 		int y = Math.min(e.y, remMousePos.y);
 		int width = Math.abs(e.x - remMousePos.x);
 		int height = Math.abs(e.y - remMousePos.y);
-		
-		myGraph.redraw();
-		GC gc = new GC(myGraph);
+
+		gc = new GC(myGraph);
 		gc.drawRectangle(x, y, width, height);
-//		myGraph.getGraphModel().drawBackground(gc, x, y, width, height);
+		myGraph.redraw();
+		// gc.dispose();
 	}
 
 	/**
-	 * Set the modus
+	 * Set the modus (mouse pointer style)
 	 * 
 	 * @param modus
+	 *            the modus "id"
 	 */
 	public void setModus(int modus) {
 		myGraph.resetMarking();
@@ -698,7 +703,8 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	 * Connects two nodes
 	 * 
 	 * @param node
-	 * @param e
+	 *            the second node to be connected, first one is saved
+	 *            temporarily
 	 */
 	protected void clickNewConnection(AlvisGraphNode node) {
 		myGraph.markToBeConnected(node);
@@ -710,7 +716,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	 * Removes a node
 	 * 
 	 * @param node
-	 * @param e
+	 *            the node to remove
 	 */
 	protected void clickRemove(AlvisGraphNode node) {
 		if (node != null) {
@@ -726,8 +732,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	 * captures current graphical representation from the graph editor and
 	 * returns it
 	 * 
-	 * @return screenshot the screenshot to create the the export file with
-	 *         (e.g.)
+	 * @return the screen shot to create the the export file with (e.g.)
 	 */
 	@Override
 	public Image getImage() {
@@ -974,8 +979,8 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		myGraph.placeNodes();
 		checkDirty();
 	}
-	
-	public void fiToPage(){
+
+	public void fiToPage() {
 		myGraph.fiToPage();
 	}
 
