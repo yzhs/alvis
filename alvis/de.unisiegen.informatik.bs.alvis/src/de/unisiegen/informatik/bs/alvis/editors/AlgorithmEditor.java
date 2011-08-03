@@ -109,8 +109,6 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 					input.getFile().getRawLocation().toString(), true);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-		} catch (RecognitionException e) {
-			// TODO Auto-generated catch block
 		}
 		/** endof Compile Algorithm */
 	}
@@ -135,9 +133,6 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 					input.getFile().getRawLocation().toString(), true);
 		} catch (IOException e) {
 			System.out.println("IOException");
-			// TODO Auto-generated catch block
-		} catch (RecognitionException e) {
-			System.out.println("RecognitionException");
 			// TODO Auto-generated catch block
 		}
 		calculatePositions();

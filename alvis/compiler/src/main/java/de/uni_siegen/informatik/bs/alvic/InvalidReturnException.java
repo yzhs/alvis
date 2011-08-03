@@ -1,7 +1,5 @@
 package de.uni_siegen.informatik.bs.alvic;
 
-import org.antlr.runtime.Token;
-
 /**
  * This exception is used when the user tries to return something of the wrong
  * type, a function with return-type void contains a return statement with a
@@ -41,12 +39,12 @@ public class InvalidReturnException extends TypeException {
 	 *            The function in question.
 	 * @param stat
 	 *            The actual return statement
-	 * @param token
-	 *            The return token.
+	 * @param tree
+	 *            The subtree with the return statement.
 	 */
 	public InvalidReturnException(Type expected, Type given, String function,
-			String stat, Token token) {
-		super(token);
+			String stat, TypedTree tree) {
+		super(tree);
 		this.expected = expected;
 		this.given = given;
 		this.function = function;

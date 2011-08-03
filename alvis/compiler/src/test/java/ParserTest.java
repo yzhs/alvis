@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import org.testng.annotations.Test;
 import de.uni_siegen.informatik.bs.alvic.TLexer;
 import de.uni_siegen.informatik.bs.alvic.TParser;
+import de.uni_siegen.informatik.bs.alvic.TypedTreeAdaptor;
 //import de.uni_siegen.informatik.bs.alvic.TypeChecker;
 import org.antlr.runtime.*;
 import org.antlr.runtime.tree.*;
@@ -42,7 +43,9 @@ public class ParserTest {
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
 		CommonTokenStream tokens = new CommonTokenStream(lexer);
-		return new TParser(tokens);
+		TParser parser = new TParser(tokens);
+		parser.setTreeAdaptor(new TypedTreeAdaptor());
+		return parser;
 	}
 
 	private void exprTest(String algorithm, String expected) {

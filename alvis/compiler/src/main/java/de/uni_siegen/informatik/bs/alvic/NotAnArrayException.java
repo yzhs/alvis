@@ -1,7 +1,5 @@
 package de.uni_siegen.informatik.bs.alvic;
 
-import org.antlr.runtime.Token;
-
 /**
  * This exception is used when trying to index something that is not an array.
  * 
@@ -25,11 +23,11 @@ public class NotAnArrayException extends TypeException {
 	 *            The expressions actual type.
 	 * @param expr
 	 *            The expression that caused the problem itself.
-	 * @param token
+	 * @param tree
 	 *            The identifier that was used as an array.
 	 */
-	public NotAnArrayException(Type type, String expr, Token token) {
-		super(token);
+	public NotAnArrayException(Type type, String expr, TypedTree tree) {
+		super(tree);
 		this.type = type;
 		this.expr = expr;
 	}

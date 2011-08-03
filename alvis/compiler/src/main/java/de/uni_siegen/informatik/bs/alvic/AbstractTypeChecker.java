@@ -105,22 +105,22 @@ public abstract class AbstractTypeChecker extends TreeParser {
 	 *            the function's type
 	 * @param arguments
 	 *            the list of types of the arguments given
-	 * @param token
-	 *            the first token of the function call
+	 * @param tree
+	 *            the tree of the function call
 	 */
 	protected void checkArgs(String name, Type functionType,
-			List<Type> arguments, CommonTree token) {
+			List<Type> arguments, TypedTree tree) {
 		int i = 0;
 		int n = ((FunctionType) functionType).getArgumentTypes().size();
 
 		if (arguments.size() != n) {
-			reportError(new ArgumentNumberException(name, n, arguments.size(), token.getToken()));
+			reportError(new ArgumentNumberException(name, n, arguments.size(), tree));
 		}
 
 		for (Type t : ((FunctionType) functionType).getArgumentTypes())
 			if (!arguments.get(i++).matches(t))
 				reportError(new ArgumentTypeException(name, t, i,
-						arguments.get(i - 1), token.getToken()));
+						arguments.get(i - 1), tree));
 	}
 
 	/**
@@ -133,13 +133,12 @@ public abstract class AbstractTypeChecker extends TreeParser {
 	 *            this is the name of the member
 	 * @param expected
 	 *            the type that is expected where the member is referenced
-	 * @param token
-	 *            the first token of the member reference
+	 * @param tree
+	 *            the tree in which the member is referenced
 	 */
-	protected Type checkMember(Type object, String member, Type expected,
-			CommonTree token) {
+	protected Type checkMember(Type object, String member, Type expected, TypedTree tree) {
 		if (!object.hasMember(member)) {
-			reportError(new UnknownMemberException(object, member, token.getToken()));
+			reportError(new UnknownMemberException(object, member, tree));
 			return SimpleType.create("# UnknownMember #");
 		}
 
@@ -147,7 +146,7 @@ public abstract class AbstractTypeChecker extends TreeParser {
 			if (t.matches(expected))
 				return t;
 
-		reportError(new TypeMismatchException(expected, object, member, token.getToken()));
+		reportError(new TypeMismatchException(expected, object, member, tree));
 
 		return SimpleType.create("# NoSuchMember #");
 	}
@@ -164,13 +163,12 @@ public abstract class AbstractTypeChecker extends TreeParser {
 	 *            the type the expression actually has
 	 * @param expr
 	 *            the expression this is about
-	 * @param token
-	 *            the first token of the expression
+	 * @param tree
+	 *            the expression's subtree
 	 */
-	protected void checkTypes(Type expected, Type actual, String expr,
-			CommonTree token) {
+	protected void checkTypes(Type expected, Type actual, String expr, TypedTree tree) {
 		if (actual == null || !actual.matches(expected))
-			reportError(new TypeMismatchException(expected, actual, expr, token.getToken()));
+			reportError(new TypeMismatchException(expected, actual, expr, tree));
 	}
 
 	/**
@@ -185,8 +183,8 @@ public abstract class AbstractTypeChecker extends TreeParser {
 	 * @param token
 	 *            its first token
 	 */
-	protected void notAFunction(String function, Type type, CommonTree token) {
-		reportError(new NotAFunctionException(type, function, token.getToken()));
+	protected void notAFunction(String function, Type type, TypedTree tree) {
+		reportError(new NotAFunctionException(type, function, tree));
 	}
 
 	/**
@@ -198,11 +196,11 @@ public abstract class AbstractTypeChecker extends TreeParser {
 	 *            what the user tries to index
 	 * @param type
 	 *            its type
-	 * @param token
-	 *            its first token
+	 * @param tree
+	 *            its tree
 	 */
-	protected void notAnArray(String array, Type type, CommonTree token) {
-		reportError(new NotAnArrayException(type, array, token.getToken()));
+	protected void notAnArray(String array, Type type, TypedTree tree) {
+		reportError(new NotAnArrayException(type, array, tree));
 	}
 
 	/**
@@ -218,13 +216,12 @@ public abstract class AbstractTypeChecker extends TreeParser {
 	 *            the type of the right argument
 	 * @param text
 	 *            the text of the expression the operator is used in
-	 * @param start
-	 *            the token associated with the operator
+	 * @param tree
+	 *            the subtree containing the operator
 	 */
-	protected Type returnType(String op, Type left, Type right, String text,
-			CommonTree start) {
+	protected Type returnType(String op, Type left, Type right, TypedTree tree) {
 		if (!left.hasMember(op)) {
-			reportError(new UnknownOperatorException(left, op, start.getToken()));
+			reportError(new UnknownOperatorException(left, op, tree));
 			return SimpleType.create("# UnknownOperator #");
 		}
 
@@ -241,7 +238,7 @@ public abstract class AbstractTypeChecker extends TreeParser {
 			return tmp.getReturnType();
 		}
 
-		reportError(new NoSuchOperatorException(left, op, right, 1, start.getToken()));
+		reportError(new NoSuchOperatorException(left, op, right, 1, tree));
 		return SimpleType.create("# NoSuchOperator #");
 	}
 
@@ -256,15 +253,14 @@ public abstract class AbstractTypeChecker extends TreeParser {
 	 *            what the operator operates on
 	 * @param text
 	 *            the text of the expression the operator is used in
-	 * @param start
-	 *            the token associated with the operator
+	 * @param tree
+	 *            the tree in which the operator is the root
 	 * @return The type of the operator's result if such an operator exists,
 	 *         otherwise an error type is returned
 	 */
-	protected Type returnType(String op, Type operand, String text,
-			CommonTree start) {
+	protected Type returnType(String op, Type operand, TypedTree tree) {
 		if (!operand.hasMember(op)) {
-			reportError(new UnknownMemberException(operand, op, start.getToken()));
+			reportError(new UnknownMemberException(operand, op, tree));
 			return SimpleType.create("# UnknownOperator #");
 		}
 
@@ -277,7 +273,7 @@ public abstract class AbstractTypeChecker extends TreeParser {
 				return tmp.getReturnType();
 		}
 
-		reportError(new NoSuchOperatorException(operand, op, null, 0, start.getToken()));
+		reportError(new NoSuchOperatorException(operand, op, null, 0, tree));
 		return SimpleType.create("# NoSuchOperator #");
 	}
 }

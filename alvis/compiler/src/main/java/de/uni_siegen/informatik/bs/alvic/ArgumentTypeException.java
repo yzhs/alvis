@@ -1,7 +1,5 @@
 package de.uni_siegen.informatik.bs.alvic;
 
-import org.antlr.runtime.Token;
-
 /**
  * This exception describes the problem that a function is called with the
  * wrong number of arguments.
@@ -16,8 +14,8 @@ public class ArgumentTypeException extends TypeMismatchException {
 	 */
 	protected int n;
 
-	public ArgumentTypeException(String method, Type expected, int n, Type given, Token token) {
-		super(expected, given, method, token);
+	public ArgumentTypeException(String method, Type expected, int n, Type given, TypedTree tree) {
+		super(expected, given, method, tree);
 		this.expected = expected;
 		this.n = n;
 		this.given = given;

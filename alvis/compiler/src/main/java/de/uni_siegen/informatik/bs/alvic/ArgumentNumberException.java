@@ -1,7 +1,5 @@
 package de.uni_siegen.informatik.bs.alvic;
 
-import org.antlr.runtime.Token;
-
 /**
  * This exception describes the problem that a function is called with the
  * wrong number of arguments.
@@ -26,8 +24,8 @@ public class ArgumentNumberException extends TypeException {
 	 */
 	protected int expected;
 
-	public ArgumentNumberException(String method, int expected, int given, Token token) {
-		super(token);
+	public ArgumentNumberException(String method, int expected, int given, TypedTree tree) {
+		super(tree);
 		this.method = method;
 		this.expected = expected;
 		this.given = given;

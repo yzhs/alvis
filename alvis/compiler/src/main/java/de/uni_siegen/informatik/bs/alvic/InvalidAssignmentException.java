@@ -1,7 +1,5 @@
 package de.uni_siegen.informatik.bs.alvic;
 
-import org.antlr.runtime.Token;
-
 /**
  * This exception is used when the user tries to use a function call as the left
  * argument of the assignment operator.
@@ -26,11 +24,11 @@ public class InvalidAssignmentException extends TypeException {
 	 *            The expression to the left of the assignment operator.
 	 * @param right
 	 *            The expression to the right of the assignment operator.
-	 * @param token
-	 *            The root token of the assignment (i.e. the '='-token).
+	 * @param tree
+	 *            The tree of the assignment.
 	 */
-	public InvalidAssignmentException(String left, String right, Token token) {
-		super(token);
+	public InvalidAssignmentException(String left, String right, TypedTree tree) {
+		super(tree);
 		this.left = left;
 		this.right = right;
 	}

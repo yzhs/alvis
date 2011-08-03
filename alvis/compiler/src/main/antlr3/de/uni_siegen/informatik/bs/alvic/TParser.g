@@ -5,7 +5,7 @@ options {
      superClass   = AbstractTParser;
      tokenVocab   = TLexer;
      backtrack    = true;
-     ASTLabelType = CommonTree;
+     ASTLabelType = TypedTree;
 }
 
 // tokens used for constructing the AST
@@ -125,7 +125,7 @@ statement
     | postfixExpr terminator
     // Java does not allow "variable" or "variable[index]" as statements, so we have to forbid those as well
     { if (!$postfixExpr.isFunctionCall)
-        reportError(new InvalidStatementException($postfixExpr.tree.toString(), $postfixExpr.start)); }
+        reportError(new InvalidStatementException($postfixExpr.text, $postfixExpr.tree)); }
     | assignment terminator
 
     /* There is no nice way to generate a breakpoint after a return statement.
@@ -152,8 +152,7 @@ declaration
 assignment
     : postfixExpr EQUAL expr
     { if ($postfixExpr.isFunctionCall)
-        reportError(new InvalidAssignmentException($postfixExpr.tree.getText(),
-            $expr.tree.getText(), $EQUAL));
+        reportError(new InvalidAssignmentException($postfixExpr.text, $expr.text, $postfixExpr.tree));
     } -> ^(ASSIGN[$postfixExpr.start, "ASSIGN"] postfixExpr expr)
     ;
 

@@ -1,7 +1,5 @@
 package de.uni_siegen.informatik.bs.alvic;
 
-import org.antlr.runtime.Token;
-
 /**
  * This exception is used to indicate that something does not have the type it
  * is supposed to.
@@ -33,11 +31,11 @@ public class TypeMismatchException extends TypeException {
 	 *            The type that was actually found.
 	 * @param expr
 	 *            The expression that has the wrong type.
-	 * @param token
-	 *            The root token of the expression.
+	 * @param tree
+	 *            The tree of the expression.
 	 */
-	public TypeMismatchException(Type expected, Type given, String expr, Token token) {
-		super(token);
+	public TypeMismatchException(Type expected, Type given, String expr, TypedTree tree) {
+		super(tree);
 		this.expected = expected;
 		this.given = given;
 		this.expr = expr;

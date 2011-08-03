@@ -132,10 +132,10 @@ options { backtrack = true; }
       Type tmp = ((FunctionType)getTypeByName(currentFunction)).getReturnType();
       if (tmp.equals(Void) && $expr.text != null)
           reportError(new InvalidReturnException(tmp, $expr.t, currentFunction,
-              $expr.tree.toString(), $expr.start.getToken()));
+              $expr.tree.toString(), $expr.tree));
       else if (!tmp.equals(Void) && $expr.text == null)
           reportError(new InvalidReturnException(tmp, null, currentFunction,
-          null, $RETURN.getToken()));
+          null, $RETURN));
     }
     | ^(IF_ELSE expr[bool] ^(STAT statement terminator?) ^(STAT statement terminator?))
     | ^(IF expr[bool] ^(STAT statement statement?))
@@ -157,79 +157,79 @@ assignment
 expr[Type expected] returns [Type t]
 @init { Type e = $expected; }
     : ^(PLUS       left=expr[e] right=expr[e]) { 
-        $t = returnType("add", $left.t, $right.t, $text, $start);
-        checkTypes(e, $t, $text, $start);
+        $t = returnType("add", $left.t, $right.t, $tree);
+        checkTypes(e, $t, $text, $tree);
         $PLUS.tree.setVarType($t);
     }
     | ^(MINUS      left=expr[e] right=expr[e]) {
-        $t = returnType("sub", $left.t, $right.t, $text, $start);
-        checkTypes(e, $t, $text, $start);
+        $t = returnType("sub", $left.t, $right.t, $tree);
+        checkTypes(e, $t, $text, $tree);
         $MINUS.tree.setVarType($t);
     }
     | ^(STAR       left=expr[e] right=expr[e]) {
-        $t = returnType("mul", $left.t, $right.t, $text, $start);
-        checkTypes(e, $t, $text, $start);
+        $t = returnType("mul", $left.t, $right.t, $tree);
+        checkTypes(e, $t, $text, $tree);
         $STAR.tree.setVarType($t);
     }
     | ^(SLASH      left=expr[e] right=expr[e]) {
-        $t = returnType("div", $left.t, $right.t, $text, $start);
-        checkTypes(e, $t, $text, $start);
+        $t = returnType("div", $left.t, $right.t, $tree);
+        checkTypes(e, $t, $text, $tree);
         $SLASH.tree.setVarType($t);
     }
     | ^(PERCENT    left=expr[e] right=expr[e]) {
-        $t = returnType("mod", $left.t, $right.t, $text, $start);
-        checkTypes(e, $t, $text, $start);
+        $t = returnType("mod", $left.t, $right.t, $tree);
+        checkTypes(e, $t, $text, $tree);
         $PERCENT.tree.setVarType($t);
     }
     | ^(AMPAMP     left=expr[e] right=expr[e]) {
-        $t = returnType("and", $left.t, $right.t, $text, $start);
-        checkTypes(e, $t, $text, $start);
+        $t = returnType("and", $left.t, $right.t, $tree);
+        checkTypes(e, $t, $text, $tree);
         $AMPAMP.tree.setVarType($t);
     }
     | ^(PIPEPIPE   left=expr[e] right=expr[e]) {
-        $t = returnType("or", $left.t, $right.t, $text, $start);
-        checkTypes(e, $t, $text, $start);
+        $t = returnType("or", $left.t, $right.t, $tree);
+        checkTypes(e, $t, $text, $tree);
         $PIPEPIPE.tree.setVarType($t);
     }
     | ^(EQEQ       left=expr[any] right=expr[any]) {
-        $t = returnType("equal", $left.t, $right.t, $text, $start);
-        checkTypes(e, $t, $text, $start);
+        $t = returnType("equal", $left.t, $right.t, $tree);
+        checkTypes(e, $t, $text, $tree);
         $EQEQ.tree.setVarType($t);
     }
     | ^(BANGEQ     left=expr[any] right=expr[any]) {
-        $t = returnType("notEqual", $left.t, $right.t, $text, $start);
-        checkTypes(e, $t, $text, $start);
+        $t = returnType("notEqual", $left.t, $right.t, $tree);
+        checkTypes(e, $t, $text, $tree);
         $BANGEQ.tree.setVarType($t);
     }
     | ^(LESS       left=expr[any] right=expr[any]) {
-        $t = returnType("less", $left.t, $right.t, $text, $start);
-        checkTypes(e, $t, $text, $start);
+        $t = returnType("less", $left.t, $right.t, $tree);
+        checkTypes(e, $t, $text, $tree);
         $LESS.tree.setVarType($t);
     }
     | ^(GREATER    left=expr[any] right=expr[any]) {
-        $t = returnType("greater", $left.t, $right.t, $text, $start);
-        checkTypes(e, $t, $text, $start);
+        $t = returnType("greater", $left.t, $right.t, $tree);
+        checkTypes(e, $t, $text, $tree);
         $GREATER.tree.setVarType($t);
     }
     | ^(LESSEQ     left=expr[any] right=expr[any]) {
-        $t = returnType("lessOrEqual", $left.t, $right.t, $text, $start);
-        checkTypes(e, $t, $text, $start);
+        $t = returnType("lessOrEqual", $left.t, $right.t, $tree);
+        checkTypes(e, $t, $text, $tree);
         $LESSEQ.tree.setVarType($t);
     }
     | ^(GREATEREQ  left=expr[any] right=expr[any]) {
-        $t = returnType("greaterOrEqual", $left.t, $right.t, $text, $start);
-        checkTypes(e, $t, $text, $start);
+        $t = returnType("greaterOrEqual", $left.t, $right.t, $tree);
+        checkTypes(e, $t, $text, $tree);
         $GREATEREQ.tree.setVarType($t);
     }
     | ^(BANG arg=expr[any]) {
-        $t = returnType("not", $arg.t, $text, $start);
-        checkTypes(e, $t, $text, $start);
+        $t = returnType("not", $arg.t, $tree);
+        checkTypes(e, $t, $text, $tree);
         $BANG.tree.setVarType($t);
     }
     | ^(PAREN arg=expr[e]) { $t = $arg.t; $PAREN.tree.setVarType($t); }
     | ^(SIGN (PLUS arg=expr[e]
              |MINUS arg=expr[e]
-             )) { $t = $arg.t; checkTypes(e, $t, $text, $start); $SIGN.tree.setVarType($t); } //TODO handle negate methods that change the type
+             )) { $t = $arg.t; checkTypes(e, $t, $text, $tree); $SIGN.tree.setVarType($t); } //TODO handle negate methods that change the type
     | postfixExpr[$expected] { $t=$postfixExpr.t; $postfixExpr.tree.setVarType($t); }
     | BOOL   { $t = bool;     checkTypes($expected, $t,   $BOOL.text,   $BOOL);   $BOOL.tree.setVarType($t); }
     | FLOAT  { $t = floating; checkTypes($expected, $t,  $FLOAT.text,  $FLOAT);  $FLOAT.tree.setVarType($t); }
@@ -245,7 +245,7 @@ postfixExpr[Type expected] returns [boolean isFunctionCall, Type t]
     : left=ident {
         if (!isDefined($left.text)) {
             $t = SimpleType.create("# NoSuchIdentifier #");
-            reportError(new UnknownIdentifierException($left.text, $left.start.getToken()));
+            reportError(new UnknownIdentifierException($left.text, $left.tree));
         } else
             $t = $left.t;
         $ident.tree.setVarType($t);
@@ -262,7 +262,7 @@ postfixExpr[Type expected] returns [boolean isFunctionCall, Type t]
             $t = SimpleType.create("# NotAFunction #");
         } else {
             $t = ((FunctionType)$function.t).getReturnType();
-            checkTypes($expected, $t, $function.tree.toString(), $function.start);
+            checkTypes($expected, $t, $function.tree.toString(), $function.tree);
             checkArgs($function.tree.toString(), $function.t, args, $function.start);
         }
         $CALL.tree.setVarType($t);
@@ -274,7 +274,7 @@ postfixExpr[Type expected] returns [boolean isFunctionCall, Type t]
             $t = SimpleType.create("# NotAnArray #");
         } else {
             $t = ((ArrayType)$array.t).getTypeArgument();
-            checkTypes($expected, $t, $array.text, $array.start);
+            checkTypes($expected, $t, $array.text, $array.tree);
         }
         $INDEX.tree.setVarType($t);
     }

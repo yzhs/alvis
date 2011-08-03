@@ -1,9 +1,5 @@
 package de.uni_siegen.informatik.bs.alvic;
 
-import org.antlr.runtime.Token;
-
-import de.uni_siegen.informatik.bs.alvic.UnknownOperatorException;
-
 /**
  * This exception describes the problem that the user tries to use an operator
  * of a given class when no such method with the correct number of arguments and
@@ -32,11 +28,11 @@ public class NoSuchOperatorException extends UnknownOperatorException {
 	 * @param arguments
 	 *            The number of arguments the operator is supposed to take
 	 *            (should be 0 or 1)
-	 * @param token
-	 *            The operator token
+	 * @param tree
+	 *            The tree which has the operator as its root
 	 */
-	public NoSuchOperatorException(Type object, String op, Type argType, int arguments, Token token) {
-		super(object, op, token);
+	public NoSuchOperatorException(Type object, String op, Type argType, int arguments, TypedTree tree) {
+		super(object, op, tree);
 		this.arguments = arguments;
 		this.argType = argType;
 	}

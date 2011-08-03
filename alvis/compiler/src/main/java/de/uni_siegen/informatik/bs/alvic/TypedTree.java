@@ -14,7 +14,7 @@ public class TypedTree extends CommonTree {
 	/**
 	 * The type of this tree.
 	 */
-	private Type type;
+	protected Type type;
 
 	/**
 	 * This is needed only for the constructor of TypedErrorNode.
@@ -46,7 +46,8 @@ public class TypedTree extends CommonTree {
 	/**
 	 * Set the type of this node.
 	 * 
-	 * @param type The new type
+	 * @param type
+	 *            The new type
 	 */
 	public void setVarType(Type type) {
 		this.type = type;
@@ -68,5 +69,33 @@ public class TypedTree extends CommonTree {
 	 */
 	public Tree dupNode() {
 		return new TypedTree(this);
+	}
+
+	public int getEndLine() {
+		return getEnd().getLine();
+	}
+
+	public int getEndCharPositionInLine() {
+		return getEnd().getCharPositionInLine();
+	}
+
+	public Token getEnd() {
+		if (null == token && getChildCount() > 0)
+			return ((TypedTree) getChild(getChildCount() - 1)).getEnd();
+		return token;
+	}
+
+	public Token getStart() {
+		if (null == token && getChildCount() > 0)
+			return ((TypedTree) getChild(0)).getStart();
+		return token;
+	}
+
+	public String treeToString() {
+		if (null == token)
+			if (getChildCount() > 0)
+				return ((TokenStream) ((TypedTree) getChild(0)).getToken()
+						.getInputStream()).toString(getStart(), getEnd());
+		return token.toString();
 	}
 }

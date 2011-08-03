@@ -1,7 +1,5 @@
 package de.uni_siegen.informatik.bs.alvic;
 
-import org.antlr.runtime.Token;
-
 /**
  * This exception describes the problem that the user tries to access a member
  * of a given class that does not exist.
@@ -26,11 +24,11 @@ public class UnknownMemberException extends TypeException {
 	 *            This object's member is the one that is unknown.
 	 * @param member
 	 *            The name of the member.
-	 * @param token
-	 *            The '.'-token.
+	 * @param tree
+	 *            The subtree in which the problem ocurred
 	 */
-	public UnknownMemberException(Type object, String member, Token token) {
-		super(token);
+	public UnknownMemberException(Type object, String member, TypedTree tree) {
+		super(tree);
 		this.object = object;
 		this.member = member;
 	}

@@ -59,8 +59,8 @@ public class AlgorithmErrorMarker {
 		// TODO implement method when Compiler front-end is created
 
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<Exception> errors = CompilerAccess.getDefault().getExceptions();
-		for(Exception error : errors) {
+		List<RecognitionException> errors = CompilerAccess.getDefault().getExceptions();
+		for(RecognitionException error : errors) {
 			String errorMessage = "";
 			if (error instanceof MismatchedTreeNodeException) {
 				MismatchedTreeNodeException re = (MismatchedTreeNodeException)error;
@@ -114,19 +114,16 @@ public class AlgorithmErrorMarker {
 				errorMessage = "Found access to member " + re.getMember() + " of class " + re.getObject() + " at " + re.line + ":" + re.charPositionInLine + ". Such a member does not exist.";
 			} else if (error instanceof TypeException) {
 				errorMessage = error.toString();
-			} else if (error instanceof RecognitionException) {
-				errorMessage = error.toString();
 			} else {
 				System.out.println("NEW ERROR " + error);
 				continue;
 			}
-			RecognitionException re = (RecognitionException)error;
-			MarkerUtilities.setLineNumber(map, re.line);
+			MarkerUtilities.setLineNumber(map, error.line);
 			MarkerUtilities.setMessage(map, errorMessage);
 //			map.put(IMarker.MESSAGE, errorMessage);
 			int offset = -1;
 			try {
-				 offset = document.getLineOffset(re.line-1) + re.charPositionInLine;
+				 offset = document.getLineOffset(error.line-1) + error.charPositionInLine;
 			} catch (BadLocationException e1) {
 				continue;
 			}

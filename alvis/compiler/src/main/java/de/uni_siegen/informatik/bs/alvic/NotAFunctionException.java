@@ -1,7 +1,5 @@
 package de.uni_siegen.informatik.bs.alvic;
 
-import org.antlr.runtime.Token;
-
 /**
  * This exception is used when the user tries to call something that is not a
  * function.
@@ -26,11 +24,11 @@ public class NotAFunctionException extends TypeException {
 	 *            The type of the expression that was called.
 	 * @param expr
 	 *            The actual expression that was called.
-	 * @param token
+	 * @param tree
 	 *            The function's identifier
 	 */
-	public NotAFunctionException(Type type, String expr, Token token) {
-		super(token);
+	public NotAFunctionException(Type type, String expr, TypedTree tree) {
+		super(tree);
 		this.type = type;
 		this.expr = expr;
 	}

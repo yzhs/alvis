@@ -1,7 +1,5 @@
 package de.uni_siegen.informatik.bs.alvic;
 
-import org.antlr.runtime.Token;
-
 /**
  * This exception is thrown when encountering an identifier that was not defined
  * in the current scope.
@@ -22,11 +20,11 @@ public class UnknownIdentifierException extends TypeException {
 	 * 
 	 * @param identifier
 	 *            The name of the identifier in question.
-	 * @param token
-	 *            The identifier token.
+	 * @param tree
+	 *            The token containing the identifier.
 	 */
-	public UnknownIdentifierException(String identifier, Token token) {
-		super(token);
+	public UnknownIdentifierException(String identifier, TypedTree tree) {
+		super(tree);
 		this.identifier = identifier;
 	}
 

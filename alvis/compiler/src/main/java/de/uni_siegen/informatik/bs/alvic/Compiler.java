@@ -37,7 +37,7 @@ public class Compiler {
 	 */
 	private Map<String, Object> types = new HashMap<String, Object>();
 
-	private List<Exception> exceptions = new ArrayList<Exception>();
+	private List<RecognitionException> exceptions = new ArrayList<RecognitionException>();
 
 	public Compiler(Collection<? extends Object> datatypes, Collection<String> packages) {
 		try {
@@ -130,7 +130,7 @@ public class Compiler {
 
 			// psrReturn = walker.program();
 			Object psrReturn = treeParser.getMethod("program").invoke(walker);
-			exceptions.addAll((List<Exception>) treeParser.getMethod("getExceptions").invoke(walker));
+			exceptions.addAll((List<RecognitionException>) treeParser.getMethod("getExceptions").invoke(walker));
 			// return (CommonTree)psrRturn.getTree();
 			return (CommonTree) psrReturn.getClass().getMethod("getTree").invoke(psrReturn);
 		} catch (InvocationTargetException e) {
@@ -153,11 +153,11 @@ public class Compiler {
 		return tree;
 	}
 
-	public String compile(String code) throws RecognitionException, IOException {
+	public String compile(String code) throws IOException {
 		return compile(code, getClass().getClassLoader().getResourceAsStream("Java.stg"));
 	}
 
-	public String compile(String code, InputStream templates) throws RecognitionException, IOException {
+	public String compile(String code, InputStream templates) throws IOException {
 		if (templates == null)
 			System.err.println("error: could not load template file");
 		String result = null;
@@ -165,9 +165,14 @@ public class Compiler {
 		tokens = new CommonTokenStream(lexer);
 		parser = new TParser(tokens);
 		parser.setTreeAdaptor(adaptor);
-		program_return psrReturn = parser.program();
-		exceptions.addAll(lexer.getExceptions());
-		exceptions.addAll(parser.getExceptions());
+		program_return psrReturn = null;
+		try {
+			psrReturn = parser.program();
+			exceptions.addAll(lexer.getExceptions());
+			exceptions.addAll(parser.getExceptions());
+		} catch (RecognitionException e) {
+			exceptions.add(e);
+		}
 		if (0 != exceptions.size())
 			return null;
 
@@ -178,12 +183,18 @@ public class Compiler {
 
 		CodeGenerator codeGenerator = new CodeGenerator(nodeStream);
 		codeGenerator.setTemplateLib(readTemplates(templates));
-		CodeGenerator.prog_return r = codeGenerator.prog();
-		StringTemplate st = (StringTemplate) r.getTemplate();
-		if (st != null)
+		CodeGenerator.prog_return r = null;
+		try {
+			r = codeGenerator.prog();
+		} catch (RecognitionException e) {
+			exceptions.add(e);
+		}
+		if (r != null) {
+			StringTemplate st = (StringTemplate) r.getTemplate();
 			result = imports() + st.toString();
 //		else
 //			exceptions.add(new NullPointerException());
+		}
 
 		if (0 != exceptions.size()) {
 			System.err.println(exceptions.size() + " exception(s) occured");
@@ -191,8 +202,29 @@ public class Compiler {
 		}
 		return result;
 	}
+	
+	public List<RecognitionException> check(String code) {
+		lexer = new TLexer(new ANTLRStringStream(code));
+		tokens = new CommonTokenStream(lexer);
+		parser = new TParser(tokens);
+		parser.setTreeAdaptor(adaptor);
+		program_return psrReturn = null;
+		try {
+			psrReturn = parser.program();
+			exceptions.addAll(lexer.getExceptions());
+			exceptions.addAll(parser.getExceptions());
+		} catch (RecognitionException e) {
+			exceptions.add(e);
+		}
+		if (0 != exceptions.size())
+			return null;
 
-	public List<Exception> getExceptions() {
+		runTreeParser(TypeChecker.class, (CommonTree) psrReturn.getTree());
+		
+		return getExceptions();
+	}
+
+	public List<RecognitionException> getExceptions() {
 		return exceptions;
 	}
 

@@ -48,7 +48,9 @@ public class CompilerAccess {
 	 * This is the absolute path to the file that is to be compiled.
 	 */
 	private String algorithmPath = null;
-	
+
+	private String javaCode;
+
 	private static CompilerAccess instance;
 
 	public static CompilerAccess getDefault() {
@@ -68,13 +70,12 @@ public class CompilerAccess {
 	 * @return path to the generated .java file if it exists, null otherwise
 	 * 
 	 * @throws IOException
-	 * @throws RecognitionException
 	 */
-	public File compile(String path) throws IOException, RecognitionException {
-		return compile(path,false);
-		
+	public File compile(String path) throws IOException {
+		return compile(path, false);
+
 	}
-	
+
 	/**
 	 * Use the compiler to compile the source code found in the given file.
 	 * Before calling this method you should provide the names of all packages
@@ -83,51 +84,84 @@ public class CompilerAccess {
 	 * 
 	 * @param path
 	 *            path to the source code that
-	 * @param isAbsolutePath true if the path is absolute.
+	 * @param isAbsolutePath
+	 *            true if the path is absolute.
 	 * @return path to the generated .java file if it exists, null otherwise
 	 * 
 	 * @throws IOException
-	 * @throws RecognitionException
 	 */
-	public File compile(String path, Boolean isAbsolutePath) throws RecognitionException, IOException
-	{
-		if(isAbsolutePath)
-		{
+	public File compile(String path, Boolean isAbsolutePath) throws IOException {
+		if (isAbsolutePath)
 			algorithmPath = path;
-		}
 		else
-		{
 			algorithmPath = currentPath() + path;
-		}
-		compiler = new Compiler(types, packages);
-		String javaCode = compiler.compile(readFile(algorithmPath));
+
+		compileString(readFile(algorithmPath));
 
 		if (null == javaCode) {
 			System.err.println("Compiling code from " + algorithmPath
 					+ " failed");
-//			for (Exception e : compiler.getExceptions())
-//				e.printStackTrace();
+			// for (Exception e : compiler.getExceptions())
+			// e.printStackTrace();
 			return null;
 		}
 
+		return writeJavaCode(getWorkspacePath(algorithmPath), "Algorithm");
+	}
+
+	/**
+	 * Write the generated Java code to a file. The file will be placed in the
+	 * given directory and will be called 'algorithmName + ".java"'.
+	 * 
+	 * @param directory
+	 *            The directory in which the file will be created.
+	 * @param algorithmName
+	 *            The name of the class used for the algorithm.
+	 * @return the file with the Java source code.
+	 * @throws IOException
+	 */
+	public File writeJavaCode(String directory, String algorithmName)
+			throws IOException {
 		File result = null;
 		BufferedWriter out = null;
+		FileWriter fstream;
 		try {
-			result = new File(getWorkspacePath(algorithmPath)
-					+ "Algorithm.java");
-			// new File(path).getName().toString().replaceAll("\\.[^.]*$",
-			// ".java"));
-			FileWriter fstream;
+			result = new File(directory + algorithmName + ".java");
 			fstream = new FileWriter(result);
 			out = new BufferedWriter(fstream);
-			// out.write(javaCode.replaceAll("#ALGORITHM_NAME#",
-			// result.getName().replaceAll("\\.java", "")));
-			out.write(javaCode.replaceAll("#ALGORITHM_NAME#", "Algorithm"));
+			out.write(javaCode.replaceAll("#ALGORITHM_NAME#", algorithmName));
 		} finally {
 			if (out != null)
 				out.close();
 		}
-		return result;		
+
+		return result;
+	}
+
+	/**
+	 * Given the pseudo code to compile create a string containing the generated
+	 * Java code.
+	 * 
+	 * @param code
+	 *            The pseudo code to be compiled.
+	 * @return the Java code the compiler generated.
+	 * @throws IOException
+	 */
+	public String compileString(String code) throws IOException {
+		compiler = new Compiler(types, packages);
+		return javaCode = compiler.compile(code);
+	}
+
+	/**
+	 * Run lexer, parser and the type checker on the code given.
+	 * 
+	 * @param code
+	 *            The code to check.
+	 * @return list of the exceptions created when lexing, parsing and type
+	 *         checking the code.
+	 */
+	public List<RecognitionException> checkCode(String code) {
+		return new Compiler(types, packages).check(code);
 	}
 
 	private String currentPath() {
@@ -135,6 +169,8 @@ public class CompilerAccess {
 	}
 
 	private String getWorkspacePath(String fileWithPath) {
+		File f = new File(fileWithPath);
+		return f.getAbsoluteFile().getParent() + File.separator;/*/
 		String[] splitPathToAlgorithm = fileWithPath.split("/");
 
 		ArrayList<String> partsOfAlgoPath = new ArrayList<String>();
@@ -150,7 +186,10 @@ public class CompilerAccess {
 			algoWorkSpacePath += part + File.separator;
 		}
 
-		return algoWorkSpacePath;
+		System.out.println(fileWithPath);
+		System.out.println(algoWorkSpacePath);
+		System.out.println(new File(fileWithPath).getParent());
+		return algoWorkSpacePath;// */
 	}
 
 	/**
@@ -172,7 +211,7 @@ public class CompilerAccess {
 		return result;
 	}
 
-	public List<Exception> getExceptions() {
+	public List<RecognitionException> getExceptions() {
 		return compiler.getExceptions();
 	}
 
@@ -231,13 +270,11 @@ public class CompilerAccess {
 		FileCopy fileCopy = new FileCopy();
 		fileCopy.copy(source, destination);
 
-		// Still hard Coded.
 		return destination;
 	}
 
 	/* ******************************************
-	 * The Datatypes and Packagenames
-	 * ******************************************
+	 * The Datatypes and Packagenames ******************************************
 	 */
 	/**
 	 * Tell the compiler which types are allowed.
@@ -261,8 +298,8 @@ public class CompilerAccess {
 	}
 
 	/**
-	 * Tell the lexer to read the input stream so it can provide auto
-	 * completion and help for syntax highlighting.
+	 * Tell the lexer to read the input stream so it can provide auto completion
+	 * and help for syntax highlighting.
 	 */
 	public void reLex() {
 		compiler.getLexer().scan();
@@ -302,15 +339,17 @@ public class CompilerAccess {
 	/**
 	 * Create a list of all the tokens in the given source code that mark the
 	 * beginning of a block.
+	 * 
 	 * @return List of tokens that mark the beginning of a block
 	 */
 	public List<Token> beginBlock() {
 		return compiler.getLexer().beginBlock();
 	}
-	
+
 	/**
 	 * Create a list of all the tokens in the given source code that mark the
 	 * end of a block.
+	 * 
 	 * @return List of tokens that mark the end of a block
 	 */
 	public List<Token> endBlock() {
@@ -326,8 +365,7 @@ public class CompilerAccess {
 	}
 
 	/**
-	 * Return a list of all the Java keywords that the pseudo code does not
-	 * use.
+	 * Return a list of all the Java keywords that the pseudo code does not use.
 	 * 
 	 * @return List of forbidden words
 	 */

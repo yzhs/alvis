@@ -1,7 +1,6 @@
 package de.uni_siegen.informatik.bs.alvic;
 
 import org.antlr.runtime.RecognitionException;
-import org.antlr.runtime.Token;
 
 /**
  * Implementations of this exception are used to handle all type checker
@@ -11,16 +10,21 @@ import org.antlr.runtime.Token;
  */
 public abstract class TypeException extends RecognitionException {
 	private static final long serialVersionUID = -2651349912464757271L;
+
+	protected int endLine;
+	protected int endCharPositionInLine;
 	
 	public abstract String toString();
 
-	protected TypeException(Token token) {
-		this.token = token;
-		this.line = token.getLine();
-		this.charPositionInLine = token.getCharPositionInLine();
+	protected TypeException(TypedTree tree) {
+		this.token = tree.getToken();
+		this.line = tree.getLine();
+		this.endLine = tree.getEndLine();
+		this.charPositionInLine = tree.getCharPositionInLine();
+		this.endCharPositionInLine = tree.getEndCharPositionInLine();
 	}
 
-	String getPos() {
-		return "(" + line + ":" + charPositionInLine + ")";
+	public String getPos() {
+		return "(from " + line + ":" + charPositionInLine + " to " + endLine + ":" + endCharPositionInLine + ")";
 	}
 }

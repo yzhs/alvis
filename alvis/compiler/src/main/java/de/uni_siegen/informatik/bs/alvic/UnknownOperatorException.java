@@ -1,9 +1,5 @@
 package de.uni_siegen.informatik.bs.alvic;
 
-import de.uni_siegen.informatik.bs.alvic.UnknownMemberException;
-import org.antlr.runtime.Token;
-
-
 /**
  * This exception describes the problem that the user tries to use an operator
  * of a given class when no operator with that name exists.
@@ -18,11 +14,11 @@ public class UnknownOperatorException extends UnknownMemberException {
 	 *            The left argument of the operator.
 	 * @param op
 	 *            The operator that is not available with this left argument.
-	 * @param token
-	 *            The operator's token.
+	 * @param tree
+	 *            The tree of which the operator is the root.
 	 */
-	public UnknownOperatorException(Type object, String op, Token token) {
-		super(object, op, token);
+	public UnknownOperatorException(Type object, String op, TypedTree tree) {
+		super(object, op, tree);
 	}
 
 	@Override

@@ -1,7 +1,5 @@
 package de.uni_siegen.informatik.bs.alvic;
 
-import org.antlr.runtime.Token;
-
 /**
  * This exception is used when the user writes something like 'x,', that is some
  * expression 'x' that is not a function call where a statement was expected.
@@ -21,8 +19,8 @@ public class InvalidStatementException extends TypeException {
 	 * @param token
 	 *            A token of the expression.
 	 */
-	public InvalidStatementException(String expr, Token token) {
-		super(token);
+	public InvalidStatementException(String expr, TypedTree tree) {
+		super(tree);
 		this.expr = expr;
 	}
 
