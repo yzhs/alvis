@@ -108,6 +108,10 @@ public abstract class AbstractTParser extends Parser {
 		exceptions.add(e);
 	}
 
+	public String getTokenName(int tokenNumber) {
+		return numToTokenName.get(tokenNumber);
+	}
+
 	/**
 	 * When given the name of a token returns what tokens could possibly be
 	 * following it. Which tokens could be next is determined using the parsers

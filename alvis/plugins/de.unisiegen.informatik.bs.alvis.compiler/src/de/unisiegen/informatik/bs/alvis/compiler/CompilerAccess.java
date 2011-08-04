@@ -344,6 +344,17 @@ public class CompilerAccess {
 	}
 
 	/**
+	 * @return List of all tokens created by the lexer.
+	 */
+	public List<Token> getTokens() {
+		return compiler.getLexer().getTokens();
+	}
+	
+	public String getTokenName(int tokenNumber) {
+		return compiler.getParser().getTokenName(tokenNumber);
+	}
+
+	/**
 	 * Method for checking whether the compiler is informed correctly about
 	 * available packages and types.
 	 */

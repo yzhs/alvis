@@ -31,6 +31,10 @@ options {
 		}
 	}
 
+	public List<Token> getTokens() {
+		return tokens;
+	}
+
 	/**
 	 * This is used to mark Java keywords we do not use as forbidden so that they
      * can not be used as identifiers. Therefore all of our identifiers can be used
