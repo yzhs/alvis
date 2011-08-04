@@ -7,10 +7,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
@@ -168,28 +166,14 @@ public class CompilerAccess {
 		return Platform.getInstanceLocation().getURL().getPath();
 	}
 
+	/**
+	 * Get parent directory of the file given by its path.
+	 * @param fileWithPath The file of which we want to get the parent directory.
+	 * @return the path to the parent directory.
+	 */
 	private String getWorkspacePath(String fileWithPath) {
 		File f = new File(fileWithPath);
-		return f.getAbsoluteFile().getParent() + File.separator;/*/
-		String[] splitPathToAlgorithm = fileWithPath.split("/");
-
-		ArrayList<String> partsOfAlgoPath = new ArrayList<String>();
-		for (String part : splitPathToAlgorithm) {
-			partsOfAlgoPath.add(part);
-		}
-
-		partsOfAlgoPath.remove(partsOfAlgoPath.size() - 1);
-
-		// getPath
-		String algoWorkSpacePath = "";
-		for (String part : partsOfAlgoPath) {
-			algoWorkSpacePath += part + File.separator;
-		}
-
-		System.out.println(fileWithPath);
-		System.out.println(algoWorkSpacePath);
-		System.out.println(new File(fileWithPath).getParent());
-		return algoWorkSpacePath;// */
+		return f.getAbsoluteFile().getParent() + File.separator;
 	}
 
 	/**
@@ -211,6 +195,9 @@ public class CompilerAccess {
 		return result;
 	}
 
+	/**
+	 * @return exceptions produced when lexing, parsing and type checking the code.
+	 */
 	public List<RecognitionException> getExceptions() {
 		return compiler.getExceptions();
 	}
@@ -241,30 +228,9 @@ public class CompilerAccess {
 		File source = new File(pathWhereTheJavaIs + SLASH + "Algorithm.java");
 
 		// Get the path to algorithm and separate path and filename
-		String[] splitPathToAlgorithm = pathToAlgorithm.split(Pattern
-				.quote(File.separator));
-
-		ArrayList<String> partsOfAlgoPath = new ArrayList<String>();
-		for (String part : splitPathToAlgorithm) {
-			partsOfAlgoPath.add(part);
-		}
-
-		partsOfAlgoPath.remove(partsOfAlgoPath.size() - 1);
-
-		// getPath
-		String algoWorkSpacePath = "";
-		for (String part : partsOfAlgoPath) {
-			algoWorkSpacePath += part + SLASH;
-		}
-
-		// for (String st : splitPathToAlgorithm)
-		// System.out.println(st);
-
-		// Destination
-		File destination = new File(currentPath() + algoWorkSpacePath
-				+ "Algorithm.java");
-		algorithmPath = Platform.getInstanceLocation().getURL().getPath()
-				+ algoWorkSpacePath + SLASH;
+		String algoWorkSpacePath = new File(pathToAlgorithm).getParent();
+		algorithmPath = currentPath() + algoWorkSpacePath + SLASH;
+		File destination = new File(algorithmPath + "Algorithm.java");
 
 		// Copy compiled file into the workspace
 		FileCopy fileCopy = new FileCopy();
@@ -273,8 +239,10 @@ public class CompilerAccess {
 		return destination;
 	}
 
-	/* ******************************************
-	 * The Datatypes and Packagenames ******************************************
+	/*
+	 * ******************************************
+	 * The Datatypes and Packagenames
+	 * ******************************************
 	 */
 	/**
 	 * Tell the compiler which types are allowed.
