@@ -9,7 +9,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -33,8 +32,6 @@ import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IFileEditorInput;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.internal.handlers.WizardHandler.New;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditor;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
@@ -48,13 +45,9 @@ import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 		IExportItem {
 
-	/**
-	 * 
-	 */
 	private ProjectionAnnotationModel annotationModel;
 	private ProjectionSupport projectionSupport;
 	private Annotation[] oldAnnotations;
-	private ArrayList<Position> fPositions = new ArrayList<Position>();
 	private Boolean[] isCollapsed;
 
 	/**
@@ -140,20 +133,19 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 	}
 
 	/**
-	 * this method is temporary for update the folding structure until the
-	 * compiler frontend is created
+	 * This method update the editors FoldingStructure by setting the annotations of the Editor.
+	 * The field fPositions is used to create the Annotations.
 	 * 
 	 * @param positions
 	 */
 	public void updateFoldingStructure(ArrayList<Position> positions) {
+		/** annotation will hold the new Folding Annotations with their corresponding Positions */
 		Annotation[] annotations = new Annotation[positions.size()];
-
-		// this will hold the new annotations along
-		// with their corresponding positions
 		HashMap<ProjectionAnnotation, Position> newAnnotations = new HashMap<ProjectionAnnotation, Position>();
 
 		for (int i = 0; i < positions.size(); i++) {
-			ProjectionAnnotation annotation = new ProjectionAnnotation(isCollapsed[i]);
+			ProjectionAnnotation annotation = new ProjectionAnnotation(
+					isCollapsed[i]);
 
 			newAnnotations.put(annotation, positions.get(i));
 
@@ -161,36 +153,43 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 		}
 
 		annotationModel.modifyAnnotations(oldAnnotations, newAnnotations, null);
-
 		oldAnnotations = annotations;
 	}
 
 	/**
-	 * this method is temporary until the compiler frontend is created, it will
-	 * calculate and add the ProjectionsAnnotations for the folding feature
+	 * This method searches all available folding Positions and saves them in
+	 * fPositions and runs updateFoldingStructure in a thread to update the
+	 * editors Folding annotations. calculate and add the ProjectionsAnnotations
+	 * for the folding feature
 	 */
 	protected void calculatePositions() {
-		final AlgorithmEditor editor = this;
-		fPositions = new ArrayList<Position>();
-
-		ITypedRegion[] partitions;
+		
+		/** create empty Position List */
+		ArrayList<Position> foldingPositions = new ArrayList<Position>();
+		
+		/**start fill positionList with all MultilineComment positions*/
 		try {
-			partitions = getSourceViewer().getDocument().computePartitioning(0,
+			ITypedRegion[]partitions = getSourceViewer().getDocument().computePartitioning(0,
 					getSourceViewer().getDocument().getLength());
 			for (ITypedRegion region : partitions) {
 				if (region.getType().equals(
 						AlgorithmPartitionScanner.MULTILINE_COMMENT)) {
-					fPositions.add(new Position(region.getOffset(), region
+					foldingPositions.add(new Position(region.getOffset(), region
 							.getLength()));
 
 				}
 			}
-		} catch (BadLocationException e) {
-
 		}
-
+		catch (BadLocationException e) {
+			//TODO handle Exception
+			e.printStackTrace();
+		}
+		
+		/** getting all begin and end Tokens from the document */
 		List<Token> beginTokens = CompilerAccess.getDefault().beginBlock();
 		List<Token> endTokens = CompilerAccess.getDefault().endBlock();
+		
+		/** getting last beginToken before the first end Token to calculate a Position */
 		while (!beginTokens.isEmpty() && !endTokens.isEmpty()) {
 			Token endToken = endTokens.get(0);
 			Token beginToken = null;
@@ -213,15 +212,12 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 				int startOfBegin = (getOffset(beginToken.getLine() - 1,
 						beginToken.getCharPositionInLine()));
 				int endOfEnd = (getOffset(endToken.getLine(), 0));
-				System.out.println("Line+1: " + (endToken.getLine())
-						+ "Document Lines: "
-						+ getSourceViewer().getDocument().getNumberOfLines());
 				if (endOfEnd < 0) {
 					endOfEnd = getSourceViewer().getDocument().getLength();
 				}
 				int regionLength = endOfEnd - startOfBegin;
 				if (regionLength > 0) {
-					fPositions.add(new Position(startOfBegin, regionLength));
+					foldingPositions.add(new Position(startOfBegin, regionLength));
 
 				}
 				beginTokens.remove(beginToken);
@@ -229,24 +225,28 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 			endTokens.remove(0);
 		}
 
-		ArrayList<Position> tempList = new ArrayList<Position>();
-		for (Position position : fPositions) {
-			for (Position currentTestPosition : fPositions) {
+		/** Test which Regions overlaps, and removing the smaller ones */
+		ArrayList<Position> tmpList = new ArrayList<Position>();
+		for (Position position : foldingPositions) {
+			for (Position currentTestPosition : foldingPositions) {
 				if (!position.equals(currentTestPosition)
 						&& position.overlapsWith(currentTestPosition.offset,
 								currentTestPosition.offset)) {
 					if (position.length > currentTestPosition.length) {
-						tempList.add(currentTestPosition);
+						tmpList.add(currentTestPosition);
 					} else {
-						tempList.add(position);
+						tmpList.add(position);
 					}
 				}
 			}
 		}
-		fPositions.removeAll(tempList);
-		isCollapsed = new Boolean[fPositions.size()];
-		for(int i=0;i<fPositions.size();i++)
-		{
+		foldingPositions.removeAll(tmpList);
+		
+		/** getting old folding state and saving in isCollapsed */
+		
+		//initialize isCollapsedArray, all new Folding Positions will be open(not Collapsed)
+		isCollapsed = new Boolean[foldingPositions.size()];
+		for (int i = 0; i < foldingPositions.size(); i++) {
 			isCollapsed[i] = false;
 		}
 		
@@ -257,20 +257,22 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 			if (currAnnotation.getType().equals(ProjectionAnnotation.TYPE))
 
 			{
-				// this is how to get the information, whether
-				// folding area is collapsed(folded).
-				Position projPosition = annotationModel.getPosition(currAnnotation);
+				Position projPosition = annotationModel
+						.getPosition(currAnnotation);
 				ProjectionAnnotation projAnnotation = (ProjectionAnnotation) currAnnotation;
-				for(int i=0;i<fPositions.size();i++)
-				{
-					Position positionToTest = fPositions.get(i);
-					if(positionToTest.overlapsWith(projPosition.offset, projPosition.length))
-					{
+				for (int i = 0; i < foldingPositions.size(); i++) {
+					Position positionToTest = foldingPositions.get(i);
+					if (positionToTest.overlapsWith(projPosition.offset,
+							projPosition.length)) {
 						isCollapsed[i] = projAnnotation.isCollapsed();
 					}
 				}
 			}
 		}
+		
+		/** update the Folding Structure of the Editor in a new thread */
+		final AlgorithmEditor editor = this;
+		final ArrayList<Position> fPositions = foldingPositions;
 		Display.getDefault().asyncExec(new Runnable() {
 			@Override
 			public void run() {
@@ -321,8 +323,18 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 		return getTextWidget();
 	}
 
+	/**
+	 * Return the offset of the Document at the transmitted line and offset in
+	 * this line.
+	 * 
+	 * @param line
+	 *            the lines
+	 * @param charPositionInLine
+	 *            the offset in the line given.
+	 * @return the offset of the position given by line and charPositionInLine
+	 *         in the current document.
+	 */
 	public int getOffset(int line, int charPositionInLine) {
-
 		try {
 			return getSourceViewer().getDocument().getLineOffset(line)
 					+ charPositionInLine;
@@ -331,6 +343,11 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 		}
 	}
 
+	/**
+	 * Return the current font size of the Edior.
+	 * 
+	 * @return the current font size.
+	 */
 	public int getCurrentFontSize() {
 		return getTextWidget().getFont().getFontData()[0].getHeight();
 	}
@@ -347,7 +364,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 	}
 
 	/**
-	 * Decreases the current editor font-size by 4;
+	 * Decreases the current editor font-size by 4.
 	 * 
 	 * @return the decreased font-size
 	 */
@@ -363,7 +380,13 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 		return newFontSize;
 	}
 
-	public boolean setFontSize(int size) {
+	/**
+	 * Set the font size of the Editor.
+	 * 
+	 * @param size
+	 *            the size to set
+	 */
+	public void setFontSize(int size) {
 		FontData[] fontData = getTextWidget().getFont().getFontData();
 		for (int i = 0; i < fontData.length; i++) {
 			fontData[i].setHeight(size);
@@ -371,9 +394,14 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 		PreferenceConverter.setValue(getPreferenceStore(),
 				getFontPropertyPreferenceKey(), fontData);
 		getTextWidget().update();
-		return true;
 	}
 
+	/**
+	 * Set the font of the Editor.
+	 * 
+	 * @param fd
+	 *            the FontData representing the font to set.
+	 */
 	public void setFont(FontData fd) {
 		PreferenceConverter.setValue(getPreferenceStore(),
 				getFontPropertyPreferenceKey(), fd);
