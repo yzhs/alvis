@@ -82,7 +82,7 @@ public class RunGraph extends ViewPart implements IExportItem {
 
 		for (String paraS : parameters.keySet()) {
 			for (IRunVisualizer runviz : myRunVisualizers) {
-				// TODO should be not an complete arraylist
+				// TODO should not be a complete array list
 				ArrayList<PCObject> tmp = runviz.chooseVariable(
 						parameters.get(paraS), paraS);
 				if (tmp.size() > 0) {
