@@ -119,10 +119,14 @@ public class AlgorithmErrorMarker {
 				System.out.println("UNKNOWN ERROR at " + error.line + ":" + error.charPositionInLine + ": " + error);
 				continue;
 			}
-			TypeException re = (TypeException) error;
+			TypeException re = null;
+			if (error instanceof TypeException) {
+				re = (TypeException) error;
+			}
+
 			MarkerUtilities.setLineNumber(map, error.line);
 			MarkerUtilities.setMessage(map, errorMessage);
-//			map.put(IMarker.MESSAGE, errorMessage);
+			// map.put(IMarker.MESSAGE, errorMessage);
 			int lineOffset;
 			try {
 				lineOffset = document.getLineOffset(error.line - 1);
@@ -130,19 +134,20 @@ public class AlgorithmErrorMarker {
 				continue;
 			}
 
-			MarkerUtilities.setLineNumber(map, ((RecognitionException)error).line-1);
-			MarkerUtilities.setCharStart(map, lineOffset + re.charPositionInLine);
-			MarkerUtilities.setCharEnd(map, lineOffset + re.endCharPositionInLine + 1);
+			MarkerUtilities.setLineNumber(map,
+					((RecognitionException) error).line - 1);
+			MarkerUtilities.setCharStart(map, lineOffset
+					+ error.charPositionInLine);
+			MarkerUtilities.setCharEnd(map, lineOffset
+					+ (null != re ? re.endCharPositionInLine : 0) + 1);
 			map.put(IMarker.SEVERITY, new Integer(IMarker.SEVERITY_ERROR));
 			map.put(IMarker.LOCATION, file.getFullPath().toString());
 			try {
 				MarkerUtilities.createMarker(file, map, ERROR_MARKER_ID);
 			} catch (CoreException e) {
-				//ignore Error
+				// ignore Error
 			}
-			
 		}
-		
 	}
 
 }
