@@ -45,6 +45,11 @@ public class InvalidReturnException extends TypeException {
 	public InvalidReturnException(Type expected, Type given, String function,
 			String stat, TypedTree tree) {
 		super(tree);
+		System.out.println(expected);
+		System.out.println(given);
+		System.out.println(function);
+		System.out.println(stat);
+		System.out.println(tree.treeToString());
 		this.expected = expected;
 		this.given = given;
 		this.function = function;
@@ -57,9 +62,8 @@ public class InvalidReturnException extends TypeException {
 					+ "value '" + stat + "' from function '" + function
 					+ "' when an empty return statement was expected.";
 		if (given == null)
-			return "Type error " + getPos() + ": Trying to return  value of "
-					+ "type '" + given + "' from non-void function '"
-					+ function + "'.";
+			return "Type error " + getPos() + ": Trying to return 'void' from "
+			        + " non-void function '" + function + "'.";
 		return "Type error " + getPos() + ": Trying to return "
 				+ "value '" + stat + "' of type '" + given
 				+ "' when a value of " + "type '" + expected

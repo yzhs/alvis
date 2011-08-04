@@ -81,7 +81,7 @@ public class CompilerAccess {
 	 * setDatatypePackages methods).
 	 * 
 	 * @param path
-	 *            path to the source code that
+	 *            path to the source code that we want to compile.
 	 * @param isAbsolutePath
 	 *            true if the path is absolute.
 	 * @return path to the generated .java file if it exists, null otherwise
@@ -118,13 +118,13 @@ public class CompilerAccess {
 	 * @return the file with the Java source code.
 	 * @throws IOException
 	 */
-	public File writeJavaCode(String directory, String algorithmName)
+	public File writeJavaCode(File directory, String algorithmName)
 			throws IOException {
 		File result = null;
 		BufferedWriter out = null;
 		FileWriter fstream;
 		try {
-			result = new File(directory + algorithmName + ".java");
+			result = new File(directory, algorithmName + ".java");
 			fstream = new FileWriter(result);
 			out = new BufferedWriter(fstream);
 			out.write(javaCode.replaceAll("#ALGORITHM_NAME#", algorithmName));
@@ -162,6 +162,9 @@ public class CompilerAccess {
 		return new Compiler(types, packages).check(code);
 	}
 
+	/**
+	 * @return path to working directory.
+	 */
 	private String currentPath() {
 		return Platform.getInstanceLocation().getURL().getPath();
 	}
@@ -171,9 +174,8 @@ public class CompilerAccess {
 	 * @param fileWithPath The file of which we want to get the parent directory.
 	 * @return the path to the parent directory.
 	 */
-	private String getWorkspacePath(String fileWithPath) {
-		File f = new File(fileWithPath);
-		return f.getAbsoluteFile().getParent() + File.separator;
+	private File getWorkspacePath(String fileWithPath) {
+		return new File(fileWithPath).getAbsoluteFile().getParentFile();
 	}
 
 	/**

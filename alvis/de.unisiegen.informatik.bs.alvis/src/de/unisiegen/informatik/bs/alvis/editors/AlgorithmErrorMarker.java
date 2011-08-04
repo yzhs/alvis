@@ -62,6 +62,7 @@ public class AlgorithmErrorMarker {
 		List<RecognitionException> errors = CompilerAccess.getDefault().getExceptions();
 		for(RecognitionException error : errors) {
 			String errorMessage = "";
+			System.err.println(error.toString());
 			if (error instanceof MismatchedTreeNodeException) {
 				MismatchedTreeNodeException re = (MismatchedTreeNodeException)error;
 				//TODO specific Exception Stuff here like, Error Message
@@ -115,21 +116,23 @@ public class AlgorithmErrorMarker {
 			} else if (error instanceof TypeException) {
 				errorMessage = error.toString();
 			} else {
-				System.out.println("NEW ERROR " + error);
+				System.out.println("UNKNOWN ERROR at " + error.line + ":" + error.charPositionInLine + ": " + error);
 				continue;
 			}
+			TypeException re = (TypeException) error;
 			MarkerUtilities.setLineNumber(map, error.line);
 			MarkerUtilities.setMessage(map, errorMessage);
 //			map.put(IMarker.MESSAGE, errorMessage);
-			int offset = -1;
+			int lineOffset;
 			try {
-				 offset = document.getLineOffset(error.line-1) + error.charPositionInLine;
+				lineOffset = document.getLineOffset(error.line - 1);
 			} catch (BadLocationException e1) {
 				continue;
 			}
+
 			MarkerUtilities.setLineNumber(map, ((RecognitionException)error).line-1);
-			MarkerUtilities.setCharStart(map, offset);
-			MarkerUtilities.setCharEnd(map, offset+1);
+			MarkerUtilities.setCharStart(map, lineOffset + re.charPositionInLine);
+			MarkerUtilities.setCharEnd(map, lineOffset + re.endCharPositionInLine + 1);
 			map.put(IMarker.SEVERITY, new Integer(IMarker.SEVERITY_ERROR));
 			map.put(IMarker.LOCATION, file.getFullPath().toString());
 			try {

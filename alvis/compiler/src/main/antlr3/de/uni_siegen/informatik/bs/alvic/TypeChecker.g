@@ -128,14 +128,17 @@ options { backtrack = true; }
     : declaration
     | expr[any]
     | assignment
-    | ^(RETURN expr[((FunctionType)getTypeByName(currentFunction)).getReturnType()]?) {
+    | ^(RETURN expr[any/*((FunctionType)getTypeByName(currentFunction)).getReturnType()*/]?) {
       Type tmp = ((FunctionType)getTypeByName(currentFunction)).getReturnType();
       if (tmp.equals(Void) && $expr.text != null)
           reportError(new InvalidReturnException(tmp, $expr.t, currentFunction,
-              $expr.tree.toString(), $expr.tree));
-      else if (!tmp.equals(Void) && $expr.text == null)
+              $expr.tree.treeToString(), $expr.tree));
+      else if (!tmp.equals(Void) && $expr.text == null){
           reportError(new InvalidReturnException(tmp, null, currentFunction,
-          null, $RETURN));
+          null, $RETURN)); System.out.println($RETURN);}
+      else if ($expr.tree != null && !tmp.equals($expr.t))
+          reportError(new InvalidReturnException(tmp, $expr.t, currentFunction,
+              $expr.tree.treeToString(), $expr.tree));
     }
     | ^(IF_ELSE expr[bool] ^(STAT statement terminator?) ^(STAT statement terminator?))
     | ^(IF expr[bool] ^(STAT statement statement?))
@@ -262,8 +265,8 @@ postfixExpr[Type expected] returns [boolean isFunctionCall, Type t]
             $t = SimpleType.create("# NotAFunction #");
         } else {
             $t = ((FunctionType)$function.t).getReturnType();
-            checkTypes($expected, $t, $function.tree.toString(), $function.tree);
-            checkArgs($function.tree.toString(), $function.t, args, $function.start);
+            checkTypes($expected, $t, $function.tree.treeToString(), $function.tree);
+            checkArgs($function.tree.toString(), $function.t, args, $function.tree);
         }
         $CALL.tree.setVarType($t);
     }

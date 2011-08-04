@@ -115,6 +115,7 @@ public abstract class AbstractTypeChecker extends TreeParser {
 
 		if (arguments.size() != n) {
 			reportError(new ArgumentNumberException(name, n, arguments.size(), tree));
+			return;
 		}
 
 		for (Type t : ((FunctionType) functionType).getArgumentTypes())

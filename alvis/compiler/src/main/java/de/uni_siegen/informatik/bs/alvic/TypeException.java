@@ -11,8 +11,8 @@ import org.antlr.runtime.RecognitionException;
 public abstract class TypeException extends RecognitionException {
 	private static final long serialVersionUID = -2651349912464757271L;
 
-	protected int endLine;
-	protected int endCharPositionInLine;
+	public int endLine;
+	public int endCharPositionInLine;
 	
 	public abstract String toString();
 

@@ -76,7 +76,8 @@ public class TypedTree extends CommonTree {
 	}
 
 	public int getEndCharPositionInLine() {
-		return getEnd().getCharPositionInLine();
+		CommonToken end = (CommonToken)getEnd();
+		return end.getCharPositionInLine() + end.getStopIndex() - end.getStartIndex();
 	}
 
 	public Token getEnd() {
