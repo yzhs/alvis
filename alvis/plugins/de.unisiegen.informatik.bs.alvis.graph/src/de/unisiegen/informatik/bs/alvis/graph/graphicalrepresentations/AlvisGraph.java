@@ -5,6 +5,11 @@ import java.util.ArrayList;
 import java.util.Set;
 
 import org.eclipse.draw2d.Animation;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseWheelListener;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.zest.core.widgets.Graph;
@@ -27,9 +32,10 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	private int middleFactor, widthPerGraph, heightPerLevel, midWidth;
 	private int[] levelWidth, levelPos;
 	private double zoomFactor;
+	private int keyPressed;
 
 	/**
-	 * the Constructor
+	 * the constructor
 	 * 
 	 * @param parent
 	 *            the parent composite
@@ -43,6 +49,33 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		admin = new AlvisSave();
 		middleFactor = 0;
 		zoomFactor = 1.4;
+		keyPressed = 0;
+
+		addKeyListener(new KeyListener() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				keyPressed = e.keyCode;
+			}
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				keyPressed = 0;
+			}
+		});
+
+		addMouseWheelListener(new MouseWheelListener() {
+			@Override
+			public void mouseScrolled(MouseEvent e) {
+				if (keyPressed == SWT.CTRL) {
+					if (e.count < 0) { // mouse wheel down
+						zoom(e.x, e.y, false);
+					} else { // mouse wheel up
+						zoom(e.x, e.y, true);
+					}
+				}
+			}
+		});
+
 	}
 
 	/**
@@ -652,7 +685,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	 * @return true if graph has zoomed in
 	 */
 	public boolean zoomIn() {
-		return zoom(0, 0, true);
+		return zoom(getSize().x / 2, getSize().y / 2, true);
 	}
 
 	/**
@@ -716,7 +749,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	 * @return true if graph has zoomed out
 	 */
 	public boolean zoomOut() {
-		return zoom(0, 0, false);
+		return zoom(getSize().x / 2, getSize().y / 2, false);
 	}
 
 	private AlvisGraphNode getConnectNode() {
@@ -873,20 +906,27 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 
 	// makes Graph fit to page
 	public void fiToPage() {
-		int gX = Math.max(getSize().x, 20), gY = Math.max(getSize().y, 20);
 		int minX = Integer.MAX_VALUE, minY = Integer.MAX_VALUE, maxX = 0, maxY = 0;
+		int maxWidth = 0, maxHeight = 0;
 		for (AlvisGraphNode gn : getAllNodes()) {
 			maxX = Math.max(maxX, (gn.getLocation().x + gn.getSize().width));
 			maxY = Math.max(maxY, (gn.getLocation().y + gn.getSize().height));
 			minX = Math.min(minX, gn.getLocation().x);
 			minY = Math.min(minY, gn.getLocation().y);
+			maxWidth = Math.max(maxWidth, gn.getSize().width);
+			maxHeight = Math.max(maxHeight, gn.getSize().height);
 		}
-		int actWidth = maxX - minX, actHeight = maxY - minY;
+
+		double actWidth = maxX - minX;
+		double actHeight = maxY - minY;
 		if (actWidth == 0 || actHeight == 0)
-			return;//avoid division by zero
-		
-		double relX = (double) gX / actWidth;
-		double relY = (double) gY / actHeight;
+			return;// avoid division by zero
+
+		double gX = Math.max(getSize().x - maxWidth, 20);
+		double gY = Math.max(getSize().y - maxHeight, 20);
+
+		double relX = gX / actWidth;
+		double relY = gY / actHeight;
 		Animation.markBegin();
 		for (AlvisGraphNode gn : getAllNodes()) {
 			double x = (gn.getLocation().x - minX) * relX;

@@ -27,7 +27,6 @@ public class ZoomIn extends AbstractHandler {
 				grapheditor.myGraph.zoomIn();
 		}
 		catch(ClassCastException e) {
-//			TODO Sinnvolle Fehlermeldung.
 		}
 		return null;
 

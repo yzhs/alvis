@@ -21,6 +21,7 @@ import javax.imageio.ImageIO;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.draw2d.ScrollBar;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
@@ -508,25 +509,11 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		// bDeleteAll.addListener(SWT.Selection, listener);
 		// bScreenShot.addListener(SWT.Selection, listener);
 
-		myGraph.addMouseWheelListener(new MouseWheelListener() {
-			@Override
-			public void mouseScrolled(MouseEvent e) {
-				if (pressed == CTRL) {
-					if (e.count < 0) { // mouse wheel down
-						if (myGraph.zoom(e.x, e.y, false))
-							setDirty(true);
-					} else { // mouse wheel up
-						if (myGraph.zoom(e.x, e.y, true))
-							setDirty(true);
-					}
-				}
-			}
-		});
-
 		myGraph.addMouseMoveListener(new MouseMoveListener() {
 
 			@Override
 			public void mouseMove(MouseEvent e) {
+
 				if (remMousePos == null)
 					return;
 
@@ -537,7 +524,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 						setDirty(true);
 					} else {
 						if (pressed == MODUS_STANDARD) {
-							drawFrame(e);
+							drawFrame(new Point(e.x, e.y));
 						}
 					}
 				}
@@ -551,6 +538,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 			public void mouseUp(MouseEvent e) {
 
 				if (!rename) {
+
 					actNode = myGraph.getHighlightedNode();
 					actCon = myGraph.getHighlightedConnection();
 
@@ -577,14 +565,13 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 						if (remMousePos.x != e.x && remMousePos.y != e.y) {
 							if (amountToBeMoved > 0) {
 								amountToBeMoved = 0;
-								remMousePos = null;
 								setDirty(true);
 							} else if (pressed == MODUS_STANDARD) {
 								markNodesInFrame(e);
-								remMousePos = null;
 							}
 						}
 					}
+					remMousePos = null;
 
 				} else {
 					// implement rename
@@ -608,6 +595,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 				// check if node gets moved:
 				remMousePos = new Point(e.x, e.y);
+
 				amountToBeMoved = myGraph.getHighlightedNodes().size();
 			}
 
@@ -647,10 +635,18 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		Set<AlvisGraphNode> gns = myGraph.getAllNodes();
 		GraphItem[] gnsa = new GraphItem[gns.size()];
 		int i = 0;
-		int xMin = Math.min(e.x, remMousePos.x);
-		int xMax = Math.max(e.x, remMousePos.x);
-		int yMin = Math.min(e.y, remMousePos.y);
-		int yMax = Math.max(e.y, remMousePos.y);
+		int xMin = Math.min(e.x, remMousePos.x)
+				+ myGraph.getHorizontalBar().getSelection();
+		int xMax = Math.max(e.x, remMousePos.x)
+				+ myGraph.getHorizontalBar().getSelection();
+		int yMin = Math.min(e.y, remMousePos.y)
+				+ myGraph.getVerticalBar().getSelection();
+		int yMax = Math.max(e.y, remMousePos.y)
+				+ myGraph.getVerticalBar().getSelection();
+
+		System.out.println(xMin + ", " + xMax + ", " + yMin + ", " + yMax);//TODO weg
+		System.out.println(myGraph.getHorizontalBar().getSelection() + ", " + myGraph.getVerticalBar().getSelection());//TODO weg
+		
 		try {
 			for (AlvisGraphNode gn : gns) {
 				if ((gn.getLocation().x + gn.getSize().width) > xMin
@@ -669,22 +665,21 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	/**
 	 * draws frame around nodes to be marked
 	 * 
-	 * @param e
-	 *            the mouse event to get the mouse location from
+	 * @param p
+	 *            the mouse location
 	 */
-	protected void drawFrame(MouseEvent e) {
+	protected void drawFrame(Point p) {
 		if (remMousePos == null)
 			return;
 
-		int x = Math.min(e.x, remMousePos.x);
-		int y = Math.min(e.y, remMousePos.y);
-		int width = Math.abs(e.x - remMousePos.x);
-		int height = Math.abs(e.y - remMousePos.y);
+		int x = Math.min(p.x, remMousePos.x);
+		int y = Math.min(p.y, remMousePos.y);
+		int width = Math.abs(p.x - remMousePos.x);
+		int height = Math.abs(p.y - remMousePos.y);
 
 		gc = new GC(myGraph);
 		gc.drawRectangle(x, y, width, height);
 		myGraph.redraw();
-		// gc.dispose();
 	}
 
 	/**
