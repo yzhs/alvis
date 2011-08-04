@@ -117,7 +117,7 @@ public class Compiler {
 	 */
 	@SuppressWarnings("unchecked")
 	private CommonTree runTreeParser(Class<? extends TreeParser> treeParser, CommonTree tree) {
-		// Since Java does not allow to use Generics parameters as
+		// Since Java does not allow to use generics parameters as
 		// constructors, this is done using reflection.
 		try {
 			CommonTreeNodeStream nodeStream = new CommonTreeNodeStream(tree);
@@ -192,8 +192,6 @@ public class Compiler {
 		if (r != null) {
 			StringTemplate st = (StringTemplate) r.getTemplate();
 			result = imports() + st.toString();
-//		else
-//			exceptions.add(new NullPointerException());
 		}
 
 		if (0 != exceptions.size()) {
