@@ -41,24 +41,27 @@ public abstract class AbstractTParser extends Parser {
 	 * Read the TParser.tokens file to initialize numToTokenName.
 	 */
 	private void readTokenNumbers() {
-		numToTokenName = new HashMap<Integer, String>();
 		InputStream tokenFile = getClass().getClassLoader()
-				.getResourceAsStream("TParser.tokens");
+				.getResourceAsStream("/target/generated-sources/antlr3/TParser.tokens");
+		if (null == tokenFile)
+			return;
 		BufferedReader fstream = new BufferedReader(new InputStreamReader(
 				tokenFile));
-		List<String> result = new ArrayList<String>();
+		List<String> tmp = new ArrayList<String>();
+		numToTokenName = new HashMap<Integer, String>();
 
 		try {
 			while (fstream.ready())
-				result.add(fstream.readLine());
+				tmp.add(fstream.readLine());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		for (String s : result) {
+		for (String s : tmp) {
 			String[] line = s.split("=");
 			numToTokenName.put(Integer.parseInt(line[1]), line[0]);
+			System.out.println("read token #" + line[1] + ": " + line[0]);
 		}
 	}
 
@@ -132,15 +135,10 @@ public abstract class AbstractTParser extends Parser {
 		try {
 			for (Field f : parser.getFields())
 				if (f.getName().startsWith("FOLLOW_" + tokenName + "_in_")) {
-//					System.out.println("found field " + f.getName());
 					BitSet b = (BitSet) f.get(null);
-					for (int i : numToTokenName.keySet()) {
-						if (b.member(i)) {
-//							System.out.println("found token #" + i
-//									+ " which is " + numToTokenName.get(i-1));
-							tokenNums.add(numToTokenName.get(i-1));
-						}
-					}
+					for (int i : numToTokenName.keySet())
+						if (b.member(i))
+							tokenNums.add(numToTokenName.get(i));
 				}
 		} catch (SecurityException e) {
 			// TODO Auto-generated catch block

@@ -195,6 +195,7 @@
 		<includes>
                     <include>Java.stg</include>
         	    <include>LaTeX.stg</include>
+		    <include>target/generated-sources/antlr3/TParser.tokens</include>
                 </includes>
             </resource>
         </resources>
