@@ -45,11 +45,6 @@ public class InvalidReturnException extends TypeException {
 	public InvalidReturnException(Type expected, Type given, String function,
 			String stat, TypedTree tree) {
 		super(tree);
-		System.out.println(expected);
-		System.out.println(given);
-		System.out.println(function);
-		System.out.println(stat);
-		System.out.println(tree.treeToString());
 		this.expected = expected;
 		this.given = given;
 		this.function = function;

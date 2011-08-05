@@ -16,6 +16,8 @@ public abstract class AbstractTypeChecker extends TreeParser {
 	 */
 	private List<RecognitionException> exceptions = new ArrayList<RecognitionException>();
 
+	protected Parser parser = null;
+
 	/**
 	 * Create a new parser instance, pre-supplying the input token stream.
 	 * 
@@ -276,5 +278,9 @@ public abstract class AbstractTypeChecker extends TreeParser {
 
 		reportError(new NoSuchOperatorException(operand, op, null, 0, tree));
 		return SimpleType.create("# NoSuchOperator #");
+	}
+
+	public void setParser(Parser parser) {
+		this.parser = parser;
 	}
 }

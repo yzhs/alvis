@@ -126,6 +126,7 @@ param(type, ident) ::= "<type> <ident>"
 decl(type, ident) ::= "<type> <ident> = new <type>();"
 declInit(type, ident, rhs) ::= "<type> <ident> = <rhs>;"
 assign(lhs, rhs) ::= "<lhs> = <rhs>;"
+arrayAssign(lhs, index, rhs) ::= "<lhs>.set(<index>, <rhs>);"
 attributeAssign(obj, lhs, rhs) ::= "<obj>.set<lhs>(<rhs>);"
 return(expr) ::= "return <expr>;"
 

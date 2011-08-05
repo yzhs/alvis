@@ -101,6 +101,9 @@ public class CompilerAccess {
 
 		compileString(readFile(algorithmPath));
 
+		System.out.println(compiler.getParser().possibleFollowingTokens(
+				compiler.getParser().getClass(), "ID"));
+
 		if (null == javaCode) {
 			System.err.println("Compiling code from " + algorithmPath
 					+ " failed");
@@ -164,7 +167,8 @@ public class CompilerAccess {
 	 *         checking the code.
 	 */
 	public List<RecognitionException> checkCode(String code) {
-		return new Compiler(types, packages).check(code);
+		compiler = new Compiler(types, packages);
+		return compiler.check(code);
 	}
 
 	/**

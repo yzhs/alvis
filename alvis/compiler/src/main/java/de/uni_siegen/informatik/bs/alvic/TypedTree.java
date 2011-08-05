@@ -71,32 +71,54 @@ public class TypedTree extends CommonTree {
 		return new TypedTree(this);
 	}
 
+	public int getLine() {
+		return getStart().getLine();
+	}
+
+	public int getCharPositionInLine() {
+		return getStart().getCharPositionInLine();
+	}
+
 	public int getEndLine() {
 		return getEnd().getLine();
 	}
 
 	public int getEndCharPositionInLine() {
-		CommonToken end = (CommonToken)getEnd();
-		return end.getCharPositionInLine() + end.getStopIndex() - end.getStartIndex();
+		CommonToken end = (CommonToken) getEnd();
+		return end.getCharPositionInLine() + end.getStopIndex()
+				- end.getStartIndex();
 	}
 
+	/**
+	 * @return last token in this tree.
+	 */
 	public Token getEnd() {
-		if (null == token && getChildCount() > 0)
+		if (getChildCount() > 0)
 			return ((TypedTree) getChild(getChildCount() - 1)).getEnd();
 		return token;
 	}
 
+	/**
+	 * @return first token in this tree.
+	 */
 	public Token getStart() {
-		if (null == token && getChildCount() > 0)
+		if (getChildCount() > 0)
 			return ((TypedTree) getChild(0)).getStart();
 		return token;
 	}
 
-	public String treeToString() {
+	/**
+	 * Print this tree.
+	 * 
+	 * @param parser The TParser instance used by the compiler.
+	 * @return the original source code from which this tree was created
+	 */
+	public String treeToString(Parser parser) {
+		if (getChildCount() > 0) {
+			return parser.getTokenStream().toString(getStart(), getEnd());
+		}
 		if (null == token)
-			if (getChildCount() > 0)
-				return ((TokenStream) ((TypedTree) getChild(0)).getToken()
-						.getInputStream()).toString(getStart(), getEnd());
-		return token.toString();
+			return "";
+		return token.getText();
 	}
 }

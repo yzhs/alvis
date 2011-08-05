@@ -64,10 +64,11 @@ public class AlgorithmErrorMarker {
 			String errorMessage = "";
 			System.err.println(error.toString());
 			if (error instanceof MismatchedTreeNodeException) {
+				// This case should not happen. If control flow gets here
+				// something is wrong with the compiler.
 				MismatchedTreeNodeException re = (MismatchedTreeNodeException)error;
-				//TODO specific Exception Stuff here like, Error Message
-				System.out.println(error);
-				errorMessage = "MismatchedTreeNode at " + re.line + ":" + re.charPositionInLine;
+				error.printStackTrace();
+				errorMessage = "MismatchedTreeNode at " + re.line + ":" + re.charPositionInLine + ": " + error;
 			} else if (error instanceof NoViableAltException) {
 				NoViableAltException re = (NoViableAltException)error;
 				//TODO specific Exception Stuff here like, Error Message
@@ -119,6 +120,7 @@ public class AlgorithmErrorMarker {
 				System.out.println("UNKNOWN ERROR at " + error.line + ":" + error.charPositionInLine + ": " + error);
 				continue;
 			}
+
 			TypeException re = null;
 			if (error instanceof TypeException) {
 				re = (TypeException) error;
@@ -134,8 +136,7 @@ public class AlgorithmErrorMarker {
 				continue;
 			}
 
-			MarkerUtilities.setLineNumber(map,
-					((RecognitionException) error).line - 1);
+			MarkerUtilities.setLineNumber(map, error.line - 1);
 			MarkerUtilities.setCharStart(map, lineOffset
 					+ error.charPositionInLine);
 			MarkerUtilities.setCharEnd(map, lineOffset

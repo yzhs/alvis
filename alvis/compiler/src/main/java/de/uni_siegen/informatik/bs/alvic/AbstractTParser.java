@@ -5,11 +5,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.antlr.runtime.*;
 
@@ -124,17 +125,21 @@ public abstract class AbstractTParser extends Parser {
 	 *            "(" etc.
 	 * @return Possible next tokens.
 	 */
-	public Collection<String> possibleFollowingTokens(
+	public List<String> possibleFollowingTokens(
 			Class<? extends AbstractTParser> parser, String tokenName) {
-		List<String> tokenNums = new ArrayList<String>();
+		Set<String> tokenNums = new TreeSet<String>();
 
 		try {
 			for (Field f : parser.getFields())
 				if (f.getName().startsWith("FOLLOW_" + tokenName + "_in_")) {
+//					System.out.println("found field " + f.getName());
 					BitSet b = (BitSet) f.get(null);
-					for (int i = 0; i < b.numBits(); i++) {
-						if (b.member(i))
-							tokenNums.add(numToTokenName.get(i));
+					for (int i : numToTokenName.keySet()) {
+						if (b.member(i)) {
+//							System.out.println("found token #" + i
+//									+ " which is " + numToTokenName.get(i-1));
+							tokenNums.add(numToTokenName.get(i-1));
+						}
 					}
 				}
 		} catch (SecurityException e) {
@@ -148,6 +153,6 @@ public abstract class AbstractTParser extends Parser {
 			e.printStackTrace();
 		}
 
-		return tokenNums;
+		return new ArrayList<String>(tokenNums);
 	}
 }
