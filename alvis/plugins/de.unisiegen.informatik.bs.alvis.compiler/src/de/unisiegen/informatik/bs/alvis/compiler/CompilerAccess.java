@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -55,6 +56,10 @@ public class CompilerAccess {
 		if (instance == null)
 			instance = new CompilerAccess();
 		return instance;
+	}
+	public File compile() throws RecognitionException, IOException
+	{
+		return compile(algorithmPath,true);
 	}
 
 	/**
@@ -282,6 +287,31 @@ public class CompilerAccess {
 	 */
 	public List<String> tryAutoCompletion(Token toComplete) {
 		return compiler.getLexer().tryAutoCompletion(toComplete);
+	}
+	
+	public List<String> tryAutoCompletion(int line, int charPositionInLine)
+	{
+		Token tokenToComplete = compiler.getLexer().getTokenByNumbers(line, charPositionInLine);
+		if(tokenToComplete!= null)
+		{
+		int previousTokenIndex = tokenToComplete.getTokenIndex()-1;
+		//channel = 99 indicates a whitespace token
+		Token previousToken = null;
+		while(previousToken == null || previousToken.getChannel()==99)
+		{
+			previousToken = compiler.getLexer().getTokens().get(previousTokenIndex);
+			previousTokenIndex--;
+		}
+		String previousTokenName = getTokenName(previousToken.getType());
+		System.out.println(previousTokenName);
+		Collection<String> possibleTokens = compiler.getParser().possibleFollowingTokens(compiler.getParser().getClass(), previousTokenName);
+		System.out.println(possibleTokens);
+		return (List<String>)  possibleTokens;
+		}
+		else
+		{
+			return new ArrayList<String>();
+		}
 	}
 
 	/**
