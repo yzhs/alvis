@@ -31,7 +31,6 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	private double middleX, middleY, radiusX, radiusY, angle;
 	private int middleFactor, widthPerGraph, heightPerLevel, midWidth;
 	private int[] levelWidth, levelPos;
-	private double zoomFactor;
 	private int keyPressed;
 
 	/**
@@ -48,7 +47,6 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 
 		admin = new AlvisSave();
 		middleFactor = 0;
-		zoomFactor = 1.4;
 		keyPressed = 0;
 
 		addKeyListener(new KeyListener() {
@@ -145,7 +143,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 			AlvisGraphConnection result = new AlvisGraphConnection(this,
 					ZestStyles.CONNECTIONS_DOT, node1, node2);
 			result.setLineWidth((getZoomCounter() <= 0) ? 1 : (int) Math.pow(
-					zoomFactor, getZoomCounter() + 1));
+					admin.getZoomFactor(), getZoomCounter() + 1));
 			admin.addConnection(result);
 			return result;
 		}
@@ -708,12 +706,12 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 			if (getZoomCounter() >= 4)
 				return false; // too far zoomed in already
 			increaseZoomCounter();
-			myZoomFactor = zoomFactor;
+			myZoomFactor = admin.getZoomFactor();
 		} else {
 			if (getZoomCounter() <= -2)
 				return false; // too far zoomed out already
 			decreaseZoomCounter();
-			myZoomFactor = 1.0 / zoomFactor;
+			myZoomFactor = 1.0 / admin.getZoomFactor();
 		}
 
 		int fontSize = 4 + (int) (6 * Math.pow(2, getZoomCounter()));
@@ -736,7 +734,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		for (AlvisGraphConnection gc : getAllConnections()) {
 			gc.setFont(gcFont);
 			gc.setLineWidth((getZoomCounter() <= 0) ? 1 : (int) Math.pow(
-					zoomFactor, getZoomCounter() + 2));
+					admin.getZoomFactor(), getZoomCounter() + 2));
 		}
 		Animation.run(200);
 		return true;

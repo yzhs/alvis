@@ -38,6 +38,7 @@ public class AlvisSave {
 	private AlvisGraphNode connectNode;
 
 	private int zoomCounter;
+	private double zoomFactor;
 
 	/**
 	 * the constructor
@@ -53,6 +54,7 @@ public class AlvisSave {
 		endNode = null;
 		connectNode = null;
 		limiter = 0.8;
+		zoomFactor = 1.4;
 		globalId = 0;
 		connectionColor = 1;
 		zoomCounter = 1;
@@ -120,6 +122,8 @@ public class AlvisSave {
 					node1, node2, id);
 			gc.setConnectionColor(seri.getConColor()[i]);
 			gc.setFont(gcFont);
+			gc.setLineWidth((this.zoomCounter <= 0) ? 1 : (int) Math.pow(
+					this.zoomFactor, this.zoomCounter + 2));
 			addConnection(gc);
 		}
 
@@ -157,16 +161,16 @@ public class AlvisSave {
 		connectionColor = 1;
 
 	}
-	
-	protected void increaseZoomCounter(){
+
+	protected void increaseZoomCounter() {
 		zoomCounter++;
 	}
-	
-	protected void decreaseZoomCounter(){
+
+	protected void decreaseZoomCounter() {
 		zoomCounter--;
 	}
-	
-	protected int getZoomCounter(){
+
+	protected int getZoomCounter() {
 		return zoomCounter;
 	}
 
@@ -323,7 +327,7 @@ public class AlvisSave {
 		dolly.limiter = this.getLimiter();
 		dolly.globalId = this.globalId;
 		dolly.zoomCounter = this.zoomCounter;
-		
+
 		int fontSize = 4 + (int) (6 * Math.pow(2, zoomCounter));
 		int gcFontSize = Math.min(48, fontSize);
 		Font gnFont = new Font(null, "gn", fontSize, 1);
@@ -389,7 +393,6 @@ public class AlvisSave {
 
 	public void setConnectionColor(int connectionColor) {
 		this.connectionColor = connectionColor;
-
 	}
 
 	public void setConnectNode(AlvisGraphNode connectNode) {
@@ -399,5 +402,13 @@ public class AlvisSave {
 	public AlvisGraphNode getConnectNode() {
 		return connectNode;
 	}
-	
+
+	public double getZoomFactor() {
+		return zoomFactor;
+	}
+
+	public void setZoomFactor(double zoomFactor) {
+		this.zoomFactor = zoomFactor;
+	}
+
 }

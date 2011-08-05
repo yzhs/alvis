@@ -21,7 +21,6 @@ import javax.imageio.ImageIO;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.draw2d.ScrollBar;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
@@ -30,7 +29,6 @@ import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseMoveListener;
-import org.eclipse.swt.events.MouseWheelListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.GC;
@@ -39,14 +37,10 @@ import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
-import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
@@ -370,7 +364,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	}
 
 	/**
-	 * sets the mouse- and key-listeners for graph view TODO implement that mode
+	 * sets the mouse- and key-listeners for graph view
 	 * switching is not possible by pushed ctrl key, because ctrl s => save
 	 */
 	private void setListeners() {
@@ -413,9 +407,9 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 						rename = false;
 					} else if (e.keyCode == 8) { // backspace
 						if (actNode != null) {
-							// TODO implement
+							//to implement
 						} else if (actNode != null) {
-							// TODO implement
+							//to implement
 						}
 					} else {
 						if (actNode != null) {
@@ -609,7 +603,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 				// setGraphModus();
 				// if (actNode != null) {
 				// actNode.setHighlightColor(AlvisGraphNode.RENAME_COLOR);//
-				// TODO
 				// // doenst
 				// // work
 				// // jet
@@ -643,9 +636,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 				+ myGraph.getVerticalBar().getSelection();
 		int yMax = Math.max(e.y, remMousePos.y)
 				+ myGraph.getVerticalBar().getSelection();
-
-		System.out.println(xMin + ", " + xMax + ", " + yMin + ", " + yMax);//TODO weg
-		System.out.println(myGraph.getHorizontalBar().getSelection() + ", " + myGraph.getVerticalBar().getSelection());//TODO weg
 		
 		try {
 			for (AlvisGraphNode gn : gns) {
@@ -751,7 +741,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	 * editor to a *.png file
 	 * 
 	 */
-	private void saveScreenshotToImg() {
+	public void saveScreenshotToImg() {
 		FileDialog saveDialog = new FileDialog(myGraph.getShell(), SWT.SAVE);
 		saveDialog.setFilterNames(new String[] { "PNG (*.png)",
 				Messages.getLabel("allFiles") });
@@ -1042,8 +1032,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 	@Override
 	public void setFocus() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -1121,7 +1109,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	}
 
 	@Override
-	public StyledText getSourceCode() {
+	public Object getSourceCode() {
 		return null;
 	}
 

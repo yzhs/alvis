@@ -185,7 +185,7 @@ public class GraphEditorAdjacencyMatrix extends EditorPart implements
 	}
 
 	@Override
-	public StyledText getSourceCode() {
+	public Object getSourceCode() {
 		for(String tit : titleLine) {
 			System.out.print(tit + ";");
 		}

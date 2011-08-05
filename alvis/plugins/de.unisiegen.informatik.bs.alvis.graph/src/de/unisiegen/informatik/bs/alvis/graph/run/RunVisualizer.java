@@ -239,7 +239,7 @@ public class RunVisualizer implements IRunVisualizer {
 	}
 
 	@Override
-	public StyledText getSourceCode() {
+	public Object getSourceCode() {
 		// no source code from here
 		return null;
 	}
