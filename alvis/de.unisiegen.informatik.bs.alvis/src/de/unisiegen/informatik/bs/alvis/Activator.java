@@ -13,6 +13,13 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IEditorReference;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.IWorkbenchPartReference;
+import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -195,40 +202,46 @@ public class Activator extends AbstractUIPlugin {
 		});
 		vm.addDPListener(new DPListener() {
 			@Override
-			public void onDecisionPoint(int DPNr, PCObject from, SortableCollection toSort) {
+			public void onDecisionPoint(int DPNr, PCObject from,
+					SortableCollection toSort) {
 				// Check if the user wants to order the decisions
-				if(activeRun.getOnDecisionPoint().equals(EDecisionPoint.RAND))
-						return;
+				if (activeRun.getOnDecisionPoint().equals(EDecisionPoint.RAND))
+					return;
 				toSort.sort();
 				Activator.getDefault().DPNr = DPNr;
 				Activator.getDefault().toSort = toSort;
 				Activator.getDefault().from = from;
-				
+
 				Runnable progress = new Runnable() {
 					public void run() {
-						Activator.getDefault().shellContainer = Display.getDefault().getActiveShell();
-						
-						Activator.getDefault().algorithmContainer.removeAllCurrentLine();
-						Activator.getDefault().algorithmContainer.addCurrentDP(Activator.getDefault().DPNr);
-						
+						Activator.getDefault().shellContainer = Display
+								.getDefault().getActiveShell();
+
+						Activator.getDefault().algorithmContainer
+								.removeAllCurrentLine();
+						Activator.getDefault().algorithmContainer
+								.addCurrentDP(Activator.getDefault().DPNr);
+
 						String name = Activator.getDefault().from.toString();
-						if(name == null)
+						if (name == null)
 							name = "Anfang des Algorithmus";
-						// TODO: Internationalisierung für übergebene Strings einbauen
+						// TODO: Internationalisierung für übergebene Strings
+						// einbauen
 						if (Display.getDefault() != null) {
 							AskMeAgain ask = new AskMeAgain(true);
 							// OrderDialog can change the order of toSort
 							// or changes the attribute of ask.
 							OrderDialog toOrder = new OrderDialog(
 									shellContainer,
-									Activator.getDefault().toSort,
-									ask,
-									"Legen Sie eine Reihenfolge fest", "Sie sind bei: " + name,
+									Activator.getDefault().toSort, ask,
+									"Legen Sie eine Reihenfolge fest",
+									"Sie sind bei: " + name,
 									"Bewegen Sie die Daten per Drag&Drop\n");
 							toOrder.open();
-							if(ask.getAsk() == false) {
+							if (ask.getAsk() == false) {
 								// the user hit the box ,,Do not askme again''
-								getActiveRun().setOnDecisionPoint(EDecisionPoint.RAND);
+								getActiveRun().setOnDecisionPoint(
+										EDecisionPoint.RAND);
 							}
 						}
 					}
@@ -266,18 +279,17 @@ public class Activator extends AbstractUIPlugin {
 		// .java
 		// Add all this to VM.
 
-		
 		// Cast the PCObjects to Objects, so that class further down this stream
 		// are independent from PCObjects
-		//ArrayList<Object> datatypesToAddToClasspath = new ArrayList<Object>();
-		//for (PCObject obj : datatypesToAddToClasspathAsPCObjects)
-		//	datatypesToAddToClasspath.add((Object) obj);
-			
-		
+		// ArrayList<Object> datatypesToAddToClasspath = new
+		// ArrayList<Object>();
+		// for (PCObject obj : datatypesToAddToClasspathAsPCObjects)
+		// datatypesToAddToClasspath.add((Object) obj);
+
 		// Cycle through the list of delivered data types and extract the
 		// package they belong to
 		// TreeSet is used so that every packages is only added once
-		TreeSet<String> dynamicallyReferencedPackagesNeededToCompile = new TreeSet<String>();	
+		TreeSet<String> dynamicallyReferencedPackagesNeededToCompile = new TreeSet<String>();
 		for (Object obj : datatypesToAddToClasspathAsPCObjects) {
 			String path = obj.getClass().getProtectionDomain().getCodeSource()
 					.getLocation().getFile().toString();
@@ -288,13 +300,15 @@ public class Activator extends AbstractUIPlugin {
 		}
 
 		try {
-			if(!vm.addAlgoToVM("algo", pathToFile, fileName, dynamicallyReferencedPackagesNeededToCompile))
-				throw new VirtualMachineException("Adding the algorithm to the Virtual Machine failed.");
+			if (!vm.addAlgoToVM("algo", pathToFile, fileName,
+					dynamicallyReferencedPackagesNeededToCompile))
+				throw new VirtualMachineException(
+						"Adding the algorithm to the Virtual Machine failed.");
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-				
+
 		//			return vm.addAlgoToVM("first", pathToAlgoInJava); //$NON-NLS-1$
 	}
 
@@ -425,15 +439,54 @@ public class Activator extends AbstractUIPlugin {
 	// }
 
 	/**
-	 * returns active part as export item
+	 * returns active editor as export item
 	 * 
-	 * @return active part as export item
+	 * @return active editor as export item
 	 */
-	public IExportItem getActivePartToExport() throws ClassCastException {
-		IExportItem part;
-		part = (IExportItem) getWorkbench().getActiveWorkbenchWindow()
-				.getActivePage().getActivePart();
+	public IExportItem getActivePartToExport() {
+		IExportItem part = null;
+
+		try {
+
+			part = (IExportItem) getWorkbench().getActiveWorkbenchWindow()
+					.getActivePage().getActivePart();
+
+		} catch (ClassCastException cce) {
+
+			IEditorReference[] editors = null;
+			editors = getWorkbench().getActiveWorkbenchWindow().getActivePage()
+					.getEditorReferences();
+			int i;
+			for (i = 0; i < editors.length; i++) {
+				String editorTitle;
+				try {
+					editorTitle = getWorkbench().getActiveWorkbenchWindow()
+							.getActivePage().getActiveEditor().getTitle();
+				} catch (NullPointerException npe) {
+					break;// no editor in foreground, first one gets chosen
+				}
+				if (editors[i].getTitle().equals(editorTitle))
+					break;
+			}
+			if (i == editors.length)
+				i = 0;
+			try {
+				Activator
+						.getDefault()
+						.getWorkbench()
+						.getActiveWorkbenchWindow()
+						.getActivePage()
+						.openEditor(editors[i].getEditorInput(),
+								editors[i].getId());
+				part = (IExportItem) getWorkbench().getActiveWorkbenchWindow()
+						.getActivePage().getActivePart();
+				return part;
+			} catch (PartInitException e) {
+			} catch (ClassCastException ccee) {
+			}
+		}
 
 		return part;
+
 	}
 }

@@ -23,6 +23,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditor;
 import org.eclipse.ui.texteditor.AbstractTextEditor;
@@ -81,7 +82,6 @@ public class PdfExport extends Document {
 			addMetaData();
 			addTitle();
 			addContent();
-			// addContentOutsideParagraph();
 
 		} catch (NullPointerException npe) {
 		} catch (FileNotFoundException fnfe) {
@@ -132,14 +132,15 @@ public class PdfExport extends Document {
 		// anchor.setName("anchor");
 
 		IExportItem exportItem;
-		try {
-			exportItem = Activator.getDefault().getActivePartToExport();
-		} catch (ClassCastException cce) {
-			exportItem = null;
-		}
+		exportItem = Activator.getDefault().getActivePartToExport();
 
 		// chapter = new Chapter(new Paragraph(anchor), 1);
 
+		try {
+			Thread.sleep(200);//wait for gui to potentially open editor and dispose file dialog
+		} catch (InterruptedException e) {
+		}
+		
 		if (exportItem != null) {
 			if (exportItem.isRun()) { // export run
 
@@ -156,21 +157,20 @@ public class PdfExport extends Document {
 				Image image = exportItem.getImage();
 				if (image != null) {
 					paragraph = toParagraph(image);
-					// chapter.add(paragraph);
-					// add(chapter);
 					add(paragraph);
 				}
+				// adding source code:
+				try {
+					StyledText sourceCode = (StyledText) exportItem
+							.getSourceCode();
+					paragraph = toParagraph(sourceCode);
+					add(paragraph);
+				} catch (ClassCastException cce) {
+				} catch (DocumentException de){
+				} catch (NullPointerException npe) {
+				}
 			}
-		}
-		// adding source code:
-		StyledText sourceCode = getStyledText();
-		if (sourceCode != null) {
-			paragraph = toParagraph(sourceCode);
-			// chapter.add(paragraph);
-			// add(chapter);
-			add(paragraph);
-		}
-
+		} 
 	}
 
 	/**

@@ -319,7 +319,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 	}
 
 	@Override
-	public StyledText getSourceCode() {
+	public Object getSourceCode() {
 		return getTextWidget();
 	}
 

@@ -147,53 +147,36 @@ public class RunGraph extends ViewPart implements IExportItem {
 
 	@Override
 	public Image getImage() {
-		IExtension[] iext = Platform
-				.getExtensionRegistry()
-				.getExtensionPoint(
-						"de.unisiegen.informatik.bs.alvis.runvisualizer")
-				.getExtensions();
-		for (int i = 0; i < iext.length; i++) {
-			try {
-
-				Drawable drawable = (Drawable) Platform
-						.getExtensionRegistry()
-						.getExtensionPoint(
-								"de.unisiegen.informatik.bs.alvis.runvisualizer")
-						.getExtensions()[i];
-				System.out.println("yes! CastToDrawable");
-				// TODO weg damit
-			} catch (ClassCastException cce) {
-				System.out.println("noCastToDrawable");
-				// TODO weg damit
-			}
-		}
 		Image image = null;
-		// GC gc = new GC(this);
-		//
-		// int width = myGraph.getSize().x;
-		// int height = myGraph.getSize().y;
-		// GC gc = new GC(myGraph);
-		// gc.drawText("Created by Alvis", 5, 5);
-		// gc.drawRectangle(new Rectangle(0, 0, width - 1, height - 1));
-		// screenshot = new Image(Display.getCurrent(), width, height);
-		// gc.copyArea(screenshot, 0, 0);
-		//
-		// gc.dispose();
-		// myGraph.redraw();
-		//
-		// System.out.println("runImRunvisualizer->getImage()");//TODO weg
+		
+//		IEditorReference[] a = Activator.getDefault().getWorkbench()
+//		.getActiveWorkbenchWindow().getActivePage()
+//		.getEditorReferences();
+//for (IEditorReference x : a) {
+//	if (!x.equals(Activator.getDefault().getWorkbench()
+//			.getActiveWorkbenchWindow().getActivePage()
+//			.getActivePartReference())) {
+//		try {
+//			Activator.getDefault().getWorkbench()
+//					.getActiveWorkbenchWindow().getActivePage()
+//					.openEditor(x.getEditorInput(), x.getId());
+//		} catch (PartInitException e) {
+//		}
+//		break;
+//	}
 
+		
 		return image;
 	}
 
 	@Override
-	public StyledText getSourceCode() {
+	public Object getSourceCode() {
 		return null;
 	}
 
 	@Override
 	public boolean isRun() {
-		return true;
+		return true;//it's a run
 	}
 
 	/* Methods we do not use */

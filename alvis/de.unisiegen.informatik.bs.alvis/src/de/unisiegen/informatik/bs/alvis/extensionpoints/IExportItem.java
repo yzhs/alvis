@@ -28,7 +28,7 @@ public interface IExportItem {
 	 * @return styled text for exporting source code
 	 */
 	
-	public StyledText getSourceCode();
+	public Object getSourceCode();
 	/**
 	 * returns true if export item is a run, which implies a more complex export, false otherwise
 	 * @return true if export item is a run, false otherwise
