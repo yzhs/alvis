@@ -4,6 +4,10 @@ options {
    superClass = AbstractTLexer;
 }
 
+tokens {
+    TYPE;
+}
+
 @header {
     package de.uni_siegen.informatik.bs.alvic;
 	import java.util.ArrayList;
@@ -207,7 +211,10 @@ JAVAKEYWORD :
    | 'synchronized' | 'this' | 'throw' | 'transient' | 'try' | 'void' | 'volatile' ) ;
 
 
-ID  : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')* ;
+ID  : ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'0'..'9'|'_')* {
+        if (isTypeName($text))
+            $type = TYPE;
+    };
 
 
 COMMENT

@@ -114,7 +114,7 @@ scope Symbols;
     ;
 
 type returns [Type t]
-    : ID                                     { $t = SimpleType.create($ID.text); }
+    : TYPE                                   { $t = SimpleType.create($TYPE.text); }
     | ^(ARRAY base=type)                     { $t = ArrayType.create($base.t); }
     | ^(COMPLEX container=type element=type) { $t = SimpleType.create($container.t.toString(), $element.t);}
     ;

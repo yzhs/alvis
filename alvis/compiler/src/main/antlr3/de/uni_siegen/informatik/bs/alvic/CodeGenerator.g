@@ -38,7 +38,7 @@ ident
     : ID -> ident(name={$ID.text})
     ;
 
-type: ID -> type(name={translate($ID.text)})
+type: TYPE -> type(name={translate($TYPE.text)})
     | ^(ARRAY base=type) -> array(base={$base.st}) // This means this is an array with elements of type 'base'
     | ^(COMPLEX container=type element=type) -> generic(container={$container.st}, element={$element.st})
         // This is used for specifying generic parameters, such as the types of elements in container classes.

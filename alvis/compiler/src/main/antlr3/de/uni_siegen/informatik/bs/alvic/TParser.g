@@ -55,8 +55,8 @@ program
     ;
 
 functionDefinition
-    : ident LPAREN formalParams? RPAREN (COLON type)? block
-        -> ^(FUNC[$ident.start, "FUNC"] ident ^(TYPE type?) ^(PARAMS formalParams?) block)
+    : ID LPAREN formalParams? RPAREN (COLON type)? block
+        -> ^(FUNC[$ID, "FUNC"] ID ^(TYPE type?) ^(PARAMS formalParams?) block)
     ;
 
 /**
@@ -82,7 +82,7 @@ formalParams
  * A variable declaration, used in lists of formal parameters and for loops
  */
 param
-    : type ident -> ^(DECL type ident)
+    : type ID -> ^(DECL type ID)
     ;
  
 /**
@@ -98,7 +98,7 @@ block
     ;
 
 type
-    : (simpleType -> simpleType) (
+    : (TYPE -> TYPE) (
     //This allows types like "Vertex Queue" which is translated to something like "Queue<Vertex>"
     (typeHelper -> ^(COMPLEX typeHelper $type))
     | (LARRAY RARRAY -> ^(ARRAY[$LARRAY, "ARRAY"] $type))
@@ -109,16 +109,6 @@ type
  * This is needed to reference the parent rule $type unabiguously when generating ^(COMPLEX typeHelper $type).
  */
 typeHelper : type ;
-
-/**
- * A simple type is just an ID that is stored in the list of the available types
- */
-simpleType : {TLexer.isTypeName(input.LT(1).getText())}? ID ;
-
-/**
- * and a valid identifier is an ID that is not stored in that list.
- */
-ident : {!TLexer.isTypeName(input.LT(1).getText())}? ID ;
 
 statement
     : declaration terminator
@@ -143,9 +133,9 @@ statement
     ;
 
 declaration
-    : type ident
-        ( -> ^(DECL[$type.start, "DECL"] type ident)
-        | EQUAL expr -> ^(DECL_INIT[$type.start, "DECL_INIT"] type ident expr)
+    : type ID
+        ( -> ^(DECL[$type.start, "DECL"] type ID)
+        | EQUAL expr -> ^(DECL_INIT[$type.start, "DECL_INIT"] type ID expr)
         )
     ;
 
@@ -191,8 +181,8 @@ atom: BANG^ atom
  */
 postfixExpr returns [boolean isFunctionCall]
 @init {$isFunctionCall = false;}
-    : (ident -> ident)
-      ( DOT right=ident                     {$isFunctionCall = false; }-> ^(DOT $postfixExpr $right)
+    : (ID -> ID)
+      ( DOT right=ID                        {$isFunctionCall = false; }-> ^(DOT $postfixExpr $right)
       | LPAREN (expr (COMMA expr)*)? RPAREN {$isFunctionCall = true; } -> ^(CALL[$LPAREN, "CALL"] $postfixExpr expr*)
       | LARRAY expr RARRAY                  {$isFunctionCall = false; }-> ^(INDEX[$LARRAY, "INDEX"] $postfixExpr expr)
       )*
