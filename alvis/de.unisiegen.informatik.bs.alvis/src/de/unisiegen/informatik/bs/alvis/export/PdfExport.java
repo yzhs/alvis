@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.StringReader;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
 import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
@@ -142,10 +144,17 @@ public class PdfExport extends Document {
 		}
 		
 		if (exportItem != null) {
-			if (exportItem.isRun()) { // export run
+			if (!exportItem.isRun()) { // export run  //TODO remove the invertion,implement correctly
 
+				
 				Image image = exportItem.getImage();
 				if (image != null) {
+					ArrayList<Image> images =new ArrayList<Image>();
+					images.add(image);
+					images.add(image);
+					images.add(image);
+					ExportShell exportShell = new ExportShell(Display.getDefault(),images);
+					exportShell.getWantedImages();
 					paragraph = toParagraph(image);
 					// chapter.add(paragraph);
 					// add(chapter);

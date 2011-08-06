@@ -471,9 +471,7 @@ public class Activator extends AbstractUIPlugin {
 			if (i == editors.length)
 				i = 0;
 			try {
-				Activator
-						.getDefault()
-						.getWorkbench()
+				getWorkbench()
 						.getActiveWorkbenchWindow()
 						.getActivePage()
 						.openEditor(editors[i].getEditorInput(),
