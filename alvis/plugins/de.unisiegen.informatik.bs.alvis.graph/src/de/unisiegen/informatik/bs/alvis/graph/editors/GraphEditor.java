@@ -92,6 +92,8 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	private Point remMousePos;
 	private int amountToBeMoved;
 
+	private boolean dirty = false;
+
 	/**
 	 * Loads the file from input and creates a new AlvisGraph from it.
 	 * 
@@ -104,7 +106,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	private void createGraph(Composite parent, IEditorInput input) {
 
 		myGraph = new AlvisGraph(parent, SWT.NONE);
-		myGraph.setForeground(new Color(null, 128, 128, 128));
 
 		// Get the absolute Path to the InstanceLocation
 		// String root = Platform.getInstanceLocation().getURL().getPath();
@@ -122,8 +123,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		doSave(null);
 
 	}
-
-	private boolean dirty = false;
 
 	/**
 	 * Compares the current state of myInput to the current state of myGraph
@@ -152,7 +151,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	 *            true, if something has changed in the graph that has to be
 	 *            saved, false if the graph is saved
 	 */
-	private void setDirty(boolean dirty) {
+	public void setDirty(boolean dirty) {
 		this.dirty = dirty;
 		firePropertyChange(IEditorPart.PROP_DIRTY);
 	}
@@ -364,8 +363,8 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	}
 
 	/**
-	 * sets the mouse- and key-listeners for graph view
-	 * switching is not possible by pushed ctrl key, because ctrl s => save
+	 * sets the mouse- and key-listeners for graph view switching is not
+	 * possible by pushed ctrl key, because ctrl s => save
 	 */
 	private void setListeners() {
 
@@ -407,9 +406,9 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 						rename = false;
 					} else if (e.keyCode == 8) { // backspace
 						if (actNode != null) {
-							//to implement
+							// to implement
 						} else if (actNode != null) {
-							//to implement
+							// to implement
 						}
 					} else {
 						if (actNode != null) {
@@ -492,16 +491,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		//
 		// }
 		// };
-		//
-		// bHand.addListener(SWT.Selection, listener);
-		// bNode.addListener(SWT.Selection, listener);
-		// bConnection.addListener(SWT.Selection, listener);
-		// bStartNode.addListener(SWT.Selection, listener);
-		// bEndNode.addListener(SWT.Selection, listener);
-		// bChangeLayout.addListener(SWT.Selection, listener);
-		// bDelete.addListener(SWT.Selection, listener);
-		// bDeleteAll.addListener(SWT.Selection, listener);
-		// bScreenShot.addListener(SWT.Selection, listener);
 
 		myGraph.addMouseMoveListener(new MouseMoveListener() {
 
@@ -511,15 +500,13 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 				if (remMousePos == null)
 					return;
 
-				if (remMousePos.x != e.x && remMousePos.y != e.y) {
-					if (amountToBeMoved > 0) {
-						amountToBeMoved = 0;
-						remMousePos = null;
-						setDirty(true);
-					} else {
-						if (pressed == MODUS_STANDARD) {
-							drawFrame(new Point(e.x, e.y));
-						}
+				if (amountToBeMoved > 0) {
+					amountToBeMoved = 0;
+					remMousePos = null;
+					setDirty(true);
+				} else {
+					if (pressed == MODUS_STANDARD) {
+						drawFrame(new Point(e.x, e.y));
 					}
 				}
 
@@ -636,7 +623,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 				+ myGraph.getVerticalBar().getSelection();
 		int yMax = Math.max(e.y, remMousePos.y)
 				+ myGraph.getVerticalBar().getSelection();
-		
+
 		try {
 			for (AlvisGraphNode gn : gns) {
 				if ((gn.getLocation().x + gn.getSize().width) > xMin
@@ -721,6 +708,11 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	 */
 	@Override
 	public Image getImage() {
+		
+		boolean isDirty = dirty;
+		savePositions();
+		fiToPage();
+		
 		Image screenshot;
 		int width = myGraph.getSize().x;
 		int height = myGraph.getSize().y;
@@ -732,6 +724,9 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 		gc.dispose();
 		myGraph.redraw();
+		
+		loadPositions();
+		setDirty(isDirty);
 
 		return screenshot;
 	}

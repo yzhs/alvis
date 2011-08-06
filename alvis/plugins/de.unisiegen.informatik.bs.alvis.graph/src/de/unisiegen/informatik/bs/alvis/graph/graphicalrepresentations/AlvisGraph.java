@@ -10,14 +10,17 @@ import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseWheelListener;
+import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.zest.core.widgets.Graph;
 import org.eclipse.zest.core.widgets.ZestStyles;
 
+import de.unisiegen.informatik.bs.alvis.graph.Activator;
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.GraphicalRepresentationEdge;
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.GraphicalRepresentationGraph;
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.GraphicalRepresentationVertex;
+import de.unisiegen.informatik.bs.alvis.graph.editors.GraphEditor;
 
 /**
  * class, that creates the alvis graph
@@ -44,6 +47,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	public AlvisGraph(Composite parent, int style) {
 		super(parent, style);
 		setLayoutAlgorithm(null, false);
+		setForeground(new Color(null, 128, 128, 128));
 
 		admin = new AlvisSave();
 		middleFactor = 0;
@@ -65,15 +69,33 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 			@Override
 			public void mouseScrolled(MouseEvent e) {
 				if (keyPressed == SWT.CTRL) {
-					if (e.count < 0) { // mouse wheel down
-						zoom(e.x, e.y, false);
-					} else { // mouse wheel up
-						zoom(e.x, e.y, true);
+					if (zoom(e.x, e.y, e.count > 0)) { // mouse wheel down ==
+														// e.count < 0
+						superSetDirty(true);
 					}
 				}
 			}
 		});
 
+	}
+
+	/**
+	 * checks if container of alvis graph is an editor and sets its dirty status
+	 * 
+	 * @param dirty
+	 *            true if dirty, false otherwise
+	 * @return if container is editor
+	 */
+	private boolean superSetDirty(boolean dirty) {
+		try {
+			GraphEditor edit = (GraphEditor) Activator.getDefault()
+					.getWorkbench().getActiveWorkbenchWindow().getActivePage()
+					.getActiveEditor();
+			edit.setDirty(dirty);
+			return true;
+		} catch (ClassCastException cce) {
+			return false;
+		}
 	}
 
 	/**
@@ -677,7 +699,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	}
 
 	/**
-	 * zooms out, i.e. pumps down the sizes and positions of graph nodes and
+	 * zooms out, i.e. pumps up the sizes and positions of graph nodes and
 	 * connections
 	 * 
 	 * @return true if graph has zoomed in
@@ -927,11 +949,13 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		double relY = gY / actHeight;
 		Animation.markBegin();
 		for (AlvisGraphNode gn : getAllNodes()) {
-			double x = (gn.getLocation().x - minX) * relX;
-			double y = (gn.getLocation().y - minY) * relY;
+			double x = (gn.getLocation().x - minX) * relX + ((maxWidth/2)*relX);
+			double y = (gn.getLocation().y - minY) * relY + ((maxHeight / 2)*relY);
 			gn.setLocation(x, y);
 		}
 		Animation.run(500);
+
+		superSetDirty(true);
 
 	}
 }
