@@ -8,9 +8,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
@@ -52,6 +55,59 @@ public class CompilerAccess {
 	private String javaCode;
 
 	private static CompilerAccess instance;
+
+	private static Map<String, List<String>> translateCompletion = null;
+
+	private static void add(String key, String... arg) {
+		translateCompletion.put(key, Arrays.asList(arg));
+	}
+
+	@SuppressWarnings("static-access")
+	private void loadTranslation() {
+		translateCompletion = new HashMap<String, List<String>>();
+		add("MAIN", "main ");
+		add("IF", "if (");
+		add("FOR", "for ");
+		add("WHILE", "while (");
+		add("IN", "in ");
+		add("RETURN", "return");
+
+		add("SIGN", "+", "-");
+		add("BANG", "!");
+
+		add("EQUAL", "=");
+		add("PLUS", "+");
+		add("MINUS", "-");
+		add("STAR", "*");
+		add("SLASH", "/");
+		add("PERCENT", "%");
+		add("AMPAMP", "&&");
+		add("PIPEPIPE", "||");
+		add("EQEQ", "==");
+		add("BANGEQ", "!=");
+		add("LESS", "<");
+		add("GREATER", ">");
+		add("LESSEQ", "<=");
+		add("GREATEREQ", ">=");
+
+		add("LPAREN", "(");
+		add("RPAREN", ")");
+		add("LARRAY", "[");
+		add("RARRAY", "]");
+
+		add("SEMICOLON", ";");
+		add("COMMA", ",");
+		add("COLON", ":");
+
+		add("SCOPEL", "begin", "{");
+		add("SCOPER", "end", "}");
+
+		add("NULL", "null");
+		add("INFTY", "infty");
+
+		translateCompletion.put("TYPE", new ArrayList<String>(compiler
+				.getLexer().getTypes()));
+	}
 
 	public static CompilerAccess getDefault() {
 		if (instance == null)
@@ -152,6 +208,7 @@ public class CompilerAccess {
 	 * @throws IOException
 	 */
 	public String compileString(String code) throws IOException {
+		loadTranslation();
 		compiler = new Compiler(types, packages);
 		return javaCode = compiler.compile(code);
 	}
@@ -205,270 +262,20 @@ public class CompilerAccess {
 		System.out.println("read file " + fileName);
 		return result;
 	}
-	
-	@SuppressWarnings("static-access")
-	private List<String> translateAutocompletionString(List<String> possibleTokens)
-	{
+
+	private List<String> translateAutocompletionString(List<String> possibleTokens) {
 		ArrayList<String> translatedCompletions = new ArrayList<String>();
-		 Iterator<String> iterator = possibleTokens.iterator();
-		 while(iterator.hasNext())
-		{
-			String completionToTranslate = iterator.next();
-			System.out.println(completionToTranslate);
-			if(completionToTranslate.equals("SIGN"))
-			{
-				translatedCompletions.add("+");
-				translatedCompletions.add("-");
-			}
-			else if(completionToTranslate.equals("JAVAKEYWORD"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("STAT"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("MAIN"))
-			{
-				translatedCompletions.add("main(");
-			}
-			else if(completionToTranslate.equals("STAR"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("RARRAY"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("WHILE"))
-			{
-				translatedCompletions.add("while(");
-			}
-			else if(completionToTranslate.equals("PIPEPIPE"))
-			{
-				translatedCompletions.add("||");
-			}
-			else if(completionToTranslate.equals("FOR"))
-			{
-				translatedCompletions.add("for(");
-			}
-			else if(completionToTranslate.equals("COMPLEX"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("FLOAT"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("ID"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("IF_ELSE"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("PAREN"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("LPAREN"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("IF"))
-			{
-				translatedCompletions.add("if(");
-			}
-			else if(completionToTranslate.equals("TYPE"))
-			{
-				translatedCompletions.addAll(getTypeNames());
-			}
-			else if(completionToTranslate.equals("INDEX"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("RPAREN"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("PROG"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("SCOPER"))
-			{
-				translatedCompletions.add("(");
-			}
-			else if(completionToTranslate.equals("SLASH"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("GREATER"))
-			{
-				translatedCompletions.add(">");
-			}
-			else if(completionToTranslate.equals("ESC_SEQ"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("IN"))
-			{
-				translatedCompletions.add("in");
-			}
-			else if(completionToTranslate.equals("SCOPEL"))
-			{
-				translatedCompletions.add(")");
-			}
-			else if(completionToTranslate.equals("LESSEQ"))
-			{
-				translatedCompletions.add("<=");
-			}
-			else if(completionToTranslate.equals("COMMA"))
-			{
-				translatedCompletions.add(",");
-			}
-			else if(completionToTranslate.equals("INFTY"))
-			{
-				translatedCompletions.add("infty");
-			}
-			else if(completionToTranslate.equals("EQUAL"))
-			{
-				translatedCompletions.add("==");
-			}
-			else if(completionToTranslate.equals("LESS"))
-			{
-				translatedCompletions.add("<");
-			}
-			else if(completionToTranslate.equals("RETURN"))
-			{
-				translatedCompletions.add("return");
-			}
-			else if(completionToTranslate.equals("BANGEQ"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("PLUS"))
-			{
-				translatedCompletions.add("+");
-			}
-			
-			else if(completionToTranslate.equals("COMMENT"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("AMPAMP"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("DOT"))
-			{
-				translatedCompletions.add(".");
-			}
-			else if(completionToTranslate.equals("ARRAY"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("EQEQ"))
-			{
-				translatedCompletions.add("==");
-			}
-			else if(completionToTranslate.equals("PARAMS"))
-			{
-				translatedCompletions.addAll(getTypeNames());
-			}
-			else if(completionToTranslate.equals("GREATEREQ"))
-			{
-				translatedCompletions.add(">=");
-			}
-			else if(completionToTranslate.equals("LARRAY"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("PERCENT"))
-			{
-				translatedCompletions.add("%");
-			}
-			else if(completionToTranslate.equals("NULL"))
-			{
-				translatedCompletions.add("null");
-			}
-			else if(completionToTranslate.equals("ELSE"))
-			{
-				translatedCompletions.add("else(");
-			}
-			else if(completionToTranslate.equals("BOOL"))
-			{
-				translatedCompletions.add("Boolean");
-			}
-			else if(completionToTranslate.equals("INT"))
-			{
-				translatedCompletions.add("int");
-			}
-			else if(completionToTranslate.equals("BANG"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("SEMICOLON"))
-			{
-				translatedCompletions.add(";");
-			}
-			else if(completionToTranslate.equals("MINUS"))
-			{
-				translatedCompletions.add("-");
-			}
-			else if(completionToTranslate.equals("DECL_INIT"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("COLON"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("DECL"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("FUNC"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("BLOCK"))
-			{
-				translatedCompletions.add("{" + " " + "}");
-			}
-			else if(completionToTranslate.equals("ASSIGN"))
-			{
-				translatedCompletions.add("=");
-			}
-			else if(completionToTranslate.equals("CALL"))
-			{
-				
-			}
-			else if(completionToTranslate.equals("STRING"))
-			{
-				translatedCompletions.add("String");
-			}
+		for (String toTranslate : possibleTokens) {
+			System.out.println(toTranslate);
+			List<String> translations = translateCompletion.get(toTranslate);
+			if (null == translations)
+				translatedCompletions.add(toTranslate);
+			else
+				for (String t : translations)
+					translatedCompletions.add(t);
 		}
-		
+
 		return translatedCompletions;
-	}
-	
-	private List<String> getTypeNames()
-	{
-		ArrayList<String> typeNames = new ArrayList<String>();
-		typeNames.add("String");
-		typeNames.add("Boolean");
-		typeNames.add("int");
-		Iterator<PCObject> it = types.iterator();
-		while(it.hasNext())
-		{
-			PCObject pcObject = it.next();
-			pcObject = pcObject.getClass().cast(pcObject.getClass().getSimpleName());
-			typeNames.add(pcObject.getTypeName());
-		}
-		return typeNames;
-		
 	}
 
 	/**
@@ -516,10 +323,6 @@ public class CompilerAccess {
 		return destination;
 	}
 
-	/*
-	 * ******************************************
-	 * The Datatypes and Packagenames ******************************************
-	 */
 	/**
 	 * Tell the compiler which types are allowed.
 	 * 
@@ -550,11 +353,15 @@ public class CompilerAccess {
 	}
 
 	/**
-	 * Computes the possible autoCompletion for the line and charPositionInLine given.
-	 * Returns a List containing all available autocompletion Strings.
-	 * @param line the line
-	 * @param charPositionInLine the offset in the line given
-	 * @return the List of Strings containing all available autocompletion Strings.
+	 * Computes the possible autoCompletion for the line and charPositionInLine
+	 * given. Returns a List containing all available auto completion Strings.
+	 *
+	 * @param line
+	 *            the line
+	 * @param charPositionInLine
+	 *            the offset in the line given
+	 * @return the List of Strings containing all available auto completion
+	 *         Strings.
 	 */
 	public List<String> tryAutoCompletion(int line, int charPositionInLine) {
 		Token tokenToComplete = compiler.getLexer().getTokenByNumbers(line,
@@ -590,14 +397,18 @@ public class CompilerAccess {
 					previousTokenIndex--;
 				}
 			}
-			
-			/** if currentChar was a whitespace and offset was higher than the one of the last Token */
-			if(tokenToComplete.getLine()<line || ((line == tokenToComplete.getLine()) && charPositionInLine > tokenToComplete
-								.getCharPositionInLine()))
-			{
-				previousToken = compiler.getLexer().getTokens().get(previousTokenIndex+2);
+
+			/**
+			 * if currentChar was a whitespace and offset was higher than the
+			 * one of the last Token
+			 */
+			if (tokenToComplete.getLine() < line
+					|| ((line == tokenToComplete.getLine()) && charPositionInLine > tokenToComplete
+							.getCharPositionInLine())) {
+				previousToken = compiler.getLexer().getTokens()
+						.get(previousTokenIndex + 2);
 			}
-			
+
 			String previousTokenName = getTokenName(previousToken.getType());
 			System.out.println(previousTokenName);
 			List<String> possibleTokens = compiler.getParser()

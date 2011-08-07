@@ -86,6 +86,10 @@ public abstract class AbstractTLexer extends Lexer {
 			addType(s);
 	}
 
+	public static Collection<String> getTypes() {
+		return types;
+	}
+
 	/**
 	 * Add a type name to the list of types the compiler recognizes. When the
 	 * name starts with a digit or contains any character not allowed in an
