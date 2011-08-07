@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import org.antlr.runtime.RecognitionException;
@@ -57,9 +58,9 @@ public class CompilerAccess {
 			instance = new CompilerAccess();
 		return instance;
 	}
-	public File compile() throws RecognitionException, IOException
-	{
-		return compile(algorithmPath,true);
+
+	public File compile() throws RecognitionException, IOException {
+		return compile(algorithmPath, true);
 	}
 
 	/**
@@ -177,7 +178,9 @@ public class CompilerAccess {
 
 	/**
 	 * Get parent directory of the file given by its path.
-	 * @param fileWithPath The file of which we want to get the parent directory.
+	 * 
+	 * @param fileWithPath
+	 *            The file of which we want to get the parent directory.
 	 * @return the path to the parent directory.
 	 */
 	private File getWorkspacePath(String fileWithPath) {
@@ -202,9 +205,275 @@ public class CompilerAccess {
 		System.out.println("read file " + fileName);
 		return result;
 	}
+	
+	@SuppressWarnings("static-access")
+	private List<String> translateAutocompletionString(List<String> possibleTokens)
+	{
+		ArrayList<String> translatedCompletions = new ArrayList<String>();
+		 Iterator<String> iterator = possibleTokens.iterator();
+		 while(iterator.hasNext())
+		{
+			String completionToTranslate = iterator.next();
+			System.out.println(completionToTranslate);
+			if(completionToTranslate.equals("SIGN"))
+			{
+				translatedCompletions.add("+");
+				translatedCompletions.add("-");
+			}
+			else if(completionToTranslate.equals("JAVAKEYWORD"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("STAT"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("MAIN"))
+			{
+				translatedCompletions.add("main(");
+			}
+			else if(completionToTranslate.equals("STAR"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("RARRAY"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("WHILE"))
+			{
+				translatedCompletions.add("while(");
+			}
+			else if(completionToTranslate.equals("PIPEPIPE"))
+			{
+				translatedCompletions.add("||");
+			}
+			else if(completionToTranslate.equals("FOR"))
+			{
+				translatedCompletions.add("for(");
+			}
+			else if(completionToTranslate.equals("COMPLEX"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("FLOAT"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("ID"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("IF_ELSE"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("PAREN"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("LPAREN"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("IF"))
+			{
+				translatedCompletions.add("if(");
+			}
+			else if(completionToTranslate.equals("TYPE"))
+			{
+				translatedCompletions.addAll(getTypeNames());
+			}
+			else if(completionToTranslate.equals("INDEX"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("RPAREN"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("PROG"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("SCOPER"))
+			{
+				translatedCompletions.add("(");
+			}
+			else if(completionToTranslate.equals("SLASH"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("GREATER"))
+			{
+				translatedCompletions.add(">");
+			}
+			else if(completionToTranslate.equals("ESC_SEQ"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("IN"))
+			{
+				translatedCompletions.add("in");
+			}
+			else if(completionToTranslate.equals("SCOPEL"))
+			{
+				translatedCompletions.add(")");
+			}
+			else if(completionToTranslate.equals("LESSEQ"))
+			{
+				translatedCompletions.add("<=");
+			}
+			else if(completionToTranslate.equals("COMMA"))
+			{
+				translatedCompletions.add(",");
+			}
+			else if(completionToTranslate.equals("INFTY"))
+			{
+				translatedCompletions.add("infty");
+			}
+			else if(completionToTranslate.equals("EQUAL"))
+			{
+				translatedCompletions.add("==");
+			}
+			else if(completionToTranslate.equals("LESS"))
+			{
+				translatedCompletions.add("<");
+			}
+			else if(completionToTranslate.equals("RETURN"))
+			{
+				translatedCompletions.add("return");
+			}
+			else if(completionToTranslate.equals("BANGEQ"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("PLUS"))
+			{
+				translatedCompletions.add("+");
+			}
+			
+			else if(completionToTranslate.equals("COMMENT"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("AMPAMP"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("DOT"))
+			{
+				translatedCompletions.add(".");
+			}
+			else if(completionToTranslate.equals("ARRAY"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("EQEQ"))
+			{
+				translatedCompletions.add("==");
+			}
+			else if(completionToTranslate.equals("PARAMS"))
+			{
+				translatedCompletions.addAll(getTypeNames());
+			}
+			else if(completionToTranslate.equals("GREATEREQ"))
+			{
+				translatedCompletions.add(">=");
+			}
+			else if(completionToTranslate.equals("LARRAY"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("PERCENT"))
+			{
+				translatedCompletions.add("%");
+			}
+			else if(completionToTranslate.equals("NULL"))
+			{
+				translatedCompletions.add("null");
+			}
+			else if(completionToTranslate.equals("ELSE"))
+			{
+				translatedCompletions.add("else(");
+			}
+			else if(completionToTranslate.equals("BOOL"))
+			{
+				translatedCompletions.add("Boolean");
+			}
+			else if(completionToTranslate.equals("INT"))
+			{
+				translatedCompletions.add("int");
+			}
+			else if(completionToTranslate.equals("BANG"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("SEMICOLON"))
+			{
+				translatedCompletions.add(";");
+			}
+			else if(completionToTranslate.equals("MINUS"))
+			{
+				translatedCompletions.add("-");
+			}
+			else if(completionToTranslate.equals("DECL_INIT"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("COLON"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("DECL"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("FUNC"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("BLOCK"))
+			{
+				translatedCompletions.add("{" + " " + "}");
+			}
+			else if(completionToTranslate.equals("ASSIGN"))
+			{
+				translatedCompletions.add("=");
+			}
+			else if(completionToTranslate.equals("CALL"))
+			{
+				
+			}
+			else if(completionToTranslate.equals("STRING"))
+			{
+				translatedCompletions.add("String");
+			}
+		}
+		
+		return translatedCompletions;
+	}
+	
+	private List<String> getTypeNames()
+	{
+		ArrayList<String> typeNames = new ArrayList<String>();
+		typeNames.add("String");
+		typeNames.add("Boolean");
+		typeNames.add("int");
+		Iterator<PCObject> it = types.iterator();
+		while(it.hasNext())
+		{
+			PCObject pcObject = it.next();
+			pcObject = pcObject.getClass().cast(pcObject.getClass().getSimpleName());
+			typeNames.add(pcObject.getTypeName());
+		}
+		return typeNames;
+		
+	}
 
 	/**
-	 * @return exceptions produced when lexing, parsing and type checking the code.
+	 * @return exceptions produced when lexing, parsing and type checking the
+	 *         code.
 	 */
 	public List<RecognitionException> getExceptions() {
 		return compiler.getExceptions();
@@ -249,8 +518,7 @@ public class CompilerAccess {
 
 	/*
 	 * ******************************************
-	 * The Datatypes and Packagenames
-	 * ******************************************
+	 * The Datatypes and Packagenames ******************************************
 	 */
 	/**
 	 * Tell the compiler which types are allowed.
@@ -282,35 +550,63 @@ public class CompilerAccess {
 	}
 
 	/**
-	 * Return probable completions for the given token.
-	 * 
-	 * @return List of String which could be useful
+	 * Computes the possible autoCompletion for the line and charPositionInLine given.
+	 * Returns a List containing all available autocompletion Strings.
+	 * @param line the line
+	 * @param charPositionInLine the offset in the line given
+	 * @return the List of Strings containing all available autocompletion Strings.
 	 */
-	public List<String> tryAutoCompletion(Token toComplete) {
-		return compiler.getLexer().tryAutoCompletion(toComplete);
-	}
-	
-	public List<String> tryAutoCompletion(int line, int charPositionInLine)
-	{
-		Token tokenToComplete = compiler.getLexer().getTokenByNumbers(line, charPositionInLine);
-		if(tokenToComplete!= null)
-		{
-		int previousTokenIndex = tokenToComplete.getTokenIndex()-1;
-		//channel = 99 indicates a whitespace token
-		Token previousToken = null;
-		while(previousToken == null || previousToken.getChannel()==99)
-		{
-			previousToken = compiler.getLexer().getTokens().get(previousTokenIndex);
-			previousTokenIndex--;
+	public List<String> tryAutoCompletion(int line, int charPositionInLine) {
+		Token tokenToComplete = compiler.getLexer().getTokenByNumbers(line,
+				charPositionInLine);
+
+		if (tokenToComplete == null) {
+			List<Token> tokens = compiler.getLexer().getTokens();
+			for (Token token : tokens) {
+				if (line > token.getLine()
+						|| ((line == token.getLine()) && charPositionInLine <= token
+								.getCharPositionInLine())) {
+					tokenToComplete = token;
+				} else {
+					// "next" token found
+					tokenToComplete = token;
+					break;
+				}
+			}
 		}
-		String previousTokenName = getTokenName(previousToken.getType());
-		System.out.println(previousTokenName);
-		Collection<String> possibleTokens = compiler.getParser().possibleFollowingTokens(compiler.getParser().getClass(), previousTokenName);
-		System.out.println(possibleTokens);
-		return (List<String>)  possibleTokens;
-		}
-		else
-		{
+		if (tokenToComplete != null) {
+			int previousTokenIndex = tokenToComplete.getTokenIndex() - 1;
+			// channel = 99 indicates a whitespace token
+			Token previousToken = null;
+			while (previousToken == null || previousToken.getChannel() == 99) {
+				if (previousTokenIndex < 0) {
+					/** tokenToComplete is first token */
+					// TODO return correct List
+					return new ArrayList<String>();
+
+				} else {
+					previousToken = compiler.getLexer().getTokens()
+							.get(previousTokenIndex);
+					previousTokenIndex--;
+				}
+			}
+			
+			/** if currentChar was a whitespace and offset was higher than the one of the last Token */
+			if(tokenToComplete.getLine()<line || ((line == tokenToComplete.getLine()) && charPositionInLine > tokenToComplete
+								.getCharPositionInLine()))
+			{
+				previousToken = compiler.getLexer().getTokens().get(previousTokenIndex+2);
+			}
+			
+			String previousTokenName = getTokenName(previousToken.getType());
+			System.out.println(previousTokenName);
+			List<String> possibleTokens = compiler.getParser()
+					.possibleFollowingTokens(compiler.getParser().getClass(),
+							previousTokenName);
+			System.out.println(possibleTokens);
+			List<String> translatedCompletions = translateAutocompletionString(possibleTokens);
+			return (List<String>) translatedCompletions;
+		} else {
 			return new ArrayList<String>();
 		}
 	}
@@ -380,7 +676,7 @@ public class CompilerAccess {
 	public List<Token> getTokens() {
 		return compiler.getLexer().getTokens();
 	}
-	
+
 	public String getTokenName(int tokenNumber) {
 		return compiler.getParser().getTokenName(tokenNumber);
 	}
