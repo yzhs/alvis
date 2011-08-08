@@ -6,10 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.net.URI;
 import java.net.URISyntaxException;
-import java.net.URL;
-import java.security.CodeSource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Locale;
@@ -18,7 +15,6 @@ import javax.tools.Diagnostic;
 import javax.tools.DiagnosticCollector;
 import javax.tools.JavaCompiler;
 import javax.tools.JavaFileObject;
-import javax.tools.SimpleJavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
@@ -45,13 +41,15 @@ public final class Javac {
 
 	String target;
 
+	static JavaCompiler compiler;
+
 	public Javac(String classpath, String outputdir) {
 		this.classpath = classpath;
 		this.outputdir = outputdir;
 	}
 
 	private static boolean compile(JavaFileObject... source) {
-		final JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+		// final JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 		final ArrayList<String> options = new ArrayList<String>();
 		if (classpath != null) {
 			options.add("-classpath");
@@ -61,7 +59,7 @@ public final class Javac {
 			options.add("-d");
 			options.add(outputdir);
 		}
-		
+
 		DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<JavaFileObject>();
 
 		/**
@@ -81,8 +79,8 @@ public final class Javac {
 				Arrays.asList(source));
 		boolean result = task.call();
 
-		if (!result) 
-			for (Diagnostic diagnostic : diagnostics.getDiagnostics()) 
+		if (!result)
+			for (Diagnostic diagnostic : diagnostics.getDiagnostics())
 				System.out.format("Error on line %d in %s",
 						diagnostic.getLineNumber(), diagnostic);
 		try {
@@ -100,34 +98,46 @@ public final class Javac {
 	 * @return null if success; or compilation errors
 	 */
 	public String compile(String srcFiles[]) {
-//		Logger.getInstance().log("Javac", Logger.DEBUG,
-//				"Beginning Javac compile(String srcFiles[]) method");
+		// Logger.getInstance().log("Javac", Logger.DEBUG,
+		// "Beginning Javac compile(String srcFiles[]) method");
 
 		StringWriter err = new StringWriter();
 		PrintWriter errPrinter = new PrintWriter(err);
 
-//		Logger.getInstance().log("Javac", Logger.DEBUG, "Attributes generated");
+		// Logger.getInstance().log("Javac", Logger.DEBUG,
+		// "Attributes generated");
 
 		String args[] = buildJavacArgs(srcFiles);
-//		Logger.getInstance().log("Javac", Logger.DEBUG, "Before compile");
+		// Logger.getInstance().log("Javac", Logger.DEBUG, "Before compile");
 
-		String algorithmAsSourceCode = readfile(args[args.length - 1]);
+		compiler = ToolProvider.getSystemJavaCompiler();
+		if (compiler != null) {
+			String algorithmAsSourceCode = readfile(args[args.length - 1]);
 
-		boolean result = false;
-		try {
-			result = compile(new AlvisFileObject("Algorithm.java",
-					algorithmAsSourceCode));
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
+			boolean result = false;
+			try {
+				result = compile(new AlvisFileObject("Algorithm.java",
+						algorithmAsSourceCode));
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+
+			// Logger.getInstance().log("Javac", Logger.DEBUG, "After compile");
+
+			errPrinter.close();
+			// Logger.getInstance().log("Javac", Logger.DEBUG,
+			// "Error? " + err.toString());
+
+			return result ? null : err.toString();
 		}
-
-//		Logger.getInstance().log("Javac", Logger.DEBUG, "After compile");
-
-		errPrinter.close();
-//		Logger.getInstance().log("Javac", Logger.DEBUG,
-//				"Error? " + err.toString());
-
-		return result ? null : err.toString();
+		
+		else{
+			// Grabbing the standard compiler did not work, compiling "by hand"
+			// FIXME: 	1. Find a way, so that ToolProvider.getSystemJavaCompiler() cannot return null
+			// 			2. Delete the call to com.sun.tools.javac.Main
+			int resultCode = com.sun.tools.javac.Main.compile(args, errPrinter);
+			return (resultCode == 0) ? null : err.toString(); 
+		}
 	}
 
 	private String readfile(String string) {
@@ -170,18 +180,18 @@ public final class Javac {
 		for (int i = 0; i < paths.length; i++) {
 			paths[i] = srcFiles[i].getAbsolutePath();
 		}
-//		for (String path : paths) {
-//			Logger.getInstance().log("Javac Paths", Logger.DEBUG,
-//					"Content of paths: " + path);
-//		}
-//		Logger.getInstance().log("Javac", Logger.DEBUG,
-//				"Extracted paths, starting compiler");
-//		Logger.getInstance().log(
-//				"Javac",
-//				Logger.DEBUG,
-//				"Path to Javac.javac: "
-//						+ this.getClass().getProtectionDomain().getCodeSource()
-//								.getLocation().getFile().toString());
+		// for (String path : paths) {
+		// Logger.getInstance().log("Javac Paths", Logger.DEBUG,
+		// "Content of paths: " + path);
+		// }
+		// Logger.getInstance().log("Javac", Logger.DEBUG,
+		// "Extracted paths, starting compiler");
+		// Logger.getInstance().log(
+		// "Javac",
+		// Logger.DEBUG,
+		// "Path to Javac.javac: "
+		// + this.getClass().getProtectionDomain().getCodeSource()
+		// .getLocation().getFile().toString());
 
 		return compile(paths);
 	}
