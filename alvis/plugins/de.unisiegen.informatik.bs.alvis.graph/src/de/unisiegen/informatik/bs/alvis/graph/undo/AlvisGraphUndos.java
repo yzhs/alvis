@@ -5,6 +5,7 @@ import java.util.Stack;
 
 import org.eclipse.swt.graphics.Point;
 
+import de.unisiegen.informatik.bs.alvis.graph.editors.GraphEditor;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraph;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraphConnection;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraphNode;
@@ -20,7 +21,7 @@ public class AlvisGraphUndos {
 
 	private Stack<AlvisGraphUndo> undos;
 	private Stack<AlvisGraphUndo> redos;
-	private AlvisGraph graph;
+	private GraphEditor editor;
 
 	/**
 	 * constructor
@@ -28,9 +29,9 @@ public class AlvisGraphUndos {
 	 * @param graph
 	 *            the graph to work with
 	 */
-	public AlvisGraphUndos(AlvisGraph graph) {
+	public AlvisGraphUndos(GraphEditor editor) {
 
-		this.graph = graph;
+		this.editor = editor;
 		undos = new Stack<AlvisGraphUndo>();
 		redos = new Stack<AlvisGraphUndo>();
 
@@ -174,9 +175,21 @@ public class AlvisGraphUndos {
 
 	}
 
-	public void pushZoom(boolean wasDirty, boolean zoomIn) {
+	/**
+	 * creates new AlvisUndoZoom and pushes it to undos, clears redos
+	 * 
+	 * @param wasDirty
+	 *            if editor was dirty before this action
+	 * @param zoomIn
+	 *            true if graph got zoomed in, false otherwise
+	 * @param mousePos
+	 *            the mouse position, i.e. where to zoom in/out
+	 */
+	public void pushZoom(boolean wasDirty, boolean zoomIn, Point mousePos) {
 
-		AlvisGraphUndo undo = new AlvisUndoZoom(wasDirty, zoomIn);
+		AlvisGraphUndo undo = new AlvisUndoZoom(wasDirty, zoomIn, mousePos);
+		undos.add(undo);
+		clearRedos();
 
 	}
 
@@ -188,8 +201,11 @@ public class AlvisGraphUndos {
 			return; // no undos available
 
 		AlvisGraphUndo undo = undos.pop();
-		undo.execute(graph);
+		undo.execute(editor.myGraph);
 		redos.push(undo.invert());
+		
+		editor.setDirty(undo.willBeDirty());
+		
 	}
 
 	/**
@@ -200,8 +216,10 @@ public class AlvisGraphUndos {
 			return; // no redos available
 
 		AlvisGraphUndo redo = redos.pop();
-		redo.execute(graph);
+		redo.execute(editor.myGraph);
 		undos.push(redo.invert());
+
+		editor.setDirty(redo.willBeDirty());
 	}
 
 	/**

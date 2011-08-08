@@ -22,7 +22,6 @@ import javax.imageio.ImageIO;
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
@@ -34,6 +33,7 @@ import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.RowLayout;
@@ -109,7 +109,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	private void createGraph(Composite parent, IEditorInput input) {
 
 		myGraph = new AlvisGraph(parent, SWT.NONE);
-		undoAdmin = new AlvisGraphUndos(myGraph);
+		undoAdmin = new AlvisGraphUndos(this);
 
 		// Get the absolute Path to the InstanceLocation
 		// String root = Platform.getInstanceLocation().getURL().getPath();
@@ -512,7 +512,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 				if (amountToBeMoved > 0) {
 					amountToBeMoved = 0;
-					remMousePos = null;
+					// remMousePos = null;
 					setDirty(true);
 				} else {
 					if (pressed == MODUS_STANDARD) {
@@ -555,14 +555,19 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 						if (remMousePos.x != e.x && remMousePos.y != e.y) {
 							if (amountToBeMoved > 0) {
 								amountToBeMoved = 0;
-								undoAdmin.pushMoveNodes(dirty,
-										myGraph.getHighlightedNodes());
-								setDirty(true);
 							} else if (pressed == MODUS_STANDARD) {
 								markNodesInFrame(e);
+								amountToBeMoved = myGraph.getHighlightedNodes()
+										.size();
+							}
+							if (!myGraph.getHighlightedNodes().isEmpty()) {
+								undoAdmin.pushMoveNodes(isDirty(),
+										myGraph.getHighlightedNodes());
+								setDirty(true);
 							}
 						}
 					}
+
 					remMousePos = null;
 
 				} else {
@@ -590,7 +595,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 				}
 
-				amountToBeMoved = myGraph.getHighlightedNodes().size();
+				 amountToBeMoved = myGraph.getHighlightedNodes().size();
 			}
 
 			@Override
@@ -694,7 +699,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	protected void clickNewConnection(AlvisGraphNode node) {
 		AlvisGraphConnection gc = myGraph.markToBeConnected(node);
 		if (gc != null) {
-			undoAdmin.pushAddConnection(dirty, gc);
+			undoAdmin.pushAddConnection(isDirty(), gc);
 			setDirty(true);
 		}
 	}
@@ -704,20 +709,11 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	 */
 	protected void clickRemove() {
 
-		if (!myGraph.getHighlightedItems().isEmpty()) {
-			ArrayList<AlvisGraphNode> nodes = myGraph.getHighlightedNodes();
-			ArrayList<AlvisGraphConnection> cons = myGraph
-					.getHighlightedConnections();
-			undoAdmin.pushRemoveSubGraph(dirty, nodes, cons);
-
-			myGraph.removeHighlightedItems();
-
-			setDirty(true);
-
+		if (removeHighlightedItems()) {
+			pressed = MODUS_MOVE;
+			setGraphModus(pressed);
 		}
 
-		pressed = MODUS_MOVE;
-		setGraphModus(pressed);
 	}
 
 	/**
@@ -729,7 +725,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	@Override
 	public Image getImage() {
 
-		boolean isDirty = dirty;
+		boolean isDirty = isDirty();
 		savePositions();
 		fitToPage(200);
 
@@ -851,7 +847,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 				+ myGraph.getAdmin().getId());
 
 		gn.setLocation(x - gn.getSize().width / 2, y - gn.getSize().height / 2);
-		undoAdmin.pushAddNode(dirty, gn);
+		undoAdmin.pushAddNode(isDirty(), gn);
 
 		// the graph might be changed
 		checkDirty();
@@ -919,10 +915,22 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		int depth = result % 65536 /* (2^16) */;
 		int width = result / 65536;
 
+		ArrayList<AlvisGraphNode> gns;
 		if (width == 0) {
-			myGraph.createCircle(depth);
+			gns = myGraph.createCircle(depth);
 		} else {
-			myGraph.createTree(depth, width, null);
+			gns = myGraph.createTree(depth, width, null);
+		}
+
+		if (gns != null) {
+			ArrayList<AlvisGraphConnection> gcs = new ArrayList<AlvisGraphConnection>();
+			for (AlvisGraphNode gn : gns) {
+				for (AlvisGraphConnection gc : gn.getConnections()) {
+					if (!gcs.contains(gc))
+						gcs.add(gc);
+				}
+			}
+			undoAdmin.pushAddSubGraph(isDirty(), gns, gcs);
 		}
 
 		setLayout();
@@ -940,31 +948,57 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 		if (sure.open() == SWT.YES) {
 			myGraph.resetContent();
+			undoAdmin.clearUndos();
+			undoAdmin.clearRedos();
 			checkDirty();
 		}
 	}
 
 	/**
-	 * removes highlighted node
+	 * removes highlighted items
+	 * 
+	 * @return if something was removed from graph
 	 */
-	protected void removeHighlightedItems() {
-		myGraph.removeHighlightedItems();
+	protected boolean removeHighlightedItems() {
+		if (!myGraph.getHighlightedItems().isEmpty()) {
+			undoAdmin.pushRemoveSubGraph(isDirty(),
+					myGraph.getHighlightedNodes(),
+					myGraph.getHighlightedConnections());
+			myGraph.removeHighlightedItems();
+			setDirty(true);
+			return true;
+		}
+		return false;
 	}
 
 	/**
-	 * switches between layouts
+	 * places nodes after algorithm
 	 */
 	public void setLayout() {
+
+		ArrayList<AlvisGraphNode> gns = new ArrayList<AlvisGraphNode>();
+		for (AlvisGraphNode alvisGraphNode : myGraph.getAdmin().getAllNodes()) {
+			gns.add(alvisGraphNode);
+		}
+		undoAdmin.pushMoveNodes(isDirty(), gns);
+
 		myGraph.placeNodes();
 		checkDirty();
 	}
 
 	public void fitToPage(int millis) {
+
+		ArrayList<AlvisGraphNode> gns = new ArrayList<AlvisGraphNode>();
+		for (AlvisGraphNode alvisGraphNode : myGraph.getAdmin().getAllNodes()) {
+			gns.add(alvisGraphNode);
+		}
+		undoAdmin.pushMoveNodes(isDirty(), gns);
+
 		myGraph.fitToPage(millis);
 	}
 
 	public void fitToPage() {
-		myGraph.fitToPage();
+		fitToPage(500);
 	}
 
 	/**
@@ -1080,7 +1114,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	// }
 
 	public static Object deserialize(String filename) {
-		// System.out.println(filename);//TODO weg
 		long filesize = new File(filename).length();
 		Object seri = null;
 		if (filesize > 7) {// TODO this is not so cool check it (SIMON)
@@ -1121,11 +1154,16 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		return null;
 	}
 
-	/*
-	 * do not use locally, method is getting used from myGraph, has to be public
-	 * because of global access
+	/**
+	 * do not use this method locally, method is getting used from myGraph, has
+	 * to be public because of global access
+	 * 
+	 * @param zoomIn
+	 *            true if graph got zoomed in, false otherwise
+	 * @param mousePos
+	 *            the mouse position, i.e. where to zoom in/out
 	 */
-	public void setZoomUndo(boolean zoomIn) {
-		undoAdmin.pushZoom(dirty, zoomIn);
+	public void setZoomUndo(boolean zoomIn, Point mousePos) {
+		undoAdmin.pushZoom(isDirty(), zoomIn, mousePos);
 	}
 }

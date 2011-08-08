@@ -17,7 +17,7 @@ public class AlvisUndoAddSubGraph implements AlvisGraphUndo {
 	private boolean dirty;
 	private ArrayList<AlvisGraphNode> gns;
 	private ArrayList<AlvisGraphConnection> gcs;
-
+	
 	public AlvisUndoAddSubGraph(boolean wasDirty,
 			ArrayList<AlvisGraphNode> gns, ArrayList<AlvisGraphConnection> gcs) {
 

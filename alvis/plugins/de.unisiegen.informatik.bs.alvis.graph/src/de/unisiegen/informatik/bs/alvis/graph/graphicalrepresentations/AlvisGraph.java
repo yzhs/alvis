@@ -1,6 +1,5 @@
 package de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations;
 
-import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -12,6 +11,7 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseWheelListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.zest.core.widgets.Graph;
 import org.eclipse.zest.core.widgets.GraphItem;
@@ -27,6 +27,7 @@ import de.unisiegen.informatik.bs.alvis.graph.editors.GraphEditor;
  * class, that creates the alvis graph
  * 
  * @author Frank Weiler
+ * 
  */
 public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 
@@ -72,7 +73,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 				if (keyPressed == SWT.CTRL) {
 					if (zoom(e.x, e.y, e.count > 0)) { // mouse wheel down ==
 														// e.count < 0
-						superSetDirty(true, true, e.count > 0);
+						superSetDirty(true, new Point(e.x, e.y), e.count > 0);
 					}
 				}
 			}
@@ -85,21 +86,21 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	 * 
 	 * @param dirty
 	 *            true if dirty, false otherwise
-	 * @param fromZoom
-	 *            if method got calld from zoom method
+	 * @param mousePos
+	 *            mouse position, if superSetDirty gets called from zoom, !!null
+	 *            otherwise!!
 	 * @param zoomIn
 	 *            if caller was zoom method and graph shall get zoomed in
 	 * @return if container is editor
 	 */
-	private boolean superSetDirty(boolean dirty, boolean fromZoom,
-			boolean zoomIn) {
+	private boolean superSetDirty(boolean dirty, Point mousePos, boolean zoomIn) {
 		try {
 			GraphEditor edit = (GraphEditor) Activator.getDefault()
 					.getWorkbench().getActiveWorkbenchWindow().getActivePage()
 					.getActiveEditor();
 			edit.setDirty(dirty);
-			if (fromZoom) {
-				edit.setZoomUndo(zoomIn);
+			if (mousePos != null) {
+				edit.setZoomUndo(zoomIn, mousePos);
 			}
 			return true;
 		} catch (ClassCastException cce) {
@@ -138,7 +139,8 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 					.preciseY() / (1.0 + (1.0 / getZoomCounter())));
 		}
 
-		admin.addNode(gn, new Point(gn.getLocation().x, gn.getLocation().y));
+		admin.addNode(gn,
+				new java.awt.Point(gn.getLocation().x, gn.getLocation().y));
 
 		return gn;
 	}
@@ -464,22 +466,24 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	}
 
 	/**
-	 * returns connections that are currently marked
+	 * returns connections that belong to currently marked graph nodes
 	 * 
-	 * @return connections that are currently marked
+	 * @return connections that belong to currently marked graph nodes
 	 */
 	public ArrayList<AlvisGraphConnection> getHighlightedConnections() {
 
-		ArrayList<AlvisGraphConnection> selectedItems = new ArrayList<AlvisGraphConnection>();
+		ArrayList<AlvisGraphNode> gns = getHighlightedNodes();
+		ArrayList<AlvisGraphConnection> selectedConnections = new ArrayList<AlvisGraphConnection>();
 
-		for (Object object : getSelection()) {
-			try {
-				selectedItems.add((AlvisGraphConnection) object);
-			} catch (Exception e) {
+		for (AlvisGraphNode gn : gns) {
+			for (AlvisGraphConnection gc : gn.getConnections()) {
+				if (!selectedConnections.contains(gc)) {
+					selectedConnections.add(gc);
+				}
 			}
 		}
 
-		return selectedItems;
+		return selectedConnections;
 	}
 
 	/**
@@ -535,13 +539,6 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 
 		for (AlvisGraphNode node : gns) {
 
-			for (int i = node.getConnections().size() - 1; i >= 0; i--) {
-				AlvisGraphConnection gc = node.getConnections().get(i);
-				gc.getNextNode(node).getConnections().remove(gc);
-				removeConnection(gc);
-				gc.dispose();
-			}
-
 			removeNode(node);
 
 			if (getConnectNode() != null && getConnectNode().equals(node))
@@ -559,7 +556,9 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 
 	/**
 	 * removes currently highlighted items and all (to node) belonging
-	 * connections, disposes items
+	 * connections, disposes items^
+	 * 
+	 * @return if something was removed
 	 */
 	public boolean removeHighlightedItems() {
 		ArrayList<GraphItem> items = getHighlightedItems();
@@ -718,16 +717,20 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	 * @param parent
 	 *            the parent node
 	 */
-	public void createTree(int depth, int width, AlvisGraphNode parent) {
+	public ArrayList<AlvisGraphNode> createTree(int depth, int width,
+			AlvisGraphNode parent) {
+
+		ArrayList<AlvisGraphNode> result = new ArrayList<AlvisGraphNode>();
 
 		if (depth <= 0)
-			return; // anchor
+			return null; // anchor
 		if (depth > 7)
 			depth = 7; // too big to draw
 		if (width > 3)
 			width = 3; // too big to draw
 
 		AlvisGraphNode gn = makeGraphNode("");
+		result.add(gn);
 		if (parent == null) {
 			if (getStartNode() != null) {
 				getStartNode().unmarkAsStartOrEndNode();
@@ -737,8 +740,17 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 			makeGraphConnection(gn, parent);
 
 		for (int i = 0; i < myRandom(width); i++) {
-			createTree(depth - 1, width, gn);
+			ArrayList<AlvisGraphNode> gnRec = createTree(depth - 1, width, gn);
+
+			if (gnRec != null) {
+				for (AlvisGraphNode alvisGraphNode : gnRec) {
+					result.add(alvisGraphNode);
+				}
+			}
+
 		}
+
+		return result;
 
 	}
 
@@ -759,8 +771,11 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	 * 
 	 * @param amountOfNodes
 	 *            the amount of nodes in circle
+	 * @return list of new nodes
 	 */
-	public void createCircle(int amountOfNodes) {
+	public ArrayList<AlvisGraphNode> createCircle(int amountOfNodes) {
+
+		ArrayList<AlvisGraphNode> result = new ArrayList<AlvisGraphNode>();
 
 		if (amountOfNodes > 300)
 			amountOfNodes = 300; // too many
@@ -768,14 +783,18 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 			amountOfNodes = 3; // too few
 
 		AlvisGraphNode start = makeGraphNode("");
+		result.add(start);
 		AlvisGraphNode one = start, two = null;
 
 		for (int i = 1; i < amountOfNodes; i++) {
 			two = makeGraphNode("");
+			result.add(two);
 			makeGraphConnection(one, two);
 			one = two;
 		}
 		makeGraphConnection(one, start);
+
+		return result;
 
 	}
 
@@ -1070,7 +1089,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		}
 		Animation.run(millis);
 
-		superSetDirty(true, false, false);
+		superSetDirty(true, null, false);
 
 	}
 }

@@ -21,6 +21,7 @@ public class AlvisGraphConnection extends GraphConnection implements
 
 	private String myText;
 	private int connectionColor;
+	private int style;
 	/**
 	 * identifier, used for equals method
 	 */
@@ -63,6 +64,8 @@ public class AlvisGraphConnection extends GraphConnection implements
 			AlvisGraphNode node1, AlvisGraphNode node2, int id) {
 
 		super(graph, style, node1, node2);
+
+		this.style = style;
 
 		if (id == -1) {
 			this.id = graph.requestId();
@@ -176,6 +179,17 @@ public class AlvisGraphConnection extends GraphConnection implements
 	@Override
 	public GraphicalRepresentationVertex getDestinationVertex() {
 		return getSecondNode();
+	}
+
+	@Override
+	public int getStyle() {
+		try {
+			style = super.getStyle();
+		} catch (Exception e) {
+			// widget is disposed already, but style is needed to undelete the
+			// connection (via redo)
+		}
+		return style;
 	}
 
 }
