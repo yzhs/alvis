@@ -208,8 +208,8 @@ public class CompilerAccess {
 	 * @throws IOException
 	 */
 	public String compileString(String code) throws IOException {
-		loadTranslation();
 		compiler = new Compiler(types, packages);
+		loadTranslation();
 		return javaCode = compiler.compile(code);
 	}
 
