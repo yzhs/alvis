@@ -28,7 +28,7 @@ public class FitToPage extends AbstractHandler {
 		// Try to cast the active editor to GraphEditor.
 		try {
 			GraphEditor grapheditor = (GraphEditor) editor;
-			grapheditor.fiToPage();
+			grapheditor.fitToPage();
 		} catch (ClassCastException e) {
 			// TODO Sinnvolle Fehlermeldung.
 		}

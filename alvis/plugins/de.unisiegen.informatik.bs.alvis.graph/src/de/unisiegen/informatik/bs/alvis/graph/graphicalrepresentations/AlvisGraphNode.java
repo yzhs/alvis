@@ -36,7 +36,7 @@ public class AlvisGraphNode extends GraphNode implements
 	private final int id;
 
 	/**
-	 * constructor builds graph nodes
+	 * constructor, builds graph nodes
 	 * 
 	 * @param graphModel
 	 *            the graph
@@ -50,7 +50,7 @@ public class AlvisGraphNode extends GraphNode implements
 	}
 
 	/**
-	 * constructor builds graph nodes with given id, of id!=-1
+	 * constructor, builds graph nodes with given id, if id!=-1
 	 * 
 	 * @param graphModel
 	 *            the graph

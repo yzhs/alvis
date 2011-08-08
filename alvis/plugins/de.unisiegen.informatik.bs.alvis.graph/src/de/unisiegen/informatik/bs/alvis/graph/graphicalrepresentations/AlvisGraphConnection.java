@@ -93,11 +93,11 @@ public class AlvisGraphConnection extends GraphConnection implements
 		return (this.node1 == allButThis) ? node2 : node1;
 	}
 
-	AlvisGraphNode getFirstNode() {
+	public AlvisGraphNode getFirstNode() {
 		return this.node1;
 	}
 
-	AlvisGraphNode getSecondNode() {
+	public AlvisGraphNode getSecondNode() {
 		return this.node2;
 	}
 

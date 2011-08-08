@@ -14,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Set;
 
 import javax.imageio.ImageIO;
@@ -23,13 +24,11 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.draw2d.geometry.Point;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseMoveListener;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
@@ -61,6 +60,7 @@ import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGrap
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraphNode;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSave;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSerialize;
+import de.unisiegen.informatik.bs.alvis.graph.undo.AlvisGraphUndos;
 
 public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		IExportItem {
@@ -71,6 +71,8 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	public static final int MODUS_CONNECTION = 99;// SWT -> c
 	public static final int MODUS_START = 115;// SWT -> s
 	public static final int MODUS_END = 101;// SWT -> e
+	public static final int MODUS_UNDO = 122;// SWT -> z
+	public static final int MODUS_REDO = 121;// SWT -> y
 	public static final int MODUS_DELETE = SWT.DEL;// SWT -> delete
 	public static final int CTRL = SWT.CTRL;// SWT -> ctrl
 	private int pressed;
@@ -93,6 +95,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	private int amountToBeMoved;
 
 	private boolean dirty = false;
+	private AlvisGraphUndos undoAdmin;
 
 	/**
 	 * Loads the file from input and creates a new AlvisGraph from it.
@@ -106,6 +109,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	private void createGraph(Composite parent, IEditorInput input) {
 
 		myGraph = new AlvisGraph(parent, SWT.NONE);
+		undoAdmin = new AlvisGraphUndos(myGraph);
 
 		// Get the absolute Path to the InstanceLocation
 		// String root = Platform.getInstanceLocation().getURL().getPath();
@@ -153,6 +157,9 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	 */
 	public void setDirty(boolean dirty) {
 		this.dirty = dirty;
+		if (!dirty) {
+			undoAdmin.setActualAsUndirty();
+		}
 		firePropertyChange(IEditorPart.PROP_DIRTY);
 	}
 
@@ -380,9 +387,12 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 						if (pressed == CTRL) {
 							clearGraph();
 						} else {
-							removeHighlightedNode();
-							removeHighlightedConnection();
+							removeHighlightedItems();
 						}
+					} else if (e.keyCode == MODUS_UNDO) {
+						undoAdmin.undo();
+					} else if (e.keyCode == MODUS_REDO) {
+						undoAdmin.redo();
 					} else {
 						pressed = e.keyCode;
 						setGraphModus(pressed);
@@ -535,8 +545,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 					} else if (pressed == MODUS_END) {
 						clickEndNode(actNode);
 					} else if (pressed == MODUS_DELETE) {
-						clickRemove(actNode);
-						clickRemove(actCon);
+						clickRemove();
 					} else if (pressed == MODUS_CONNECTION) {
 						clickNewConnection(actNode);
 					}
@@ -546,6 +555,8 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 						if (remMousePos.x != e.x && remMousePos.y != e.y) {
 							if (amountToBeMoved > 0) {
 								amountToBeMoved = 0;
+								undoAdmin.pushMoveNodes(dirty,
+										myGraph.getHighlightedNodes());
 								setDirty(true);
 							} else if (pressed == MODUS_STANDARD) {
 								markNodesInFrame(e);
@@ -568,14 +579,16 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 					return;
 				}
 
-				if (pressed == MODUS_STANDARD
-						&& !myGraph.getSelection().isEmpty()) {
-					pressed = MODUS_MOVE;
-					setGraphModus(pressed);
-				}
-
 				// check if node gets moved:
 				remMousePos = new Point(e.x, e.y);
+
+				if (pressed == MODUS_STANDARD
+						&& !myGraph.getSelection().isEmpty()) {
+
+					pressed = MODUS_MOVE;
+					setGraphModus(pressed);
+
+				}
 
 				amountToBeMoved = myGraph.getHighlightedNodes().size();
 			}
@@ -679,23 +692,30 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	 *            temporarily
 	 */
 	protected void clickNewConnection(AlvisGraphNode node) {
-		myGraph.markToBeConnected(node);
-		// the graph might be changed
-		checkDirty();
+		AlvisGraphConnection gc = myGraph.markToBeConnected(node);
+		if (gc != null) {
+			undoAdmin.pushAddConnection(dirty, gc);
+			setDirty(true);
+		}
 	}
 
 	/**
 	 * Removes a node
-	 * 
-	 * @param node
-	 *            the node to remove
 	 */
-	protected void clickRemove(AlvisGraphNode node) {
-		if (node != null) {
-			myGraph.removeHighlightedNode();
-			// the graph might be changed
-			checkDirty();
+	protected void clickRemove() {
+
+		if (!myGraph.getHighlightedItems().isEmpty()) {
+			ArrayList<AlvisGraphNode> nodes = myGraph.getHighlightedNodes();
+			ArrayList<AlvisGraphConnection> cons = myGraph
+					.getHighlightedConnections();
+			undoAdmin.pushRemoveSubGraph(dirty, nodes, cons);
+
+			myGraph.removeHighlightedItems();
+
+			setDirty(true);
+
 		}
+
 		pressed = MODUS_MOVE;
 		setGraphModus(pressed);
 	}
@@ -708,11 +728,11 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	 */
 	@Override
 	public Image getImage() {
-		
+
 		boolean isDirty = dirty;
 		savePositions();
-		fiToPage();
-		
+		fitToPage(200);
+
 		Image screenshot;
 		int width = myGraph.getSize().x;
 		int height = myGraph.getSize().y;
@@ -724,8 +744,8 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 		gc.dispose();
 		myGraph.redraw();
-		
-		loadPositions();
+
+		loadPositions(200);
 		setDirty(isDirty);
 
 		return screenshot;
@@ -769,21 +789,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		loader.save(name, SWT.IMAGE_PNG);
 
 		screenshot.dispose();
-	}
-
-	/**
-	 * removes connection
-	 * 
-	 * @param con
-	 */
-	protected void clickRemove(AlvisGraphConnection con) {
-		if (con != null) {
-			myGraph.removeHighlightedConnection();
-			// the graph might be changed
-			checkDirty();
-		}
-		pressed = MODUS_MOVE;
-		setGraphModus(pressed);
 	}
 
 	/**
@@ -846,6 +851,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 				+ myGraph.getAdmin().getId());
 
 		gn.setLocation(x - gn.getSize().width / 2, y - gn.getSize().height / 2);
+		undoAdmin.pushAddNode(dirty, gn);
 
 		// the graph might be changed
 		checkDirty();
@@ -941,15 +947,8 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	/**
 	 * removes highlighted node
 	 */
-	protected void removeHighlightedNode() {
-		myGraph.removeHighlightedNode();
-	}
-
-	/**
-	 * removes highlighted connection
-	 */
-	protected void removeHighlightedConnection() {
-		myGraph.removeHighlightedConnection();
+	protected void removeHighlightedItems() {
+		myGraph.removeHighlightedItems();
 	}
 
 	/**
@@ -960,8 +959,12 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		checkDirty();
 	}
 
-	public void fiToPage() {
-		myGraph.fiToPage();
+	public void fitToPage(int millis) {
+		myGraph.fitToPage(millis);
+	}
+
+	public void fitToPage() {
+		myGraph.fitToPage();
 	}
 
 	/**
@@ -976,6 +979,16 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	 */
 	public void loadPositions() {
 		myGraph.loadNodes();
+	}
+
+	/**
+	 * loads positions of graph nodes
+	 * 
+	 * @param millis
+	 *            time to move nodes (in milli seconds)
+	 */
+	public void loadPositions(int millis) {
+		myGraph.loadNodes(millis);
 	}
 
 	// IGraphEditor editorExtension;
@@ -1108,4 +1121,11 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		return null;
 	}
 
+	/*
+	 * do not use locally, method is getting used from myGraph, has to be public
+	 * because of global access
+	 */
+	public void setZoomUndo(boolean zoomIn) {
+		undoAdmin.pushZoom(dirty, zoomIn);
+	}
 }
