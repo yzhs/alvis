@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.eclipse.jface.text.TextViewer;
-import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
@@ -22,15 +20,9 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.texteditor.AbstractDecoratedTextEditor;
-import org.eclipse.ui.texteditor.AbstractTextEditor;
-import com.itextpdf.text.Anchor;
-import com.itextpdf.text.Chapter;
+
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
@@ -139,27 +131,30 @@ public class PdfExport extends Document {
 		// chapter = new Chapter(new Paragraph(anchor), 1);
 
 		try {
-			Thread.sleep(200);//wait for gui to potentially open editor and dispose file dialog
+			Thread.sleep(200);// wait for gui to potentially open editor and
+								// dispose file dialog
 		} catch (InterruptedException e) {
 		}
-		
-		if (exportItem != null) {
-			if (!exportItem.isRun()) { // export run  //TODO remove the invertion,implement correctly
 
-				
+		if (exportItem != null) {
+			if (!exportItem.isRun()) { // export run //TODO remove the
+										// invertion,implement correctly
+
+				ArrayList<Image> images = new ArrayList<Image>();
 				Image image = exportItem.getImage();
 				if (image != null) {
-					ArrayList<Image> images =new ArrayList<Image>();
 					images.add(image);
 					images.add(image);
 					images.add(image);
-					ExportShell exportShell = new ExportShell(Display.getDefault(),images);
-					exportShell.getWantedImages();
-					paragraph = toParagraph(image);
-					// chapter.add(paragraph);
-					// add(chapter);
+				}
+				ExportShell exportShell = new ExportShell(Display.getDefault(),
+						images);
+				images = exportShell.getWantedImages();
+				for (Image img : images) {
+					paragraph = toParagraph(img);
 					add(paragraph);
 				}
+
 			} else { // export single editor
 
 				// adding image:
@@ -175,11 +170,11 @@ public class PdfExport extends Document {
 					paragraph = toParagraph(sourceCode);
 					add(paragraph);
 				} catch (ClassCastException cce) {
-				} catch (DocumentException de){
+				} catch (DocumentException de) {
 				} catch (NullPointerException npe) {
 				}
 			}
-		} 
+		}
 	}
 
 	/**
@@ -270,7 +265,7 @@ public class PdfExport extends Document {
 		}
 		addEmptyLine(paragraph, 2);
 
-		image.dispose();
+//		image.dispose();
 		return paragraph;
 
 	}
