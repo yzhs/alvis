@@ -73,7 +73,7 @@ scope Symbols;
 
 functionDefinition
 @init { Type ret = Void; }
-    : ^(FUNC ident ^(TYPE type? { ret = $type.t; }) ^(PARAMS p=formalParams?) {
+    : ^(FUNC ident ^(RET type? { ret = $type.t; }) ^(PARAMS p=formalParams?) {
         $Symbols::symbols.put($ident.text, FunctionType.create(null != $p.t ? $p.t : new ArrayList<Type>(), ret));
         currentFunction = $ident.text;
     } block { currentFunction = null; })

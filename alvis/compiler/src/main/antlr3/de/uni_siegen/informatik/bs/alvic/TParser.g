@@ -14,7 +14,7 @@ tokens {
     FUNC;   // function definition
     BLOCK;
 
-    TYPE;   // used to declare return types of functions
+    RET;   // used to declare return types of functions
     ARRAY;  // array type declaration
     COMPLEX;// used to declare types that use generics, such as "Integer Queue"
     // which is translated to something like Java's "Queue<Integer>"
@@ -56,7 +56,7 @@ program
 
 functionDefinition
     : ID LPAREN formalParams? RPAREN (COLON type)? block
-        -> ^(FUNC[$ID, "FUNC"] ID ^(TYPE type?) ^(PARAMS formalParams?) block)
+        -> ^(FUNC[$ID, "FUNC"] ID ^(RET type?) ^(PARAMS formalParams?) block)
     ;
 
 /**

@@ -43,20 +43,14 @@ public class Compiler {
 		try {
 			for (Object o : datatypes) {
 				Class<?> c = o.getClass();
-				types.put((String) c.getMethod("getTypeName").invoke(null), o);
+				types.put(c.getName().replaceAll(".*\\.PC", ""), o);
 			}
 			TLexer.addTypes(types.keySet());
 			for (String s : packages)
 				packageNames.add(s);
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
 		}
 		instance = this;

@@ -120,7 +120,7 @@ public class ParserTest {
 		                   "main() begin fact(5); end\n"; //$NON-NLS-1$
 		String stringTree = test(algorithm);
 		printAndAssert(stringTree,
-		               stringTree.startsWith("(PROG (FUNC fact (TYPE Integer) " //$NON-NLS-1$
+		               stringTree.startsWith("(PROG (FUNC fact (RET Integer) " //$NON-NLS-1$
 		                                     +"(PARAMS (DECL Integer n)) (BLOCK")); //$NON-NLS-1$
 	}
 
