@@ -139,34 +139,36 @@ public class RunGraph extends ViewPart implements IExportItem {
 		for (IRunVisualizer runviz : myRunVisualizers) {
 			// Call the method and if the extension returns false then
 			// the extension does not know about the type in myInputFilePath...
-			if (!runviz.addVisualizing(myParent, myInputFilePath))
+			if (!runviz.addVisualizing(myParent, myInputFilePath)) {
 				// ... and we delete it.
 				myRunVisualizers.remove(runviz);
+			}
 		}
 	}
 
 	@Override
 	public Image getImage() {
-		Image image = null;
-		
-//		IEditorReference[] a = Activator.getDefault().getWorkbench()
-//		.getActiveWorkbenchWindow().getActivePage()
-//		.getEditorReferences();
-//for (IEditorReference x : a) {
-//	if (!x.equals(Activator.getDefault().getWorkbench()
-//			.getActiveWorkbenchWindow().getActivePage()
-//			.getActivePartReference())) {
-//		try {
-//			Activator.getDefault().getWorkbench()
-//					.getActiveWorkbenchWindow().getActivePage()
-//					.openEditor(x.getEditorInput(), x.getId());
-//		} catch (PartInitException e) {
-//		}
-//		break;
-//	}
 
-		
-		return image;
+		// IEditorReference[] a = Activator.getDefault().getWorkbench()
+		// .getActiveWorkbenchWindow().getActivePage()
+		// .getEditorReferences();
+		// for (IEditorReference x : a) {
+		// if (!x.equals(Activator.getDefault().getWorkbench()
+		// .getActiveWorkbenchWindow().getActivePage()
+		// .getActivePartReference())) {
+		// try {
+		// Activator.getDefault().getWorkbench()
+		// .getActiveWorkbenchWindow().getActivePage()
+		// .openEditor(x.getEditorInput(), x.getId());
+		// } catch (PartInitException e) {
+		// }
+		// break;
+		// }
+
+		Image screenshot = myRunVisualizers.get(0).getImage();
+
+		return screenshot;
+
 	}
 
 	@Override
@@ -176,7 +178,7 @@ public class RunGraph extends ViewPart implements IExportItem {
 
 	@Override
 	public boolean isRun() {
-		return true;//it's a run
+		return true;// it's a run
 	}
 
 	/* Methods we do not use */

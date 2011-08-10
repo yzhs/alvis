@@ -15,6 +15,10 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
+import org.eclipse.ui.IPerspectiveDescriptor;
+import org.eclipse.ui.IViewPart;
+import org.eclipse.ui.IViewReference;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.IWorkbenchPartReference;
@@ -444,47 +448,52 @@ public class Activator extends AbstractUIPlugin {
 	 * @return active editor as export item
 	 */
 	public IExportItem getActivePartToExport() {
-		IExportItem part = null;
 
-		try {
+		IWorkbenchPart myPart = getWorkbench().getActiveWorkbenchWindow()
+				.getActivePage().getActivePart();
 
-			part = (IExportItem) getWorkbench().getActiveWorkbenchWindow()
-					.getActivePage().getActivePart();
+		if (myPart instanceof IExportItem)
+			return (IExportItem) myPart;
 
-		} catch (ClassCastException cce) {
-
-			IEditorReference[] editors = null;
-			editors = getWorkbench().getActiveWorkbenchWindow().getActivePage()
-					.getEditorReferences();
-			int i;
-			for (i = 0; i < editors.length; i++) {
-				String editorTitle;
-				try {
-					editorTitle = getWorkbench().getActiveWorkbenchWindow()
-							.getActivePage().getActiveEditor().getTitle();
-				} catch (NullPointerException npe) {
-					break;// no editor in foreground, first one gets chosen
-				}
-				if (editors[i].getTitle().equals(editorTitle))
-					break;
-			}
-			if (i == editors.length)
-				i = 0;
-			try {
-				getWorkbench()
-						.getActiveWorkbenchWindow()
-						.getActivePage()
-						.openEditor(editors[i].getEditorInput(),
-								editors[i].getId());
-				part = (IExportItem) getWorkbench().getActiveWorkbenchWindow()
-						.getActivePage().getActivePart();
-				return part;
-			} catch (PartInitException e) {
-			} catch (ClassCastException ccee) {
+		@SuppressWarnings("deprecation")
+		IViewPart[] parts = getWorkbench().getActiveWorkbenchWindow()
+				.getActivePage().getViews();
+		for (IViewPart iViewPart : parts) {
+			if (iViewPart instanceof IExportItem) {
+				return (IExportItem) iViewPart;
 			}
 		}
 
-		return part;
+		IEditorReference[] editors = null;
+		editors = getWorkbench().getActiveWorkbenchWindow().getActivePage()
+				.getEditorReferences();
+		int i;
+		for (i = 0; i < editors.length; i++) {
+			String editorTitle;
+			try {
+				editorTitle = getWorkbench().getActiveWorkbenchWindow()
+						.getActivePage().getActiveEditor().getTitle();
+			} catch (NullPointerException npe) {
+				break;// no editor in foreground, first one gets chosen
+			}
+			if (editors[i].getTitle().equals(editorTitle))
+				break;
+		}
+		if (i == editors.length)
+			i = 0;
+
+		try {
+			getWorkbench()
+					.getActiveWorkbenchWindow()
+					.getActivePage()
+					.openEditor(editors[i].getEditorInput(), editors[i].getId());
+			IWorkbenchPart part = getWorkbench().getActiveWorkbenchWindow()
+					.getActivePage().getActivePart();
+			return (IExportItem) part;
+		} catch (PartInitException e) {
+		}
+
+		return null;
 
 	}
 }

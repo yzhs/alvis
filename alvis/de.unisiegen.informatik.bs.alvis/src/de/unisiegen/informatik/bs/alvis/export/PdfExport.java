@@ -136,44 +136,59 @@ public class PdfExport extends Document {
 		} catch (InterruptedException e) {
 		}
 
-		if (exportItem != null) {
-			if (!exportItem.isRun()) { // export run //TODO remove the
-										// invertion,implement correctly
+		if (exportItem == null)
+			return; // nothing to add
 
-				ArrayList<Image> images = new ArrayList<Image>();
-				Image image = exportItem.getImage();
-				if (image != null) {
-					images.add(image);
-					images.add(image);
-					images.add(image);
-				}
-				ExportShell exportShell = new ExportShell(Display.getDefault(),
-						images);
-				images = exportShell.getWantedImages();
-				for (Image img : images) {
-					paragraph = toParagraph(img);
-					add(paragraph);
-				}
+		if (exportItem.isRun()) {
 
-			} else { // export single editor
+			ArrayList<Image> images = new ArrayList<Image>();
+			Image image;
 
-				// adding image:
-				Image image = exportItem.getImage();
-				if (image != null) {
-					paragraph = toParagraph(image);
-					add(paragraph);
-				}
-				// adding source code:
-				try {
-					StyledText sourceCode = (StyledText) exportItem
-							.getSourceCode();
-					paragraph = toParagraph(sourceCode);
-					add(paragraph);
-				} catch (ClassCastException cce) {
-				} catch (DocumentException de) {
-				} catch (NullPointerException npe) {
-				}
+			image = exportItem.getImage();
+			if (image != null)
+				images.add(image);
+
+			Activator.getDefault().runStart();
+			image = exportItem.getImage();
+			if (image != null)
+				images.add(image);
+
+			for (int i = 0; i < 15 || false; i++) {// TODO replace with
+				// for (int i = 0; i < 15 || Activator.getDefault().runNext();
+				// i++) when runNext returns boolean-> while something changes
+				// in run after new step
+				Activator.getDefault().runNext();
+				image = exportItem.getImage();
+				if (image != null)
+					images.add(image);
 			}
+
+			ExportShell exportShell = new ExportShell(Display.getDefault(),
+					images);
+			images = exportShell.getWantedImages();
+			for (Image img : images) {
+				paragraph = toParagraph(img);
+				add(paragraph);
+			}
+
+		} else { // export single editor
+
+			// adding image:
+			Image image = exportItem.getImage();
+			if (image != null) {
+				paragraph = toParagraph(image);
+				add(paragraph);
+			}
+			// adding source code:
+			try {
+				StyledText sourceCode = (StyledText) exportItem.getSourceCode();
+				paragraph = toParagraph(sourceCode);
+				add(paragraph);
+			} catch (ClassCastException cce) {
+			} catch (DocumentException de) {
+			} catch (NullPointerException npe) {
+			}
+
 		}
 	}
 
@@ -265,7 +280,7 @@ public class PdfExport extends Document {
 		}
 		addEmptyLine(paragraph, 2);
 
-//		image.dispose();
+		// image.dispose();
 		return paragraph;
 
 	}

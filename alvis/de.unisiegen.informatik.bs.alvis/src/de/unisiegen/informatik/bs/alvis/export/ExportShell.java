@@ -10,6 +10,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
@@ -46,29 +47,32 @@ public class ExportShell extends Shell {
 
 		super(display);
 
+		int maxPreviewWidth = 200;
+		int maxPreviewHeight = (maxPreviewWidth * 7) / 10;
+
 		images = imgs;
 		checkButtons = new ArrayList<Button>();
 
-		// setSize(520, 200);
 		setLayout(new RowLayout());
 		setText(Messages.getLabel("exportShellTag"));
 
-		composite = new Composite(this, SWT.NONE);
+		Canvas composite = new Canvas(this, SWT.NONE);
 		composite.setLayout(new GridLayout(1, false));
 
 		Composite imageContainer = new Composite(composite, SWT.BORDER);
-		imageContainer.setLayout(new GridLayout(2, false));
+		imageContainer.setLayout(new GridLayout(5, false));
 
 		for (int i = 0; i < images.size(); i++) {
 
+			Canvas imgAndRadio = new Canvas(imageContainer, SWT.BORDER);
 			// resizing image and adding to composite
-			Label label = new Label(imageContainer, SWT.NONE);
+			Label label = new Label(imgAndRadio, SWT.NONE);
 			int width = images.get(i).getBounds().width;
 			int height = images.get(i).getBounds().height;
-			int newWidth = 200;
+			int newWidth = maxPreviewWidth;
 			int newHeight = (newWidth * height) / width;
-			if (newHeight > 140) {
-				newHeight = 140;
+			if (newHeight > maxPreviewHeight) {
+				newHeight = maxPreviewHeight;
 				newWidth = (newHeight * width) / height;
 			}
 			Image myImage = new Image(images.get(i).getDevice(), newWidth,
@@ -78,7 +82,7 @@ public class ExportShell extends Shell {
 					newHeight);
 			gc.dispose();
 			label.setImage(myImage);
-			Button check = new Button(imageContainer, SWT.CHECK);
+			Button check = new Button(imgAndRadio, SWT.CHECK);
 			check.setText(Messages.getLabel("exportImage") + " " + i);
 			checkButtons.add(check);
 
