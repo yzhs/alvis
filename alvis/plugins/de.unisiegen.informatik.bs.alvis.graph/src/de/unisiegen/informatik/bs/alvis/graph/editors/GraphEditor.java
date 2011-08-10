@@ -729,17 +729,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		savePositions();
 		fitToPage(200);
 
-		Image screenshot;
-		int width = myGraph.getSize().x;
-		int height = myGraph.getSize().y;
-		GC gc = new GC(myGraph);
-		gc.drawText("Created by Alvis", 5, 5);
-		gc.drawRectangle(new Rectangle(0, 0, width - 1, height - 1));
-		screenshot = new Image(Display.getCurrent(), width, height);
-		gc.copyArea(screenshot, 0, 0);
-
-		gc.dispose();
-		myGraph.redraw();
+		Image screenshot = myGraph.getImage();
 
 		loadPositions(200);
 		setDirty(isDirty);

@@ -11,8 +11,12 @@ import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseWheelListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.GC;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.zest.core.widgets.Graph;
 import org.eclipse.zest.core.widgets.GraphItem;
 import org.eclipse.zest.core.widgets.ZestStyles;
@@ -31,6 +35,8 @@ import de.unisiegen.informatik.bs.alvis.graph.editors.GraphEditor;
  */
 public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 
+	public static final String ID = "de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.graph";
+	
 	AlvisSave admin;
 
 	private double middleX, middleY, radiusX, radiusY, angle;
@@ -1091,5 +1097,29 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 
 		superSetDirty(true, null, false);
 
+	}
+	
+	/**
+	 * captures current graphical representation from the graph editor and
+	 * returns it
+	 * 
+	 * @return the screen shot to create the the export file with (e.g.)
+	 */
+	public Image getImage() {
+
+		Image screenshot;
+		int width = getSize().x;
+		int height = getSize().y;
+		GC gc = new GC(this);
+		gc.drawText("Created by Alvis", width-95, height-20);
+		gc.drawRectangle(new Rectangle(0, 0, width - 1, height - 1));
+		screenshot = new Image(Display.getCurrent(), width, height);
+		gc.copyArea(screenshot, 0, 0);
+
+		gc.dispose();
+		redraw();
+
+		return screenshot;
+		
 	}
 }

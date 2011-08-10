@@ -51,7 +51,7 @@ public class AlvisUndoMoveNodes implements AlvisGraphUndo {
 		}
 		oldPositions = redoPositions;
 
-		Animation.run(500);
+		Animation.run(200);
 
 	}
 
