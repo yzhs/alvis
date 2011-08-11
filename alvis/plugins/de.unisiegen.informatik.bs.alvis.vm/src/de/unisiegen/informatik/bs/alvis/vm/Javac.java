@@ -18,7 +18,7 @@ import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
-//import de.unisiegen.informatik.bs.alvis.io.logger.Logger;
+import de.unisiegen.informatik.bs.alvis.io.logger.Logger;
 
 /**
  * A wrapper to ease the use of com.sun.tools.javac.Main.
@@ -98,8 +98,10 @@ public final class Javac {
 	 * @return null if success; or compilation errors
 	 */
 	public String compile(String srcFiles[]) {
-		// Logger.getInstance().log("Javac", Logger.DEBUG,
-		// "Beginning Javac compile(String srcFiles[]) method");
+		Logger.getInstance().setLogLevel(Logger.INFO);
+		 Logger.getInstance().log("Javac", Logger.INFO,
+		 "Beginning Javac compile(String srcFiles[]) method");
+		 System.out.println("test hallo hallo");
 
 		StringWriter err = new StringWriter();
 		PrintWriter errPrinter = new PrintWriter(err);
@@ -113,10 +115,11 @@ public final class Javac {
 		compiler = ToolProvider.getSystemJavaCompiler();
 		if (compiler != null) {
 			String algorithmAsSourceCode = readfile(args[args.length - 1]);
+			String algorithmName =args[args.length - 1].split("/")[args[args.length - 1].split("/").length-1];
 
 			boolean result = false;
 			try {
-				result = compile(new AlvisFileObject("Algorithm.java",
+				result = compile(new AlvisFileObject(algorithmName,
 						algorithmAsSourceCode));
 			} catch (URISyntaxException e) {
 				e.printStackTrace();
@@ -125,8 +128,8 @@ public final class Javac {
 			// Logger.getInstance().log("Javac", Logger.DEBUG, "After compile");
 
 			errPrinter.close();
-			// Logger.getInstance().log("Javac", Logger.DEBUG,
-			// "Error? " + err.toString());
+//			 Logger.getInstance().log("Javac", Logger.DEBUG,
+//			 "Error? " + err.toString());
 
 			return result ? null : err.toString();
 		}

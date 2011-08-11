@@ -9,4 +9,5 @@ Require-Bundle: org.eclipse.ui,
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: de.unisiegen.informatik.bs.alvis.io.dialogs,
- de.unisiegen.informatik.bs.alvis.io.files
+ de.unisiegen.informatik.bs.alvis.io.files,
+ de.unisiegen.informatik.bs.alvis.io.logger
