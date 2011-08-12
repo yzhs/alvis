@@ -99,17 +99,22 @@ public class AlgorithmEditorCompletionProcessor implements
 		/** creation of the CompletionProposal Array */
 		List<CompletionProposal> resultList = new ArrayList<CompletionProposal>();
 		for (int i = 0; i < availableProposals.size(); i++) {
-			
-			CompletionInformation currentProposal = availableProposals
-					.get(i);
+
+			CompletionInformation currentProposal = availableProposals.get(i);
 			if (currentProposal != null) {
+				
 				ContextInformation contextInfo = new ContextInformation(
 						currentProposal.getReplacementString(),
 						"Context Information for "
 								+ currentProposal.getReplacementString());
+				
+				int replacementOffset = viewer.getTextWidget().getOffsetAtLine((
+						currentProposal.getLine()-1))
+						+ currentProposal.getCharPositionInLine();
+				
 				CompletionProposal completionProposal = new CompletionProposal(
 						currentProposal.getReplacementString(),
-						currentProposal.getReplacementOffset(),
+						replacementOffset,
 						currentProposal.getReplacementLength(), currentProposal
 								.getReplacementString().length(), null,
 						currentProposal.getReplacementString(), contextInfo,
@@ -121,7 +126,7 @@ public class AlgorithmEditorCompletionProcessor implements
 		}
 		ICompletionProposal[] result = new ICompletionProposal[availableProposals
 				.size()];
-		result = availableProposals.toArray(new ICompletionProposal[0]);
+		result = resultList.toArray(new ICompletionProposal[0]);
 		return result;
 	}
 
