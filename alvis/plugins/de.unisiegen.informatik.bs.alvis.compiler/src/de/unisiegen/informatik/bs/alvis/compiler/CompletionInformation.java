@@ -1,56 +1,93 @@
 /**
- * This Class contain all completion relevant Data for a single Completion.
+ * 
  */
 package de.unisiegen.informatik.bs.alvis.compiler;
 
 /**
- * @author Eduard Boos
- *
+ * @author Eduard Boos This Class contain all completion relevant Data for a
+ *         single Completion.
+ * 
  */
 public class CompletionInformation {
+
 	private String replacementString;
-	private int replacementOffset;
+	private int line;
+	private int charPositionInLine;
 	private int replacementLength;
-	public CompletionInformation(String replacementString, int replacementOffset, int replacementLength) {
+
+	/**
+	 * Creates a basic CompletionInformaion Object needed for Code-Completion.
+	 * @param replacementString the String
+	 * @param line the line where this proposal should be inserted.
+	 * @param charPositionInLine the offset in the line.
+	 * @param replacementLength usually the length of the proposal that was already written.
+	 */
+	public CompletionInformation(String replacementString, int line,
+			int charPositionInLine, int replacementLength) {
 		this.replacementString = replacementString;
-		this.replacementOffset = replacementOffset;
+		this.line = line;
+		this.charPositionInLine = charPositionInLine;
 		this.replacementLength = replacementLength;
 	}
+
 	/**
 	 * @return the replacementString
 	 */
 	public String getReplacementString() {
 		return replacementString;
 	}
+
 	/**
-	 * @param replacementString the replacementString to set
+	 * @param replacementString
+	 *            the replacementString to set
 	 */
 	public void setReplacementString(String replacementString) {
 		this.replacementString = replacementString;
 	}
-	/**
-	 * @return the replacementOffset
-	 */
-	public int getReplacementOffset() {
-		return replacementOffset;
-	}
-	/**
-	 * @param replacementOffset the replacementOffset to set
-	 */
-	public void setReplacementOffset(int replacementOffset) {
-		this.replacementOffset = replacementOffset;
-	}
+
 	/**
 	 * @return the replacementLength
 	 */
 	public int getReplacementLength() {
 		return replacementLength;
 	}
+
 	/**
-	 * @param replacementLength the replacementLength to set
+	 * @param replacementLength
+	 *            the replacementLength to set
 	 */
 	public void setReplacementLength(int replacementLength) {
 		this.replacementLength = replacementLength;
 	}
-	
+
+	/**
+	 * @return the line
+	 */
+	public int getLine() {
+		return line;
+	}
+
+	/**
+	 * @param line
+	 *            the line to set
+	 */
+	public void setLine(int line) {
+		this.line = line;
+	}
+
+	/**
+	 * @return the charPositionInLine
+	 */
+	public int getCharPositionInLine() {
+		return charPositionInLine;
+	}
+
+	/**
+	 * @param charPositionInLine
+	 *            the charPositionInLine to set
+	 */
+	public void setCharPositionInLine(int charPositionInLine) {
+		this.charPositionInLine = charPositionInLine;
+	}
+
 }

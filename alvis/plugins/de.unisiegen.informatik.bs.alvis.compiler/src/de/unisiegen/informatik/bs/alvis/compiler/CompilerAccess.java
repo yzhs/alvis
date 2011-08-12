@@ -369,10 +369,24 @@ public class CompilerAccess {
 			int charPositionInLine) {
 		Token tokenToComplete = compiler.getLexer().getTokenByNumbers(line,
 				charPositionInLine);
+		int prefixLength = 0;
+		String prefix = "";
+		if(tokenToComplete != null)
+		{
+			/** getPrefix and prefixLength and override line and charPositionInLine */
+			prefixLength = charPositionInLine
+					- tokenToComplete.getCharPositionInLine();
+			prefix = tokenToComplete.getText().substring(0, prefixLength);
+			line = tokenToComplete.getLine();
+			charPositionInLine = tokenToComplete.getCharPositionInLine();
+		}
 		Token previousToken = findPreviousToken(line, charPositionInLine);
 		List<CompletionInformation> availableProposals = new ArrayList<CompletionInformation>();
+
 		if (previousToken == null) {
 			/** current token is first token */
+			availableProposals.add(new CompletionInformation("main", line,
+					charPositionInLine, 0));
 			// TODO find out what is available for the first Token.
 			System.out.println("Current Token is first token.");
 		} else {
@@ -380,18 +394,26 @@ public class CompilerAccess {
 			 * previousToken was set --> get possibleFollowing Tokens and create
 			 * code-Completion Information
 			 */
-			System.out.println("Previous Token Name : "
-					+ getTokenName(previousToken.getType()));
+			List<String> possibleTokens = compiler.getParser()
+					.possibleFollowingTokens(TParser.class,
+							getTokenName(previousToken.getType()));
+			List<String> viableCompletionStrings = translateAutocompletionString(possibleTokens);
+			List<String> validCompletionStrings = new ArrayList<String>();
 			/** Some Cases have to be computed separately */
-
-			if (getTokenName(previousToken.getType()).equals("ID")) {
-				// TODO implement
-			} else {
-				// TODO implement
-				List<String> possibleFollowingTokens = compiler.getParser()
-						.possibleFollowingTokens(TParser.class,
-								getTokenName(previousToken.getType()));
+			for(String completionString:viableCompletionStrings)
+			{
+				if(completionString.startsWith(prefix))
+				{
+					validCompletionStrings.add(completionString);
+					CompletionInformation completionInfomation = new CompletionInformation(completionString, line, charPositionInLine, prefixLength);
+					availableProposals.add(completionInfomation);
+				}
 			}
+//			if (getTokenName(previousToken.getType()).equals("DOT")) {
+//				System.out.println(prefix);
+//			} else {
+//				// TODO implement
+//			}
 		}
 		return availableProposals;
 
