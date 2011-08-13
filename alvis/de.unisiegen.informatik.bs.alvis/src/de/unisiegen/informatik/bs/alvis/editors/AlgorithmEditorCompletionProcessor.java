@@ -162,16 +162,4 @@ public class AlgorithmEditorCompletionProcessor implements
 		return null;
 	}
 
-	/**
-	 * Returns true is the character is a whitespace
-	 * 
-	 * @param c
-	 *            character to test
-	 * @return true if c is whitespace
-	 */
-	@SuppressWarnings("unused")
-	private boolean isWhitespace(char c) {
-		return (c == ' ' || c == '\t' || c == '\n' || c == '\r');
-	}
-
 }

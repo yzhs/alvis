@@ -13,6 +13,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
@@ -57,7 +58,6 @@ public class CompilerAccess {
 	private static CompilerAccess instance;
 
 	private static Map<String, List<String>> translateCompletion = null;
-	private Token previousToken;
 
 	private static void add(String key, String... arg) {
 		translateCompletion.put(key, Arrays.asList(arg));
@@ -99,6 +99,7 @@ public class CompilerAccess {
 		add("SEMICOLON", ";");
 		add("COMMA", ",");
 		add("COLON", ":");
+		add("DOT", ".");
 
 		add("SCOPEL", "begin", "{");
 		add("SCOPER", "end", "}");
@@ -281,6 +282,68 @@ public class CompilerAccess {
 	}
 
 	/**
+	 * Finds the previous Token to the position given.
+	 * 
+	 * @param the
+	 *            line of the Position
+	 * @param charPositionInLine
+	 *            the offset in the line.
+	 * @return the previous token to the position given. Null if the given
+	 *         position is the first Token.
+	 */
+	private Token findPreviousToken(int line, int charPositionInLine) {
+		Token currentToken = compiler.getLexer().getTokenByNumbers(line,
+				charPositionInLine);
+		if(currentToken!=null && ((currentToken.getCharPositionInLine()+currentToken.getText().length()) < charPositionInLine))
+		{
+			currentToken = null;
+		}
+		Token previousToken = null;
+		/**
+		 * currentToken is null, when Whitespace is currentChar --> find
+		 * previous Token
+		 */
+		if (currentToken == null) {
+			List<Token> tokens = compiler.getLexer().getTokens();
+			for (Token token : tokens) {
+				if (line > token.getLine()
+						|| ((line == token.getLine()) && charPositionInLine >= token
+								.getCharPositionInLine())) {
+					currentToken = token;
+				} else {
+					return currentToken;
+				}
+			}
+		} else {
+			int previousTokenIndex = currentToken.getTokenIndex() - 1;
+			// channel = 99 indicates a whitespace token
+			while (previousToken == null || previousToken.getChannel() == 99) {
+				if (previousTokenIndex < 0) {
+					break;
+				} else {
+					previousToken = compiler.getLexer().getTokens()
+							.get(previousTokenIndex);
+					previousTokenIndex--;
+				}
+			}
+		}
+		/** previousToken is null when, the token to Complete is the first token */
+		return previousToken;
+	}
+	
+	/**
+	 * Returns true is the character is a whitespace
+	 * 
+	 * @param c
+	 *            character to test
+	 * @return true if c is whitespace
+	 */
+	@SuppressWarnings("unused")
+	private boolean isWhitespace(char c) {
+		return (c == ' ' || c == '\t' || c == '\n' || c == '\r');
+	}
+
+	/**
 	 * @return exceptions produced when lexing, parsing and type checking the
 	 *         code.
 	 */
@@ -369,6 +432,10 @@ public class CompilerAccess {
 			int charPositionInLine) {
 		Token tokenToComplete = compiler.getLexer().getTokenByNumbers(line,
 				charPositionInLine);
+		if(tokenToComplete!=null && ((tokenToComplete.getCharPositionInLine()+tokenToComplete.getText().length()) < charPositionInLine))
+		{
+			tokenToComplete = null;
+		}
 		int prefixLength = 0;
 		String prefix = "";
 		if(tokenToComplete != null)
@@ -382,13 +449,11 @@ public class CompilerAccess {
 		}
 		Token previousToken = findPreviousToken(line, charPositionInLine);
 		List<CompletionInformation> availableProposals = new ArrayList<CompletionInformation>();
-
+		
 		if (previousToken == null) {
 			/** current token is first token */
 			availableProposals.add(new CompletionInformation("main", line,
 					charPositionInLine, 0));
-			// TODO find out what is available for the first Token.
-			System.out.println("Current Token is first token.");
 		} else {
 			/**
 			 * previousToken was set --> get possibleFollowing Tokens and create
@@ -397,9 +462,65 @@ public class CompilerAccess {
 			List<String> possibleTokens = compiler.getParser()
 					.possibleFollowingTokens(TParser.class,
 							getTokenName(previousToken.getType()));
+			System.out.println("PreviousToken Type : " +getTokenName(previousToken.getType()));
 			List<String> viableCompletionStrings = translateAutocompletionString(possibleTokens);
 			List<String> validCompletionStrings = new ArrayList<String>();
 			/** Some Cases have to be computed separately */
+			
+			/** Handle ID Token */
+			if(possibleTokens.contains("ID"))
+			{
+				if (getTokenName(previousToken.getType()).equals("DOT")) {
+					System.out.println("previousToken == DOT");
+					/** getting full prefix(until whitespace is found */
+					int currentTokenIndex = previousToken.getTokenIndex()-1;
+					Token currentToken = compiler.getLexer().getTokens().get(currentTokenIndex);
+					String stillPrefix = "ID";
+					Stack<String> idToTest = new Stack<String>();
+					while(currentTokenIndex>0 && getTokenName(currentToken.getType()).equals(stillPrefix))
+					{
+						if(stillPrefix.equals("ID"))
+						{
+							idToTest.push(currentToken.getText());
+							stillPrefix = "DOT";
+						}
+						else
+						{
+							stillPrefix = "ID";
+						}
+						currentTokenIndex = currentTokenIndex-1;
+						currentToken = compiler.getLexer().getTokens().get(currentTokenIndex);
+					}
+					List<Token> identifiers = getIdentifiers();
+					if(!idToTest.isEmpty())
+					{
+						String firstID = idToTest.pop();
+						System.out.println("FIRSTID: " + firstID);
+						/** getting first index of id */
+						int idIndex = -1;
+						for(int i=0;i<identifiers.size();i++)
+						{
+							Token token = identifiers.get(i);
+							if(token.getText().equals(firstID))
+							{
+								idIndex = i;
+								break;
+							}
+						}
+						if(idIndex!=-1)
+						{
+							Token varToken = identifiers.get(idIndex);
+							Token varType = getTokens().get(varToken.getTokenIndex()-1);
+							if(getTokenName(varType.getType()).equals("TYPE"))
+							{
+								System.out.println("FOUND ID and Type is: " + getTokenName(varType.getTokenIndex()));
+								//TODO complete it here
+							}
+						}
+					}
+				}
+			}
+			/** EndOF Handle ID */
 			for(String completionString:viableCompletionStrings)
 			{
 				if(completionString.startsWith(prefix))
@@ -425,70 +546,6 @@ public class CompilerAccess {
 		// previousTokenName);
 		// List<String> translatedCompletions =
 		// translateAutocompletionString(possibleTokens);
-	}
-
-	/**
-	 * Finds the previous Token to the position given.
-	 * 
-	 * @param the
-	 *            line of the Position
-	 * @param charPositionInLine
-	 *            the offset in the line.
-	 * @return the previous token to the position given. Null if the given
-	 *         position is the first Token.
-	 */
-	private Token findPreviousToken(int line, int charPositionInLine) {
-		Token currentToken = compiler.getLexer().getTokenByNumbers(line,
-				charPositionInLine);
-		Token previousToken = null;
-		/**
-		 * currentToken is null, when Whitespace is currentChar --> find
-		 * previous Token
-		 */
-		if (currentToken == null) {
-			List<Token> tokens = compiler.getLexer().getTokens();
-			for (Token token : tokens) {
-				if (line > token.getLine()
-						|| ((line == token.getLine()) && charPositionInLine <= token
-								.getCharPositionInLine())) {
-					currentToken = token;
-				} else {
-					return currentToken;
-				}
-			}
-		} else {
-			int previousTokenIndex = currentToken.getTokenIndex() - 1;
-			// channel = 99 indicates a whitespace token
-			while (previousToken == null || previousToken.getChannel() == 99) {
-				if (previousTokenIndex < 0) {
-					break;
-				} else {
-					previousToken = compiler.getLexer().getTokens()
-							.get(previousTokenIndex);
-					previousTokenIndex--;
-				}
-			}
-		}
-		/** previousToken is null when, the token to Complete is the first token */
-		return previousToken;
-	}
-
-	/**
-	 * Return the previous Token, last completion used
-	 * 
-	 * @return the Token used as previousToken in last tryAutoCompletion
-	 */
-	public int[] getPreviousTokenEndPosition() {
-		int[] previousTokenEndPos = new int[2];
-		previousTokenEndPos[0] = previousToken.getLine();
-		previousTokenEndPos[1] = previousToken.getCharPositionInLine();
-		if (!getTokenName(previousToken.getType()).equals("ID"))
-			;
-		{
-			previousTokenEndPos[1] = previousTokenEndPos[1]
-					+ previousToken.getText().length();
-		}
-		return previousTokenEndPos;
 	}
 
 	/**
