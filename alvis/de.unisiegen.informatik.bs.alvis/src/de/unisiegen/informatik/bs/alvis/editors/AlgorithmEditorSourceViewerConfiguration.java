@@ -5,7 +5,9 @@ package de.unisiegen.informatik.bs.alvis.editors;
 
 import java.util.ArrayList;
 
+import org.eclipse.jface.text.DefaultTextHover;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.ITextHover;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.text.contentassist.ContentAssistant;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
@@ -21,6 +23,8 @@ import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.jface.text.rules.WhitespaceRule;
 import org.eclipse.jface.text.rules.WordRule;
+import org.eclipse.jface.text.source.DefaultAnnotationHover;
+import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.SourceViewerConfiguration;
 import org.eclipse.swt.SWT;
@@ -128,6 +132,18 @@ public class AlgorithmEditorSourceViewerConfiguration extends
 				AlgorithmPartitionScanner.SINGLELINE_COMMENT,
 				AlgorithmPartitionScanner.BEGIN_END };
 	}
+	@Override
+	public ITextHover getTextHover(ISourceViewer sourceViewer, String
+			contentType)
+			{
+			return new DefaultTextHover(sourceViewer);
+			}
+	@Override
+	public IAnnotationHover getAnnotationHover(ISourceViewer sourceViewer) {
+		
+		return new DefaultAnnotationHover(true);
+	}
+
 
 	/**
 	 * This method helps to create a color, cause it can be hard to do so if not
