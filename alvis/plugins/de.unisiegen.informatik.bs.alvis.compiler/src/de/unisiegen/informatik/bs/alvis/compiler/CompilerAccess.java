@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Stack;
@@ -105,6 +106,7 @@ public class CompilerAccess {
 		add("SCOPER", "end", "}");
 
 		add("NULL", "null");
+		add("BOOL", "false", "true");
 		add("INFTY", "infty");
 
 		translateCompletion.put("TYPE", new ArrayList<String>(compiler
@@ -294,8 +296,9 @@ public class CompilerAccess {
 	private Token findPreviousToken(int line, int charPositionInLine) {
 		Token currentToken = compiler.getLexer().getTokenByNumbers(line,
 				charPositionInLine);
-		if(currentToken!=null && ((currentToken.getCharPositionInLine()+currentToken.getText().length()) < charPositionInLine))
-		{
+		if (currentToken != null
+				&& ((currentToken.getCharPositionInLine() + currentToken
+						.getText().length()) < charPositionInLine)) {
 			currentToken = null;
 		}
 		Token previousToken = null;
@@ -330,17 +333,42 @@ public class CompilerAccess {
 		/** previousToken is null when, the token to Complete is the first token */
 		return previousToken;
 	}
-	
+
 	/**
-	 * Returns true is the character is a whitespace
 	 * 
-	 * @param c
-	 *            character to test
-	 * @return true if c is whitespace
+	 * @param line
+	 * @param charPositionInLine
+	 * @return
 	 */
-	@SuppressWarnings("unused")
-	private boolean isWhitespace(char c) {
-		return (c == ' ' || c == '\t' || c == '\n' || c == '\r');
+	private ArrayList<String[]> getDefinedVariables(int line,
+			int charPositionInLine) {
+		/** Hashmap contains varName -> Type entry */
+		// HashMap<String,String> variables = new HashMap<String,String>();
+		ArrayList<String[]> variables = new ArrayList<String[]>();
+		List<Token> tokenList = getTokens();
+		for (Token token : tokenList) {
+			if (token.getType() != -1
+					&& getTokenName(token.getType()).equals("TYPE")) {
+				if (token.getLine() <= line
+						&& token.getCharPositionInLine() <= charPositionInLine) {
+					/**
+					 * This Token can be start of variable definition and fits
+					 * the condition
+					 */
+					int tokenIndex = token.getTokenIndex();
+					if ((tokenIndex) <= tokenList.size())
+						;
+					Token nextToken = tokenList.get(tokenIndex + 1);
+					String nextTokenName = getTokenName(nextToken.getType());
+					if (nextTokenName.equals("ID")) {
+						String[] variableSet = { nextToken.getText(),
+								token.getText() };
+						variables.add(variableSet);
+					}
+				}
+			}
+		}
+		return variables;
 	}
 
 	/**
@@ -432,24 +460,39 @@ public class CompilerAccess {
 			int charPositionInLine) {
 		Token tokenToComplete = compiler.getLexer().getTokenByNumbers(line,
 				charPositionInLine);
-		if(tokenToComplete!=null && ((tokenToComplete.getCharPositionInLine()+tokenToComplete.getText().length()) < charPositionInLine))
-		{
+		
+		if (tokenToComplete != null
+				&& ((tokenToComplete.getCharPositionInLine() + tokenToComplete
+						.getText().length()) < charPositionInLine)) {
 			tokenToComplete = null;
 		}
 		int prefixLength = 0;
 		String prefix = "";
-		if(tokenToComplete != null)
-		{
-			/** getPrefix and prefixLength and override line and charPositionInLine */
+		if (tokenToComplete != null) {
+			/**
+			 * getPrefix and prefixLength and override line and
+			 * charPositionInLine
+			 */
 			prefixLength = charPositionInLine
 					- tokenToComplete.getCharPositionInLine();
 			prefix = tokenToComplete.getText().substring(0, prefixLength);
 			line = tokenToComplete.getLine();
 			charPositionInLine = tokenToComplete.getCharPositionInLine();
 		}
-		Token previousToken = findPreviousToken(line, charPositionInLine);
+		Token previousToken = null;
+		if(tokenToComplete!= null && (tokenToComplete.getText().equals(".") || tokenToComplete.getText().equals("(") || tokenToComplete.getText().equals("{")))
+		{
+			previousToken = tokenToComplete;
+			prefix = "";
+			prefixLength = 0;
+			charPositionInLine = tokenToComplete.getCharPositionInLine()+tokenToComplete.getText().length();
+		}
+		else
+		{
+			previousToken = findPreviousToken(line, charPositionInLine);			
+		}
 		List<CompletionInformation> availableProposals = new ArrayList<CompletionInformation>();
-		
+
 		if (previousToken == null) {
 			/** current token is first token */
 			availableProposals.add(new CompletionInformation("main", line,
@@ -462,90 +505,89 @@ public class CompilerAccess {
 			List<String> possibleTokens = compiler.getParser()
 					.possibleFollowingTokens(TParser.class,
 							getTokenName(previousToken.getType()));
-			System.out.println("PreviousToken Type : " +getTokenName(previousToken.getType()));
+			possibleTokens.remove("DOT");
+			if (getTokenName(previousToken.getType()).equals("SEMICOLON")) {
+				/** add all to this position defined Variables */
+				ArrayList<String[]> definedVariables = getDefinedVariables(
+						line, charPositionInLine);
+				Iterator<String[]> iterator = definedVariables.iterator();
+				while (iterator.hasNext()) {
+					String[] varSet = iterator.next();
+					if (varSet.length == 2) {
+						possibleTokens.add(varSet[0]);
+					}
+				}
+				
+				possibleTokens.add("TYPE");
+			}
 			List<String> viableCompletionStrings = translateAutocompletionString(possibleTokens);
 			List<String> validCompletionStrings = new ArrayList<String>();
 			/** Some Cases have to be computed separately */
-			
+
 			/** Handle ID Token */
-			if(possibleTokens.contains("ID"))
-			{
+			if (possibleTokens.contains("ID")) {
 				if (getTokenName(previousToken.getType()).equals("DOT")) {
 					System.out.println("previousToken == DOT");
 					/** getting full prefix(until whitespace is found */
-					int currentTokenIndex = previousToken.getTokenIndex()-1;
-					Token currentToken = compiler.getLexer().getTokens().get(currentTokenIndex);
+					int currentTokenIndex = previousToken.getTokenIndex() - 1;
+					Token currentToken = compiler.getLexer().getTokens()
+							.get(currentTokenIndex);
 					String stillPrefix = "ID";
 					Stack<String> idToTest = new Stack<String>();
-					while(currentTokenIndex>0 && getTokenName(currentToken.getType()).equals(stillPrefix))
-					{
-						if(stillPrefix.equals("ID"))
-						{
+					while (currentTokenIndex > 0
+							&& getTokenName(currentToken.getType()).equals(
+									stillPrefix)) {
+						if (stillPrefix.equals("ID")) {
 							idToTest.push(currentToken.getText());
 							stillPrefix = "DOT";
-						}
-						else
-						{
+						} else {
 							stillPrefix = "ID";
 						}
-						currentTokenIndex = currentTokenIndex-1;
-						currentToken = compiler.getLexer().getTokens().get(currentTokenIndex);
+						currentTokenIndex = currentTokenIndex - 1;
+						currentToken = compiler.getLexer().getTokens()
+								.get(currentTokenIndex);
 					}
 					List<Token> identifiers = getIdentifiers();
-					if(!idToTest.isEmpty())
-					{
+					if (!idToTest.isEmpty()) {
 						String firstID = idToTest.pop();
 						System.out.println("FIRSTID: " + firstID);
 						/** getting first index of id */
 						int idIndex = -1;
-						for(int i=0;i<identifiers.size();i++)
-						{
+						for (int i = 0; i < identifiers.size(); i++) {
 							Token token = identifiers.get(i);
-							if(token.getText().equals(firstID))
-							{
+							if (token.getText().equals(firstID)) {
 								idIndex = i;
 								break;
 							}
 						}
-						if(idIndex!=-1)
-						{
+						if (idIndex != -1) {
 							Token varToken = identifiers.get(idIndex);
-							Token varType = getTokens().get(varToken.getTokenIndex()-1);
-							if(getTokenName(varType.getType()).equals("TYPE"))
-							{
-								System.out.println("FOUND ID and Type is: " + getTokenName(varType.getTokenIndex()));
-								//TODO complete it here
+							Token varType = getTokens().get(
+									varToken.getTokenIndex() - 1);
+							if (getTokenName(varType.getType()).equals("TYPE")) {
+								System.out
+										.println("FOUND ID and Type is: "
+												+ varType.getText());
+								// TODO complete it here
 							}
 						}
 					}
 				}
 			}
 			/** EndOF Handle ID */
-			for(String completionString:viableCompletionStrings)
-			{
-				if(completionString.startsWith(prefix))
-				{
+			
+			for (String completionString : viableCompletionStrings) {
+				if (completionString.startsWith(prefix)) {
 					validCompletionStrings.add(completionString);
-					CompletionInformation completionInfomation = new CompletionInformation(completionString, line, charPositionInLine, prefixLength);
+					CompletionInformation completionInfomation = new CompletionInformation(
+							completionString, line, charPositionInLine,
+							prefixLength);
 					availableProposals.add(completionInfomation);
 				}
 			}
-//			if (getTokenName(previousToken.getType()).equals("DOT")) {
-//				System.out.println(prefix);
-//			} else {
-//				// TODO implement
-//			}
 		}
 		return availableProposals;
 
-		// For getPreviousTOkenEndPosition();
-		// this.previousToken = previousToken;
-		// String previousTokenName = getTokenName(previousToken.getType());
-		// List<String> possibleTokens = compiler.getParser()
-		// .possibleFollowingTokens(compiler.getParser().getClass(),
-		// previousTokenName);
-		// List<String> translatedCompletions =
-		// translateAutocompletionString(possibleTokens);
 	}
 
 	/**
