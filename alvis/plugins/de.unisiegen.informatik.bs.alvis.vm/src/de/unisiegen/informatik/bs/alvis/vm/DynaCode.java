@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.TreeSet;
 
+import de.unisiegen.informatik.bs.alvis.io.logger.Logger;
+
 
 
 /**
@@ -45,6 +47,9 @@ public final class DynaCode {
 			TreeSet<String> dynamicallyReferencedPackagesNeededToCompile) {
 		this(extractClasspath(parentClassLoader), parentClassLoader,
 				dynamicallyReferencedPackagesNeededToCompile);
+		Logger.getInstance().setLogLevel(Logger.DEBUG);
+		Logger.getInstance().log("de.~.vm.AlgoThread.loadAlgo()", Logger.DEBUG, "Created a new DynaCode");
+				
 
 	}
 
@@ -130,17 +135,22 @@ public final class DynaCode {
 		synchronized (loadedClasses) {
 			loadedClass = loadedClasses.get(className);
 		}
+		Logger.getInstance().log("de.~.vm.DynaCode.loadClass()", Logger.DEBUG, "Begin of function");
+		
 
 		// first access of a class
 		if (loadedClass == null) {
 			String resource = className.replace('.', '/') + ".java";
 			SourceDir src = locateResource(resource);
 			if (src == null) {
+				Logger.getInstance().log("de.~.vm.DynaCode.loadClass()", Logger.DEBUG, "Class not found");
 				throw new ClassNotFoundException("DynaCode class not found "
 						+ className);
 			} else
 
 			synchronized (this) {
+
+				Logger.getInstance().log("de.~.vm.DynaCode.loadClass()", Logger.DEBUG, "Starting compile");
 
 				// compile and load class
 				loadedClass = new LoadedClass(className, src);
@@ -149,6 +159,7 @@ public final class DynaCode {
 					loadedClasses.put(className, loadedClass);
 				}
 			}
+			Logger.getInstance().log("de.~.vm.DynaCode.loadClass()", Logger.DEBUG, "class loaded");
 
 			return loadedClass.clazz;
 		}
@@ -260,6 +271,8 @@ public final class DynaCode {
 		}
 
 		void compileAndLoadClass() {
+
+			Logger.getInstance().log("de.~.vm.DynaCode.compileAndLoadClass()", Logger.DEBUG, "Begin of function");
 
 			if (clazz != null) {
 				return; // class already loaded

@@ -44,8 +44,8 @@ public final class Javac {
 	static JavaCompiler compiler;
 
 	public Javac(String classpath, String outputdir) {
-		this.classpath = classpath;
-		this.outputdir = outputdir;
+		Javac.classpath = classpath;
+		Javac.outputdir = outputdir;
 	}
 
 	private static boolean compile(JavaFileObject... source) {
@@ -98,24 +98,19 @@ public final class Javac {
 	 * @return null if success; or compilation errors
 	 */
 	public String compile(String srcFiles[]) {
-		Logger.getInstance().setLogLevel(Logger.INFO);
-		 Logger.getInstance().log("Javac", Logger.INFO,
-		 "Beginning Javac compile(String srcFiles[]) method");
-		 System.out.println("test hallo hallo");
+		Logger.getInstance().log("de.~.vm.Javac.compile(String)", Logger.DEBUG,
+				"Begin of function");
 
 		StringWriter err = new StringWriter();
 		PrintWriter errPrinter = new PrintWriter(err);
 
-		// Logger.getInstance().log("Javac", Logger.DEBUG,
-		// "Attributes generated");
-
 		String args[] = buildJavacArgs(srcFiles);
-		// Logger.getInstance().log("Javac", Logger.DEBUG, "Before compile");
 
 		compiler = ToolProvider.getSystemJavaCompiler();
 		if (compiler != null) {
 			String algorithmAsSourceCode = readfile(args[args.length - 1]);
-			String algorithmName =args[args.length - 1].split("/")[args[args.length - 1].split("/").length-1];
+			String algorithmName = args[args.length - 1].split("/")[args[args.length - 1]
+					.split("/").length - 1];
 
 			boolean result = false;
 			try {
@@ -125,21 +120,24 @@ public final class Javac {
 				e.printStackTrace();
 			}
 
-			// Logger.getInstance().log("Javac", Logger.DEBUG, "After compile");
+			 Logger.getInstance().log("de.~.vm.Javac.compile(String)", Logger.DEBUG, "Compile with ToolsProvider compiler was successful");
 
 			errPrinter.close();
-//			 Logger.getInstance().log("Javac", Logger.DEBUG,
-//			 "Error? " + err.toString());
+			 Logger.getInstance().log("de.~.vm.Javac.compile(String)", Logger.DEBUG,
+			 "Error? " + err.toString());
 
 			return result ? null : err.toString();
 		}
-		
-		else{
+
+		else {
+			Logger.getInstance().log("de.~.vm.Javac.compile(String)", Logger.DEBUG,
+					 "ToolsProvider did not provide a compiler, using fallback");
 			// Grabbing the standard compiler did not work, compiling "by hand"
-			// FIXME: 	1. Find a way, so that ToolProvider.getSystemJavaCompiler() cannot return null
-			// 			2. Delete the call to com.sun.tools.javac.Main
+			// FIXME: 1. Find a way, so that
+			// ToolProvider.getSystemJavaCompiler() cannot return null
+			// 2. Delete the call to com.sun.tools.javac.Main
 			int resultCode = com.sun.tools.javac.Main.compile(args, errPrinter);
-			return (resultCode == 0) ? null : err.toString(); 
+			return (resultCode == 0) ? null : err.toString();
 		}
 	}
 
@@ -183,18 +181,18 @@ public final class Javac {
 		for (int i = 0; i < paths.length; i++) {
 			paths[i] = srcFiles[i].getAbsolutePath();
 		}
-		// for (String path : paths) {
-		// Logger.getInstance().log("Javac Paths", Logger.DEBUG,
-		// "Content of paths: " + path);
-		// }
-		// Logger.getInstance().log("Javac", Logger.DEBUG,
-		// "Extracted paths, starting compiler");
-		// Logger.getInstance().log(
-		// "Javac",
-		// Logger.DEBUG,
-		// "Path to Javac.javac: "
-		// + this.getClass().getProtectionDomain().getCodeSource()
-		// .getLocation().getFile().toString());
+		for (String path : paths) {
+			Logger.getInstance().log("de.~.vm.Javac.compile(File)", Logger.DEBUG,
+					"Content of paths: " + path);
+		}
+		Logger.getInstance().log("de.~.vm.Javac.compile(File)", Logger.DEBUG,
+				"Extracted paths, starting compiler");
+		Logger.getInstance().log(
+				"de.~.vm.Javac.compile(File)",
+				Logger.DEBUG,
+				"Path to Javac.javac: "
+						+ this.getClass().getProtectionDomain().getCodeSource()
+								.getLocation().getFile().toString());
 
 		return compile(paths);
 	}

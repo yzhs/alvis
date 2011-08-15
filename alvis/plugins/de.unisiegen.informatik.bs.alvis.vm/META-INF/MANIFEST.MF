@@ -9,8 +9,7 @@ Require-Bundle: org.eclipse.core.runtime,
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Export-Package: de.unisiegen.informatik.bs.alvis.vm
-Bundle-ClassPath: src/de/unisiegen/informatik/bs/alvis/vm/tools.jar,
- .,
- tools.jar
+Bundle-ClassPath: src/tools.jar,
+ .
 DynamicImport-Package: *
 Import-Package: de.unisiegen.informatik.bs.alvis.io.logger

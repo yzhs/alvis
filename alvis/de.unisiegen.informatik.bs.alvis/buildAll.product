@@ -14,7 +14,6 @@ Eduard Boos
 Dominik Dingel
 Simon Groth
 Sebastian Schmitz
-Tobias Schueler
 Frank Weiler
       </text>
    </aboutInfo>
@@ -45,8 +44,10 @@ Frank Weiler
       </win>
    </launcher>
 
+
    <vm>
    </vm>
+
 
    <plugins>
       <plugin id="com.ibm.icu"/>
@@ -116,6 +117,8 @@ Frank Weiler
    <features>
       <feature id="de.unisiegen.informatik.bs.alvis.app"/>
       <feature id="org.eclipse.rcp.nl_de"/>
+      <feature id="de.unisiegen.informatik.bs.alvis.graph.app" version="1.0.0.qualifier"/>
+      <feature id="de.unisiegen.informatik.bs.alvis.languages.nl_de" version="1.0.0.qualifier"/>
    </features>
 
 

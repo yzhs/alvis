@@ -67,7 +67,7 @@
          </property>
          <property
                name="aboutText"
-               value="A project by Simon Meurer&#x0A;Version 1 by:&#x0A;Jan Bauerdick&#x0A;Colin Benner&#x0A;Eduard Boos&#x0A;Dominik Dingel&#x0A;Simon Groth&#x0A;Sebastian Schmitz&#x0A;Tobias Schueler&#x0A;Frank Weiler">
+               value="A project by Simon Meurer&#x0A;Version 1 by:&#x0A;Jan Bauerdick&#x0A;Colin Benner&#x0A;Eduard Boos&#x0A;Dominik Dingel&#x0A;Simon Groth&#x0A;Sebastian Schmitz&#x0A;Frank Weiler">
          </property>
          <property
                name="windowImages"
@@ -547,6 +547,38 @@
       <super
             type="org.eclipse.core.resources.problemmarker">
       </super>
+   </extension>
+   <extension
+         id="buildAll"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="de.unisiegen.informatik.bs.alvis.application"
+            name="%product.name">
+         <property
+               name="windowImages"
+               value="alvis16.png,alvis32.png,alvis48.png,alvis64.png,alvis128.png">
+         </property>
+         <property
+               name="aboutText"
+               value="A project by Simon Meurer&#x0A;Version 1 by:&#x0A;Jan Bauerdick&#x0A;Colin Benner&#x0A;Eduard Boos&#x0A;Dominik Dingel&#x0A;Simon Groth&#x0A;Sebastian Schmitz&#x0A;Frank Weiler">
+         </property>
+         <property
+               name="aboutImage"
+               value="about.png">
+         </property>
+         <property
+               name="startupForegroundColor"
+               value="000000">
+         </property>
+         <property
+               name="startupProgressRect"
+               value="0,243,450,10">
+         </property>
+         <property
+               name="startupMessageRect"
+               value="15,220,400,20">
+         </property>
+      </product>
    </extension>
    
 
