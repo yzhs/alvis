@@ -1,28 +1,54 @@
 package de.unisiegen.informatik.bs.alvis.sync.datatypes;
 
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCString;
 
 public class PCActor extends PCObject {
 	
 	protected static final String TYPENAME = "Actor";
-	private PCBoolean doStep;
-	private PCBoolean isBlocked;
-	private PCString name;
+	private boolean doStep;
+	private boolean isBlocked;
+	private String name;
+	
+	public PCActor() {
+		name = "";
+		doStep = false;
+		isBlocked = false;
+	}
+	
+	public PCActor(String name, GraphicalRepresentationActor gr) {
+		allGr.add(gr);
+		this.name = name;
+		doStep = false;
+		isBlocked = false;
+	}
+	
+	public PCActor(String name) {
+		this.name = name;
+		doStep = false;
+		isBlocked = false;
+	}
+	
+	public PCActor(String name, GraphicalRepresentationActor gr, boolean doStep, boolean isBlocked) {
+		allGr.add(gr);
+		this.name = name;
+		this.isBlocked = isBlocked;
+		this.doStep = doStep;
+	}
 	
 	public synchronized void step() {
-		if (!doStep.getLiteralValue() && !isBlocked.getLiteralValue()) {
-			doStep = new PCBoolean(true);
+		if (!doStep && !isBlocked) {
+			doStep = true;
 			notify();
 		}
 	}
 	
 	public synchronized void showline(PCInteger line) {
-		doStep = new PCBoolean(false);
+		doStep = false;
 		//vis.setLine(line);
-		while (!doStep.getLiteralValue()) {
+		while (!doStep) {
 			try {
 				wait();
 			} catch (InterruptedException e) {
@@ -33,7 +59,7 @@ public class PCActor extends PCObject {
 
 	@Override
 	public String toString() {
-		return TYPENAME + name.getLiteralValue() + ": " + (isBlocked.getLiteralValue() ? "" : "not") + " blocked.";
+		return TYPENAME + name + ": " + (isBlocked ? "" : "not") + " blocked.";
 	}
 
 	public static String getTypeName() {
@@ -44,11 +70,11 @@ public class PCActor extends PCObject {
 	public PCObject set(String memberName, PCObject value) {
 		if (memberName.equals("doStep")) {
 			PCBoolean b = (PCBoolean) value;
-			doStep = b;
+			doStep = b.getLiteralValue();
 			return this;
 		} else if (memberName.equals("isBlocked")) {
 			PCBoolean b = (PCBoolean) value;
-			isBlocked = b;
+			isBlocked = b.getLiteralValue();
 			return this;
 		}
 		return null;
@@ -68,9 +94,14 @@ public class PCActor extends PCObject {
 		}
 	}
 
-	public void setBlocked(PCBoolean newState, PCBoolean bySemaphore) {
+	public void setBlocked(boolean newState, boolean bySemaphore) {
 		isBlocked = newState;
 		//TODO: Visualization
+	}
+	
+	@Override
+	public void updateGR(GraphicalRepresentation gr) {
+		
 	}
 
 }

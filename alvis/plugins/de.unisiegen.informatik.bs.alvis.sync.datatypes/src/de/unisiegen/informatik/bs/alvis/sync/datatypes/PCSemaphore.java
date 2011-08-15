@@ -1,6 +1,6 @@
 package de.unisiegen.informatik.bs.alvis.sync.datatypes;
 
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCString;
@@ -8,33 +8,44 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCString;
 public class PCSemaphore extends PCObject {
 
 	protected static final String TYPENAME = "Semaphore";
-	private PCInteger counter;
-	private PCString name;
+	private int counter;
+	private String name;
+	
+	public PCSemaphore() {
+		name = "";
+		counter = 1;
+	}
 
-	public PCSemaphore(PCInteger counter, PCString name) {
+	public PCSemaphore(int counter, String name) {
+		this.counter = counter;
+		this.name = name;
+	}
+	
+	public PCSemaphore(int counter, String name, GraphicalRepresentationSemaphore gr) {
+		allGr.add(gr);
 		this.counter = counter;
 		this.name = name;
 	}
 
 	public synchronized void P(PCActor a) {
 		try {
-			counter.sub(new PCInteger(1));
+			counter--;
 			// vis.setState(this.counterVis);
-			if (counter.equals(new PCInteger(0))) {
-				a.setBlocked(new PCBoolean(true), new PCBoolean(true));
+			if (counter == 0) {
+				a.setBlocked(true, true);
 			}
-			while (counter.lessOrEqual(new PCInteger(0)).getLiteralValue()) {
+			while (counter <= 0) {
 				wait();
 			}
 			// counter--;
-			a.setBlocked(new PCBoolean(false), new PCBoolean(true));
+			a.setBlocked(false, true);
 		} catch (InterruptedException e) {
 			// sollte nicht passieren
 		}
 	}
 
 	public synchronized void V() {
-		counter.add(new PCInteger(1));
+		counter++;
 		// counterVis++;
 		// vis.setState(this.counterVis);
 		notify();
@@ -42,7 +53,7 @@ public class PCSemaphore extends PCObject {
 
 	@Override
 	public String toString() {
-		return PCSemaphore.TYPENAME +  name.getLiteralValue() + ": " + counter.getLiteralValue();
+		return PCSemaphore.TYPENAME +  name + ": " + counter;
 	}
 
 	public static String getTypeName() {
@@ -52,10 +63,10 @@ public class PCSemaphore extends PCObject {
 	@Override
 	public PCObject set(String memberName, PCObject value) {
 		if (memberName.equals("name")) {
-			name.setValue((PCString) value);
+			name = ((PCString) value).getLiteralValue();
 			return this;
 		} else if (memberName.equals("counter")) {
-			counter.setValue((PCInteger) value);
+			counter = ((PCInteger) value).getLiteralValue();
 			return this;
 		} else {
 			// Exception?
@@ -75,15 +86,21 @@ public class PCSemaphore extends PCObject {
 		}
 	}
 
+	@Override
 	public PCObject get(String memberName) {
 		if (memberName.equals("name")) {
-			return name;
+			return new PCString(name);
 		} else if (memberName.equals("counter")) {
-			return counter;
+			return new PCInteger(counter);
 		} else {
 			// Exception?
 			return null;
 		}
+	}
+	
+	@Override
+	public void updateGR(GraphicalRepresentation gr) {
+		
 	}
 
 }
