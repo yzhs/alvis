@@ -134,10 +134,16 @@ public class Member {
 			return new Member(name, SimpleType.create(typeName));
 	}
 
+	/**
+	 * @return the name of the member.
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * @return the type of the member.
+	 */
 	public Type getType() {
 		return type;
 	}

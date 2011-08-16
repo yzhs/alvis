@@ -33,6 +33,7 @@ public class InvalidAssignmentException extends TypeException {
 		this.right = right;
 	}
 
+	@Override
 	public String toString() {
 		return "Syntax error " + getPos() + ": The left "
 				+ "side '" + left + "' of the assignement '" + left + " = "
@@ -40,10 +41,16 @@ public class InvalidAssignmentException extends TypeException {
 				+ "allowed in this place.";
 	}
 
+	/**
+	 * @return the type of the left argument of the operator
+	 */
 	public String getLeft() {
 		return left;
 	}
 
+	/**
+	 * @return the type of the right argument of the operator
+	 */
 	public String getRight() {
 		return right;
 	}

@@ -1,9 +1,9 @@
 package de.uni_siegen.informatik.bs.alvic;
 
 /**
- * This exception describes the problem that a function is called with the
- * wrong number of arguments.
- *
+ * This exception describes the problem that a function is called with the wrong
+ * number of arguments.
+ * 
  * @author Colin
  */
 public class ArgumentNumberException extends TypeException {
@@ -24,16 +24,34 @@ public class ArgumentNumberException extends TypeException {
 	 */
 	protected int expected;
 
-	public ArgumentNumberException(String method, int expected, int given, TypedTree tree) {
+	/**
+	 * Create new ArgumentNumberException instance.
+	 * 
+	 * @param method
+	 *            The name of the method or function that is called with the
+	 *            wrong number of arguments.
+	 * @param expected
+	 *            The number of arguments the method or function expects.
+	 * @param given
+	 *            The actual number of arguments given.
+	 * @param tree
+	 *            The tree containing the function call.
+	 */
+	public ArgumentNumberException(String method, int expected, int given,
+			TypedTree tree) {
 		super(tree);
 		this.method = method;
 		this.expected = expected;
 		this.given = given;
 	}
 
+	/**
+	 * @return a textual representation of the problem.
+	 */
+	@Override
 	public String toString() {
-		return "Argument error " + getPos() + ": Method "
-		    + " '" + method + "' expects " + expected + " parameters "
-		    + "but is called with " + given + " arguments.";
+		return "Argument error " + getPos() + ": Method " + " '" + method
+				+ "' expects " + expected + " parameters "
+				+ "but is called with " + given + " arguments.";
 	}
 }

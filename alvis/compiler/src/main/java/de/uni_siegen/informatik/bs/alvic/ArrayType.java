@@ -79,12 +79,6 @@ public class ArrayType implements Type {
 				&& elementType.matches(((ArrayType) other).getTypeArgument());
 	}
 
-	/**
-	 * @param other
-	 *            the type to compare this with
-	 * @return true if and only if this and other are arrays with the exact same
-	 *         element type
-	 */
 	public boolean equals(Type other) {
 		if (other == null || !(other instanceof ArrayType))
 			return false;

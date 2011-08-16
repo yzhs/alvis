@@ -51,6 +51,7 @@ public class InvalidReturnException extends TypeException {
 		this.stat = stat;
 	}
 
+	@Override
 	public String toString() {
 		if (expected.toString().equalsIgnoreCase("void"))
 			return "Type error " + getPos() + ": Trying to return non-void "
@@ -65,18 +66,30 @@ public class InvalidReturnException extends TypeException {
 				+ "' was expected.";
 	}
 
+	/**
+	 * @return the type that was expected to be returned.
+	 */
 	public Type getExpected() {
 		return expected;
 	}
 	
+	/**
+	 * @return the type that the used tried to return.
+	 */
 	public Type getGiven() {
 		return given;
 	}
 
+	/**
+	 * @return the function in which the invalid return statement is in.
+	 */
 	public String getFunction() {
 		return function;
 	}
 
+	/**
+	 * @return the offending statement or the relevant part of it.
+	 */
 	public String getStat() {
 		return stat;
 	}

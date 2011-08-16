@@ -11,11 +11,21 @@ import org.antlr.runtime.RecognitionException;
 public abstract class TypeException extends RecognitionException {
 	private static final long serialVersionUID = -2651349912464757271L;
 
+	/**
+	 * The last line containing part of the invalid code.
+	 */
 	public int endLine;
-	public int endCharPositionInLine;
 	
+	/**
+	 * The last column containing part of the invalid code in the last line.
+	 */
+	public int endCharPositionInLine;
+
 	public abstract String toString();
 
+	/**
+	 * @param tree the tree in which the error occurred.
+	 */
 	protected TypeException(TypedTree tree) {
 		this.token = tree.getToken();
 		this.line = tree.getLine();
@@ -24,6 +34,10 @@ public abstract class TypeException extends RecognitionException {
 		this.endCharPositionInLine = tree.getEndCharPositionInLine();
 	}
 
+	/**
+	 * 
+	 * @return a textual representation of the range in which which the error occurred.
+	 */
 	public String getPos() {
 		return "(from " + line + ":" + charPositionInLine + " to " + endLine + ":" + endCharPositionInLine + ")";
 	}

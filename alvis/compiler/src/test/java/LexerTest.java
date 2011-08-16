@@ -203,6 +203,7 @@ public class LexerTest {
 				+ toGet.getText() + "' instead of 'end'";
 	}
 
+/*
 	@Test
 	public void autoCompletionKeyWords1() {
 		printTestName();
@@ -231,6 +232,7 @@ public class LexerTest {
 						.get(0) + "' when trying to complete '"
 				+ lexer.getTokenByNumbers(2, 11) + "'";
 	}
+*/
 
 	@Test
 	public void checkTypeNames() {

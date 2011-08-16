@@ -10,8 +10,8 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 /**
- * SimpleType describes a builtin type like 'Integer' or 'Boolean' as well as
- * types provided by plugins, such as 'Graph' or 'Vertex'. It does not describe
+ * SimpleType describes a built-in type like 'Integer' or 'Boolean' as well as
+ * types provided by plug-ins, such as 'Graph' or 'Vertex'. It does not describe
  * the type of a function or an array.
  * 
  * @author Colin
@@ -72,7 +72,8 @@ public class SimpleType implements Type {
 	/**
 	 * Create non-generic type with the given name.
 	 * 
-	 * @param name The name of the type that is to be created.
+	 * @param name
+	 *            The name of the type that is to be created.
 	 * @return SimpleType object representing the type with that name.
 	 */
 	public static SimpleType create(String name) {
@@ -138,6 +139,7 @@ public class SimpleType implements Type {
 				t.parent = SimpleType.create(c.getSuperclass().getName());
 			else
 				t.parent = null;
+			// TODO decide on what to do with the exceptions
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
@@ -151,10 +153,17 @@ public class SimpleType implements Type {
 		}
 	}
 
+	/**
+	 * @return the name of this type.
+	 */
 	public String getName() {
 		return name;
 	}
 
+	/**
+	 * @return the type this was derived from if this is not PCObject, null
+	 *         otherwise.
+	 */
 	public SimpleType getParent() {
 		return parent;
 	}
@@ -227,6 +236,7 @@ public class SimpleType implements Type {
 		return other.toString().equals(name);
 	}
 
+	@Override
 	public String toString() {
 		return null == argument ? name : argument + " " + name;
 	}

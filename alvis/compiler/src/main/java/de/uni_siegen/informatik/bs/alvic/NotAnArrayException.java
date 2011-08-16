@@ -32,16 +32,23 @@ public class NotAnArrayException extends TypeException {
 		this.expr = expr;
 	}
 
+	@Override
 	public String toString() {
 		return "Indexing error " + getPos() + ": "
 				+ "Tried to index '" + expr + "', which has type '" + type
 				+ "', which is not an array type.";
 	}
 
+	/**
+	 * @return the type of the expression the user tried to use as if it was an array.
+	 */
 	public Type getType() {
 		return type;
 	}
-	
+
+	/**
+	 * @return the expression the user tried to use as if it was an array.
+	 */
 	public String getExpr() {
 		return expr;
 	}

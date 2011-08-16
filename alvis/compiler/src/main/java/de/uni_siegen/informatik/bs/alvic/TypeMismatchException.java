@@ -41,20 +41,30 @@ public class TypeMismatchException extends TypeException {
 		this.expr = expr;
 	}
 
+	@Override
 	public String toString() {
 		return "Type error " + getPos() + ": Found '" + expr
 				+ "' which has type '" + given + "', but expected "
 				+ "an expression of type '" + expected + "'.";
 	}
 
+	/**
+	 * @return the type that was expected.
+	 */
 	public Type getExpected() {
 		return expected;
 	}
 
+	/**
+	 * @return the type that was actually found.
+	 */
 	public Type getGiven() {
 		return given;
 	}
 
+	/**
+	 * @return the expression with that type.
+	 */
 	public String getExpr() {
 		return expr;
 	}

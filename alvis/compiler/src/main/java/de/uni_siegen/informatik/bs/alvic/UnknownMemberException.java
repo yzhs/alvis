@@ -25,7 +25,7 @@ public class UnknownMemberException extends TypeException {
 	 * @param member
 	 *            The name of the member.
 	 * @param tree
-	 *            The subtree in which the problem ocurred
+	 *            The subtree in which the problem occurred
 	 */
 	public UnknownMemberException(Type object, String member, TypedTree tree) {
 		super(tree);
@@ -33,15 +33,22 @@ public class UnknownMemberException extends TypeException {
 		this.member = member;
 	}
 
+	@Override
 	public String toString() {
-		return "Attribute error " + getPos() + ": Class '"
-				+ object + "' does not have a member called '" + member + "'.";
+		return "Attribute error " + getPos() + ": Class '" + object
+				+ "' does not have a member called '" + member + "'.";
 	}
 
+	/**
+	 * @return the class used.
+	 */
 	public Type getObject() {
 		return object;
 	}
 
+	/**
+	 * @return the name of the member that the class does not have.
+	 */
 	public String getMember() {
 		return member;
 	}

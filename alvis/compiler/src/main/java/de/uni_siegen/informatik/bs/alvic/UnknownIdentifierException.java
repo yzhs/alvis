@@ -28,12 +28,16 @@ public class UnknownIdentifierException extends TypeException {
 		this.identifier = identifier;
 	}
 
+	@Override
 	public String toString() {
 		return "Type error " + getPos() + ": Identifier '"
 				+ identifier + "' was used before being declared in the "
 				+ "current scope.";
 	}
 
+	/**
+	 * @return the unknown identifier. 
+	 */
 	public String getIdentifier() {
 		return identifier;
 	}

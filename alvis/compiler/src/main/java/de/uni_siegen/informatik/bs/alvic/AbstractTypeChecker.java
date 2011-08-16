@@ -19,24 +19,27 @@ public abstract class AbstractTypeChecker extends TreeParser {
 	protected Parser parser = null;
 
 	/**
-	 * Create a new parser instance, pre-supplying the input token stream.
+	 * Create a new type checker instance, pre-supplying the input tree node
+	 * stream.
 	 * 
 	 * @param input
-	 *            The stream of tokens that will be pulled from the lexer
+	 *            The stream of tree nodes that will be pulled from the previous
+	 *            parser
 	 */
 	protected AbstractTypeChecker(TreeNodeStream input) {
 		super(input);
 	}
 
 	/**
-	 * Create a new parser instance, pre-supplying the input token stream and
-	 * the shared state.
+	 * Create a new type checker instance, pre-supplying the input tree node
+	 * stream and the shared state.
 	 * 
 	 * This is only used when a grammar is imported into another grammar, but we
 	 * must supply this constructor to satisfy the super class contract.
 	 * 
 	 * @param input
-	 *            The stream of tokens that will be pulled from the lexer
+	 *            The stream of tree nodes that will be pulled from the previous
+	 *            parser
 	 * @param state
 	 *            The shared state object created by an interconnected grammar
 	 */
@@ -116,7 +119,8 @@ public abstract class AbstractTypeChecker extends TreeParser {
 		int n = ((FunctionType) functionType).getArgumentTypes().size();
 
 		if (arguments.size() != n) {
-			reportError(new ArgumentNumberException(name, n, arguments.size(), tree));
+			reportError(new ArgumentNumberException(name, n, arguments.size(),
+					tree));
 			return;
 		}
 
@@ -139,7 +143,8 @@ public abstract class AbstractTypeChecker extends TreeParser {
 	 * @param tree
 	 *            the tree in which the member is referenced
 	 */
-	protected Type checkMember(Type object, String member, Type expected, TypedTree tree) {
+	protected Type checkMember(Type object, String member, Type expected,
+			TypedTree tree) {
 		if (!object.hasMember(member)) {
 			reportError(new UnknownMemberException(object, member, tree));
 			return SimpleType.create("# UnknownMember #");
@@ -169,7 +174,8 @@ public abstract class AbstractTypeChecker extends TreeParser {
 	 * @param tree
 	 *            the expression's subtree
 	 */
-	protected void checkTypes(Type expected, Type actual, String expr, TypedTree tree) {
+	protected void checkTypes(Type expected, Type actual, String expr,
+			TypedTree tree) {
 		if (actual == null || !actual.matches(expected))
 			reportError(new TypeMismatchException(expected, actual, expr, tree));
 	}
@@ -280,6 +286,12 @@ public abstract class AbstractTypeChecker extends TreeParser {
 		return SimpleType.create("# NoSuchOperator #");
 	}
 
+	/**
+	 * Set the parser to the previously used one.
+	 * 
+	 * @param parser
+	 *            the previous (tree-)parser.
+	 */
 	public void setParser(Parser parser) {
 		this.parser = parser;
 	}

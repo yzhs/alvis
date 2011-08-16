@@ -33,7 +33,7 @@ public class NoSuchOperatorException extends UnknownOperatorException {
 	 */
 	public NoSuchOperatorException(Type object, String op, Type argType, int arguments, TypedTree tree) {
 		super(object, op, tree);
-		this.arguments = arguments;
+		this.arguments = arguments + 1;
 		this.argType = argType;
 	}
 
@@ -41,14 +41,20 @@ public class NoSuchOperatorException extends UnknownOperatorException {
 	public String toString() {
 		return "Operator error " + getPos() + ": There is "
 				+ "no operator '" + member + "' for objects of type '" + object + "'"
-				+ ((arguments == 0) ? "." : (" taking exactly " + arguments
+				+ ((arguments == 1) ? "." : (" taking exactly " + arguments
 						+ " arguments of a " + "subtype of '" + object + "'."));
 	}
 
+	/**
+	 * @return the number of parameters of the operator (should always be either 1 or 2). 
+	 */
 	public int getArguments() {
 		return arguments;
 	}
 	
+	/**
+	 * @return the type of the second argument if there is one, null otherwise.
+	 */
 	public Type getArgType() {
 		return argType;
 	}

@@ -157,76 +157,76 @@ public abstract class AbstractTLexer extends Lexer {
 		return tmp;
 	}
 
-	/**
-	 * Return probable completions for the given token.
-	 * 
-	 * @return List of String which could be useful
-	 */
-	public List<String> tryAutoCompletion(Token toComplete) {
-		return this.tryAutoCompletion(toComplete, 5, false, 0.5f);
-	}
-
-	/**
-	 * Internal helper function for auto-completion.
-	 * 
-	 * @param toComplete
-	 *            the token that is to be completed
-	 * @param numberSuggestions
-	 *            how many suggestions to generate
-	 * @param allowSame
-	 * @param epsilon
-	 *            how similar to the given token are the suggestions supposed to
-	 *            be
-	 * @return list of suggestions
-	 */
-	protected List<String> tryAutoCompletion(Token toComplete,
-			int numberSuggestions, boolean allowSame, float epsilon) {
-		this.allTokens();
-		List<String> result = new ArrayList<String>();
-		float[] values = new float[numberSuggestions];
-		String[] sugges = new String[numberSuggestions];
-		for (int i = 0; i < numberSuggestions; i++) {
-			values[i] = 0;
-			sugges[i] = new String("");
-		}
-
-		float check = 0;
-		for (String s : tokenText)
-			if ((!s.equals(toComplete.getText())) || allowSame) {
-				check = StringRate.calcStringMatching(s, toComplete.getText());
-				if (check >= epsilon)
-					insertTo(sugges, values, s, check);
-			}
-
-		for (int i = 0; i < sugges.length; i++)
-			if (!sugges[i].isEmpty())
-				result.add(sugges[i]);
-
-		return result;
-	}
-
-	/**
-	 * 
-	 * @param insertArr
-	 * @param values
-	 * @param insert
-	 * @param checkValue
-	 */
-	protected void insertTo(String[] insertArr, float[] values, String insert,
-			float checkValue) {
-		String stmp;
-		float ftmp;
-		for (int i = 0; i < values.length; i++) {
-			if (checkValue <= values[i])
-				continue;
-			
-			stmp = insertArr[i];
-			insertArr[i] = insert;
-			ftmp = values[i];
-			values[i] = checkValue;
-			insertTo(insertArr, values, stmp, ftmp);
-		}
-	}
+//	/**
+//	 * Return probable completions for the given token.
+//	 * 
+//	 * @return List of String which could be useful
+//	 */
+//	private List<String> tryAutoCompletion(Token toComplete) {
+//		return this.tryAutoCompletion(toComplete, 5, false, 0.5f);
+//	}
+//
+//	/**
+//	 * Internal helper function for auto-completion.
+//	 * 
+//	 * @param toComplete
+//	 *            the token that is to be completed
+//	 * @param numberSuggestions
+//	 *            how many suggestions to generate
+//	 * @param allowSame
+//	 * @param epsilon
+//	 *            how similar to the given token are the suggestions supposed to
+//	 *            be
+//	 * @return list of suggestions
+//	 */
+//	protected List<String> tryAutoCompletion(Token toComplete,
+//			int numberSuggestions, boolean allowSame, float epsilon) {
+//		this.allTokens();
+//		List<String> result = new ArrayList<String>();
+//		float[] values = new float[numberSuggestions];
+//		String[] sugges = new String[numberSuggestions];
+//		for (int i = 0; i < numberSuggestions; i++) {
+//			values[i] = 0;
+//			sugges[i] = new String("");
+//		}
+//
+//		float check = 0;
+//		for (String s : tokenText)
+//			if ((!s.equals(toComplete.getText())) || allowSame) {
+//				check = StringRate.calcStringMatching(s, toComplete.getText());
+//				if (check >= epsilon)
+//					insertTo(sugges, values, s, check);
+//			}
+//
+//		for (int i = 0; i < sugges.length; i++)
+//			if (!sugges[i].isEmpty())
+//				result.add(sugges[i]);
+//
+//		return result;
+//	}
+//
+//	/**
+//	 * 
+//	 * @param insertArr
+//	 * @param values
+//	 * @param insert
+//	 * @param checkValue
+//	 */
+//	protected void insertTo(String[] insertArr, float[] values, String insert,
+//			float checkValue) {
+//		String stmp;
+//		float ftmp;
+//		for (int i = 0; i < values.length; i++) {
+//			if (checkValue <= values[i])
+//				continue;
+//			
+//			stmp = insertArr[i];
+//			insertArr[i] = insert;
+//			ftmp = values[i];
+//			values[i] = checkValue;
+//			insertTo(insertArr, values, stmp, ftmp);
+//		}
+//	}
 
 	/**
 	 * @return all exceptions that occurred.
@@ -280,7 +280,7 @@ public abstract class AbstractTLexer extends Lexer {
 	}
 
 	/**
-	 * Get a token given its position.
+	 * Get a token given its position. This is used for testing the lexer.
 	 * 
 	 * @param line
 	 *            Starting at 1

@@ -24,12 +24,16 @@ public class InvalidStatementException extends TypeException {
 		this.expr = expr;
 	}
 
+	@Override
 	public String toString() {
 		return "Syntax error " + getPos() + ": Found '" + expr
 				+ "' which is not a valid statement but used where a statement"
 				+ " was expected.";
 	}
 
+	/**
+	 * @return the expression that is used as if it were a statement.
+	 */
 	public String getExpr() {
 		return expr;
 	}

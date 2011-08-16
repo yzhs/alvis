@@ -17,6 +17,7 @@ public class TypedTreeAdaptor extends CommonTreeAdaptor {
 	 * 
 	 * @return empty TypedTree
 	 */
+	@Override
 	public Object nil() {
 		return create(null);
 	}
@@ -28,6 +29,7 @@ public class TypedTreeAdaptor extends CommonTreeAdaptor {
 	 *            The token to be stored in the TypedTree.
 	 * @return new TypedTree with the given payload.
 	 */
+	@Override
 	public Object create(Token payload) {
 		return new TypedTree(payload);
 	}
@@ -39,6 +41,7 @@ public class TypedTreeAdaptor extends CommonTreeAdaptor {
 	 *            The tree to be duplicated.
 	 * @return a copy of that tree.
 	 */
+	@Override
 	public Object dupNode(Object t) {
 		if (t == null)
 			return null;
@@ -58,6 +61,7 @@ public class TypedTreeAdaptor extends CommonTreeAdaptor {
 	 *            The exception that occurred.
 	 * @return new TypedErrorNode describing the problem.
 	 */
+	@Override
 	public Object errorNode(TokenStream input, Token start, Token stop,
 			RecognitionException e) {
 		return new TypedErrorNode(input, start, stop, e);

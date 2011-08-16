@@ -60,6 +60,7 @@ public class TypedErrorNode extends TypedTree {
 		this.re = re;
 	}
 
+	@Override
 	public boolean isNil() {
 		return false;
 	}
@@ -69,6 +70,7 @@ public class TypedErrorNode extends TypedTree {
 	 * 
 	 * @return Token.INVALID_TOKEN_TYPE because this is an error node.
 	 */
+	@Override
 	public int getType() {
 		return Token.INVALID_TOKEN_TYPE;
 	}
@@ -76,6 +78,7 @@ public class TypedErrorNode extends TypedTree {
 	/**
 	 * @return the source code in the problematic section
 	 */
+	@Override
 	public String getText() {
 		String badText = null;
 		if (start instanceof Token) {
@@ -97,6 +100,7 @@ public class TypedErrorNode extends TypedTree {
 	/**
 	 * Create the error message that will be used by the toStringTree() method.
 	 */
+	@Override
 	public String toString() {
 		if (re instanceof UnwantedTokenException) {
 			return "<extraneous: "

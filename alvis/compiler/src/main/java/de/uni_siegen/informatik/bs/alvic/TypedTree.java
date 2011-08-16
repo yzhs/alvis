@@ -71,18 +71,32 @@ public class TypedTree extends CommonTree {
 		return new TypedTree(this);
 	}
 
+	/**
+	 * @return the line in which the leftmost descendant of this node begins.
+	 */
+	@Override
 	public int getLine() {
 		return getStart().getLine();
 	}
 
+	/**
+	 * @return the column in which the leftmost descendant of this node begins.
+	 */
+	@Override
 	public int getCharPositionInLine() {
 		return getStart().getCharPositionInLine();
 	}
 
+	/**
+	 * @return the line in which the rightmost descendant of this node begins.
+	 */
 	public int getEndLine() {
 		return getEnd().getLine();
 	}
 
+	/**
+	 * @return the column in which the rightmost descendant of this node begins.
+	 */
 	public int getEndCharPositionInLine() {
 		CommonToken end = (CommonToken) getEnd();
 		return end.getCharPositionInLine() + end.getStopIndex()
@@ -110,7 +124,8 @@ public class TypedTree extends CommonTree {
 	/**
 	 * Print this tree.
 	 * 
-	 * @param parser The TParser instance used by the compiler.
+	 * @param parser
+	 *            The TParser instance used by the compiler.
 	 * @return the original source code from which this tree was created
 	 */
 	public String treeToString(Parser parser) {

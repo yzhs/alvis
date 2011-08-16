@@ -33,16 +33,23 @@ public class NotAFunctionException extends TypeException {
 		this.expr = expr;
 	}
 
+	@Override
 	public String toString() {
 		return "Function call error " + getPos() + ": "
 				+ "Tried to call '" + expr + "', which has type '" + type
 				+ "', which is not a function type.";
 	}
 
+	/**
+	 * @return the type of the expression the user tried to call.
+	 */
 	public Type getType() {
 		return type;
 	}
 
+	/**
+	 * @return the expression the user tried to call.
+	 */
 	public String getExpr() {
 		return expr;
 	}

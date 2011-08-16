@@ -18,12 +18,8 @@ import org.antlr.runtime.*;
  * The super class of the generated parser. It is extended by the generated code
  * because of the superClass option in the .g file.
  * 
- * This class contains any helper functions used within the parser grammar
- * itself, as well as any overrides of the standard ANTLR Java runtime methods,
- * such as an implementation of a custom error reporting method, symbol table
- * populating methods and so on.
- * 
- * @author Jim Idle - Temporal Wave LLC - jimi@temporal-wave.com
+ * This class is based on the one given as a template by the Eclipes Maven
+ * plugin.
  */
 public abstract class AbstractTParser extends Parser {
 	/**
@@ -42,7 +38,8 @@ public abstract class AbstractTParser extends Parser {
 	 */
 	private void readTokenNumbers() {
 		InputStream tokenFile = getClass().getClassLoader()
-				.getResourceAsStream("/target/generated-sources/antlr3/TParser.tokens");
+				.getResourceAsStream(
+						"/target/generated-sources/antlr3/TParser.tokens");
 		if (null == tokenFile)
 			return;
 		BufferedReader fstream = new BufferedReader(new InputStreamReader(
@@ -112,6 +109,13 @@ public abstract class AbstractTParser extends Parser {
 		exceptions.add(e);
 	}
 
+	/**
+	 * Given the internal number of a token get its name.
+	 * 
+	 * @param tokenNumber
+	 *            The number of the token
+	 * @return the name of the token
+	 */
 	public String getTokenName(int tokenNumber) {
 		return numToTokenName.get(tokenNumber);
 	}
@@ -141,13 +145,15 @@ public abstract class AbstractTParser extends Parser {
 							tokenNums.add(numToTokenName.get(i));
 				}
 		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
+			// This should not happen as long as the parser is a public class.
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
+			// This does not happen as long as ANTLR generates the FOLLOW_* sets
+			// like it does now.
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
+			// This does not happen as long as ANTLR generates the FOLLOW_* sets
+			// like it does now.
 			e.printStackTrace();
 		}
 
