@@ -2,9 +2,10 @@ package de.uni_siegen.informatik.bs.alvic;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.HashSet;
 
@@ -115,7 +116,8 @@ public abstract class AbstractTLexer extends Lexer {
 	}
 
 	/**
-	 * Add all predefined types and keywords to a list. This is used for auto completion.
+	 * Add all predefined types and keywords to a list. This is used for auto
+	 * completion.
 	 */
 	abstract protected void allTokens();
 
@@ -144,7 +146,7 @@ public abstract class AbstractTLexer extends Lexer {
 		while (this.nextToken() != Token.EOF_TOKEN)
 			;
 	}
-	
+
 	/**
 	 * Add a copy of every token found in the input stream to the tokens list.
 	 * 
@@ -157,76 +159,77 @@ public abstract class AbstractTLexer extends Lexer {
 		return tmp;
 	}
 
-//	/**
-//	 * Return probable completions for the given token.
-//	 * 
-//	 * @return List of String which could be useful
-//	 */
-//	private List<String> tryAutoCompletion(Token toComplete) {
-//		return this.tryAutoCompletion(toComplete, 5, false, 0.5f);
-//	}
-//
-//	/**
-//	 * Internal helper function for auto-completion.
-//	 * 
-//	 * @param toComplete
-//	 *            the token that is to be completed
-//	 * @param numberSuggestions
-//	 *            how many suggestions to generate
-//	 * @param allowSame
-//	 * @param epsilon
-//	 *            how similar to the given token are the suggestions supposed to
-//	 *            be
-//	 * @return list of suggestions
-//	 */
-//	protected List<String> tryAutoCompletion(Token toComplete,
-//			int numberSuggestions, boolean allowSame, float epsilon) {
-//		this.allTokens();
-//		List<String> result = new ArrayList<String>();
-//		float[] values = new float[numberSuggestions];
-//		String[] sugges = new String[numberSuggestions];
-//		for (int i = 0; i < numberSuggestions; i++) {
-//			values[i] = 0;
-//			sugges[i] = new String("");
-//		}
-//
-//		float check = 0;
-//		for (String s : tokenText)
-//			if ((!s.equals(toComplete.getText())) || allowSame) {
-//				check = StringRate.calcStringMatching(s, toComplete.getText());
-//				if (check >= epsilon)
-//					insertTo(sugges, values, s, check);
-//			}
-//
-//		for (int i = 0; i < sugges.length; i++)
-//			if (!sugges[i].isEmpty())
-//				result.add(sugges[i]);
-//
-//		return result;
-//	}
-//
-//	/**
-//	 * 
-//	 * @param insertArr
-//	 * @param values
-//	 * @param insert
-//	 * @param checkValue
-//	 */
-//	protected void insertTo(String[] insertArr, float[] values, String insert,
-//			float checkValue) {
-//		String stmp;
-//		float ftmp;
-//		for (int i = 0; i < values.length; i++) {
-//			if (checkValue <= values[i])
-//				continue;
-//			
-//			stmp = insertArr[i];
-//			insertArr[i] = insert;
-//			ftmp = values[i];
-//			values[i] = checkValue;
-//			insertTo(insertArr, values, stmp, ftmp);
-//		}
-//	}
+	// /**
+	// * Return probable completions for the given token.
+	// *
+	// * @return List of String which could be useful
+	// */
+	// private List<String> tryAutoCompletion(Token toComplete) {
+	// return this.tryAutoCompletion(toComplete, 5, false, 0.5f);
+	// }
+	//
+	// /**
+	// * Internal helper function for auto-completion.
+	// *
+	// * @param toComplete
+	// * the token that is to be completed
+	// * @param numberSuggestions
+	// * how many suggestions to generate
+	// * @param allowSame
+	// * @param epsilon
+	// * how similar to the given token are the suggestions supposed to
+	// * be
+	// * @return list of suggestions
+	// */
+	// protected List<String> tryAutoCompletion(Token toComplete,
+	// int numberSuggestions, boolean allowSame, float epsilon) {
+	// this.allTokens();
+	// List<String> result = new ArrayList<String>();
+	// float[] values = new float[numberSuggestions];
+	// String[] sugges = new String[numberSuggestions];
+	// for (int i = 0; i < numberSuggestions; i++) {
+	// values[i] = 0;
+	// sugges[i] = new String("");
+	// }
+	//
+	// float check = 0;
+	// for (String s : tokenText)
+	// if ((!s.equals(toComplete.getText())) || allowSame) {
+	// check = StringRate.calcStringMatching(s, toComplete.getText());
+	// if (check >= epsilon)
+	// insertTo(sugges, values, s, check);
+	// }
+	//
+	// for (int i = 0; i < sugges.length; i++)
+	// if (!sugges[i].isEmpty())
+	// result.add(sugges[i]);
+	//
+	// return result;
+	// }
+	//
+	// /**
+	// *
+	// * @param insertArr
+	// * @param values
+	// * @param insert
+	// * @param checkValue
+	// */
+	// protected void insertTo(String[] insertArr, float[] values, String
+	// insert,
+	// float checkValue) {
+	// String stmp;
+	// float ftmp;
+	// for (int i = 0; i < values.length; i++) {
+	// if (checkValue <= values[i])
+	// continue;
+	//
+	// stmp = insertArr[i];
+	// insertArr[i] = insert;
+	// ftmp = values[i];
+	// values[i] = checkValue;
+	// insertTo(insertArr, values, stmp, ftmp);
+	// }
+	// }
 
 	/**
 	 * @return all exceptions that occurred.
@@ -257,25 +260,26 @@ public abstract class AbstractTLexer extends Lexer {
 	 * @return list of all keywords
 	 */
 	public static List<String> allKeywords() {
-		String[] keywords = { "if", "else", "begin", "end", "for", "while", "in", "{", "}", ":" };
+		String[] keywords = { "if", "else", "begin", "end", "for", "while",
+				"in", "{", "}", ":" };
 		return Arrays.asList(keywords);
-	} 
+	}
 
 	/**
-	 * Provides a list of all Java keywords we do not use. These can not be
-	 * used as identifiers because that would cause syntax errors in the
-	 * generated Java code.
+	 * Provides a list of all Java keywords we do not use. These can not be used
+	 * as identifiers because that would cause syntax errors in the generated
+	 * Java code.
 	 * 
 	 * @return a list of all forbidden words
 	 */
 	public static List<String> allForbidden() {
-		String[] forbidden = { "abstract", "assert", "boolean", "byte", "catch",
-		    "class", "const", "default", "double", "enum", "extends", "final",
-		    "finally", "float", "goto", "implements", "import", "int",
-		    "instanceof", "interface", "long", "native", "new", "package",
-		    "private", "protected", "public", "return", "short", "static",
-		    "strictfp", "super", "synchronized", "this", "throw", "transient",
-		    "try", "void", "volatile" };
+		String[] forbidden = { "abstract", "assert", "boolean", "byte",
+				"catch", "class", "const", "default", "double", "enum",
+				"extends", "final", "finally", "float", "goto", "implements",
+				"import", "int", "instanceof", "interface", "long", "native",
+				"new", "package", "private", "protected", "public", "return",
+				"short", "static", "strictfp", "super", "synchronized", "this",
+				"throw", "transient", "try", "void", "volatile" };
 		return Arrays.asList(forbidden);
 	}
 
@@ -289,32 +293,19 @@ public abstract class AbstractTLexer extends Lexer {
 	 * @return The Token at this position
 	 */
 	public Token getTokenByNumbers(int line, int position) {
-		Iterator<Token> it = tokens.iterator();
-		boolean notTheEnd = true;
-		Token next = null;
-		Token act = null;
+		List<Token> t = new ArrayList<Token>(tokens);
+		if (t.size() == 0)
+			return null;
+		t.remove(t.size()-1); // remove the EOF-token
+		Collections.reverse(t);
 
-		while (notTheEnd) {
-			act = next;
-			if (it.hasNext())
-				next = it.next();
-			else {
-				next = null;
-				notTheEnd = false;
-			}
-			if (act != null && act.getLine() == line) {
-				if (!notTheEnd)
-					return act;
-
-				if (next != null && next.getLine() != line)
-					return act;
-
-				if (act.getCharPositionInLine() <= position
-						&& next.getCharPositionInLine() > position)
-					return act;
+		for (Token act : t) {
+			if (act.getLine() < line || act.getLine() == line
+					&& act.getCharPositionInLine() <= position) {
+				return act;
 			}
 		}
-		return null;
+		return t.get(0);
 	}
 
 	/**

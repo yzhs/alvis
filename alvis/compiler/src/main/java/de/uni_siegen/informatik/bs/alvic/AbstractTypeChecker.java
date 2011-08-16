@@ -10,7 +10,7 @@ import org.antlr.runtime.tree.*;
  * 
  * @author Colin
  */
-public abstract class AbstractTypeChecker extends TreeParser {
+public abstract class AbstractTypeChecker extends AbstractTreeParser {
 	/**
 	 * List of all exceptions created during type checking.
 	 */

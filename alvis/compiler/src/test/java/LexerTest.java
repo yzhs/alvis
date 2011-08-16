@@ -139,7 +139,8 @@ public class LexerTest {
 		TLexer lexer = new TLexer(cs);
 		lexer.scan();
 		Token toGet = lexer.getTokenByNumbers(1, 0);
-		assert toGet.getText().equals("BFS") : "found wrong token '"
+		System.err.println(toGet);
+		assert "BFS".equals(toGet.getText()) : "found wrong token '"
 				+ toGet.getText() + "' instead of 'BFS'";
 	}
 
@@ -151,7 +152,7 @@ public class LexerTest {
 		TLexer lexer = new TLexer(cs);
 		lexer.scan();
 		Token toGet = lexer.getTokenByNumbers(1, 8);
-		assert toGet.getText().equals("Graph") : "found wrong token '"
+		assert "Graph".equals(toGet.getText()) : "found wrong token '"
 				+ toGet.getText() + "' instead of 'Graph'";
 	}
 
@@ -163,7 +164,7 @@ public class LexerTest {
 		TLexer lexer = new TLexer(cs);
 		lexer.scan();
 		Token toGet = lexer.getTokenByNumbers(1, 24);
-		assert toGet.getText().equals("begin") : "found wrong token '"
+		assert "begin".equals(toGet.getText()) : "found wrong token '"
 				+ toGet.getText() + "' instead of 'begin'";
 	}
 
@@ -180,26 +181,8 @@ public class LexerTest {
 		CharStream cs = new ANTLRStringStream(algorithm);
 		TLexer lexer = new TLexer(cs);
 		lexer.scan();
-		Token toGet = lexer.getTokenByNumbers(7, 24);
-		assert toGet == null : "found token '" + toGet.getText()
-				+ "' when expecting to find nothing";
-	}
-
-	@Test
-	public void getTokenByNumbers5() {
-		printTestName();
-		String algorithm = "" + //$NON-NLS-1$
-				"BFS(Graph G, Vertex s) begin\n" + //$NON-NLS-1$
-				"\tfor Vertex v in G.vertices begin\n" + //$NON-NLS-1$
-				"\t\tv.color = \"white\",\n" + //$NON-NLS-1$
-				"\t\tv.distance = infty,\n" + //$NON-NLS-1$
-				"\t\tv.pi = null,\n" + //$NON-NLS-1$
-				"\tend\n"; //$NON-NLS-1$
-		CharStream cs = new ANTLRStringStream(algorithm);
-		TLexer lexer = new TLexer(cs);
-		lexer.scan();
 		Token toGet = lexer.getTokenByNumbers(6, 1);
-		assert toGet.getText().equals("end") : "found token '"
+		assert "end".equals(toGet.getText()) : "found token '"
 				+ toGet.getText() + "' instead of 'end'";
 	}
 

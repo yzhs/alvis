@@ -416,6 +416,9 @@ public class CompilerAccess {
 		return destination;
 	}
 
+	/**
+	 * @return a list of all type names available for the user.
+	 */
 	public Collection<String> getDatatypes() {
 		return compiler.getDatatypes();
 	}

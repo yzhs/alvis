@@ -36,12 +36,21 @@ public class Compiler {
 	 */
 	private Map<String, Object> types = new HashMap<String, Object>();
 
+	/**
+	 * @return all the types available to the user.
+	 */
 	public Collection<String> getDatatypes() {
 		return types.keySet();
 	}
 
 	private List<RecognitionException> exceptions = new ArrayList<RecognitionException>();
 
+	/**
+	 * @param datatypes
+	 *            all the types provided by the plug-ins.
+	 * @param packages
+	 *            all the packages the generated Java code might want to import.
+	 */
 	public Compiler(Collection<? extends Object> datatypes,
 			Collection<String> packages) {
 		try {
@@ -60,6 +69,11 @@ public class Compiler {
 		instance = this;
 	}
 
+	/**
+	 * Generate code for importing all the packages provided by plug-ins.
+	 * 
+	 * @return Java code to import all the packages the user can use.
+	 */
 	private String imports() {
 		String result = "";
 		for (String name : packageNames)
@@ -93,8 +107,7 @@ public class Compiler {
 	 *            The tree that the tree parser is supposed to walk
 	 * @return The AST produced by the tree parser
 	 */
-	@SuppressWarnings("unchecked")
-	private CommonTree runTreeParser(Class<? extends TreeParser> treeParser,
+	private CommonTree runTreeParser(Class<? extends AbstractTreeParser> treeParser,
 			CommonTree tree) {
 		// Since Java does not allow to use generics parameters as
 		// constructors, this is done using reflection.
@@ -105,18 +118,19 @@ public class Compiler {
 			// treeParser walker = new treeParser(nodeStream);
 			TreeParser walker = (TreeParser) treeParser.getConstructor(
 					TreeNodeStream.class).newInstance(nodeStream);
-			treeParser.getMethod("setTreeAdaptor", TreeAdaptor.class).invoke(
-					walker, adaptor);
+			treeParser.cast(walker).setTreeAdaptor(adaptor);
 
 			// This is needed to be able to give the tree parser access to the
 			// token stream.
-			treeParser.getMethod("setParser", Parser.class).invoke(walker,
-					parser);
+			treeParser.cast(walker).setParser(parser);
 
-			// psrReturn = walker.program();
-			Object psrReturn = treeParser.getMethod("program").invoke(walker);
-			exceptions.addAll((List<RecognitionException>) treeParser
-					.getMethod("getExceptions").invoke(walker));
+			Object psrReturn = null;
+			try {
+				psrReturn = treeParser.cast(walker).program();
+			} catch (RecognitionException e) {
+				exceptions.add(e);
+			}
+			exceptions.addAll(treeParser.cast(walker).getExceptions());
 			// return (CommonTree)psrRturn.getTree();
 			return (CommonTree) psrReturn.getClass().getMethod("getTree")
 					.invoke(psrReturn);
