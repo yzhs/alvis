@@ -36,6 +36,10 @@ public class Compiler {
 	 */
 	private Map<String, Object> types = new HashMap<String, Object>();
 
+	public Collection<String> getDatatypes() {
+		return types.keySet();
+	}
+
 	private List<RecognitionException> exceptions = new ArrayList<RecognitionException>();
 
 	public Compiler(Collection<? extends Object> datatypes,

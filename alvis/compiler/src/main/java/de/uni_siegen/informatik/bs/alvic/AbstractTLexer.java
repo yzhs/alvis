@@ -295,11 +295,10 @@ public abstract class AbstractTLexer extends Lexer {
 		Token act = null;
 
 		while (notTheEnd) {
-			if (it.hasNext()) {
-				act = next;
+			act = next;
+			if (it.hasNext())
 				next = it.next();
-			} else {
-				act = next;
+			else {
 				next = null;
 				notTheEnd = false;
 			}

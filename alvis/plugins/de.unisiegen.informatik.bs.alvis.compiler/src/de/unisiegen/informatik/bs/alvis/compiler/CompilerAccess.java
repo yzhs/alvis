@@ -416,6 +416,10 @@ public class CompilerAccess {
 		return destination;
 	}
 
+	public Collection<String> getDatatypes() {
+		return compiler.getDatatypes();
+	}
+
 	/**
 	 * Tell the compiler which types are allowed.
 	 * 
