@@ -34,8 +34,11 @@ public class CheckTimeAndMarkErrors implements Runnable {
 				e.printStackTrace();
 			}
 			if ((System.currentTimeMillis() - editor.lastKeyStroke) > 499) {
+				if(editor.isCompilationNeeded(code))
+				{
 				editor.compileCode(code);
 				editor.markErrors();
+				}
 			}
 		}
 	}

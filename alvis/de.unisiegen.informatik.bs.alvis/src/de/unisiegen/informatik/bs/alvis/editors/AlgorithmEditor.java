@@ -51,6 +51,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 	private ProjectionSupport projectionSupport;
 	private Annotation[] oldAnnotations;
 	private Boolean[] isCollapsed;
+	private String codeOfLastCompile = "";
 	protected long lastKeyStroke;
 
 	/**
@@ -309,6 +310,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 	protected boolean compileCode(String code) {
 		try {
 			CompilerAccess.getDefault().compileString(code);
+			codeOfLastCompile = code;
 		} catch (IOException e) {
 			return false;
 		}
@@ -440,5 +442,18 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 		Thread timeChecker = new Thread(new CheckTimeAndMarkErrors(this,
 				getSourceViewer().getTextWidget().getText()));
 		timeChecker.start();
+	}
+
+	/**
+	 * Check whether a new compilation of the editor's code is needed to be up to date.
+	 * @return true if last compile was executed with a different code
+	 */
+	public boolean isCompilationNeeded(String codeToTest) {
+		if (codeOfLastCompile.equals(codeToTest)) {
+			// no compilation is needed
+			return false;
+		} else {
+			return true;
+		}
 	}
 }
