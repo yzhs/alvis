@@ -55,9 +55,6 @@ public class AlgorithmErrorMarker {
 			// not critical, will be deleted next time called
 		}
 		/** remark all errorMarkers */
-		// test mark the current Document, from start to position 50
-		// TODO implement method when Compiler front-end is created
-
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<RecognitionException> errors = CompilerAccess.getDefault().getExceptions();
 		for(RecognitionException error : errors) {

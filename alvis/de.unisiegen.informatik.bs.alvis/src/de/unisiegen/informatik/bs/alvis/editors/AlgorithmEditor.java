@@ -25,6 +25,8 @@ import org.eclipse.jface.text.source.projection.ProjectionAnnotationModel;
 import org.eclipse.jface.text.source.projection.ProjectionSupport;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
@@ -43,20 +45,18 @@ import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
  * 
  */
 public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
-		IExportItem {
+		IExportItem, KeyListener {
 
 	private ProjectionAnnotationModel annotationModel;
 	private ProjectionSupport projectionSupport;
 	private Annotation[] oldAnnotations;
 	private Boolean[] isCollapsed;
+	protected long lastKeyStroke;
 
 	/**
 	 * 
 	 */
 	public AlgorithmEditor() {
-
-		// Activator.getDefault().registerExport(this);
-		// Activator.getDefault().getWorkbench().getEditorRegistry().
 
 		/** filling Tokens to highlight */
 		Color highlightColor = new Color(Display.getCurrent(), new RGB(111, 33,
@@ -85,6 +85,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 		ProjectionViewer viewer = (ProjectionViewer) getSourceViewer();
 		projectionSupport = new ProjectionSupport(viewer,
 				getAnnotationAccess(), getSharedColors());
+
 		projectionSupport.install();
 
 		// turn projection mode on
@@ -104,6 +105,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 			// TODO Auto-generated catch block
 		}
 		/** endof Compile Algorithm */
+		getSourceViewer().getTextWidget().addKeyListener(this);
 	}
 
 	@Override
@@ -114,32 +116,30 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 
 		// ensure decoration support has been created and configured.
 		getSourceViewerDecorationSupport(viewer).install(getPreferenceStore());
+
 		return viewer;
 	}
 
 	@Override
 	public void doSave(IProgressMonitor progressMonitor) {
 		super.doSave(progressMonitor);
-		try {
-			IFileEditorInput input = (IFileEditorInput) getEditorInput();
-			CompilerAccess.getDefault().compile(
-					input.getFile().getRawLocation().toString(), true);
-		} catch (IOException e) {
-			System.out.println("IOException");
-			// TODO Auto-generated catch block
-		}
-		calculatePositions();
+		compileCode(getSourceViewer().getTextWidget().getText());
 		markErrors();
+		calculatePositions();
 	}
 
 	/**
-	 * This method update the editors FoldingStructure by setting the annotations of the Editor.
-	 * The field fPositions is used to create the Annotations.
+	 * This method update the editors FoldingStructure by setting the
+	 * annotations of the Editor. The field fPositions is used to create the
+	 * Annotations.
 	 * 
 	 * @param positions
 	 */
 	public void updateFoldingStructure(ArrayList<Position> positions) {
-		/** annotation will hold the new Folding Annotations with their corresponding Positions */
+		/**
+		 * annotation will hold the new Folding Annotations with their
+		 * corresponding Positions
+		 */
 		Annotation[] annotations = new Annotation[positions.size()];
 		HashMap<ProjectionAnnotation, Position> newAnnotations = new HashMap<ProjectionAnnotation, Position>();
 
@@ -163,33 +163,36 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 	 * for the folding feature
 	 */
 	protected void calculatePositions() {
-		
+
 		/** create empty Position List */
 		ArrayList<Position> foldingPositions = new ArrayList<Position>();
-		
-		/**start fill positionList with all MultilineComment positions*/
+
+		/** start fill positionList with all MultilineComment positions */
 		try {
-			ITypedRegion[]partitions = getSourceViewer().getDocument().computePartitioning(0,
-					getSourceViewer().getDocument().getLength());
+			ITypedRegion[] partitions = getSourceViewer().getDocument()
+					.computePartitioning(0,
+							getSourceViewer().getDocument().getLength());
 			for (ITypedRegion region : partitions) {
 				if (region.getType().equals(
 						AlgorithmPartitionScanner.MULTILINE_COMMENT)) {
-					foldingPositions.add(new Position(region.getOffset(), region
-							.getLength()));
+					foldingPositions.add(new Position(region.getOffset(),
+							region.getLength()));
 
 				}
 			}
-		}
-		catch (BadLocationException e) {
-			//TODO handle Exception
+		} catch (BadLocationException e) {
+			// TODO handle Exception
 			e.printStackTrace();
 		}
-		
+
 		/** getting all begin and end Tokens from the document */
 		List<Token> beginTokens = CompilerAccess.getDefault().beginBlock();
 		List<Token> endTokens = CompilerAccess.getDefault().endBlock();
-		
-		/** getting last beginToken before the first end Token to calculate a Position */
+
+		/**
+		 * getting last beginToken before the first end Token to calculate a
+		 * Position
+		 */
 		while (!beginTokens.isEmpty() && !endTokens.isEmpty()) {
 			Token endToken = endTokens.get(0);
 			Token beginToken = null;
@@ -217,7 +220,8 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 				}
 				int regionLength = endOfEnd - startOfBegin;
 				if (regionLength > 0) {
-					foldingPositions.add(new Position(startOfBegin, regionLength));
+					foldingPositions.add(new Position(startOfBegin,
+							regionLength));
 
 				}
 				beginTokens.remove(beginToken);
@@ -241,15 +245,16 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 			}
 		}
 		foldingPositions.removeAll(tmpList);
-		
+
 		/** getting old folding state and saving in isCollapsed */
-		
-		//initialize isCollapsedArray, all new Folding Positions will be open(not Collapsed)
+
+		// initialize isCollapsedArray, all new Folding Positions will be
+		// open(not Collapsed)
 		isCollapsed = new Boolean[foldingPositions.size()];
 		for (int i = 0; i < foldingPositions.size(); i++) {
 			isCollapsed[i] = false;
 		}
-		
+
 		@SuppressWarnings("unchecked")
 		Iterator<Annotation> iter = annotationModel.getAnnotationIterator();
 		while (iter.hasNext()) {
@@ -269,7 +274,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 				}
 			}
 		}
-		
+
 		/** update the Folding Structure of the Editor in a new thread */
 		final AlgorithmEditor editor = this;
 		final ArrayList<Position> fPositions = foldingPositions;
@@ -290,6 +295,24 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 		AlgorithmErrorMarker errorMarker = new AlgorithmErrorMarker(
 				getInputFile(), getSourceViewer().getDocument());
 		errorMarker.markErrors();
+	}
+
+	/**
+	 * This method compiles the code given.
+	 * 
+	 * @param code
+	 *            the code to compile.
+	 * @return true if the code was checked by the compiler. If the code given
+	 *         contains grammatical errors, the return value will be true as
+	 *         well, as long as the compiler runs the method without Exceptions.
+	 */
+	protected boolean compileCode(String code) {
+		try {
+			CompilerAccess.getDefault().compileString(code);
+		} catch (IOException e) {
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -406,5 +429,16 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 		PreferenceConverter.setValue(getPreferenceStore(),
 				getFontPropertyPreferenceKey(), fd);
 		getTextWidget().update();
+	}
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		Thread timeChecker = new Thread(new CheckTimeAndMarkErrors(this,
+				getSourceViewer().getTextWidget().getText()));
+		timeChecker.start();
 	}
 }

@@ -297,8 +297,8 @@ public class CompilerAccess {
 		Token currentToken = compiler.getLexer().getTokenByNumbers(line,
 				charPositionInLine);
 		if (currentToken != null
-				&& ((currentToken.getCharPositionInLine() + currentToken
-						.getText().length()) < charPositionInLine)) {
+				&& ((currentToken.getLine()<line || (currentToken.getCharPositionInLine() + currentToken
+						.getText().length()) < charPositionInLine))) {
 			currentToken = null;
 		}
 		Token previousToken = null;
@@ -469,8 +469,8 @@ public class CompilerAccess {
 				charPositionInLine);
 		
 		if (tokenToComplete != null
-				&& ((tokenToComplete.getCharPositionInLine() + tokenToComplete
-						.getText().length()) < charPositionInLine)) {
+				&& ((tokenToComplete.getLine()<line  || (tokenToComplete.getCharPositionInLine() + tokenToComplete
+						.getText().length()) < charPositionInLine))) {
 			tokenToComplete = null;
 		}
 		int prefixLength = 0;
@@ -513,6 +513,7 @@ public class CompilerAccess {
 					.possibleFollowingTokens(TParser.class,
 							getTokenName(previousToken.getType()));
 			possibleTokens.remove("DOT");
+			System.out.println(getTokenName(previousToken.getType()));
 			if (getTokenName(previousToken.getType()).equals("SEMICOLON")) {
 				/** add all to this position defined Variables */
 				ArrayList<String[]> definedVariables = getDefinedVariables(
@@ -534,7 +535,6 @@ public class CompilerAccess {
 			/** Handle ID Token */
 			if (possibleTokens.contains("ID")) {
 				if (getTokenName(previousToken.getType()).equals("DOT")) {
-					System.out.println("previousToken == DOT");
 					/** getting full prefix(until whitespace is found */
 					int currentTokenIndex = previousToken.getTokenIndex() - 1;
 					Token currentToken = compiler.getLexer().getTokens()
@@ -557,7 +557,6 @@ public class CompilerAccess {
 					List<Token> identifiers = getIdentifiers();
 					if (!idToTest.isEmpty()) {
 						String firstID = idToTest.pop();
-						System.out.println("FIRSTID: " + firstID);
 						/** getting first index of id */
 						int idIndex = -1;
 						for (int i = 0; i < identifiers.size(); i++) {
@@ -572,9 +571,7 @@ public class CompilerAccess {
 							Token varType = getTokens().get(
 									varToken.getTokenIndex() - 1);
 							if (getTokenName(varType.getType()).equals("TYPE")) {
-								System.out
-										.println("FOUND ID and Type is: "
-												+ varType.getText());
+								
 								// TODO complete it here
 							}
 						}

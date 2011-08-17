@@ -78,17 +78,18 @@ public class AlgorithmEditorCompletionProcessor implements
 		int line = -1;
 		int charPositionInLine = -1;
 		try {
-			CompilerAccess.getDefault().compileString(
-					viewer.getTextWidget().getText());
+			CompilerAccess.getDefault().compileString(viewer.getTextWidget().getText());
 			line = viewer.getDocument().getLineOfOffset(offset);
 			charPositionInLine = offset
 					- viewer.getDocument().getLineOffset(line);
 			line++;
 		} catch (BadLocationException e) {
-			System.out.println("BAD LOCATION");
+			//TODO
+			return null;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return null;
 		}
 		List<CompletionInformation> availableProposals = new ArrayList<CompletionInformation>();
 		if (line != -1 && charPositionInLine != -1) {
