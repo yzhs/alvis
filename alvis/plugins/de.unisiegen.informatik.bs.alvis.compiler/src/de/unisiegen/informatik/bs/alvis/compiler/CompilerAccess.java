@@ -7,10 +7,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -370,6 +372,22 @@ public class CompilerAccess {
 		}
 		return variables;
 	}
+//	private <Type extends PCObject> ArrayList<String> getMembers(Type pcObject)
+//	{
+//		Method[] methods = pcObject.getClass().getMethods();
+//		/** set is to sort out same methods with different parameters */
+//		/** if implemented with parameter transmitted just replace the set with the returnList */
+//		HashSet<String> set = new HashSet<String>();
+//		for(int i=0;i<methods.length;i++)
+//		{
+//			set.add(methods[i].getName());
+//			//TODO implement with parameters
+////			methods[i].getParameterTypes()
+//		}
+//		ArrayList<String> returnList = new ArrayList<String>();
+//		returnList.addAll(set);
+//		return null;
+//	}
 
 	/**
 	 * @return exceptions produced when lexing, parsing and type checking the
@@ -571,8 +589,43 @@ public class CompilerAccess {
 							Token varType = getTokens().get(
 									varToken.getTokenIndex() - 1);
 							if (getTokenName(varType.getType()).equals("TYPE")) {
-								
 								// TODO complete it here
+								Collection<String> availableDatatypes = compiler.getDatatypes();
+								if(availableDatatypes.contains(varType.getText()))
+								{
+									for(PCObject dataType:this.types)
+									{
+			                                try {
+												String type = (dataType.getClass()).getMethod("getTypeName",null).invoke(null, null).toString();
+												if(type.equals(varType.getText()))
+												{
+													viableCompletionStrings.addAll(dataType.getMembers());
+													/** to mark methods as methods */
+													List<String> methods = dataType.getMethods();
+													for(String method:methods)
+													{
+														viableCompletionStrings.add(method + "()");
+													}
+												}
+											} catch (IllegalArgumentException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											} catch (SecurityException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											} catch (IllegalAccessException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											} catch (InvocationTargetException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											} catch (NoSuchMethodException e) {
+												// TODO Auto-generated catch block
+												e.printStackTrace();
+											}
+
+									}
+								}
 							}
 						}
 					}
