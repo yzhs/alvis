@@ -4,8 +4,11 @@
 package de.unisiegen.informatik.bs.alvis.compiler;
 
 /**
- * @author Eduard Boos This Class contain all completion relevant Data for a
- *         single Completion.
+ * This Class contains all completion relevant Data for a single completion.
+ * Note this isn't the final version of this class. It shall be completed for
+ * advanced code-completion.
+ * 
+ * @author Eduard Boos
  * 
  */
 public class CompletionInformation {
@@ -17,10 +20,15 @@ public class CompletionInformation {
 
 	/**
 	 * Creates a basic CompletionInformaion Object needed for Code-Completion.
-	 * @param replacementString the String
-	 * @param line the line where this proposal should be inserted.
-	 * @param charPositionInLine the offset in the line.
-	 * @param replacementLength usually the length of the proposal that was already written.
+	 * 
+	 * @param replacementString
+	 *            the String
+	 * @param line
+	 *            the line where this proposal should be inserted.
+	 * @param charPositionInLine
+	 *            the offset in the line.
+	 * @param replacementLength
+	 *            usually the length of the proposal that was already written.
 	 */
 	public CompletionInformation(String replacementString, int line,
 			int charPositionInLine, int replacementLength) {

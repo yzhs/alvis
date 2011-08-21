@@ -7,12 +7,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -29,9 +27,10 @@ import de.uni_siegen.informatik.bs.alvic.TParser;
 import de.unisiegen.informatik.bs.alvis.io.files.FileCopy;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
-/**
+/** 
  * @author mays
  * @author Colin
+ * @author Eduard Boos
  * 
  */
 public class CompilerAccess {
@@ -66,7 +65,6 @@ public class CompilerAccess {
 		translateCompletion.put(key, Arrays.asList(arg));
 	}
 
-	@SuppressWarnings("static-access")
 	private void loadTranslation() {
 		translateCompletion = new HashMap<String, List<String>>();
 		add("MAIN", "main ");
@@ -111,8 +109,7 @@ public class CompilerAccess {
 		add("BOOL", "false", "true");
 		add("INFTY", "infty");
 
-		translateCompletion.put("TYPE", new ArrayList<String>(compiler
-				.getLexer().getTypes()));
+		translateCompletion.put("TYPE", new ArrayList<String>(AbstractTLexer.getTypes()));
 	}
 
 	public static CompilerAccess getDefault() {
@@ -269,6 +266,11 @@ public class CompilerAccess {
 		return result;
 	}
 
+	/**
+	 * Translates the token names given into the PseudoCode representation.
+	 * @param possibleTokens the token to translate
+	 * @return the List of translated Strings.
+	 */
 	private List<String> translateAutocompletionString(
 			List<String> possibleTokens) {
 		ArrayList<String> translatedCompletions = new ArrayList<String>();
@@ -299,8 +301,9 @@ public class CompilerAccess {
 		Token currentToken = compiler.getLexer().getTokenByNumbers(line,
 				charPositionInLine);
 		if (currentToken != null
-				&& ((currentToken.getLine()<line || (currentToken.getCharPositionInLine() + currentToken
-						.getText().length()) < charPositionInLine))) {
+				&& ((currentToken.getLine() < line || (currentToken
+						.getCharPositionInLine() + currentToken.getText()
+						.length()) < charPositionInLine))) {
 			currentToken = null;
 		}
 		Token previousToken = null;
@@ -337,10 +340,11 @@ public class CompilerAccess {
 	}
 
 	/**
-	 * 
-	 * @param line
-	 * @param charPositionInLine
-	 * @return
+	 * Returns the ArrayList<String[]> containing all variables declared until this line at charPositionInLine.
+	 * @param line the line
+	 * @param charPositionInLine the offset in the line given
+	 * @return the ArrayList<String[]> containing all variables declared until the position given by the parameters.
+	 * The String Array contains the Type at index 0 and the variable name at index 1;
 	 */
 	private ArrayList<String[]> getDefinedVariables(int line,
 			int charPositionInLine) {
@@ -372,22 +376,6 @@ public class CompilerAccess {
 		}
 		return variables;
 	}
-//	private <Type extends PCObject> ArrayList<String> getMembers(Type pcObject)
-//	{
-//		Method[] methods = pcObject.getClass().getMethods();
-//		/** set is to sort out same methods with different parameters */
-//		/** if implemented with parameter transmitted just replace the set with the returnList */
-//		HashSet<String> set = new HashSet<String>();
-//		for(int i=0;i<methods.length;i++)
-//		{
-//			set.add(methods[i].getName());
-//			//TODO implement with parameters
-////			methods[i].getParameterTypes()
-//		}
-//		ArrayList<String> returnList = new ArrayList<String>();
-//		returnList.addAll(set);
-//		return null;
-//	}
 
 	/**
 	 * @return exceptions produced when lexing, parsing and type checking the
@@ -472,25 +460,28 @@ public class CompilerAccess {
 
 	/**
 	 * Computes the possible autoCompletion for the line and charPositionInLine
-	 * given. Returns a List containing all available auto completion Strings.
+	 * given. Returns a List containing all available completions as
+	 * CompletionInformation.
 	 * 
 	 * @param line
 	 *            the line
 	 * @param charPositionInLine
 	 *            the offset in the line given
-	 * @return the List of Strings containing all available auto completion
-	 *         Strings.
+	 * @return the List of CompletionInformation available at this line at
+	 *         charPositionInLine.
 	 */
 	public List<CompletionInformation> tryAutoCompletion(int line,
 			int charPositionInLine) {
+
 		Token tokenToComplete = compiler.getLexer().getTokenByNumbers(line,
 				charPositionInLine);
-		
 		if (tokenToComplete != null
-				&& ((tokenToComplete.getLine()<line  || (tokenToComplete.getCharPositionInLine() + tokenToComplete
-						.getText().length()) < charPositionInLine))) {
+				&& ((tokenToComplete.getLine() < line || (tokenToComplete
+						.getCharPositionInLine() + tokenToComplete.getText()
+						.length()) < charPositionInLine))) {
 			tokenToComplete = null;
 		}
+
 		int prefixLength = 0;
 		String prefix = "";
 		if (tokenToComplete != null) {
@@ -505,16 +496,17 @@ public class CompilerAccess {
 			charPositionInLine = tokenToComplete.getCharPositionInLine();
 		}
 		Token previousToken = null;
-		if(tokenToComplete!= null && (tokenToComplete.getText().equals(".") || tokenToComplete.getText().equals("(") || tokenToComplete.getText().equals("{")))
-		{
+		if (tokenToComplete != null
+				&& (tokenToComplete.getText().equals(".")
+						|| tokenToComplete.getText().equals("(") || tokenToComplete
+						.getText().equals("{"))) {
 			previousToken = tokenToComplete;
 			prefix = "";
 			prefixLength = 0;
-			charPositionInLine = tokenToComplete.getCharPositionInLine()+tokenToComplete.getText().length();
-		}
-		else
-		{
-			previousToken = findPreviousToken(line, charPositionInLine);			
+			charPositionInLine = tokenToComplete.getCharPositionInLine()
+					+ tokenToComplete.getText().length();
+		} else {
+			previousToken = findPreviousToken(line, charPositionInLine);
 		}
 		List<CompletionInformation> availableProposals = new ArrayList<CompletionInformation>();
 
@@ -530,25 +522,28 @@ public class CompilerAccess {
 			List<String> possibleTokens = compiler.getParser()
 					.possibleFollowingTokens(TParser.class,
 							getTokenName(previousToken.getType()));
+			/** Remove the tokens which should not be completed */
 			possibleTokens.remove("DOT");
-			System.out.println(getTokenName(previousToken.getType()));
+
+			List<String> viableCompletionStrings = translateAutocompletionString(possibleTokens);
+			/** Some cases have to be handled separately */
+
+			/** Handle SEMICOLON Token */
 			if (getTokenName(previousToken.getType()).equals("SEMICOLON")) {
-				/** add all to this position defined Variables */
+				/** add all variable names which are available at this position */
 				ArrayList<String[]> definedVariables = getDefinedVariables(
 						line, charPositionInLine);
+
 				Iterator<String[]> iterator = definedVariables.iterator();
 				while (iterator.hasNext()) {
 					String[] varSet = iterator.next();
 					if (varSet.length == 2) {
-						possibleTokens.add(varSet[0]);
+						viableCompletionStrings.add(varSet[0]);
 					}
 				}
-				
-				possibleTokens.add("TYPE");
+				viableCompletionStrings.addAll(AbstractTLexer.getTypes());
 			}
-			List<String> viableCompletionStrings = translateAutocompletionString(possibleTokens);
-			List<String> validCompletionStrings = new ArrayList<String>();
-			/** Some Cases have to be computed separately */
+			/** EndOf Handle SEMICOLON token */
 
 			/** Handle ID Token */
 			if (possibleTokens.contains("ID")) {
@@ -572,6 +567,7 @@ public class CompilerAccess {
 						currentToken = compiler.getLexer().getTokens()
 								.get(currentTokenIndex);
 					}
+
 					List<Token> identifiers = getIdentifiers();
 					if (!idToTest.isEmpty()) {
 						String firstID = idToTest.pop();
@@ -589,41 +585,40 @@ public class CompilerAccess {
 							Token varType = getTokens().get(
 									varToken.getTokenIndex() - 1);
 							if (getTokenName(varType.getType()).equals("TYPE")) {
-								// TODO complete it here
-								Collection<String> availableDatatypes = compiler.getDatatypes();
-								if(availableDatatypes.contains(varType.getText()))
-								{
-									for(PCObject dataType:this.types)
-									{
-			                                try {
-												String type = (dataType.getClass()).getMethod("getTypeName",null).invoke(null, null).toString();
-												if(type.equals(varType.getText()))
-												{
-													viableCompletionStrings.addAll(dataType.getMembers());
-													/** to mark methods as methods */
-													List<String> methods = dataType.getMethods();
-													for(String method:methods)
-													{
-														viableCompletionStrings.add(method + "()");
-													}
-												}
-											} catch (IllegalArgumentException e) {
-												// TODO Auto-generated catch block
-												e.printStackTrace();
-											} catch (SecurityException e) {
-												// TODO Auto-generated catch block
-												e.printStackTrace();
-											} catch (IllegalAccessException e) {
-												// TODO Auto-generated catch block
-												e.printStackTrace();
-											} catch (InvocationTargetException e) {
-												// TODO Auto-generated catch block
-												e.printStackTrace();
-											} catch (NoSuchMethodException e) {
-												// TODO Auto-generated catch block
-												e.printStackTrace();
+								for (PCObject dataType : this.types) {
+									try {
+										String type = (dataType.getClass())
+												.getMethod("getTypeName", null)
+												.invoke(null, null).toString();
+										if (type.equals(varType.getText())) {
+											viableCompletionStrings
+													.addAll(dataType
+															.getMembers());
+											/**
+											 * add () to mark methods as methods
+											 */
+											List<String> methods = dataType
+													.getMethods();
+											for (String method : methods) {
+												viableCompletionStrings
+														.add(method + "()");
 											}
-
+										}
+									} catch (IllegalArgumentException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									} catch (SecurityException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									} catch (IllegalAccessException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									} catch (InvocationTargetException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									} catch (NoSuchMethodException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
 									}
 								}
 							}
@@ -632,10 +627,13 @@ public class CompilerAccess {
 				}
 			}
 			/** EndOF Handle ID */
-			
+
+			/**
+			 * create a CompletionInformation Object if prefix fits the
+			 * viableCompletionString
+			 */
 			for (String completionString : viableCompletionStrings) {
 				if (completionString.startsWith(prefix)) {
-					validCompletionStrings.add(completionString);
 					CompletionInformation completionInfomation = new CompletionInformation(
 							completionString, line, charPositionInLine,
 							prefixLength);
