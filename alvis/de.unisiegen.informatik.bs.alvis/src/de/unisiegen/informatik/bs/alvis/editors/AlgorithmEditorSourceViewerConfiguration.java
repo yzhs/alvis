@@ -37,7 +37,7 @@ import de.unisiegen.informatik.bs.alvis.Activator;
 
 /**
  * AlgorithmEditor Configuration Class is used to set up e.g. highlighting,
- * content assist and document portioning
+ * content assist and document partitioning
  * 
  * @author Eduard Boos
  * 
@@ -201,7 +201,6 @@ public class AlgorithmEditorSourceViewerConfiguration extends
 				public boolean isWordStart(char character) {
 					return Character.isJavaIdentifierStart(character);
 				}
-
 			};
 		}
 		return wordDetector;
@@ -243,6 +242,10 @@ public class AlgorithmEditorSourceViewerConfiguration extends
 		this.wordsToHighlight = wordsToHighlight;
 	}
 
+	/**
+	 * Returns the ITokenScanner with the rules for highlighting.
+	 * @return the ITokenScanner with the rules for highlighting.
+	 */
 	private ITokenScanner getScanner() {
 		RuleBasedScanner scanner = new RuleBasedScanner();
 		/** get the Rules for Syntax highlighting */
@@ -251,7 +254,6 @@ public class AlgorithmEditorSourceViewerConfiguration extends
 		IToken def = new Token(new TextAttribute(Display.getCurrent()
 				.getSystemColor(SWT.COLOR_BLACK), null, SWT.NORMAL));
 		scanner.setDefaultReturnToken(def);
-
 		return scanner;
 	}
 

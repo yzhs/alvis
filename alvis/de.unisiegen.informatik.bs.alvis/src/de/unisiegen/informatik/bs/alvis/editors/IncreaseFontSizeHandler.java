@@ -1,5 +1,5 @@
 /**
- * Default handler for increasing the font size of the AlgorithmEditor.
+ * 
  */
 package de.unisiegen.informatik.bs.alvis.editors;
 
@@ -9,14 +9,13 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.ui.PlatformUI;
 
 /**
+ * Default handler for increasing the font size of the AlgorithmEditor.
+ * 
  * @author Eduard Boos
  *
  */
 public class IncreaseFontSizeHandler extends AbstractHandler {
 
-	/* (non-Javadoc)
-	 * @see org.eclipse.core.commands.IHandler#execute(org.eclipse.core.commands.ExecutionEvent)
-	 */
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		AlgorithmEditor editor = (AlgorithmEditor)PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().getActiveEditor();

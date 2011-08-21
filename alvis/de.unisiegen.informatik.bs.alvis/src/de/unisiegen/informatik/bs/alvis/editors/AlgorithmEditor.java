@@ -39,6 +39,7 @@ import org.eclipse.ui.texteditor.AbstractDecoratedTextEditor;
 import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.compiler.CompilerAccess;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
+import de.unisiegen.informatik.bs.alvis.io.logger.Logger;
 
 /**
  * @author Eduard Boos
@@ -182,8 +183,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 				}
 			}
 		} catch (BadLocationException e) {
-			// TODO handle Exception
-			e.printStackTrace();
+			Logger.getInstance().log("AlgorithmEditor", Logger.ERROR, "Exception in AlgorithmEditor ( BadLocationException): \n"+ e.getLocalizedMessage());
 		}
 
 		/** getting all begin and end Tokens from the document */

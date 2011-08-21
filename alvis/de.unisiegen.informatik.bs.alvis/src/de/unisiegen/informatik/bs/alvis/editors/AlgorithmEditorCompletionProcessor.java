@@ -20,9 +20,11 @@ import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 
 import de.unisiegen.informatik.bs.alvis.compiler.CompilerAccess;
 import de.unisiegen.informatik.bs.alvis.compiler.CompletionInformation;
+import de.unisiegen.informatik.bs.alvis.io.logger.Logger;
 
 /**
- * Provides Content Assist(Code-Completion) functionality to the Algorithmeditor
+ * Provides Content Assist(Code-Completion) functionality to the AlgorithmEditor.
+ * This is the class to change, when advanced code-completion shall be implemented.
  * 
  * @author Eduard Boos
  * 
@@ -84,11 +86,9 @@ public class AlgorithmEditorCompletionProcessor implements
 					- viewer.getDocument().getLineOffset(line);
 			line++;
 		} catch (BadLocationException e) {
-			//TODO
-			return null;
+			Logger.getInstance().log("Editor->AlgorithmEditorCompletionProcessor", Logger.ERROR, "Code-Completion caused an BadLocationException: \n"+ e.getLocalizedMessage());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Logger.getInstance().log("Editor->AlgorithmEditorCompletionProcessor", Logger.ERROR, "Code-Completion caused an IOException: \n"+ e.getLocalizedMessage());
 			return null;
 		}
 		List<CompletionInformation> availableProposals = new ArrayList<CompletionInformation>();

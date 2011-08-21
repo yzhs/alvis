@@ -19,6 +19,7 @@ import org.eclipse.ui.texteditor.MarkerUtilities;
 
 import de.uni_siegen.informatik.bs.alvic.*;
 import de.unisiegen.informatik.bs.alvis.compiler.CompilerAccess;
+import de.unisiegen.informatik.bs.alvis.io.logger.Logger;
 
 /**
  * This class is for marking the given Document and File with Errors that occurs parsing the document.
@@ -52,7 +53,7 @@ public class AlgorithmErrorMarker {
 		try {
 			file.deleteMarkers(ERROR_MARKER_ID, false, IResource.DEPTH_ZERO);
 		} catch (CoreException e) {
-			// not critical, will be deleted next time called
+			Logger.getInstance().log("Editor->AlgorithmErrorMarker", Logger.ERROR, "Error marking caused an CoreException: \n"+ e.getLocalizedMessage());
 		}
 		/** remark all errorMarkers */
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -143,7 +144,7 @@ public class AlgorithmErrorMarker {
 			try {
 				MarkerUtilities.createMarker(file, map, ERROR_MARKER_ID);
 			} catch (CoreException e) {
-				// ignore Error
+				Logger.getInstance().log("Editor->AlgorithmErrorMarker", Logger.ERROR, "Error marking caused an CoreException: \n"+ e.getLocalizedMessage());
 			}
 		}
 	}
