@@ -1,0 +1,191 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage{ucs}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{makeidx}
+
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage{inputenc}
+\usepackage[german]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{helvet}
+
+\author{Jan Bauerdick,
+Colin Benner,
+Eduard Boos,
+Dominik Dingel,\\
+Simon Groth,
+Sebastian Schmitz,
+Tobias Schüler,
+Frank Weiler}
+\title{Alvis\\Handbuch für Entwickler}
+\makeindex
+\begin{document}
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+Wir wünschen viel Spaß bei der Weiterentwicklung von Alvis.
+\section{Benötigtes Equipment}
+\subsection{Software}
+\subsubsection{Eclipse}
+Alvis ist ein Eclipse RCP Projekt daher wird für die Eclipse für die Entwicklung mindestens in Version 3.6, benötigt.
+
+Auf der Eclipse Webseite gibt es bereits ein Eclipse, welches schon die Möglichkeit ein Eclipse mit RCP herunterzuladen. Es heißt ,,Eclipse for RCP and RAP Developers''. 
+
+Falls ein bereits vorhandenes Eclipse für die Entwicklung von Alvis benutzt werden soll, kann man die benötigten Plug-ins auch über die Update Funktion von Eclipse beziehen.
+\subsubsection{SVN}
+Um das Projekt zu beziehen und zu bearbeiten benutzen wir SVN. SVN ist ebenfalls über die Update Funktion von Eclipse beziehbar.
+
+\subsection{Kenntnisse}
+Für das (Weiter-)Entwickeln der Plug-ins für Alvis erfordert Kenntnisse im Umgang mit RCP. Diese sollte man sich aneignen, bevor man mit der Entwicklung von einem Plug-in beginnt. Dazu empfehlen wir die Durcharbeitung einiger Literatur, welche wir im folgenden kurz vorstellen wollen.
+
+\begin{itemize}
+\item Vogella.de - Sehr zu empfehlen für Einsteiger. \\
+Lars Vogels Tutorial für Eclipse RCP bietet einen guten Einstieg in die Welt von RCP. Anfänger sollten hier beginnen.\\
+http://www.vogella.de/articles/EclipseRCP/article.html
+\item RalfEbert.de - RCP Buch für fortgeschrittene. \\
+Ralf Ebert hat ein Buch über RCP in Form einer Webseite veröffentlicht. In diesem Buch werden in jedem Kapitel andere Konzepte von RCP erklärt. \\
+http://www.ralfebert.de/eclipse\_rcp/
+\item Einstieg in Eclipse 3.5 - Künneth, Thomas \\
+Wer lieber etwas in der Hand hat, der ist mit diesem Buch gut bedient. Hier wird Eclipse RCP gut erläutert. \\
+Verfügbar in der Uni-Bibliothek, ISBN: 978-3-8362-1428-5
+\end{itemize}
+
+
+
+\newpage
+\section{Alvis}
+\subsection{Übersicht über die Komponenten}
+Bei den einzelnen Komponenten wird die Bezeichnung ,,Plug-in'' vielfältig eingesetzt. Wir sprechen von einem Plug-in für Alvis, wenn wir eine neue Algorithmen Art hinzufügen, oder das Hauptplug-in um andere Funktionalitäten erweitern. Dabei ist Alvis selbst auch nur ein Plug-in. Demnach gibt es auch Plug-ins für Plug-ins.
+
+Alle Plug-ins befinden sich im SVN - Ordner ,,trunk/alvis''.
+\subsubsection{Das Alvis Plug-in}
+,,de.unisiegen.informatik.bs.alvis'' - Das Haupt Plug-in, welches die graphische Oberfläche beinhaltet.
+\subsubsection{Plug-ins für Alvis}
+Diese Plug-ins erweitern das Haupt Plug-in um notwendige Funktionen. Die Teilung des Hauptprogramms in verschiedene Plug-ins fördert die Modularisierung und die Wiederverwendbarkeit, ggf. auch für neue Projekte.
+\\
+Nicht alle Plug-ins werden für die Funktion von Alvis benötigt. Es gibt Plug-ins, ohne die würde Alvis nicht funktionieren, andere erweitern Alvis um nützliche, aber nicht unbedingt notwendige Funktionen.
+\\ \\
+Die Plug-ins befinden sich im Ordner ,,trunk/alvis/plugins''.
+\\ \\
+\textbf{Benötigte Plug-ins:}
+\begin{itemize}
+\item ,,de.unisiegen.informatik.bs.alvis.primitive'' - Primitive.
+\item ,,de.unisiegen.informatik.bs.alvis.primitive.datatypes'' - Primitive Datentypen.
+\item ,,de.unisiegen.informatik.bs.alvis.ui.navigator'' - Navigator (Package Explorer).
+\item ,,de.unisiegen.informatik.bs.alvis.vm'' - Virtuelle Maschine.
+\end{itemize}
+\textbf{Optionale Plug-ins:}
+\begin{itemize}
+\item ,,de.unisiegen.informatik.bs.alvis.vm.test'' - Test der virtuellen Maschine.
+\item ,,de.unisiegen.informatik.bs.alvis.editors.xml'' - XML Editor.
+\end{itemize}
+\subsubsection{Graph Plug-in}
+Das Graph Plug-in erweitert Alvis um die Datentypen Graph, Knoten und Kante.
+\begin{itemize}
+\item ,,de.unisiegen.informatik.bs.alvis.graph'' - Graph Plug-in.
+\item ,,de.unisiegen.informatik.bs.alvis.graph.datatypes'' - Graph Datentypen.
+\end{itemize}
+\subsubsection{Betriebssysteme Plug-in}
+
+
+
+
+
+
+
+
+
+\newpage
+\section{Export}
+\subsection{Erste Schritte}
+Wir werden den Export des Programms und der Plug-ins über eine Update Seite und über Features bewältigen. Dazu empfehlen wir ein Tutorial von Ralf Ebert zur Update Funktionalität in RCP.
+\\ \\
+http://www.ralfebert.de/blog/eclipsercp/p2\_updates\_tutorial\_36/
+\\ \\
+Neben den Projekten aus dem vorherigen Kapitel benötigen wir nun auch die Feature-Projekte aus dem Ordner ,,trunk/export''.
+
+\subsection{Export des Hauptprogramms für verschiedene Plattformen}
+Wir stellen uns vor, wir haben einige größere Änderungen an unserem Hauptprogramm, oder an einem der Plug-ins vollzogen. Wir wollen diese Verbesserungen nun den Benutzern von Alvis, in Form einer neuen Version und einem Update für bereits installierte Programme, zugänglich machen. 
+\\ \\
+Hier gibt es immer zwei Typen von Benutzern. Die einen die das Programm noch nicht auf Ihrem System haben und die, die das Programm bereits benutzen. Die ersten sind kein Problem, wir exportieren das Programm und aktualisieren die Download Seite. Für die Zweiten ist der Aufwand etwas größer. Da wir nicht von jedem Benutzer verlangen wollen Alvis zu löschen und neu herunterzuladen, müssen wir die Möglichkeit bieten das Programm zu updaten. Im folgenden wollen wir genauer auf die Probleme eingehen.
+\subsubsection{Vorbereitung}
+Wie wir wissen aus dem Tutorial, dass unser Export auf Basis von Features läuft. Diese Features müssen wir nun erstmal aus dem SVN in den Workspace auschecken, in dem auch unser Hauptprogramm und die benötigten Plug-ins liegen.
+\\ \\
+Die Features befinden sich im Ordner ,,trunk/alvis/export''.
+Wir benötigen:
+\begin{itemize}
+\item ,,org.eclipselabs.p2.rcpupdate''
+\item ,,org.eclipselabs.p2.rcpupdate.utils''
+\item ,,de.unisiegen.informatik.bs.alvis.app''
+\end{itemize}
+
+Das Hauptprojekt wird in einen Ordner exportiert. Dabei wird auch ein Ordner ,,repository'' erstellt. Wir erstellen zuerst einen einen Ordner, welchen wir für den Export benutzen möchten. Hier ,,D:/Alvis/''. Anschließend noch einen Ordner ,,repository'' für die Update Seite. Hier ,,D:/Alvis/repository''.
+\\ \\
+Damit die Änderungen auch als Updates auf die Webseite kommen, brauchen wir die vorhandene Update Seite. Diese befindet sich im Ordner ,,trunk/alvis/updates'' und wird in regelmäßigen Abständen automatisch auf den Server kopiert. 
+\\ \\
+Dazu checken wir den Ordner ,,updates'' aus. Wir wählen ,,D:/Alvis/repository'' als Speicherort.
+\subsubsection{Export mit einer Target Platform}
+Um eine RCP Anwendung für verschiedene Plattformen zu exportieren muss die sogenannte ,,Target Platform'' angepasst werden. Mit einer Target Platform kann man festlegen, welche Plug-ins der Anwendung zur Verfügung stehen. Hat man keine spezielle Target Platform gewählt, so bedient sich die Anwendungen aus den Plug-ins, die der installierten Eclipse Distribution zur Verfügung stehen.
+\\
+\\
+Das Wechseln der Target Platform hat mehrere Vorteile. \\
+Zum Ersten kann man sich aus der Vielzahl vorhandener Plug-ins für RCP bedienen - und zwar ohne, dass diese Plug-ins auch allen anderen Projekten, die mit diesem Eclipse entwickelt werden, zur Verfügung stehen.
+Zum Zweiten, und diesen Vorteil wollen wir im Folgenden ausnutzen, lassen sich mit einer Target Platform auch die Plug-ins holen, die sonst für andere Betriebssysteme geladen worden wären.
+
+\subsubsection{Einstellen der Target Platform}
+Wir wollen nun die vorhandene Target Platform als Target Platform für unser Projekt einstellen. Dazu müssen wir das Projekt\\
+,,de.unisiegen.informatik.bs.alvis.app'' in unserem Workspace haben. Wir öffnen die Datei ,,allPlatforms.target'' und warten bis alle Plug-ins geladen wurden. Dies kann unter Umständen einige Zeit in Anspruch nehmen. 
+\\ \\
+Das vorläufige Ergebnis sieht folgendermaßen aus.
+\begin{center}
+\includegraphics[scale=0.48]{images/export_all_platforms_00}
+\end{center}
+
+Mit einem Klick auf ,,Set as Target Platform'' lässt sich diese Konfiguration einstellen. 
+Danach wird der Workspace neu gebaut. Die Projekte sollten keine Fehler aufweisen. Sollten Fehler bezüglich nicht aufzufindender Imports sein ist dies ein Indiz für fehlende Plug-ins in der Target Platform. Über den Button ,,Edit'' lassen sich benötigte Plug-ins aus der Update Seite für Helios holen.
+\\ \\
+Zum Zeitpunkt des Verfassens dieser Anleitung war ein release von Eclipse 3.7 in Aussicht. Entwickelt haben wir aber  mit Eclipse 3.6. Sollte Alvis inzwischen mit einer neueren Version von Eclipse entwickelt werden, so ist es möglicherweise notwendig auch die Target Platform aufzufrischen. Eine genauere Anleitung findet man im RCP-Buch von Ralf Ebert im Kapitel 16 - Export und Verteilung von RCP-Anwendungen\footnote{http://www.ralfebert.de/eclipse\_rcp/distribution\/}. Noch genauer geht Ebert in seinem Blog\footnote{http://www.ralfebert.de/blog/eclipsercp/rcp\_builds\/} auf die Problematik ein. Es muss, in dem Fenster wo wir uns die Plug-ins aus der Update Seite holen, unbedingt ein Haken bei ,,Include all environments'' gesetzt sein.
+\\ \\
+
+Nachdem die Target Platform übernommen wurde und wir die Korrektheit des Programms überprüft haben können wir das Projekt exportieren. 
+\subsubsection{Export}
+Wir möchten nochmals darauf hinweisen, dass es nötig ist die Versionsnummern zu erhöhen, damit ein Update auf die jetzt exportierte Software funktioniert. Es müssen sowohl in der \\
+,,MANIFEST.MF'' und der \\
+,,*.product'', im Hauptprogramm, und in der \\
+,,feature.xml'' im Feature ,,~.alvis.app'', \\
+die Versionsnummer auf einen gemeinsamen neuen Wert erhöht werden.
+\\ \\
+Um das Hauptprogramm zu exportieren öffnen wir die Datei ,,build.product'' aus dem Plug-in ,,de.unisiegen.informatik.bs.alvis''.
+
+\begin{center}
+\includegraphics[scale=0.65]{images/export_main_product_00}
+\end{center}
+
+Wir klicken auf den  Link ,,\underline{Eclipse Product export wizard}'' und es erscheint ein Wizard für den Export.
+
+\begin{center}
+\includegraphics[scale=0.48]{images/export_main_product_01}
+\end{center}
+
+Wir wählen als ,,Roo\underline{t} directory:'' einen beliebigen, noch nicht im Ordner ,,D:/Alvis/'' vorhandenen Ordnernamen und stellen ,,D:/Alvis/'' als ,,Directory:'' ein. 
+Wichtig ist, dass der Haken bei ,,Generate metadata repository'' gesetzt ist.
+Außerdem setzen wir einen Haken bei ,,Export for multiple platforms''.\\ \\
+Wir bestätigen die obigen Einstellungen und klicken auf ,,Next''.
+\begin{center}
+\includegraphics[scale=0.48]{images/export_main_product_02}
+\end{center}
+Im nächsten Fenster wählen wir die Plattformen aus, die wir bedienen möchten.
+Nachdem wir auf ,,Finish'' geklickt haben und der Export abgeschlossen ist, können wir im Zielverzeichnis die Ordner für die einzelnen Plattformen finden.
+\\ \\
+Beim Export wurden im Ordner ,,repository'' die Java Archive generiert, die eine ältere Version von Alvis bei einem Klick auf ,,Help'' \(\rightarrow \) ,,Check for Updates'' für ein Update auf unsere neue Version benötigt. Als Standard Update Pfad ist für Alvis die ,,Alvis Update Seite\footnote{http://alvis.bs.informatik.uni-siegen.de/update/}'' eingetragen also muss der Inhalt des Ordners ,,repository'' in diesen Ordner kopiert werden.
+
+Dies geschieht über einen ,,commit'' der Update Seite.
+
+\end{document}

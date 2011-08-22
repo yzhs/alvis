@@ -1,0 +1,21 @@
+\select@language {german}
+\contentsline {section}{\numberline {1}Einleitung}{1}{section.1}
+\contentsline {section}{\numberline {2}Vorkenntnisse}{2}{section.2}
+\contentsline {section}{\numberline {3}Vorbereitung}{2}{section.3}
+\contentsline {section}{\numberline {4}Konventionen}{2}{section.4}
+\contentsline {subsection}{\numberline {4.1}Namenskonventionen}{2}{subsection.4.1}
+\contentsline {section}{\numberline {5}Bestandteile der Plug-ins}{3}{section.5}
+\contentsline {section}{\numberline {6}\textit {de.unisiegen.informatik.bs.alvis.pluginname.datatypes}}{3}{section.6}
+\contentsline {subsection}{\numberline {6.1}Erstellen von Klassen f\IeC {\"u}r Datentypen}{4}{subsection.6.1}
+\contentsline {subsection}{\numberline {6.2}Erstellen von Interfaces zur graphischen Repr\IeC {\"a}sentation}{5}{subsection.6.2}
+\contentsline {section}{\numberline {7}\textit {de.unisiegen.informatik.bs.alvis.pluginname}}{5}{section.7}
+\contentsline {subsection}{\numberline {7.1}Visualisierung des Datentyps}{7}{subsection.7.1}
+\contentsline {subsection}{\numberline {7.2}Erstellen eines Editors f\IeC {\"u}r ein Beispiel}{7}{subsection.7.2}
+\contentsline {subsection}{\numberline {7.3}Registrieren eines Wizards}{12}{subsection.7.3}
+\contentsline {subsection}{\numberline {7.4}Visualisierung des Runs}{12}{subsection.7.4}
+\contentsline {subsection}{\numberline {7.5}Datentypen registrieren}{15}{subsection.7.5}
+\contentsline {section}{\numberline {8}Anhang}{17}{section.8}
+\contentsline {subsection}{\numberline {8.1}Der Klabautermann}{17}{subsection.8.1}
+\contentsline {subsection}{\numberline {8.2}Probleme beim Start}{18}{subsection.8.2}
+\contentsline {subsubsection}{\numberline {8.2.1}Fehlende Plugins}{18}{subsubsection.8.2.1}
+\contentsline {subsubsection}{\numberline {8.2.2}.jar Dateien einbinden}{18}{subsubsection.8.2.2}
