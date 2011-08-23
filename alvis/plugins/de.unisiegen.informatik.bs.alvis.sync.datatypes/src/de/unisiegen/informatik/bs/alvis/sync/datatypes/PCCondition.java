@@ -28,7 +28,35 @@ public class PCCondition extends PCObject {
 		this(name, waiting, sema);
 		allGr.add(gr);
 	}
-	
+		
+	public PCSemaphore getSema() {
+		return sema;
+	}
+
+	public void setSema(PCSemaphore sema) {
+		this.sema = sema;
+	}
+
+	public int getWaiting() {
+		return waiting;
+	}
+
+	public void setWaiting(int waiting) {
+		this.waiting = waiting;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public static String getTypename() {
+		return TYPENAME;
+	}
+
 	public void wait(PCActor a) {
 		synchronized (this) {
 			sema.V();

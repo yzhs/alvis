@@ -7,5 +7,7 @@ Bundle-Activator: de.unisiegen.informatik.bs.alvis.sync.datatypes.Activator
 Require-Bundle: org.eclipse.core.runtime
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Import-Package: de.unisiegen.informatik.bs.alvis.primitive.datatypes,
+Import-Package: de.unisiegen.informatik.bs.alvis.extensionpoints,
+ de.unisiegen.informatik.bs.alvis.primitive.datatypes,
  org.eclipse.swt.graphics
+Export-Package: de.unisiegen.informatik.bs.alvis.sync.datatypes
