@@ -21,14 +21,14 @@ public class NewAlgorithmWizard extends Wizard implements INewWizard {
 	private IStructuredSelection selection;
 	private IWorkbench workbench;
 	private NewAlgorithmWizardPage newAlgorithmWizardPage;
-	public static final String ID = "de.unisiegen.informatik.bs.alvis.navigator.wizards.newAlgorithmWizard";
-	public static final String WIZARD_ID = "de.unisiegen.informatik.bs.alvis.navigator.wizards.newAlgorithmWizard";
+	public static final String ID = "de.unisiegen.informatik.bs.alvis.navigator.wizards.newAlgorithmWizard"; //$NON-NLS-1$
+	public static final String WIZARD_ID = "de.unisiegen.informatik.bs.alvis.navigator.wizards.newAlgorithmWizard"; //$NON-NLS-1$
 	
 	/**
 	 * 
 	 */
 	public NewAlgorithmWizard() {
-		setWindowTitle("New Algorithm File");
+		setWindowTitle(Messages.NewAlgorithmWizard_newAlgorithmFile);
 	}
 
 	@Override

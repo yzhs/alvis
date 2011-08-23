@@ -19,7 +19,7 @@ import de.unisiegen.informatik.bs.alvis.ui.navigator.wizards.*;
  *
  */
 public class ShowNewAlgorithmWizard extends AbstractHandler {
-	public static final String HANDLING_COMMAND_ID = "de.unisiegen.informatik.bs.alvis.navigator.commands.showNewAlgorithmWizard";
+	public static final String HANDLING_COMMAND_ID = "de.unisiegen.informatik.bs.alvis.navigator.commands.showNewAlgorithmWizard"; //$NON-NLS-1$
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		NewAlgorithmWizard algorithmWizard = new NewAlgorithmWizard();

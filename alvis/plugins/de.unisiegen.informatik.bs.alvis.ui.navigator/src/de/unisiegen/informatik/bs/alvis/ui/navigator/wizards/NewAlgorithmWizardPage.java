@@ -15,10 +15,10 @@ import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 public class NewAlgorithmWizardPage extends WizardNewFileCreationPage {
 
 	public NewAlgorithmWizardPage(IStructuredSelection selection) {
-		super("New Algorithm File Wizard", selection);
-		setTitle("Algorithm File");
-		setDescription("Creates a new Algorithm File");
-		setFileExtension("algo");
+		super(Messages.NewAlgorithmWizardPage_newAlgorithmFileWizard, selection);
+		setTitle(Messages.NewAlgorithmWizardPage_algorithmFile);
+		setDescription(Messages.NewAlgorithmWizardPage_createsNewAlgorithmFile);
+		setFileExtension("algo"); //$NON-NLS-1$
 	}
 
 	@Override

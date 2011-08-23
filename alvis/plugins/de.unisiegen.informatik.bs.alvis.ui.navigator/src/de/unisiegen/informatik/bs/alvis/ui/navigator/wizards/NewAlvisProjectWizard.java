@@ -22,8 +22,8 @@ import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 @SuppressWarnings("deprecation")
 public class NewAlvisProjectWizard extends BasicNewProjectResourceWizard {
 
-	public static final String ID = "de.unisiegen.informatik.bs.alvis.navigator.wizards.newAlvisProjectWizard";
-	public static final String WIZARD_ID = "de.unisiegen.informatik.bs.alvis.navigator.wizards.newAlvisProjectWizard";
+	public static final String ID = "de.unisiegen.informatik.bs.alvis.navigator.wizards.newAlvisProjectWizard"; //$NON-NLS-1$
+	public static final String WIZARD_ID = "de.unisiegen.informatik.bs.alvis.navigator.wizards.newAlvisProjectWizard"; //$NON-NLS-1$
 	public IFile fileToBeOpened;
 	
 	@Override
@@ -56,14 +56,14 @@ public class NewAlvisProjectWizard extends BasicNewProjectResourceWizard {
 	 */
 	private boolean createProjectFolders(IProject project) {
 		try {
-			IFolder srcFolder = project.getFolder("src");
+			IFolder srcFolder = project.getFolder("src"); //$NON-NLS-1$
 			srcFolder.create(true, true, null);
-			IFolder dataFolder = project.getFolder("data");
+			IFolder dataFolder = project.getFolder("data"); //$NON-NLS-1$
 			dataFolder.create(true, true, null);
-			IFile algoFile = srcFolder.getFile("algorithm.algo");
+			IFile algoFile = srcFolder.getFile("algorithm.algo"); //$NON-NLS-1$
 			//TODO find a new way to create the File! StringBufferInputStream is "deprecated"
 			// with argument = null it will create a non local file (not existent)
-			algoFile.create(new StringBufferInputStream(""), true, null);
+			algoFile.create(new StringBufferInputStream(""), true, null); //$NON-NLS-1$
 			this.fileToBeOpened = algoFile;
 		} catch (CoreException e) {
 			return false;

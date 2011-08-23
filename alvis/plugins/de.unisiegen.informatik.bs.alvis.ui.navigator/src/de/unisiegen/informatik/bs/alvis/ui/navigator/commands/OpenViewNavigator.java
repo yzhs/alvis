@@ -17,7 +17,7 @@ import de.unisiegen.informatik.bs.alvis.ui.navigator.views.Navigator;
  */
 public class OpenViewNavigator extends AbstractHandler {
 	public static final String ID 
-		= "de.unisiegen.informatik.bs.alvis.navigator.commands.openNavigator";
+		= "de.unisiegen.informatik.bs.alvis.navigator.commands.openNavigator"; //$NON-NLS-1$
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {

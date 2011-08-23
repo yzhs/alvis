@@ -62,12 +62,12 @@ public class AlvisLabelProvider extends WorkbenchLabelProvider implements
 			Object element) {
 			if (element instanceof IProject) {
 			IProject project = (IProject) element;
-			IFolder src = project.getFolder(new Path("src"));
-			IFolder data = project.getFolder(new Path("data"));
+			IFolder src = project.getFolder(new Path("src")); //$NON-NLS-1$
+			IFolder data = project.getFolder(new Path("data")); //$NON-NLS-1$
 			if (src.exists() && data.exists()) {
 				input = ImageDescriptor.createFromURL(FileLocator.find(
 						Activator.getDefault().getBundle(), new Path(
-								"icons/navigator/alvis_project.png"), null));
+								"icons/navigator/alvis_project.png"), null)); //$NON-NLS-1$
 			}
 		}
 		return super.decorateImage(input, element);
