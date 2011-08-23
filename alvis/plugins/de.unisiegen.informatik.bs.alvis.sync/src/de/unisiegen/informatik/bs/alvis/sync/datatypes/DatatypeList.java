@@ -14,6 +14,7 @@ public class DatatypeList implements IDatatypeList {
 		usedDatatypes.add(new PCCondition());
 		usedDatatypes.add(new PCActor());
 		usedDatatypes.add(new PCScenario());
+		usedDatatypes.add(new PCBuffer());
 		return usedDatatypes;
 	}
 

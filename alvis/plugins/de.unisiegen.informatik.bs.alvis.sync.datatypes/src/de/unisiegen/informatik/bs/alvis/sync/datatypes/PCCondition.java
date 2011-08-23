@@ -5,6 +5,11 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCString;
 
+/**
+ * Pseudo code implementation of a condition
+ * @author Jan Bauerdick
+ *
+ */
 public class PCCondition extends PCObject {
 	
 	protected static final String TYPENAME = "Condition";

@@ -12,7 +12,7 @@ public interface GraphicalRepresentationActor extends GraphicalRepresentation {
 	public final static Color NORMAL = new Color(null, 0xFF, 0xFF, 0xFF);
 	
 	public void setLine(int newLine);
-	public void setBlocked(boolean newState, boolean bySemaphore);
+	public void setBlocked(boolean blocked, boolean bySemaphore);
 	public boolean isBlocked();
 
 }
