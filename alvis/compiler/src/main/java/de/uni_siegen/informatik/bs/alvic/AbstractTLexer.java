@@ -294,7 +294,7 @@ public abstract class AbstractTLexer extends Lexer {
 	 */
 	public Token getTokenByNumbers(int line, int position) {
 		List<Token> t = new ArrayList<Token>(tokens);
-		if (t.size() == 0)
+		if (t.size()<=1)
 			return null;
 		t.remove(t.size()-1); // remove the EOF-token
 		Collections.reverse(t);
