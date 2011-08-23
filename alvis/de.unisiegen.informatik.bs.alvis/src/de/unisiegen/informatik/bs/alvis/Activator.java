@@ -11,6 +11,7 @@ import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorPart;
@@ -228,9 +229,7 @@ public class Activator extends AbstractUIPlugin {
 
 						String name = Activator.getDefault().from.toString();
 						if (name == null)
-							name = "Anfang des Algorithmus";
-						// TODO: Internationalisierung für übergebene Strings
-						// einbauen
+							name = Messages.Activator_DP_position_begin_algo;
 						if (Display.getDefault() != null) {
 							AskMeAgain ask = new AskMeAgain(true);
 							// OrderDialog can change the order of toSort
@@ -238,9 +237,9 @@ public class Activator extends AbstractUIPlugin {
 							OrderDialog toOrder = new OrderDialog(
 									shellContainer,
 									Activator.getDefault().toSort, ask,
-									"Legen Sie eine Reihenfolge fest",
-									"Sie sind bei: " + name,
-									"Bewegen Sie die Daten per Drag&Drop\n");
+									"Legen Sie eine Reihenfolge fest"/*Messages.Activator_DP_order*/,
+									NLS.bind(Messages.Activator_DP_current_position, name),
+									Messages.Activator_DP_drag_and_drop);
 							toOrder.open();
 							if (ask.getAsk() == false) {
 								// the user hit the box ,,Do not askme again''
@@ -264,7 +263,7 @@ public class Activator extends AbstractUIPlugin {
 
 	public void runBack() {
 		// TODO change for multiple Algos
-		vm.stepAlgoBackward("algo");
+		vm.stepAlgoBackward("algo"); //$NON-NLS-1$
 	}
 
 	/**
@@ -297,17 +296,17 @@ public class Activator extends AbstractUIPlugin {
 		for (Object obj : datatypesToAddToClasspathAsPCObjects) {
 			String path = obj.getClass().getProtectionDomain().getCodeSource()
 					.getLocation().getFile().toString();
-			if (path.endsWith(".jar"))
+			if (path.endsWith(".jar")) //$NON-NLS-1$
 				dynamicallyReferencedPackagesNeededToCompile.add(path);
 			else
-				dynamicallyReferencedPackagesNeededToCompile.add(path + "src/");
+				dynamicallyReferencedPackagesNeededToCompile.add(path + "src/"); //$NON-NLS-1$
 		}
 
 		try {
-			if (!vm.addAlgoToVM("algo", pathToFile, fileName,
+			if (!vm.addAlgoToVM("algo", pathToFile, fileName, //$NON-NLS-1$
 					dynamicallyReferencedPackagesNeededToCompile))
 				throw new VirtualMachineException(
-						"Adding the algorithm to the Virtual Machine failed.");
+						"Adding the algorithm to the Virtual Machine failed."); //$NON-NLS-1$
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -397,14 +396,14 @@ public class Activator extends AbstractUIPlugin {
 		allDatatypesInPlugIns.add(new PCList());
 		allDatatypesInPlugIns.add(new PCStack());
 		allDatatypesInPlugIns.add(new PCQueue());
-		allDatatypesInPlugIns.add(new PCString(""));
+		allDatatypesInPlugIns.add(new PCString("")); //$NON-NLS-1$
 		allDatatypesInPlugIns.add(new PCVoid());
 
 		/*
 		 * ADD THE DATATYPE-PACKAGENAMES THAT COME WITH ALVIS
 		 */
 		allDatatypesPackagesInPlugIns
-				.add("de.unisiegen.informatik.bs.alvis.primitive.datatypes");
+				.add("de.unisiegen.informatik.bs.alvis.primitive.datatypes"); //$NON-NLS-1$
 	}
 
 	/* ************************************************************************
