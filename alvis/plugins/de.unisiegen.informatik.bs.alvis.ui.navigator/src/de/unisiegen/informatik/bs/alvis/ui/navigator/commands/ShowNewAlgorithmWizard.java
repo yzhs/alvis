@@ -1,5 +1,5 @@
 /**
- * Command to open a new popup showing the new Algorithm wizard
+ * 
  */
 package de.unisiegen.informatik.bs.alvis.ui.navigator.commands;
 
@@ -15,6 +15,8 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import de.unisiegen.informatik.bs.alvis.ui.navigator.wizards.*;
 
 /**
+ * Command to open a new popup showing the new Algorithm wizard
+ * 
  * @author Eduard Boos
  *
  */

@@ -1,5 +1,5 @@
 /**
- * Creates a new Algorithm Wizard which creates a new File with the .algo extension
+ * 
  */
 package de.unisiegen.informatik.bs.alvis.ui.navigator.wizards;
 
@@ -13,6 +13,8 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.ide.IDE;
 
 /**
+ * Creates a new Algorithm Wizard which creates a new File with the .algo extension
+ * 
  * @author Eduard Boos
  *
  */

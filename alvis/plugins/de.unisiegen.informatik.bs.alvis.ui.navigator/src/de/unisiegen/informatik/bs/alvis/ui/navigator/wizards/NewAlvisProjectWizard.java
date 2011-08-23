@@ -1,5 +1,5 @@
 /**
- * Creates a wizard for a new Alvis Project and create all initial resources.
+ * 
  */
 package de.unisiegen.informatik.bs.alvis.ui.navigator.wizards;
 
@@ -16,6 +16,8 @@ import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.wizards.newresource.BasicNewProjectResourceWizard;
 
 /**
+ * Creates a wizard for a new alvis Project and create all initial resources.
+ * 
  * @author Eduard Boos
  *
  */

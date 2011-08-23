@@ -8,7 +8,8 @@ import org.eclipse.ui.navigator.CommonNavigator;
 import org.eclipse.ui.navigator.CommonViewer;
 
 /**
- *
+ * Main Navigator class, which extends the CommonNavigator and add the Workspace folder as root.
+ * 
  * @author Eduard Boos
  *
  */

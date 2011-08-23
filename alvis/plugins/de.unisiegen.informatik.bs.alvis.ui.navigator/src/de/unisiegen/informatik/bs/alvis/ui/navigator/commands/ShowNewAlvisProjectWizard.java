@@ -1,5 +1,5 @@
 /**
- * Command to open a new popup with the new Alvis Project Wizard
+ *
  */
 package de.unisiegen.informatik.bs.alvis.ui.navigator.commands;
 
@@ -14,6 +14,8 @@ import org.eclipse.ui.handlers.HandlerUtil;
 import de.unisiegen.informatik.bs.alvis.ui.navigator.wizards.*;
 
 /**
+ * Command to open a new popup with the new Alvis Project Wizard
+ * 
  * @author Eduard Boos
  * 
  */

@@ -1,6 +1,5 @@
 /**
- * The AlvisLabelProvider implements the ILabelProvider Interface to
- * add the icons in the alvis navigator.
+ * 
  */
 package de.unisiegen.informatik.bs.alvis.ui.navigator.views;
 
@@ -19,6 +18,9 @@ import de.unisiegen.informatik.bs.alvis.ui.navigator.Activator;
 
 
 /**
+ * The AlvisLabelProvider implements the ILabelProvider Interface to
+ * contribute alvis specific icons to the navigator.
+ * 
  * @author Eduard Boos
  * 
  */

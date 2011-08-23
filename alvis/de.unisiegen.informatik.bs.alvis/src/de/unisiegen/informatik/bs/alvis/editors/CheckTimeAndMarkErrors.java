@@ -36,7 +36,7 @@ public class CheckTimeAndMarkErrors implements Runnable {
 			try {
 				wait(500);
 			} catch (InterruptedException e) {
-				Logger.getInstance().log("AlgorithmEditorCompletionsProcessor->CheckTimeAndMarkErrors", Logger.ERROR, "CheckTimeAndMarkErrors thread was interrupted.");
+				Logger.getInstance().log("AlgorithmEditorCompletionsProcessor->CheckTimeAndMarkErrors", Logger.ERROR, "CheckTimeAndMarkErrors thread was interrupted."); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			if ((System.currentTimeMillis() - editor.lastKeyStroke) > 499) {
 				if (editor.isCompilationNeeded(code)) {

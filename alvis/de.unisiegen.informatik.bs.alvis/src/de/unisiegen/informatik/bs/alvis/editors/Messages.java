@@ -11,6 +11,9 @@ public class Messages extends NLS {
 	private static Locale currentLanguage;
 	private static final String BUNDLE_NAME = "de.unisiegen.informatik.bs.alvis.editors.messages"; //$NON-NLS-1$
 
+	public static String AlgorithmEditorCompletionProcessor_additionalInformationFor;
+	public static String AlgorithmEditorCompletionProcessor_contextInformationFor;
+	public static String AlgorithmEditorCompletionProcessor_newLineSomeInfo;
 	public static String Graph_button_depth;
 	public static String Graph_button_width;
 	public static String Graph_button_add;

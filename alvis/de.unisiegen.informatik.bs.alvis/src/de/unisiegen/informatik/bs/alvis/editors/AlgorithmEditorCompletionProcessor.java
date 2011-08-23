@@ -86,9 +86,9 @@ public class AlgorithmEditorCompletionProcessor implements
 					- viewer.getDocument().getLineOffset(line);
 			line++;
 		} catch (BadLocationException e) {
-			Logger.getInstance().log("Editor->AlgorithmEditorCompletionProcessor", Logger.ERROR, "Code-Completion caused an BadLocationException: \n"+ e.getLocalizedMessage());
+			Logger.getInstance().log("Editor->AlgorithmEditorCompletionProcessor", Logger.ERROR, "Code-Completion caused an BadLocationException: \n"+ e.getLocalizedMessage()); //$NON-NLS-1$ //$NON-NLS-2$
 		} catch (IOException e) {
-			Logger.getInstance().log("Editor->AlgorithmEditorCompletionProcessor", Logger.ERROR, "Code-Completion caused an IOException: \n"+ e.getLocalizedMessage());
+			Logger.getInstance().log("Editor->AlgorithmEditorCompletionProcessor", Logger.ERROR, "Code-Completion caused an IOException: \n"+ e.getLocalizedMessage()); //$NON-NLS-1$ //$NON-NLS-2$
 			return null;
 		}
 		List<CompletionInformation> availableProposals = new ArrayList<CompletionInformation>();
@@ -106,7 +106,7 @@ public class AlgorithmEditorCompletionProcessor implements
 				
 				ContextInformation contextInfo = new ContextInformation(
 						currentProposal.getReplacementString(),
-						"Context Information for "
+						Messages.AlgorithmEditorCompletionProcessor_contextInformationFor + " "
 								+ currentProposal.getReplacementString());
 				
 				int replacementOffset = viewer.getTextWidget().getOffsetAtLine((
@@ -119,9 +119,9 @@ public class AlgorithmEditorCompletionProcessor implements
 						currentProposal.getReplacementLength(), currentProposal
 								.getReplacementString().length(), null,
 						currentProposal.getReplacementString(), contextInfo,
-						"Additional Information for: "
+						Messages.AlgorithmEditorCompletionProcessor_additionalInformationFor + " "
 								+ currentProposal.getReplacementString()
-								+ "\n Some Info here");
+								+ Messages.AlgorithmEditorCompletionProcessor_newLineSomeInfo);
 				resultList.add(completionProposal);
 			}
 		}

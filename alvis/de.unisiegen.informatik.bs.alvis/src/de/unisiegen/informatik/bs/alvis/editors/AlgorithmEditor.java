@@ -52,7 +52,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 	private ProjectionSupport projectionSupport;
 	private Annotation[] oldAnnotations;
 	private Boolean[] isCollapsed;
-	private String codeOfLastCompile = "";
+	private String codeOfLastCompile = ""; //$NON-NLS-1$
 	protected long lastKeyStroke;
 
 	/**
@@ -183,7 +183,7 @@ public class AlgorithmEditor extends AbstractDecoratedTextEditor implements
 				}
 			}
 		} catch (BadLocationException e) {
-			Logger.getInstance().log("AlgorithmEditor", Logger.ERROR, "Exception in AlgorithmEditor ( BadLocationException): \n"+ e.getLocalizedMessage());
+			Logger.getInstance().log("AlgorithmEditor", Logger.ERROR, "Exception in AlgorithmEditor ( BadLocationException): \n"+ e.getLocalizedMessage()); //$NON-NLS-1$ //$NON-NLS-2$
 		}
 
 		/** getting all begin and end Tokens from the document */

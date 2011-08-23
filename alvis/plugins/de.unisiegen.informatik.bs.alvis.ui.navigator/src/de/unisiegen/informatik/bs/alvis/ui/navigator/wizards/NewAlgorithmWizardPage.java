@@ -1,5 +1,5 @@
 /**
- * This calss is needed for the NewAlgorithmWizard and defines the WizardPage, windowTitle
+ *
  */
 package de.unisiegen.informatik.bs.alvis.ui.navigator.wizards;
 
@@ -9,6 +9,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 
 /**
+ *  This calss is needed for the NewAlgorithmWizard and defines the WizardPage, windowTitle
+ *  
  * @author Eduard Boos
  * 
  */

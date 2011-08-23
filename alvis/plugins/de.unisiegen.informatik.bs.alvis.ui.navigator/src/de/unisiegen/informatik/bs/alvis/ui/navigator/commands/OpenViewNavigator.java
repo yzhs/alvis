@@ -1,5 +1,5 @@
 /**
- * Command to open the Navigator View
+ * 
  */
 package de.unisiegen.informatik.bs.alvis.ui.navigator.commands;
 
@@ -12,6 +12,8 @@ import de.unisiegen.informatik.bs.alvis.ui.navigator.views.Navigator;
 
 
 /**
+ * Command to open the Navigator View
+ * 
  * @author Eduard Boos
  *
  */
