@@ -56,13 +56,13 @@ public class AlgorithmErrorMarker {
 		} catch (CoreException e) {
 			Logger.getInstance().log("Editor->AlgorithmErrorMarker", Logger.ERROR, "Error marking caused an CoreException: \n" + e.getLocalizedMessage()); //$NON-NLS-1$
 		}
-		/** remark all errorMarkers */
+		/* remark all errorMarkers */
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<RecognitionException> errors = CompilerAccess.getDefault()
 				.getExceptions();
 		for (RecognitionException error : errors) {
-			String errorMessage = ""; //$NON-NLS-1$
-			System.err.println(error.toString());
+			String errorMessage;
+//			System.err.println(error.toString());
 			if (error instanceof MismatchedTreeNodeException) {
 				// This case should not happen. If control flow gets here
 				// something is wrong with the compiler.

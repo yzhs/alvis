@@ -93,7 +93,7 @@ public abstract class AbstractTypeChecker extends AbstractTreeParser {
 		 * earlier error.
 		 */
 		if (!e.toString().contains("#")) {
-			System.err.println(e);
+//			System.err.println(e);
 			exceptions.add(e);
 		}
 	}
