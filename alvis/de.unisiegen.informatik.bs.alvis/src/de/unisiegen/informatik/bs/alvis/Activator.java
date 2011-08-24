@@ -237,7 +237,7 @@ public class Activator extends AbstractUIPlugin {
 							OrderDialog toOrder = new OrderDialog(
 									shellContainer,
 									Activator.getDefault().toSort, ask,
-									"Legen Sie eine Reihenfolge fest"/*Messages.Activator_DP_order*/,
+									Messages.Activator_DP_order,
 									NLS.bind(Messages.Activator_DP_current_position, name),
 									Messages.Activator_DP_drag_and_drop);
 							toOrder.open();
