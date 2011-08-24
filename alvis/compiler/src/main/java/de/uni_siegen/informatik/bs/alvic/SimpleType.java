@@ -14,7 +14,7 @@ import java.lang.reflect.Method;
  * types provided by plug-ins, such as 'Graph' or 'Vertex'. It does not describe
  * the type of a function or an array.
  * 
- * @author Colin
+ * @author Colin Benner
  */
 public class SimpleType implements Type {
 	/**

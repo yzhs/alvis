@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * An ArrayType is a type of the form "elementType[]" or List<elementType>"
  * where 'elementType' is an arbitrary type.
  * 
- * @author Colin
+ * @author Colin Benner
  */
 public class ArrayType implements Type {
 	/**

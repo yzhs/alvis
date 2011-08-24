@@ -8,7 +8,7 @@ import org.antlr.runtime.tree.*;
  * in the AST around. We actually use this to tell the code generator what types
  * the 'null' and 'infty' literals are.
  * 
- * @author Colin
+ * @author Colin Benner
  */
 public class TypedTree extends CommonTree {
 	/**

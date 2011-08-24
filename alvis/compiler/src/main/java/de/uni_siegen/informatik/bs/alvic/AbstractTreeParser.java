@@ -9,6 +9,12 @@ import org.antlr.runtime.tree.TreeAdaptor;
 import org.antlr.runtime.tree.TreeNodeStream;
 import org.antlr.runtime.tree.TreeParser;
 
+/**
+ * Used to avoid excessive reflection usage that could theoretically lead to
+ * exceptions being thrown.
+ *
+ * @author Colin Benner
+ */
 public abstract class AbstractTreeParser extends TreeParser {
 	public AbstractTreeParser(TreeNodeStream input) {
 		super(input);
@@ -21,7 +27,10 @@ public abstract class AbstractTreeParser extends TreeParser {
 	public abstract void setTreeAdaptor(TreeAdaptor treeAdaptor);
 
 	public abstract void setParser(Parser parser);
-	
+
+	/**
+	 * Parse the entire AST.
+	 */
 	public abstract Object program() throws RecognitionException;
 
 	public abstract List<RecognitionException> getExceptions();

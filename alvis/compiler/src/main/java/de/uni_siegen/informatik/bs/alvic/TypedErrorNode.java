@@ -12,7 +12,7 @@ import org.antlr.runtime.tree.*;
  * All of this stuff has to be reimplemented because Java does not allow
  * multiple inheritance.
  * 
- * @author Colin
+ * @author Colin Benner
  */
 public class TypedErrorNode extends TypedTree {
 	/**

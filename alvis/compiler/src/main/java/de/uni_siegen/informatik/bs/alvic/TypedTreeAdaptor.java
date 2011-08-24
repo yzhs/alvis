@@ -9,7 +9,7 @@ import org.antlr.runtime.tree.*;
  * type checker can pass its results (especially the types it inferred for the
  * 'null' and 'infty' literals) to the code generator.
  * 
- * @author Colin
+ * @author Colin Benner
  */
 public class TypedTreeAdaptor extends CommonTreeAdaptor {
 	/**

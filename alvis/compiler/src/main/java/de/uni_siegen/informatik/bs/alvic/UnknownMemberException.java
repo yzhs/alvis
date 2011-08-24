@@ -4,7 +4,7 @@ package de.uni_siegen.informatik.bs.alvic;
  * This exception describes the problem that the user tries to access a member
  * of a given class that does not exist.
  * 
- * @author Colin
+ * @author Colin Benner
  */
 public class UnknownMemberException extends TypeException {
 	private static final long serialVersionUID = -2392060752964066036L;

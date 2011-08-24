@@ -4,7 +4,7 @@ package de.uni_siegen.informatik.bs.alvic;
  * This exception describes the problem that the user tries to use an operator
  * of a given class when no operator with that name exists.
  * 
- * @author Colin
+ * @author Colin Benner
  */
 public class UnknownOperatorException extends UnknownMemberException {
 	private static final long serialVersionUID = 3837290428993154987L;

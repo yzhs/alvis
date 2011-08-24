@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * A FunctionType describes what type a function returns and what types of
  * parameters it accepts.
  * 
- * @author Colin
+ * @author Colin Benner
  */
 public class FunctionType implements Type {
 	/**

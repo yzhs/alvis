@@ -4,7 +4,7 @@ package de.uni_siegen.informatik.bs.alvic;
  * This exception is thrown when encountering an identifier that was not defined
  * in the current scope.
  * 
- * @author Colin
+ * @author Colin Benner
  */
 public class UnknownIdentifierException extends TypeException {
 	private static final long serialVersionUID = -2452015985530518766L;

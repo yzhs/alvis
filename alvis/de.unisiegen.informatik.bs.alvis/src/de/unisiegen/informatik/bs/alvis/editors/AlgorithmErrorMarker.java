@@ -2,6 +2,7 @@
  * Error Marker Class to mark error in an AlgorithmEditor
  */
 package de.unisiegen.informatik.bs.alvis.editors;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,14 +23,15 @@ import de.unisiegen.informatik.bs.alvis.compiler.CompilerAccess;
 import de.unisiegen.informatik.bs.alvis.io.logger.Logger;
 
 /**
- * This class is for marking the given Document and File with Errors that occurs parsing the document.
- * @author Eduard Boos
+ * This class is for marking the given Document and File with Errors that occurs
+ * parsing the document.
  * 
+ * @author Eduard Boos
  */
 public class AlgorithmErrorMarker {
 	private IFile file;
 	private IDocument document;
-	public static final String ERROR_MARKER_ID = "de.unisiegen.informatik.bs.alvis.markers.AlgorithmErrorMarker";
+	public static final String ERROR_MARKER_ID = "de.unisiegen.informatik.bs.alvis.markers.AlgorithmErrorMarker"; //$NON-NLS-1$
 
 	/**
 	 * 
@@ -44,24 +46,26 @@ public class AlgorithmErrorMarker {
 	}
 
 	/**
-	 * mark the errors in the file/document, this method will parse the document
+	 * Mark the errors in the file/document. This method will parse the document
 	 * text for errors. First delete all markers and then repaint the errors
 	 * again.
 	 */
 	public void markErrors() {
-		/** delete old errorMarkers */
+		/* delete old errorMarkers */
 		try {
 			file.deleteMarkers(ERROR_MARKER_ID, false, IResource.DEPTH_ZERO);
 		} catch (CoreException e) {
-			Logger.getInstance().log("Editor->AlgorithmErrorMarker", Logger.ERROR, "Error marking caused an CoreException: \n"+ e.getLocalizedMessage());
+			Logger.getInstance().log("Editor->AlgorithmErrorMarker", Logger.ERROR, "Error marking caused an CoreException: \n"+ e.getLocalizedMessage()); //$NON-NLS-1$ //$NON-NLS-2$
 		}
-		/** remark all errorMarkers */
+		/* remark all errorMarkers */
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<RecognitionException> errors = CompilerAccess.getDefault().getExceptions();
 		for(RecognitionException error : errors) {
-			String errorMessage = "";
+			String errorMessage;
 			System.err.println(error.toString());
-			if (error instanceof MismatchedTreeNodeException) {
+			if (error instanceof TypeException)
+				errorMessage = error.toString();
+			else if (error instanceof MismatchedTreeNodeException) {
 				// This case should not happen. If control flow gets here
 				// something is wrong with the compiler.
 				MismatchedTreeNodeException re = (MismatchedTreeNodeException)error;
@@ -69,51 +73,7 @@ public class AlgorithmErrorMarker {
 				errorMessage = "MismatchedTreeNode at " + re.line + ":" + re.charPositionInLine + ": " + error;
 			} else if (error instanceof NoViableAltException) {
 				NoViableAltException re = (NoViableAltException)error;
-				//TODO specific Exception Stuff here like, Error Message
-		 		errorMessage = "No alternative given at " + re.line + ":" + re.charPositionInLine;
-			} else if (error instanceof ArgumentNumberException) {
-				ArgumentNumberException re = (ArgumentNumberException)error;
-				errorMessage = "Function called at " + re.line + ":" + re.charPositionInLine + " with the wrong number of arguments (" + " instead of the expected " + ")";
-			} else if (error instanceof ArgumentTypeException) {
-				ArgumentTypeException re = (ArgumentTypeException)error;
-				errorMessage = "Function called at " + re.line + ":" + re.charPositionInLine + " got an argument with the wrong type: argument #" + re.getArgumentNumber() + " is of type " + re.getGiven() + " but should be of type " + re.getExpected() + ".";
-			} else if (error instanceof InvalidAssignmentException) {
-				InvalidAssignmentException re = (InvalidAssignmentException)error;
-				errorMessage = "Tried to assign to " + re.getLeft() + " at " + re.line + ":" + re.charPositionInLine + " which is a function call and can thus not be assigned to.";
-			} else if (error instanceof InvalidReturnException) {
-				InvalidReturnException re = (InvalidReturnException)error;
-				if (re.getExpected().toString().equalsIgnoreCase("void"))
-					errorMessage = "Trying to return non-void result " + re.getStat() + " at " + re.line + ":" + re.charPositionInLine + " from void function " + re.getFunction() + ".";
-				else if (null == re.getGiven())
-					errorMessage = "Trying to return from function " + re.getFunction() + " at " + re.line + ":" + re.charPositionInLine + " without a return value where a return value of type " + re.getExpected() + " was expected.";
-				else
-					errorMessage = "Trying to return value " + re.getStat() + " from function " + re.getFunction() + " at " + re.line + ":" + re.charPositionInLine + " which has type " + re.getGiven() + " where an expression of type " + re.getExpected() + " was expected.";
-			} else if (error instanceof InvalidStatementException) {
-				InvalidStatementException re = (InvalidStatementException)error;
-				errorMessage = "Tried to use expression " + re.getExpr() + " where a statement was expected at " + re.line + ":" + re.charPositionInLine + ".";
-			} else if (error instanceof NoSuchOperatorException) {
-				NoSuchOperatorException re = (NoSuchOperatorException)error;
-				errorMessage = "Using non-existant operator " + re.getMember() +  "(" + re.getObject() + (re.getArguments() == 0 ? ")." : ", " + re.getArgType()+ ").");
-			} else if (error instanceof NotAFunctionException) {
-				NotAFunctionException re = (NotAFunctionException)error;
-				errorMessage = "Trying to call " + re.getExpr() + " at " + re.line + ":" + re.charPositionInLine + " which has type " + re.getType() + "and therefore is not a function.";
-			} else if (error instanceof NotAnArrayException) {
-				NotAnArrayException re = (NotAnArrayException)error;
-				errorMessage = "Trying to index " + re.getExpr() + " at " + re.line + ":" + re.charPositionInLine + " which has type " + re.getType() + " and therefore is not an array.";
-			} else if (error instanceof TypeMismatchException) {
-				TypeMismatchException re = (TypeMismatchException)error;
-				errorMessage = "Found expression " + re.getExpr() + " at " + re.line + ":" + re.charPositionInLine + " which has type " + re.getGiven() + " where an expression of type" + re.getExpected() + " was expected.";
-			} else if (error instanceof UnknownIdentifierException) {
-				UnknownIdentifierException re = (UnknownIdentifierException)error;
-				errorMessage = "Found identifier " + re.getIdentifier() + " at " + re.line + ":" + re.charPositionInLine + " which was not declared before being used.";
-			} else if (error instanceof UnknownOperatorException) {
-				UnknownOperatorException re = (UnknownOperatorException)error;
-				errorMessage = "Found operator " + re.getMember() + " at " + re.line + ":" + re.charPositionInLine + " with argument of type " + re.getObject() + " which is not defined.";
-			} else if (error instanceof UnknownMemberException) {
-				UnknownMemberException re = (UnknownMemberException)error;
-				errorMessage = "Found access to member " + re.getMember() + " of class " + re.getObject() + " at " + re.line + ":" + re.charPositionInLine + ". Such a member does not exist.";
-			} else if (error instanceof TypeException) {
-				errorMessage = error.toString();
+				errorMessage = "No alternative given at " + re.line + ":" + re.charPositionInLine;
 			} else {
 				System.out.println("UNKNOWN ERROR at " + error.line + ":" + error.charPositionInLine + ": " + error);
 				continue;
@@ -144,7 +104,7 @@ public class AlgorithmErrorMarker {
 			try {
 				MarkerUtilities.createMarker(file, map, ERROR_MARKER_ID);
 			} catch (CoreException e) {
-				Logger.getInstance().log("Editor->AlgorithmErrorMarker", Logger.ERROR, "Error marking caused an CoreException: \n"+ e.getLocalizedMessage());
+				Logger.getInstance().log("Editor->AlgorithmErrorMarker", Logger.ERROR, "Error marking caused an CoreException: \n"+ e.getLocalizedMessage()); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		}
 	}

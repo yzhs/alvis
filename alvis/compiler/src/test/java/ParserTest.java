@@ -4,12 +4,11 @@ import org.testng.annotations.Test;
 import de.uni_siegen.informatik.bs.alvic.TLexer;
 import de.uni_siegen.informatik.bs.alvic.TParser;
 import de.uni_siegen.informatik.bs.alvic.TypedTreeAdaptor;
-//import de.uni_siegen.informatik.bs.alvic.TypeChecker;
 import org.antlr.runtime.*;
 import org.antlr.runtime.tree.*;
 
 /**
- * @author Colin
+ * @author Colin Benner
  */
 @Test
 public class ParserTest {
@@ -60,13 +59,10 @@ public class ParserTest {
 	private String test(String algorithm, int i) {
 		printTestName(i+1);
 		TParser.program_return program = null;
-//		TypeChecker walker = null;
 		CommonTree tree = null;
 		try {
 			program = createParser(algorithm).program();
 			tree = (CommonTree)program.getTree();
-//			walker = new TypeChecker(new CommonTreeNodeStream(tree));
-//			tree = (CommonTree)walker.program().getTree();
 		} catch (RecognitionException re) {
 			re.printStackTrace();
 			assert false;
@@ -401,32 +397,6 @@ public class ParserTest {
 		printAndAssert(stringTree, stringTree.contains("(CALL f 1 2.3 \"abc\")")); //$NON-NLS-1$
 	}
 
-/*
- * These tests are disabled as the type checker does not care about arguments
- * at the moment. They should be enabled once the type checker makes sure that
- * arguments have the correct type.
- */
-//	@Test
-//	public void functionCallFailure1() {
-//		String algorithm = "f() begin end\n" + //$NON-NLS-1$
-//		                   "main() begin f(1), end\n"; //$NON-NLS-1$
-//		negativeTest(algorithm);
-//	}
-//
-//	@Test
-//	public void functionCallFailure2() {
-//		String algorithm = "f(Integer i) begin end\n" + //$NON-NLS-1$
-//		                   "main() begin f(), end\n"; //$NON-NLS-1$
-//		negativeTest(algorithm);
-//	}
-//
-//	@Test
-//	public void functionCallFailure3() {
-//		String algorithm = "f(Integer i) begin end\n" + //$NON-NLS-1$
-//		                   "main() begin f(1.5), end\n"; //$NON-NLS-1$
-//		negativeTest(algorithm);
-//	}
-
 	@Test
 	public void memberAccessSuccess() {
 		String algorithm = "main() begin\n" + //$NON-NLS-1$
@@ -437,15 +407,6 @@ public class ParserTest {
 		printAndAssert(stringTree, stringTree.contains("(. s size)")); //$NON-NLS-1$
 	}
 
-//	@Test
-//	public void memberAccessFailure() {
-//		String algorithm = "main() begin\n" + //$NON-NLS-1$
-//		                   "String s,\n" + //$NON-NLS-1$
-//		                   "s.nuihkoghaepmincw,\n" + //$NON-NLS-1$
-//		                   "end\n"; //$NON-NLS-1$
-//		negativeTest(algorithm);
-//	}
-
 	@Test
 	public void arrayIndexSucces() {
 		String algorithm = "main() begin\n" + //$NON-NLS-1$
@@ -455,54 +416,6 @@ public class ParserTest {
 		String stringTree = test(algorithm);
 		printAndAssert(stringTree, stringTree.contains("(INDEX a 0)")); //$NON-NLS-1$
 	}
-
-
-//	@Test
-//	public void methodCallSuccess1() {
-//		String algorithm = "main() begin\n" + //$NON-NLS-1$
-//		                   "String s,\n" + //$NON-NLS-1$
-//		                   "s.length(),\n" + //$NON-NLS-1$
-//		                   "end\n"; //$NON-NLS-1$
-//		String stringTree = test(algorithm);
-//		printAndAssert(stringTree, stringTree.contains("(CALL (. s length))")); //$NON-NLS-1$
-//	}
-//
-//	@Test
-//	public void methodCallSuccess2() {
-//		String algorithm = "main() begin\n" + //$NON-NLS-1$
-//		                   "String s,\n" + //$NON-NLS-1$
-//		                   "s.concat(\"abc\"),\n" + //$NON-NLS-1$
-//		                   "end\n"; //$NON-NLS-1$
-//		String stringTree = test(algorithm);
-//		printAndAssert(stringTree, stringTree.contains("(CALL (. s concat) \"abc\")")); //$NON-NLS-1$
-//	}
-//
-//	@Test
-//	public void methodCallFailure1() {
-//		String algorithm = "main() begin\n" + //$NON-NLS-1$
-//		                   "String s,\n" + //$NON-NLS-1$
-//		                   "s.length(1),\n" + //$NON-NLS-1$
-//		                   "end\n"; //$NON-NLS-1$
-//		negativeTest(algorithm);
-//	}
-//
-//	@Test
-//	public void methodCallFailure2() {
-//		String algorithm = "main() begin\n" + //$NON-NLS-1$
-//		                   "String s,\n" + //$NON-NLS-1$
-//		                   "s.concat(),\n" + //$NON-NLS-1$
-//		                   "end\n"; //$NON-NLS-1$
-//		negativeTest(algorithm);
-//	}
-//
-//	@Test
-//	public void methodCallFailure3() {
-//		String algorithm = "main() begin\n" + //$NON-NLS-1$
-//		                   "String s,\n" + //$NON-NLS-1$
-//		                   "s.concat(1),\n" + //$NON-NLS-1$
-//		                   "end\n"; //$NON-NLS-1$
-//		negativeTest(algorithm);
-//	}
 
 	@Test
 	public void terminator1() {

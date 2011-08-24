@@ -3,7 +3,7 @@ package de.uni_siegen.informatik.bs.alvic;
 /**
  * This exception is used when trying to index something that is not an array.
  * 
- * @author Colin
+ * @author Colin Benner
  */
 public class NotAnArrayException extends TypeException {
 	private static final long serialVersionUID = 8561795105957083725L;

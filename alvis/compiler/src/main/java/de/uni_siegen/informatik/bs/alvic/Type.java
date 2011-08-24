@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Type is used to describe a type as it is used in Alvis' language.
  * 
- * @author Colin
+ * @author Colin Benner
  */
 public interface Type {
 	/**

@@ -4,7 +4,7 @@ package de.uni_siegen.informatik.bs.alvic;
  * This exception is used when the user tries to call something that is not a
  * function.
  * 
- * @author Colin
+ * @author Colin Benner
  */
 public class NotAFunctionException extends TypeException {
 	private static final long serialVersionUID = 2290856303317891280L;

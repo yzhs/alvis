@@ -6,7 +6,7 @@ import org.antlr.runtime.RecognitionException;
  * Implementations of this exception are used to handle all type checker
  * generated problems.
  *
- * @author Colin
+ * @author Colin Benner
  */
 public abstract class TypeException extends RecognitionException {
 	private static final long serialVersionUID = -2651349912464757271L;

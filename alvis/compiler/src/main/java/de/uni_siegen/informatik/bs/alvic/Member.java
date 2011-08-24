@@ -9,7 +9,7 @@ import java.lang.reflect.ParameterizedType;
 /**
  * Represents members of classes.
  * 
- * @author Colin
+ * @author Colin Benner
  */
 public class Member {
 	/**

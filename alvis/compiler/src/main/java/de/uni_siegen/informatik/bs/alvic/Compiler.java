@@ -16,7 +16,7 @@ import java.io.*;
 import de.uni_siegen.informatik.bs.alvic.TParser.program_return;
 
 /**
- * @author Colin
+ * @author Colin Benner
  */
 public class Compiler {
 	private static final TreeAdaptor adaptor = new TypedTreeAdaptor();
@@ -71,7 +71,7 @@ public class Compiler {
 
 	/**
 	 * Generate code for importing all the packages provided by plug-ins.
-	 * 
+	 *
 	 * @return Java code to import all the packages the user can use.
 	 */
 	private String imports() {
@@ -83,7 +83,7 @@ public class Compiler {
 
 	/**
 	 * Load a StringTemplateGroup from a file.
-	 * 
+	 *
 	 * @param resources
 	 *            the file from which the template definitions are loaded
 	 */
@@ -99,7 +99,7 @@ public class Compiler {
 
 	/**
 	 * This method applies an AST emitting tree parser to an AST.
-	 * 
+	 *
 	 * @param treeParser
 	 *            The tree parser's Class (must be tree parser that outputs an
 	 *            AST)
@@ -155,15 +155,33 @@ public class Compiler {
 		return tree;
 	}
 
+	/**
+	 * Compile the given code and generate Java code.
+	 *
+	 * @param code The code we want to translate.
+	 * @return The generated Java code.
+	 * @throws IOException
+	 */
 	public String compile(String code) throws IOException {
 		return compile(code,
 				getClass().getClassLoader().getResourceAsStream("Java.stg"));
 	}
 
+	/**
+	 * Compile the given code and generate output using the template group
+	 * specified.
+	 *
+	 * @param code
+	 *            The code we want to translate.
+	 * @param templates
+	 *            The set of templates used to generate the output code.
+	 * @return The generated code.
+	 * @throws IOException
+	 */
 	public String compile(String code, InputStream templates)
 			throws IOException {
 		if (templates == null)
-			System.err.println("error: could not load template file");
+			System.err.println("error: could not load template file from jar");
 		String result = null;
 		lexer = new TLexer(new ANTLRStringStream(code));
 		tokens = new CommonTokenStream(lexer);
@@ -205,6 +223,15 @@ public class Compiler {
 		return result;
 	}
 
+	/**
+	 * Use lexer, parser and type checker to check the code without generating
+	 * any Java code.
+	 *
+	 * @param code
+	 *            The code to check
+	 * @return a list of the exceptions that occurred when lexing, parsing and
+	 *         type checking.
+	 */
 	public List<RecognitionException> check(String code) {
 		lexer = new TLexer(new ANTLRStringStream(code));
 		tokens = new CommonTokenStream(lexer);
@@ -234,6 +261,13 @@ public class Compiler {
 		return instance;
 	}
 
+	/**
+	 * Get an object of the given type.
+	 *
+	 * @param className
+	 *            The type of the object to be returned.
+	 * @return an object of that type.
+	 */
 	public Object getObject(String className) {
 		return types.get(className);
 	}

@@ -4,7 +4,7 @@ package de.uni_siegen.informatik.bs.alvic;
  * This exception is used when the user tries to use a function call as the left
  * argument of the assignment operator.
  * 
- * @author Colin
+ * @author Colin Benner
  */
 public class InvalidAssignmentException extends TypeException {
 	private static final long serialVersionUID = 7488963207043957012L;

@@ -4,7 +4,7 @@ package de.uni_siegen.informatik.bs.alvic;
  * This exception is used when the user writes something like 'x,', that is some
  * expression 'x' that is not a function call where a statement was expected.
  * 
- * @author Colin
+ * @author Colin Benner
  */
 public class InvalidStatementException extends TypeException {
 	private static final long serialVersionUID = -2667840149739205105L;

@@ -5,7 +5,7 @@ package de.uni_siegen.informatik.bs.alvic;
  * type, a function with return-type void contains a return statement with a
  * parameter or a non-void functions contains an empty return statement.
  * 
- * @author Colin
+ * @author Colin Benner
  */
 public class InvalidReturnException extends TypeException {
 	private static final long serialVersionUID = -1434703988506333067L;

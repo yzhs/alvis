@@ -8,7 +8,7 @@ import org.antlr.runtime.tree.*;
 /**
  * The super class of the generated type checker.
  * 
- * @author Colin
+ * @author Colin Benner
  */
 public abstract class AbstractTypeChecker extends AbstractTreeParser {
 	/**

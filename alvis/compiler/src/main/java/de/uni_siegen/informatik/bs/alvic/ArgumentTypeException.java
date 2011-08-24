@@ -4,7 +4,7 @@ package de.uni_siegen.informatik.bs.alvic;
  * This exception describes the problem that a function is called with the wrong
  * number of arguments.
  * 
- * @author Colin
+ * @author Colin Benner
  */
 public class ArgumentTypeException extends TypeMismatchException {
 	private static final long serialVersionUID = -6914907729944478299L;

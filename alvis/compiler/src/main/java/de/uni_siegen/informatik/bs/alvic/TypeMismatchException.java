@@ -4,7 +4,7 @@ package de.uni_siegen.informatik.bs.alvic;
  * This exception is used to indicate that something does not have the type it
  * is supposed to.
  * 
- * @author Colin
+ * @author Colin Benner
  */
 public class TypeMismatchException extends TypeException {
 	private static final long serialVersionUID = 8394305381771635018L;

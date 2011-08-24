@@ -5,7 +5,7 @@ package de.uni_siegen.informatik.bs.alvic;
  * of a given class when no such method with the correct number of arguments and
  * the correct argument types exists.
  * 
- * @author Colin
+ * @author Colin Benner
  */
 public class NoSuchOperatorException extends UnknownOperatorException {
 	private static final long serialVersionUID = -54345625059571797L;
