@@ -25,13 +25,14 @@ import de.uni_siegen.informatik.bs.alvic.AbstractTLexer;
 import de.uni_siegen.informatik.bs.alvic.Compiler;
 import de.uni_siegen.informatik.bs.alvic.TParser;
 import de.unisiegen.informatik.bs.alvis.io.files.FileCopy;
+import de.unisiegen.informatik.bs.alvis.io.logger.Logger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
 /**
  * @author mays
  * @author Colin Benner
  * @author Eduard Boos
- *
+ * 
  */
 public class CompilerAccess {
 	/**
@@ -69,9 +70,11 @@ public class CompilerAccess {
 
 	/**
 	 * Add possible results for a given key.
-	 *
-	 * @param key The token name to translate.
-	 * @param arg The possible characters.
+	 * 
+	 * @param key
+	 *            The token name to translate.
+	 * @param arg
+	 *            The possible characters.
 	 */
 	private static void add(String key, String... arg) {
 		translateCompletion.put(key, Arrays.asList(arg));
@@ -136,8 +139,9 @@ public class CompilerAccess {
 
 	/**
 	 * Compile the source found at algorithmPath.
-	 *
-	 * @return The File representing the file containing the generated Java code.
+	 * 
+	 * @return The File representing the file containing the generated Java
+	 *         code.
 	 * @throws RecognitionException
 	 * @throws IOException
 	 */
@@ -150,11 +154,11 @@ public class CompilerAccess {
 	 * Before calling this method you should provide the names of all packages
 	 * and classes that the user may use (using the setDatatypes and
 	 * setDatatypePackages methods).
-	 *
+	 * 
 	 * @param path
 	 *            path to the source code that
 	 * @return path to the generated .java file if it exists, null otherwise
-	 *
+	 * 
 	 * @throws IOException
 	 */
 	public File compile(String path) throws IOException {
@@ -167,13 +171,13 @@ public class CompilerAccess {
 	 * Before calling this method you should provide the names of all packages
 	 * and classes that the user may use (using the setDatatypes and
 	 * setDatatypePackages methods).
-	 *
+	 * 
 	 * @param path
 	 *            path to the source code that we want to compile.
 	 * @param isAbsolutePath
 	 *            true if the path is absolute.
 	 * @return path to the generated .java file if it exists, null otherwise
-	 *
+	 * 
 	 * @throws IOException
 	 */
 	public File compile(String path, Boolean isAbsolutePath) throws IOException {
@@ -193,7 +197,7 @@ public class CompilerAccess {
 	/**
 	 * Write the generated Java code to a file. The file will be placed in the
 	 * given directory and will be called 'algorithmName + ".java"'.
-	 *
+	 * 
 	 * @param directory
 	 *            The directory in which the file will be created.
 	 * @param algorithmName
@@ -222,7 +226,7 @@ public class CompilerAccess {
 	/**
 	 * Given the pseudo code to compile create a string containing the generated
 	 * Java code.
-	 *
+	 * 
 	 * @param code
 	 *            The pseudo code to be compiled.
 	 * @return the Java code the compiler generated.
@@ -236,7 +240,7 @@ public class CompilerAccess {
 
 	/**
 	 * Run lexer, parser and the type checker on the code given.
-	 *
+	 * 
 	 * @param code
 	 *            The code to check.
 	 * @return list of the exceptions created when lexing, parsing and type
@@ -256,7 +260,7 @@ public class CompilerAccess {
 
 	/**
 	 * Get parent directory of the file given by its path.
-	 *
+	 * 
 	 * @param fileWithPath
 	 *            The file of which we want to get the parent directory.
 	 * @return the path to the parent directory.
@@ -267,7 +271,7 @@ public class CompilerAccess {
 
 	/**
 	 * Read a file given by its path into a String.
-	 *
+	 * 
 	 * @param fileName
 	 *            the file to read
 	 * @return the contents of the file
@@ -285,7 +289,7 @@ public class CompilerAccess {
 
 	/**
 	 * Translates the token names given into the PseudoCode representation.
-	 *
+	 * 
 	 * @param possibleTokens
 	 *            the token to translate
 	 * @return the List of translated Strings.
@@ -294,7 +298,6 @@ public class CompilerAccess {
 			List<String> possibleTokens) {
 		ArrayList<String> translatedCompletions = new ArrayList<String>();
 		for (String toTranslate : possibleTokens) {
-			System.out.println(toTranslate);
 			List<String> translations = translateCompletion.get(toTranslate);
 			if (null == translations)
 				translatedCompletions.add(toTranslate);
@@ -308,7 +311,7 @@ public class CompilerAccess {
 
 	/**
 	 * Finds the previous Token to the position given.
-	 *
+	 * 
 	 * @param the
 	 *            line of the Position
 	 * @param charPositionInLine
@@ -361,7 +364,7 @@ public class CompilerAccess {
 	/**
 	 * Returns the ArrayList<String[]> containing all variables declared until
 	 * this line at charPositionInLine.
-	 *
+	 * 
 	 * @param line
 	 *            the line
 	 * @param charPositionInLine
@@ -413,7 +416,7 @@ public class CompilerAccess {
 	 * This method copies the Dummy Algorithm file next to the PCAlgorithm file
 	 * that is written by the user. To get the path of the created file see
 	 * getAlgorithmPath().
-	 *
+	 * 
 	 * @param pathToAlgorithm
 	 *            relative to Alvis-workspace e.g.: "project/src/Algorithm.algo"
 	 * @return Name of the Java Algorithm file
@@ -455,7 +458,7 @@ public class CompilerAccess {
 
 	/**
 	 * Tell the compiler which types are allowed.
-	 *
+	 * 
 	 * @param datatypes
 	 *            the types
 	 */
@@ -466,7 +469,7 @@ public class CompilerAccess {
 	/**
 	 * Tell the compiler which packages the user can use. I.e. what packages the
 	 * compiler is supposed to import.
-	 *
+	 * 
 	 * @param datatypePackages
 	 *            the packages
 	 */
@@ -486,7 +489,7 @@ public class CompilerAccess {
 	 * Computes the possible autoCompletion for the line and charPositionInLine
 	 * given. Returns a List containing all available completions as
 	 * CompletionInformation.
-	 *
+	 * 
 	 * @param line
 	 *            the line
 	 * @param charPositionInLine
@@ -539,8 +542,6 @@ public class CompilerAccess {
 			List<Token> tokens = compiler.getLexer().getTokens();
 			boolean containsMain = false;
 			for (Token currToken : tokens) {
-				System.out.println("CurrentToken: "
-						+ getTokenName(currToken.getType()));
 				if (getTokenName(currToken.getType()) != null
 						&& getTokenName(currToken.getType()).equals("MAIN")) {
 					containsMain = true;
@@ -645,20 +646,35 @@ public class CompilerAccess {
 											}
 										}
 									} catch (IllegalArgumentException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
+										Logger.getInstance()
+												.log("alvis.compiler->CompilerAccess",
+														Logger.ERROR,
+														"IlligelArgumentException in tryAutoCompletion : "
+																+ e.getMessage());
 									} catch (SecurityException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
+										Logger.getInstance()
+												.log("alvis.compiler->CompilerAccess",
+														Logger.ERROR,
+														"IlligelArgumentException in tryAutoCompletion : "
+																+ e.getMessage());
 									} catch (IllegalAccessException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
+										Logger.getInstance()
+												.log("alvis.compiler->CompilerAccess",
+														Logger.ERROR,
+														"IlligelArgumentException in tryAutoCompletion : "
+																+ e.getMessage());
 									} catch (InvocationTargetException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
+										Logger.getInstance()
+												.log("alvis.compiler->CompilerAccess",
+														Logger.ERROR,
+														"IlligelArgumentException in tryAutoCompletion : "
+																+ e.getMessage());
 									} catch (NoSuchMethodException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
+										Logger.getInstance()
+												.log("alvis.compiler->CompilerAccess",
+														Logger.ERROR,
+														"IlligelArgumentException in tryAutoCompletion : "
+																+ e.getMessage());
 									}
 								}
 							}
@@ -710,7 +726,7 @@ public class CompilerAccess {
 	/**
 	 * Create a list of all the tokens in the given source code that mark the
 	 * beginning of a block.
-	 *
+	 * 
 	 * @return List of tokens that mark the beginning of a block
 	 */
 	public List<Token> beginBlock() {
@@ -720,7 +736,7 @@ public class CompilerAccess {
 	/**
 	 * Create a list of all the tokens in the given source code that mark the
 	 * end of a block.
-	 *
+	 * 
 	 * @return List of tokens that mark the end of a block
 	 */
 	public List<Token> endBlock() {
@@ -737,7 +753,7 @@ public class CompilerAccess {
 
 	/**
 	 * Return a list of all the Java keywords that the pseudo code does not use.
-	 *
+	 * 
 	 * @return List of forbidden words
 	 */
 	public List<String> allForbidden() {
@@ -753,8 +769,9 @@ public class CompilerAccess {
 
 	/**
 	 * Translate the internal number of a token type to its name.
-	 *
-	 * @param tokenNumber The number to translate.
+	 * 
+	 * @param tokenNumber
+	 *            The number to translate.
 	 * @return The name of the token type with that number.
 	 */
 	public String getTokenName(int tokenNumber) {
