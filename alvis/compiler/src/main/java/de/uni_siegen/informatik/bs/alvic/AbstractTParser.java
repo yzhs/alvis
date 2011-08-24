@@ -58,7 +58,6 @@ public abstract class AbstractTParser extends Parser {
 		for (String s : tmp) {
 			String[] line = s.split("=");
 			numToTokenName.put(Integer.parseInt(line[1]), line[0]);
-			System.out.println("read token #" + line[1] + ": " + line[0]);
 		}
 	}
 

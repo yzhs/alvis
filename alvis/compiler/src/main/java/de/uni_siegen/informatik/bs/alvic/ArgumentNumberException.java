@@ -54,4 +54,16 @@ public class ArgumentNumberException extends TypeException {
 				+ "' expects " + expected + " parameters "
 				+ "but is called with " + given + " arguments.";
 	}
+
+	public String getMethod() {
+		return method;
+	}
+
+	public int getGiven() {
+		return given;
+	}
+
+	public int getExpected() {
+		return expected;
+	}
 }

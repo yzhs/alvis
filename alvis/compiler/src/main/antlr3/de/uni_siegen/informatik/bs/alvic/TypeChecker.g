@@ -135,7 +135,7 @@ options { backtrack = true; }
               $expr.tree.treeToString(parser), $expr.tree));
       else if (!tmp.equals(Void) && $expr.text == null){
           reportError(new InvalidReturnException(tmp, null, currentFunction,
-          null, $RETURN)); System.out.println($RETURN);}
+          null, $RETURN));}
       else if ($expr.tree != null && !tmp.equals($expr.t))
           reportError(new InvalidReturnException(tmp, $expr.t, currentFunction,
               $expr.tree.treeToString(parser), $expr.tree));

@@ -3,6 +3,7 @@ package de.uni_siegen.informatik.bs.alvic;
 import java.util.Collection;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Map;
 import java.util.HashMap;
 import java.lang.reflect.InvocationTargetException;
@@ -21,6 +22,7 @@ import de.uni_siegen.informatik.bs.alvic.TParser.program_return;
 public class Compiler {
 	private static final TreeAdaptor adaptor = new TypedTreeAdaptor();
 	private static Compiler instance;
+	public static Locale currentLocale;
 
 	private TLexer lexer;
 	private TParser parser;
@@ -216,10 +218,9 @@ public class Compiler {
 			result = imports() + st.toString();
 		}
 
-		if (0 != exceptions.size()) {
-			System.err.println(exceptions.size() + " exception(s) occured");
-			return null;
-		}
+		if (0 != exceptions.size())
+			result = null;
+
 		return result;
 	}
 

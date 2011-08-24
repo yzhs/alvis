@@ -3,7 +3,7 @@ package de.uni_siegen.informatik.bs.alvic;
 /**
  * This exception describes the problem that a function is called with the wrong
  * number of arguments.
- * 
+ *
  * @author Colin Benner
  */
 public class ArgumentTypeException extends TypeMismatchException {
@@ -16,7 +16,7 @@ public class ArgumentTypeException extends TypeMismatchException {
 
 	/**
 	 * Create new ArgumentTypeException instance.
-	 * 
+	 *
 	 * @param method
 	 *            The method which was called with the wrongly typed argument.
 	 * @param expected
@@ -49,5 +49,9 @@ public class ArgumentTypeException extends TypeMismatchException {
 	 */
 	public int getArgumentNumber() {
 		return n;
+	}
+
+	public String getMethod() {
+		return getExpr();
 	}
 }
