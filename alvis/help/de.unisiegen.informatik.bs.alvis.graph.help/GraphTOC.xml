@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="Graphs" topic="html/graph_main.html">
+   <topic href="html/zooming.html" label="Zooming">
+   </topic>
+ <topic href="html/creating_a_graph.html" label="Creating Graphs">
+ </topic>
+</toc>
