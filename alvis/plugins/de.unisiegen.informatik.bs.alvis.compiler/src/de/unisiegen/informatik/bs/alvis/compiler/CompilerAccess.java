@@ -27,7 +27,7 @@ import de.uni_siegen.informatik.bs.alvic.TParser;
 import de.unisiegen.informatik.bs.alvis.io.files.FileCopy;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
-/** 
+/**
  * @author mays
  * @author Colin
  * @author Eduard Boos
@@ -109,7 +109,8 @@ public class CompilerAccess {
 		add("BOOL", "false", "true");
 		add("INFTY", "infty");
 
-		translateCompletion.put("TYPE", new ArrayList<String>(AbstractTLexer.getTypes()));
+		translateCompletion.put("TYPE",
+				new ArrayList<String>(AbstractTLexer.getTypes()));
 	}
 
 	public static CompilerAccess getDefault() {
@@ -268,7 +269,9 @@ public class CompilerAccess {
 
 	/**
 	 * Translates the token names given into the PseudoCode representation.
-	 * @param possibleTokens the token to translate
+	 * 
+	 * @param possibleTokens
+	 *            the token to translate
 	 * @return the List of translated Strings.
 	 */
 	private List<String> translateAutocompletionString(
@@ -340,11 +343,16 @@ public class CompilerAccess {
 	}
 
 	/**
-	 * Returns the ArrayList<String[]> containing all variables declared until this line at charPositionInLine.
-	 * @param line the line
-	 * @param charPositionInLine the offset in the line given
-	 * @return the ArrayList<String[]> containing all variables declared until the position given by the parameters.
-	 * The String Array contains the Type at index 0 and the variable name at index 1;
+	 * Returns the ArrayList<String[]> containing all variables declared until
+	 * this line at charPositionInLine.
+	 * 
+	 * @param line
+	 *            the line
+	 * @param charPositionInLine
+	 *            the offset in the line given
+	 * @return the ArrayList<String[]> containing all variables declared until
+	 *         the position given by the parameters. The String Array contains
+	 *         the Type at index 0 and the variable name at index 1;
 	 */
 	private ArrayList<String[]> getDefinedVariables(int line,
 			int charPositionInLine) {
@@ -512,8 +520,24 @@ public class CompilerAccess {
 
 		if (previousToken == null) {
 			/** current token is first token */
-			availableProposals.add(new CompletionInformation("main", line,
-					charPositionInLine, 0));
+			List<Token> tokens = compiler.getLexer().getTokens();
+			boolean containsMain = false;
+			for (Token currToken : tokens) {
+				System.out.println("CurrentToken: "
+						+ getTokenName(currToken.getType()));
+				if (getTokenName(currToken.getType()) != null
+						&& getTokenName(currToken.getType()).equals("MAIN")) {
+					containsMain = true;
+				}
+			}
+			if (!containsMain) {
+				prefixLength = charPositionInLine;
+				prefix = tokenToComplete.getText().substring(0, prefixLength);
+				line = tokenToComplete.getLine();
+				charPositionInLine = tokenToComplete.getCharPositionInLine();
+				availableProposals.add(new CompletionInformation("main", line,
+						charPositionInLine, prefixLength));
+			}
 		} else {
 			/**
 			 * previousToken was set --> get possibleFollowing Tokens and create
