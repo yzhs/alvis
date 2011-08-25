@@ -2,6 +2,6 @@
 <?NLS TYPE="org.eclipse.help.toc"?>
 
 <toc label="Syncronisation" topic="html/sync_main.html">
- <topic href="html/semaphors.html" label="Semaphores">
+ <topic href="html/semaphors.html" label="Semaphore">
  </topic>
 </toc>

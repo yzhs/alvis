@@ -2,8 +2,8 @@
 <?NLS TYPE="org.eclipse.help.toc"?>
 
 <toc label="Alvis" topic="html/alvis_main.html">
-   <topic href="html/runfiles.html" label="Run Files">
+   <topic href="html/runfiles.html" label="Run-Dateien">
    </topic>
- <topic href="html/algorithms.html" label="Creating Algorithms">
+ <topic href="html/algorithms.html" label="Algorithmen schreiben">
  </topic>
 </toc>
