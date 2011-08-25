@@ -66,7 +66,7 @@ public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 	
 	
     protected void fillMenuBar(IMenuManager menuBar) {
-        MenuManager helpMenu = new MenuManager("&Help", IWorkbenchActionConstants.M_HELP); // TODO: Externalize String!
+        MenuManager helpMenu = new MenuManager(Messages.ApplicationActionBarAdvisor_MenuBar_help, IWorkbenchActionConstants.M_HELP); // TODO: Externalize String!
         
         // Add a group marker indicating where action set menus will appear.
         menuBar.add(new GroupMarker(IWorkbenchActionConstants.MB_ADDITIONS));

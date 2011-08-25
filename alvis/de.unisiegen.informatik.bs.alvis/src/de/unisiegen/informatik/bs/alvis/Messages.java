@@ -8,6 +8,7 @@ public class Messages extends NLS {
 	public static String Activator_DP_drag_and_drop;
 	public static String Activator_DP_order;
 	public static String Activator_DP_position_begin_algo;
+	public static String ApplicationActionBarAdvisor_MenuBar_help;
 	public static String ApplicationWorkbenchWindowAdvisor_0;
 	static {
 		// initialize resource bundle
