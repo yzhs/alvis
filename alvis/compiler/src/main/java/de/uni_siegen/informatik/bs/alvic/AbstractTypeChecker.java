@@ -1,7 +1,6 @@
 package de.uni_siegen.informatik.bs.alvic;
 
 import java.util.List;
-import java.util.ArrayList;
 import org.antlr.runtime.*;
 import org.antlr.runtime.tree.*;
 
@@ -11,13 +10,6 @@ import org.antlr.runtime.tree.*;
  * @author Colin Benner
  */
 public abstract class AbstractTypeChecker extends AbstractTreeParser {
-	/**
-	 * List of all exceptions created during type checking.
-	 */
-	private List<RecognitionException> exceptions = new ArrayList<RecognitionException>();
-
-	protected Parser parser = null;
-
 	/**
 	 * Create a new type checker instance, pre-supplying the input tree node
 	 * stream.
@@ -284,15 +276,5 @@ public abstract class AbstractTypeChecker extends AbstractTreeParser {
 
 		reportError(new NoSuchOperatorException(operand, op, null, 0, tree));
 		return SimpleType.create("# NoSuchOperator #");
-	}
-
-	/**
-	 * Set the parser to the previously used one.
-	 * 
-	 * @param parser
-	 *            the previous (tree-)parser.
-	 */
-	public void setParser(Parser parser) {
-		this.parser = parser;
 	}
 }

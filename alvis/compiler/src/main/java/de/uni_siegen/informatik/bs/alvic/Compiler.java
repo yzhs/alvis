@@ -73,7 +73,7 @@ public class Compiler {
 
 	/**
 	 * Generate code for importing all the packages provided by plug-ins.
-	 *
+	 * 
 	 * @return Java code to import all the packages the user can use.
 	 */
 	private String imports() {
@@ -85,7 +85,7 @@ public class Compiler {
 
 	/**
 	 * Load a StringTemplateGroup from a file.
-	 *
+	 * 
 	 * @param resources
 	 *            the file from which the template definitions are loaded
 	 */
@@ -101,7 +101,7 @@ public class Compiler {
 
 	/**
 	 * This method applies an AST emitting tree parser to an AST.
-	 *
+	 * 
 	 * @param treeParser
 	 *            The tree parser's Class (must be tree parser that outputs an
 	 *            AST)
@@ -109,8 +109,8 @@ public class Compiler {
 	 *            The tree that the tree parser is supposed to walk
 	 * @return The AST produced by the tree parser
 	 */
-	private CommonTree runTreeParser(Class<? extends AbstractTreeParser> treeParser,
-			CommonTree tree) {
+	private CommonTree runTreeParser(
+			Class<? extends AbstractTreeParser> treeParser, CommonTree tree) {
 		// Since Java does not allow to use generics parameters as
 		// constructors, this is done using reflection.
 		try {
@@ -159,8 +159,9 @@ public class Compiler {
 
 	/**
 	 * Compile the given code and generate Java code.
-	 *
-	 * @param code The code we want to translate.
+	 * 
+	 * @param code
+	 *            The code we want to translate.
 	 * @return The generated Java code.
 	 * @throws IOException
 	 */
@@ -172,7 +173,7 @@ public class Compiler {
 	/**
 	 * Compile the given code and generate output using the template group
 	 * specified.
-	 *
+	 * 
 	 * @param code
 	 *            The code we want to translate.
 	 * @param templates
@@ -201,6 +202,7 @@ public class Compiler {
 			return null;
 
 		CommonTree tree = (CommonTree) psrReturn.getTree();
+		runTreeParser(FunctionPass.class, tree);
 		tree = runTreeParser(TypeChecker.class, tree);
 		CommonTreeNodeStream nodeStream = new CommonTreeNodeStream(tree);
 		nodeStream.setTokenStream(tokens);
@@ -227,7 +229,7 @@ public class Compiler {
 	/**
 	 * Use lexer, parser and type checker to check the code without generating
 	 * any Java code.
-	 *
+	 * 
 	 * @param code
 	 *            The code to check
 	 * @return a list of the exceptions that occurred when lexing, parsing and
@@ -249,6 +251,7 @@ public class Compiler {
 		if (0 != exceptions.size())
 			return null;
 
+		runTreeParser(FunctionPass.class, (CommonTree) psrReturn.getTree());
 		runTreeParser(TypeChecker.class, (CommonTree) psrReturn.getTree());
 
 		return getExceptions();
@@ -264,7 +267,7 @@ public class Compiler {
 
 	/**
 	 * Get an object of the given type.
-	 *
+	 * 
 	 * @param className
 	 *            The type of the object to be returned.
 	 * @return an object of that type.
@@ -279,5 +282,49 @@ public class Compiler {
 
 	public TParser getParser() {
 		return parser;
+	}
+
+	/**
+	 * Names and types of all the functions in the program being compiled.
+	 */
+	private Map<String, Type> functions;
+
+	/**
+	 * Add built-in functions like print() to the list of functions available.
+	 */
+	private void addBuiltInFunctions() {
+		List<Type> args = new ArrayList<Type>();
+		args.add(SimpleType.wildcard);
+		functions.put("print",
+				FunctionType.create(args, SimpleType.create("Void")));
+	}
+
+	/**
+	 * Set the available functions. This includes adding built-in functions. We
+	 * need this to allow the functions in the pseudo code to be in arbitrary
+	 * order. Without this mutual recursion would be completely impossible. The
+	 * functions are recorded by a separate tree parser and later used to
+	 * initialize the outermost scope of the type checker.
+	 * 
+	 * @param functions
+	 *            The functions found in the source.
+	 */
+	public void setFunctions(Map<String, Type> functions) {
+		this.functions = functions;
+		addBuiltInFunctions();
+	}
+
+	/**
+	 * Get the available functions. This method is used by the type checker to
+	 * get all the function's names and types. We need this to allow the
+	 * functions in the pseudo code to be in arbitrary order. Without this
+	 * mutual recursion would be completely impossible. The functions are
+	 * recorded by a separate tree parser and later used to initialize the
+	 * outermost scope of the type checker.
+	 * 
+	 * @return The functions found in the source.
+	 */
+	public Map<String, Type> getFunctions() {
+		return functions;
 	}
 }

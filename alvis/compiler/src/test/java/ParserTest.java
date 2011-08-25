@@ -14,13 +14,13 @@ import org.antlr.runtime.tree.*;
 public class ParserTest {
 	static {
 		List<String> types = new ArrayList<String>();
-		types.add("Boolean");
-		types.add("Integer");
-		types.add("Float");
-		types.add("String");
-		types.add("Graph");
-		types.add("Vertex");
-		types.add("Queue");
+		types.add("Boolean"); //$NON-NLS-1$
+		types.add("Integer"); //$NON-NLS-1$
+		types.add("Float"); //$NON-NLS-1$
+		types.add("String"); //$NON-NLS-1$
+		types.add("Graph"); //$NON-NLS-1$
+		types.add("Vertex"); //$NON-NLS-1$
+		types.add("Queue"); //$NON-NLS-1$
 		TLexer.addTypes(types);
 	}
 
@@ -29,7 +29,8 @@ public class ParserTest {
 	}
 
 	private void printTestName(int i) {
-		System.out.println(Thread.currentThread().getStackTrace()[2+i].getMethodName());
+		System.out.println(Thread.currentThread().getStackTrace()[2 + i]
+				.getMethodName());
 	}
 
 	private void printAndAssert(String message, boolean b) {
@@ -48,7 +49,7 @@ public class ParserTest {
 	}
 
 	private void exprTest(String algorithm, String expected) {
-		String stringTree = test("main() begin " + algorithm + ", end\n", 1);
+		String stringTree = test("main() begin " + algorithm + ", end\n", 1); //$NON-NLS-1$ //$NON-NLS-2$
 		printAndAssert(stringTree, stringTree.contains(expected));
 	}
 
@@ -57,74 +58,65 @@ public class ParserTest {
 	}
 
 	private String test(String algorithm, int i) {
-		printTestName(i+1);
+		printTestName(i + 1);
 		TParser.program_return program = null;
 		CommonTree tree = null;
 		try {
 			program = createParser(algorithm).program();
-			tree = (CommonTree)program.getTree();
+			tree = (CommonTree) program.getTree();
 		} catch (RecognitionException re) {
 			re.printStackTrace();
 			assert false;
 		}
 		return tree.toStringTree();
 	}
-	
+
 	private void negativeTest(String algorithm) {
 		printTestName(1);
 		TParser parser = createParser(algorithm);
 		CommonTree t = null;
 		try {
-			t = (CommonTree)parser.program().getTree();
+			t = (CommonTree) parser.program().getTree();
 		} catch (RecognitionException re) {
 			re.printStackTrace();
 		}
-		assert parser.getExceptions().size() != 0;
 		if (t != null)
-			System.out.println(t.toStringTree());
+			printAndAssert(t.toStringTree(), parser.getExceptions().size() != 0);
 	}
 
-// Templates for parser tests
-/*
-
-	@Test
-	public void <++>() {
-		String algorithm = "main() begin <++> end\n"; //$NON-NLS-1$
-		negativeTest(algorithm);
-	}
-
-	@Test
-	public void <++>() {
-		String algorithm = "main() begin\n" +
-		                   "<++>\n" +
-		                   "end\n"; //$NON-NLS-1$
-		String stringTree = test(algorithm);
-		printAndAssert(stringTree, stringTree.<++>);
-	}
-
-*/
+	// Templates for parser tests
+	/*
+	 * 
+	 * @Test public void <++>() { String algorithm = "main() begin <++> end\n";
+	 * //$NON-NLS-1$ negativeTest(algorithm); }
+	 * 
+	 * @Test public void <++>() { String algorithm = "main() begin\n" + "<++>\n"
+	 * + "end\n"; //$NON-NLS-1$ String stringTree = test(algorithm);
+	 * printAndAssert(stringTree, stringTree.<++>); }
+	 */
 
 	@Test
 	public void functionDefinitionSuccess1() {
 		String algorithm = "fact(Integer n) : Integer\n" + //$NON-NLS-1$
-		                   "begin\n" + //$NON-NLS-1$
-		                   "  if n == 0:\n" + //$NON-NLS-1$
-				   "    return 1;\n" + //$NON-NLS-1$
-				   "  else\n" + //$NON-NLS-1$
-				   "    return n*fact(n-1);\n" + //$NON-NLS-1$
-				   "end\n" + //$NON-NLS-1$
-		                   "main() begin fact(5); end\n"; //$NON-NLS-1$
+				"begin\n" + //$NON-NLS-1$
+				"  if n == 0:\n" + //$NON-NLS-1$
+				"    return 1;\n" + //$NON-NLS-1$
+				"  else\n" + //$NON-NLS-1$
+				"    return n*fact(n-1);\n" + //$NON-NLS-1$
+				"end\n" + //$NON-NLS-1$
+				"main() begin fact(5); end\n"; //$NON-NLS-1$
 		String stringTree = test(algorithm);
 		printAndAssert(stringTree,
-		               stringTree.startsWith("(PROG (FUNC fact (RET Integer) " //$NON-NLS-1$
-		                                     +"(PARAMS (DECL Integer n)) (BLOCK")); //$NON-NLS-1$
+				stringTree.startsWith("(PROG (FUNC fact (RET Integer) " //$NON-NLS-1$
+						+ "(PARAMS (DECL Integer n)) (BLOCK")); //$NON-NLS-1$
 	}
 
 	@Test
 	public void functionDefinitionSuccess2() {
 		String algorithm = "main() begin end\n"; //$NON-NLS-1$
 		String stringTree = test(algorithm);
-		printAndAssert(stringTree, stringTree.equals("(PROG (FUNC main PARAMS BLOCK))")); //$NON-NLS-1$
+		printAndAssert(stringTree,
+				stringTree.equals("(PROG (FUNC main PARAMS BLOCK))")); //$NON-NLS-1$
 	}
 
 	@Test
@@ -150,7 +142,8 @@ public class ParserTest {
 	public void assignmentSuccess() {
 		String algorithm = "main() begin String x, Integer a, x().y = a, end\n"; //$NON-NLS-1$
 		String stringTree = test(algorithm);
-		printAndAssert(stringTree, stringTree.contains("(ASSIGN (. (CALL x) y) a)")); //$NON-NLS-1$
+		printAndAssert(stringTree,
+				stringTree.contains("(ASSIGN (. (CALL x) y) a)")); //$NON-NLS-1$
 	}
 
 	@Test
@@ -161,27 +154,28 @@ public class ParserTest {
 
 	@Test
 	public void exprSuccess1() {
-		exprTest("Boolean b = !true", "(! true)");
+		exprTest("Boolean b = !true", "(! true)"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	@Test
 	public void exprSuccess2() {
-		exprTest("String foo, foo.length()", "(CALL (. foo length))");
+		exprTest("String foo, foo.length()", "(CALL (. foo length))"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	@Test
 	public void exprSuccess3() {
-		exprTest("String s = \"abc\"", "\"abc\"");
+		exprTest("String s = \"abc\"", "\"abc\""); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	@Test
 	public void precedence1() {
 		String algorithm = "main() begin" + //$NON-NLS-1$
-		                   "\tBoolean a = false," + //$NON-NLS-1$
-		                   "\ta = a || true && false," + //$NON-NLS-1$
-		                   "end\n"; //$NON-NLS-1$
+				"\tBoolean a = false," + //$NON-NLS-1$
+				"\ta = a || true && false," + //$NON-NLS-1$
+				"end\n"; //$NON-NLS-1$
 		String stringTree = test(algorithm);
-		printAndAssert(stringTree, stringTree.contains("(|| a (&& true false))")); //$NON-NLS-1$
+		printAndAssert(stringTree,
+				stringTree.contains("(|| a (&& true false))")); //$NON-NLS-1$
 	}
 
 	@Test
@@ -355,28 +349,28 @@ public class ParserTest {
 	@Test
 	public void argumentsFailure1() {
 		String algorithm = "f() begin end\n" + //$NON-NLS-1$
-		                   "main() begin f(123; true), end\n"; //$NON-NLS-1$
+				"main() begin f(123; true), end\n"; //$NON-NLS-1$
 		negativeTest(algorithm);
 	}
 
 	@Test
 	public void argumentsFailure2() {
 		String algorithm = "f() begin end\n" + //$NON-NLS-1$
-		                   "main() begin f(0 123), end\n"; //$NON-NLS-1$
+				"main() begin f(0 123), end\n"; //$NON-NLS-1$
 		negativeTest(algorithm);
 	}
 
 	@Test
 	public void argumentsFailure3() {
 		String algorithm = "f() begin end\n" + //$NON-NLS-1$
-		                   "main() begin f(,), end\n"; //$NON-NLS-1$
+				"main() begin f(,), end\n"; //$NON-NLS-1$
 		negativeTest(algorithm);
 	}
 
 	@Test
 	public void functionCallSuccess1() {
 		String algorithm = "f() begin end\n" + //$NON-NLS-1$
-		                   "main() begin f(), end\n"; //$NON-NLS-1$
+				"main() begin f(), end\n"; //$NON-NLS-1$
 		String stringTree = test(algorithm);
 		printAndAssert(stringTree, stringTree.contains("(CALL f)")); //$NON-NLS-1$
 	}
@@ -384,7 +378,7 @@ public class ParserTest {
 	@Test
 	public void functionCallSuccess2() {
 		String algorithm = "f(Integer a) begin end\n" + //$NON-NLS-1$
-		                   "main() begin f(1), end\n"; //$NON-NLS-1$
+				"main() begin f(1), end\n"; //$NON-NLS-1$
 		String stringTree = test(algorithm);
 		printAndAssert(stringTree, stringTree.contains("(CALL f 1)")); //$NON-NLS-1$
 	}
@@ -392,17 +386,18 @@ public class ParserTest {
 	@Test
 	public void functionCallSuccess3() {
 		String algorithm = "f(Integer a, Float b, String c) begin end\n" + //$NON-NLS-1$
-		                   "main() begin f(1, 2.3, \"abc\"), end\n"; //$NON-NLS-1$
+				"main() begin f(1, 2.3, \"abc\"), end\n"; //$NON-NLS-1$
 		String stringTree = test(algorithm);
-		printAndAssert(stringTree, stringTree.contains("(CALL f 1 2.3 \"abc\")")); //$NON-NLS-1$
+		printAndAssert(stringTree,
+				stringTree.contains("(CALL f 1 2.3 \"abc\")")); //$NON-NLS-1$
 	}
 
 	@Test
 	public void memberAccessSuccess() {
 		String algorithm = "main() begin\n" + //$NON-NLS-1$
-		                   "Integer s,\n" + //$NON-NLS-1$
-		                   "s.size,\n" + //$NON-NLS-1$
-		                   "end\n"; //$NON-NLS-1$
+				"Integer s,\n" + //$NON-NLS-1$
+				"s.size,\n" + //$NON-NLS-1$
+				"end\n"; //$NON-NLS-1$
 		String stringTree = test(algorithm);
 		printAndAssert(stringTree, stringTree.contains("(. s size)")); //$NON-NLS-1$
 	}
@@ -410,9 +405,9 @@ public class ParserTest {
 	@Test
 	public void arrayIndexSucces() {
 		String algorithm = "main() begin\n" + //$NON-NLS-1$
-		                   "Integer[] a,\n" + //$NON-NLS-1$
-		                   "a[1] = a[0],\n" + //$NON-NLS-1$
-		                   "end\n"; //$NON-NLS-1$
+				"Integer[] a,\n" + //$NON-NLS-1$
+				"a[1] = a[0],\n" + //$NON-NLS-1$
+				"end\n"; //$NON-NLS-1$
 		String stringTree = test(algorithm);
 		printAndAssert(stringTree, stringTree.contains("(INDEX a 0)")); //$NON-NLS-1$
 	}
@@ -427,8 +422,8 @@ public class ParserTest {
 		} catch (RecognitionException e) {
 			e.printStackTrace();
 		}
-		CommonTree tree = (CommonTree)rule.getTree();
-		assert tree.toStringTree().equals(";");
+		CommonTree tree = (CommonTree) rule.getTree();
+		assert tree.toStringTree().equals(";"); //$NON-NLS-1$
 	}
 
 	@Test

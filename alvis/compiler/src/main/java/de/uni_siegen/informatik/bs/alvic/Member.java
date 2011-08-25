@@ -116,17 +116,15 @@ public class Member {
 						.toString().replaceAll("[^<]*<", "")
 						.replaceAll(">$", "")));
 			else
+				// TODO handle attributes like Queue<Integer>
 				return new Member(name, SimpleType.create(typeName));
-			// TODO handle attributes like Queue<Integer>
 		} else if (typeName
 				.equals("de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCList"))
-			// TODO handle generic classes correctly
+			// FIXME this only works correctly, if the class has only one type argument
 			return new Member(name,
 					ArrayType.create(((Class<?>) ((ParameterizedType) field
 							.getGenericType()).getActualTypeArguments()[0])
 							.getName()));
-		// FIXME this only works correctly, if the class has only one type
-		// argument
 		else if (repr.getClass().getTypeParameters().length > 0)
 			return new Member(name, SimpleType.create(typeName,
 					SimpleType.create(field.getGenericType().toString())));

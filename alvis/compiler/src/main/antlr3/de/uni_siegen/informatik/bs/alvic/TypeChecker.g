@@ -63,28 +63,17 @@ import java.util.HashMap;
 program
 scope Symbols;
 @init {
-    $Symbols::symbols = new HashMap<String,Type>();
-    List<Type> args = new ArrayList<Type>();
-    args.add(any);
-    $Symbols::symbols.put("print", FunctionType.create(args, Void)); // TODO handle built-in functions more flexibly
+    $Symbols::symbols = Compiler.getInstance().getFunctions();
 }
     : ^(PROG functionDefinition* mainFunction)
     ;
 
 functionDefinition
-@init { Type ret = Void; }
-    : ^(FUNC ident ^(RET type? { ret = $type.t; }) ^(PARAMS p=formalParams?) {
-        $Symbols::symbols.put($ident.text, FunctionType.create(null != $p.t ? $p.t : new ArrayList<Type>(), ret));
-        currentFunction = $ident.text;
-    } block { currentFunction = null; })
+    : ^(FUNC ident ^(RET type?) ^(PARAMS p=formalParams?) { currentFunction = $ident.text; } block { currentFunction = null; })
     ;
 
 mainFunction
-    : ^(FUNC MAIN ^(PARAMS formalParams?) {
-        $Symbols::symbols.put("main", FunctionType.create(new ArrayList<Type>(), Void));
-        currentFunction = "main";
-    }
-    block { currentFunction = null; })
+    : ^(FUNC MAIN ^(PARAMS formalParams?) { currentFunction = "main"; } block { currentFunction = null; })
     ;
 
 /**

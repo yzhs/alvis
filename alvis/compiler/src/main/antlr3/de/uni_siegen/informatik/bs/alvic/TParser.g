@@ -51,7 +51,7 @@ package de.uni_siegen.informatik.bs.alvic;
 }
 
 program
-    : functionDefinition* mainFunction -> ^(PROG functionDefinition* mainFunction)
+    : functionDefinition* mainFunction functionDefinition* -> ^(PROG functionDefinition* mainFunction)
     ;
 
 functionDefinition

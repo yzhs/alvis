@@ -139,7 +139,6 @@ public class LexerTest {
 		TLexer lexer = new TLexer(cs);
 		lexer.scan();
 		Token toGet = lexer.getTokenByNumbers(1, 0);
-		System.err.println(toGet);
 		assert "BFS".equals(toGet.getText()) : "found wrong token '"
 				+ toGet.getText() + "' instead of 'BFS'";
 	}
