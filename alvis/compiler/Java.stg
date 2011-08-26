@@ -85,6 +85,17 @@ public class #ALGORITHM_NAME# implements AbstractAlgo {
     public void setLock(Lock toLockOn) {
         lock = toLockOn;
     }
+
+    private boolean stopThread = false;
+
+    public void stopThread() {
+        stopThread = true;
+    }
+
+    private void stop() /*throws AlgorithmStopException*/ {
+        if (stopThread)
+            /*throw new AlgorithmStopException()*/;
+    }
 }
 >>
 
@@ -106,10 +117,16 @@ public Map\<String, PCObject\> getParameterTypes() {
     return result;
 }
 
-public void run() <code>
+public void run() /*throws AlgorithmStopException*/ {
+    stop();
+    <code>
+}
 >>
 function(name, type, params, code) ::= <<
-private <type> <name>(<params; separator=", ">) <code>
+private <type> <name>(<params; separator=", ">) /*throws AlgorithmStopException*/ {
+    stop();
+    <code>
+}
 >>
 
 type(name) ::= "<name>"
@@ -139,11 +156,15 @@ if ((<cond>).getLiteralValue())
 else
     <otherwise>
 >>
-for(lhs, line, obj, type, rhs, body) ::= <<for (<lhs> : (<type>)reachedDecisionPoint(<line>, <obj>, <rhs>))
+for(lhs, line, obj, type, rhs, body) ::= <<for (<lhs> : (<type>)reachedDecisionPoint(<line>, <obj>, <rhs>)) {
+    stop();
     <body>
+}
 >>
-while(cond, body) ::= <<while ((<cond>).getLiteralValue())
+while(cond, body) ::= <<while ((<cond>).getLiteralValue()) {
+    stop();
     <body>
+}
 >>
 
 breakpoint(lineNumber) ::= "reachedBreakPoint(<lineNumber>);"
