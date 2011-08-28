@@ -2,6 +2,7 @@
  * Error Marker Class to mark error in an AlgorithmEditor
  */
 package de.unisiegen.informatik.bs.alvis.editors;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,7 +24,9 @@ import de.unisiegen.informatik.bs.alvis.compiler.CompilerAccess;
 import de.unisiegen.informatik.bs.alvis.io.logger.Logger;
 
 /**
- * This class is for marking the given Document and File with Errors that occurs parsing the document.
+ * This class is for marking the given Document and File with Errors that occurs
+ * parsing the document.
+ * 
  * @author Eduard Boos
  * 
  */
@@ -54,7 +57,8 @@ public class AlgorithmErrorMarker {
 		try {
 			file.deleteMarkers(ERROR_MARKER_ID, false, IResource.DEPTH_ZERO);
 		} catch (CoreException e) {
-			Logger.getInstance().log("Editor->AlgorithmErrorMarker", Logger.ERROR, "Error marking caused an CoreException: \n" + e.getLocalizedMessage()); //$NON-NLS-1$
+			Logger.getInstance()
+					.log("Editor->AlgorithmErrorMarker", Logger.ERROR, "Error marking caused an CoreException: \n" + e.getLocalizedMessage()); //$NON-NLS-1$
 		}
 		/* remark all errorMarkers */
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -62,7 +66,7 @@ public class AlgorithmErrorMarker {
 				.getExceptions();
 		for (RecognitionException error : errors) {
 			String errorMessage;
-//			System.err.println(error.toString());
+			// System.err.println(error.toString());
 			if (error instanceof MismatchedTreeNodeException) {
 				// This case should not happen. If control flow gets here
 				// something is wrong with the compiler.
@@ -173,11 +177,10 @@ public class AlgorithmErrorMarker {
 			} else if (error instanceof TypeException) {
 				errorMessage = error.toString();
 			} else {
-				System.err.println(NLS.bind(
+				errorMessage = NLS.bind(
 						Messages.AlgorithmErrorMarker_UnknownError,
 						new Object[] { error.line, error.charPositionInLine,
-								error }));
-				continue;
+								error });
 			}
 
 			TypeException re = null;
@@ -205,7 +208,8 @@ public class AlgorithmErrorMarker {
 			try {
 				MarkerUtilities.createMarker(file, map, ERROR_MARKER_ID);
 			} catch (CoreException e) {
-				Logger.getInstance().log("Editor->AlgorithmErrorMarker", Logger.ERROR, "Error marking caused an CoreException: \n"+ e.getLocalizedMessage()); //$NON-NLS-1$
+				Logger.getInstance()
+						.log("Editor->AlgorithmErrorMarker", Logger.ERROR, "Error marking caused an CoreException: \n" + e.getLocalizedMessage()); //$NON-NLS-1$
 			}
 		}
 	}
