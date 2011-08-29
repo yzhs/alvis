@@ -11,7 +11,7 @@
 <h2>Introduction</h2>
 The alvis programming language's syntax is inspired by several programming languages and the pseudo code syntax used in <q>Introduction to Algorithms</q> by Cormen, Leiserson, Rivest and Stein.
 
-A <q>hello world</q> program could look like this:<br>
+A hello world program could look like this:<br>
 <pre>
 /*
  * The main function.
@@ -64,7 +64,7 @@ The available constanst are
 		<q>+</q>, <q>-</q>, <q>*</q>, <q>/</q>, <q>%</q>, <q>&lt;</q>, <q>&gt;</q>, <q>&lt;=</q>, <q>&gt;=</q>, <q>==</q>, <q>!=</q>, <q>||</q>, <q>&amp;&amp;</q>.</li>
 	<li>of the form <q>(+ expression)</q>, <q>(- expression)</q> or <q>! expression</q>.</li>
 	<li>of the form <q>(expression)</q>.</li>
-	<li>of the form <q>prefixExpression</li>
+	<li>of the form <q>prefixExpression</q>.</li>
 </ul>
 Nothing except what can be generated from the above is an expression. </p>
 
@@ -223,6 +223,26 @@ while condition:
 </pre>
 where <code>condition</code> is an expression of a subtype of Boolean and <code>block</code> is either a block or a single expression.
 
+
+<h2>Defining functions</h2>
+<p>Functions can be defined in a way similar to Pascal:
+<pre>
+name(parameterList) : returnType block
+</pre>
+where <code>name</code> is an identifier, <code>parameterList</code> is a arbitrarily long sequence of declarations (i.e. parameter type followed by parameter name) which are separated by commas.
+<code>returnType</code> is the type of the return value of that function.
+If the function does not return anything, i.e. has return type <code>Void</code>, in which case the return type combined with the colon preceeding are optional.
+In other words
+<pre>
+f() : Void {}
+</pre>
+defines the exact same functions as
+<pre>
+f() {}
+</pre>
+</p>
+
+<p>For the program to compile properly it is necessary to include exactly one function called <code>main</code>.  The main function is the one that gets executed by alvis when running the algorithm.</p>
 
 </body>
 </html>
