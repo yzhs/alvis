@@ -3,15 +3,15 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Creating algorithms</title>
+	<title>Algorithmen schreiben</title>
 </head>
 
 <body>
-<h1>Creating algorithms</h1>
-<h2>Introduction</h2>
-The alvis programming language's syntax is inspired by several programming languages and the pseudo code syntax used in <q>Introduction to Algorithms</q> by Cormen, Leiserson, Rivest and Stein.
+<h1>Algorithmen schreiben</h1>
+<h2>Einführung</h2>
+Die Syntax von Alvis' Algorithmenprogrammiersprache wurde inspiriert durch verschiedene Programmiersprachen, sowie die Pseudo-Code-Syntax, die in <q>Algorithmen &ndash; Eine Einführung</q> von Cormen, Leiserson, Rivest und Stein verwendet wird.
 
-A <q>hello world</q> program could look like this:<br>
+Ein <q>hello world</q>-Programm kann etwa so aussehen:<br>
 <pre>
 /*
  * The main function.
@@ -22,167 +22,193 @@ main() {
 	print("world!"),
 }
 </pre>
+Man kann hier die beiden zur Verfügung stehenden Kommentararten sehen: mehrzeilige Kommentare die mit <code>/*</code> beginnen und mit <code>*/</code> enden und mit <code>//</code> eingeleitete Kommentare, die den Rest der Zeile zum Kommentar machen.
 
-What you can see are the two types of comments available: from <code>/*</code> to <code>*/</code> for multiple line comments and <code>//</code> as the start for a comment to the end of the line.
-
-Every algorithm needs to have a <code>main</code> function. That function is the one called when you run the algorithm. It corresponds to the <code>main</code> function in C , C++, C#, Java, etc.
+Jeder Algorithmus benötigt einen <code>main</code>-Funktion. Das ist die Funktion, die von Alvis aufgerufen wird, wenn man einen Algorithmus ausführt. Sie entspricht der <code>main</code>-Funktion bei C, C++, C#, Java, etc.
 
 
-<h2>Identifiers</h2>
-Identifiers are character strings that start with an upper case or lower case ASCII letter (i.e. <q>A</q>,<q>B</q>,<q>C</q>,&hellip;,<q>Z</q> or <q>a</q>,<q>b</q>,<q>c</q>,&hellip;,<q>z</q>) or an underscore (i.e. <q>_</q>.
-That initial character can be followed by any combination of ASCII letters, underscores and the digits <q>0</q>,<q>1</q><q>2</q>,&hellip;,<q>9</q>.
+<h2>Bezeichner</h2>
+Bezeichner sind Zeichenketten, die mit einem großen oder kleinen ASCII-Buchstaben (d.h. <q>A</q>,<q>B</q>,<q>C</q>,&hellip;,<q>Z</q> oder <q>a</q>,<q>b</q>,<q>c</q>,&hellip;,<q>z</q>) oder einem Unterstrich (d.h. <q>_</q>) beginnen.
+Nach diesem ersten Zeichen dürfen weitere Zeichen dieser Art sowie die Ziffern <q>0</q>,<q>1</q><q>2</q>,&hellip;,<q>9</q> benutzt werden.
 
-<h2>Constants</h2>
-The available constanst are
+<h2>Konstanten</h2>
+Es gibt Konstanten für folgendes:
 <ul>
-	<li>Integer constants: sequences of digits <q>0</q> through <q>9</q>
-	For instance:<br><q>1</q>, <q>23</q>, <q>623843824</q>, <q>1234567890</q>, <q>42</q></li>
-	<li>Floting point constants: sequences of digits <q>0</q> through <q>9</q> followed by a dot (<q>.</q>) followed by an arbitrarily long string of digits. For instance:<br>
+	<li>Boolesche Werte: <q>true</q> und <q>false</q></li>
+	<li>Ganzzahlen werden dargestellt als Ketten von Ziffern <q>0</q>, &hellip;, <q>9</q>,
+	zum Beispiel:<br><q>1</q>, <q>23</q>, <q>623843824</q>, <q>1234567890</q>, <q>42</q></li>
+	<li>Fließkommazahlen sind ebensolche Zeichenketten gefolgt von einem Punkt (<q>.</q>) auf welchen dann beliebig viele weiter Ziffern folgen dürfen. Beispielsweise:<br>
 	<q>3.</q>, <q>2.71828</q>, <q>0.1234567890876543</q></li>
-	<li>String constants which are arbitrarily long sequences of ASCII characters except backslash and <q>"</q> plus a few escape sequences starting with a backslash:
+	<li>Zeichenketten werden mit doppelten Anführungszeichen eingefasst <q>"</q>. Innerhalb dieses gibt es die Escape-Sequenzen
 	<ul>
-		<li>The backspace character <q>\b</q></li>
-		<li>The tabulator character <q>\t</q></li>
-		<li>The new line character <q>\n</q></li>
-		<li>The formfeed character <q>\f</q></li>
-		<li>The carriage return character <q>\r</q></li>
-		<li>The single quotation mark character <q>'</q>: <q>\'</q></li>
-		<li>The double quotation mark character <q>"</q>: <q>\"</q></li>
-		<li>The backslash character <q>\</q>: <q>\\</q></li>
+		<li>Backspace-Zeichen <q>\b</q></li>
+		<li>Tabulator-Zeichen <q>\t</q></li>
+		<li>Newline-Zeichen <q>\n</q></li>
+		<li>Formfeed-Zeichen <q>\f</q></li>
+		<li>Wagenrücklauf-Zeichen <q>\r</q></li>
+		<li>Einfaches Anführungszeichen (<q>'</q>): <q>\'</q></li>
+		<li>Doppeltes Anführungszeichen (<q>"</q>): <q>\"</q></li>
+		<li>Backslash (<q>\</q>): <q>\\</q></li>
 	</ul>
-	For instance: "abc", "", "a\"bcd\"efg\n"</li>
-	<li><q>null</q> which is a placeholder value for every type</li>
-	<li>The infinity symbol: The result of the division <q>1/0</q> which is positive infinity, would be written <q>infty</q> in the algorithm language.</li>
+	Zum Beispiel "abc", "", "a\"bcd\"efg\n"</li>
+	<li><q>null</q> als Platzhalterwert für beliebige Typen</li>
+	<li><q>infty</q> als Darstellung eines typspezifischen unendlichen Elements. So sind etwa die beiden Zeilen
+	<pre>
+Float a = 1/0,
+Float a = infty,
+	</pre>
+	äquivalent.
+	</li>
 </ul>
 
 
-<h2>Expressions</h2>
-<p>Exrpessions can be
+<h2>Ausdrücke</h2>
+<p>Ausdrücke können die folgenden konstruiert werden.
 <ul>
-	<li>a constant.</li>
-	<li>of the form <q>expression op expression</q> where <q>op</q> is one of the operators
-		<q>+</q>, <q>-</q>, <q>*</q>, <q>/</q>, <q>%</q>, <q>&lt;</q>, <q>&gt;</q>, <q>&lt;=</q>, <q>&gt;=</q>, <q>==</q>, <q>!=</q>, <q>||</q>, <q>&amp;&amp;</q>.</li>
-	<li>of the form <q>(+ expression)</q>, <q>(- expression)</q> or <q>! expression</q>.</li>
-	<li>of the form <q>(expression)</q>.</li>
-	<li>of the form <q>prefixExpression</li>
+	<li>Eine Konstante ist ein Ausdruck</li>
+	<li>Wenn <code>a</code> und <code>b</code> Konstanten sind, so sind auch <code>a op b</code> Ausdrücke, wobei <code>op</code> einer der Operatoren
+		<q>+</q>, <q>-</q>, <q>*</q>, <q>/</q>, <q>%</q>, <q>&lt;</q>, <q>&gt;</q>, <q>&lt;=</q>, <q>&gt;=</q>, <q>==</q>, <q>!=</q>, <q>||</q>, <q>&amp;&amp;</q> ist.</li>
+	<li>Wenn <code>a</code> ein Ausdruck ist, so ist es auch <code>(+ a)</code>, <code>(- a)</code> und <code>! a</code> ein Ausdruck.</li>
+	<li>Wenn <code>a</code> ein Ausdruck ist, so auch <code>(a)</code>.</li>
+	<li>Ein Postfix-Ausdruck ist eine Ausdruck.</li>
 </ul>
-Nothing except what can be generated from the above is an expression. </p>
+Nichts außer dem so definierten ist ein Ausdruck. </p>
 
-<p> Postfix expressions are defined as
+<p> Postfix-Ausdrücke haben eine der folgenden Formen.
 <ul>
-	<li><q>identifier</q></li>
-	<li><q>postfixExpression.identifier</q></li>
-	<li><q>postfixExpression(argumentList)</q></li>
-	<li><q>postfixExpressino[expression]</q>.</li>
+	<li><code>id</code>, wobei <code>id</code> ein Bezeichner ist.</li>
+	<li><code>postfixExpression.id</code> wobei <code>a</code> ein Bezeichner ist.</li>
+	<li><code>postfixExpression(argumentList)</code>, wobei argumentList eine beliebig lange Liste von durch Kommata getrennte Ausdrücke ist.</li>
+	<li><code>postfixExpressino[a]</code>, wobei <code>a</code> ein Ausdruck ist.</li>
 </ul>
-Nothing other than the expressions generated by the cases specified is a postfix expression.</p>
+Nichts außer dem so definierten ist ein Postfix-Ausdruck.</p>
 
 
 
-<h2>Types</h2>
-Types are either simple types like <q>Integer</q>, <q>Float</q>, <q>String</q> or <q>Void</q>, complex types like <q>Integer List</q> which describes a list of integers or an array type like
-<q>Integer[]</q>, or <q>Float[][][]</q> which is an array of Integers in the first case and an array of arrays of arrays of floats in the second case.
+<h2>Typen</h2>
+Typen sind entweder einfach Typen wie <code>Integer</code> (Ganzzahlen), <code>Float</code> (Fließkommazahlen), <code>String</code> (Zeichenkette) oder <code>Void</code> (Typ der ein leeres Funktionsergebnis darstellt),
+zusammengesetzte Typen wie <code>Integer List</code>, was eine Liste von Ganzzahlen beschreibt oder Array-Typen wie
+<code>Integer[]</code> (Array mit ganzzahligen Elementen) oder <code>Float[][][]</code> (Array aus Arrays aus Arrays mit Fließkommazahlen als Elementen).
 
-<p>Simple types and complex types can be subtypes or supertypes of other simple types and complex types.
-Whenever you can use an expression of type A you can also use an expression of type B if B is a subtype of a.</p>
-<p>If B is derived from A using inheritance we call B a subtype of A and A a supertype of B.
-We also use both terms if A and B are equal.<br>
-If A and B are not equal we call B a proper subtype of A and A a proper supertype of B.
+<p>
+Einfache Typen und zusammengesetzte Typen können Unter- oder Obertypen anderer Typen sein.
+Sind <code>A</code> und <code>B</code> Typen, wobei <code>B</code> durch Vererbung aus <code>A</code> hervorgeht,
+so nennen wir <code>A</code> einen echten Obertypen von <code>B</code> und <code>B</code> einen echten Untertypen von <code>A</code>.
+Sind <code>A</code> und <code>B</code> gleich, so nennen wir auch <code>A</code> Untertyp von <code>B</code> und <code>B</code> Untertype von <code>A</code>.
 </p>
 
 
 
-<h2>Statement terminators</h2>
-<p>Note the two different end-of-statement signs <q>;</q> and <q>,</q> in the code above.
-<q>,</q> is the usual statement termination character. <q>;</q> is used to insert a breakpoint after that statement.
-This is used to define at which points in the algorithm's execution it will stop and show the user what the system looks like at that point.</p>
+<h2>Anweisungs-End-Zeichen</h2>
+<p>
+Es gibt zwei verschiedene Zeichen, die das Ende einer Anweisung markieren: <q>;</q> und <q>,</q>, die man beide im <q>hello world</q>-Programm oben sehen kann.
+<q>,</q> markiert nur das Ende einer Anweisung.
+<q>;</q> markiert das Ende einer Anweisung und fügt einen Breakpoint nach der Anweisung ein.
+Damit kann man Alvis mitteilen, an welchen Stellen die Ausführung des Algorithmus unterbrochen werden soll, so dass man sich angucken kann, wie der momentane Zustand aussieht.
+</p>
 
-In the following documentation I will always use <q>,</q> as the termination symbol to mean any termination symbol.
-In every case where you can write a comma, you can replace it with a semicolon.
+<p>
+Im Folgenden wird in der Dokumentation nur noch Kommata verwendet werden. An jeder Stelle, an der ein Komma steht könnte aber genauso auch ein Semikolon stehen. 
+</p>
 
 
-<h2>Statements</h2>
+<h2>Anweisungen</h2>
 <ul>
-	<li>A declaration is a statement.</li>
-	<li>An assignment is a statement.</li>
-	<li>A return-statement is a statement.</li>
-	<li>A function or method call is a statement.</li>
-	<li>Every block is a statement.</li>
-	<li>An if-statement is a statement.</li>
-	<li>A for-loop is a statement.</li>
-	<li>A while-loop is a statement.</li>
+	<li>Eine Deklaration ist eine Anweisung.</li>
+	<li>Eine Zuweisung ist eine Anweisung.</li>
+	<li>Eine return-Anweisung ist eine Anweisung.</li>
+	<li>Ein Funktions- oder Methodenaufruf ist eine Anweisung.</li>
+	<li>Jeder Block ist eine Anweisung.</li>
+	<li>Ein if-statement ist eine Anweisung.</li>
+	<li>Eine for-Schliefe ist eine Anweisung.</li>
+	<li>Eine while-Schliefe ist eine Anweisung.</li>
 </ul>
-Nothing other than the above is a statement.
+Nichts außer dem so definierten ist eine Anweisung.
 
 
-<h2>Declarations</h2>
-A declaration always has the form it also has in C or Java:
+<h2>Deklarationen</h2>
+Eine Deklaration hat die gleiche Form wie in C oder Java:
 <pre>
 T id,
 </pre>
-or it can be combined with an assignment like
+oder in Kombination mit einer Zuweisung
 <pre>
 T id = expr,
 </pre>
-where <q>T</q> is a type, <q>id</q> is an identifier and <q>expr</q> is an expression of a subtype of <q>T</q>.
+wobei <code>T</code> ein Typ, <code>id</code> ein Bezeichner und <code>expr</code> ein Ausdruck ist, der als Typ einen Untertype von <code>T</code> hat.
 
 
-<h2>Assignments</h2>
-Simple assignments have the same syntax they have in C or Java:
+<h2>Zuweisungen</h2>
+<p>
+Zuweisungen haben die gleich Form wie in C oder in Java:
 <pre>
 a = 3,
 </pre>
-where <code>a</code> is a variable defined in the current scope.
-The types of the left hand side and the right hand side of an assignment have to agree, that is the type of the variable on the left has to be a supertype of the type on the right hand side.
+wobei <code>a</code> diese Anweisung sich im Gültigkeitsbereich der Variable <code>a</code> befinden muss.
+Weiterhin muss der Typ der linken Seite ein Obertype des Typs der rechten Seite sein.
+</p>
 
-<p>It is, however, not possible to compile code like
+<p>Im gegensetz zu C oder Java ist es aber nicht möglich
 <pre>
 a = b = 3,
 </pre>
-because in the algorithm language an assignment is a statement but not an expression and the right hand side of an assignment has to be an expression.
+statt
+<pre>
+b = 3,
+a = b,
+</pre>
+zu benutzen, da in Alvis' Algorithmensprache Zuweisungen Anweisungen aber keine Ausdrücke sind.
 </p>
 
-As mention above, it is possible to combine declaration and assignment.
+Wie oben erwähnt ist es möglich eine Kombination von Deklaration und Zuweisung zu verwenden.
 
 
-<h2>Return statements</h2>
-<p>A return statement has the same form as in C or Java:
+<h2>return-Ausdruck</h2>
+<p>
+Ein return-Ausdruck hat die gleiche Form, wie einer in C oder Java:
 <pre>
 return,
 </pre>
-in a function that returns no value or
+in einer Funktion die keine Werte zurückgibt, oder
 <pre>
 return expr,
 </pre>
-in a function that does return a value, specifically one of the same type as expression.
-The type of <q>expr</q> has to be a subtype of the return type of the function that return statement is part of.</p>
+in einer Funktion, die einen Wert zurückgibt, dessen Typ ein Obertyp des Ausdrucks <code>expr</code> sein muss.
+</p>
 
-<p>Note that a semicolon as a terminator following a return statement is silently ignored.
-That is because the breakpoint would have to be after the return occured in which case the path of execution is at a competely different place, because the function can be called from multiple places there can also be multiple locations at which the execution continues.
-If you want to use a breakpoint after a return statement, place the semicolon after the call to the function that includes this return statement.</p>
+<p>
+An dieser Stelle ist zu beachten, dass Alvis am Ende eines return-Ausdrucks ein Semikolon stillschweigend ignoriert.
+Das liegt daran, dass die Ausführung nach einem return-Ausdruck an verschiedenen Stellen im Quelltext weitergehen kann, je nachdem, von wo aus die Funktion, die den return-Ausdruck enthält aufgerufen wird.
+Dadurch ist es nicht möglich im generierten Code automatisch einen Breakpoint einzufügen.
+
+Möchte den Ablauf des Algorithmus nach verlassen einer Funktion dennoch pausieren, so kann man einfach ein Semikolon hinter den Ausdruck mit dem entsprechenden Funktionsaufruf setzten.
+</p>
 
 
-<h2>Blocks</h2>
-There are two ways of writing blocks in the algorithm language.
-You can write them either in C/Java style, i.e. enclosed in <q>{</q> and <q>}</q> or in Pascal style, i.e. enclosed in <q>begin</q> and <q>end</q>.
+<h2>Blöcke</h2>
+Es gibt zwei Möglichkeiten Blöcke zu Schreiben.
+Ein Block ist eine Liste von Anweisungen, die umfasst werden von <q>{</q> am Anfang und <q>}</q> am Ende (C-Stil) oder von <q>begin</q> am Anfang und <q>end</q> am Ende.
 
 
-<h2>If statements</h2>
-<p>The if statements have two general forms:
+<h2>if-statements</h2>
+<p>
+if-statements haben die folgenden Formen:
 <pre>
 if condition:
 	then_block
 </pre>
-and
+und
 <pre>
 if condition:
 	then_block
 else
 	else_block
 </pre>
-where <q>then_block</q> and <q>else_block</q> are either blocks or single statement and <q>condition</q> is a expression which has a type that is a subtype of Boolean.</p>
+wobei <code>then_block</code> und <code>else_block</code> Anweisungen sind und <code>condition</code> ein Ausdruck mit einem Typ, der Untertyp vom eingebauten Typ <code>Boolean</code> ist, ist.
+</p>
 
-<p>Note that there is an ambiguity in code like
+<p>
+Der folgende Code ist zunächst uneindeutig:
 <pre>
 if condition1:
 if condition2:
@@ -190,38 +216,40 @@ if condition2:
 else
 	else_block
 </pre>
-It is not immediatly clear, which <q>if</q> the <q>else</q> belongs to. In this case the compiler assumes you meant
+Es ist hier nicht sofort klar, zu welchem <code>if</code> das <code>else</code> gehört. In solchen Fällen geht Alvis analog zu C und Java davon aus, dass
 <pre>
-if condition1: {
+ if condition1: {
 	if condition2:
 		then_block
 	else
 		else_block
 }
 </pre>
-i.e. when in doubt the <q>else</q> block always belongs to the last <q>if</q> statement preceeding it that does not already have an <q>else</q> statement.
-(This is the same way the conflict is resolved in C and Java.)</p>
+gemeint war, dass also im Zweifel das <code>else</code> immer zum letzen infrage kommenden <code>if</code> gehört, das noch kein <code>else</code> besitzt.
+</p>
 
 
-
-<h2>Loops</h2>
-<p>There are two different loops in the pseudo code language. There is a <code>for</code> loop which some would rather call a foreach loop<br>
+<h2>Schleifen</h2>
+<p>
+Es gibt zwei Arten von Schliefen in Alvis' Sprache. Zum einen gibt es die for-Schliefe, die man auch foreach-Schleife nennen könnte<br>
 <pre>
 for Type id in someArray:
 	block
 </pre>
-where <code>Type</code> is a type name, <code>id</code> is an identifier, <code>someArray</code> is some array-valued expression with elements which have a subtype of <code>Type</code> as their type and <code>block</code> is either a block or a single statement followed by a statement terminator.
-What this loop does is that it iterates over all the elements in someArray storing the current element in <code>id</code>.
-The scope within which <code>id</code> can be used is <code>block</code>, that is after the flow of execution leaves the loop, <code>id</code> will not be defined any more unless it was defined before the loop.
-In that case <code>id</code> will have the same value it had before entering the loop.</p>
+wobei <code>Type</code> ein Typname, <code>id</code> ein Bezeichner, <code>someArray</code> ein Ausdruck von dessen Typ ein Array-Typ ist, dessen Elemente als Typ einen Untertyp von <code>Type</code> haben und <code>block</code> ein Ausdruck ist.
+Diese Schliefe iteriert über alle Elemente in <code>someArray</code>, wobei bei jedem Schleifendurchlauf das aktuelle Element in <code>id</code> gespeichert ist.
+<code>id</code> ist dabei nur innerhalb von <code>block</code> gültig.
+</p>
 
 
-<p>The other loop is a <code>while</code> loop. The syntax is the following:<br>
+<p>
+Die andere Schleife ist eine while-Schleife. Die Syntax dafür ist:<br>
 <pre>
 while condition:
 	block
 </pre>
-where <code>condition</code> is an expression of a subtype of Boolean and <code>block</code> is either a block or a single expression.
+wobei <code>condition</code> ein Ausdrück von einem Untertyp von Boolean ist und <code>block</code> ein Ausdruck ist.
+<code>block</code> wird so lange ausgeführt, wie <code>condition</code> <code>true</code> ist.
 
 
 </body>
