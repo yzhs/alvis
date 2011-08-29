@@ -237,6 +237,11 @@ public class CompilerAccess {
 		loadTranslation();
 		return javaCode = compiler.compile(code);
 	}
+	
+	public String generateLatex(String code) throws IOException {
+		compiler = new Compiler(types, packages);
+		return compiler.compile(code, "LaTeX.stg");
+	}
 
 	/**
 	 * Run lexer, parser and the type checker on the code given.

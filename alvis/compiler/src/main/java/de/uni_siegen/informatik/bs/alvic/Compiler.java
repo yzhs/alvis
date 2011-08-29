@@ -166,10 +166,24 @@ public class Compiler {
 	 * @throws IOException
 	 */
 	public String compile(String code) throws IOException {
-		return compile(code,
-				getClass().getClassLoader().getResourceAsStream("Java.stg"));
+		return compile(code, "Java.stg");
 	}
 
+	/**
+	 * Compile the given code and generate Java code.
+	 * 
+	 * @param code
+	 *            The code we want to translate.
+	 * @param templateFile
+	 * 			  The template file used to generate the code.
+	 * @return The generated Java code.
+	 * @throws IOException
+	 */
+	public String compile(String code, String templateFile) throws IOException {
+		return compile(code,
+				getClass().getClassLoader().getResourceAsStream(templateFile));
+	}
+	
 	/**
 	 * Compile the given code and generate output using the template group
 	 * specified.
