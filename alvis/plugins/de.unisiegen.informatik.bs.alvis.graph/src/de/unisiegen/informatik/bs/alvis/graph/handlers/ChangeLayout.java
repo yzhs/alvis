@@ -30,7 +30,6 @@ public class ChangeLayout extends AbstractHandler {
 			GraphEditor grapheditor = (GraphEditor) editor;
 			grapheditor.setLayout();
 		} catch (ClassCastException e) {
-			// TODO Sinnvolle Fehlermeldung.
 		}
 		return null;
 

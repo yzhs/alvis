@@ -27,10 +27,9 @@ public class Move extends AbstractHandler {
 //		Try to cast the active editor to GraphEditor.
 		try {
 			GraphEditor grapheditor = (GraphEditor)editor;
-				grapheditor.setModus(GraphEditor.MODUS_MOVE);
+				grapheditor.setModus(GraphEditor.MODUS_STANDARD);
 		}
 		catch(ClassCastException e) {
-//			TODO Sinnvolle Fehlermeldung.
 		}
 		return null;
 

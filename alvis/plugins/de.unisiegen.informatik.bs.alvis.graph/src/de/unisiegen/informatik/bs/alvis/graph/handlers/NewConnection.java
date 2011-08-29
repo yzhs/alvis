@@ -33,7 +33,6 @@ public class NewConnection extends AbstractHandler {
 				grapheditor.setModus(GraphEditor.MODUS_CONNECTION);
 		}
 		catch(ClassCastException e) {
-//			TODO Sinnvolle Fehlermeldung.
 		}
 		return null;
 	}

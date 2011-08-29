@@ -30,7 +30,6 @@ public class ZoomOut extends AbstractHandler {
 				grapheditor.myGraph.zoomOut();
 		}
 		catch(ClassCastException e) {
-//			TODO Sinnvolle Fehlermeldung.
 		}
 		return null;
 

@@ -30,7 +30,6 @@ public class FitToPage extends AbstractHandler {
 			GraphEditor grapheditor = (GraphEditor) editor;
 			grapheditor.fitToPage();
 		} catch (ClassCastException e) {
-			// TODO Sinnvolle Fehlermeldung.
 		}
 		return null;
 

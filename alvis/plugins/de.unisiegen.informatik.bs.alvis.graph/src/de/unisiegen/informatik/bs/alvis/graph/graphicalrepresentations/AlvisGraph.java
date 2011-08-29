@@ -36,7 +36,10 @@ import de.unisiegen.informatik.bs.alvis.graph.editors.GraphEditor;
 public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 
 	public static final String ID = "de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.graph";
-	
+	public static final int CTRL = SWT.CTRL;// SWT -> ctrl
+	public static final int PLUS = 43;// SWT -> "+"
+	public static final int MINUS = 45;// SWT -> "-"
+
 	AlvisSave admin;
 
 	private double middleX, middleY, radiusX, radiusY, angle;
@@ -64,6 +67,17 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		addKeyListener(new KeyListener() {
 			@Override
 			public void keyPressed(KeyEvent e) {
+				if (e.keyCode == PLUS) {
+					if (zoomIn()) {
+						superSetDirty(true, new Point(getSize().x / 2,
+								getSize().y / 2), true);
+					}
+				} else if (e.keyCode == MINUS) {
+					if (zoomOut()) {
+						superSetDirty(true, new Point(getSize().x / 2,
+								getSize().y / 2), false);
+					}
+				}
 				keyPressed = e.keyCode;
 			}
 
@@ -76,7 +90,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		addMouseWheelListener(new MouseWheelListener() {
 			@Override
 			public void mouseScrolled(MouseEvent e) {
-				if (keyPressed == SWT.CTRL) {
+				if (keyPressed == CTRL) {
 					if (zoom(e.x, e.y, e.count > 0)) { // mouse wheel down ==
 														// e.count < 0
 						superSetDirty(true, new Point(e.x, e.y), e.count > 0);
@@ -1098,7 +1112,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		superSetDirty(true, null, false);
 
 	}
-	
+
 	/**
 	 * captures current graphical representation from the graph editor and
 	 * returns it
@@ -1111,7 +1125,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		int width = getSize().x;
 		int height = getSize().y;
 		GC gc = new GC(this);
-		gc.drawText("Created by Alvis", width-95, height-20);
+		gc.drawText("Created by Alvis", width - 95, height - 20);
 		gc.drawRectangle(new Rectangle(0, 0, width - 1, height - 1));
 		screenshot = new Image(Display.getCurrent(), width, height);
 		gc.copyArea(screenshot, 0, 0);
@@ -1120,6 +1134,6 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		redraw();
 
 		return screenshot;
-		
+
 	}
 }

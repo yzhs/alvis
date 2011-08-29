@@ -30,7 +30,6 @@ public class DeleteAll extends AbstractHandler {
 				grapheditor.clearGraph();
 		}
 		catch(ClassCastException e) {
-//			TODO Sinnvolle Fehlermeldung.
 		}		return null;
 	}
 

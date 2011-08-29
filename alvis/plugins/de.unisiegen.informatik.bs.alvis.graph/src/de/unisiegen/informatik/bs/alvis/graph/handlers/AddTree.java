@@ -34,7 +34,6 @@ public class AddTree extends AbstractHandler {
 			grapheditor.autoFill();
 			
 		} catch (ClassCastException e) {
-			// TODO Sinnvolle Fehlermeldung.
 		}
 		
 		

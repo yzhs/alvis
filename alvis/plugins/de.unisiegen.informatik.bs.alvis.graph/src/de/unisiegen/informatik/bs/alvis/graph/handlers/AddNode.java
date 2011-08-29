@@ -33,7 +33,6 @@ public class AddNode extends AbstractHandler {
 				grapheditor.setModus(GraphEditor.MODUS_NODE);
 		}
 		catch(ClassCastException e) {
-//			TODO Sinnvolle Fehlermeldung.
 		}
 		return null;
 	}
