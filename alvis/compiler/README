@@ -1,0 +1,69 @@
+Structure
+---------
+
+The compiler is composed of five ANTLR grammars and a few supporting Java classes.
+
+The ANTLR grammars are the following, they run in that order (in "src/main/antlr3/de/uni_siegen/informatik/bs/alvic/"):
+TLexer.g:         The lexer, its parent class is AbstractTLexer
+TParser.g:        The Parser, its parent class is AbstractTParser
+FunctionPass.g:   A tree parser that reads the headers of all function definitions to allow functions to be in arbitrary order.
+		That list is passed to the type checker.  The parent class of FunctionPass is AbstractTreeParser.
+TypeChecker.g:    The type checker gets a list of functions produced by FunctionPass.  It checks whether operators and functions
+		have correct argument types, whether the types of left and right side of an assignment agree, etc.  The parent
+		class of TypeChecker is AbstractTypeChecker which in turn is a child of AbstractTreeParser.
+CodeGenerator.g:  Using StringTemplate generates the Java code from the AST produced by the previous stages.
+
+Java sources (in "src/main/java/de/uni_siegen/informatik/bs/alvic/"):
+Compiler.java: This class controls the entire compilation and is the main interface to the outside world.
+InvalidStatementException.java: This is used to indicate failure in case the user tries to use "a.b," as a statement.
+InvalidAssignmentException.java: This is used when the user tries something like "a() = 1,".
+All the other *Eception.java files: Exceptions used by the type checker.
+
+Type.java: This class is used to define a general interface what a type means.
+SimpleType.java: This is used to describe a type like "Integer", "String", "Queue<Integer>", ...
+FunctionType.java: Describes the type of a function, i.e. the type of its arguments and its return type.
+ArrayType.java: Describes the type like "List<String>". This type could also be described using SimpleType but ArrayType is used
+		only for "List<T>" which is the only type in the pseudo code that can be used in conjunction with the "[]" indexing operator.
+Member.java: A helper class to describe the attributes and methods of a Type.
+
+Typed*.java: These classes are used to implement our own node type.  This is used to pass type information from the type checker to the code generator.
+
+
+Tests can be found in "src/test/java/".
+
+
+
+Limitations
+-----------
+
+1. The compiler is unable to handle the case of a class with an attribute that has a type argument.
+If you try to use a Java class like
+
+public class A {
+	List<String> a;
+}
+
+the compiler will handle this exactly like
+
+public class B {
+	List a;
+}
+
+In particular the type checker will not know what type a.get(0) actually has.  This is rather problematic because of limitation 2.
+The source that needs to be changed is marked as a TODO in Member.java.
+
+
+2. The language does not allow type casts. As languages like Haskell or ML that do not have type casts either show, this is not a real limitation.
+However, it depends on the compiler knowing that a.get(0) has type String if a is defined by
+
+List<String> a = ...;
+
+If we used the non-generic "List a" we could not use anything stored in that list as anything other than Object.
+
+
+3. The compiler has neither a break nor a continue construct.
+Hence it is only possible to exit from a function either using that function's break condition or using a return statement to exit the current function.
+Again, as in 2. this is not a real limitation, merely an inconvenience.
+
+
+
