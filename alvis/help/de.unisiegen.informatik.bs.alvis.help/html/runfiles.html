@@ -3,44 +3,44 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>Run Dateien</title>
+	<title>Run Files</title>
 </head>
 
 <body>
 <h1>Run Files</h1>
-Run Dateien sind dazu da, um zu steuern, wie ein Algorithmus auf ein Beispiel angewandt wird. <br/>
+Run Files are a means of controlling how an algorithm is used on an example.<br/>
 <br/>
-Dazu wählt im Feld "Algorithm File" einen Algorithmus aus dem aktuellen Alvis-Workspace aus. Außerdem fügt man im Feld "Example File" ein Beispiel hinzu, das als Datum für den Algorithmus dient. Dies kann ein Graph, Syncronisationsproblem oder ein anderer beliebiger Datentyp aus Alvis-Plugins sein. <br/><br/>
+In order to do so you chose an algorithm file from the current Alvis workspace. Furthermore you add an example file on which the algorithm is used. This can be a graph or a syncronisation problem oder any other datatype provided by an Alvis plug-in.<br/><br/>
 
 <table border="1" cellspacing="0">
 <thead>
 <tr>
-      <th ROWSPAN="1" COLSPAN="1"> <P CLASS="Para"> Symbol/Reiter</P></TH>
-      <th ROWSPAN="1" COLSPAN="1"> <P CLASS="Para"> Bedeutung</P></th>
+      <th ROWSPAN="1" COLSPAN="1"> <P CLASS="Para">Symbol/Tab</P></TH>
+      <th ROWSPAN="1" COLSPAN="1"> <P CLASS="Para">Description</P></th>
 </tr>
 </thead>
   <tbody>
 
 	<tr>
 		<td align="center"><IMG align="middle" src="../images/box_open.png" width="16" height="16" border="0"></td>
-		<td>Springe in den Editor der jeweiligen Datei</td>
+		<td>Open the editor of the particular file.</td>
 	
 	</tr>
 	<tr>
 		<td align="center"><IMG align="middle" src="../images/run.png" width="16" height="16" border="0"></td>
-		<td>Starte den Ablauf mit den gegebenen Parametern</td>
+		<td>Start the run with the given parameters.</td>
 	</tr>
 	<TR>
 		<TD align="center">Start Points</TD>
-		<TD><strong>Zufällig:</strong> Alvis entscheidet, welche Parameter dem Algorithmus übergeben werden. Beispiel: Start- und Endknoten im Graph-Plugin<br/>
-		    <strong>Entscheide:</strong> Der Benutzer entscheidet selbst. Sobald man den Run startet, wird man dann nach den Parametern gefragt</TD>
+		<TD><strong>Random:</strong>Alvis decides, which parameters are handed over to the algorithm. Example: Start and end node of a graph algorithm.<br/>
+		    <strong>Decide:</strong>The user decides. As soon as the run starts, Alvis asks for the parameters.</TD>
 	</TR>
 	<TR>
 		<TD align="center">Decision Points</TD>
-		<TD>Jedes Mal, wenn der Algorithmus auf eine unsortierte Menge von Objekten (Beispiel: die Nachbarn eines Knoten in einem Graph) stößt, muss eine Entscheidung getroffen werden, in welcher Reihenfolge diese Daten abgearbeitet werden.<br/>
-		<strong>Zufällig:</strong> Alvis entscheidet zufällig<br/>
-		<strong>Einmal:</strong> Der Benutzer legt einmal eine Reihenfolge fest, die auch beim Zurückgehen im Algorithmus nicht gelöscht wird<br/>
-		<strong>Immer: </strong>Jedes Mal wird vom Nutzer eine Entscheidung verlangt. Frühere Entscheidungen werden beim Zurückgehen im Algorithmus gelöscht</TD>
+		<TD>Every time the algorithm has to process an unordered set of data (example: adjacent nodes of node in a graph), the user has to decide, in what order the data is used.<br/>
+		<strong>Random:</strong> Alvis decides randomly.<br/>
+		<strong>Once:</strong>The user orders the data belonging to each decision points once. These decisions will not be delete when undoing algorithm steps.<br/>
+		<strong>Always: </strong>Alvis asks for a decision every time and decisions will be deleted by going backwards.</TD>
 	</TR>	
   </tbody>
 </table>

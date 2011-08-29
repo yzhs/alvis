@@ -4,8 +4,8 @@
 <toc label="Alvis" topic="html/alvis_main.html">
    <topic href="html/runfiles.html" label="Run-Files">
    </topic>
- <topic href="html/algorithms.html" label="Algorithmen schreiben">
+ <topic href="html/algorithms.html" label="Writing algorithms">
  </topic>
- <topic href="html/run.html" label="Der Ablauf">
+ <topic href="html/run.html" label="The Run">
  </topic>
 </toc>
