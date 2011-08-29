@@ -2,7 +2,7 @@
 <?NLS TYPE="org.eclipse.help.toc"?>
 
 <toc label="Graphen" topic="nl/de/html/graph_main.html">
-   <topic href="nl/de/html/zooming.html" label="Zooming">
+   <topic href="nl/de/html/zooming.html" label="Zoomen">
    </topic>
  <topic href="nl/de/html/creating_a_graph.html" label="Die Bedienelemente">
  </topic>
