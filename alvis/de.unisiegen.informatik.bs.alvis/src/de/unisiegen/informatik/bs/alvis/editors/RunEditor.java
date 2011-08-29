@@ -70,6 +70,8 @@ import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.GridData;
 
+import org.eclipse.osgi.util.NLS;
+
 /**
  * Editor to edit the run preferences Note: This class has been made with
  * (google)WindowBuilder Eclipse Plugin
@@ -345,7 +347,7 @@ public class RunEditor extends EditorPart implements IExportItem {
 								.getShell(), new WorkbenchLabelProvider(),
 						new BaseWorkbenchContentProvider());
 				dialog.setTitle(Messages.RunEditor_17);
-				dialog.setMessage(Messages.RunEditor_18);
+				dialog.setMessage(NLS.bind(Messages.RunEditor_18, Activator.getDefault().getFileExtensionsAsCommaSeparatedList()));
 				dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
 				dialog.open();
 				if (dialog.getResult() != null) {

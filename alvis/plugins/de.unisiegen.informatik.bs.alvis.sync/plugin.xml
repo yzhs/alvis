@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="de.unisiegen.informatik.bs.alvis.extensionpoints.fileextension">
+      <FileExtension
+            class="de.unisiegen.informatik.bs.alvis.sync.extension.FileExtension">
+      </FileExtension>
+   </extension>
+
+</plugin>

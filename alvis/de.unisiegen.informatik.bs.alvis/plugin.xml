@@ -5,6 +5,7 @@
    <extension-point id="de.unisiegen.informatik.bs.alvis.runvisualizer" name="%extension-point.name.0" schema="schema/de.unisiegen.informatik.bs.alvis.runvisualizer.exsd"/>
    <extension-point id="de.unisiegen.informatik.bs.alvis.export" name="%extension-point.name.1" schema="schema/de.unisiegen.informatik.bs.alvis.export.exsd"/>
    <extension-point id="de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist" name="%extension-point.name.2" schema="schema/de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist.exsd"/>
+   <extension-point id="de.unisiegen.informatik.bs.alvis.extensionpoints.fileextension" name="%extension-point.name.3" schema="schema/de.unisiegen.informatik.bs.alvis.extensionpoints.fileextension.exsd"/>
 
    <extension
          id="application"

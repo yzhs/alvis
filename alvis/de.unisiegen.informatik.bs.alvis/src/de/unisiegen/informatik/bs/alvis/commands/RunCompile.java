@@ -1,6 +1,7 @@
 package de.unisiegen.informatik.bs.alvis.commands;
 
 import java.io.File;
+
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
@@ -8,6 +9,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.ErrorDialog;
+import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.PlatformUI;
@@ -155,6 +157,9 @@ public class RunCompile extends AbstractHandler {
 	}
 
 	private Run getPreferencesByDialog() {
+		
+		String extensions = Activator.getDefault().getFileExtensionsAsCommaSeparatedList();
+		
 		Run seri = new Run();
 		while (seri.getAlgorithmFile().equals("") | seri.getExampleFile().equals("")) { //$NON-NLS-1$ //$NON-NLS-2$
 			ElementTreeSelectionDialog dialog = new ElementTreeSelectionDialog(
@@ -162,7 +167,7 @@ public class RunCompile extends AbstractHandler {
 							.getShell(), new WorkbenchLabelProvider(),
 					new BaseWorkbenchContentProvider());
 			dialog.setTitle(Messages.RunCompile_7);
-			dialog.setMessage(Messages.RunCompile_8);
+			dialog.setMessage(NLS.bind(Messages.RunCompile_8, "(" + extensions + ")"));
 			dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
 			dialog.open();
 
@@ -170,6 +175,8 @@ public class RunCompile extends AbstractHandler {
 				String result = ""; //$NON-NLS-1$
 				for (Object o : dialog.getResult()) {
 					result = o.toString();
+					
+					// TODO: "graph" rausnehmen und gegen die Liste aus Activator.getDefault().getFileExtensions() checken (by Basti 28.08.11)
 					if (result.startsWith("L") && result.endsWith("graph")) { //$NON-NLS-1$ //$NON-NLS-2$
 						result = result.substring(2); // cut the first two chars
 						seri.setExampleFile(result);

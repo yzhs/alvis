@@ -324,4 +324,10 @@
             class="de.unisiegen.informatik.bs.alvis.graph.datatypes.DatatypeList">
       </DatatypeList>
    </extension>
+   <extension
+         point="de.unisiegen.informatik.bs.alvis.extensionpoints.fileextension">
+      <FileExtension
+            class="de.unisiegen.informatik.bs.alvis.graph.extension.FileExtension">
+      </FileExtension>
+   </extension>
 </plugin>

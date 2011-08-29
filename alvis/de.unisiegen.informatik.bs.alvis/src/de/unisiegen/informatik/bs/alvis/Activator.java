@@ -33,6 +33,7 @@ import de.unisiegen.informatik.bs.alvis.editors.EDecisionPoint;
 import de.unisiegen.informatik.bs.alvis.exceptions.VirtualMachineException;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IDatatypeList;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
+import de.unisiegen.informatik.bs.alvis.extensionpoints.IFileExtension;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCList;
@@ -332,6 +333,7 @@ public class Activator extends AbstractUIPlugin {
 	public ArrayList<PCObject> getAllDatatypesInPlugIns() {
 		if (allDatatypesInPlugIns == null)
 			registerAllDatatypes();
+		
 		return allDatatypesInPlugIns;
 	}
 
@@ -364,7 +366,7 @@ public class Activator extends AbstractUIPlugin {
 		IExtensionRegistry registry = Platform.getExtensionRegistry();
 		IExtensionPoint extensionPoint = registry
 				.getExtensionPoint("de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist"); //$NON-NLS-1$
-		IExtension[] extensions = extensionPoint.getExtensions();
+		IExtension[] extensions = extensionPoint.getExtensions();		
 
 		// * For all Extensions that contribute:
 		for (int i = 0; i < extensions.length; i++) {
@@ -494,5 +496,37 @@ public class Activator extends AbstractUIPlugin {
 
 		return null;
 
+	}
+	
+	public ArrayList<String> getFileExtensions(){
+		ArrayList<String> fileextensions = new ArrayList<String>();
+		
+		for(IExtension ext : Platform.getExtensionRegistry().getExtensionPoint("de.unisiegen.informatik.bs.alvis.extensionpoints.fileextension").getExtensions()){ //$NON-NLS-1$
+			for(IConfigurationElement con : ext.getConfigurationElements()){
+				try {
+					IFileExtension extension = (IFileExtension) con.createExecutableExtension("class"); //$NON-NLS-1$
+					fileextensions.add(extension.getFileExtension());
+				} catch (CoreException e) {
+					e.printStackTrace();
+				}
+				
+			}
+		}
+		return fileextensions;
+	}
+	
+	public String getFileExtensionsAsCommaSeparatedList(){
+		String extensions = "";
+		ArrayList<String> fileextensions = Activator.getDefault().getFileExtensions();
+		for(int i = 0; i < fileextensions.size(); i++){
+			if(i == 0){
+				extensions += fileextensions.get(i);
+			}
+			else{
+				extensions += ", " + fileextensions.get(i);
+			}
+		}
+		
+		return extensions;
 	}
 }
