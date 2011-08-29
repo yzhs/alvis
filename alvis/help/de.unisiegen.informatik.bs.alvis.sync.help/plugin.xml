@@ -5,7 +5,7 @@
    <extension
          point="org.eclipse.help.toc">
       <toc
-            file="SyncTOC.xml"
+            file="$nl$/SyncTOC.xml"
             primary="true">
       </toc>
    </extension>

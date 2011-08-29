@@ -5,7 +5,7 @@
    <extension
          point="org.eclipse.help.toc">
       <toc
-            file="AlvisTOC.xml"
+            file="$nl$/AlvisTOC.xml"
             primary="true">
       </toc>
    </extension>

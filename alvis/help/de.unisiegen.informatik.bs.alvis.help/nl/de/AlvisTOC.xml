@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+
+<toc label="Alvis" topic="nl/de/html/alvis_main.html">
+   <topic href="nl/de/html/runfiles.html" label="Run-Dateien">
+   </topic>
+ <topic href="nl/de/html/algorithms.html" label="Algorithmen schreiben">
+ </topic>
+ <topic href="nl/de/html/run.html" label="Der Ablauf">
+ </topic>
+</toc>
