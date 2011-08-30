@@ -2,18 +2,25 @@ group T;
 program(functions) ::= <<
 \documentclass{scrartcl}
 \usepackage{fancyvrb}
+\usepackage{color}
 \begin{document}
+
+
+\definecolor{const}{RGB}{255,85,255}
+\definecolor{blue}{RGB}{65,85,255}
+\definecolor{green}{RGB}{85,255,65}
 \newcommand{\ident}[1]{#1}
-\newcommand{\type}[1]{#1}
+\newcommand{\type}[1]{\textcolor{blue}{#1}}
 \newcommand{\keyword}[1]{\emph{#1}}
 \newcommand{\binop}[1]{$#1$}
 \newcommand{\unop}[1]{$#1$}
-\newcommand{\literal}[1]{\blue{#1}}
+\newcommand{\literal}[1]{\textcolor{const}{#1}}
 
 \begin{Verbatim}[commandchars=\\\{\}]
 <functions; separator="
 ">
 \end{Verbatim}
+
 \end{document}
 >>
 
