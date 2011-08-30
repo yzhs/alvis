@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?NLS TYPE="org.eclipse.help.toc"?>
 
-<toc label="Syncronisation" topic="nl/de/html/sync_main.html">
+<toc label="Synchronisation" topic="nl/de/html/sync_main.html">
  <topic href="nl/de/html/semaphors.html" label="Semaphore">
  </topic>
 </toc>
