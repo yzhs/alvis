@@ -47,6 +47,8 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 	 * @param parent
 	 */
 	public AlvisScenario(Composite parent) {
+		
+		//TODO: verschieben nach RunVisualizer
 		GridLayout outerGL = new GridLayout();
 		outerGL.makeColumnsEqualWidth = false;
 		outerGL.numColumns = 2;
@@ -98,6 +100,57 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		actorVisualization.setLayout(actorsFL);		
 	}
 	
+	
+	public ArrayList<AlvisSemaphore> getSemaphores() {
+		return semaphores;
+	}
+
+
+	public void setSemaphores(ArrayList<AlvisSemaphore> semaphores) {
+		this.semaphores = semaphores;
+	}
+
+
+	public ArrayList<AlvisCondition> getConditions() {
+		return conditions;
+	}
+
+
+	public void setConditions(ArrayList<AlvisCondition> conditions) {
+		this.conditions = conditions;
+	}
+
+
+	public ArrayList<AlvisPrimitive> getPrimitives() {
+		return primitives;
+	}
+
+
+	public void setPrimitives(ArrayList<AlvisPrimitive> primitives) {
+		this.primitives = primitives;
+	}
+
+
+	public ArrayList<AlvisActor> getActors() {
+		return actors;
+	}
+
+
+	public void setActors(ArrayList<AlvisActor> actors) {
+		this.actors = actors;
+	}
+
+
+	public ArrayList<AlvisBuffer> getBuffers() {
+		return buffers;
+	}
+
+
+	public void setBuffers(ArrayList<AlvisBuffer> buffers) {
+		this.buffers = buffers;
+	}
+
+
 	public void addActor(PCActor a) {
 		AlvisActor aa = new AlvisActor(actorVisualization, a);
 		actors.add(aa);

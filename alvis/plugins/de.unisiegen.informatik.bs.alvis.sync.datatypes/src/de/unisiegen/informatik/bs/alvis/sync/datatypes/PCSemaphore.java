@@ -1,5 +1,7 @@
 package de.unisiegen.informatik.bs.alvis.sync.datatypes;
 
+import java.util.ArrayList;
+
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
@@ -10,21 +12,39 @@ public class PCSemaphore extends PCObject {
 	protected static final String TYPENAME = "Semaphore";
 	private int counter;
 	private String name;
+	private final int id;
+	private static int globalID = 0;
+	private static ArrayList<PCSemaphore> allSemas = new ArrayList<PCSemaphore>();
 	
 	public PCSemaphore() {
 		name = "";
 		counter = 1;
+		id = globalID++;
+		allSemas.add(this);
 	}
 
 	public PCSemaphore(int counter, String name) {
 		this.counter = counter;
 		this.name = name;
+		id = globalID++;
+		allSemas.add(this);
 	}
 	
 	public PCSemaphore(int counter, String name, GraphicalRepresentationSemaphore gr) {
 		allGr.add(gr);
 		this.counter = counter;
 		this.name = name;
+		id = globalID++;
+		allSemas.add(this);
+	}
+	
+	public static PCSemaphore findByID(int id) {
+		for (PCSemaphore sema: allSemas) {
+			if (id == sema.getID()) {
+				return sema;
+			}
+		}
+		return null;
 	}
 	
 	public int getCounter() {
@@ -41,6 +61,10 @@ public class PCSemaphore extends PCObject {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public int getID() {
+		return id;
 	}
 
 	public static String getTypename() {
