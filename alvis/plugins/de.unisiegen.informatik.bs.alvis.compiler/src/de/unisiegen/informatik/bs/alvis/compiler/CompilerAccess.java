@@ -554,9 +554,12 @@ public class CompilerAccess {
 			}
 			if (!containsMain) {
 				prefixLength = charPositionInLine;
-				prefix = tokenToComplete.getText().substring(0, prefixLength);
-				line = tokenToComplete.getLine();
-				charPositionInLine = tokenToComplete.getCharPositionInLine();
+				if(tokenToComplete!=null)
+				{
+					prefix = tokenToComplete.getText().substring(0, prefixLength);
+					line = tokenToComplete.getLine();
+					charPositionInLine = tokenToComplete.getCharPositionInLine();					
+				}
 				availableProposals.add(new CompletionInformation("main", line,
 						charPositionInLine, prefixLength));
 			}
