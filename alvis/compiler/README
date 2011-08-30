@@ -3,30 +3,60 @@ Structure
 
 The compiler is composed of five ANTLR grammars and a few supporting Java classes.
 
-The ANTLR grammars are the following, they run in that order (in "src/main/antlr3/de/uni_siegen/informatik/bs/alvic/"):
-TLexer.g:         The lexer, its parent class is AbstractTLexer
-TParser.g:        The Parser, its parent class is AbstractTParser
-FunctionPass.g:   A tree parser that reads the headers of all function definitions to allow functions to be in arbitrary order.
-		That list is passed to the type checker.  The parent class of FunctionPass is AbstractTreeParser.
-TypeChecker.g:    The type checker gets a list of functions produced by FunctionPass.  It checks whether operators and functions
-		have correct argument types, whether the types of left and right side of an assignment agree, etc.  The parent
-		class of TypeChecker is AbstractTypeChecker which in turn is a child of AbstractTreeParser.
-CodeGenerator.g:  Using StringTemplate generates the Java code from the AST produced by the previous stages.
+The ANTLR grammars are the following, they run in that order (found in
+"src/main/antlr3/de/uni_siegen/informatik/bs/alvic/"):
+TLexerg:        The lexer, its parent class is AbstractTLexer
+
+TParser:        The Parser, its parent class is AbstractTParser
+
+FunctionPass:   A tree parser that reads the headers of all function definitions
+                to allow functions to be in arbitrary order.  That list is
+                passed to the type checker.  The parent class of FunctionPass is
+                AbstractTreeParser.
+
+TypeChecker:    The type checker gets a list of functions produced by
+                FunctionPass.  It checks whether operators and functions have
+                correct argument types, whether the types of left and right side
+                of an assignment agree, etc.  The parent class of TypeChecker is
+                AbstractTypeChecker which in turn is a child of
+                AbstractTreeParser.
+
+CodeGenerator:  Using StringTemplate generates the Java code from the AST
+                produced by the previous stages.
+
 
 Java sources (in "src/main/java/de/uni_siegen/informatik/bs/alvic/"):
-Compiler.java: This class controls the entire compilation and is the main interface to the outside world.
-InvalidStatementException.java: This is used to indicate failure in case the user tries to use "a.b," as a statement.
-InvalidAssignmentException.java: This is used when the user tries something like "a() = 1,".
+Compiler:                   This class controls the entire compilation and is
+                            the main interface to the outside world.
+
+InvalidStatementException:  This is used to indicate failure in case the user
+                            tries to use "a.b," as a statement.
+
+InvalidAssignmentException: This is used when the user tries something like
+                            "a() = 1,".
+
 All the other *Eception.java files: Exceptions used by the type checker.
 
-Type.java: This class is used to define a general interface what a type means.
-SimpleType.java: This is used to describe a type like "Integer", "String", "Queue<Integer>", ...
-FunctionType.java: Describes the type of a function, i.e. the type of its arguments and its return type.
-ArrayType.java: Describes the type like "List<String>". This type could also be described using SimpleType but ArrayType is used
-		only for "List<T>" which is the only type in the pseudo code that can be used in conjunction with the "[]" indexing operator.
-Member.java: A helper class to describe the attributes and methods of a Type.
 
-Typed*.java: These classes are used to implement our own node type.  This is used to pass type information from the type checker to the code generator.
+Type:           This class is used to define a general interface what a type
+                means.
+
+SimpleType:     This is used to describe a type like "Integer", "String",
+                "Queue<Integer>", ...
+
+FunctionType:   Describes the type of a function, i.e. the type of its arguments
+                and its return type.
+
+ArrayType:      Describes the type like "List<String>". This type could also be
+                described using SimpleType but ArrayType is used only for
+                "List<T>" which is the only type in the pseudo code that can be
+                used in conjunction with the "[]" indexing operator.
+
+Member:         A helper class to describe the attributes and methods of a Type.
+
+Typed*:         These classes are used to implement our own node type.  This is
+                used to pass type information from the type checker to the code
+                generator.
 
 
 Tests can be found in "src/test/java/".
@@ -36,34 +66,61 @@ Tests can be found in "src/test/java/".
 Limitations
 -----------
 
-1. The compiler is unable to handle the case of a class with an attribute that has a type argument.
-If you try to use a Java class like
+1. The compiler is unable to handle the case of a class with an attribute that
+has a type argument.  If you try to use a Java class like
 
 public class A {
-	List<String> a;
+    List<String> a;
 }
 
 the compiler will handle this exactly like
 
 public class B {
-	List a;
+    List a;
 }
 
-In particular the type checker will not know what type a.get(0) actually has.  This is rather problematic because of limitation 2.
-The source that needs to be changed is marked as a TODO in Member.java.
+In particular the type checker will not know what type a.get(0) actually has.
+This is rather problematic because of limitation 2.
+    The source that needs to be changed is marked as a TODO in Member.java.
 
 
-2. The language does not allow type casts. As languages like Haskell or ML that do not have type casts either show, this is not a real limitation.
-However, it depends on the compiler knowing that a.get(0) has type String if a is defined by
+2. The language does not allow type casts. As languages like Haskell or ML that
+do not have type casts either show, this is not a real limitation.  However, it
+depends on the compiler knowing that 'a.get(0)' has type String if 'a' is
+defined by
 
 List<String> a = ...;
 
-If we used the non-generic "List a" we could not use anything stored in that list as anything other than Object.
+If we used the non-generic "List a" we could not use anything stored in that
+list as anything other than Object.
 
 
-3. The compiler has neither a break nor a continue construct.
-Hence it is only possible to exit from a function either using that function's break condition or using a return statement to exit the current function.
-Again, as in 2. this is not a real limitation, merely an inconvenience.
+3. The compiler has neither a break nor a continue construct.  Hence it is only
+possible to exit from a function either using that function's break condition or
+using a return statement to exit the current function.
+Again, as in 2. this is not a real limitation, merely an inconvenience.  This
+could, however, easily be fixed. You would have to add a token for "break" or
+"continue" to TLexer and allow this token (followed by a statement terminator)
+to be used within the body of a loop.  Looking up the term "gated semantic
+predicate" in the ANTLR documentation might be helpful.
 
 
+4. The names of all classes available to the user have to begin with the letters
+'PC' (pseudo code). If you want to fix that, you might want to search for the
+places where 'replaceAll(".*\\.PC", "")' is applied to some String.
 
+
+5. To keep the language simple (at least syntactically) it only has a few
+operators. While the usual operators like "+=", "-=", ... can be replaced by
+using "a = a + b" instead of "a += b", there are operators which can not be
+replaced that easily. Specifically there are no binary versions of "&&", "||"
+and "!" and there is no XOR operator at all.
+
+Implementing any of these operators will force you to either rewrite expression
+in the parser, which will leave the tree parsers unchanged but will result in a
+LaTeX export where all the Operators are replaced by something more complicated
+corresponding to that rewrite, or you will have to change the whole compiler
+pipeline from the lexer to the code generator (including the template files).
+
+
+/* vim:set ts=4 sw=4 et: */
