@@ -112,7 +112,11 @@ typeHelper : type ;
 
 statement
     : declaration terminator
-    | postfixExpr terminator
+    | blockStatement
+    ;
+
+blockStatement
+    : postfixExpr terminator
     // Java does not allow "variable" or "variable[index]" as statements, so we have to forbid those as well
     { if (!$postfixExpr.isFunctionCall)
         reportError(new InvalidStatementException($postfixExpr.text, $postfixExpr.tree)); }
@@ -123,12 +127,12 @@ statement
      * makes a difference, we simply ignore a semicolon after a return statement.
      */
     | RETURN^ expr? terminator!
-    | IF expr COLON t=statement
-        ((ELSE)=> ELSE e=statement -> ^(IF_ELSE[$IF, "IF_ELSE"] expr ^(STAT $t) ^(STAT $e))
+    | IF expr COLON t=blockStatement
+        ((ELSE)=> ELSE e=blockStatement -> ^(IF_ELSE[$IF, "IF_ELSE"] expr ^(STAT $t) ^(STAT $e))
         | -> ^(IF expr ^(STAT $t))
         )
-    | FOR^ param IN! expr COLON! statement
-    | WHILE^ expr COLON! statement
+    | FOR^ param IN! expr COLON! blockStatement
+    | WHILE^ expr COLON! blockStatement
     | block
     ;
 
