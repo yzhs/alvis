@@ -7,6 +7,7 @@ import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.osgi.util.NLS;
@@ -92,16 +93,22 @@ public class RunCompile extends AbstractHandler {
 			try {
 				// Translate the PseudoCode and get the translated file
 				File javaCode = null;
-
-				// try to compile with compiler
-				javaCode = CompilerAccess.getDefault().compile(
-						seri.getAlgorithmFile());
-
-				// if fails
-				if (null == javaCode) // compile with dummy
-					javaCode = CompilerAccess.getDefault().compileThisDummy(
+				
+				// if the algorithm is of type ".algo" it is pseudo code and it must be compiled
+				// if not, it's passed on to the virtual machine
+				if(seri.getAlgorithmFile().endsWith(".algo")){
+					// try to compile with compiler
+					javaCode = CompilerAccess.getDefault().compile(
 							seri.getAlgorithmFile());
-
+	
+					// if fails
+					if (null == javaCode) // compile with dummy
+						javaCode = CompilerAccess.getDefault().compileThisDummy(
+								seri.getAlgorithmFile());
+				}
+				else{
+					javaCode = new File(Platform.getInstanceLocation().getURL().getPath() + seri.getAlgorithmFile());
+				}
 				// Kill the extension
 				String fileNameOfTheAlgorithm = javaCode.getCanonicalPath()
 						.replaceAll("\\.java$", ""); //$NON-NLS-1$
@@ -181,7 +188,7 @@ public class RunCompile extends AbstractHandler {
 							seri.setExampleFile(result);
 						}
 					}
-					if (result.startsWith("L") && result.endsWith("algo")) { //$NON-NLS-1$ //$NON-NLS-2$
+					if (result.startsWith("L") && (result.endsWith("algo")|| result.endsWith(".java"))) { //$NON-NLS-1$ //$NON-NLS-2$
 						result = result.substring(2); // cut the first two chars
 						seri.setAlgorithmFile(result);
 					}
