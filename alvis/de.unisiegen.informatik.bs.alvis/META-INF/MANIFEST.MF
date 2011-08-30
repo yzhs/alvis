@@ -14,7 +14,9 @@ Require-Bundle: org.eclipse.ui,
  de.unisiegen.informatik.bs.alvis.primitive.datatypes;bundle-version="1.0.0",
  de.unisiegen.informatik.bs.alvis.vm;bundle-version="1.0.0",
  de.unisiegen.informatik.bs.alvis.compiler;bundle-version="1.0.0",
- de.unisiegen.informatik.bs.alvis.io
+ de.unisiegen.informatik.bs.alvis.io,
+ org.eclipse.help.ui;bundle-version="3.5.3",
+ org.eclipse.help.webapp;bundle-version="3.5.3"
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Import-Package: org.eclipse.core.resources,

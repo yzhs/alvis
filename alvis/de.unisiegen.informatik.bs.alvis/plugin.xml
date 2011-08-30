@@ -342,7 +342,7 @@
                   style="push">
             </command>
          </menu>
-        <!-- <menu
+         <menu
                label="%menu.help">
             <command
                   commandId="org.eclipse.ui.help.aboutAction"
@@ -362,7 +362,11 @@
                   label="%help.tipsandtricks"
                   style="push">
             </command>
-         </menu> -->
+            <command
+                  commandId="org.eclipse.ui.help.helpContents"
+                  style="push">
+            </command> 
+         </menu> 
       </menuContribution>
       <menuContribution
             allPopups="false"
