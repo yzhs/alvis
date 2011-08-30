@@ -207,7 +207,8 @@
             </separator>
             <command
                   commandId="org.eclipse.ui.file.exit"
-                  label="%command.label">
+                  label="%file.exit"
+                  style="push">
             </command>
          </menu>
          <menu
@@ -364,6 +365,7 @@
             </command>
             <command
                   commandId="org.eclipse.ui.help.helpContents"
+                  label="%help.helpcontents"
                   style="push">
             </command> 
          </menu> 
