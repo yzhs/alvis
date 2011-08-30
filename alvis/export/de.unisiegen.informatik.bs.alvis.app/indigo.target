@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.6"?>
 
-<target name="indigo" sequenceNumber="17">
+<target name="indigo" sequenceNumber="18">
 <locations>
 <location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
 <unit id="org.eclipse.equinox.p2.user.ui.source.feature.group" version="2.0.1.r361_v20100903-897HFa-FX0z-z-ntoaavz0JPX628"/>
@@ -30,6 +30,34 @@
 <unit id="org.eclipse.xpand.sdk.feature.group" version="1.0.1.v201008251147"/>
 <unit id="org.eclipse.xtext.sdk.feature.group" version="1.0.2.v201102150722"/>
 <repository location="http://download.eclipse.org/releases/helios"/>
+</location>
+<location includeAllPlatforms="false" includeMode="planner" includeSource="true" type="InstallableUnit">
+<unit id="org.eclipse.babel.nls_modeling.emf.cdo_de.feature.group" version="3.7.0.v20110723043401"/>
+<unit id="org.eclipse.babel.nls_technology.egit_de.feature.group" version="3.7.0.v20110723043401"/>
+<unit id="org.eclipse.babel.nls_webtools.sourceediting_de.feature.group" version="3.7.0.v20110723043401"/>
+<unit id="org.eclipse.babel.nls_mylyn_de.feature.group" version="3.7.0.v20110723043401"/>
+<unit id="org.eclipse.babel.nls_rt.equinox_de.feature.group" version="3.7.0.v20110723043401"/>
+<unit id="org.eclipse.babel.nls_tools.objectteams_de.feature.group" version="3.7.0.v20110723043401"/>
+<unit id="org.eclipse.babel.nls_modeling.gmp.graphiti_de.feature.group" version="3.7.0.v20110723043401"/>
+<unit id="org.eclipse.babel.nls_webtools.jsf_de.feature.group" version="3.7.0.v20110723043401"/>
+<unit id="org.eclipse.babel.nls_webtools.webservices_de.feature.group" version="3.7.0.v20110723043401"/>
+<unit id="org.eclipse.babel.nls_technology.uomo_de.feature.group" version="3.7.0.v20110723043401"/>
+<unit id="org.eclipse.babel.nls_webtools.jsdt_de.feature.group" version="3.7.0.v20110723043401"/>
+<unit id="org.eclipse.babel.nls_birt_de.feature.group" version="3.7.0.v20110723043401"/>
+<unit id="org.eclipse.babel.nls_modeling.emft.emf-facet_de.feature.group" version="3.7.0.v20110723043401"/>
+<unit id="org.eclipse.babel.nls_technology.jgit_de.feature.group" version="3.7.0.v20110723043401"/>
+<unit id="org.eclipse.babel.nls_rt.equinox.p2_de.feature.group" version="3.7.0.v20110723043401"/>
+<unit id="org.eclipse.babel.nls_tools.gef_de.feature.group" version="3.7.0.v20110723043401"/>
+<unit id="org.eclipse.babel.nls_webtools.dali_de.feature.group" version="3.7.0.v20110723043401"/>
+<unit id="org.eclipse.babel.nls_technology.bpel_de.feature.group" version="3.7.0.v20110723043401"/>
+<unit id="org.eclipse.babel.nls_technology.actf_de.feature.group" version="3.7.0.v20110723043401"/>
+<unit id="org.eclipse.babel.nls_webtools.servertools_de.feature.group" version="3.7.0.v20110723043401"/>
+<unit id="org.eclipse.babel.nls_tools.cdt_de.feature.group" version="3.7.0.v20110723043401"/>
+<unit id="org.eclipse.babel.nls_webtools.libra_de.feature.group" version="3.7.0.v20110723043401"/>
+<unit id="org.eclipse.babel.nls_eclipse_de.feature.group" version="3.7.0.v20110723043401"/>
+<unit id="org.eclipse.babel.nls_modeling.mdt.modisco_de.feature.group" version="3.7.0.v20110723043401"/>
+<unit id="org.eclipse.babel.nls_technology.jubula_de.feature.group" version="3.7.0.v20110723043401"/>
+<repository location="http://download.eclipse.org/technology/babel/update-site/R0.9.0/indigo"/>
 </location>
 </locations>
 </target>
