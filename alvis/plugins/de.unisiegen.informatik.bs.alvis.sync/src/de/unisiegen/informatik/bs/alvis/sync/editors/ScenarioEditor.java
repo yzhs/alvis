@@ -4,6 +4,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
@@ -17,6 +19,7 @@ import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 import org.eclipse.ui.part.FileEditorInput;
@@ -25,6 +28,7 @@ import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 import de.unisiegen.informatik.bs.alvis.sync.Activator;
 import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisScenario;
 import de.unisiegen.informatik.bs.alvis.sync.newwizards.NewSemaphoreWizard;
+import de.unisiegen.informatik.bs.alvis.sync.newwizards.ShowNewSemaphoreWizard;
 
 public class ScenarioEditor extends EditorPart implements
 		PropertyChangeListener, IExportItem {
@@ -179,6 +183,16 @@ public class ScenarioEditor extends EditorPart implements
 				WizardDialog d = new WizardDialog(Activator.getDefault()
 						.getWorkbench().getActiveWorkbenchWindow().getShell(),
 						w);
+				w.addPages();
+				IWorkbench workbench = Activator.getDefault().getWorkbench();
+				ISelection selection = Activator.getDefault().getWorkbench()
+						.getActiveWorkbenchWindow().getSelectionService()
+						.getSelection();
+				if(selection instanceof IStructuredSelection) {
+					w.init(workbench, (IStructuredSelection) selection);
+				} else {
+					w.init(workbench, null);
+				}
 				d.open();
 			}
 		});

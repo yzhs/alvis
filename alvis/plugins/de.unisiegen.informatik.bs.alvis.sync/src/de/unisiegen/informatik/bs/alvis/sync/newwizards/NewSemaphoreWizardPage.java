@@ -13,12 +13,12 @@ import org.eclipse.swt.widgets.Text;
 import de.unisiegen.informatik.bs.alvis.sync.datatypes.PCSemaphore;
 
 public class NewSemaphoreWizardPage extends WizardPage {
-	
+
 	private Text name, counter;
 	private Label Lname, Lcounter;
 	private Button confirm, cancel;
 	private Composite container;
-	
+
 	public NewSemaphoreWizardPage() {
 		super("Add a semaphore");
 		setTitle("Add a semaphore");
@@ -34,11 +34,15 @@ public class NewSemaphoreWizardPage extends WizardPage {
 		Lname = new Label(container, SWT.NULL);
 		Lname.setText("Enter a name for the semaphore");
 		name = new Text(container, SWT.BORDER | SWT.SINGLE);
+		Lcounter = new Label(container, SWT.NULL);
+		Lcounter.setText("Initial value of semaphore counter");
+		counter = new Text(container, SWT.BORDER | SWT.SINGLE);
 		confirm = new Button(container, SWT.PUSH);
 		confirm.setText("Add semaphore");
 		confirm.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
-				PCSemaphore s = new PCSemaphore(1, name.getText());
+				PCSemaphore s = new PCSemaphore(Integer.parseInt(counter
+						.getText()), name.getText());
 				System.out.println(s);
 			}
 		});
@@ -50,5 +54,9 @@ public class NewSemaphoreWizardPage extends WizardPage {
 			}
 		});
 	}
+	
+//	public PCSemaphore createNewPCSemaphore() {
+//		
+//	}
 
 }

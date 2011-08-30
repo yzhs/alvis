@@ -10,6 +10,8 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.handlers.HandlerUtil;
 
 public class ShowNewSemaphoreWizard extends AbstractHandler {
+	
+	public static final String HANDLING_COMMAND_ID = "de.unisiegen.informatik.bs.alvis.sync.commands.showNewSemaphoreWizard";
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {
