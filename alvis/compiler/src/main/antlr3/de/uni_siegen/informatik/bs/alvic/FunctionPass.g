@@ -32,13 +32,13 @@ program
 functionDefinition
 @init { Type ret = Void; }
     : ^(FUNC ident ^(RET type? { ret = $type.t; }) ^(PARAMS p=formalParams?) {
-        functions.put($ident.text, FunctionType.create(null != $p.t ? $p.t : new ArrayList<Type>(), ret));
+        checkAndPut(functions, $ident.text, FunctionType.create(null != $p.t ? $p.t : new ArrayList<Type>(), ret), $functionDefinition.tree);
     } block)
     ;
 
 mainFunction
-    : ^(FUNC MAIN ^(PARAMS formalParams?) {
-        functions.put("main", FunctionType.create(new ArrayList<Type>(), Void));
+    : ^(FUNC MAIN ^(PARAMS p=formalParams?) {
+        checkAndPut(functions, "main", FunctionType.create(null != $p.t ? $p.t : new ArrayList<Type>(), Void), $mainFunction.tree);
     } block)
     ;
 

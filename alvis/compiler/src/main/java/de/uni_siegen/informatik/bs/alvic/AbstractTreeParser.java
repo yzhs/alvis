@@ -2,6 +2,7 @@ package de.uni_siegen.informatik.bs.alvic;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.antlr.runtime.Parser;
 import org.antlr.runtime.RecognitionException;
@@ -46,5 +47,11 @@ public abstract class AbstractTreeParser extends TreeParser {
 
 	public void setParser(Parser p) {
 		parser = p;
+	}
+	
+	public void checkAndPut(Map<String, Type> symbols, String id, Type type, TypedTree tree) throws DuplicateDeclarationException {
+		if (symbols.containsKey(id))
+			throw new DuplicateDeclarationException(id, tree);
+		symbols.put(id, type);
 	}
 }

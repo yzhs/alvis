@@ -100,6 +100,12 @@ public class AlgorithmErrorMarker {
 						Messages.AlgorithmErrorMarker_InvalidAssignment,
 						new Object[] { re.getLeft(), re.line,
 								re.charPositionInLine });
+			} else if (error instanceof DuplicateDeclarationException) {
+				DuplicateDeclarationException re = (DuplicateDeclarationException) error;
+				errorMessage = NLS.bind(
+						Messages.AlgorithmErrorMarker_DuplicateDeclaration,
+						new Object[] { re.getIdentifier(), re.line,
+								re.charPositionInLine });
 			} else if (error instanceof InvalidReturnException) {
 				InvalidReturnException re = (InvalidReturnException) error;
 				if (re.getExpected().toString().equalsIgnoreCase("void")) //$NON-NLS-1$
@@ -128,7 +134,7 @@ public class AlgorithmErrorMarker {
 				NoSuchOperatorException re = (NoSuchOperatorException) error;
 				if (re.getArguments() == 0)
 					errorMessage = NLS.bind(
-							Messages.AlgorithmErrorMarker_NoUnarySuchOperator,
+							Messages.AlgorithmErrorMarker_NoSuchUnaryOperator,
 							new Object[] { re.getMember(), re.getObject(),
 									re.line, re.charPositionInLine });
 				else

@@ -3,7 +3,7 @@ tree grammar TypeChecker;
 options {
      output       = AST;
      superClass   = AbstractTypeChecker;
-     tokenVocab   = TParser;
+     tokenVocab   = FunctionPass;
      ASTLabelType = TypedTree;
 }
 
@@ -90,7 +90,7 @@ formalParams returns [List<Type> t]
 param returns [Type t]
     : ^(DECL type ident) {
         $t = $type.t;
-        $Symbols::symbols.put($ident.text, $t);
+        checkAndPut($Symbols::symbols, $ident.text, $t, $param.tree);
     }
     ;
 
@@ -138,8 +138,8 @@ options { backtrack = true; }
     ;
 
 declaration returns [Type t]
-    : ^(DECL type ident)                    { $Symbols::symbols.put($ident.text, $type.t); $t = $type.t; }
-    | ^(DECL_INIT type ident expr[$type.t]) { $Symbols::symbols.put($ident.text, $type.t); $t = $type.t; }
+    : ^(DECL type ident)                    { checkAndPut($Symbols::symbols, $ident.text, $type.t, $declaration.tree); $t = $type.t; }
+    | ^(DECL_INIT type ident expr[$type.t]) { checkAndPut($Symbols::symbols, $ident.text, $type.t, $declaration.tree); $t = $type.t; }
     ;
 
 assignment

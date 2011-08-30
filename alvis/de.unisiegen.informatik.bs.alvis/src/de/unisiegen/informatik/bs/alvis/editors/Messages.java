@@ -16,6 +16,7 @@ public class Messages extends NLS {
 	public static String AlgorithmEditorCompletionProcessor_newLineSomeInfo;
 	public static String AlgorithmErrorMarker_ArgumentNumberEx;
 	public static String AlgorithmErrorMarker_ArgumentTypeEx;
+	public static String AlgorithmErrorMarker_DuplicateDeclaration;
 	public static String AlgorithmErrorMarker_InvalidAssignment;
 	public static String AlgorithmErrorMarker_InvalidNonVoidReturn;
 	public static String AlgorithmErrorMarker_InvalidReturnType;
@@ -23,7 +24,7 @@ public class Messages extends NLS {
 	public static String AlgorithmErrorMarker_InvalidVoidReturn;
 	public static String AlgorithmErrorMarker_MismatcheTreeNode;
 	public static String AlgorithmErrorMarker_NoSuchBinaryOperator;
-	public static String AlgorithmErrorMarker_NoUnarySuchOperator;
+	public static String AlgorithmErrorMarker_NoSuchUnaryOperator;
 	public static String AlgorithmErrorMarker_NotAFunction;
 	public static String AlgorithmErrorMarker_NotAnArray;
 	public static String AlgorithmErrorMarker_NoViableAlt;
