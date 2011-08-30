@@ -1,32 +1,31 @@
 group T;
-program(functions) ::= <<\documentclass{report}
-%\usepackage{color}
-%\usepackage{xcolor}
-\usepackage{listings}
-
+program(functions) ::= <<
+\documentclass{scrartcl}
+\usepackage{fancyvrb}
+\begin{document}
 \newcommand{\ident}[1]{#1}
 \newcommand{\type}[1]{#1}
 \newcommand{\keyword}[1]{\emph{#1}}
+\newcommand{\binop}[1]{$#1$}
+\newcommand{\unop}[1]{$#1$}
+\newcommand{\literal}[1]{\blue{#1}}
 
-\begin{document}
-
-\begin{verbatim}
+\begin{Verbatim}[commandchars=\\\{\}]
 <functions; separator="
 ">
-\end{verbatim}
-
+\end{Verbatim}
 \end{document}
 >>
 
 mainFunction(params, code) ::= <<
-main(<params; separator=", ">) <code>
+\keyword{main}(<params; separator=", ">) <code>
 >>
 function(name, params, code) ::= <<
 <name>(<params; separator=", ">) <code>
 >>
 
 type(name) ::= "<name>"
-array(base) ::= "<base>[]"
+array(base) ::= "<base>$[]$"
 ident(name) ::= "<name>"
 
 block(statements) ::= <<{
@@ -37,55 +36,55 @@ block(statements) ::= <<{
 
 param(type, ident) ::= "<type> <ident>"
 decl(type, ident) ::= "<type> <ident>,"
-declInit(type, ident, rhs) ::= "<type> <ident> = <rhs>,"
-assign(lhs, rhs) ::= "<lhs> = <rhs>,"
-attributeAssign(obj, lhs, rhs) ::= "<obj>.<lhs> = <rhs>"
-return(expr) ::= "return <expr>,"
+declInit(type, ident, rhs) ::= "<type> <ident> \binop{=} <rhs>,"
+assign(lhs, rhs) ::= "<lhs> \binop{=} <rhs>,"
+attributeAssign(obj, lhs, rhs) ::= "<obj>.<lhs> \binop{=} <rhs>"
+return(expr) ::= "\keyword{return} <expr>,"
 
-if(cond, then) ::= <<if <cond>:
+if(cond, then) ::= <<\keyword{if} <cond>\keyword{:}
     <then>
 >>
 ifElse(cond, then, else) ::= <<
-if (<cond>)
+\keyword{if} <cond>\keyword{:}
     <then>
-else
+\keyword{else}
     <else>
 >>
-for(lhs, rhs, body) ::= <<for <lhs> = <rhs>:
+for(lhs, rhs, body) ::= <<\keyword{for} <lhs> \keyword{in} <rhs>\keyword{:}
     <body>
 >>
-while(cond, body) ::= <<while (<cond>)
+while(cond, body) ::= <<\keyword{while} <cond>\keyword{:}
     <body>
 >>
 
 breakpoint(pseudoArgument) ::= ";"
 
-add(left, right) ::= "<left> + <right>"
-sub(left, right) ::= "<left> - <right>"
-mul(left, right) ::= "<left> * <right>"
-div(left, right) ::= "<left> / <right>"
-mod(left, right) ::= "<left> % <right>"
-and(left, right) ::= "<left> && <right>"
-or(left, right) ::= "<left> || <right>"
-equal(left, right) ::= "<left> == <right>"
-notEqual(left, right) ::= "<left> != <right>"
-lessThan(left, right) ::= "<left> \< <right>"
-greaterThan(left, right) ::= "<left> \> <right>"
-lessOrEqual(left, right) ::= "<left> \<= <right>"
-greaterOrEqual(left, right) ::= "<left> \>= <right>"
+add(left, right) ::= "<left> \binop{+} <right>"
+sub(left, right) ::= "<left> \binop{-} <right>"
+mul(left, right) ::= "<left> \binop{*} <right>"
+div(left, right) ::= "<left> \binop{/} <right>"
+mod(left, right) ::= "<left> \binop{%} <right>"
+and(left, right) ::= "<left> \binop{&&} <right>"
+or(left, right) ::= "<left> \binop{||} <right>"
+equal(left, right) ::= "<left> \binop{==} <right>"
+notEqual(left, right) ::= "<left> \binop{!=} <right>"
+lessThan(left, right) ::= "<left> \binop{\<} <right>"
+greaterThan(left, right) ::= "<left> \binop{\>} <right>"
+lessOrEqual(left, right) ::= "<left> \binop{\<=} <right>"
+greaterOrEqual(left, right) ::= "<left> \binop{\>=} <right>"
 
-not(arg) ::= "! <arg>"
+not(arg) ::= "\binop{!}<arg>"
 paren(arg) ::= "(<arg>)"
-plus(arg) ::= "+ <arg>"
-minus(arg) ::= "- <arg>"
+plus(arg) ::= "\unop{+}<arg>"
+minus(arg) ::= "\unop{-}<arg>"
 
-literal(text) ::= "<text>"
+literal(text) ::= "\literal{<text>}"
 
 call(function, args) ::= "<function>(<args; separator=\", \">)"
 
 dot(left, right) ::= "<left>.<right>"
 
-index(array, index) ::= "<array>[<index>]"
+index(array, index) ::= "<array>$[$<index>$]$"
 
 semicolon(stat) ::= "<stat>,"
 breakBlock(stat) ::= "<stat>;"
