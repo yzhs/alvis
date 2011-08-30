@@ -22,6 +22,11 @@
             id="de.unisiegen.informatik.bs.alvis.sync.commands.showNewScenarioWizard"
             name="%command.name.newscenario">
       </command>
+      <command
+            defaultHandler="de.unisiegen.informatik.bs.alvis.sync.handlers.AddSemaphore"
+            id="de.unisiegen.informatik.bs.alvis.sync.editoraddsemaphore"
+            name="%editor.addSemaphore">
+      </command>
    </extension>
    <extension
          point="org.eclipse.ui.editors">
@@ -84,6 +89,21 @@
       <FileExtension
             class="de.unisiegen.informatik.bs.alvis.sync.extension.FileExtension">
       </FileExtension>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="de.unisiegen.informatik.bs.alvis.sync.handlers.AddSemaphore"
+            commandId="de.unisiegen.informatik.bs.alvis.sync.addSemaphore">
+         <enabledWhen>
+            <with
+                  variable="activeEditorId">
+               <equals
+                     value="de.unisiegen.informatik.bs.alvis.sync.editor1">
+               </equals>
+            </with>
+         </enabledWhen>
+      </handler>
    </extension>
 
 </plugin>
