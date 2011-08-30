@@ -354,10 +354,12 @@ public class RunEditor extends EditorPart implements IExportItem {
 					String result = ""; //$NON-NLS-1$
 					for (Object o : dialog.getResult())
 						result = o.toString();
-					if (result.startsWith("L") & result.endsWith("graph")) { //$NON-NLS-1$ //$NON-NLS-2$
-						result = result.substring(2); // cut the first two chars
-						myExampleFile.setText(result);
-						setDirty(true);
+					for(String fileExtension : Activator.getDefault().getFileExtensions()){
+						if (result.startsWith("L") & result.endsWith(fileExtension)) { //$NON-NLS-1$ //$NON-NLS-2$
+							result = result.substring(2); // cut the first two chars
+							myExampleFile.setText(result);
+							setDirty(true);
+						}
 					}
 				}
 			}

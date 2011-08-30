@@ -21,7 +21,9 @@ import javax.tools.ToolProvider;
 import de.unisiegen.informatik.bs.alvis.io.logger.Logger;
 
 /**
- * A wrapper to ease the use of com.sun.tools.javac.Main.
+ * A wrapper to ease the use of ToolProvider.getSystemJavaCompiler();
+ * Uses com.sun.tools.javac.Main as fallback, if the ToolProvider does
+ * not provide a compiler 
  * 
  * @author Sebastian Schmitz
  */
@@ -49,7 +51,6 @@ public final class Javac {
 	}
 
 	private static boolean compile(JavaFileObject... source) {
-		// final JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 		final ArrayList<String> options = new ArrayList<String>();
 		if (classpath != null) {
 			options.add("-classpath");
@@ -80,7 +81,7 @@ public final class Javac {
 		boolean result = task.call();
 
 		if (!result)
-			for (Diagnostic diagnostic : diagnostics.getDiagnostics())
+			for (@SuppressWarnings("rawtypes") Diagnostic diagnostic : diagnostics.getDiagnostics())
 				System.out.format("Error on line %d in %s",
 						diagnostic.getLineNumber(), diagnostic);
 		try {
@@ -109,6 +110,8 @@ public final class Javac {
 		compiler = ToolProvider.getSystemJavaCompiler();
 		if (compiler != null) {
 			String algorithmAsSourceCode = readfile(args[args.length - 1]);
+			
+			// extract the name of the algorithm. The name is always at the last position of this array
 			String algorithmName = args[args.length - 1].split("/")[args[args.length - 1]
 					.split("/").length - 1];
 
@@ -141,6 +144,12 @@ public final class Javac {
 		}
 	}
 
+	
+	/**
+	 * Reads and returns the file corresponding to the given path.
+	 * @param string
+	 * @return
+	 */
 	private String readfile(String string) {
 		FileInputStream fis = null;
 		String algorithmAsString = "";

@@ -498,6 +498,12 @@ public class Activator extends AbstractUIPlugin {
 
 	}
 	
+	/**
+	 * Creates and returns an ArrayList<String> containing the file extensions allowed
+	 * as algorithm files in the run.
+	 * @return the ArrayList
+	 */
+	
 	public ArrayList<String> getFileExtensions(){
 		ArrayList<String> fileextensions = new ArrayList<String>();
 		
@@ -514,6 +520,12 @@ public class Activator extends AbstractUIPlugin {
 		}
 		return fileextensions;
 	}
+	
+	/**
+	 * Creates and returns a comma separated list in one string containing the file extensions allowed
+	 * as algorithm files in the run. This list is meant for direct use in the GUI or during debugging.
+	 * @return 
+	 */
 	
 	public String getFileExtensionsAsCommaSeparatedList(){
 		String extensions = "";

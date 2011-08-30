@@ -201,7 +201,7 @@ public class AlgoThread {
 		DynaCode dynacode = new DynaCode(dynamicallyReferencedPackagesNeededToCompile);
 
 		Logger.getInstance().log("de.~.vm.AlgoThread.loadAlgo()", Logger.DEBUG, ".addSourceDir()");
-		dynacode.addSourceDir(pathToFile, new File(fileName));
+		dynacode.addSourceDir(pathToFile);
 		Logger.getInstance().log("de.~.vm.AlgoThread.loadAlgo()", Logger.DEBUG, "Source Dir added!");
 		
 		algoClass = dynacode.loadClass(fileName);

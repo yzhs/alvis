@@ -175,11 +175,11 @@ public class RunCompile extends AbstractHandler {
 				String result = ""; //$NON-NLS-1$
 				for (Object o : dialog.getResult()) {
 					result = o.toString();
-					
-					// TODO: "graph" rausnehmen und gegen die Liste aus Activator.getDefault().getFileExtensions() checken (by Basti 28.08.11)
-					if (result.startsWith("L") && result.endsWith("graph")) { //$NON-NLS-1$ //$NON-NLS-2$
-						result = result.substring(2); // cut the first two chars
-						seri.setExampleFile(result);
+					for(String fileExtension : Activator.getDefault().getFileExtensions()){
+						if (result.startsWith("L") && result.endsWith(fileExtension)) { //$NON-NLS-1$ //$NON-NLS-2$
+							result = result.substring(2); // cut the first two chars
+							seri.setExampleFile(result);
+						}
 					}
 					if (result.startsWith("L") && result.endsWith("algo")) { //$NON-NLS-1$ //$NON-NLS-2$
 						result = result.substring(2); // cut the first two chars

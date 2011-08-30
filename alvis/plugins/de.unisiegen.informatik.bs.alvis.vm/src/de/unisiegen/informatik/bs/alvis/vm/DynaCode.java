@@ -99,23 +99,18 @@ public final class DynaCode {
 	 * @return true if the add is successful
 	 * @throws IOException
 	 */
-	public boolean addSourceDir(String pathToFile, File srcDir) {
-		srcDir = new File(pathToFile);
+	public boolean addSourceDir(String pathToFile) {
+		File srcDir = new File(pathToFile);
 		synchronized (sourceDirs) {
-
-			// check existence
-			for (int i = 0; i < sourceDirs.size(); i++) {
-				SourceDir src = sourceDirs.get(i);
-				if (src.srcDir.equals(srcDir)) {
+			
+			// check whether the new srcDir already exists
+			for(SourceDir src : sourceDirs){
+				if(src.srcDir.equals(srcDir)){
 					return false;
 				}
 			}
-
 			// add new
-			SourceDir src = new SourceDir(srcDir);
-			sourceDirs.add(src);
-
-			info("Add source dir " + srcDir);
+			sourceDirs.add(new SourceDir(srcDir));
 		}
 		return true;
 	}
@@ -137,7 +132,6 @@ public final class DynaCode {
 		}
 		Logger.getInstance().log("de.~.vm.DynaCode.loadClass()", Logger.DEBUG, "Begin of function");
 		
-
 		// first access of a class
 		if (loadedClass == null) {
 			String resource = className.replace('.', '/') + ".java";
@@ -211,8 +205,6 @@ public final class DynaCode {
 		Javac javac;
 
 		URLClassLoader classLoader;
-
-		// ClassLoader classLoader;
 
 		SourceDir(File srcDir) {
 			this.srcDir = srcDir;
@@ -299,8 +291,6 @@ public final class DynaCode {
 				throw new RuntimeException("Failed to load DynaCode class "
 						+ srcFile.getAbsolutePath());
 			}
-
-			info("Init " + clazz);
 		}
 		
 		public URLClassLoader getClassLoader(){
@@ -328,13 +318,6 @@ public final class DynaCode {
 		}
 
 		return buf.toString();
-	}
-
-	/**
-	 * Log a message.
-	 */
-	private static void info(String msg) {
-		// System.out.println("[DynaCode] " + msg);
 	}
 	
 	public URLClassLoader getClassLoader(String classname){
