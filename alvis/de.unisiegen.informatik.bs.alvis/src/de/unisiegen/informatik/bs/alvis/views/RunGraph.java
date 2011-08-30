@@ -141,7 +141,8 @@ public class RunGraph extends ViewPart implements IExportItem {
 		for (IRunVisualizer runviz : myRunVisualizers) {
 			// Call the method and if the extension returns false then
 			// the extension does not know about the type in myInputFilePath...
-			if (!runviz.addVisualizing(myParent, myInputFilePath)) {
+			String extension = myInputFilePath.split("\\.")[myInputFilePath.split("\\.").length-1];
+			if (!runviz.addVisualizing(myParent, myInputFilePath, "."+extension)) {
 				// ... and we add it to the removeList
 				removeList.add(runviz);
 			}

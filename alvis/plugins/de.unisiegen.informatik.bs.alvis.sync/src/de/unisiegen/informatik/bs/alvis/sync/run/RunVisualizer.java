@@ -60,7 +60,10 @@ public class RunVisualizer implements IRunVisualizer {
 	}
 
 	@Override
-	public boolean addVisualizing(Composite parent, String inputFile) {
+	public boolean addVisualizing(Composite parent, String inputFile, String fileExtension) {
+		if(!fileExtension.equals(".sync"))
+			return false;
+		
 		if (parent == null | inputFile == null) {
 			return false;
 		}
