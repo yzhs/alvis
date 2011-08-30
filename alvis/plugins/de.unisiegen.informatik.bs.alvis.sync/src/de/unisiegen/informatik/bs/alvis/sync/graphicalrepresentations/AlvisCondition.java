@@ -25,10 +25,14 @@ public class AlvisCondition implements GraphicalRepresentationCondition {
 	 */
 	private int waiting;
 	
+	private String sema;
+	
 	/**
 	 * Label representing the condition
 	 */
 	private Label label;
+	
+	private Display d;
 	
 	/**
 	 * Contruct a new graphical representation
@@ -36,8 +40,10 @@ public class AlvisCondition implements GraphicalRepresentationCondition {
 	 * @param c Condition to display
 	 */
 	public AlvisCondition(Composite parent, PCCondition c) {
+		d = parent.getDisplay();
 		name = c.getName();
 		waiting = c.getWaiting();
+		sema = c.getSema().getName();
 		label = new Label(parent, SWT.LEFT);
 		label.setText("Condition " + name + Messages.AlvisCondition_waiting + waiting);
 		label.setBackground(FREE);
@@ -50,7 +56,6 @@ public class AlvisCondition implements GraphicalRepresentationCondition {
 	 */
 	public void setState(final int waiting) {
 		this.waiting = waiting;
-		Display d = Display.getDefault();
 		d.syncExec(new Runnable() {
 			public void run() {
 				if (waiting == 0) {
@@ -61,6 +66,30 @@ public class AlvisCondition implements GraphicalRepresentationCondition {
 				label.setText("Condition " + name + Messages.AlvisCondition_waiting + waiting);
 			}
 		});
+	}
+	
+	public int getWaiting() {
+		return waiting;
+	}
+	
+	public void setWaiting(int value) {
+		waiting = value;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String value) {
+		name = value;
+	}
+	
+	public String getSema() {
+		return sema;
+	}
+	
+	public void setSema(String value) {
+		sema = value;
 	}
 
 }

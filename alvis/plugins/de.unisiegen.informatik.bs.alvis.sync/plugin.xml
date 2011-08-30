@@ -22,11 +22,6 @@
             id="de.unisiegen.informatik.bs.alvis.sync.commands.showNewScenarioWizard"
             name="%command.name.newscenario">
       </command>
-      <command
-            defaultHandler="de.unisiegen.informatik.bs.alvis.sync.handlers.AddSemaphore"
-            id="de.unisiegen.informatik.bs.alvis.sync.editoraddsemaphore"
-            name="%editor.addSemaphore">
-      </command>
    </extension>
    <extension
          point="org.eclipse.ui.editors">
@@ -37,21 +32,24 @@
             id="de.unisiegen.informatik.bs.alvis.sync.editor1"
             name="%editor.name">
       </editor>
-      <editor
-            class="de.unisiegen.informatik.bs.alvis.sync.editors.SemaphorEditor"
-            default="false"
-            id="de.unisiegen.informatik.bs.alvis.sync.editorSemaphore"
-            name="%editor.semaphore">
-      </editor>
    </extension>
    <extension
          point="de.unisiegen.informatik.bs.alvis.runvisualizer">
+      <RunVisualizer
+            class="de.unisiegen.informatik.bs.alvis.sync.run.RunVisualizer">
+      </RunVisualizer>
    </extension>
    <extension
          point="de.unisiegen.informatik.bs.alvis.extensions.runpreferences">
+      <RunPreferences
+            class="de.unisiegen.informatik.bs.alvis.sync.run.RunPreferences">
+      </RunPreferences>
    </extension>
    <extension
          point="de.unisiegen.informatik.bs.alvis.export">
+      <export
+            class="de.unisiegen.informatik.bs.alvis.sync.editors.ScenarioEditor">
+      </export>
    </extension>
    <extension
          point="de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist">
@@ -89,21 +87,6 @@
       <FileExtension
             class="de.unisiegen.informatik.bs.alvis.sync.extension.FileExtension">
       </FileExtension>
-   </extension>
-   <extension
-         point="org.eclipse.ui.handlers">
-      <handler
-            class="de.unisiegen.informatik.bs.alvis.sync.handlers.AddSemaphore"
-            commandId="de.unisiegen.informatik.bs.alvis.sync.addSemaphore">
-         <enabledWhen>
-            <with
-                  variable="activeEditorId">
-               <equals
-                     value="de.unisiegen.informatik.bs.alvis.sync.editor1">
-               </equals>
-            </with>
-         </enabledWhen>
-      </handler>
    </extension>
 
 </plugin>

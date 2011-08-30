@@ -41,12 +41,15 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 	private ArrayList<AlvisPrimitive> primitives;
 	private ArrayList<AlvisActor> actors;
 	private ArrayList<AlvisBuffer> buffers;
+	private AlvisSave admin;
 	
 	/**
 	 * Setup the parent composite for scenario
 	 * @param parent
 	 */
 	public AlvisScenario(Composite parent) {
+		
+		admin = new AlvisSave();
 		
 		//TODO: verschieben nach RunVisualizer
 		GridLayout outerGL = new GridLayout();
@@ -100,67 +103,134 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		actorVisualization.setLayout(actorsFL);		
 	}
 	
+	public AlvisSemaphore makeSemaphore(String name, int counter) {
+		AlvisSemaphore s = new AlvisSemaphore(this, name, counter);
+		admin.addSemaphore(s);
+		return s;
+	}
 	
+	public PCScenario getScenario() {
+		return scenario;
+	}
+
+	public void setScenario(PCScenario scenario) {
+		this.scenario = scenario;
+	}
+
+	public Group getVars() {
+		return vars;
+	}
+
+	public void setVars(Group vars) {
+		this.vars = vars;
+	}
+
+	public Group getOutput() {
+		return output;
+	}
+
+	public void setOutput(Group output) {
+		this.output = output;
+	}
+
+	public Group getBuffer() {
+		return buffer;
+	}
+
+	public void setBuffer(Group buffer) {
+		this.buffer = buffer;
+	}
+
+	public Group getControl() {
+		return control;
+	}
+
+	public void setControl(Group control) {
+		this.control = control;
+	}
+
+	public Combo getStrategy() {
+		return strategy;
+	}
+
+	public void setStrategy(Combo strategy) {
+		this.strategy = strategy;
+	}
+
+	public Button getGlobalStep() {
+		return globalStep;
+	}
+
+	public void setGlobalStep(Button globalStep) {
+		this.globalStep = globalStep;
+	}
+
+	public Composite getActorVisualization() {
+		return actorVisualization;
+	}
+
+	public void setActorVisualization(Composite actorVisualization) {
+		this.actorVisualization = actorVisualization;
+	}
+
 	public ArrayList<AlvisSemaphore> getSemaphores() {
 		return semaphores;
 	}
-
 
 	public void setSemaphores(ArrayList<AlvisSemaphore> semaphores) {
 		this.semaphores = semaphores;
 	}
 
-
 	public ArrayList<AlvisCondition> getConditions() {
 		return conditions;
 	}
-
 
 	public void setConditions(ArrayList<AlvisCondition> conditions) {
 		this.conditions = conditions;
 	}
 
-
 	public ArrayList<AlvisPrimitive> getPrimitives() {
 		return primitives;
 	}
-
 
 	public void setPrimitives(ArrayList<AlvisPrimitive> primitives) {
 		this.primitives = primitives;
 	}
 
-
 	public ArrayList<AlvisActor> getActors() {
 		return actors;
 	}
-
 
 	public void setActors(ArrayList<AlvisActor> actors) {
 		this.actors = actors;
 	}
 
-
 	public ArrayList<AlvisBuffer> getBuffers() {
 		return buffers;
 	}
-
 
 	public void setBuffers(ArrayList<AlvisBuffer> buffers) {
 		this.buffers = buffers;
 	}
 
+	public AlvisSave getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(AlvisSave admin) {
+		this.admin = admin;
+	}
 
 	public void addActor(PCActor a) {
 		AlvisActor aa = new AlvisActor(actorVisualization, a);
 		actors.add(aa);
 	}
 	
-	public void addSemaphore(PCSemaphore s) {
-		AlvisSemaphore as = new AlvisSemaphore(vars, s);
-		semaphores.add(as);
-		hasVariables();
-	}
+//	public void addSemaphore(PCSemaphore s) {
+//		AlvisSemaphore as = new AlvisSemaphore(vars, s);
+//		semaphores.add(as);
+//		hasVariables();
+//	}
 	
 	public void addCondition(PCCondition c) {
 		AlvisCondition ac = new AlvisCondition(vars, c);

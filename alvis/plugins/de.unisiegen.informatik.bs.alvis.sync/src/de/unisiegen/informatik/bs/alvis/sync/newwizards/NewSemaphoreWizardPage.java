@@ -3,20 +3,15 @@ package de.unisiegen.informatik.bs.alvis.sync.newwizards;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 
-import de.unisiegen.informatik.bs.alvis.sync.datatypes.PCSemaphore;
 
 public class NewSemaphoreWizardPage extends WizardPage {
 
 	private Text name, counter;
 	private Label Lname, Lcounter;
-	private Button confirm, cancel;
 	private Composite container;
 
 	public NewSemaphoreWizardPage() {
@@ -37,26 +32,15 @@ public class NewSemaphoreWizardPage extends WizardPage {
 		Lcounter = new Label(container, SWT.NULL);
 		Lcounter.setText("Initial value of semaphore counter");
 		counter = new Text(container, SWT.BORDER | SWT.SINGLE);
-		confirm = new Button(container, SWT.PUSH);
-		confirm.setText("Add semaphore");
-		confirm.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event e) {
-				PCSemaphore s = new PCSemaphore(Integer.parseInt(counter
-						.getText()), name.getText());
-				System.out.println(s);
-			}
-		});
-		cancel = new Button(container, SWT.PUSH);
-		cancel.setText("Cancel");
-		cancel.addListener(SWT.Selection, new Listener() {
-			public void handleEvent(Event e) {
-				System.err.println("cancel");
-			}
-		});
+		setControl(container);
+	}
+
+	public String getName() {
+		return name.getText();
 	}
 	
-//	public PCSemaphore createNewPCSemaphore() {
-//		
-//	}
+	public String getCounter() {
+		return counter.getText();
+	}
 
 }

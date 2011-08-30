@@ -30,23 +30,34 @@ public class AlvisSemaphore implements GraphicalRepresentationSemaphore {
 	 */
 	private Label label;
 	
+	private final int id;
+	private Display d;
+	
 	/**
 	 * Construct a new representation of a semaphore
 	 * @param parent Composite where to display graphical representation
 	 * @param sema Semaphore to show
 	 */
-	public AlvisSemaphore(Composite parent, PCSemaphore sema) {
-		name = sema.getName();
-		count = sema.getCounter();
-		label = new Label(parent, SWT.LEFT);
-		if (count > 0) {
-			label.setBackground(FREE);
-		} else if (count == 0) {
-			label.setBackground(ZERO);
-		} else {
-			label.setBackground(WAIT);
-		}
-		label.setText("Semaphore " + name + ": " + count);
+//	public AlvisSemaphore(Composite parent, PCSemaphore sema) {
+//		d = parent.getDisplay();
+//		name = sema.getName();
+//		count = sema.getCounter();
+//		label = new Label(parent, SWT.LEFT);
+//		if (count > 0) {
+//			label.setBackground(FREE);
+//		} else if (count == 0) {
+//			label.setBackground(ZERO);
+//		} else {
+//			label.setBackground(WAIT);
+//		}
+//		label.setText("Semaphore " + name + ": " + count);
+//	}
+	
+	public AlvisSemaphore(AlvisScenario scenario, String name, int counter) {
+		this.id = scenario.getAdmin().requestId();
+		this.name = name;
+		label = new Label(scenario.getVars(), SWT.NULL);
+		setState(counter);
 	}
 
 	@Override
@@ -55,7 +66,6 @@ public class AlvisSemaphore implements GraphicalRepresentationSemaphore {
 	 */
 	public void setState(final int count) {
 		this.count = count;
-		Display d = Display.getDefault();
 		d.syncExec(new Runnable() {
 			public void run() {
 				if (label.isDisposed()) return;
@@ -69,6 +79,26 @@ public class AlvisSemaphore implements GraphicalRepresentationSemaphore {
 				label.setText("Semaphore " + name + ": " + count);
 			}
 		});
+	}
+	
+	public int getCount() {
+		return count;
+	}
+	
+	public void setCount(int value) {
+		count = value;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String value) {
+		name = value;
+	}
+	
+	public String toString() {
+		return name + ": " + count; 
 	}
 
 }

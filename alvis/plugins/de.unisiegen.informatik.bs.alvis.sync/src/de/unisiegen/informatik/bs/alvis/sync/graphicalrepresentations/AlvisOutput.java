@@ -22,5 +22,14 @@ public class AlvisOutput implements GraphicalRepresentationOutput {
 		current += s;
 		output.setText(current);
 	}
+	
+	public String getOutput() {
+		return current;
+	}
+	
+	public void setOutput(String value) {
+		current = value;
+		append("");
+	}
 
 }

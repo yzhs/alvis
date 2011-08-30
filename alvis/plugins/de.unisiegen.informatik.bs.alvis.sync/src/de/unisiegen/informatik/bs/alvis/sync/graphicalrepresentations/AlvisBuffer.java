@@ -13,7 +13,7 @@ import de.unisiegen.informatik.bs.alvis.sync.datatypes.PCBuffer;
  * @author Jan Bauerdick
  *
  */
-public class AlvisBuffer implements GraphicalRepresentationBuffer {
+public class AlvisBuffer extends PCBuffer implements GraphicalRepresentationBuffer {
 	
 	/**
 	 * Buffer's capacity
@@ -30,12 +30,15 @@ public class AlvisBuffer implements GraphicalRepresentationBuffer {
 	 */
 	private int lastFilled;
 	
+	private Display d;
+	
 	/**
 	 * Contruct a new representation of a buffer
 	 * @param parent Composite where to display graphical representation
 	 * @param b Buffer to show
 	 */
 	public AlvisBuffer(Composite parent, PCBuffer b) {
+		d = parent.getDisplay();
 		capacity = b.getCapacity();
 		usage = new Label[capacity];
 		for (int i = 0; i < capacity; i++) {
@@ -50,7 +53,6 @@ public class AlvisBuffer implements GraphicalRepresentationBuffer {
 	 * Set next place full
 	 */
 	public void setFull() {
-		Display d = Display.getDefault();
 		d.syncExec(new Runnable() {
 			public void run() {
 				usage[lastFilled++].setBackground(FULL);
@@ -63,12 +65,30 @@ public class AlvisBuffer implements GraphicalRepresentationBuffer {
 	 * Set last place empty 
 	 */
 	public void setEmpty() {
-		Display d = Display.getDefault();
 		d.syncExec(new Runnable() {
 			public void run() {
 				usage[--lastFilled].setBackground(EMPTY);
 			}
 		});
+	}
+	
+	public int getCapacity() {
+		return capacity;
+	}
+	
+	public void setCapacity(int value) {
+		capacity = value;
+	}
+	
+	public int getLastFilled() {
+		return lastFilled;
+	}
+	
+	public void setLastFilled(int value) {
+		lastFilled = 0;
+		for (int i = 0; i < value; i++) {
+			setFull();
+		}
 	}
 
 }

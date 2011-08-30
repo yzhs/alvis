@@ -7,6 +7,8 @@ import java.util.Random;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
 public class PCScenario extends PCObject {
+	
+	private static final String TYPENAME = "Scenario";
 
 	private ArrayList<PCActor> actors;
 	private ArrayList<PCActor> actorsRunnable;
@@ -27,6 +29,14 @@ public class PCScenario extends PCObject {
 		rndGen = new Random(new Date().getTime());
 		currentActor = 0;
 		deadlocked = false;
+	}
+
+	public PCScenario(ArrayList<GraphicalRepresentationActor> actors,
+			ArrayList<GraphicalRepresentationBuffer> buffer,
+			ArrayList<GraphicalRepresentationCondition> conditions,
+			ArrayList<GraphicalRepresentationSemaphore> semaphores,
+			ArrayList<GraphicalRepresentationOutput> output) {
+		
 	}
 
 	public ArrayList<PCActor> getActors() {
@@ -109,21 +119,21 @@ public class PCScenario extends PCObject {
 			break;
 
 		case 1: // Round Robin
-			//Check if a former blocked actor can run now
+			// Check if a former blocked actor can run now
 			for (PCActor a : actorsBlocked) {
 				if (!a.isBlocked()) {
 					actorsBlocked.remove(a);
 					actorsRunnable.add(a);
 				}
 			}
-			//Check if a former runnable actor is blocked now
+			// Check if a former runnable actor is blocked now
 			for (PCActor a : actorsRunnable) {
 				if (a.isBlocked()) {
 					actorsRunnable.remove(a);
 					actorsBlocked.add(a);
 				}
 			}
-			//Get first runnable actor, do step and move to end of list
+			// Get first runnable actor, do step and move to end of list
 			if (!actorsRunnable.isEmpty()) {
 				PCActor a = actorsRunnable.get(0);
 				actorsRunnable.remove(0);
@@ -132,7 +142,7 @@ public class PCScenario extends PCObject {
 				deadlocked = false;
 			}
 			break;
-			
+
 		case 2: // FIFO
 			for (i = 0; i < actors.size(); i++) {
 				j = (currentActor + 1) % actors.size();
@@ -145,7 +155,7 @@ public class PCScenario extends PCObject {
 			}
 			currentActor = j;
 			break;
-			
+
 		case 3: // Prio
 			for (i = 0; i < actors.size(); i++) {
 				PCActor a = actors.get(i);
@@ -156,7 +166,7 @@ public class PCScenario extends PCObject {
 				}
 			}
 			break;
-			
+
 		case 4: // rev. Prio
 			for (i = actors.size() - 1; i >= 0; i--) {
 				PCActor a = actors.get(i);

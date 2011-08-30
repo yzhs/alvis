@@ -47,6 +47,8 @@ public class AlvisActor implements GraphicalRepresentationActor, Listener {
 	 * The represented actor
 	 */
 	private PCActor a;
+	
+	private Display d;
 
 	/**
 	 * Construct a new graphical representation of an actor
@@ -57,6 +59,7 @@ public class AlvisActor implements GraphicalRepresentationActor, Listener {
 	 *            Actor to show
 	 */
 	public AlvisActor(Composite parent, PCActor act) {
+		d = parent.getDisplay();
 		FillLayout f = new FillLayout();
 		f.type = SWT.VERTICAL;
 		Group g = new Group(parent, SWT.CASCADE);
@@ -88,7 +91,6 @@ public class AlvisActor implements GraphicalRepresentationActor, Listener {
 	 */
 	public void setLine(final int newLine) {
 		if (currentLine != newLine) {
-			Display d = Display.getDefault();
 			d.syncExec(new Runnable() {
 				public void run() {
 					if (lines[currentLine].isDisposed())
@@ -108,7 +110,6 @@ public class AlvisActor implements GraphicalRepresentationActor, Listener {
 	 * @param bySemaphore Color of blocking differs between semaphore or condition, true if blocked by semaphore, false if blocked by condition
 	 */
 	public void setBlocked(final boolean blocked, final boolean bySemaphore) {
-		Display d = Display.getDefault();
 		d.syncExec(new Runnable() {
 			public void run() {
 				Color c;
@@ -139,6 +140,38 @@ public class AlvisActor implements GraphicalRepresentationActor, Listener {
 	 */
 	public void handleEvent(Event arg0) {
 		a.step();
+	}
+	
+	public PCActor getActor() {
+		return a;
+	}
+	
+	public void setActor(PCActor a) {
+		this.a = a;
+	}
+	
+	public String[] getLines() {
+		String[] res = new String[lines.length];
+		for (int i = 0; i < lines.length; i++) {
+			res[i] = lines[i].getText();
+		}
+		return res;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	
+	public void setName(String value) {
+		name = value;
+	}
+	
+	public int getCurrentLine() {
+		return currentLine;
+	}
+	
+	public void setCurrentLine(int value) {
+		currentLine = value;
 	}
 
 }
