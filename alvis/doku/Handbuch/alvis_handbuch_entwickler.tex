@@ -22,7 +22,6 @@ Eduard Boos,
 Dominik Dingel,\\
 Simon Groth,
 Sebastian Schmitz,
-Tobias Schüler,
 Frank Weiler}
 \title{Alvis\\Handbuch für Entwickler}
 \makeindex
@@ -74,9 +73,11 @@ Alle Plug-ins befinden sich im SVN - Ordner ,,trunk/alvis''.
  \item ,,de.unisiegen.informatik.bs.alvis.runvisualizer''\\
  \item ,,de.unisiegen.informatik.bs.alvis.export''\\
  \item ,,de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist''\\
- \item ,,de.unisiegen.informatik.bs.alvis.extensionpoints.fileextension''\\ An diesem Extension Point registrieren Plug-Ins,
-	  die eine Algorithmen-Art bereitstellen, ihre Dateiendung. Dazu muss das Interface\\
-	  de.unisiegen.informatik.bs.alvis.extensionpoints.IFileExtension im jeweiligen Plug-In implementiert werden.
+ \item ,,de.unisiegen.informatik.bs.alvis.extensionpoints.fileextension''\\
+	  An diesem Extension Point registrieren Plug-Ins, die eine Algorithmen-Art
+	  bereitstellen, ihre Dateiendung. Dazu muss das Interface
+	  de.\-unisiegen.\-informatik.\-bs.\-alvis.\-extension\-points.\-IFileExtension im jeweiligen
+	  Plug-In implementiert werden.
 \end{itemize}
 
 \subsection{Plug-ins für Alvis}
@@ -140,10 +141,12 @@ Im Folgenden werden die einzelnen Klassen kurz erläutert, alle Einzelheiten sin
     Kompiliert Java-Dateien, die ihm von DynaCode gegeben werden. Dazu baut die Klasse nur ein Array mit den
     Optionen für den Compiler auf und übergibt sie ihm. Zuerst wird versucht, von ToolProvider einen Compiler zu
     beziehen. Im Erfolgsfall wird der Algorithmus in einem AlvisFileObject gespeichert und kompiliert.
-    Falls kein Compiler zurückgegeben wird, wird der Compiler aus\\com.sun.tools.javac.Main benutzt.
+    Falls kein Compiler zurückgegeben wird, wird der Compiler aus\\com.\-sun.\-tools.\-javac.\-Main benutzt.
     Dieser Fallback ist nicht schön und soll noch aus Alvis verschwinden. Leider trat das Problem erst gegen Ende der
     Projektgruppe auf. Da es einen funktionierenden Workaround gibt, wurde der Fehler als weniger wichtig erachtet und
-    andere Dinge vorgezogen.
+    andere Dinge vorgezogen.\\
+    Wenn sich tools.jar nicht im Classpath befindet, stoppt Alvis beim Aufruf der Funktion, die etwas
+    aus com.\-sun.\-tools.\-javac.\-Main benutzt.
  \item VirtualMachine \\
 \end{itemize}
 \subsection{Die Help-Plug-Ins}
