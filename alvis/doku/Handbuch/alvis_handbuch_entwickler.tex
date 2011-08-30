@@ -1,4 +1,4 @@
-\documentclass[10pt,a4paper]{article}
+\documentclass[10pt,a4paper,oneside]{scrbook}
 \usepackage[utf8x]{inputenc}
 \usepackage{ucs}
 \usepackage{amsmath}
@@ -32,18 +32,18 @@ Frank Weiler}
 \tableofcontents
 \newpage
 Wir wünschen viel Spaß bei der Weiterentwicklung von Alvis.
-\section{Benötigtes Equipment}
-\subsection{Software}
-\subsubsection{Eclipse}
+\chapter{Benötigtes Equipment}
+\section{Software}
+\subsection{Eclipse}
 Alvis ist ein Eclipse RCP Projekt daher wird für die Eclipse für die Entwicklung mindestens in Version 3.6, benötigt.
 
 Auf der Eclipse Webseite gibt es bereits ein Eclipse, welches schon die Möglichkeit ein Eclipse mit RCP herunterzuladen. Es heißt ,,Eclipse for RCP and RAP Developers''. 
 
 Falls ein bereits vorhandenes Eclipse für die Entwicklung von Alvis benutzt werden soll, kann man die benötigten Plug-ins auch über die Update Funktion von Eclipse beziehen.
-\subsubsection{SVN}
+\subsection{SVN}
 Um das Projekt zu beziehen und zu bearbeiten benutzen wir SVN. SVN ist ebenfalls über die Update Funktion von Eclipse beziehbar.
 
-\subsection{Kenntnisse}
+\section{Kenntnisse}
 Für das (Weiter-)Entwickeln der Plug-ins für Alvis erfordert Kenntnisse im Umgang mit RCP. Diese sollte man sich aneignen, bevor man mit der Entwicklung von einem Plug-in beginnt. Dazu empfehlen wir die Durcharbeitung einiger Literatur, welche wir im folgenden kurz vorstellen wollen.
 
 \begin{itemize}
@@ -61,25 +61,25 @@ Verfügbar in der Uni-Bibliothek, ISBN: 978-3-8362-1428-5
 
 
 \newpage
-\section{Alvis}
-\subsection{Übersicht über die Komponenten}
+\chapter{Alvis}
+\section{Übersicht über die Komponenten}
 Bei den einzelnen Komponenten wird die Bezeichnung ,,Plug-in'' vielfältig eingesetzt. Wir sprechen von einem Plug-in für Alvis, wenn wir eine neue Algorithmen Art hinzufügen, oder das Hauptplug-in um andere Funktionalitäten erweitern. Dabei ist Alvis selbst auch nur ein Plug-in. Demnach gibt es auch Plug-ins für Plug-ins.
 
 Alle Plug-ins befinden sich im SVN - Ordner ,,trunk/alvis''.
-\subsubsection{Das Alvis Plug-in}
+\subsection{Das Alvis Plug-in}
 ,,de.unisiegen.informatik.bs.alvis'' - Das Haupt Plug-in, welches die graphische Oberfläche beinhaltet.
-\subparagraph{Extension Points}
+\subsubsection{Extension Points}
 \begin{itemize}
- \item ,,de.unisiegen.informatik.bs.alvis.extensions.runpreferences''
- \item ,,de.unisiegen.informatik.bs.alvis.runvisualizer''
- \item ,,de.unisiegen.informatik.bs.alvis.export''
- \item ,,de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist''
- \item ,,de.unisiegen.informatik.bs.alvis.extensionpoints.fileextension''\\ an diesem Extension Point registrieren Plug-Ins,
+ \item ,,de.unisiegen.informatik.bs.alvis.extensions.runpreferences''\\
+ \item ,,de.unisiegen.informatik.bs.alvis.runvisualizer''\\
+ \item ,,de.unisiegen.informatik.bs.alvis.export''\\
+ \item ,,de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist''\\
+ \item ,,de.unisiegen.informatik.bs.alvis.extensionpoints.fileextension''\\ An diesem Extension Point registrieren Plug-Ins,
 	  die eine Algorithmen-Art bereitstellen, ihre Dateiendung. Dazu muss das Interface\\
 	  de.unisiegen.informatik.bs.alvis.extensionpoints.IFileExtension im jeweiligen Plug-In implementiert werden.
 \end{itemize}
 
-\subsubsection{Plug-ins für Alvis}
+\subsection{Plug-ins für Alvis}
 Diese Plug-ins erweitern das Haupt Plug-in um notwendige Funktionen. Die Teilung des Hauptprogramms in verschiedene Plug-ins fördert die Modularisierung und die Wiederverwendbarkeit, ggf. auch für neue Projekte.
 \\
 Nicht alle Plug-ins werden für die Funktion von Alvis benötigt. Es gibt Plug-ins, ohne die würde Alvis nicht funktionieren, andere erweitern Alvis um nützliche, aber nicht unbedingt notwendige Funktionen.
@@ -98,13 +98,13 @@ Die Plug-ins befinden sich im Ordner ,,trunk/alvis/plugins''.
 \item ,,de.unisiegen.informatik.bs.alvis.vm.test'' - Test der virtuellen Maschine.
 \item ,,de.unisiegen.informatik.bs.alvis.editors.xml'' - XML Editor.
 \end{itemize}
-\subsubsection{Graph Plug-in}
+\subsection{Graph Plug-in}
 Das Graph Plug-in erweitert Alvis um die Datentypen Graph, Knoten und Kante.
 \begin{itemize}
 \item ,,de.unisiegen.informatik.bs.alvis.graph'' - Graph Plug-in.
 \item ,,de.unisiegen.informatik.bs.alvis.graph.datatypes'' - Graph Datentypen.
 \end{itemize}
-\subsubsection{Betriebssysteme Plug-in}
+\subsection{Betriebssysteme Plug-in}
 
 
 
@@ -112,22 +112,53 @@ Das Graph Plug-in erweitert Alvis um die Datentypen Graph, Knoten und Kante.
 
 
 
+\subsection{Virtual Machine Plug-In}
+Die Virtual Machine steuert den Ablauf eines Algorithmus. Sie ist für die Verwaltung der einzelnen
+Schritte der Threads verantwortlich.
+
+\subsubsection{Klassen}
+Im Folgenden werden die einzelnen Klassen kurz erläutert, alle Einzelheiten sind in der jeweiligen Java-Doc zu finden.
+\begin{itemize}
+ \item AbstractAlgo\\
+ \item Activator\\
+ \item Algo\\
+ \item AlgoThread\\
+ \item AlvisFileObject\\
+    Nimmt den zu kompilierenden Algorithmus in seiner CharSequence auf und wird an den Compiler, der von ToolProvider
+    bereitgestellt wird, überreicht.
+ \item BPListener\\
+ \item DPListener\\
+ \item DynaCode\\
+    Ist für das Kompilieren und Laden des Java-Algorithmus verantwortlich.
+    Dazu erzeugt sie aus den benötigten Paketen den Classpath und erzeugt eine Liste von Verzeichnissen, in denen
+    Algorithmen liegen. Danach wird der Compiler in Javac mit den erzeugten Parametern angestoßen. Nach dem Kompilieren
+    holt sich DynaCode das class-Objekt und lädt es.
+ \item Javac\\
+    Kompiliert Java-Dateien, die ihm von DynaCode gegeben werden. Dazu baut die Klasse nur ein Array mit den
+    Optionen für den Compiler auf und übergibt sie ihm. Zuerst wird versucht, von ToolProvider einen Compiler zu
+    beziehen. Im Erfolgsfall wird der Algorithmus in einem AlvisFileObject gespeichert und kompiliert.
+    Falls kein Compiler zurückgegeben wird, wird der Compiler aus\\com.sun.tools.javac.Main benutzt.
+    Dieser Fallback ist nicht schön und soll noch aus Alvis verschwinden. Leider trat das Problem erst gegen Ende der
+    Projektgruppe auf. Da es einen funktionierenden Workaround gibt, wurde der Fehler als weniger wichtig erachtet und
+    andere Dinge vorgezogen.
+ \item VirtualMachine \\
+\end{itemize}
 
 
 \newpage
-\section{Export}
-\subsection{Erste Schritte}
+\chapter{Export}
+\section{Erste Schritte}
 Wir werden den Export des Programms und der Plug-ins über eine Update Seite und über Features bewältigen. Dazu empfehlen wir ein Tutorial von Ralf Ebert zur Update Funktionalität in RCP.
 \\ \\
 http://www.ralfebert.de/blog/eclipsercp/p2\_updates\_tutorial\_36/
 \\ \\
 Neben den Projekten aus dem vorherigen Kapitel benötigen wir nun auch die Feature-Projekte aus dem Ordner ,,trunk/export''.
 
-\subsection{Export des Hauptprogramms für verschiedene Plattformen}
+\section{Export des Hauptprogramms für verschiedene Plattformen}
 Wir stellen uns vor, wir haben einige größere Änderungen an unserem Hauptprogramm, oder an einem der Plug-ins vollzogen. Wir wollen diese Verbesserungen nun den Benutzern von Alvis, in Form einer neuen Version und einem Update für bereits installierte Programme, zugänglich machen. 
 \\ \\
 Hier gibt es immer zwei Typen von Benutzern. Die einen die das Programm noch nicht auf Ihrem System haben und die, die das Programm bereits benutzen. Die ersten sind kein Problem, wir exportieren das Programm und aktualisieren die Download Seite. Für die Zweiten ist der Aufwand etwas größer. Da wir nicht von jedem Benutzer verlangen wollen Alvis zu löschen und neu herunterzuladen, müssen wir die Möglichkeit bieten das Programm zu updaten. Im folgenden wollen wir genauer auf die Probleme eingehen.
-\subsubsection{Vorbereitung}
+\subsection{Vorbereitung}
 Wie wir wissen aus dem Tutorial, dass unser Export auf Basis von Features läuft. Diese Features müssen wir nun erstmal aus dem SVN in den Workspace auschecken, in dem auch unser Hauptprogramm und die benötigten Plug-ins liegen.
 \\ \\
 Die Features befinden sich im Ordner ,,trunk/alvis/export''.
@@ -143,7 +174,7 @@ Das Hauptprojekt wird in einen Ordner exportiert. Dabei wird auch ein Ordner ,,r
 Damit die Änderungen auch als Updates auf die Webseite kommen, brauchen wir die vorhandene Update Seite. Diese befindet sich im Ordner ,,trunk/alvis/updates'' und wird in regelmäßigen Abständen automatisch auf den Server kopiert. 
 \\ \\
 Dazu checken wir den Ordner ,,updates'' aus. Wir wählen ,,D:/Alvis/repository'' als Speicherort.
-\subsubsection{Export mit einer Target Platform}
+\subsection{Export mit einer Target Platform}
 Um eine RCP Anwendung für verschiedene Plattformen zu exportieren muss die sogenannte ,,Target Platform'' angepasst werden. Mit einer Target Platform kann man festlegen, welche Plug-ins der Anwendung zur Verfügung stehen. Hat man keine spezielle Target Platform gewählt, so bedient sich die Anwendungen aus den Plug-ins, die der installierten Eclipse Distribution zur Verfügung stehen.
 \\
 \\
@@ -151,7 +182,7 @@ Das Wechseln der Target Platform hat mehrere Vorteile. \\
 Zum Ersten kann man sich aus der Vielzahl vorhandener Plug-ins für RCP bedienen - und zwar ohne, dass diese Plug-ins auch allen anderen Projekten, die mit diesem Eclipse entwickelt werden, zur Verfügung stehen.
 Zum Zweiten, und diesen Vorteil wollen wir im Folgenden ausnutzen, lassen sich mit einer Target Platform auch die Plug-ins holen, die sonst für andere Betriebssysteme geladen worden wären.
 
-\subsubsection{Einstellen der Target Platform}
+\subsection{Einstellen der Target Platform}
 Wir wollen nun die vorhandene Target Platform als Target Platform für unser Projekt einstellen. Dazu müssen wir das Projekt\\
 ,,de.unisiegen.informatik.bs.alvis.app'' in unserem Workspace haben. Wir öffnen die Datei ,,allPlatforms.target'' und warten bis alle Plug-ins geladen wurden. Dies kann unter Umständen einige Zeit in Anspruch nehmen. 
 \\ \\
@@ -167,7 +198,7 @@ Zum Zeitpunkt des Verfassens dieser Anleitung war ein release von Eclipse 3.7 in
 \\ \\
 
 Nachdem die Target Platform übernommen wurde und wir die Korrektheit des Programms überprüft haben können wir das Projekt exportieren. 
-\subsubsection{Export}
+\subsection{Export}
 Wir möchten nochmals darauf hinweisen, dass es nötig ist die Versionsnummern zu erhöhen, damit ein Update auf die jetzt exportierte Software funktioniert. Es müssen sowohl in der \\
 ,,MANIFEST.MF'' und der \\
 ,,*.product'', im Hauptprogramm, und in der \\
