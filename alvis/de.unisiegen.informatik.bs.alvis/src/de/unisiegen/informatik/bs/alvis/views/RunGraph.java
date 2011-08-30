@@ -135,15 +135,20 @@ public class RunGraph extends ViewPart implements IExportItem {
 	 * myInputFilePath
 	 */
 	private void handExampleToExtensions() {
+		ArrayList<IRunVisualizer> removeList = new ArrayList<IRunVisualizer>();
+		
 		// For all registered extensions
 		for (IRunVisualizer runviz : myRunVisualizers) {
 			// Call the method and if the extension returns false then
 			// the extension does not know about the type in myInputFilePath...
 			if (!runviz.addVisualizing(myParent, myInputFilePath)) {
-				// ... and we delete it.
-				myRunVisualizers.remove(runviz);
+				// ... and we add it to the removeList
+				removeList.add(runviz);
 			}
 		}
+		
+		// lets remove it now
+		myRunVisualizers.removeAll(removeList);
 	}
 
 	@Override
