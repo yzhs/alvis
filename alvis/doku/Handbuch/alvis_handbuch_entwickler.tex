@@ -97,6 +97,9 @@ Die Plug-ins befinden sich im Ordner ,,trunk/alvis/plugins''.
 \begin{itemize}
 \item ,,de.unisiegen.informatik.bs.alvis.vm.test'' - Test der virtuellen Maschine.
 \item ,,de.unisiegen.informatik.bs.alvis.editors.xml'' - XML Editor.
+\item ,,de.unisiegen.informatik.bs.alvis.help''
+\item ,,de.unisiegen.informatik.bs.alvis.graph.help''
+\item ,,de.unisiegen.informatik.bs.alvis.sync.help''
 \end{itemize}
 \subsection{Graph Plug-in}
 Das Graph Plug-in erweitert Alvis um die Datentypen Graph, Knoten und Kante.
@@ -143,7 +146,14 @@ Im Folgenden werden die einzelnen Klassen kurz erläutert, alle Einzelheiten sin
     andere Dinge vorgezogen.
  \item VirtualMachine \\
 \end{itemize}
-
+\subsection{Die Help-Plug-Ins}
+Die Help-Plug-Ins sind dazu da, dem User Hilfestellung zu leisten. Man erreicht sie in Alvis über Hilfe->Hilfeinhalte.\\
+Der Aufbau gestaltet sich wie folgt:\\
+Plug-Ins müssen den Extension Point org.eclipse.help.toc implementieren und dort eine Help Table of Contens bereitstellen.
+Der Pfad zu dieser TOC muss \$nl\$/NameDerTOC.xml lauten, damit die Hilfe in mehreren Sprachen zur Verfügung gestellt werden kann.
+Die deutschen Hilfeseiten - und somit auch die deutsche Table of Contents - befinden sich alle im Ordner nl/de, die 
+standardmäßig angezeigte, englische direkt im Plug-In. Konvention ist, für HTML-Seiten einen Unterordner html anzulegen,
+um die Übersicht zu bewahren.
 
 \newpage
 \chapter{Export}
