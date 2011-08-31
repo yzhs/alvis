@@ -1121,19 +1121,21 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	 */
 	public Image getImage() {
 
-		Image screenshot;
-		int width = getSize().x;
-		int height = getSize().y;
-		GC gc = new GC(this);
-		gc.drawText("Created by Alvis", width - 95, height - 20);
-		gc.drawRectangle(new Rectangle(0, 0, width - 1, height - 1));
-		screenshot = new Image(Display.getCurrent(), width, height);
-		gc.copyArea(screenshot, 0, 0);
+		final ArrayList<Image> screenshot = new ArrayList<Image>();
+		this.getDisplay().syncExec(new Runnable() {
+			public void run() {
+				GC gc = new GC(AlvisGraph.this);
+				int width = getSize().x;
+				int height = getSize().y;
+				gc.drawText("Created by Alvis", width - 95, height - 20);
+				gc.drawRectangle(new Rectangle(0, 0, width - 1, height - 1));
+				screenshot.add(new Image(Display.getCurrent(), width, height));
+				gc.copyArea(screenshot.get(0), 0, 0);
+				gc.dispose();
+			}
+		});
 
-		gc.dispose();
-		redraw();
-
-		return screenshot;
+		return screenshot.get(0);
 
 	}
 }

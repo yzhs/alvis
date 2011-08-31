@@ -12,10 +12,12 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
 import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
@@ -129,7 +131,7 @@ public class PdfExport extends Document {
 		// anchor = new Anchor("anchor", catFont);
 		// anchor.setName("anchor");
 
-		IExportItem exportItem;
+		final IExportItem exportItem;
 		exportItem = Activator.getDefault().getActivePartToExport();
 
 		// chapter = new Chapter(new Paragraph(anchor), 1);
@@ -143,49 +145,87 @@ public class PdfExport extends Document {
 		if (exportItem == null)
 			throw new NothingToExportException(); // nothing to export
 
+		final ArrayList<Image> images = new ArrayList<Image>();
+
 		if (exportItem.isRun()) { // export run
+		// Image image;
 
-			ArrayList<Image> images = new ArrayList<Image>();
-			Image image;
+			Thread thr = new Thread(new Runnable() {
+				@Override
+				public void run() {
+					Image image = exportItem.getImage();
+					if (image != null)
+						images.add(image);
 
-			image = exportItem.getImage();
-			if (image != null)
-				images.add(image);
+					Activator.getDefault().shutUpForExport(true);
+					VirtualMachine vm = VirtualMachine.getInstance();
 
-			Activator.getDefault().shutUpForExport(true);
-			VirtualMachine vm = VirtualMachine.getInstance();
+					Activator.getDefault().runStart();
+					vm.waitForBreakPoint();
 
-			Activator.getDefault().runStart();
-			vm.waitForBreakPoint();
-			
-			image = exportItem.getImage();
-			if (image != null)
-				images.add(image);
+					image = exportItem.getImage();
+					if (image != null)
+						images.add(image);
 
-			int maxAmountOfPicturesToShow = 15;
-			for (int i = 0; i < maxAmountOfPicturesToShow; i++) {
-				
-				if (!vm.runningThreads())
+					int maxAmountOfPicturesToShow = 15;
+					for (int i = 0; i < maxAmountOfPicturesToShow; i++) {
+
+						if (!vm.runningThreads())
+							return;
+
+						image = exportItem.getImage();
+						if (image != null)
+							images.add(image);
+
+						vm.waitForBreakPoint();
+						vm.stepAlgoForward();
+					}
+					Activator.getDefault().getWorkbench().getDisplay()
+							.syncExec(new Runnable() {
+								public void run() {
+
+									ExportShell exportShell = new ExportShell(
+											Display.getDefault(), images);
+									// images = exportShell.getWantedImages();
+									for (Image img : images) {
+										try {
+											paragraph = toParagraph(img);
+										} catch (DocumentException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+										try {
+											add(paragraph);
+										} catch (DocumentException e) {
+											// TODO Auto-generated catch block
+											e.printStackTrace();
+										}
+									}
+								}
+							});
+
+					Activator.getDefault().shutUpForExport(false);
 					return;
-				
-				image = exportItem.getImage();
-				if (image != null)
-					images.add(image);
-			
-				vm.stepAlgoForward();
-				vm.waitForBreakPoint();
+				}
+			});
 
-			}
+			thr.start();
 
-			ExportShell exportShell = new ExportShell(Display.getDefault(),
-					images);
-			// images = exportShell.getWantedImages();
-			for (Image img : images) {
-				paragraph = toParagraph(img);
-				add(paragraph);
-			}
+			// while(thr.isAlive()) {
+			// try {
+			// Thread.sleep(1000);
+			//
+			// } catch (InterruptedException e) {
+			// e.printStackTrace();
+			// }
+			// }
 
-			Activator.getDefault().shutUpForExport(false);
+			// try {
+			// thr.join();
+			// } catch (InterruptedException e) {
+			// e.printStackTrace();
+			// }
+			//
 
 		} else { // export single editor
 
