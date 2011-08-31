@@ -925,9 +925,12 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		int depth = result % 65536 /* (2^16) */;
 		int width = result / 65536;
 
-		ArrayList<AlvisGraphNode> gns;
+		ArrayList<AlvisGraphNode> gns = null;
 		if (width == 0) {
-			gns = myGraph.createCircle(depth);
+			System.out.println(result + " " + width + " " + depth);
+			if (depth > 2) {
+				gns = myGraph.createCircle(depth);
+			}
 		} else {
 			gns = myGraph.createTree(depth, width, null);
 		}
