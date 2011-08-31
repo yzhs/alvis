@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Condition</title>
+</head>
+
+<body>
+<h1>Condition</h1>
+A condition is a condition variable that is used in a monitor called synchronization
+structure. A monitor cannot deadlock by jamming operations in the wrong order.
+A condition also knows two operations. The operation signal indicates that a condition
+is met, the wait operation waits for the fulfillment of this.
+
+<h2>Functionality</h2>
+The monitor consists of the operations and resources, which should be synced and the
+conditions needed for this. The operations that are defined in the monitor are
+automatically under mutual exclusion.<br />
+When a process calls the wait operation, it releases the monitor and waits for another
+process invokes the signal operation on the same condition. During this time the process
+is blocked and the condition manages it in a queue.<br />
+If the signal operation is called, the processes that are waiting for the fulfillment
+of this condition wake up an are ready to run when the process that invoked the signal
+operation releases the monitor.
+This plugin contains a replica of the codition construct, which contains the methods wait()
+and signal().
+
+<h2>Example</h2>
+
+In the following example there are two processes that may put only strictly alternately a
+message on the console. This synchronization is possible using a monitor with two
+conditions by any process waiting for the condition for an issue and fulfilled this
+condition for the other process.<br />
+<span style="font-family: Courier New">
+<pre>
+monitor AlternatingOutput
+begin
+	Condition c1; //condition for the first thread.
+	Condition c2; //condition for the second thread.
+	int turn; //Indicates which thread is allowed to print
+	
+	void thread1()
+	begin
+		if turn != 1
+			wait(c1);
+		print("Thread 1");
+		turn = 2;
+		signal(c2);
+	end;
+	
+	void thread2()
+	begin
+		if turn != 2
+			wait(c2);
+		print("Thread 2");
+		turn = 1;
+		signal(c1);
+	end;
+	
+	turn = 1; //Thread 1 begins
+end monitor;
+</pre>
+</span>
+</body>
+</html>

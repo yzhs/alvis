@@ -3,11 +3,67 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-	<title>Semaphore</title>
+	<title>Semaphor</title>
 </head>
 
 <body>
-<h1>Semaphore</h1>
-Ouuuuh, Semaphore! Ladidaaa!
+<h1>Semaphor</h1>
+Ein Semaphor ist eine Datenstruktur, die der Verwaltung beschr&auml;nkter, z&auml;hlbarer
+Ressourcen dient. Ein Semaphor besteht im Wesentlichen aus einer ganzzahligen Variable,
+dessen Wert die Anzahl der noch vorhandenen Ressourcen darstellt. Es stellt zwei
+Operationen zur Verf&uuml;gung, eine zum Reservieren und Belegen einer Ressource (genannt
+P-Operation) und einer weiteren zum Freigeben einer Ressource (V-Operation genannt).
+
+<h2>Funktionsweise</h2>
+Das Semaphor wird in den meisten F&auml;llen mit der Anzahl der verf&uuml;gbaren Ressourcen
+initialisiert.<br />
+Wenn ein Prozess die Ressource nutzen m&ouml;chte, so muss er durch Aufrufen der P-Operation
+diese belegen und erh&auml;lt den Zugriff, sobald kein anderer Prozess mehr darauf zugreift.
+Die P-Operation verringert den Z&auml;hler innerhalb der Semaphore um 1. Wenn der Z&auml;hler durch
+diese Operation auf einen Wert kleiner als 0 verringert wird, so wird der aufrufende
+Prozess blockiert, bis wieder eine Ressource freigegeben wurde.
+<br />
+Ist die Benutzung der Ressource abgeschlossen, so ruft der Prozess die V-Operation auf.
+Diese Operation erh&ouml;ht den Z&auml;hler innerhalb der Semaphore um 1, es wird signalisiert dass
+nun eine zus&auml;tzliche Ressource freigegeben wurde. Sollte es Prozesse geben, die vorher
+von der Semaphore geblockt wurden, werden diese benachrichtigt und k&ouml;nnen ihren Ablauf
+fortsetzen.
+
+<h2>Beispiel</h2>
+
+Im folgenden Beispiel treten zwei Prozesse auf, die nur streng abwechselnd eine Meldung
+auf die Konsole ausgeben d&uuml;rfen. Diese Synchronisation ist mit zwei Semaphoren machbar,
+indem jeder Prozess die M&ouml;glichkeit einer Ausgabe f&uuml;r sich selbst sperrt und f&uuml;r den
+anderen Prozess freigibt.<br />
+
+Die ben&ouml;tigten Semaphore:<br />
+<span style="font-family: Courier New">
+<pre>
+Semaphore s1 = 1; //Semaphor f&uuml;r den ersten Prozess. Ausgabe ist sofort m&ouml;glich.
+Semaphore s2 = 0; //Semaphor f&uuml;r den zweiten Prozess. Ausgabe ist erst nach dem ersten Prozess m&ouml;glich
+</pre>
+</span><br />
+
+Prozess 1:
+<span style="font-family: Courier New">
+<pre>
+while (true) {
+	s1.P();
+	print("Prozess 1");
+	s2.V();
+}
+</pre>
+</span><br />
+
+Prozess 2:
+<span style="font-family: Courier New">
+<pre>
+while (true) {
+	s2.P();
+	print("Prozess 2");
+	s1.V();
+}
+</pre>
+</span>
 </body>
 </html>

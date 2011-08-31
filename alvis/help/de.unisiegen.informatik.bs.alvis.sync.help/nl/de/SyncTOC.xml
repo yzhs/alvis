@@ -2,6 +2,22 @@
 <?NLS TYPE="org.eclipse.help.toc"?>
 
 <toc label="Synchronisation" topic="nl/de/html/sync_main.html">
- <topic href="nl/de/html/semaphors.html" label="Semaphore">
- </topic>
+   <topic href="nl/de/html/about.html" label="Über das Plugin">
+   </topic>
+   <topic label="Datentypen">
+      <topic href="nl/de/html/thread.html" label="Prozess">
+      </topic>
+      <topic href="nl/de/html/buffer.html" label="Puffer">
+      </topic>
+      <topic href="nl/de/html/semaphors.html" label="Semaphor">
+      </topic>
+      <topic href="nl/de/html/condition.html" label="Condition">
+      </topic>
+      <topic href="nl/de/html/scenario.html" label="Scenario">
+      </topic>
+   </topic>
+   <topic href="nl/de/html/editor.html" label="Bedienung des Editors">
+   </topic>
+   <topic href="nl/de/html/algo.html" label="Algorithmus schreiben">
+   </topic>
 </toc>

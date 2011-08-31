@@ -1,7 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?NLS TYPE="org.eclipse.help.toc"?>
 
-<toc label="Synchronisation" topic="html/sync_main.html">
- <topic href="html/semaphors.html" label="Semaphore">
- </topic>
+<toc label="Synchronization" topic="html/sync_main.html">
+   <topic href="html/about.html" label="About this plugin">
+   </topic>
+   <topic label="Datatypes">
+      <topic href="html/thread.html" label="Thread">
+      </topic>
+      <topic href="html/buffer.html" label="Buffer">
+      </topic>
+      <topic href="html/semaphors.html" label="Semaphore">
+      </topic>
+      <topic href="html/condition.html" label="Condition">
+      </topic>
+      <topic href="html/scenario.html" label="Scenario">
+      </topic>
+   </topic>
+   <topic href="html/editor.html" label="Using the Editor">
+   </topic>
+   <topic href="html/algo.html" label="Write an algorithm">
+   </topic>
 </toc>

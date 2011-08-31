@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Editor</title>
+</head>
+
+<body>
+<h1>Scenario Editor</h1>
+The scenario editor allows the user to define a sample on which the run is executed.
+
+<h2>Structure of the editor and define an example</h2>
+If the user creates a new scenario file (an example), it will automatically open the
+scenario editor. At the beginning of the scenario it is empty.<br />
+<center><img src="images/de_editorStart.jpg"/><br />
+<span style="font-size: small">Illustration of the empty editor</span></center><br /><br />
+
+The editor provides the ability to add various data types by a few clicks through a wizard.
+The primitive data type variable (Integer and Boolean), semaphore, condition and thread
+are managed in four adjacent fields. By clicking "add" the user can add data types to the
+scenario, and he is supported by an assistant.<br />
+<center><img src="images/de_editorVariable.jpg"/><br />
+<span style="font-size: small">Wizard to add a primitive variable</span>
+</center><br /><br />
+After adding one or more variables they are displayed in their areas.<br />
+<center><img src="images/de_editorVariableAdded.jpg"/><br />
+<span style="font-size: small">View of the editor after adding variables</span>
+</center><br /><br />
+By clicking the "delete" button the data types can be deleted from the sample. Clicking
+the button opens a dialog that provides a list with multiple selection. Highlight the data
+types to be deleted (for multiple selection press CTRL-key) by clicking on the list, then
+click on "OK" will delete them. By clicking "cancel" the deletion can still be canceled at
+this time.<br />
+<strong>Bild machen und einf&uuml;gen</strong><br/>
+There are also examples that require an ability to output a text or the use of a buffer.
+Both can be controlled by the the checkboxes in the lower part. If the checkbox "buffer
+needed" is activated, it opens a wizard that prompts the user for the number of places
+and then the buffer area in the example made ​​visible. If the buffer is not needed it can be
+deleted by unchecking the checkbox. The visualization uses orange label if the space is
+occupied, a free space appears in green.<br />
+The ability to output requires no further configuration, a simple activating the checkbox
+makes the output area visible, unchecking the checkbox makes it invisble.<br />
+<center><img src="images/de_editorBufferOutput.jpg"/><br />
+<span style="font-size: small">View of the editor after adding buffer and output</span>
+</center>

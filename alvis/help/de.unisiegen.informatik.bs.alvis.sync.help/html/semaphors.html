@@ -3,11 +3,59 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-	<title>Semaphores</title>
+	<title>Semaphore</title>
 </head>
 
 <body>
-<h1>Semaphores</h1>
-Ouuuuh, semaphors! Ladidaaa!
+<h1>Semaphore</h1>
+A semaphore is a data structure that is used to manage limited, countable resources. A
+semaphore consists essentially of an integer variable whose value is the number of
+remaining resources is. It provides two operations are available, one to reserve a resource
+(called P-operation) and another (called V-operation) to release a resource.
+
+<h2>Functionality</h2>
+The semaphore is initialized in most cases with the number of available resources.<br />
+When a process wants to use the resource, he must prove by calling the P-operation and
+receives this access if no other process is accessing it more. The P-operation reduces
+the count in the semaphore by 1. If the counter is by this operation reduces to a value
+less than 0, then the calling process is blocked until a resource has been released.<br />
+If the use of the resource is completed, the process calls on the V-operation. This
+operation increases the count in the semaphore by 1, it indicates that now an additional
+resource has been released. If there are any processes that were previously blocked by
+the semaphore, they are notified and can continue their progress.
+
+<h2>Example</h2>
+In the following example there are two threads that may print only strictly alternately
+a message on the console. This synchronization is possible using two semaphores, since
+each process locks  for themselves and releasing them to the other thread.<br />
+The required semaphores:<br />
+<span style="font-family: Courier New">
+<pre>
+Semaphore s1 = 1; //semaphore for the first thread. Can start
+Semaphore s2 = 0; //semaphore for den second thread. Has to wait for thread 1
+</pre>
+</span><br />
+
+Thread 1:
+<span style="font-family: Courier New">
+<pre>
+while (true) {
+	s1.P();
+	print("Thread 1");
+	s2.V();
+}
+</pre>
+</span><br />
+
+Thread 2:
+<span style="font-family: Courier New">
+<pre>
+while (true) {
+	s2.P();
+	print("Thread 2");
+	s1.V();
+}
+</pre>
+</span>
 </body>
 </html>

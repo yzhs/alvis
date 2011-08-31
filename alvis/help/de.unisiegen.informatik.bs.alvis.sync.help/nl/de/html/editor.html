@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Editor</title>
+</head>
+
+<body>
+<h1>Scenario Editor</h1>
+Der Scenario Editor erm&ouml;glicht es dem Benutzer ein Beispiel zu definieren, auf dem der
+Run ausgef&uuml;hrt wird.
+
+<h2>Aufbau des Editors und definieren eines Beispiels</h2>
+Wenn der Benutzer eine neue Scenario Datei (ein neues Beispiel) anlegt, wird diese
+automatisch im Scenario Editor ge&ouml;ffnet. Zu Beginn ist das Scenario leer.<br />
+<center><img src="images/de_editorStart.jpg"/><br />
+<span style="font-size: small">Abbildung des leeren Editors</span></center><br /><br />
+Der Editor bietet die M&ouml;glichkeit, durch einen Klick &uuml;ber einen Assistenten
+dem Scenario verschiedene Datentypen hinzuzuf&uuml;gen. Die Datentypen primitive Variable
+(Integer und Boolean), Semaphor, Bedingungsvariable und Prozess werden in vier nebeneinander
+liegenden Feldern verwaltet. Durch einen Klick auf "hinzuf&uuml;gen" kann der Benutzer
+Datentypen dem Scenario hinzuf&uuml;gen, wobei er vom einem Assistenten unterst&uuml;tzt
+wird.<br />
+<center><img src="images/de_editorVariable.jpg"/><br />
+<span style="font-size: small">Assistent zum Hinzuf&uuml;gen einer Variablen</span>
+</center><br /><br />
+Nach dem Hinzuf&uuml;gen einer oder mehrere Variablen werden diese im jeweiligen Bereich angezeigt.
+<center><img src="images/de_editorVariableAdded.jpg"/><br />
+<span style="font-size: small">Ansicht der Editors nach Hinzuf&uuml;gen von Variablen</span>
+</center><br /><br />
+&Uuml;ber den Button "l&ouml;schen" lassen sich Datentypen wieder aus dem Beispiel l&ouml;schen.
+Ein Klick auf den Button &ouml;ffnet einen Dialog, der eine Liste mit Mehrfachauswahl anbietet. Die
+zu L&ouml;schenden Datentypen werden durch einen Klick (bei Mehrfachauswahl STRG-Taste dr&uuml;cken)
+markiert, ein Klick auf "OK" l&ouml;scht diese. Mit "Abbrechen" l&auml;sst sich das L&ouml;schen
+zu diesem Zeitpunkt noch abbrechen.<br />
+<strong>Bild machen und einf&uuml;gen</strong><br/>
+
+Es gibt auch Beispiele, die eine M&ouml;glichkeit zur Ausgabe eines Textes oder das Nutzen eines
+Puffers erfordern. Beides kann dem Beispiel &uuml;ber die Checkboxen im unteren Teil gesteuert werden.
+Wird die Checkbox "Puffer ben&ouml;tigt" aktiviert, so &ouml;ffnet sich ein Assistent, der den
+Benutzer nach der Anzahl der gew&uuml;schten Pl&auml;tze fragt und anschlie&szlig;end der Pufferbereich
+im Beispiel sichtbar gemacht. Wird der Puffer doch nicht ben&ouml;tigt wird er durch Deaktivieren der
+Checkbox aus dem Beispiel gel&ouml;scht. Die Visualisierung verwendet orange Labels falls der Platz
+belegt ist, eine freier Platz erscheint in gr&uuml;n.<br />
+Die M&ouml;glichkeit zur Ausgabe erfordert keine weitere
+Konfiguration, ein Aktivieren der entsprechnenden Checkbox macht sofort den Ausgabebereich sichtbar,
+ein Deaktivieren l&auml;sst ihn verschwinden.
+<center><img src="images/de_editorBufferOutput.jpg"/><br />
+<span style="font-size: small">Ansicht der Editors nach Hinzuf&uuml;gen von Puffer und Ausgabe</span>
+</center>

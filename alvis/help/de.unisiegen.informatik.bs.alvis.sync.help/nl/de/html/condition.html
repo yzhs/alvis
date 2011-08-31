@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Condition</title>
+</head>
+
+<body>
+<h1>Condition</h1>
+Eine Condition ist eine Bedingungsvariable, die in einem Monitor genannten
+Synchronisationsstruktur eingesetzt wird. Im Gegensatz zu besteht bei einem Monitor
+keine Verklemmungsgefahr durch in falscher Reihenfolge aufgerufener Operationen.
+Eine Condition kennt ebenfalls zwei Operationen. Die signal-Operation signalisiert, dass eine
+Bedingung erf&uuml;llt ist, die wait-Operation wartet auf die Erf&uuml;llung dieser.
+
+<h2>Funktionsweise</h2>
+Der Monitor besteht aus den Operationen und Ressourcen, die die Synchronisierung umfassen
+soll und den daf&uuml;r ben&ouml;tigten Conditions. Die Operationen, die im Monitor 
+definiert sind, stehen automatisch unter wechselseitigem Ausschluss.<br />
+Wenn ein Prozess die wait-Operation aufruft, gibt er den Monitor frei und wartet darauf,
+dass ein anderer Prozess die signal-Operation derselben Condition aufruft. In dieser Zeit
+wird der Prozess blockiert und von der Condition in einer Warteschlange verwaltet.<br />
+Wird die signal-Operation aufgerufen, werden die Prozesse, die auf die Erf&uuml;llung dieser
+Bedingung warten, geweckt und k&ouml;nnen ausgef&uuml;rt werden, sobald der Prozess, der
+die signal-Operation aufgerufen hat den Monitor freigegeben hat.<br />
+Dieses Plugin enth&auml;lt die Nachbildung dieses Konstrukts (Condition), welches die
+Methoden wait() und signal() zur Verf&uuml;gung stellt.
+
+
+<h2>Beispiel</h2>
+Im folgenden Beispiel treten zwei Prozesse auf, die nur streng abwechselnd eine Meldung
+auf die Konsole ausgeben d&uuml;rfen. Diese Synchronisation ist mittels Monitor mit 
+zwei Conditions machbar, indem jeder Prozess auf die Bedingung f&uuml;r eine Ausgabe
+wartet und f&uuml;r den anderen Prozess diese Bedingung erf&uuml;llt.<br />
+<span style="font-family: Courier New">
+<pre>
+monitor Abwechselnde Ausgabe
+begin
+	Condition c1; //Condition f&uuml;r den ersten Prozess.
+	Condition c2; //Semaphor f&uuml;r den zweiten Prozess.
+	int turn; //Gibt an, welcher Prozess ausgeben darf.
+	
+	void Prozess1()
+	begin
+		if turn != 1
+			wait(c1);
+		print("Prozess 1");
+		turn = 2;
+		signal(c2);
+	end;
+	
+	void Prozess2()
+	begin
+		if turn != 2
+			wait(c2);
+		print("Prozess 2");
+		turn = 1;
+		signal(c1);
+	end;
+	
+	turn = 1; //Prozess 1 beginnt
+end monitor;
+</pre>
+</span>
+</body>
+</html>

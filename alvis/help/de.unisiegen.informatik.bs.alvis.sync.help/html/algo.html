@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Algorithm</title>
+</head>
+
+<body>
+<h1>Write an algorithm</h1>
+If the user has created an example using the scenario editor, is still missing, the
+algorithm / algorithms. For each process, an algorithm is defined, he will run in the
+Run. As the editor and its operation in Section Alvis -> write algorithms described
+will be omitted at this point.
+
+<h2>Beispiel</h2>
+The following example shows the algorithms for the well-known example from the semaphore
+section, with two processes that are strictly alternateling their output.
+
+<pre>
+main(Scenario s) begin
+	Thread List tl = s.threads;
+	for Thread t in tl: begin
+		t.start(t.algo),
+	end
+end
+
+Prozess1(Semaphore s1, Semaphore s2) begin
+	while true: begin
+		s1.P();
+		print("Prozess 1");
+		s2.V();
+	end
+end
+
+Prozess2(Semaphore s1, Semaphore s2) begin
+	while true: begin
+		s2.P();
+		print("Prozess 2");
+		s1.V();
+	end
+end
+</pre>
+
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<title>Algorithmus</title>
+</head>
+
+<body>
+<h1>Algorithmus definieren</h1>
+Wenn der Benutzer ein Beispiel mit dem Scenario Editor erstellt hat fehlt noch
+der Algorithmus/die Algorithmen. F&uuml;r jeden Prozess wird ein Algorithmus
+definiert, den er im Run ausf&uuml;hren wird.<br />
+Da der Editor und dessen Bedienung schon in Abschnitt Alvis -> Algorithmen schreiben
+beschrieben wurde wird an dieser Stelle darauf verzichtet.
+
+<h2>Beispiel</h2>
+Das folgende Beispiel zeigt die Algorithmen f&uuml;r das aus dem Abschnitt Semaphor
+bekannte Beispiel, in dem zwei Prozesse streng abwechselnd einen String ausgeben.
+
+<pre>
+main(Scenario s) begin
+	Thread List tl = s.threads;
+	for Thread t in tl: begin
+		t.start(t.algo),
+	end
+end
+
+Prozess1(Semaphore s1, Semaphore s2) begin
+	while true: begin
+		s1.P();
+		print("Prozess 1");
+		s2.V();
+	end
+end
+
+Prozess2(Semaphore s1, Semaphore s2) begin
+	while true: begin
+		s2.P();
+		print("Prozess 2");
+		s1.V();
+	end
+end
+</pre>
+
+</body>
+</html>
