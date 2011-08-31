@@ -25,7 +25,7 @@ public class AlvisCondition implements GraphicalRepresentationCondition {
 		d = scenario.getMyDisplay();
 		id = scenario.getAdmin().requestId();
 		this.name = name;
-		sema = new AlvisSemaphore(scenario, name + "_sema", 1);
+		sema = new AlvisSemaphore(scenario, name + "_sema", 1); //$NON-NLS-1$
 		semaName = sema.getName();
 		label = new Label(scenario.getConditionsScroll(), SWT.NONE);
 		setState(0);
@@ -35,7 +35,7 @@ public class AlvisCondition implements GraphicalRepresentationCondition {
 		d = scenario.getMyDisplay();
 		this.id = id;
 		this.name = name;
-		sema = new AlvisSemaphore(scenario, name + "_sema", 1);
+		sema = new AlvisSemaphore(scenario, name + "_sema", 1); //$NON-NLS-1$
 		semaName = sema.getName();
 		label = new Label(scenario.getConditionsScroll(), SWT.NONE);
 		setState(0);
@@ -55,7 +55,7 @@ public class AlvisCondition implements GraphicalRepresentationCondition {
 				} else {
 					label.setBackground(WAIT);
 				}
-				label.setText("Condition " + name + Messages.AlvisCondition_waiting + waiting);
+				label.setText("Condition " + name + Messages.AlvisCondition_conditionWaiting + waiting); //$NON-NLS-1$
 			}
 		});
 	}

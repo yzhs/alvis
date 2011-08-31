@@ -21,7 +21,7 @@ public class NewSemaphoreWizard extends Wizard implements INewWizard {
 	private AlvisScenario myScenario;
 	
 	public NewSemaphoreWizard() {
-		setWindowTitle("create new semaphore");
+		setWindowTitle(Messages.NewSemaphoreWizard_createNewSemaphoreWizardTitle);
 	}
 
 	@Override
@@ -45,8 +45,8 @@ public class NewSemaphoreWizard extends Wizard implements INewWizard {
 			return true;
 		} catch (NumberFormatException e) {
 			Shell s = Activator.getDefault().getWorkbench().getActiveWorkbenchWindow().getShell();
-			Status st = new Status(IStatus.ERROR, "Alvis", e.getMessage(), e);
-			ErrorDialog.openError(s, "Input error", "The value you entered for counter is not an integer", st);
+			Status st = new Status(IStatus.ERROR, "Alvis", e.getMessage(), e); //$NON-NLS-1$
+			ErrorDialog.openError(s, Messages.NewSemaphoreWizard_inputError, Messages.NewSemaphoreWizard_notInteger, st);
 			return false;
 		}
 	}

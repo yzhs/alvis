@@ -14,9 +14,9 @@ public class NewActorWizardPage extends WizardPage {
 	private Composite container;
 
 	public NewActorWizardPage() {
-		super("Add an actor");
-		setTitle("Add an actor");
-		setDescription("This wizard adds an new actor to the scenario");
+		super(Messages.NewActorWizardPage_addActorWizardPageTitle);
+		setTitle("Add an actor"); //$NON-NLS-1$
+		setDescription(Messages.NewActorWizardPage_addActorWizardPageDescription);
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class NewActorWizardPage extends WizardPage {
 		container.setLayout(layout);
 		layout.numColumns = 2;
 		lName = new Label(container, SWT.NULL);
-		lName.setText("Enter a name for the actor");
+		lName.setText(Messages.NewActorWizardPage_actorName);
 		name = new Text(container, SWT.BORDER | SWT.SINGLE);
 		setControl(container);
 	}

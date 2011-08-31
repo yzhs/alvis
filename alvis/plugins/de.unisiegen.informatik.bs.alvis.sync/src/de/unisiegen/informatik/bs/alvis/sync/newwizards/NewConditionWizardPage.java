@@ -15,9 +15,9 @@ public class NewConditionWizardPage extends WizardPage {
 	private Composite container;
 
 	public NewConditionWizardPage() {
-		super("Add a condition");
-		setTitle("Add a condition");
-		setDescription("This wizard adds a new condition to the scenario");
+		super(Messages.NewConditionWizardPage_addConditionWizardPageTitle);
+		setTitle("Add a condition"); //$NON-NLS-1$
+		setDescription(Messages.NewConditionWizardPage_addConditionWizardPageDescription);
 	}
 
 	@Override
@@ -27,7 +27,7 @@ public class NewConditionWizardPage extends WizardPage {
 		container.setLayout(layout);
 		layout.numColumns = 2;
 		lName = new Label(container, SWT.NULL);
-		lName.setText("Enter a name for the condition");
+		lName.setText(Messages.NewConditionWizardPage_conditionName);
 		name = new Text(container, SWT.BORDER | SWT.SINGLE);
 		setControl(container);
 	}

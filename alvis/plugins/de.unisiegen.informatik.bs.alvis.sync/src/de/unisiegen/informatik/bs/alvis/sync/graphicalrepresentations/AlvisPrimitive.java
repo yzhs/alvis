@@ -23,7 +23,7 @@ public class AlvisPrimitive implements GraphicalRepresentation {
 		this.name = name;
 		intValue = value;
 		label = new Label(scenario.getPrimitivesScroll(), SWT.NONE);
-		label.setText("int " + name + " = " + intValue);
+		label.setText("int " + name + " = " + intValue); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	public AlvisPrimitive(AlvisScenario scenario, String name, int value, int id) {
@@ -33,7 +33,7 @@ public class AlvisPrimitive implements GraphicalRepresentation {
 		this.name = name;
 		intValue = value;
 		label = new Label(scenario.getPrimitivesScroll(), SWT.NONE);
-		label.setText("int " + name + " = " + intValue);
+		label.setText("int " + name + " = " + intValue); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
 	public AlvisPrimitive(AlvisScenario scenario, String name, boolean value) {
@@ -43,7 +43,7 @@ public class AlvisPrimitive implements GraphicalRepresentation {
 		this.name = name;
 		boolValue = value;
 		label = new Label(scenario.getPrimitivesScroll(), SWT.NONE);
-		label.setText("boolean " + name + " = " + (value ? "true" : "false"));
+		label.setText("boolean " + name + " = " + (value ? "true" : "false")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		
 	}
 	
@@ -54,7 +54,7 @@ public class AlvisPrimitive implements GraphicalRepresentation {
 		this.name = name;
 		boolValue = value;
 		label = new Label(scenario.getPrimitivesScroll(), SWT.NONE);
-		label.setText("boolean " + name + " = " + (value ? "true" : "false"));
+		label.setText("boolean " + name + " = " + (value ? "true" : "false")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		
 	}
 	
@@ -62,7 +62,7 @@ public class AlvisPrimitive implements GraphicalRepresentation {
 		intValue = i;
 		d.syncExec(new Runnable() {
 			public void run() {
-				label.setText("int " + name + " = " + intValue);
+				label.setText("int " + name + " = " + intValue); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		});
 	}
@@ -71,7 +71,7 @@ public class AlvisPrimitive implements GraphicalRepresentation {
 		boolValue = b;
 		d.syncExec(new Runnable() {
 			public void run() {
-				label.setText("boolean " + name + " = " + (boolValue ? "true" : "false"));
+				label.setText("boolean " + name + " = " + (boolValue ? "true" : "false")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 			}
 		});
 	}

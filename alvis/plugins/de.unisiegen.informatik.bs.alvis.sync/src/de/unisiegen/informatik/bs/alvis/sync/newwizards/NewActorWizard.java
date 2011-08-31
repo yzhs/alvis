@@ -14,7 +14,7 @@ public class NewActorWizard extends Wizard implements INewWizard {
 	private AlvisScenario myScenario;
 	
 	public NewActorWizard() {
-		setWindowTitle("create new actor");
+		setWindowTitle(Messages.NewActorWizard_newActorWizard);
 	}
 
 	@Override

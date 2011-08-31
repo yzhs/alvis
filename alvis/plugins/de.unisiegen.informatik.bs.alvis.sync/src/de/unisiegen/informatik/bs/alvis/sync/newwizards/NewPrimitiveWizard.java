@@ -19,7 +19,7 @@ public class NewPrimitiveWizard extends Wizard implements IWizard {
 	private AlvisScenario myScenario;
 	
 	public NewPrimitiveWizard() {
-		setWindowTitle("Create new primitive");
+		setWindowTitle(Messages.NewPrimitiveWizard_createNewPrimitiveWizard);
 	}
 	
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
@@ -44,20 +44,20 @@ public class NewPrimitiveWizard extends Wizard implements IWizard {
 				return true;
 			} catch (NumberFormatException e) {
 				Shell s = Activator.getDefault().getWorkbench().getActiveWorkbenchWindow().getShell();
-				Status st = new Status(IStatus.ERROR, "Alvis", e.getMessage(), e);
-				ErrorDialog.openError(s, "Input error", "The value you entered is not an integer", st);
+				Status st = new Status(IStatus.ERROR, "Alvis", e.getMessage(), e); //$NON-NLS-1$
+				ErrorDialog.openError(s, Messages.NewPrimitiveWizard_inputError, Messages.NewPrimitiveWizard_notInteger, st);
 				return false;
 			}
 		case 1: //bool
 			boolean v;
-			if (value.equals("true") || value.equals("t") || value.equals("1")) {
+			if (value.equals("true") || value.equals("t") || value.equals("1")) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				v = true;
-			} else if (value.equals("false") || value.equals("f") || value.equals("0")) {
+			} else if (value.equals("false") || value.equals("f") || value.equals("0")) { //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 				v = false;
 			} else {
 				Shell s = Activator.getDefault().getWorkbench().getActiveWorkbenchWindow().getShell();
-				Status st = new Status(IStatus.ERROR, "Alvis", value + "is not a valid boolean value");
-				ErrorDialog.openError(s, "Input error", "The value you entered is not an integer", st);
+				Status st = new Status(IStatus.ERROR, "Alvis", value + Messages.NewPrimitiveWizard_notBool1); //$NON-NLS-1$
+				ErrorDialog.openError(s, "Input error", Messages.NewPrimitiveWizard_notBool2, st); //$NON-NLS-1$
 				return false;
 			}
 			AlvisPrimitive p = new AlvisPrimitive(myScenario, name, v);
@@ -65,8 +65,8 @@ public class NewPrimitiveWizard extends Wizard implements IWizard {
 			return true;
 		default:
 			Shell s = Activator.getDefault().getWorkbench().getActiveWorkbenchWindow().getShell();
-			Status st = new Status(IStatus.ERROR, "Alvis", "Oooops");
-			ErrorDialog.openError(s, "Input error", "Fuck...", st);
+			Status st = new Status(IStatus.ERROR, "Alvis", "Oooops"); //$NON-NLS-1$ //$NON-NLS-2$
+			ErrorDialog.openError(s, "Input error", Messages.NewPrimitiveWizard_17, st); //$NON-NLS-1$
 			return false;
 		} 
 	}

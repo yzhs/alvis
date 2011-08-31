@@ -14,7 +14,7 @@ public class NewConditionWizard extends Wizard implements INewWizard {
 	private AlvisScenario myScenario;
 
 	public NewConditionWizard() {
-		setWindowTitle("create new condition");
+		setWindowTitle(Messages.NewConditionWizard_createNewConditionWizardTitle);
 	}
 
 	@Override

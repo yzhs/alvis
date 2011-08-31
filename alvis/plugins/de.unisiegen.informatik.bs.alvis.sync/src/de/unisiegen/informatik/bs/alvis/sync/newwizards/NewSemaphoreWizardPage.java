@@ -15,9 +15,9 @@ public class NewSemaphoreWizardPage extends WizardPage {
 	private Composite container;
 
 	public NewSemaphoreWizardPage() {
-		super("Add a semaphore");
-		setTitle("Add a semaphore");
-		setDescription("This wizard adds a new semaphore to the scenario");
+		super(Messages.NewSemaphoreWizardPage_addSemaphorePageTitle);
+		setTitle("Add a semaphore"); //$NON-NLS-1$
+		setDescription(Messages.NewSemaphoreWizardPage_semaphoreWizardPageDescription);
 	}
 
 	@Override
@@ -27,10 +27,10 @@ public class NewSemaphoreWizardPage extends WizardPage {
 		container.setLayout(layout);
 		layout.numColumns = 2;
 		Lname = new Label(container, SWT.NULL);
-		Lname.setText("Enter a name for the semaphore");
+		Lname.setText(Messages.NewSemaphoreWizardPage_semaphoreName);
 		name = new Text(container, SWT.BORDER | SWT.SINGLE);
 		Lcounter = new Label(container, SWT.NULL);
-		Lcounter.setText("Initial value of semaphore counter");
+		Lcounter.setText(Messages.NewSemaphoreWizardPage_semaphoreCounter);
 		counter = new Text(container, SWT.BORDER | SWT.SINGLE);
 		setControl(container);
 	}

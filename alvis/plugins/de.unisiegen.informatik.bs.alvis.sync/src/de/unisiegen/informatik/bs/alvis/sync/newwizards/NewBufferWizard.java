@@ -21,7 +21,7 @@ public class NewBufferWizard extends Wizard implements INewWizard {
 	private AlvisScenario myScenario;
 	
 	public NewBufferWizard() {
-		setWindowTitle("create new buffer");
+		setWindowTitle(Messages.NewBufferWizard_createNewBufferWizardTitle);
 	}
 
 	@Override
@@ -45,8 +45,8 @@ public class NewBufferWizard extends Wizard implements INewWizard {
 			return true;
 		} catch (NumberFormatException e) {
 			Shell s = Activator.getDefault().getWorkbench().getActiveWorkbenchWindow().getShell();
-			Status st = new Status(IStatus.ERROR, "Alvis", e.getMessage(), e);
-			ErrorDialog.openError(s, "Input error", "The value you entered is not an integer", st);
+			Status st = new Status(IStatus.ERROR, "Alvis", e.getMessage(), e); //$NON-NLS-1$
+			ErrorDialog.openError(s, Messages.NewBufferWizard_inputError, Messages.NewBufferWizard_notInteger, st);
 			return false;
 		}
 	}

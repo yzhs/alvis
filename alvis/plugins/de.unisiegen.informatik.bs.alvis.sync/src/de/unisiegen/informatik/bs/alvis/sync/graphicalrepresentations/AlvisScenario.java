@@ -57,7 +57,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 
 		Group primitives = new Group(container, SWT.NONE);
 		primitives.setBounds(5, 5, 192, 294);
-		primitives.setText("Primitives");
+		primitives.setText(Messages.AlvisScenario_primitives);
 
 		primitivesScroll = new ScrolledComposite(primitives, SWT.BORDER
 				| SWT.H_SCROLL | SWT.V_SCROLL);
@@ -68,7 +68,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 
 		Button primAdd = new Button(primitives, SWT.NONE);
 		primAdd.setBounds(10, 266, 90, 26);
-		primAdd.setText("Add");
+		primAdd.setText(Messages.AlvisScenario_add);
 		primAdd.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				NewPrimitiveWizard w = new NewPrimitiveWizard();
@@ -91,11 +91,11 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 
 		Button primDel = new Button(primitives, SWT.NONE);
 		primDel.setBounds(106, 266, 82, 26);
-		primDel.setText("Delete");
+		primDel.setText(Messages.AlvisScenario_delete);
 
 		Group semaphores = new Group(container, SWT.NONE);
 		semaphores.setBounds(202, 5, 194, 294);
-		semaphores.setText("Semaphores");
+		semaphores.setText(Messages.AlvisScenario_semaphores);
 
 		semaphoresScroll = new ScrolledComposite(semaphores, SWT.BORDER
 				| SWT.H_SCROLL | SWT.V_SCROLL);
@@ -104,7 +104,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		semaphoresScroll.setExpandVertical(true);
 
 		Button semaAdd = new Button(semaphores, SWT.NONE);
-		semaAdd.setText("Add");
+		semaAdd.setText("Add"); //$NON-NLS-1$
 		semaAdd.setBounds(12, 266, 90, 26);
 		semaAdd.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
@@ -127,12 +127,12 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		});
 
 		Button semaDel = new Button(semaphores, SWT.NONE);
-		semaDel.setText("Delete");
+		semaDel.setText("Delete"); //$NON-NLS-1$
 		semaDel.setBounds(108, 266, 82, 26);
 
 		Group conditions = new Group(container, SWT.NONE);
 		conditions.setBounds(401, 5, 194, 294);
-		conditions.setText("Conditions");
+		conditions.setText(Messages.AlvisScenario_conditions);
 
 		conditionsScroll = new ScrolledComposite(conditions, SWT.BORDER
 				| SWT.H_SCROLL | SWT.V_SCROLL);
@@ -141,7 +141,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		conditionsScroll.setExpandVertical(true);
 
 		Button condAdd = new Button(conditions, SWT.NONE);
-		condAdd.setText("Add");
+		condAdd.setText("Add"); //$NON-NLS-1$
 		condAdd.setBounds(10, 266, 90, 26);
 		condAdd.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
@@ -164,12 +164,12 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		});
 
 		Button condDel = new Button(conditions, SWT.NONE);
-		condDel.setText("Delete");
+		condDel.setText("Delete"); //$NON-NLS-1$
 		condDel.setBounds(106, 266, 82, 26);
 
 		Group actors = new Group(container, SWT.NONE);
 		actors.setBounds(604, 5, 190, 294);
-		actors.setText("Actors");
+		actors.setText(Messages.AlvisScenario_actors);
 
 		actorsScroll = new ScrolledComposite(actors, SWT.BORDER | SWT.H_SCROLL
 				| SWT.V_SCROLL);
@@ -179,7 +179,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		actorsScroll.setExpandVertical(true);
 
 		Button actAdd = new Button(actors, SWT.NONE);
-		actAdd.setText("Add");
+		actAdd.setText("Add"); //$NON-NLS-1$
 		actAdd.setBounds(10, 266, 90, 26);
 		actAdd.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
@@ -202,24 +202,24 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		});
 
 		Button actDel = new Button(actors, SWT.NONE);
-		actDel.setText("Delete");
+		actDel.setText("Delete"); //$NON-NLS-1$
 		actDel.setBounds(106, 266, 82, 26);
 
 		final Button needBuffer = new Button(container, SWT.CHECK);
 		needBuffer.setBounds(15, 322, 164, 23);
-		needBuffer.setText("Scenario needs buffer");
+		needBuffer.setText(Messages.AlvisScenario_needBuffer);
 
 		final Button needOutput = new Button(container, SWT.CHECK);
 		needOutput.setBounds(15, 350, 169, 23);
-		needOutput.setText("Scenario needs output");
+		needOutput.setText(Messages.AlvisScenario_needOutput);
 
 		final Group grpBuffer = new Group(container, SWT.NONE);
 		grpBuffer.setBounds(202, 305, 198, 244);
-		grpBuffer.setText("Buffer");
+		grpBuffer.setText(Messages.AlvisScenario_buffer);
 		grpBuffer.setVisible(false);
 
 		final Group grpOutput = new Group(container, SWT.NONE);
-		grpOutput.setText("Output");
+		grpOutput.setText(Messages.AlvisScenario_output);
 		grpOutput.setBounds(411, 305, 184, 244);
 		grpOutput.setVisible(false);
 
@@ -253,7 +253,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		needOutput.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				if (needOutput.getSelection()) {
-					AlvisOutput o = new AlvisOutput(scenario, "");
+					AlvisOutput o = new AlvisOutput(scenario, ""); //$NON-NLS-1$
 					setOutput(o);
 					admin.setOutput(o);
 				} else {

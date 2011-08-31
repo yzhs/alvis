@@ -14,9 +14,9 @@ public class NewBufferWizardPage extends WizardPage {
 	private Composite container;
 
 	public NewBufferWizardPage() {
-		super("Add a buffer");
-		setTitle("Add a buffer");
-		setDescription("This wizard adds a new buffer to the scenario");
+		super(Messages.NewBufferWizardPage_newBufferWizardPageTitle);
+		setTitle("Add a buffer"); //$NON-NLS-1$
+		setDescription(Messages.NewBufferWizardPage_newBufferWizardPageDescription);
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class NewBufferWizardPage extends WizardPage {
 		container.setLayout(layout);
 		layout.numColumns = 2;
 		lCapacity = new Label(container, SWT.NULL);
-		lCapacity.setText("Number of places in the buffer");
+		lCapacity.setText(Messages.NewBufferWizardPage_bufferPlaces);
 		capacity = new Text(container, SWT.BORDER | SWT.SINGLE);
 		setControl(container);
 	}

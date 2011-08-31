@@ -16,9 +16,9 @@ public class NewPrimitiveWizardPage extends WizardPage {
 	private Label lName, lValue, lType;
 
 	public NewPrimitiveWizardPage() {
-		super("Add a primitive");
-		setTitle("Add a primitive");
-		setDescription("This wizard adds a new primitive variable to the scenario");
+		super(Messages.NewPrimitiveWizardPage_addPrimitiveWizardPageTitle);
+		setTitle("Add a primitive"); //$NON-NLS-1$
+		setDescription(Messages.NewPrimitiveWizardPage_addPrimitiveWizardPageDescription);
 	}
 
 	@Override
@@ -28,16 +28,16 @@ public class NewPrimitiveWizardPage extends WizardPage {
 		container.setLayout(layout);
 		layout.numColumns = 2;
 		lType = new Label(container, SWT.NULL);
-		lType.setText("Select type");
+		lType.setText(Messages.NewPrimitiveWizardPage_selectType);
 		type = new Combo(container, SWT.READ_ONLY | SWT.DROP_DOWN);
-		String[] typeValues = {"Integer", "Boolean"};
+		String[] typeValues = {"Integer", "Boolean"}; //$NON-NLS-1$ //$NON-NLS-2$
 		
 		type.setItems(typeValues);
 		lName = new Label(container, SWT.NULL);
-		lName.setText("Enter a name for the primitive");
+		lName.setText(Messages.NewPrimitiveWizardPage_primitiveName);
 		name = new Text(container, SWT.BORDER | SWT.SINGLE);
 		lValue = new Label(container, SWT.NULL);
-		lValue.setText("Enter a value for the primitive");
+		lValue.setText(Messages.NewPrimitiveWizardPage_primitiveValue);
 		value = new Text(container, SWT.BORDER | SWT.SINGLE);
 		setControl(container);
 	}

@@ -16,7 +16,7 @@ public class NewScenarioWizard extends Wizard implements INewWizard {
 	private NewScenarioWizardPage page;
 	
 	public NewScenarioWizard() {
-		setWindowTitle(Messages.NewScenarioWizard_title);
+		setWindowTitle(Messages.NewScenarioWizard_createNewScenarioWizardTitle);
 	}
 	
 	@Override

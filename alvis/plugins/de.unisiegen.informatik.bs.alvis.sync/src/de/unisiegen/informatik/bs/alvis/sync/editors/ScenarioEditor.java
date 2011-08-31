@@ -9,27 +9,17 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
 
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.jface.viewers.ISelection;
-import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.List;
-import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
-import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 import org.eclipse.ui.part.FileEditorInput;
@@ -38,14 +28,9 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
-import de.unisiegen.informatik.bs.alvis.sync.Activator;
 import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisSave;
 import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisScenario;
-import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisSemaphore;
 import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisSerialize;
-import de.unisiegen.informatik.bs.alvis.sync.newwizards.NewConditionWizard;
-import de.unisiegen.informatik.bs.alvis.sync.newwizards.NewPrimitiveWizard;
-import de.unisiegen.informatik.bs.alvis.sync.newwizards.NewSemaphoreWizard;
 
 public class ScenarioEditor extends EditorPart implements
 		PropertyChangeListener, IExportItem {
@@ -172,7 +157,7 @@ public class ScenarioEditor extends EditorPart implements
 	public void clearScenario() {
 		MessageBox sure = new MessageBox(scenario.getMyDisplay().getActiveShell(), SWT.ICON_WARNING
 				| SWT.YES | SWT.NO);
-		sure.setMessage(Messages.getLabel("resetAll"));
+		sure.setMessage(Messages.ScenarioEditor_resetAll);
 
 		if (sure.open() == SWT.YES) {
 			scenario.resetContent();

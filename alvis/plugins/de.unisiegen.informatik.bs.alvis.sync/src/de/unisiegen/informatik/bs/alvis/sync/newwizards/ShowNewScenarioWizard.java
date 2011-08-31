@@ -11,7 +11,7 @@ import org.eclipse.ui.handlers.HandlerUtil;
 
 public class ShowNewScenarioWizard extends AbstractHandler {
 	
-	public static final String HANDLING_COMMAND_ID = "de.unisiegen.informatik.bs.alvis.sync.commands.showNewScenarioWizard";
+	public static final String HANDLING_COMMAND_ID = "de.unisiegen.informatik.bs.alvis.sync.commands.showNewScenarioWizard"; //$NON-NLS-1$
 
 	@Override
 	public Object execute(ExecutionEvent event) throws ExecutionException {

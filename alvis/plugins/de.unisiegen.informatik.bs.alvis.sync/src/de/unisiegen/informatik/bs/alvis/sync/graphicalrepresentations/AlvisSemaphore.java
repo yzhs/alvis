@@ -60,7 +60,7 @@ public class AlvisSemaphore implements GraphicalRepresentationSemaphore {
 				} else {
 					label.setBackground(WAIT);
 				}
-				label.setText("Semaphore " + name + ": " + count);
+				label.setText("Semaphore " + name + ": " + count); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		});
 	}
@@ -86,7 +86,7 @@ public class AlvisSemaphore implements GraphicalRepresentationSemaphore {
 	}
 
 	public String toString() {
-		return name + ": " + count; 
+		return name + ": " + count;  //$NON-NLS-1$
 	}
 	
 	public Label getLabel() {
