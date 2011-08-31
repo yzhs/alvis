@@ -11,7 +11,7 @@
 \usepackage{inputenc}
 \usepackage[german]{babel}
 \usepackage[T1]{fontenc}
-\usepackage{hyperref}
+\usepackage[linkcolor=black,urlcolor=blue,colorlinks=true]{hyperref}
 \renewcommand{\familydefault}{\sfdefault}
 \usepackage{helvet}
 \setcounter{secnumdepth}{4}
@@ -39,6 +39,7 @@ Alvis als RCP Projekt kann am besten mit Eclipse weiterentwickelt werden, wir ha
 Es besteht die Möglichkeit bei eclipse.org das Paket ,,Eclipse for RCP and RAP Developers'' herunterzuladen, dies ist ein komplett vorkonfiguriertes und mit allen Abhängigkeiten bestücktes Eclipse.
 
 Falls ein bereits vorhandenes Eclipse für die Entwicklung von Alvis benutzt werden soll, kann man die benötigten Plug-ins auch über die Update Funktion von Eclipse beziehen.
+
 \subsection{SVN}
 Für die Versionskontrolle und zur zentralen Ablage benutzen wir ein zur Verfügung gestelltes SVN. Entsprechendes Plugins und Programme sind für Eclipse und jedes Betriebssystem verfügbar. 
 
@@ -48,10 +49,10 @@ Für das (Weiter-)Entwickeln der Plug-ins für Alvis sind Kenntnisse im Umgang m
 \begin{itemize}
 \item Vogella.de - Sehr zu empfehlen für Einsteiger. \\
 Lars Vogels Tutorial für Eclipse RCP bietet einen guten Einstieg in die Welt von RCP. Anfänger sollten hier beginnen.\\
-http://www.vogella.de/articles/EclipseRCP/article.html
+\url{http://www.vogella.de/articles/EclipseRCP/article.html}
 \item RalfEbert.de - RCP Buch für fortgeschrittene. \\
 Ralf Ebert hat ein Buch über RCP in Form einer Webseite veröffentlicht. In diesem Buch werden in jedem Kapitel andere Konzepte von RCP erklärt. \\
-http://www.ralfebert.de/eclipse\_rcp/
+\url{http://www.ralfebert.de/eclipse\_rcp/}
 \item Einstieg in Eclipse 3.5 - Künneth, Thomas \\
 Wer lieber etwas in der Hand hat, der ist mit diesem Buch gut bedient. Hier wird Eclipse RCP gut erläutert. \\
 Verfügbar in der Uni-Bibliothek, ISBN: 978-3-8362-1428-5
@@ -72,11 +73,13 @@ Alle Plug-ins befinden sich im SVN - Ordner ,,trunk/alvis''.
  \item ,,de.unisiegen.informatik.bs.alvis.runvisualizer''\\
  \item ,,de.unisiegen.informatik.bs.alvis.export''\\
  \item ,,de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist''\\
+	  An diesem Extension Point registrieren Plug-ins, die Datentypen bereitstellen,
+	  welche Datentypen sie bereitstellen und in welchen Paketen diese enthalten sind.
  \item ,,de.unisiegen.informatik.bs.alvis.extensionpoints.fileextension''\\
 	  An diesem Extension Point registrieren sich Plug-Ins, die eine Algorithmen-Art
 	  bereitstellen, dies wird durch ihre Dateiendung gekennzeichnet. Dazu muss das Interface
 	  de.\-unisiegen.\-informatik.\-bs.\-alvis.\-extension\-points.\-IFileExtension im jeweiligen
-	  Plug-In implementiert werden.
+	  Plug-in implementiert werden.
 \end{itemize}
 
 \subsection{Plug-ins für Alvis}
@@ -115,7 +118,7 @@ Das Graph Plug-in erweitert Alvis um die Datentypen Graph, Knoten und Kante.
 
 
 
-\subsection{Virtual Machine Plug-In}
+\subsection{Virtual Machine Plug-in}
 Die Virtual Machine steuert den Ablauf eines Algorithmus. Sie ist für die Verwaltung der einzelnen
 Schritte der Threads verantwortlich.
 
@@ -154,13 +157,13 @@ Im Folgenden werden die einzelnen Klassen kurz erläutert, alle Einzelheiten sin
  \item VirtualMachine \\
 	Das Schnittstellen Objekt zur GUI, diese arbeitet nur auf der VirtualMachine.
 \end{itemize}
-\subsection{Die Help-Plug-Ins}
-Die Help-Plug-Ins sind dazu da, dem User Hilfestellung zu leisten. Man erreicht sie in Alvis über Hilfe->Hilfeinhalte.\\
+\subsection{Die Help-Plug-ins}
+Die Help-Plug-ins sind dazu da, dem User Hilfestellung zu leisten. Man erreicht sie in Alvis über Hilfe->Hilfeinhalte.\\
 Der Aufbau gestaltet sich wie folgt:\\
-Plug-Ins müssen den Extension Point org.eclipse.help.toc implementieren und dort eine Help Table of Contens bereitstellen.
+Plug-ins müssen den Extension Point org.eclipse.help.toc implementieren und dort eine Help Table of Contens bereitstellen.
 Der Pfad zu dieser TOC muss \$nl\$/NameDerTOC.xml lauten, damit die Hilfe in mehreren Sprachen zur Verfügung gestellt werden kann.
 Die deutschen Hilfeseiten - und somit auch die deutsche Table of Contents - befinden sich alle im Ordner nl/de, die 
-standardmäßig angezeigte, englische direkt im Plug-In. Konvention ist, für HTML-Seiten einen Unterordner html anzulegen,
+standardmäßig angezeigte, englische direkt im Plug-in. Konvention ist, für HTML-Seiten einen Unterordner html anzulegen,
 um die Übersicht zu bewahren.
 
 \newpage
@@ -168,7 +171,7 @@ um die Übersicht zu bewahren.
 \section{Erste Schritte}
 Wir werden den Export des Programms und der Plug-ins über eine Update Seite und über Features bewältigen. Dazu empfehlen wir das Tutorial von Ralf Ebert zur Update Funktionalität in RCP.
 \\ \\
-http://www.ralfebert.de/blog/eclipsercp/p2\_updates\_tutorial\_36/
+\url{http://www.ralfebert.de/blog/eclipsercp/p2\_updates\_tutorial\_36/}
 \\ \\
 Neben den Projekten aus dem vorherigen Kapitel benötigen wir nun auch die Feature-Projekte aus dem Ordner ,,trunk/export''.
 
@@ -244,7 +247,7 @@ Wir bestätigen die obigen Einstellungen und klicken auf ,,Next''.
 Im nächsten Fenster wählen wir die Plattformen aus, die wir bedienen möchten.
 Nachdem wir auf ,,Finish'' geklickt haben und der Export abgeschlossen ist, können wir im Zielverzeichnis die Ordner für die einzelnen Plattformen finden.
 \\ \\
-Beim Export wurden im Ordner ,,repository'' die Java Archive generiert, die eine ältere Version von Alvis bei einem Klick auf ,,Help'' \(\rightarrow \) ,,Check for Updates'' für ein Update auf unsere neue Version benötigt. Als Standard Update Pfad ist für Alvis die ,,Alvis Update Seite\footnote{http://alvis.bs.informatik.uni-siegen.de/update/}'' eingetragen also muss der Inhalt des Ordners ,,repository'' in diesen Ordner kopiert werden.
+Beim Export wurden im Ordner ,,repository'' die Java Archive generiert, die eine ältere Version von Alvis bei einem Klick auf ,,Help'' \(\rightarrow \) ,,Check for Updates'' für ein Update auf unsere neue Version benötigt. Als Standard Update Pfad ist für Alvis die ,,Alvis Update Seite\footnote{\url{http://alvis.bs.informatik.uni-siegen.de/update/}}'' eingetragen also muss der Inhalt des Ordners ,,repository'' in diesen Ordner kopiert werden.
 
 Dies geschieht über einen ,,commit'' der Update Seite.
 

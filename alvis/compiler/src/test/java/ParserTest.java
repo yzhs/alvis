@@ -85,15 +85,21 @@ public class ParserTest {
 	}
 
 	// Templates for parser tests
-	/*
-	 * 
-	 * @Test public void <++>() { String algorithm = "main() begin <++> end\n";
-	 * //$NON-NLS-1$ negativeTest(algorithm); }
-	 * 
-	 * @Test public void <++>() { String algorithm = "main() begin\n" + "<++>\n"
-	 * + "end\n"; //$NON-NLS-1$ String stringTree = test(algorithm);
-	 * printAndAssert(stringTree, stringTree.<++>); }
-	 */
+/*
+
+	@Test
+	public void <++>() {
+		String algorithm = "main() begin <++> end\n"; //$NON-NLS-1$
+		negativeTest(algorithm);
+	}
+
+	@Test
+	public void <++>() {
+		String algorithm = "main() begin\n" + "<++>\n" + "end\n"; //$NON-NLS-1$
+		String stringTree = test(algorithm);
+		printAndAssert(stringTree, stringTree.<++>);
+	}
+*/	
 
 	@Test
 	public void functionDefinitionSuccess1() {
@@ -437,5 +443,22 @@ public class ParserTest {
 			e.printStackTrace();
 		}
 		assert rule.getTree() == null;
+	}
+
+	@Test
+	public void declarationNotAStatement() {
+		String algorithm = "main() begin if true: Integer a, end\n"; //$NON-NLS-1$
+		negativeTest(algorithm);
+	}
+	@Test
+	public void memberNotAStatement() {
+		String algorithm = "main() begin Graph G, G.vertices, end\n"; //$NON-NLS-1$
+		negativeTest(algorithm);
+	}
+
+	@Test
+	public void arrayElementNotAStatement() {
+		String algorithm = "main() begin Integer[] a, a[0], end\n"; //$NON-NLS-1$
+		negativeTest(algorithm);
 	}
 }
