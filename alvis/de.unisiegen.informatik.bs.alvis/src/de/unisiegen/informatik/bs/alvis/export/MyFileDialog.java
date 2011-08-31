@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.awt.SWT_AWT;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
@@ -12,57 +13,101 @@ import org.eclipse.swt.widgets.Shell;
 import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.editors.Messages;
 
-//TODO replace static strings with dynamic, language-specific files
 /**
  * own file dialog which asks if existing file shall be overwritten at saving
  * 
  * @author Frank Weiler
  * 
  */
-public class MyFileDialog {
+public class MyFileDialog extends FileDialog {
 
+	private int fileEnding;
+	
 	/**
-	 * creates file chooser for exporting alvis to pdf
+	 * creates file chooser for exporting alvis to pdf or whatever
 	 * 
-	 * @return dialog a file dialog for exporting alvis to pdf
+	 * @param exportToWhat
+	 *            which options the file dialog shall show as possible file
+	 *            endings: 0==pdf; 1==png,jpg
+	 * 
 	 */
-	public static FileDialog getExportDialog() {
-		Shell shell = new Shell();
-		FileDialog dialog = new FileDialog(shell, SWT.SAVE);
-		dialog.setText(Messages.getLabel("saveExport"));
-		dialog.setFilterNames(new String[] { "PDF (*.pdf)", Messages.getLabel("allFiles") });
-		dialog.setFilterExtensions(new String[] { "*.pdf", "*.*" });
+	public MyFileDialog(int exportToWhat) {
+
+		super(new Shell(), SWT.SAVE);
+
+		String[] fileNames = null;
+		String[] extensions = null;
+		String defaultEnding = ".pdf";
+		if (exportToWhat == 0) {
+			fileNames = new String[] { "PDF (*.pdf)",
+					Messages.getLabel("allFiles") };
+			extensions = new String[] { "*.pdf", "*.*" };
+		} else if (exportToWhat == 1) {
+			fileNames = new String[] { "PNG (*.png)", "JPG (*.jpg)",
+					Messages.getLabel("allFiles") };
+
+			extensions = new String[] { "*.png", "*.jpg", "*.*" };
+			defaultEnding = ".png";
+		} else {
+			return;
+		}
+
+		setText(Messages.getLabel("saveExport"));
+		setFilterNames(fileNames);
+		setFilterExtensions(extensions);
 		try {
-			dialog.setFilterPath(FileLocator.getBundleFile(
+			setFilterPath(FileLocator.getBundleFile(
 					Activator.getDefault().getBundle()).getAbsolutePath());
 		} catch (IOException e) {
 		}
 
-		dialog.setFileName(Messages.getLabel("alvisExport_") + ((System.currentTimeMillis()/1000)%100000) + ".pdf");
-
-		return dialog;
+		setFileName(Messages.getLabel("alvisExport_")
+				+ ((System.currentTimeMillis() / 1000) % 1000) + defaultEnding);
 	}
 
+	@Override
+	protected void checkSubclass() {
+		// important, without this (empty) method subclassing is not allowed
+	}
+
+
+	@Override
 	/**
 	 * opens file chooser, asks if already existing file shall be replaced
 	 * 
-	 * @dialog the file dialog to open
 	 * @return path the chosen file path
 	 */
-	public static String open(FileDialog dialog) {
-		String path = dialog.open();
+	public String open() {
+		String path = super.open();
 
 		if (path == null)
 			return null;// operation canceled
 		if (new File(path).exists()) {
-			MessageBox mb = new MessageBox(dialog.getParent(), SWT.ICON_WARNING
+			MessageBox mb = new MessageBox(getParent(), SWT.ICON_WARNING
 					| SWT.YES | SWT.NO);
 			mb.setMessage(path + Messages.getLabel("alreadyExists"));
 			if (mb.open() == SWT.NO) {
-				return open(dialog);
+				return open();
 			}
 		}
+		
+		if(path.toLowerCase().endsWith("png")){
+			setFileEnding(SWT.IMAGE_PNG);
+		} else if(path.toLowerCase().endsWith("jpg")){
+			setFileEnding(SWT.IMAGE_JPEG);
+		} else {
+			setFileEnding(SWT.IMAGE_UNDEFINED);
+		}
+
 		return path;
+	}
+
+	public void setFileEnding(int fileEnding) {
+		this.fileEnding = fileEnding;
+	}
+
+	public int getFileEnding() {
+		return fileEnding;
 	}
 
 }

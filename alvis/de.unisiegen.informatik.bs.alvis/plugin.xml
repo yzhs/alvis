@@ -162,7 +162,12 @@
             <command
                   commandId="de.unisiegen.informatik.bs.alvis.commands.ExportTo"
                   icon="icons/menubar/pdf.png"
-                  label="Save as PDF"
+                  label="%file.saveAsPdf"
+                  style="push">
+            </command>
+            <command
+                  commandId="de.unisiegen.informatik.bs.alvis.commands.ExportToImage"
+                  label="%file.saveAsPicture"
                   style="push">
             </command>
             <command
@@ -539,6 +544,11 @@
             defaultHandler="de.unisiegen.informatik.bs.alvis.editors.EditFontHandler"
             id="de.unisiegen.informatik.bs.alvis.commands.editor.editFont"
             name="%commands.editor.editFont">
+      </command>
+      <command
+            defaultHandler="de.unisiegen.informatik.bs.alvis.commands.ExportToImage"
+            id="de.unisiegen.informatik.bs.alvis.commands.ExportToImage"
+            name="%command.name.6">
       </command>
    </extension>
    <extension

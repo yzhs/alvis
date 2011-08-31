@@ -228,7 +228,8 @@ public class RunEditor extends EditorPart implements IExportItem {
 		btnselectAlgorithmFile.setText(Messages.RunEditor_6);
 
 		Button btnOpenEditorAlgorithm = new Button(grpAlgorithmFile, SWT.NONE);
-		btnOpenEditorAlgorithm.setToolTipText(Messages.RunEditor_btnOpenEditorAlgorithm_toolTipText);
+		btnOpenEditorAlgorithm
+				.setToolTipText(Messages.RunEditor_btnOpenEditorAlgorithm_toolTipText);
 		btnOpenEditorAlgorithm.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -311,7 +312,8 @@ public class RunEditor extends EditorPart implements IExportItem {
 		btnSelectExampleFile.setText(Messages.RunEditor_16);
 
 		Button btnOpenExample = new Button(grpExampleFile, SWT.NONE);
-		btnOpenExample.setToolTipText(Messages.RunEditor_btnOpenExample_toolTipText);
+		btnOpenExample
+				.setToolTipText(Messages.RunEditor_btnOpenExample_toolTipText);
 		btnOpenExample.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				if (myExampleFile.getText().equals(""))
@@ -347,16 +349,19 @@ public class RunEditor extends EditorPart implements IExportItem {
 								.getShell(), new WorkbenchLabelProvider(),
 						new BaseWorkbenchContentProvider());
 				dialog.setTitle(Messages.RunEditor_17);
-				dialog.setMessage(NLS.bind(Messages.RunEditor_18, Activator.getDefault().getFileExtensionsAsCommaSeparatedList()));
+				dialog.setMessage(NLS.bind(Messages.RunEditor_18, Activator
+						.getDefault().getFileExtensionsAsCommaSeparatedList()));
 				dialog.setInput(ResourcesPlugin.getWorkspace().getRoot());
 				dialog.open();
 				if (dialog.getResult() != null) {
 					String result = ""; //$NON-NLS-1$
 					for (Object o : dialog.getResult())
 						result = o.toString();
-					for(String fileExtension : Activator.getDefault().getFileExtensions()){
+					for (String fileExtension : Activator.getDefault()
+							.getFileExtensions()) {
 						if (result.startsWith("L") & result.endsWith(fileExtension)) { //$NON-NLS-1$ //$NON-NLS-2$
-							result = result.substring(2); // cut the first two chars
+							result = result.substring(2); // cut the first two
+															// chars
 							myExampleFile.setText(result);
 							setDirty(true);
 						}
@@ -695,16 +700,26 @@ public class RunEditor extends EditorPart implements IExportItem {
 	@Override
 	public Image getImage() {
 		Image screenshot;
-		int width = Activator.getDefault().getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage().getActiveEditor()
-				.getEditorSite().getShell().getSize().x;
-		int height = Activator.getDefault().getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage().getActiveEditor()
-				.getEditorSite().getShell().getSize().y;
-		GC gc = new GC(Activator.getDefault().getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage().getActiveEditor()
-				.getEditorSite().getShell());
-		gc.drawText("Created by Alvis", 5, 5);
+
+		GC gc;
+		int width,height;
+		if (composite_1 != null) {
+			width = composite_1.getSize().x;
+			height = composite_1.getSize().y;
+			gc = new GC(composite_1);
+		} else {
+			width = Activator.getDefault().getWorkbench()
+					.getActiveWorkbenchWindow().getActivePage()
+					.getActiveEditor().getEditorSite().getShell().getSize().x;
+			height = Activator.getDefault().getWorkbench()
+					.getActiveWorkbenchWindow().getActivePage()
+					.getActiveEditor().getEditorSite().getShell().getSize().y;
+			gc = new GC(Activator.getDefault().getWorkbench()
+					.getActiveWorkbenchWindow().getActivePage()
+					.getActiveEditor().getEditorSite().getShell());
+		}
+
+		gc.drawText("Created by Alvis", width - 95, height - 20);
 		gc.drawRectangle(new Rectangle(0, 0, width - 1, height - 1));
 		screenshot = new Image(Display.getCurrent(), width, height);
 		gc.copyArea(screenshot, 0, 0);

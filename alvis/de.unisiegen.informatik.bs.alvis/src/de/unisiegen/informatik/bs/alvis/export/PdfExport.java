@@ -67,8 +67,8 @@ public class PdfExport extends Document {
 
 		try {
 
-			FileDialog saveDialog = MyFileDialog.getExportDialog();
-			String path = MyFileDialog.open(saveDialog);
+			MyFileDialog saveDialog = new MyFileDialog(0);
+			String path = saveDialog.open();
 			PdfWriter.getInstance(this, new FileOutputStream(path));
 
 			open();
