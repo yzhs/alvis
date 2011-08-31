@@ -1,15 +1,80 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
    <head>
-      <title>Title</title>
+   	  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+      <title>The Algorithm Editor</title>
    </head>
 
    <body>
       <h2>
-         Title
+         The Algorithm-Editor
       </h2>
-      <p>
-         Body
+      <p id="main">
+         Algorithms  using the Alvis language can be written with the Algorithm-Editor.
+         The editor supports the user by highlighting source code's syntax, by offering established completions and by highlighting incorrect code.
+         Common shortcuts, like "Ctrl + c" or "Ctrl + v" for copy and paste text can also be used in this editor.
+      </p>
+	  <ul>
+      	<li><a href="#codeCompletion">The Autocompletion</a></li>
+      	<li><a href="#errorMarking">Highlighting mistakes inside source code </a></li>
+      	<li><a href="#font">Changing font size and style</a></li>
+      </ul>
+      <p id="codeCompletion">
+      <h3>
+      The Autocompletion
+      </h3>
+      In the editor code can be completed by using the short key "Ctrl + space bar". 
+      Already defined variables, common keywords and types known by the compiler will be autocompleted.
+      Furthermore, the types' methods and attributes can be completed. 
+      A "()" is appended to methods, so one can identify them as functions, which are being autocompleted. </br>
+      <img align="middle" src="../images/codeVervollstaendigung.png" border="1">      
+      </p>
+      <p id="errorMarking">
+      <h3>
+      Highlighting mistakes inside source code
+      </h3>
+      Mistakes inside the source code are being highlighted while doing a 0.5 long break from typing.
+      When going to the end of the row which contains the error or by rolling the mouse pointer over the fault position, one can get support. </br>
+
+      <img align="middle" src="../images/errorMarking.png" border="1"></br>      
+      </p>
+      <p id="font">
+      <h3>
+      Changing font size and style
+      </h3>
+      The font size and style can be changed by using the buttons at the toolbar.
+      One can only see them, while an algorithm editor is active.</br>
+      <img align="middle" src="../images/ToolbarButtons.PNG" border="1"></br></br>
+      <b>Explanation of the buttons:</b></br>
+		<table border="1" cellspacing="0">
+			<thead>
+			<tr>
+			      <th ROWSPAN="1" COLSPAN="1"> <P CLASS="Para"> Symbol</P></TH>
+			      <th ROWSPAN="1" COLSPAN="1"> <P CLASS="Para"> Meaning</P></th>
+			</tr>
+			</thead>
+			  <tbody>
+				<tr>
+					<td align="center"><IMG align="middle" src="../images/text_increaseSize.png" width="16" height="16" border="0"></td>
+					<td>Enlarge the editor's font size by 4 .</td>
+				</tr>
+				<tr>
+					<td align="center"><IMG align="middle" src="../images/text_decreaseSize.png" width="16" height="16" border="0"></td>
+					<td>Reduce the editor's font size by 4.</td>
+				</tr>
+				<tr>
+					<td align="center"><IMG align="middle" src="../images/text_editFont.png" width="16" height="16" border="0"></td>
+					<td>Change the editor's font style. Here, the font size can be changed precisely.</td>
+				</tr>	
+			  </tbody>
+		</table>
+      </p>
+      <p id="lineNumbers">
+      <h3>
+      Line numbers
+      </h3>
+      Line numbers can be shown or hidden by right-clicking on the left border and choosing "....".</br>
+      <IMG align="middle" src="../images/lineNumbers.png" border="1">
       </p>
    </body>
 </html>
