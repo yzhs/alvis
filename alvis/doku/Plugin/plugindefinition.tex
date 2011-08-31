@@ -41,17 +41,17 @@ Sie müssen das Alvis Projekt in Ihrem Workspace importiert haben, da bei der En
 \section{Konventionen}
 \subsection{Namenskonventionen}
 Für bessere Übersichtlichkeit unter den Plug-ins wollen wir das neue Plug-in\\
-\textit{\textbf{de.unisiegen.informatik.bs.alvis.pluginname}} nennen. \\
+\emph{\textbf{de.unisiegen.informatik.bs.alvis.pluginname}} nennen. \\
 Weiterhin wird noch ein zweites Plug-in für die Datentypen mit dem Namen \\
-\textit{\textbf{de.unisiegen.informatik.bs.alvis.pluginname.datatypes}} angelegt.\\
+\emph{\textbf{de.unisiegen.informatik.bs.alvis.pluginname.datatypes}} angelegt.\\
 \\ \\
-\textit{Die langen Namen kommen von der RCP Konvention seine Plug-ins nach der Internetadresse (alvis.bs.informatik.uni-siegen.de) zu benennen, auf der man diese veröffentlicht.}
+\emph{Die langen Namen kommen von der RCP Konvention seine Plug-ins nach der Internetadresse (alvis.bs.informatik.uni-siegen.de) zu benennen, auf der man diese veröffentlicht.}
 \newpage
 
 \section{Bestandteile der Plug-ins}
-Primär stellt ein Plug-in nur die neuen Datentypen zur Verfügung. Daher ist der Kern des neuen Plug-ins das Plug-in \textit{de.unisiegen.informatik.bs.alvis.pluginname.datatypes}. \\
-Im Plug-in \textit{de.unisiegen.informatik.bs.alvis.pluginname} werden die Elemente implementiert, die es ermöglichen die neuen Datentypen zu visualisieren.
-\section{\textit{de.unisiegen.informatik.bs.alvis.pluginname.datatypes}}
+Primär stellt ein Plug-in nur die neuen Datentypen zur Verfügung. Daher ist der Kern des neuen Plug-ins das Plug-in \emph{de.unisiegen.informatik.bs.alvis.pluginname.datatypes}. \\
+Im Plug-in \emph{de.unisiegen.informatik.bs.alvis.pluginname} werden die Elemente implementiert, die es ermöglichen die neuen Datentypen zu visualisieren.
+\section{\emph{de.unisiegen.informatik.bs.alvis.pluginname.datatypes}}
 Dieses Plugin stellt nur Java-Klassen für andere Plug-ins zur Verfügung. Wir erstellen daher ein neues Plug-in Project mit den folgenden Einstellungen: \\
 
 \begin{center}
@@ -61,26 +61,27 @@ Dieses Plugin stellt nur Java-Klassen für andere Plug-ins zur Verfügung. Wir e
 \end{center}
 
 \subsection{Erstellen von Klassen für Datentypen}
-Als nächstes erstelle man für jeden Datentyp eine Klasse \textit{PseudoCodeDatentypname}. Diese Klasse muss von \textit{PCObject} erben.
+Als nächstes erstelle man für jeden Datentyp eine Klasse \emph{PCDatentypname}. Diese Klasse muss von \emph{PCObject} erben.
+Es ist wichtig darauf zu achten, dass der Klassenname mit den Buchstaben \emph{PC} beginnt. Dies ist für das Funktionieren des Compilers nötig.
 
 \lstset{language=java}
-\lstinputlisting[caption=Klasse PseudoCodeDatentyp,numbers=left]{sourcecode/PseudoCodeDatentypname.java}
+\lstinputlisting[caption=Klasse PCDatentyp,numbers=left]{sourcecode/PseudoCodeDatentypname.java}
 
 Man implementiere die abstrakten Methoden und überschreibe je nach Bedarf weitere Methoden. Natürlich müssen noch weitere Attribute und Methoden hinzugefügt werden, welche die Logik des Datentypen stellen.
-Als Beispiel sehe man sich den Datentypen Graph\footnote{de.unisiegen.informatik.bs.alvis.graph.datatypes.PseudoCodeGraph} aus dem Graph Plugin an. Dieser beinhaltet lediglich Knoten und Kanten. 
+Als Beispiel sehe man sich den Datentypen Graph\footnote{de.unisiegen.informatik.bs.alvis.graph.datatypes.PCGraph} aus dem Graph Plugin an. Dieser beinhaltet lediglich Knoten und Kanten. 
 Die definierte Schnittstelle\\
 \lstinline{public PCObject get(String memberName);}\\
 ermöglicht dann den Zugriff auf die Attribute.
 
 \subsection{Erstellen von Interfaces zur graphischen Repräsentation}
-Zu diesem Datentyp erstelle man nun ein Interface \textit{GraphicalRepresentationDatentypname}. Dieses Interface muss von \textit{GraphicalRepresentation} erben.
+Zu diesem Datentyp erstelle man nun ein Interface \emph{GraphicalRepresentationDatentypname}. Dieses Interface muss von \emph{GraphicalRepresentation} erben.
 
 \lstset{language=java}
 \lstinputlisting[caption=Interface GraphicalRepresentationDatentyp,numbers=left]{sourcecode/GraphicalRepresentationDatentypname.java}
 
 Dieses Interface wird nachher von der graphischen Repräsentation des neuen Datentyps implementiert. Hier ist es möglich die Schnittstellen zu definieren, welche die graphische Repräsentation auf den reinen Datentypen abbilden. Die graphische Repräsentation eines Datentypen enthält in der Regel noch weitere Metadaten (x- und y-Koordinaten auf dem Bildschirm, Schriftart...). Zum besseren Verständnis sehe man sich hier ebenfalls die Implementierung des Graph Plug-ins an.
 
-\section{\textit{de.unisiegen.informatik.bs.alvis.pluginname}}
+\section{\emph{de.unisiegen.informatik.bs.alvis.pluginname}}
 
 Als möchte ich einen Überblick geben, welche verbleibenden Teile in diesem Plug-in zusammengefasst werden.
 
@@ -98,7 +99,7 @@ Als möchte ich einen Überblick geben, welche verbleibenden Teile in diesem Plu
  
 \end{enumerate}
 
-Dieses Plug-in beinhaltet Klassen, die das Userinterface erweitern deswegen setzte man dieses mal bei \textit{,,This plug-in will make contributions to the UI''} einen Haken.
+Dieses Plug-in beinhaltet Klassen, die das Userinterface erweitern deswegen setzte man dieses mal bei \emph{,,This plug-in will make contributions to the UI''} einen Haken.
 
 \begin{center}
 \includegraphics[scale=0.449]{images/new_plugin_datatypes_03}
@@ -111,7 +112,7 @@ Dieses Plug-in beinhaltet Klassen, die das Userinterface erweitern deswegen setz
 %%%
 %%%
 \subsection{Visualisierung des Datentyps}
-Klassen zur Visualisierung des Datentyps wollen wir in das Package \\ \textit{,,de.unisiegen.informatik.bs.alvis.pluginname.graphicalrepresentations''} ablegen.\\ 
+Klassen zur Visualisierung des Datentyps wollen wir in das Package \\ \emph{,,de.unisiegen.informatik.bs.alvis.pluginname.graphicalrepresentations''} ablegen.\\ 
 \\
 Zur Visualisierung von Datentypen benötigt man eine Klasse, welche man an einen Editor oder an einen View hängen kann. Dazu muss diese Klasse einen Konstruktor der Form 
 \lstinline{Klasse(Composite parent, ...)} 
@@ -120,13 +121,13 @@ haben. Die neue Klasse kann sich dazu aus dem Paket
 \href{http://help.eclipse.org/helios/index.jsp?topic=/org.eclipse.platform.doc.isv/reference/api/org/eclipse/swt/widgets/package-summary.html}{http://help.eclipse.org/helios/index.jsp?topic=/org.eclipse.platform.doc.isv/reference/api/org/eclipse/swt/widgets/package-summary.html}}''
 bedienen. \\ 
 Damit aus der graphischen Repräsentation  muss die Klasse das von 
-\textit{GraphicalRepresentation}\footnote{Siehe dazu: Erstellen von Interfaces zur graphischen Repräsentation} abgeleitetes Interface aus dem Plug-in \\ \textit{,,de.unisiegen.informatik.bs.alvis.pluginname.datatypes''} implementieren.
+\emph{GraphicalRepresentation}\footnote{Siehe dazu: Erstellen von Interfaces zur graphischen Repräsentation} abgeleitetes Interface aus dem Plug-in \\ \emph{,,de.unisiegen.informatik.bs.alvis.pluginname.datatypes''} implementieren.
 
 %%% EDITOR 
 %%%
 %%%
 \subsection{Erstellen eines Editors für ein Beispiel}
-Editoren für unser Beispiel wollen wir in das Package \\ \textit{,,de.unisiegen.informatik.bs.alvis.pluginname.editors''} ablegen.\\ 
+Editoren für unser Beispiel wollen wir in das Package \\ \emph{,,de.unisiegen.informatik.bs.alvis.pluginname.editors''} ablegen.\\ 
 \\
 Wir wollen zum Anlegen und Bearbeiten eines Beispiels einen Editor verwenden. Der Editor speichert unser Beispiel in serialisierter Form in eine Datei. \\
 Wir fügen nun in der ,,MANIFEST.MF'' die Extension ,,org.eclipse.ui.editors''  und einen neuen Editor hinzu. \\
@@ -135,10 +136,10 @@ Wir fügen nun in der ,,MANIFEST.MF'' die Extension ,,org.eclipse.ui.editors''  
 \includegraphics[scale=0.625]{images/new_plugin_editor_00}
 \end{center}
 
-Die \textit{id} ist auch hier möglichst aussagekräftig zu wählen.\\
-Als \textit{name*:} wähle man einen Namen. Dieser wird als Editor Name angezeigt, wenn man eine Datei per ,,öffnen mit...'' öffnet.\\
-\textit{extensions:} ist die Dateiendung (ohne .), für die dieser Editor zuständig ist.\\
-\textit{default:} gibt an, ob der Editor der Standard Editor für die Extension ist.\\
+Die \emph{id} ist auch hier möglichst aussagekräftig zu wählen.\\
+Als \emph{name*:} wähle man einen Namen. Dieser wird als Editor Name angezeigt, wenn man eine Datei per ,,öffnen mit...'' öffnet.\\
+\emph{extensions:} ist die Dateiendung (ohne .), für die dieser Editor zuständig ist.\\
+\emph{default:} gibt an, ob der Editor der Standard Editor für die Extension ist.\\
 
 
 Mit einem klick auf \underline{class:} wird die Implementierung für den Editor hinzugefügt.
@@ -147,9 +148,9 @@ Mit einem klick auf \underline{class:} wird die Implementierung für den Editor 
 \includegraphics[scale=0.485]{images/new_plugin_editor_01}
 \end{center}
 
-Um Ordnung in dem Plugin zu halten erstelle man den Editor im Package \textit{de.unisiegen.informatik.bs.alvis.pluginname.editors}.\\
-Weiterhin lässt man den Editor das Interface \textit{PropertyChangeListener} implementieren.\\
-Nach einem Klick auf \textit{"Finish"} öffnet sich die Implementierung des Editors. \\
+Um Ordnung in dem Plugin zu halten erstelle man den Editor im Package \emph{de.unisiegen.informatik.bs.alvis.pluginname.editors}.\\
+Weiterhin lässt man den Editor das Interface \emph{PropertyChangeListener} implementieren.\\
+Nach einem Klick auf \emph{"Finish"} öffnet sich die Implementierung des Editors. \\
 
 \lstinputlisting[caption=Editor Editorname,numbers=left]{sourcecode/Editorname.java}
 
@@ -166,14 +167,14 @@ In der init-Methode werden einige setMethoden aufgerufen und die privaten Attrib
 \\ \\
 In der createPartCotrol-Methode wird das Parent gesetzt und eine Methode zum erstellen des Editors aufgerufen.
 \\ \\
-Die Methode \textit{createEditorFromInput(...)} ist für das laden des Beispiels zuständig. Falls myInput bereits ein gespeichertes Beispiel beinhaltet hat, ist es die Aufgabe dieser Methode den gespeicherten Zustand des Beispiels wieder herzustellen. Falls die Datei frisch erstellt wurde so muss diese Methode einen leeren Editor Zustand herstellen.
+Die Methode \emph{createEditorFromInput(...)} ist für das laden des Beispiels zuständig. Falls myInput bereits ein gespeichertes Beispiel beinhaltet hat, ist es die Aufgabe dieser Methode den gespeicherten Zustand des Beispiels wieder herzustellen. Falls die Datei frisch erstellt wurde so muss diese Methode einen leeren Editor Zustand herstellen.
 \\ \\
-Die \textit{doSave}-Methode serialisiert\footnote{Es wird empfohlen http://xstream.codehaus.org/ zum Serialisieren zu verwenden. } den derzeitigen Zustand des Editors in die geöffnete Datei.
+Die \emph{doSave}-Methode serialisiert\footnote{Es wird empfohlen http://xstream.codehaus.org/ zum Serialisieren zu verwenden. } den derzeitigen Zustand des Editors in die geöffnete Datei.
 
 \lstinputlisting[caption=Editor Editorname erweitert,numbers=left]{sourcecode/Editorname_extends.java}
 
 \subsection{Registrieren eines Wizards}
-Damit der Benutzer auch eine Möglichkeit hat Dateien des neuen Typs anzulegen benötigt man einen \textbf{Wizard} für diese Dateiendung. Ein Wizard ist ein Dialog, der es dem Benutzer ermöglicht Dateien eines bestimmten Typs anzulegen. Dieser muss die Extension \textit{,,org.eclipse.ui.newWizards''} bedienen.
+Damit der Benutzer auch eine Möglichkeit hat Dateien des neuen Typs anzulegen benötigt man einen \textbf{Wizard} für diese Dateiendung. Ein Wizard ist ein Dialog, der es dem Benutzer ermöglicht Dateien eines bestimmten Typs anzulegen. Dieser muss die Extension \emph{,,org.eclipse.ui.newWizards''} bedienen.
 
 \subsection{Visualisierung des Runs}
 Wenn der Benutzer den Algorithmus und sein Beispiel definiert hat und einen Run startet wird nach Plug-ins gesucht, die die Extension ,,de.unisiegen.informatik.bs.alvis.runvisualizer'' erweitern. Diesen Plug-ins werden dann alle Datentypen und das Parent herunter gegeben. Das Plug-in prüft dann, ob es sich bei einem der Datentypen um einen Datentyp des Plug-ins handelt und hängt dann die Visualisierung seiner Datentypen an das Parent.
@@ -190,7 +191,7 @@ Mit der rechten Maustaste auf den neu hinzugefügten Extension Point lässt sich
 \includegraphics[scale=0.58]{images/new_plugin_runvisualizer_01}
 \end{center}
 
-Der Link ,,\textit{class*:}'' ermöglicht es uns eine neue Klasse anzulegen, die folgende Anforderungen erfüllt.
+Der Link ,,\emph{class*:}'' ermöglicht es uns eine neue Klasse anzulegen, die folgende Anforderungen erfüllt.
 
 \begin{center}
 \includegraphics[scale=0.478]{images/new_plugin_runvisualizer_00}
@@ -215,7 +216,7 @@ Als nächstes öffnet sich ein neues Fenster, dass uns anbietet eine neue Klasse
 \end{center}
 
 Anschließend bestätigen wir mit ,,Finish'' werfen einen Blick auf die Implementierung.
-Sollte Eclipse sich über fehlende Methoden beschweren, so kann man den Mauszeiger über den Klassennamen halten und auf das Kontext Menü warten. Anschließend lassen sich die fehlenden Methoden mit einem Klick auf den Link ,,\textit{Add unimplemented methods}'' hinzufügen.
+Sollte Eclipse sich über fehlende Methoden beschweren, so kann man den Mauszeiger über den Klassennamen halten und auf das Kontext Menü warten. Anschließend lassen sich die fehlenden Methoden mit einem Klick auf den Link ,,\emph{Add unimplemented methods}'' hinzufügen.
 
 \begin{center}
 \includegraphics[scale=0.48]{images/new_plugin_datatypeslist_01}
@@ -231,7 +232,7 @@ Wir wollen sichergehen, dass der Import von PCObject\footnote{de.unisiegen.infor
 Danach sollte die Klasse in etwa so aussehen.
 \lstinputlisting[caption=Klasse DatatypeList,numbers=left]{sourcecode/DatatypeList.java}
 
-Nun wollen wir noch die Methode \textit{getAllDatatypesInThisPlugin()} implementieren.
+Nun wollen wir noch die Methode \emph{getAllDatatypesInThisPlugin()} implementieren.
 In dieser Methode geben wir ein Null-Object von jedem Datentyp den wir erstellt haben in einer ArrayList zurück.
 \lstinputlisting[caption=Klasse DatatypeList,numbers=left]{sourcecode/DatatypeList_01.java}
 
