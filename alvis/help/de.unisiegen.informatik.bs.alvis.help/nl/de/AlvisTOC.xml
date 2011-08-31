@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <toc label="Alvis" topic="html/alvis_main.html">
+   <topic href="nl/de/html/getting_started.html" label="Erste Schritte">
+   </topic>
    <topic href="nl/de/html/runfiles.html" label="Run-Dateien">
    </topic>
    <topic href="nl/de/html/algorithms.html" label="Algorithmen schreiben">

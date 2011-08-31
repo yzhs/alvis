@@ -40,26 +40,26 @@ public class AddTreeWindow extends TitleAreaDialog {
 		composite.setLayoutData(gd);
 
 		cAutoFill = new Combo(composite, SWT.READ_ONLY);
-		cAutoFill.add(Messages.getLabel("makeTree"));
-		cAutoFill.add(Messages.getLabel("makeCircle"));
+		cAutoFill.add(Messages.AddTreeWindow_tree);
+		cAutoFill.add(Messages.AddTreeWindow_circle);
 		cAutoFill.select(0);
 		
 		choose = new Group(composite, SWT.NONE);
 		choose.setLayout(new GridLayout(2, false));
 		choose.setLayoutData(gd);
 
-		setTitle(Messages.getLabel("autoFill"));
-		setMessage(Messages.getLabel("pleaseAutoFill") + ":", SWT.ERROR);
+		setTitle(Messages.AddTreeWindow_autoFill);
+		setMessage(Messages.AddTreeWindow_chooseOptions + ":", SWT.ERROR); //$NON-NLS-2$
 
 		lDepth = new Label(choose, SWT.NONE);
-		lDepth.setText(Messages.getLabel("button_depth"));
+		lDepth.setText(Messages.AddTreeWindow_chooseOptions);
 		tDepth = new Text(choose, SWT.NONE);
-		tDepth.setText("4");
+		tDepth.setText("4"); //$NON-NLS-1$
 
 		lWidth = new Label(choose, SWT.NONE);
-		lWidth.setText(Messages.getLabel("button_width"));
+		lWidth.setText(Messages.AddTreeWindow_averageWidth);
 		tWidth = new Text(choose, SWT.NONE);
-		tWidth.setText("2");
+		tWidth.setText("2"); //$NON-NLS-1$
 
 		cAutoFill.addSelectionListener(new SelectionListener() {
 
@@ -69,20 +69,20 @@ public class AddTreeWindow extends TitleAreaDialog {
 				int treeOrCircle = cAutoFill.getSelectionIndex();
 				switch (treeOrCircle) {
 				case 0: // tree
-					lDepth.setText(Messages.getLabel("button_depth"));
-					tDepth.setText("4");
+					lDepth.setText(Messages.AddTreeWindow_depth);
+					tDepth.setText("4"); //$NON-NLS-1$
 
-					lWidth.setText(Messages.getLabel("button_width"));
+					lWidth.setText(Messages.AddTreeWindow_averageWidth);
 					tWidth.setEnabled(true);
-					tWidth.setText("2");
+					tWidth.setText("2"); //$NON-NLS-1$
 					break;
 				case 1: // circle
-					lDepth.setText(Messages.getLabel("circleAmount"));
-					tDepth.setText("10");
+					lDepth.setText(Messages.AddTreeWindow_amountOfNodes);
+					tDepth.setText("10"); //$NON-NLS-1$
 
-					lWidth.setText("");
+					lWidth.setText(""); //$NON-NLS-1$
 					lWidth.setSize(0, 0);
-					tWidth.setText("");
+					tWidth.setText(""); //$NON-NLS-1$
 					tWidth.setSize(0, 0);
 					tWidth.setEnabled(false);
 					break;
@@ -107,7 +107,7 @@ public class AddTreeWindow extends TitleAreaDialog {
 	@Override
 	protected void configureShell(Shell newShell) {
 		super.configureShell(newShell);
-		newShell.setText("Einstellungen");
+		newShell.setText(Messages.AddTreeWindow_NewRandomGraphWizard);
 	}
 
 	@Override

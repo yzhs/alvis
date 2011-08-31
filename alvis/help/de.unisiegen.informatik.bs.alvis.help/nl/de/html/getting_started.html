@@ -1,0 +1,68 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Erste Schritte</title>
+</head>
+
+<body>
+<h1>Erste Schritte</h1>
+Der Sinn und Zweck von Alvis ist es, mit allem, was bezüglich Algorithmen in der Informatik vorkommt, experimentieren zu können, um vermitteltes Wissen zu vertiefen.<br/>
+<br>
+Dazu schreibt kann man bestehende Algorithmen verändern oder ganz eigene Schreiben.<br/>
+Einen neuen Algorithmus schreibt man, indem man im <strong>Package Explorer links klickt -> Neu -> Algorithmus</strong> klickt.<br/>
+<br/><br>
+
+<IMG src="../../../images/newAlgoDE.png" width="742" height="513" border="0" />
+<br/><br>
+Danach öffnet sich der Wizard, mit dem neue Algorithmen anlegen kann.
+<br/><br>
+
+<IMG src="../../../images/newAlgoWizardDE.png" width="594" height="523" border="0"/>
+<br/><br>
+Wir nennen diesen Algorithmus "BeispielAlgorithmus" und quittieren mit einem Klick auf "Fertigstellen". Es öffnet sich der Algorithmus-Editor. Wir fügen folgenden Algorithmus einer Breitentraversierung ein:
+ <br><br/>
+main(Graph G, Vertex s) begin<br/>
+<font color="White">____</font> for Vertex v in G.vertices: begin<br/>
+<font color="White">________</font>               v.color = "white",<br/>
+<font color="White">________</font>v.distance = infty,<br/>
+<font color="White">________</font>v.parentId = null,<br/>
+<font color="White">____</font>end<br/>
+<font color="White">____</font>s.color = "grey";<br/>
+<font color="White">____</font>s.distance = 0,<br/>
+<font color="White">____</font>Vertex Queue Q,<br/>
+<font color="White">____</font>Q.enqueue(s),<br/>
+<font color="White">____</font>while ! Q.isEmpty(): begin<br/>
+<font color="White">________</font>Vertex u,<br/>
+<font color="White">________</font>u = Q.dequeue(),<br/>
+<font color="White">________</font>for Vertex v in u.adjacents:<br/>
+<font color="White">____________</font>if v.color == "white": begin<br/>
+<font color="White">________________</font>v.color = "grey";<br/>
+<font color="White">________________</font>v.distance = u.distance + 1,<br/>
+<font color="White">________________</font>v.parentId = u,<br/>
+<font color="White">________________</font>Q.enqueue(v),<br/>
+<font color="White">____________</font>end<br/>
+<font color="White">____</font>end<br/>
+end<br/>
+<br/>
+Wie man sieht, werden alle Schlüsselworte direkt farbig markiert.<br>
+Zur Ausführung eines Algorithmus braucht man aber nicht nur den Algorithmus selbst, sondern auch ein Beispiel, auf das er angewendet wird. Wir wollen hierzu einen zufällig erzeugten Graphen nehmen.
+Im <strong>Package Explorer klicken wir rechts auf data -> Neu -> Graph Datei</strong> <br><br>
+<IMG src="../../../images/newGraphDE.png" width="740" height="449" border="0">
+<br><br>
+Ein ähnlicher Wizard wie für die Algorithmus-Datei erscheint. Wir nennen den Graphen "BeispielGraph" und klicken auf "Fertigstellen". Es öffnet sich der Editor für Graphen. <br>
+Wir wollen uns nicht lange mit der Erstellen eines Graphen beschäftigen (dies wird in der Hilfe für Graphen erklärt), sondern schnell einen zufälligen erzeugen. Dazu klicken wir auf das kleine Baum-Symbol <IMG src="../../../images/graph_layout_tree.png" width="16" height="16" align="left" border="0">. Es erscheint der Wizard, mit dem man einen neuen, zufälligen Graphen erstellt.<br><br>
+<IMG src="../../../images/newRandomGraphDE.png" width="407" height="302" border="0"><br><br>
+Wir lassen die Werte auf ihren Standardeinstellungen und fahren mit einem Klick auf "OK" fort. Ein zufälliger Baum erscheint im Graph-Editor.<br>
+Nun haben wir einen Algorithmus und ein Beispiel, auf den wir ihn anwenden können. Um den Algorithmus zu testen klick wir auf das kleine Play-Symbol oben links. <br><br>
+<IMG src="../../../images/startRunDE.png" width="477" height="124" border="0">
+<br><br>
+Eventuelle Nachfragen, ob veränderte Dateien gespeichert werden sollen, bestätigen wir. Im folgenden Dialog klappen wir die Verzeichnisse "src" und "data" auf und klick mit gedrückter Strg-Taste auf unser Beispiel und unseren Algorithmus. <br><br>
+<IMG src="../../../images/startRunDialogDE.png" width="932" height="502" border="0">
+<br><br>
+Nach einem Klick auf "OK" startet der Ablauf, auch Run genannt. Wie man diesen genau steuert, erfährt man in <a href="run.html">Der Ablauf</a>. Wenn wir nun auf den blauen Play-Button <IMG src="../../../images/run_play.png" width="16" height="16" border="0"> klicken, startet der Algorithmus. Mit den anderen beiden Buttons lassen wir ihn vor- und zurücklaufen. Stanardmäßig ist Alvis so eingestellt, dass er selbst festlegt, welcher der Startknoten ist und in welcher Reihenfolge die Knoten abgearbeitet werden. Um dies zu beeinflussen, muss ein so genanntes <a href="runfiles.html">Run File</a> angelegt werden. <br><br>
+
+Herzlichen Glückwunsch, sie haben ihre ersten Schritte mit Alvis gemacht!
+</body>
+</html>

@@ -359,13 +359,13 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		ig2.drawString(text, (width - stringWidth) / 2, height / 2
 				+ stringHeight / 4 + 4);
 
-		ImageIO.write(bi, "PNG",
-				new File(dir + System.getProperty("file.separator") + "temp"
-						+ System.getProperty("file.separator")
+		ImageIO.write(bi, "PNG", //$NON-NLS-1$
+				new File(dir + System.getProperty("file.separator") + "temp" //$NON-NLS-1$ //$NON-NLS-2$
+						+ System.getProperty("file.separator") //$NON-NLS-1$
 						+ "alvis_graph_icon_" //$NON-NLS-1$ 
 						+ text + ".png")); //$NON-NLS-1$
 
-		return loadImage("/temp/alvis_graph_icon_" + text + ".png");
+		return loadImage("/temp/alvis_graph_icon_" + text + ".png"); //$NON-NLS-1$ //$NON-NLS-2$
 		// return loadImage("icons/editor/graph_add.png");
 	}
 
@@ -754,17 +754,17 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	 */
 	public void saveScreenshotToImg() {
 		FileDialog saveDialog = new FileDialog(myGraph.getShell(), SWT.SAVE);
-		saveDialog.setFilterNames(new String[] { "PNG (*.png)",
-				Messages.getLabel("allFiles") });
-		saveDialog.setFilterExtensions(new String[] { "*.png", "*.*" });
+		saveDialog.setFilterNames(new String[] { "PNG (*.png)", //$NON-NLS-1$
+				Messages.GraphEditor_allFiles });
+		saveDialog.setFilterExtensions(new String[] { "*.png", "*.*" }); //$NON-NLS-1$ //$NON-NLS-2$
 		try {
 			saveDialog.setFilterPath(FileLocator.getBundleFile(
 					Activator.getDefault().getBundle()).getAbsolutePath());
 		} catch (IOException e) {
 		}
 
-		saveDialog.setFileName("alvisGraph" + System.currentTimeMillis()
-				+ ".png");
+		saveDialog.setFileName("alvisGraph" + System.currentTimeMillis() //$NON-NLS-1$
+				+ ".png"); //$NON-NLS-1$
 
 		Image screenshot = getImage();
 
@@ -775,7 +775,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 			// The file already exists; asks for confirmation
 			MessageBox mb = new MessageBox(saveDialog.getParent(),
 					SWT.ICON_WARNING | SWT.YES | SWT.NO);
-			mb.setMessage(name + Messages.getLabel("imgAlreadyExists"));
+			mb.setMessage(name + Messages.GraphEditor_alreadyExists);
 			if (mb.open() == SWT.NO)
 				return;// do not overwrite
 		}
@@ -841,7 +841,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	 *            the y coordinate
 	 */
 	protected void clickNewNode(int x, int y) {
-		AlvisGraphNode gn = myGraph.makeGraphNode(""
+		AlvisGraphNode gn = myGraph.makeGraphNode("" //$NON-NLS-1$
 				+ myGraph.getAdmin().getId());
 
 		gn.setLocation(x - gn.getSize().width / 2, y - gn.getSize().height / 2);
@@ -867,17 +867,17 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		switch (pressed) {
 		case (MODUS_MOVE):
 			cursor = new Cursor(Display.getCurrent(),
-					loadImageData("icons/editor/graph_hand_grab.png"), 8, 8);
+					loadImageData("icons/editor/graph_hand_grab.png"), 8, 8); //$NON-NLS-1$
 			myGraph.setCursor(cursor);
 			break;
 		case (MODUS_NODE):
 			cursor = new Cursor(Display.getCurrent(),
-					loadImageData("icons/editor/graph_add.png"), 8, 8);
+					loadImageData("icons/editor/graph_add.png"), 8, 8); //$NON-NLS-1$
 			myGraph.setCursor(cursor);
 			break;
 		case (MODUS_CONNECTION):
 			cursor = new Cursor(Display.getCurrent(),
-					loadImageData("icons/editor/graph_connection.png"), 8, 8);
+					loadImageData("icons/editor/graph_connection.png"), 8, 8); //$NON-NLS-1$
 			myGraph.setCursor(cursor);
 			break;
 		// case (MODUS_START):
@@ -892,7 +892,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		// break;
 		case (MODUS_DELETE):
 			cursor = new Cursor(Display.getCurrent(),
-					loadImageData("icons/editor/graph_delete.png"), 8, 8);
+					loadImageData("icons/editor/graph_delete.png"), 8, 8); //$NON-NLS-1$
 			myGraph.setCursor(cursor);
 			break;
 		case (SHIFT):
@@ -902,7 +902,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		case (MODUS_STANDARD):
 		default:
 			cursor = new Cursor(Display.getCurrent(),
-					loadImageData("icons/editor/graph_hand.png"), 8, 8);
+					loadImageData("icons/editor/graph_hand.png"), 8, 8); //$NON-NLS-1$
 			myGraph.setCursor(cursor);
 			break;
 
@@ -954,7 +954,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	public void clearGraph() {
 		MessageBox sure = new MessageBox(myGraph.getShell(), SWT.ICON_WARNING
 				| SWT.YES | SWT.NO);
-		sure.setMessage(Messages.getLabel("resetAll"));
+		sure.setMessage(Messages.GraphEditor_reset);
 
 		if (sure.open() == SWT.YES) {
 			myGraph.resetContent();
