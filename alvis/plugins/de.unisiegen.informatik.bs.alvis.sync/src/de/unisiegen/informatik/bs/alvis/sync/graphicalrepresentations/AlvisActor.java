@@ -2,15 +2,8 @@ package de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.Font;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Event;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Listener;
 
 import de.unisiegen.informatik.bs.alvis.sync.datatypes.GraphicalRepresentationActor;
 import de.unisiegen.informatik.bs.alvis.sync.datatypes.PCActor;
@@ -21,67 +14,63 @@ import de.unisiegen.informatik.bs.alvis.sync.datatypes.PCActor;
  * @author Jan Bauerdick
  * 
  */
-public class AlvisActor implements GraphicalRepresentationActor, Listener {
+public class AlvisActor implements GraphicalRepresentationActor {
 
-	/**
-	 * Array of labels, showing the actor's source code
-	 */
-	private Label[] lines;
-
-	/**
-	 * Actor's name
-	 */
 	private String name;
-
-	/**
-	 * Actor's current line
-	 */
+	private Label lName;
 	private int currentLine;
-
-	/**
-	 * Button below the source code to do a single step
-	 */
-	private Button nextStep;
-
-	/**
-	 * The represented actor
-	 */
+	private boolean blocked;
 	private PCActor a;
-	
 	private Display d;
+	private AlvisScenario myScenario;
+	private final int id;
 
-	/**
-	 * Construct a new graphical representation of an actor
-	 * 
-	 * @param parent
-	 *            Composite where to display graphical representation
-	 * @param act
-	 *            Actor to show
-	 */
-	public AlvisActor(Composite parent, PCActor act) {
-		d = parent.getDisplay();
-		FillLayout f = new FillLayout();
-		f.type = SWT.VERTICAL;
-		Group g = new Group(parent, SWT.CASCADE);
-		g.setLayout(f);
-
-		a = act;
-		name = act.getName();
-		currentLine = 0;
-
-		g.setText(name);
-
-		Font ft = new Font(Display.getDefault(), "Monospaced", 9, SWT.BOLD); //$NON-NLS-1$
-		lines = new Label[act.getLines().length];
-		for (int i = 0; i < act.getLines().length; i++) {
-			lines[i] = new Label(g, SWT.LEFT);
-			lines[i].setText(act.getLines()[i]);
-			lines[i].setFont(ft);
-			lines[i].setBackground(i == 0 ? HIGHLIGHT : NORMAL);
-		}
-		nextStep = new Button(g, SWT.PUSH);
-		nextStep.setText(Messages.AlvisActor_nextStepButton);
-		nextStep.addListener(SWT.Selection, this);
+//	public AlvisActor(AlvisScenario scenario, PCActor act) {
+////		d = scenario;
+//		FillLayout f = new FillLayout();
+//		f.type = SWT.VERTICAL;
+//		Group g = new Group(parent, SWT.CASCADE);
+//		g.setLayout(f);
+//
+//		a = act;
+//		name = act.getName();
+//		currentLine = 0;
+//
+//		g.setText(name);
+//
+//		Font ft = new Font(Display.getDefault(), "Monospaced", 9, SWT.BOLD); //$NON-NLS-1$
+//		lines = new Label[act.getLines().length];
+//		for (int i = 0; i < act.getLines().length; i++) {
+//			lines[i] = new Label(g, SWT.LEFT);
+//			lines[i].setText(act.getLines()[i]);
+//			lines[i].setFont(ft);
+//			lines[i].setBackground(i == 0 ? HIGHLIGHT : NORMAL);
+//		}
+//		nextStep = new Button(g, SWT.PUSH);
+//		nextStep.setText(Messages.AlvisActor_nextStepButton);
+//		nextStep.addListener(SWT.Selection, this);
+//	}
+	
+	public AlvisActor(AlvisScenario scenario, String name, boolean status) {
+		myScenario = scenario;
+		d = scenario.getMyDisplay();
+		id = scenario.getAdmin().requestId();
+		this.name = name;
+		blocked = status;
+		lName = new Label(myScenario.getActorsScroll(), SWT.NONE);
+		lName.setText(name);
+		lName.setBackground(status ? BLOCKED : NORMAL);
+	}
+	
+	public AlvisActor(AlvisScenario scenario, String name, boolean status, int id) {
+		myScenario = scenario;
+		d = scenario.getMyDisplay();
+		this.id = id;
+		this.name = name;
+		blocked = status;
+		lName = new Label(myScenario.getActorsScroll(), SWT.NONE);
+		lName.setText(name);
+		lName.setBackground(status ? BLOCKED : NORMAL);
 	}
 
 	@Override
@@ -91,15 +80,7 @@ public class AlvisActor implements GraphicalRepresentationActor, Listener {
 	 */
 	public void setLine(final int newLine) {
 		if (currentLine != newLine) {
-			d.syncExec(new Runnable() {
-				public void run() {
-					if (lines[currentLine].isDisposed())
-						return;
-					lines[currentLine].setBackground(NORMAL);
-					currentLine = newLine;
-					lines[currentLine].setBackground(HIGHLIGHT);
-				}
-			});
+			
 		}
 	}
 
@@ -110,17 +91,16 @@ public class AlvisActor implements GraphicalRepresentationActor, Listener {
 	 * @param bySemaphore Color of blocking differs between semaphore or condition, true if blocked by semaphore, false if blocked by condition
 	 */
 	public void setBlocked(final boolean blocked, final boolean bySemaphore) {
+		this.blocked = blocked;
 		d.syncExec(new Runnable() {
 			public void run() {
 				Color c;
 				if (blocked) {
-					nextStep.setEnabled(false);
 					c = (bySemaphore ? SEMA : BLOCKED);
 				} else {
-					nextStep.setEnabled(true);
 					c = HIGHLIGHT;
 				}
-				lines[currentLine].setBackground(c);
+				lName.setBackground(c);
 			}
 		});
 	}
@@ -131,47 +111,51 @@ public class AlvisActor implements GraphicalRepresentationActor, Listener {
 	 * @return Actor's current status
 	 */
 	public boolean isBlocked() {
-		return nextStep.getEnabled();
+		return blocked;
 	}
 
-	@Override
-	/**
-	 * Perform a single step by clicking the button
-	 */
-	public void handleEvent(Event arg0) {
-		a.step();
-	}
-	
-	public PCActor getActor() {
-		return a;
-	}
-	
-	public void setActor(PCActor a) {
-		this.a = a;
-	}
-	
-	public String[] getLines() {
-		String[] res = new String[lines.length];
-		for (int i = 0; i < lines.length; i++) {
-			res[i] = lines[i].getText();
-		}
-		return res;
-	}
-	
 	public String getName() {
 		return name;
 	}
-	
-	public void setName(String value) {
-		name = value;
+
+	public void setName(String name) {
+		this.name = name;
 	}
-	
+
 	public int getCurrentLine() {
 		return currentLine;
 	}
+
+	public void setCurrentLine(int currentLine) {
+		this.currentLine = currentLine;
+	}
+
+	public PCActor getA() {
+		return a;
+	}
+
+	public void setA(PCActor a) {
+		this.a = a;
+	}
+
+	public int getId() {
+		return id;
+	}
 	
-	public void setCurrentLine(int value) {
-		currentLine = value;
+	public Label getlName() {
+		return lName;
+	}
+
+	public void setlName(Label lName) {
+		this.lName = lName;
+	}
+
+	public boolean equals(AlvisActor a) {
+		if (a == null) {
+			return false;
+		} else {
+			return (a.getId() == id);
+		}
 	}
 
 }

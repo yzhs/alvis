@@ -5,43 +5,34 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
-public class PCActor extends PCObject {
-	
+/**
+ * Pseudo code implementation of an actor
+ * 
+ * @author Jan Bauerdick
+ * 
+ */
+
+public class PCActor extends PCObject implements Runnable {
+
 	protected static final String TYPENAME = "Actor";
+	
 	private boolean doStep;
 	private boolean isBlocked;
-	private String name;
-	private int line;
-	private String[] lines;
-	
+	private int currentLine;
+
 	public PCActor() {
-		name = "";
 		doStep = false;
 		isBlocked = false;
+		currentLine = 0;
 	}
-	
-	public PCActor(String name, String[] lines, GraphicalRepresentationActor gr) {
+
+	public PCActor(GraphicalRepresentationActor gr) {
 		allGr.add(gr);
-		this.name = name;
-		this.lines = lines;
 		doStep = false;
 		isBlocked = false;
+		currentLine = 0;
 	}
-	
-	public PCActor(String name, String[] lines) {
-		this.name = name;
-		doStep = false;
-		isBlocked = false;
-	}
-	
-	public PCActor(String name, String[] lines, GraphicalRepresentationActor gr, boolean doStep, boolean isBlocked) {
-		allGr.add(gr);
-		this.name = name;
-		this.lines = lines;
-		this.isBlocked = isBlocked;
-		this.doStep = doStep;
-	}
-		
+
 	public boolean isDoStep() {
 		return doStep;
 	}
@@ -58,52 +49,44 @@ public class PCActor extends PCObject {
 		this.isBlocked = isBlocked;
 	}
 
-	public String getName() {
-		return name;
+	public int getCurrentLine() {
+		return currentLine;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setCurrentLine(int currentLine) {
+		this.currentLine = currentLine;
 	}
 
-	public int getLine() {
-		return line;
-	}
-
-	public void setLine(int line) {
-		this.line = line;
-	}
-
-	public String[] getLines() {
-		return lines;
-	}
-
-	public void setLines(String[] lines) {
-		this.lines = lines;
-	}
-
+	/**
+	 * Perform a single step
+	 */
 	public synchronized void step() {
 		if (!doStep && !isBlocked) {
 			doStep = true;
 			notify();
 		}
 	}
-	
+
+	/**
+	 * Highlight a line in source
+	 * @param line
+	 */
 	public synchronized void showline(PCInteger line) {
-		this.line = line.getLiteralValue();
+		currentLine = line.getLiteralValue();
 		doStep = false;
 		while (!doStep) {
 			try {
 				wait();
 			} catch (InterruptedException e) {
-				
+
 			}
 		}
 	}
 
 	@Override
 	public String toString() {
-		return TYPENAME + name + ": " + (isBlocked ? "" : "not") + " blocked.";
+		return TYPENAME + ": " + (isBlocked ? "" : "not") + " blocked on line "
+				+ currentLine;
 	}
 
 	public static String getTypeName() {
@@ -120,30 +103,37 @@ public class PCActor extends PCObject {
 			PCBoolean b = (PCBoolean) value;
 			isBlocked = b.getLiteralValue();
 			return this;
+		} else if (memberName.equals("currentLine")) {
+			PCInteger i = (PCInteger) value;
+			currentLine = i.getLiteralValue();
+			return this;
 		}
 		return null;
 	}
 
 	@Override
 	public boolean equals(PCObject toCheckAgainst) {
-		try {
+		if (toCheckAgainst instanceof PCActor) {
 			PCActor a = (PCActor) toCheckAgainst;
-			if (a.get("doStep").equals(this.doStep) && a.get("isBlocked").equals(this.isBlocked)) {
+			if (a.isBlocked() == isBlocked() && a.isDoStep() == isDoStep()
+					&& a.getCurrentLine() == getCurrentLine()) {
 				return true;
 			} else {
 				return false;
 			}
-		} catch (ClassCastException e) {
+		} else {
 			return false;
 		}
 	}
 
-	public void setBlocked(boolean newState, boolean bySemaphore) {
-		isBlocked = newState;
-	}
-	
 	@Override
 	public void updateGR(GraphicalRepresentation gr) {
+
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
 		
 	}
 

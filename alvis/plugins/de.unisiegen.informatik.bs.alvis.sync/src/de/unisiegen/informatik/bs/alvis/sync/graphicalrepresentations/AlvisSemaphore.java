@@ -1,7 +1,6 @@
 package de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 
@@ -15,49 +14,34 @@ import de.unisiegen.informatik.bs.alvis.sync.datatypes.PCSemaphore;
  */
 public class AlvisSemaphore implements GraphicalRepresentationSemaphore {
 	
-	/**
-	 * Semaphore's name
-	 */
 	private String name;
-	
-	/**
-	 * Semaphore's counter
-	 */
 	private int count;
-	
-	/**
-	 * Label to represent the semaphore
-	 */
 	private Label label;
+	private PCSemaphore sema;
 	
 	private final int id;
 	private Display d;
 	
-	/**
-	 * Construct a new representation of a semaphore
-	 * @param parent Composite where to display graphical representation
-	 * @param sema Semaphore to show
-	 */
-//	public AlvisSemaphore(Composite parent, PCSemaphore sema) {
-//		d = parent.getDisplay();
-//		name = sema.getName();
-//		count = sema.getCounter();
-//		label = new Label(parent, SWT.LEFT);
-//		if (count > 0) {
-//			label.setBackground(FREE);
-//		} else if (count == 0) {
-//			label.setBackground(ZERO);
-//		} else {
-//			label.setBackground(WAIT);
-//		}
-//		label.setText("Semaphore " + name + ": " + count);
-//	}
-	
 	public AlvisSemaphore(AlvisScenario scenario, String name, int counter) {
-		this.id = scenario.getAdmin().requestId();
+		d = scenario.getMyDisplay();
+		id = scenario.getAdmin().requestId();
 		this.name = name;
-		label = new Label(scenario.getVars(), SWT.NULL);
-		setState(counter);
+		sema = new PCSemaphore(counter);
+		label = new Label(scenario.getSemaphoresScroll(), SWT.NULL);
+		sema.addGraphicalRepresentation(this);
+		this.setState(counter);
+		
+	}
+	
+	public AlvisSemaphore(AlvisScenario scenario, String name, int counter, int id) {
+		d = scenario.getMyDisplay();
+		this.id = id;
+		this.name = name;
+		sema = new PCSemaphore(counter);
+		label = new Label(scenario.getSemaphoresScroll(), SWT.NULL);
+		sema.addGraphicalRepresentation(this);
+		this.setState(counter);
+		
 	}
 
 	@Override
@@ -97,8 +81,28 @@ public class AlvisSemaphore implements GraphicalRepresentationSemaphore {
 		name = value;
 	}
 	
+	public int getId() {
+		return id;
+	}
+
 	public String toString() {
 		return name + ": " + count; 
+	}
+	
+	public Label getLabel() {
+		return label;
+	}
+
+	public void setLabel(Label label) {
+		this.label = label;
+	}
+
+	public boolean equals(AlvisSemaphore s) {
+		if (s == null) {
+			return false;
+		} else {
+			return (this.id == s.getId());
+		}
 	}
 
 }

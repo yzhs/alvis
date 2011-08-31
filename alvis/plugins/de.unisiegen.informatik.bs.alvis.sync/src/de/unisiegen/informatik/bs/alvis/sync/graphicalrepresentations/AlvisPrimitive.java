@@ -1,14 +1,10 @@
 package de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
 public class AlvisPrimitive implements GraphicalRepresentation {
 	
@@ -16,34 +12,66 @@ public class AlvisPrimitive implements GraphicalRepresentation {
 	private boolean type;
 	private boolean boolValue;
 	private int intValue;
+	private final int id;
 	private Label label;
 	private Display d;
 	
-	public AlvisPrimitive(Composite parent, PCObject o) {
-		d = parent.getDisplay();
-		name = ""; //TODO: get primitive's name
-		label = new Label(parent, SWT.NULL);
-		if (o instanceof PCInteger) {
-			type = true;
-			intValue = ((PCInteger) o).getLiteralValue();
-			label.setText(name + ": " + intValue);
-		} else if (o instanceof PCBoolean) {
-			type = false;
-			boolValue = ((PCBoolean) o).getLiteralValue();
-			label.setText(name + ": " + (boolValue ? "true" : "false"));
-		}
+	public AlvisPrimitive(AlvisScenario scenario, String name, int value) {
+		d = scenario.getMyDisplay();
+		id = scenario.getAdmin().requestId();
+		type = true;
+		this.name = name;
+		intValue = value;
+		label = new Label(scenario.getPrimitivesScroll(), SWT.NONE);
+		label.setText("int " + name + " = " + intValue);
 	}
 	
-	public void update(final PCObject o) { 
+	public AlvisPrimitive(AlvisScenario scenario, String name, int value, int id) {
+		d = scenario.getMyDisplay();
+		this.id = id;
+		type = true;
+		this.name = name;
+		intValue = value;
+		label = new Label(scenario.getPrimitivesScroll(), SWT.NONE);
+		label.setText("int " + name + " = " + intValue);
+	}
+	
+	public AlvisPrimitive(AlvisScenario scenario, String name, boolean value) {
+		d = scenario.getMyDisplay();
+		id = scenario.getAdmin().requestId();
+		type = false;
+		this.name = name;
+		boolValue = value;
+		label = new Label(scenario.getPrimitivesScroll(), SWT.NONE);
+		label.setText("boolean " + name + " = " + (value ? "true" : "false"));
+		
+	}
+	
+	public AlvisPrimitive(AlvisScenario scenario, String name, boolean value, int id) {
+		d = scenario.getMyDisplay();
+		this.id = id;
+		type = false;
+		this.name = name;
+		boolValue = value;
+		label = new Label(scenario.getPrimitivesScroll(), SWT.NONE);
+		label.setText("boolean " + name + " = " + (value ? "true" : "false"));
+		
+	}
+	
+	public void update(final int i) {
+		intValue = i;
 		d.syncExec(new Runnable() {
 			public void run() {
-				if (o instanceof PCInteger) {
-					intValue = ((PCInteger) o).getLiteralValue();
-					label.setText(name + ": " + intValue);
-				} else if (o instanceof PCBoolean) {
-					boolValue = ((PCBoolean) o).getLiteralValue();
-					label.setText(name + ": " + (boolValue ? "true" : "false"));
-				}
+				label.setText("int " + name + " = " + intValue);
+			}
+		});
+	}
+	
+	public void update(final boolean b) {
+		boolValue = b;
+		d.syncExec(new Runnable() {
+			public void run() {
+				label.setText("boolean " + name + " = " + (boolValue ? "true" : "false"));
 			}
 		});
 	}
@@ -93,6 +121,26 @@ public class AlvisPrimitive implements GraphicalRepresentation {
 			boolValue = value;
 		} else {
 			boolValue = false;
+		}
+	}
+
+	public int getId() {
+		return id;
+	}
+	
+	public Label getLabel() {
+		return label;
+	}
+
+	public void setLabel(Label label) {
+		this.label = label;
+	}
+
+	public boolean equals(AlvisPrimitive p) {
+		if (p == null) {
+			return false;
+		} else {
+			return (p.getId() == id);
 		}
 	}
 

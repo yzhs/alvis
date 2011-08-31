@@ -31,7 +31,7 @@ public class NewPrimitiveWizardPage extends WizardPage {
 		lType.setText("Select type");
 		type = new Combo(container, SWT.READ_ONLY | SWT.DROP_DOWN);
 		String[] typeValues = {"Integer", "Boolean"};
-		type.select(0);
+		
 		type.setItems(typeValues);
 		lName = new Label(container, SWT.NULL);
 		lName.setText("Enter a name for the primitive");

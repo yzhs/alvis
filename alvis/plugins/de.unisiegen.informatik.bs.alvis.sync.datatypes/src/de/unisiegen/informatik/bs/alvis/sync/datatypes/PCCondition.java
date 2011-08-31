@@ -1,39 +1,44 @@
 package de.unisiegen.informatik.bs.alvis.sync.datatypes;
 
+import java.util.Arrays;
+import java.util.List;
+
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCString;
 
 /**
  * Pseudo code implementation of a condition
+ * 
  * @author Jan Bauerdick
- *
+ * 
  */
 public class PCCondition extends PCObject {
-	
+
 	protected static final String TYPENAME = "Condition";
+	
+	/**
+	 * Semaphore which locks the monitor & number of waiting threads
+	 */
 	private PCSemaphore sema;
 	private int waiting;
-	private String name;
-	
+
 	public PCCondition() {
 		sema = new PCSemaphore();
-		name = "";
 		waiting = 0;
 	}
-	
-	public PCCondition(String name, int waiting, PCSemaphore sema) {
-		this.name = name;
+
+	public PCCondition(int waiting, PCSemaphore sema) {
 		this.waiting = waiting;
 		this.sema = sema;
 	}
-	
-	public PCCondition(String name, int waiting, PCSemaphore sema, GraphicalRepresentationCondition gr) {
-		this(name, waiting, sema);
+
+	public PCCondition(int waiting, PCSemaphore sema,
+			GraphicalRepresentationCondition gr) {
+		this(waiting, sema);
 		allGr.add(gr);
 	}
-		
+
 	public PCSemaphore getSema() {
 		return sema;
 	}
@@ -50,50 +55,50 @@ public class PCCondition extends PCObject {
 		this.waiting = waiting;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public static String getTypename() {
 		return TYPENAME;
 	}
 
+	/**
+	 * Wait for condition
+	 * @param a Actor who has to wait
+	 */
 	public void wait(PCActor a) {
 		synchronized (this) {
 			sema.V();
 			try {
 				waiting++;
-				a.setBlocked(true, false);
+				a.setBlocked(true);
 				wait();
 			} catch (InterruptedException e) {
-				//Abbruch
+
 			}
 			waiting--;
-			a.setBlocked(false, false);
+			a.setBlocked(false);
 		}
 		sema.P(a);
 	}
-	
+
+	/**
+	 * Signals that condition is free
+	 */
 	public synchronized void signal() {
 		notify();
 	}
-	
+
+	/**
+	 * Signals that condtion is free to all waiting threads
+	 */
 	public void signalAll() {
 		notifyAll();
 	}
-	
+
 	@Override
 	public PCObject get(String memberName) {
-		if (memberName.equals("Semaphore")) {
+		if (memberName.equals("semaphore")) {
 			return sema;
 		} else if (memberName.equals("waiting")) {
 			return new PCInteger(waiting);
-		} else if (memberName.equals("name")) {
-			return new PCString(name);
 		} else {
 			return null;
 		}
@@ -102,7 +107,8 @@ public class PCCondition extends PCObject {
 	@Override
 	public String toString() {
 		int i = ((PCInteger) sema.get("counter")).getLiteralValue();
-		return TYPENAME + name + ": " + waiting + " waiting, monitor "  + (i <= 0 ? "locked." : "unlocked.");
+		return TYPENAME + ": " + waiting + " waiting, monitor "
+				+ (i <= 0 ? "locked." : "unlocked.");
 	}
 
 	public static String getTypeName() {
@@ -111,7 +117,7 @@ public class PCCondition extends PCObject {
 
 	@Override
 	public PCObject set(String memberName, PCObject value) {
-		if (memberName.equals("Semaphore")) {
+		if (memberName.equals("semaphore")) {
 			PCSemaphore s = (PCSemaphore) value;
 			sema = s;
 			return this;
@@ -119,31 +125,33 @@ public class PCCondition extends PCObject {
 			PCInteger i = (PCInteger) value;
 			waiting = i.getLiteralValue();
 			return this;
-		} else if (memberName.equals("name")) {
-			PCString s = (PCString) value;
-			name = s.getLiteralValue();
-			return this;
 		}
 		return null;
 	}
 
 	@Override
 	public boolean equals(PCObject toCheckAgainst) {
-		try {
+		if (toCheckAgainst instanceof PCCondition) {
 			PCCondition c = (PCCondition) toCheckAgainst;
-			if ((c.get("semaphore").equals(this.sema)) && (c.get("waiting").equals(this.waiting))) {
+			if (c.getWaiting() == getWaiting() && c.getSema().equals(sema)) {
 				return true;
 			} else {
 				return false;
 			}
-		} catch (ClassCastException e) {
+		} else {
 			return false;
 		}
 	}
 	
 	@Override
+	public List<String> getMethods() {
+		String[] methods = { "wait", "signal", "signalAll" };
+		return Arrays.asList(methods);
+	}
+
+	@Override
 	public void updateGR(GraphicalRepresentation gr) {
-		
+
 	}
 
 }

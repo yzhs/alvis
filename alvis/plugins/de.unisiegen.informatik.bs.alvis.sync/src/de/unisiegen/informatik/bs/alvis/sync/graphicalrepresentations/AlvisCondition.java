@@ -1,12 +1,10 @@
 package de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 
 import de.unisiegen.informatik.bs.alvis.sync.datatypes.GraphicalRepresentationCondition;
-import de.unisiegen.informatik.bs.alvis.sync.datatypes.PCCondition;
 
 /**
  * Graphical representation of a condition
@@ -15,38 +13,32 @@ import de.unisiegen.informatik.bs.alvis.sync.datatypes.PCCondition;
  */
 public class AlvisCondition implements GraphicalRepresentationCondition {
 	
-	/**
-	 * Condition's name
-	 */
 	private String name;
-	
-	/**
-	 * Number of threads waiting for condition
-	 */
 	private int waiting;
-	
-	private String sema;
-	
-	/**
-	 * Label representing the condition
-	 */
+	private AlvisSemaphore sema;
+	private String semaName;
 	private Label label;
-	
 	private Display d;
+	private final int id;
+
+	public AlvisCondition(AlvisScenario scenario, String name) {
+		d = scenario.getMyDisplay();
+		id = scenario.getAdmin().requestId();
+		this.name = name;
+		sema = new AlvisSemaphore(scenario, name + "_sema", 1);
+		semaName = sema.getName();
+		label = new Label(scenario.getConditionsScroll(), SWT.NONE);
+		setState(0);
+	}
 	
-	/**
-	 * Contruct a new graphical representation
-	 * @param parentComposite where to display graphical representation
-	 * @param c Condition to display
-	 */
-	public AlvisCondition(Composite parent, PCCondition c) {
-		d = parent.getDisplay();
-		name = c.getName();
-		waiting = c.getWaiting();
-		sema = c.getSema().getName();
-		label = new Label(parent, SWT.LEFT);
-		label.setText("Condition " + name + Messages.AlvisCondition_waiting + waiting);
-		label.setBackground(FREE);
+	public AlvisCondition(AlvisScenario scenario, String name, int id) {
+		d = scenario.getMyDisplay();
+		this.id = id;
+		this.name = name;
+		sema = new AlvisSemaphore(scenario, name + "_sema", 1);
+		semaName = sema.getName();
+		label = new Label(scenario.getConditionsScroll(), SWT.NONE);
+		setState(0);
 	}
 
 	@Override
@@ -83,13 +75,41 @@ public class AlvisCondition implements GraphicalRepresentationCondition {
 	public void setName(String value) {
 		name = value;
 	}
-	
-	public String getSema() {
+
+	public AlvisSemaphore getSema() {
 		return sema;
 	}
+
+	public void setSema(AlvisSemaphore sema) {
+		this.sema = sema;
+	}
+
+	public String getSemaName() {
+		return semaName;
+	}
+
+	public void setSemaName(String semaName) {
+		this.semaName = semaName;
+	}
+
+	public int getId() {
+		return id;
+	}
 	
-	public void setSema(String value) {
-		sema = value;
+	public Label getLabel() {
+		return label;
+	}
+
+	public void setLabel(Label label) {
+		this.label = label;
+	}
+
+	public boolean equals(AlvisCondition c) {
+		if (c == null) {
+			return false;
+		} else {
+			return (c.getId() == id);
+		}
 	}
 
 }

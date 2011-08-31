@@ -89,15 +89,15 @@ public class RunVisualizer implements IRunVisualizer {
 
 	public boolean createScenario() {
 		boolean res = false;
-//		try {
-//			AlvisSerialize seri = (AlvisSerialize) deserialize(myInputFilePath);
-//			myScenario = new AlvisScenario(myParent);
-//			new AlvisSave(myScenario, seri);
-//			codeScenario = new PCScenario();
-//			res = true;
-//		} catch (ClassCastException e) {
-//			return false;
-//		}
+		try {
+			AlvisSerialize seri = (AlvisSerialize) deserialize(myInputFilePath);
+			myScenario = new AlvisScenario(myParent);
+			new AlvisSave(myScenario, seri);
+			codeScenario = new PCScenario();
+			res = true;
+		} catch (ClassCastException e) {
+			return false;
+		}
 		return res;
 	}
 

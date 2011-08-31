@@ -34,9 +34,12 @@ public class PCScenario extends PCObject {
 	public PCScenario(ArrayList<GraphicalRepresentationActor> actors,
 			ArrayList<GraphicalRepresentationBuffer> buffer,
 			ArrayList<GraphicalRepresentationCondition> conditions,
-			ArrayList<GraphicalRepresentationSemaphore> semaphores,
-			ArrayList<GraphicalRepresentationOutput> output) {
+			ArrayList<GraphicalRepresentationSemaphore> semaphores) {
 		
+	}
+	
+	public static String getTypename() {
+		return TYPENAME;
 	}
 
 	public ArrayList<PCActor> getActors() {

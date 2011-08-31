@@ -9,20 +9,21 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IWorkbench;
 
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
 import de.unisiegen.informatik.bs.alvis.sync.Activator;
+import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisPrimitive;
+import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisScenario;
 
 public class NewPrimitiveWizard extends Wizard implements IWizard {
 	
 	private NewPrimitiveWizardPage page;
+	private AlvisScenario myScenario;
 	
 	public NewPrimitiveWizard() {
 		setWindowTitle("Create new primitive");
 	}
 	
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
-		
+		myScenario = AlvisScenario.scenario;
 	}
 	
 	public void addPages() {
@@ -38,8 +39,8 @@ public class NewPrimitiveWizard extends Wizard implements IWizard {
 		switch (type) {
 		case 0: //int
 			try {
-				PCInteger i = new PCInteger(Integer.parseInt(value));
-				System.out.println(i);
+				AlvisPrimitive p = new AlvisPrimitive(myScenario, name, Integer.parseInt(value));
+				myScenario.addPrimitive(p);
 				return true;
 			} catch (NumberFormatException e) {
 				Shell s = Activator.getDefault().getWorkbench().getActiveWorkbenchWindow().getShell();
@@ -59,8 +60,8 @@ public class NewPrimitiveWizard extends Wizard implements IWizard {
 				ErrorDialog.openError(s, "Input error", "The value you entered is not an integer", st);
 				return false;
 			}
-			PCBoolean b = new PCBoolean(v);
-			System.out.println(b);
+			AlvisPrimitive p = new AlvisPrimitive(myScenario, name, v);
+			myScenario.addPrimitive(p);
 			return true;
 		default:
 			Shell s = Activator.getDefault().getWorkbench().getActiveWorkbenchWindow().getShell();

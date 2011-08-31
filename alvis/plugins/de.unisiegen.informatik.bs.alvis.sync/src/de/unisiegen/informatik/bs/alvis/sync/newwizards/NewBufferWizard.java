@@ -10,18 +10,18 @@ import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 
 import de.unisiegen.informatik.bs.alvis.sync.Activator;
-import de.unisiegen.informatik.bs.alvis.sync.datatypes.PCSemaphore;
-import de.unisiegen.informatik.bs.alvis.sync.editors.ScenarioEditor;
+import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisActor;
+import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisBuffer;
+import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisPrimitive;
 import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisScenario;
-import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisSemaphore;
 
-public class NewSemaphoreWizard extends Wizard implements INewWizard {
-	
-	private NewSemaphoreWizardPage page;
+public class NewBufferWizard extends Wizard implements INewWizard {
+
+	private NewBufferWizardPage page;
 	private AlvisScenario myScenario;
 	
-	public NewSemaphoreWizard() {
-		setWindowTitle("create new semaphore");
+	public NewBufferWizard() {
+		setWindowTitle("create new buffer");
 	}
 
 	@Override
@@ -31,22 +31,22 @@ public class NewSemaphoreWizard extends Wizard implements INewWizard {
 	
 	@Override
 	public void addPages() {
-		page = new NewSemaphoreWizardPage();
+		page = new NewBufferWizardPage();
 		addPage(page);
 	}
 
 	@Override
 	public boolean performFinish() {
-		String name = page.getName();
-		String counter = page.getCounter();
 		try {
-			AlvisSemaphore s = new AlvisSemaphore(myScenario, name, Integer.parseInt(counter));
-			myScenario.addSemaphore(s);
+			int capacity = Integer.parseInt(page.getCapacity());
+			AlvisBuffer b = new AlvisBuffer(myScenario, capacity);
+			myScenario.setBuffer(b);
+			myScenario.getAdmin().addBuffer(b);
 			return true;
 		} catch (NumberFormatException e) {
 			Shell s = Activator.getDefault().getWorkbench().getActiveWorkbenchWindow().getShell();
 			Status st = new Status(IStatus.ERROR, "Alvis", e.getMessage(), e);
-			ErrorDialog.openError(s, "Input error", "The value you entered for counter is not an integer", st);
+			ErrorDialog.openError(s, "Input error", "The value you entered is not an integer", st);
 			return false;
 		}
 	}
