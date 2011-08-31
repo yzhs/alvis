@@ -1,3 +1,21 @@
+/*
+ * Copyright (c) 2011 Dominik Dingel
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use, 
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
+ * Software, and to permit persons to whom the Software is furnished to do so, 
+ * subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all 
+ * copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package de.unisiegen.informatik.bs.alvis.vm.test;
 
 import java.io.File;
@@ -17,12 +35,12 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.vm.BPListener;
 import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
 
-/**
- * 
- * @author Dominik Dingel
- * 
- */
 public class VMMultiThreadTest {
+	
+	/**
+	 * Runs the concurrency Test 500 times to check that the system is currently working
+	 * @throws IOException, ClassNotFoundException
+	 */
 	@Test
 	public void multipleCounter() throws IOException, ClassNotFoundException,
 			InterruptedException {
@@ -33,6 +51,11 @@ public class VMMultiThreadTest {
 		Thread.sleep(5000);
 	}
 
+
+	/**
+	 * The implemented Test
+	 * @throws IOException and ClassNotFoundException
+	 */
 	@Test
 	public void counter() throws IOException, ClassNotFoundException {
 		String localpath = new String();
@@ -66,11 +89,6 @@ public class VMMultiThreadTest {
 			@Override
 			public void onBreakPoint(int BreakPointNumber) {
 				VirtualMachine vm = VirtualMachine.getInstance();
-//				System.out.println(VirtualMachine.getInstance().getThreadState(
-//						"first"));
-//				System.out.println(VirtualMachine.getInstance().getThreadState(
-//						"second"));
-				// // first start
 				if (vm.getThreadState("first").equals(Thread.State.NEW)
 						|| vm.getThreadState("second").equals(Thread.State.NEW)) {
 					if (vm.getThreadState("first").equals(Thread.State.NEW)) {
@@ -111,11 +129,6 @@ public class VMMultiThreadTest {
 		vm.setParameter("second", tmpl);
 
 		vm.startAlgos();
-
-//		System.out
-//				.println(VirtualMachine.getInstance().getThreadState("first"));
-//		System.out.println(VirtualMachine.getInstance()
-//				.getThreadState("second"));
 
 		Assert.assertEquals(true,
 				vm.getThreadState("first").equals(Thread.State.WAITING));

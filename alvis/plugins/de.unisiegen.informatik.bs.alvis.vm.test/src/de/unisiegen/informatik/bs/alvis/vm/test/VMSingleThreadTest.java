@@ -1,3 +1,21 @@
+/*
+ * Copyright (c) 2011 Dominik Dingel
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use, 
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
+ * Software, and to permit persons to whom the Software is furnished to do so, 
+ * subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all 
+ * copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package de.unisiegen.informatik.bs.alvis.vm.test;
 
 import java.io.File;
@@ -19,19 +37,26 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.vm.BPListener;
 import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
 
-/**
- * 
- * @author Dominik Dingel
- * 
- */
-
 public class VMSingleThreadTest {
+
+	/**
+	 * no Threads should be running if nothing is started
+	 */
 	@Test
 	public void checkDoneBeforeInit() {
 		VirtualMachine vm = VirtualMachine.getInstance();
 		Assert.assertEquals(vm.runningThreads(), false);
 	}
 
+	/**
+	 * checking that PCObject will return there right TypeName
+	 * 
+	 * @throws SecurityException
+	 * @throws NoSuchMethodException
+	 * @throws IllegalArgumentException
+	 * @throws IllegalAccessException
+	 * @throws InvocationTargetException
+	 */
 	@SuppressWarnings("static-access")
 	@Test
 	public void getTypeNames() throws SecurityException, NoSuchMethodException,
@@ -60,6 +85,12 @@ public class VMSingleThreadTest {
 
 	}
 
+	/**
+	 * loads an algo with success
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	@Test
 	public void loadAlgoClassTrue() throws IOException, ClassNotFoundException {
 		String localpath = new String();
@@ -84,6 +115,12 @@ public class VMSingleThreadTest {
 
 	}
 
+	/**
+	 * loads an empty fail so the algo will fail
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	@Test(expectedExceptions = ClassNotFoundException.class)
 	public void loadAlgoClassFalse() throws IOException, ClassNotFoundException {
 		String localpath = new String();
@@ -106,6 +143,12 @@ public class VMSingleThreadTest {
 		vm.addAlgoToVM("algo", localpath + "/src/resources", "", dynamRef);
 	}
 
+	/**
+	 * returns the Arguments for the Algo
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	@SuppressWarnings("static-access")
 	@Test
 	public void getStartTypes() throws IOException, ClassNotFoundException {
@@ -134,6 +177,13 @@ public class VMSingleThreadTest {
 						.toArray())[0]).getTypeName());
 	}
 
+	/**
+	 * Runs the Thread forwards and backwards till Termination and checking the
+	 * return value
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	@Test
 	public void runThreadWithBPBackwardsOnTermination() throws IOException,
 			ClassNotFoundException {
@@ -186,6 +236,12 @@ public class VMSingleThreadTest {
 				.get(0)).getLiteralValue());
 	}
 
+	/**
+	 * Runs the Thread forwards and backwards and checking the return value
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	@Test
 	public void runThreadWithBPBackwards() throws IOException,
 			ClassNotFoundException {
@@ -238,6 +294,12 @@ public class VMSingleThreadTest {
 				.get(0)).getLiteralValue());
 	}
 
+	/**
+	 * Run the Algo and then back to the start.
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	@Test
 	public void runThreadWithBPBackwardsError() throws IOException,
 			ClassNotFoundException {
@@ -295,15 +357,21 @@ public class VMSingleThreadTest {
 
 		Assert.assertEquals(0, ((PCInteger) vm.getRunningReferences("algo")
 				.get(0)).getLiteralValue());
-		
+
 		vm.stepAlgoBackward("algo");
 		vm.waitForBreakPoint(); // at the beginning
-		
+
 		Assert.assertEquals(null, ((PCInteger) vm.getRunningReferences("algo")
 				.get(0)));
 
 	}
 
+	/**
+	 * Run the AlgoThread till Beginning
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	@Test
 	public void runThreadWithBPBackwardsTillBeginning() throws IOException,
 			ClassNotFoundException {
@@ -363,6 +431,12 @@ public class VMSingleThreadTest {
 				.get(0)).getLiteralValue());
 	}
 
+	/**
+	 * Runs Thread with Breakpoints
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	@Test
 	public void runThreadWithBP() throws IOException, ClassNotFoundException {
 		String localpath = new String();
@@ -412,6 +486,12 @@ public class VMSingleThreadTest {
 		}
 	}
 
+	/**
+	 * changed the resources/template file to load a modified java file
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	@Test
 	public void changeCodeToRuntime2() throws IOException,
 			ClassNotFoundException {
@@ -491,6 +571,12 @@ public class VMSingleThreadTest {
 				.get(0)).getLiteralValue());
 	}
 
+	/**
+	 * changed the resources/template file to load a modified java file
+	 * 
+	 * @throws IOException
+	 * @throws ClassNotFoundException
+	 */
 	@Test
 	public void changeCodeToRuntime() throws IOException,
 			ClassNotFoundException {

@@ -103,7 +103,7 @@ public class VirtualMachine {
 	/**
 	 * Is any Thread currently running
 	 * 
-	 * @return
+	 * @return true if any Algo is still Running, otherwise false 
 	 */
 	public boolean runningThreads() {
 		boolean result = false;
