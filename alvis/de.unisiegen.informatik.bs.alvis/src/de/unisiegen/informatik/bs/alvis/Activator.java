@@ -177,6 +177,7 @@ public class Activator extends AbstractUIPlugin {
 
 	// Storage for Decision Points
 	public int DPNr;
+	@SuppressWarnings("rawtypes")
 	public SortableCollection toSort;
 	public PCObject from;
 
@@ -184,19 +185,7 @@ public class Activator extends AbstractUIPlugin {
 
 		vm.removeAllBPListener();
 		vm.stopAlgos();
-		vm.setParameter("algo", paraMap); //$NON-NLS-1$
-		// if(this.runGraph.getStartNode() != null)
-		// vm.addParameter(gr.getVertexFromGraphic(
-		// this.runGraph.getStartNode()));
-		// else {
-		// for(AlvisGraphNode node : this.runGraph.getAllNodes()) {
-		// vm.addParameter(gr.getVertexFromGraphic(node));
-		// break;
-		// }
-		// }
-		// if(this.runGraph.getEndNode() != null) {
-		// vm.addParameter(gr.getVertexFromGraphic(this.runGraph.getEndNode()));
-		// }
+		vm.setParameter("algo", paraMap); 
 		vm.addBPListener(new BPListener() {
 			@Override
 			public void onBreakPoint(int BreakPointNumber) {
@@ -209,7 +198,7 @@ public class Activator extends AbstractUIPlugin {
 		vm.addDPListener(new DPListener() {
 			@Override
 			public void onDecisionPoint(int DPNr, PCObject from,
-					SortableCollection toSort) {
+					@SuppressWarnings("rawtypes") SortableCollection toSort) {
 				// Check if the user wants to order the decisions
 				if (activeRun.getOnDecisionPoint().equals(EDecisionPoint.RAND))
 					return;
@@ -268,27 +257,13 @@ public class Activator extends AbstractUIPlugin {
 	}
 
 	/**
-	 * Set the compiled .java algorithm path TODO @throws VMException
+	 * Set the compiled .java algorithm path @throws VMException
 	 * 
 	 * @param pathToAlgoInJava
 	 */
 	public void setJavaAlgorithmToVM(String pathToFile, String fileName,
 			ArrayList<PCObject> datatypesToAddToClasspathAsPCObjects)
 			throws VirtualMachineException {
-
-		// TODO vm.addAlgo needs three arguments: key to identify algo (any
-		// given String it's just used to address this algo for mutliple
-		// operations ) , path to
-		// the java algo file, the java algo filename, without the typending
-		// .java
-		// Add all this to VM.
-
-		// Cast the PCObjects to Objects, so that class further down this stream
-		// are independent from PCObjects
-		// ArrayList<Object> datatypesToAddToClasspath = new
-		// ArrayList<Object>();
-		// for (PCObject obj : datatypesToAddToClasspathAsPCObjects)
-		// datatypesToAddToClasspath.add((Object) obj);
 
 		// Cycle through the list of delivered data types and extract the
 		// package they belong to
@@ -313,7 +288,6 @@ public class Activator extends AbstractUIPlugin {
 					"Adding the algorithm to the Virtual Machine failed.");
 		}
 
-		//			return vm.addAlgoToVM("first", pathToAlgoInJava); //$NON-NLS-1$
 	}
 
 	/* ************************************************************************
@@ -354,6 +328,7 @@ public class Activator extends AbstractUIPlugin {
 	 * Fill allDatatypesInPlugIns and allDatatypesPackagesInPlugIns with
 	 * datatypes and packagenames.
 	 */
+	@SuppressWarnings("rawtypes")
 	private void registerAllDatatypes() {
 		// The list to add all known datatypes
 		allDatatypesInPlugIns = new ArrayList<PCObject>();

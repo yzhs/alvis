@@ -74,6 +74,55 @@ public class AlgoThread {
 	@SuppressWarnings("rawtypes")
 	private HashMap<Integer, Queue<SortableCollection>> dPointsTemp;
 
+	// saved to restore from running AlgoThread
+	private String mPathName;
+	private String mFileName;
+	private Lock mToLockOn;
+	private TreeSet<String> mDynamicallyReferencedPackagesNeededToCompile;
+
+	/**
+	 * Creates new AlgoThread, will directly load the fileName, create the Class
+	 * Inst and the Thread Object
+	 * 
+	 * @param prev
+	 *            to create from
+	 */
+	@SuppressWarnings("rawtypes")
+	public AlgoThread(AlgoThread prev) throws ClassNotFoundException {
+		this.mPathName = prev.mPathName;
+		this.mFileName = prev.mFileName;
+		this.mToLockOn = prev.mToLockOn;
+		this.mDynamicallyReferencedPackagesNeededToCompile = prev.mDynamicallyReferencedPackagesNeededToCompile;
+
+		Logger.getInstance()
+				.log("de.~.vm.AlgoThread",
+						Logger.DEBUG,
+						"AlgoThread(String pathName, String fileName, Lock toLockOn, ArrayList<Object> datatypesToAddToClasspath)"
+								+ "\n pathName: "
+								+ prev.mPathName
+								+ "\n fileName: "
+								+ prev.mFileName
+								+ "\n toLockOn: "
+								+ prev.mToLockOn
+								+ "\n datatypesToAddToClasspath: "
+								+ prev.mDynamicallyReferencedPackagesNeededToCompile);
+		bpListeners = new ArrayList<BPListener>();
+		lineCounter = new HashMap<Integer, Integer>();
+		lastCounter = new HashMap<Integer, Integer>();
+		dPoints = new HashMap<Integer, Queue<SortableCollection>>();
+		parameters = null;
+		onBreak = false;
+		lock = prev.mToLockOn;
+		Logger.getInstance().log("de.~.vm.AlgoThread", Logger.DEBUG,
+				"PRE - loading the class");
+		loadAlgo(prev.mPathName, mFileName,
+				mDynamicallyReferencedPackagesNeededToCompile);
+		Logger.getInstance().log("de.~.vm.AlgoThread", Logger.DEBUG,
+				"POST - loading the class");
+
+		createThread();
+	}
+
 	/**
 	 * Creates new AlgoThread, will directly load the fileName, create the Class
 	 * Inst and the Thread Object
@@ -87,6 +136,11 @@ public class AlgoThread {
 	public AlgoThread(String pathName, String fileName, Lock toLockOn,
 			TreeSet<String> dynamicallyReferencedPackagesNeededToCompile)
 			throws ClassNotFoundException {
+		this.mPathName = pathName;
+		this.mFileName = fileName;
+		this.mToLockOn = toLockOn;
+		this.mDynamicallyReferencedPackagesNeededToCompile = dynamicallyReferencedPackagesNeededToCompile;
+
 		Logger.getInstance()
 				.log("de.~.vm.AlgoThread",
 						Logger.DEBUG,
@@ -259,7 +313,7 @@ public class AlgoThread {
 				do {
 					try {
 						synchronized (this) {
-							wait(1);
+							wait(10);
 						}
 					} catch (InterruptedException e) {
 						e.printStackTrace();
@@ -300,9 +354,11 @@ public class AlgoThread {
 				}
 			}
 		});
+
 		algoThread.start();
 		this.waitForBreakpoint();
 		isFirstBP = false;
+		this.stepForward();
 	}
 
 	/**
@@ -320,6 +376,8 @@ public class AlgoThread {
 	 * stops running thread with creating new one
 	 */
 	public void stopAlgo() {
+		if (!algoThread.isAlive())
+			return;
 		synchronized (algoThread) {
 			algoInst.kill();
 			algoThread.notify();

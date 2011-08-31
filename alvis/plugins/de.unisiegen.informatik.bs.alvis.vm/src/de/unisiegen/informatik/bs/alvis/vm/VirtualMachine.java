@@ -259,6 +259,15 @@ public class VirtualMachine {
 		for (AlgoThread algo : algos.values()) {
 			algo.stopAlgo();
 		}
+		HashMap<String, AlgoThread> tempAlgos = new HashMap<String, AlgoThread>();
+		for(String key : algos.keySet()) {
+			try {
+				tempAlgos.put(key,new AlgoThread(algos.get(key)));
+			} catch (ClassNotFoundException e) {
+				e.printStackTrace();
+			}
+		}
+		algos = tempAlgos;
 	}
 
 	/**
