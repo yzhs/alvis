@@ -1,6 +1,9 @@
 package de.uni_siegen.informatik.bs.alvic;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.antlr.runtime.*;
 import org.antlr.runtime.tree.*;
 
@@ -276,5 +279,23 @@ public abstract class AbstractTypeChecker extends AbstractTreeParser {
 
 		reportError(new NoSuchOperatorException(operand, op, null, 0, tree));
 		return SimpleType.create("# NoSuchOperator #");
+	}
+
+	protected static Map<String,String> translateOp = new HashMap<String,String>();
+
+	static {
+		translateOp.put("+", "add");
+		translateOp.put("-", "sub");
+		translateOp.put("*", "mul");
+		translateOp.put("/", "div");
+		translateOp.put("%", "mod");
+		translateOp.put("&&", "and");
+		translateOp.put("||", "or");
+		translateOp.put("==", "equal");
+		translateOp.put("!=", "notEqual");
+		translateOp.put("<", "less");
+		translateOp.put(">", "greater");
+		translateOp.put("<=", "lessOrEqual");
+		translateOp.put(">=", "greaterOrEqual");
 	}
 }

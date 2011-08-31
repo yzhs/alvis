@@ -17,29 +17,27 @@ import java.util.HashMap;
 
 
 @members {
-	/**
-	 * Some shortcuts for commonly used types
-	 */
 	private Type Void = SimpleType.create("Void");
 
     private Map<String,Type> functions = new HashMap<String,Type>();
 }
 
+// Tell the compiler what functions there are, so the type checker can handle mutual recursion
 program
     : ^(PROG functionDefinition* mainFunction {Compiler.getInstance().setFunctions(functions);})
     ;
 
 functionDefinition
 @init { Type ret = Void; }
-    : ^(FUNC ident ^(RET type? { ret = $type.t; }) ^(PARAMS p=formalParams?) {
-        checkAndPut(functions, $ident.text, FunctionType.create(null != $p.t ? $p.t : new ArrayList<Type>(), ret), $functionDefinition.tree);
-    } block)
+    : ^(FUNC ID ^(RET type? { ret = $type.t; }) ^(PARAMS p=formalParams?) {
+        checkAndPut(functions, $ID.text, FunctionType.create(null != $p.t ? $p.t : new ArrayList<Type>(), ret), $functionDefinition.tree);
+    } statement)
     ;
 
 mainFunction
     : ^(FUNC MAIN ^(PARAMS p=formalParams?) {
         checkAndPut(functions, "main", FunctionType.create(null != $p.t ? $p.t : new ArrayList<Type>(), Void), $mainFunction.tree);
-    } block)
+    } statement)
     ;
 
 /**
@@ -54,11 +52,7 @@ formalParams returns [List<Type> t]
  * Return what type a single parameter was declared as.
  */
 param returns [Type t]
-    : ^(DECL type ident) {$t = $type.t;}
-    ;
-
-block
-    : ^(BLOCK statement*)
+    : ^(DECL type ID) {$t = $type.t;}
     ;
 
 type returns [Type t]
@@ -67,43 +61,30 @@ type returns [Type t]
     | ^(COMPLEX container=type element=type) { $t = SimpleType.create($container.t.toString(), $element.t);}
     ;
 
-ident : ID ;
-
 statement
 options { backtrack = true; }
     : declaration
     | expr
     | assignment
     | ^(RETURN expr?)
-    | ^(IF_ELSE expr ^(STAT statement terminator?) ^(STAT statement terminator?))
+    | ^(IF_ELSE expr ^(STAT statement SEMICOLON?) ^(STAT statement SEMICOLON?))
     | ^(IF expr ^(STAT statement statement?))
     | ^(FOR param expr statement)
     | ^(WHILE expr statement)
-    | block
-    | terminator
+    | ^(BLOCK statement*)
+    | SEMICOLON
     ;
 
 declaration
-    : ^(DECL type ident)
-    | ^(DECL_INIT type ident expr)
+    : ^(DECL type ID)
+    | ^(DECL_INIT type ID expr)
     ;
 
 assignment : ^(ASSIGN postfixExpr expr) ;
 
-expr
-    : ^(PLUS      expr expr)
-    | ^(MINUS     expr expr)
-    | ^(STAR      expr expr)
-    | ^(SLASH     expr expr)
-    | ^(PERCENT   expr expr)
-    | ^(AMPAMP    expr expr) 
-    | ^(PIPEPIPE  expr expr) 
-    | ^(EQEQ      expr expr)
-    | ^(BANGEQ    expr expr)
-    | ^(LESS      expr expr)
-    | ^(GREATER   expr expr)
-    | ^(LESSEQ    expr expr)
-    | ^(GREATEREQ expr expr)
+binop : PLUS | MINUS | STAR | SLASH | PERCENT | AMPAMP | PIPEPIPE | EQEQ | BANGEQ | LESS | GREATER | LESSEQ | GREATEREQ ;
+
+expr: ^(binop expr expr)
     | ^(BANG expr)
     | ^(PAREN expr)
     | ^(SIGN (PLUS expr | MINUS expr))
@@ -118,11 +99,8 @@ expr
 
 
 postfixExpr
-    : left=ident
-    | ^(DOT obj=postfixExpr ident)
+    : left=ID
+    | ^(DOT obj=postfixExpr ID)
     | ^(CALL function=postfixExpr expr*)
-    | ^(INDEX array=postfixExpr expr) 
+    | ^(INDEX array=postfixExpr expr)
     ;
-
-
-terminator: SEMICOLON ;
