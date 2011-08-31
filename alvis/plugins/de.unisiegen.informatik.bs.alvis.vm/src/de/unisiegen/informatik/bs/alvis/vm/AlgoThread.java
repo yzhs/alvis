@@ -1,6 +1,23 @@
+/*
+ * Copyright (c) 2011 Dominik Dingel
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use, 
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
+ * Software, and to permit persons to whom the Software is furnished to do so, 
+ * subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all 
+ * copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package de.unisiegen.informatik.bs.alvis.vm;
 
-import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,16 +31,6 @@ import java.util.concurrent.locks.Lock;
 import de.unisiegen.informatik.bs.alvis.io.logger.Logger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.SortableCollection;
-
-/**
- * Class capsulating Algo with all Information needed for handling plus methods
- * to move the thread forward and backward
- * 
- * TODO DP Handling
- * 
- * @author Dominik Dingel
- * 
- */
 
 public class AlgoThread {
 	// shared object across all threads to sync run
@@ -61,8 +68,10 @@ public class AlgoThread {
 
 	// reference to dplistener
 	private DPListener dpListen;
+	@SuppressWarnings("rawtypes")
 	private HashMap<Integer, Queue<SortableCollection>> dPoints;
 	// walinkg back
+	@SuppressWarnings("rawtypes")
 	private HashMap<Integer, Queue<SortableCollection>> dPointsTemp;
 
 	/**
@@ -74,14 +83,22 @@ public class AlgoThread {
 	 * @param toLockOn
 	 * @param packagesToAddToClasspath
 	 */
+	@SuppressWarnings("rawtypes")
 	public AlgoThread(String pathName, String fileName, Lock toLockOn,
 			TreeSet<String> dynamicallyReferencedPackagesNeededToCompile)
 			throws ClassNotFoundException {
-		Logger.getInstance().log("de.~.vm.AlgoThread", Logger.DEBUG, "AlgoThread(String pathName, String fileName, Lock toLockOn, ArrayList<Object> datatypesToAddToClasspath)" +
-				"\n pathName: " + pathName +
-				"\n fileName: " + fileName +
-				"\n toLockOn: " + toLockOn +
-				"\n datatypesToAddToClasspath: " + dynamicallyReferencedPackagesNeededToCompile);
+		Logger.getInstance()
+				.log("de.~.vm.AlgoThread",
+						Logger.DEBUG,
+						"AlgoThread(String pathName, String fileName, Lock toLockOn, ArrayList<Object> datatypesToAddToClasspath)"
+								+ "\n pathName: "
+								+ pathName
+								+ "\n fileName: "
+								+ fileName
+								+ "\n toLockOn: "
+								+ toLockOn
+								+ "\n datatypesToAddToClasspath: "
+								+ dynamicallyReferencedPackagesNeededToCompile);
 		bpListeners = new ArrayList<BPListener>();
 		lineCounter = new HashMap<Integer, Integer>();
 		lastCounter = new HashMap<Integer, Integer>();
@@ -89,9 +106,12 @@ public class AlgoThread {
 		parameters = null;
 		onBreak = false;
 		lock = toLockOn;
-		Logger.getInstance().log("de.~.vm.AlgoThread", Logger.DEBUG, "PRE - loading the class");
-		loadAlgo(pathName, fileName, dynamicallyReferencedPackagesNeededToCompile);
-		Logger.getInstance().log("de.~.vm.AlgoThread", Logger.DEBUG, "POST - loading the class");
+		Logger.getInstance().log("de.~.vm.AlgoThread", Logger.DEBUG,
+				"PRE - loading the class");
+		loadAlgo(pathName, fileName,
+				dynamicallyReferencedPackagesNeededToCompile);
+		Logger.getInstance().log("de.~.vm.AlgoThread", Logger.DEBUG,
+				"POST - loading the class");
 
 		createThread();
 	}
@@ -128,7 +148,11 @@ public class AlgoThread {
 		bpListeners.add(wantsToListen);
 	}
 
-	// TODO javadoc + clean
+	/**
+	 * add DP Listener
+	 * 
+	 * @param toListen
+	 */
 	public void addDPListener(DPListener toListen) {
 		dpListen = toListen;
 	}
@@ -159,10 +183,9 @@ public class AlgoThread {
 	}
 
 	/**
-	 * Passes over the needed Parameter Types for the specific Algo TODO update
-	 * javadoc
+	 * Passes over the needed Parameter Types for the specific Algo
 	 * 
-	 * @return ArrayList with PCObject ArrayList, should be never a nullpointer
+	 * @return Parameters as Hashmap, should never be null
 	 */
 	public Map<String, PCObject> getParameterTypes() {
 		return algoInst.getParameterTypes();
@@ -170,7 +193,10 @@ public class AlgoThread {
 
 	/**
 	 * helper function to create algo Thread from class object
+	 * 
+	 * TODO remove the unneeded lock meachnismen
 	 */
+	@SuppressWarnings("deprecation")
 	private void createThread() {
 		try {
 			algoInst = (AbstractAlgo) algoClass.getConstructors()[0]
@@ -200,15 +226,20 @@ public class AlgoThread {
 	private void loadAlgo(String pathToFile, String fileName,
 			TreeSet<String> dynamicallyReferencedPackagesNeededToCompile)
 			throws ClassNotFoundException {
-		Logger.getInstance().log("de.~.vm.AlgoThread.loadAlgo()", Logger.DEBUG, "new DynaCode()");
-		DynaCode dynacode = new DynaCode(dynamicallyReferencedPackagesNeededToCompile);
+		Logger.getInstance().log("de.~.vm.AlgoThread.loadAlgo()", Logger.DEBUG,
+				"new DynaCode()");
+		DynaCode dynacode = new DynaCode(
+				dynamicallyReferencedPackagesNeededToCompile);
 
-		Logger.getInstance().log("de.~.vm.AlgoThread.loadAlgo()", Logger.DEBUG, ".addSourceDir()");
+		Logger.getInstance().log("de.~.vm.AlgoThread.loadAlgo()", Logger.DEBUG,
+				".addSourceDir()");
 		dynacode.addSourceDir(pathToFile);
-		Logger.getInstance().log("de.~.vm.AlgoThread.loadAlgo()", Logger.DEBUG, "Source Dir added!");
-		
+		Logger.getInstance().log("de.~.vm.AlgoThread.loadAlgo()", Logger.DEBUG,
+				"Source Dir added!");
+
 		algoClass = dynacode.loadClass(fileName);
-		Logger.getInstance().log("de.~.vm.AlgoThread.loadAlgo()", Logger.DEBUG, "Class loaded");
+		Logger.getInstance().log("de.~.vm.AlgoThread.loadAlgo()", Logger.DEBUG,
+				"Class loaded");
 	}
 
 	/**
@@ -225,15 +256,15 @@ public class AlgoThread {
 			 */
 			@Override
 			public void onBreakPoint(int BPNr) {
-				do{
-				try {
-					synchronized (this) {
-						wait(1);
+				do {
+					try {
+						synchronized (this) {
+							wait(1);
+						}
+					} catch (InterruptedException e) {
+						e.printStackTrace();
 					}
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
-				}while(!algoThread.getState().equals(Thread.State.WAITING));
+				} while (!algoThread.getState().equals(Thread.State.WAITING));
 
 				if (lineCounter.containsKey(new Integer(BPNr))) {
 					int tmp = lineCounter.get(new Integer(BPNr)).intValue();
@@ -255,6 +286,7 @@ public class AlgoThread {
 			}
 		});
 		algoInst.addDPListener(new DPListener() {
+			@SuppressWarnings("rawtypes")
 			@Override
 			public void onDecisionPoint(int DPNr, PCObject from,
 					SortableCollection toSort) {
@@ -335,7 +367,7 @@ public class AlgoThread {
 	/**
 	 * let the algo restart, and running till the previous Breakpoint
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void stepBackward() {
 		// saving temp list for walking back
 		dPointsTemp = (HashMap<Integer, Queue<SortableCollection>>) dPoints
@@ -359,8 +391,7 @@ public class AlgoThread {
 		reduce(lastCounter);
 		lineCounter.clear();
 		onBreak = false;
-		// TODO won't forget any decisions made, fix me to support removing from
-		// one
+
 		algoInst.addDPListener(new DPListener() {
 			@Override
 			public void onDecisionPoint(int DPNr, PCObject from,

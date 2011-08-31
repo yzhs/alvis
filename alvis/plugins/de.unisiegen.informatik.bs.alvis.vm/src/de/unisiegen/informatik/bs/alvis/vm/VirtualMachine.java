@@ -1,3 +1,21 @@
+/*
+ * Copyright (c) 2011 Dominik Dingel
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use, 
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
+ * Software, and to permit persons to whom the Software is furnished to do so, 
+ * subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all 
+ * copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package de.unisiegen.informatik.bs.alvis.vm;
 
 import java.util.ArrayList;
@@ -9,6 +27,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 //import de.unisiegen.informatik.bs.alvis.io.logger.Logger;
+import de.unisiegen.informatik.bs.alvis.io.logger.Logger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
 /**
@@ -17,8 +36,6 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
  * 
  *         take care, could be multiple times run (singleton pattern works not
  *         that fine with multiple classloaders)
- * 
- *         TODO DP Points
  * 
  */
 
@@ -39,18 +56,19 @@ public class VirtualMachine {
 	public static VirtualMachine getInstance() {
 		return instance;
 	}
-	
-	// Decision Points only for one Algo
-	// TODO change this to support multiple Algos/Threads for BS Sync
+
+	// Decision Points only for all Algos
 	private DPListener dpListen;
-	
+
 	/**
-	 * Inform listener about DecisionPoint, only if AlgoThread can't handle it by it self
+	 * Inform listener about DecisionPoint, only if AlgoThread can't handle it
+	 * by it self
+	 * 
 	 * @param toListen
 	 */
 	public void addDPListener(DPListener toListen) {
 		dpListen = toListen;
-		for(AlgoThread alg : algos.values()) {
+		for (AlgoThread alg : algos.values()) {
 			alg.addDPListener(dpListen);
 		}
 	}
@@ -61,8 +79,7 @@ public class VirtualMachine {
 	public void removeDPListener() {
 		dpListen = null;
 	}
-	
-	
+
 	/**
 	 * private Method to create virtual Machine instance
 	 */
@@ -78,7 +95,7 @@ public class VirtualMachine {
 	 * @return thread status
 	 */
 	public Thread.State getThreadState(String key) {
-		if(algos.size() == 0)
+		if (algos.size() == 0)
 			return Thread.State.TERMINATED;
 		return algos.get(key).getCurrentThreadState();
 	}
@@ -98,9 +115,10 @@ public class VirtualMachine {
 
 	/**
 	 * Method to get needed Parametertypes
-	 * TODO update javadoc
+	 * 
 	 * @param key
-	 * @return PCObject ArrayList to determine the types, for editor and view
+	 * @return Map containg the Parameters with String for the identifier and
+	 *         PCObject as argument
 	 */
 	public Map<String, PCObject> getParametersTypesAlgo(String key) {
 		return algos.get(key).getParameterTypes();
@@ -112,27 +130,24 @@ public class VirtualMachine {
 	 * @param key
 	 * @param pathToFile
 	 * @param fileName
-	 * @return boolean with success
-	 * @throws ClassNotFoundException 
+	 * @throws ClassNotFoundException
 	 */
-	public boolean addAlgoToVM(String key, String pathToFile, String fileName,TreeSet<String> dynamicallyReferencedPackagesNeededToCompile) throws ClassNotFoundException {
-		
-//		Logger.getInstance().log("de.~.alvis.vm", Logger.DEBUG, "addAlgoToVM with params:" +
-//				"\n Key: " + key +
-//				"\n pathToFile: " + pathToFile +
-//				"\n fileName: " + fileName +
-//				"\n datatypesToAddToClasspath: " + dynamicallyReferencedPackagesNeededToCompile);
-		
+	public void addAlgoToVM(String key, String pathToFile, String fileName,
+			TreeSet<String> dynamicallyReferencedPackagesNeededToCompile)
+			throws ClassNotFoundException {
+
+		Logger.getInstance().log(
+				"de.~.alvis.vm",
+				Logger.DEBUG,
+				"addAlgoToVM with params:" + "\n Key: " + key
+						+ "\n pathToFile: " + pathToFile + "\n fileName: "
+						+ fileName + "\n datatypesToAddToClasspath: "
+						+ dynamicallyReferencedPackagesNeededToCompile);
+
 		AlgoThread tmp;
-//		try {
-			tmp = new AlgoThread(pathToFile, fileName, lock, dynamicallyReferencedPackagesNeededToCompile);
-//		} catch (ClassNotFoundException e) {
-//			Logger.getInstance().log("VirtualMachine.addAlgoToVM", Logger.ERROR, "Begin");
-//			e.printStackTrace();
-//			return false;
-//		}
+		tmp = new AlgoThread(pathToFile, fileName, lock,
+				dynamicallyReferencedPackagesNeededToCompile);
 		algos.put(key, tmp);
-		return true;
 	}
 
 	/**
@@ -203,10 +218,6 @@ public class VirtualMachine {
 	 * @param para
 	 */
 	public void setParameter(String key, Map<String, PCObject> para) {
-		if(algos.get(key) == null )
-			System.out.println("Algo ist null!"); // TODO weg damit
-		if(para == null)
-			System.out.println("Die Parameter sind leer!" ); // TODO weg damit
 		algos.get(key).setParameters(para);
 	}
 
@@ -328,7 +339,7 @@ public class VirtualMachine {
 	 * removes all references to algos and threads, to clean up
 	 */
 	public void clear() {
-		for(AlgoThread algo : algos.values()) {
+		for (AlgoThread algo : algos.values()) {
 			algo.stopAlgo();
 		}
 		algos.clear();
