@@ -10,7 +10,7 @@
 <h1>Erste Schritte</h1>
 Der Sinn und Zweck von Alvis ist es, mit Allem, was bezüglich Algorithmen in der Informatik vorkommt, experimentieren zu können, um vermitteltes Wissen zu vertiefen.<br/>
 <br>
-Dazu kann man bestehende Algorithmen verändern oder ganz eigene Schreiben.<br/>
+Dazu kann man bestehende Algorithmen verändern oder ganz eigene schreiben.<br/>
 Um überhaupt mit etwas arbeiten zu können, muss man zuerst einmal ein neues Alvis Projekt anlegen. Hierzu klickt man im <strong>Package Explorer rechts -> Neu -> Alvis Projekt</strong>
 <br><br>
 <IMG src="../../../images/newProjectDE.png" width="488" height="339" border="0">
@@ -18,7 +18,7 @@ Um überhaupt mit etwas arbeiten zu können, muss man zuerst einmal ein neues Al
 Es erscheint der Alvis Projekt-Wizard. Wir nennen das Projekt "Beispiel" und klicken auf Fertigstellen. Automatisch wird das Beispiel mit den beiden Ordnern "src" und "data" angelegt. In "src" liegt nun schon eine leere
 Algorithmus-Datei. Wir klappen also "Beispiel" und "src" per Doppelklick auf, der Package Explorer sieht dann so aus:
 <br><br><IMG src="../../../images/packageExplorer.png" width="501" height="362" border="0"><br><br>
-Nun klicken wir doppelt auf algorithm.algo. Es öffnet sich der Algorithmus-Editor. Wir fügen folgenden Algorithmus einer Breitentraversierung ein:
+Nun klicken wir doppelt auf algorithm.algo. Es öffnet sich der leere Algorithmus-Editor. Wir fügen folgenden Algorithmus einer Breitentraversierung ein:
 <br><br/>
 <pre>
 main(Graph G, Vertex s) begin
@@ -50,13 +50,15 @@ Im <strong>Package Explorer klicken wir rechts auf data -> Neu -> Graph Datei</s
 <IMG src="../../../images/newGraphDE.png" width="740" height="449" border="0">
 <br><br>
 Ein ähnlicher Wizard wie für das Projekt erscheint. Wir nennen den Graphen "BeispielGraph" und klicken auf "Fertigstellen". Es öffnet sich der Editor für Graphen. <br>
-Wir wollen uns nicht lange mit der Erstellen eines Graphen beschäftigen (dies wird in der Hilfe für Graphen erklärt), sondern schnell einen zufälligen erzeugen. Dazu klicken wir auf das kleine Baum-Symbol <IMG src="../../../images/graph_layout_tree.png" width="16" height="16" align="left" border="0">. Es erscheint der Wizard, mit dem man einen neuen, zufälligen Graphen erstellt.<br><br>
+Wir wollen uns nicht lange mit der Erstellen eines Graphen beschäftigen (dies wird in der Hilfe für Graphen erklärt), sondern schnell einen zufälligen erzeugen. Dazu klicken wir auf das kleine Baum-Symbol.<br><br>
+<IMG src="../../../images/treeDE.png" width="467" height="94" border="0"><br><br>
+Es erscheint der Wizard, mit dem man einen neuen, zufälligen Graphen erstellt.<br><br>
 <IMG src="../../../images/newRandomGraphDE.png" width="407" height="302" border="0"><br><br>
 Wir lassen die Werte auf ihren Standardeinstellungen und fahren mit einem Klick auf "OK" fort. Ein zufälliger Baum erscheint im Graph-Editor.<br>
-Nun haben wir einen Algorithmus und ein Beispiel, auf den wir ihn anwenden können. Um den Algorithmus zu testen klick wir auf das kleine Play-Symbol oben links. <br><br>
+Nun haben wir einen Algorithmus und ein Beispiel, auf den wir ihn anwenden können. Um den Algorithmus zu testen klicken wir auf das kleine Play-Symbol oben links. <br><br>
 <IMG src="../../../images/startRunDE.png" width="477" height="124" border="0">
 <br><br>
-Eventuelle Nachfragen, ob veränderte Dateien gespeichert werden sollen, bestätigen wir. Im folgenden Dialog klappen wir die Verzeichnisse "src" und "data" auf und klick mit gedrückter Strg-Taste auf unser Beispiel und unseren Algorithmus. <br><br>
+Eventuelle Nachfragen, ob veränderte Dateien gespeichert werden sollen, bestätigen wir. Im folgenden Dialog klappen wir die Verzeichnisse "src" und "data" auf und klicken mit gedrückter Strg-Taste auf unser Beispiel und unseren Algorithmus. <br><br>
 <IMG src="../../../images/startRunDialogDE.png" width="932" height="502" border="0">
 <br><br>
 Nach einem Klick auf "OK" startet der Ablauf, auch Run genannt. Wie man diesen genau steuert, erfährt man in <a href="run.html">Der Ablauf</a>. Wenn wir nun auf den blauen Play-Button <IMG src="../../../images/run_play.png" width="16" height="16" border="0"> klicken, startet der Algorithmus. Mit den anderen beiden Buttons lassen wir ihn vor- und zurücklaufen. Standardmäßig ist Alvis so eingestellt, dass er zufällig wählt, welcher der Startknoten ist und in welcher Reihenfolge die Knoten abgearbeitet werden. Um dies zu beeinflussen, muss ein so genanntes <a href="runfiles.html">Run File</a> angelegt werden. <br><br>

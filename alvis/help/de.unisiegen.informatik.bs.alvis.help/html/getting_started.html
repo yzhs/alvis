@@ -3,41 +3,70 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>The Run</title>
+	<title>First Steps</title>
 </head>
 
 <body>
-<h1>The Run</h1>
-The so called run is the core of Alvis. By default the left view shows the algorithm and the right view shows your example. You control the run with the buttons in the above bar.<br/>
+<h1>First Steps</h1>
+The purpose of Alvis is experimenting with everything you hear about algorithms in computer science and deepening your knowledge about it.<br/>
 <br>
-<table border="1" cellspacing="0">
-<thead>
-<tr>
-      <th ROWSPAN="1" COLSPAN="1"> <P CLASS="Para">Button</P></TH>
-	<th ROWSPAN="1" COLSPAN="1"> <P CLASS="Para">Tool-Tip</P></TH>
-      <th ROWSPAN="1" COLSPAN="1"> <P CLASS="Para">Description</P></th>
-</tr>
-</thead>
-  <tbody>
-	<tr>
-		<td align="center"><IMG align="middle" src="../images/run_play.png" width="16" height="16" border="0"></td>
-		<td>Start run</td>
-		<td>(Re)start the run with the given parameters und delete all existing decisions.</td>
-	</tr>
-	<TR>
-		<TD align="center"><IMG src="../images/run_previous.png" width="16" height="16" align="middle" border="0"></TD>
-		<TD>Previous Break Point</TD>
-		<TD>Takes the algorithm back to the previous break point.</TD>
-	</TR>	
-	<TR>
-		<TD align="center"><IMG src="../images/run_next.png" width="16" height="16" align="middle" border="0"></TD>
-		<TD>Next Break Point</TD>
-		<TD>Lets the algorithm advance to the next break point. Break points are the end of the lines with a ";" at the end.</TD>
-	</TR>
-
-  </tbody>
-</table>
+In order to do so, you can modify existing algorithms or write new one from scratch.<br/>
+First of all you have to create a new Alvis Project. Do so by <strong>clicking right in Package Explorer -> New -> Alvis Project</strong>.
+<br><br>
+<IMG src="../images/newProjectEN.png" width="495" height="422" border="0">
+<br><br>
+The Alvis Project Wizard appears. Let us call the new project "Example" and click Finish. The folders "src" and "data" are generated automatically in the project folder. "src" contains an empty algorithm file.
+We expand the folders "Example" and "src", after this the Package Explorer looks like this:
+<br><br><IMG src="../images/packageExplorerEN.png" width="496" height="387"border="0"><br><br>
+Now we double click on algorithm.algo. The empty Algorithm Editor opens and we paste this algorithm implementing a breadth first traversal: <!-- Is that correct?! Literal translation of "Breitentraversierung" -->
+<br><br/>
+<pre>
+main(Graph G, Vertex s) begin
+        for Vertex v in G.vertices: begin
+                v.color = "white",
+                v.distance = infty,
+                v.parentId = null,
+        end
+        s.color = "grey";
+        s.distance = 0,
+        Vertex Queue Q,
+        Q.enqueue(s),
+        while ! Q.isEmpty(): begin
+                Vertex u,
+                u = Q.dequeue(),
+                for Vertex v in u.adjacents:
+                        if v.color == "white": begin
+                                v.color = "grey";
+                                v.distance = u.distance + 1,
+                                v.parentId = u,
+                                Q.enqueue(v),
+                        end
+        end
+end</pre>
 <br/>
-If the algorithm is at a break point the current line is highlighted in orange. At a decision point the highlight is blue, a decision points demands a decision from the user.
+As you can see, all the key words are highlighted.<br>
+For executing the algorithm do not only need the algorithm itself, in fact we also need an example the algorithm uses. For this we create a random graph.
+<strong>Click right in the Package Explorer -> New -> Graph File</strong><br><br>
+<IMG src="../images/newGraphEN.png" width="659" height="508" border="0">
+<br><br>
+A Wizard similar to the Project Wizard appears. Let's call it "ExampleGraph" and click Finish. The empty Graph Editor opens. <br>
+We do not want to create a graph manually (how to do this is explained in the graph help), but rather generate one randomly. For this purpose we click the little tree symbol.<br><br>
+<IMG src="../images/treeEN.png" width="463" height="95"  border="0">
+<br><br>
+The New Random Graph Wizard appears.<br><br>
+<IMG src="../images/newRandomGraphEN.png" width="405" height="304" border="0"><br><br>
+We leave the values the way they are und continue by clicking "OK". A randomly generated tree shows up in the Graph Editor.<br>
+Now we have an algorithm and an example. In order to test the algorithm we click the play symbol in the upper left corner<br><br>
+<IMG src="../images/runEN.png" width="463" height="95" border="0">
+<br><br>
+We approve potential requests wether modified files should be saved. In the following dialog we expand the directories "src" and "data" and select the algorithm and the example graph by clicking them with the control key pressed.<br><br>
+<IMG src="../images/startRunDialogEN.png" width="769" height="424" border="0">
+<br><br>
+The Run starts after we click "OK". How to control it is explained in <a href="run.html">The Run</a>.
+Clicking the play button <IMG src="../images/run_play.png" width="16" height="16" border="0"> starts the algorithm. 
+The other two buttons let the already take a step backwards or forwards. By default, Alvis decides randomly, which node is the start node an in what order the nodes are visited. To control this, you have to create a so call 
+<a href="runfiles.html">Run File</a><br><br>
+
+Congratulations, you have just taken your first steps with Alvis!
 </body>
 </html>

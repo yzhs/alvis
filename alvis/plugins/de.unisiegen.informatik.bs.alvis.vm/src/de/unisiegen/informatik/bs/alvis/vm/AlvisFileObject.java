@@ -33,7 +33,9 @@ class AlvisFileObject extends SimpleJavaFileObject {
 		this.sourceCode = source;
 
 	}
-
+	/**
+	 * returns the source code held by this opbejct
+	 */
 	@Override
 	public CharSequence getCharContent(boolean ignoreEncodingErrors)
 			throws IOException {
