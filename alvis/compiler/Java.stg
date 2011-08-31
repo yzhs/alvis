@@ -47,7 +47,7 @@ public class #ALGORITHM_NAME# implements AbstractAlgo {
      *            set breakpoint field, inform breakpoint listener, sleeps
      *            current thread
      */
-    private void reachedBreakPoint(int BPNr) {
+    private void reachedBreakPoint(int BPNr) throws KillThreadException {
         localbp = BPNr;
         Thread thr = new Thread(new Runnable() {
             public void run() {
@@ -68,6 +68,8 @@ public class #ALGORITHM_NAME# implements AbstractAlgo {
                 }
             } while(onBreak);
         }
+
+        stop();
     }
 
     public List\<PCObject\> getVariableReferences() {
