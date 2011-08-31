@@ -72,6 +72,8 @@ public class Activator extends AbstractUIPlugin {
 
 	private AlgorithmPartitionScanner fPartitionsScanner;
 
+	private boolean shutUpForExport;
+
 	// private Export myExport = new Export();
 
 	/**
@@ -183,22 +185,32 @@ public class Activator extends AbstractUIPlugin {
 
 	public void runStart() {
 
+		shutUpForExport = false;
 		vm.removeAllBPListener();
 		vm.stopAlgos();
 		vm.setParameter("algo", paraMap); 
 		vm.addBPListener(new BPListener() {
 			@Override
 			public void onBreakPoint(int BreakPointNumber) {
+				
+				if (shutUpForExport)
+					return; // this deactivates the listener when run export works
+
 				Activator.getDefault().algorithmContainer
 						.removeAllCurrentLine();
 				Activator.getDefault().algorithmContainer
 						.addCurrentBP(BreakPointNumber);
 			}
 		});
+		
 		vm.addDPListener(new DPListener() {
 			@Override
 			public void onDecisionPoint(int DPNr, PCObject from,
 					@SuppressWarnings("rawtypes") SortableCollection toSort) {
+
+				if (shutUpForExport)
+					return; // this deactivates the listener when run export works
+
 				// Check if the user wants to order the decisions
 				if (activeRun.getOnDecisionPoint().equals(EDecisionPoint.RAND))
 					return;
@@ -226,9 +238,12 @@ public class Activator extends AbstractUIPlugin {
 							// or changes the attribute of ask.
 							OrderDialog toOrder = new OrderDialog(
 									shellContainer,
-									Activator.getDefault().toSort, ask,
+									Activator.getDefault().toSort,
+									ask,
 									Messages.Activator_DP_order,
-									NLS.bind(Messages.Activator_DP_current_position, name),
+									NLS.bind(
+											Messages.Activator_DP_current_position,
+											name),
 									Messages.Activator_DP_drag_and_drop);
 							toOrder.open();
 							if (ask.getAsk() == false) {
@@ -307,7 +322,7 @@ public class Activator extends AbstractUIPlugin {
 	public ArrayList<PCObject> getAllDatatypesInPlugIns() {
 		if (allDatatypesInPlugIns == null)
 			registerAllDatatypes();
-		
+
 		return allDatatypesInPlugIns;
 	}
 
@@ -341,7 +356,7 @@ public class Activator extends AbstractUIPlugin {
 		IExtensionRegistry registry = Platform.getExtensionRegistry();
 		IExtensionPoint extensionPoint = registry
 				.getExtensionPoint("de.unisiegen.informatik.bs.alvis.extensionpoints.datatypelist"); //$NON-NLS-1$
-		IExtension[] extensions = extensionPoint.getExtensions();		
+		IExtension[] extensions = extensionPoint.getExtensions();
 
 		// * For all Extensions that contribute:
 		for (int i = 0; i < extensions.length; i++) {
@@ -455,6 +470,10 @@ public class Activator extends AbstractUIPlugin {
 			if (editors[i].getTitle().equals(editorTitle))
 				break;
 		}
+
+		if (editors.length == 0)
+			return null; // no editor opened
+
 		if (i == editors.length)
 			i = 0;
 
@@ -472,48 +491,64 @@ public class Activator extends AbstractUIPlugin {
 		return null;
 
 	}
-	
+
 	/**
-	 * Creates and returns an ArrayList<String> containing the file extensions allowed
-	 * as algorithm files in the run.
+	 * Creates and returns an ArrayList<String> containing the file extensions
+	 * allowed as algorithm files in the run.
+	 * 
 	 * @return the ArrayList
 	 */
-	
-	public ArrayList<String> getFileExtensions(){
+
+	public ArrayList<String> getFileExtensions() {
 		ArrayList<String> fileextensions = new ArrayList<String>();
-		
-		for(IExtension ext : Platform.getExtensionRegistry().getExtensionPoint("de.unisiegen.informatik.bs.alvis.extensionpoints.fileextension").getExtensions()){ //$NON-NLS-1$
-			for(IConfigurationElement con : ext.getConfigurationElements()){
+
+		for (IExtension ext : Platform
+				.getExtensionRegistry()
+				.getExtensionPoint(
+						"de.unisiegen.informatik.bs.alvis.extensionpoints.fileextension").getExtensions()) { //$NON-NLS-1$
+			for (IConfigurationElement con : ext.getConfigurationElements()) {
 				try {
-					IFileExtension extension = (IFileExtension) con.createExecutableExtension("class"); //$NON-NLS-1$
+					IFileExtension extension = (IFileExtension) con
+							.createExecutableExtension("class"); //$NON-NLS-1$
 					fileextensions.add(extension.getFileExtension());
 				} catch (CoreException e) {
 					e.printStackTrace();
 				}
-				
+
 			}
 		}
 		return fileextensions;
 	}
-	
+
 	/**
-	 * Creates and returns a comma separated list in one string containing the file extensions allowed
-	 * as algorithm files in the run. This list is meant for direct use in the GUI or during debugging.
-	 * @return 
+	 * Creates and returns a comma separated list in one string containing the
+	 * file extensions allowed as algorithm files in the run. This list is meant
+	 * for direct use in the GUI or during debugging.
+	 * 
+	 * @return
 	 */
-	
-	public String getFileExtensionsAsCommaSeparatedList(){
+
+	public String getFileExtensionsAsCommaSeparatedList() {
 		String extensions = "";
-		ArrayList<String> fileextensions = Activator.getDefault().getFileExtensions();
-		for(int i = 0; i < fileextensions.size(); i++){
-			if(i == 0){
+		ArrayList<String> fileextensions = Activator.getDefault()
+				.getFileExtensions();
+		for (int i = 0; i < fileextensions.size(); i++) {
+			if (i == 0) {
 				extensions += fileextensions.get(i);
-			}
-			else{
+			} else {
 				extensions += ", " + fileextensions.get(i);
 			}
 		}
-		
+
 		return extensions;
 	}
+
+	public boolean isShuttingUpForExport() {
+		return shutUpForExport;
+	}
+
+	public void shutUpForExport(boolean shutUpForExport) {
+		this.shutUpForExport = shutUpForExport;
+	}
+
 }

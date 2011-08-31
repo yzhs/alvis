@@ -60,13 +60,14 @@ public class ExportShell extends Shell {
 		composite.setLayout(new GridLayout(1, false));
 
 		Composite imageContainer = new Composite(composite, SWT.BORDER);
-		imageContainer.setLayout(new GridLayout(5, false));
+		imageContainer.setLayout(new GridLayout(10, false));
 
 		for (int i = 0; i < images.size(); i++) {
 
-			Canvas imgAndRadio = new Canvas(imageContainer, SWT.BORDER);
-			// resizing image and adding to composite
-			Label label = new Label(imgAndRadio, SWT.NONE);
+//			Canvas imgAndRadio = new Canvas(imageContainer, SWT.BORDER);
+//			// resizing image and adding to composite
+//			Label label = new Label(imgAndRadio, SWT.NONE);
+			Label label = new Label(imageContainer, SWT.NONE);
 			int width = images.get(i).getBounds().width;
 			int height = images.get(i).getBounds().height;
 			int newWidth = maxPreviewWidth;
@@ -80,11 +81,12 @@ public class ExportShell extends Shell {
 			GC gc = new GC(myImage);
 			gc.drawImage(images.get(i), 0, 0, width, height, 0, 0, newWidth,
 					newHeight);
-			gc.dispose();
 			label.setImage(myImage);
-			Button check = new Button(imgAndRadio, SWT.CHECK);
+//			Button check = new Button(imgAndRadio, SWT.CHECK);
+			Button check = new Button(imageContainer, SWT.CHECK);
 			check.setText(Messages.getLabel("exportImage") + " " + i);
 			checkButtons.add(check);
+			gc.dispose();
 
 		}
 
@@ -101,8 +103,8 @@ public class ExportShell extends Shell {
 		bOk.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseUp(MouseEvent e) {
-				for (int i = 0; i < checkButtons.size(); i++) {
-					System.out.println(checkButtons.get(i).getSelection());
+				for (int i = checkButtons.size() - 1; i >= 0; i--) {
+					System.out.println(checkButtons.get(i).getSelection());//TODO weg
 					if (!checkButtons.get(i).getSelection()) {
 						images.remove(i);
 					}

@@ -17,11 +17,8 @@ import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.PlatformUI;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -34,9 +31,9 @@ import com.itextpdf.text.html.simpleparser.StyleSheet;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import de.unisiegen.informatik.bs.alvis.Activator;
-import de.unisiegen.informatik.bs.alvis.editors.AlgorithmEditor;
 import de.unisiegen.informatik.bs.alvis.editors.Messages;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
+import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
 
 /**
  * class which creates the export PDF file
@@ -47,7 +44,8 @@ public class PdfExport extends Document {
 
 	private static Font titleFont = FontFactory.getFont("Calibri", 32,
 			Font.BOLD);
-	private static Font catFont = FontFactory.getFont("Calibri", 18, Font.BOLD);
+	// private static Font catFont = FontFactory.getFont("Calibri", 18,
+	// Font.BOLD);
 	private static Font subFont = FontFactory.getFont("Calibri", 16, Font.BOLD);
 	private static Font smallBold = FontFactory.getFont("Calibri", 12,
 			Font.BOLD);
@@ -82,6 +80,11 @@ public class PdfExport extends Document {
 			MessageBox sure = new MessageBox(new Shell(), SWT.ICON_WARNING
 					| SWT.OK);
 			sure.setMessage(Messages.getLabel("FileProbablyopened"));
+			sure.open();
+		} catch (NothingToExportException e) {
+			MessageBox sure = new MessageBox(new Shell(), SWT.ICON_WARNING
+					| SWT.OK);
+			sure.setMessage(Messages.getLabel("nothingToExport"));
 			sure.open();
 		} finally {
 			close();
@@ -120,7 +123,8 @@ public class PdfExport extends Document {
 
 	}
 
-	private void addContent() throws DocumentException {
+	private void addContent() throws DocumentException,
+			NothingToExportException {
 
 		// anchor = new Anchor("anchor", catFont);
 		// anchor.setName("anchor");
@@ -137,9 +141,9 @@ public class PdfExport extends Document {
 		}
 
 		if (exportItem == null)
-			return; // nothing to add
+			throw new NothingToExportException(); // nothing to export
 
-		if (exportItem.isRun()) {
+		if (exportItem.isRun()) { // export run
 
 			ArrayList<Image> images = new ArrayList<Image>();
 			Image image;
@@ -148,28 +152,40 @@ public class PdfExport extends Document {
 			if (image != null)
 				images.add(image);
 
+			Activator.getDefault().shutUpForExport(true);
+			VirtualMachine vm = VirtualMachine.getInstance();
+
 			Activator.getDefault().runStart();
+			vm.waitForBreakPoint();
+			
 			image = exportItem.getImage();
 			if (image != null)
 				images.add(image);
 
-			for (int i = 0; i < 15 || false; i++) {// TODO replace with
-				// for (int i = 0; i < 15 || Activator.getDefault().runNext();
-				// i++) when runNext returns boolean-> while something changes
-				// in run after new step
-				Activator.getDefault().runNext();
+			int maxAmountOfPicturesToShow = 15;
+			for (int i = 0; i < maxAmountOfPicturesToShow; i++) {
+				
+				if (!vm.runningThreads())
+					return;
+				
 				image = exportItem.getImage();
 				if (image != null)
 					images.add(image);
+			
+				vm.stepAlgoForward();
+				vm.waitForBreakPoint();
+
 			}
 
 			ExportShell exportShell = new ExportShell(Display.getDefault(),
 					images);
-			images = exportShell.getWantedImages();
+			// images = exportShell.getWantedImages();
 			for (Image img : images) {
 				paragraph = toParagraph(img);
 				add(paragraph);
 			}
+
+			Activator.getDefault().shutUpForExport(false);
 
 		} else { // export single editor
 
@@ -272,6 +288,11 @@ public class PdfExport extends Document {
 			width = Math.min(530, pdfImage.getScaledWidth());
 			height = pdfImage.getScaledHeight() / pdfImage.getScaledWidth()
 					* width;
+			if (height > 500.0f) {
+				height = 500.0f;
+				width = pdfImage.getScaledWidth() / pdfImage.getScaledHeight()
+						* height;
+			}
 			pdfImage.scaleAbsolute(width, height);
 			paragraph.add(pdfImage);
 		} catch (Exception e) {
@@ -363,31 +384,31 @@ public class PdfExport extends Document {
 		return toReturn;
 	}
 
-	/**
-	 * @author Sebastian Schmitz This method adds the content from the active
-	 *         editor to the document. The content added is not inside of a
-	 *         paragraph, let's hope we can find a fix for that.
-	 * @throws IOException
-	 * @throws DocumentException
-	 */
-	private void addContentOutsideParagraph() throws IOException,
-			DocumentException {
-		List<Element> bodyText;
-		StyleSheet styles = new StyleSheet();
-		styles.loadTagStyle("ol", "leading", "16,0");
-		String pseudoCode = highlightStyleTextinHTML(getStyledText());
-
-		if (pseudoCode != null) {
-			bodyText = HTMLWorker.parseToList(new StringReader(
-					indentCode(pseudoCode)), styles);
-			for (Element elem : bodyText) {
-				add(elem);
-			}
-		} else {
-			System.out
-					.println("ERROR: The content retrieved from the editor was empty!");
-		}
-	}
+	// /**
+	// * @author Sebastian Schmitz This method adds the content from the active
+	// * editor to the document. The content added is not inside of a
+	// * paragraph, let's hope we can find a fix for that.
+	// * @throws IOException
+	// * @throws DocumentException
+	// */
+	// private void addContentOutsideParagraph() throws IOException,
+	// DocumentException {
+	// List<Element> bodyText;
+	// StyleSheet styles = new StyleSheet();
+	// styles.loadTagStyle("ol", "leading", "16,0");
+	// String pseudoCode = highlightStyleTextinHTML(getStyledText());
+	//
+	// if (pseudoCode != null) {
+	// bodyText = HTMLWorker.parseToList(new StringReader(
+	// indentCode(pseudoCode)), styles);
+	// for (Element elem : bodyText) {
+	// add(elem);
+	// }
+	// } else {
+	// System.out
+	// .println("ERROR: The content retrieved from the editor was empty!");
+	// }
+	// }
 
 	/**
 	 * @author Sebastian Schmitz this function grabs the content from the editor
@@ -478,41 +499,41 @@ public class PdfExport extends Document {
 		System.out.println(str);
 	}
 
-	private StyledText getStyledText() {
-
-		AlgorithmEditor edit = null;
-
-		// Get active page:
-		IWorkbenchPage page = PlatformUI.getWorkbench()
-				.getActiveWorkbenchWindow().getActivePage();
-		try {
-			edit = (AlgorithmEditor) page.getActiveEditor();
-		} catch (ClassCastException ccee) {
-		}
-
-		// XtextEditor edit = null;
-		// // Get open pages
-		// IWorkbenchPage pages[] = PlatformUI.getWorkbench()
-		// .getActiveWorkbenchWindow().getPages();
-		// // Cycle through these pages
-		// for (IWorkbenchPage page : pages) {
-		// // Cycle through every page's editors
-		// for (IEditorReference ref : page.getEditorReferences()) {
-		// String title = ref.getTitle();
-		// IEditorPart refpart = ref.getEditor(true);
-		// // Get algo-editor
-		// if (title.contains(".algo")) {
-		// if (refpart.getAdapter(refpart.getClass()) instanceof XtextEditor) {
-		// edit = (XtextEditor) ref.getEditor(true).getAdapter(
-		// XtextEditor.class);
-		// }
-		// }
-		//
-		// }
-		//
-		// }
-
-		return edit.getTextWidget();
-	}
+	// private StyledText getStyledText() {
+	//
+	// AlgorithmEditor edit = null;
+	//
+	// // Get active page:
+	// IWorkbenchPage page = PlatformUI.getWorkbench()
+	// .getActiveWorkbenchWindow().getActivePage();
+	// try {
+	// edit = (AlgorithmEditor) page.getActiveEditor();
+	// } catch (ClassCastException ccee) {
+	// }
+	//
+	// // XtextEditor edit = null;
+	// // // Get open pages
+	// // IWorkbenchPage pages[] = PlatformUI.getWorkbench()
+	// // .getActiveWorkbenchWindow().getPages();
+	// // // Cycle through these pages
+	// // for (IWorkbenchPage page : pages) {
+	// // // Cycle through every page's editors
+	// // for (IEditorReference ref : page.getEditorReferences()) {
+	// // String title = ref.getTitle();
+	// // IEditorPart refpart = ref.getEditor(true);
+	// // // Get algo-editor
+	// // if (title.contains(".algo")) {
+	// // if (refpart.getAdapter(refpart.getClass()) instanceof XtextEditor) {
+	// // edit = (XtextEditor) ref.getEditor(true).getAdapter(
+	// // XtextEditor.class);
+	// // }
+	// // }
+	// //
+	// // }
+	// //
+	// // }
+	//
+	// return edit.getTextWidget();
+	// }
 
 }
