@@ -399,7 +399,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 					} else {
 						setGraphModus(e.keyCode);
 					}
-				} else { // rename
+				} else { // rename, not used in code yet
 					if (e.keyCode == 27) { // escape
 						if (actNode != null) {
 							actNode.setText(actNode.getMyText());
@@ -440,6 +440,8 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 					if (!graphModusIs(MODUS_CONNECTION)) {
 						setGraphModus(MODUS_STANDARD);
 					}
+				} else if (e.keyCode == CTRL) {
+					setGraphModus(MODUS_STANDARD);
 				}
 			}
 		});
