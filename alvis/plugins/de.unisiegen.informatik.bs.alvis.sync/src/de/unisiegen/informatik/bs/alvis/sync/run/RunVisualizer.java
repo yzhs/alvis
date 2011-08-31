@@ -61,7 +61,7 @@ public class RunVisualizer implements IRunVisualizer {
 
 	@Override
 	public boolean addVisualizing(Composite parent, String inputFile, String fileExtension) {
-		if(!fileExtension.equals(".sync"))
+		if(!fileExtension.equals(de.unisiegen.informatik.bs.alvis.sync.Activator.getDefault().getFileExtension()))
 			return false;
 		
 		if (parent == null | inputFile == null) {

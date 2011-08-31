@@ -29,6 +29,7 @@ import de.unisiegen.informatik.bs.alvis.graph.datatypes.GraphicalRepresentationV
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.PCEdge;
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.PCGraph;
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.PCVertex;
+import de.unisiegen.informatik.bs.alvis.graph.extension.FileExtension;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraph;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraphConnection;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraphNode;
@@ -55,7 +56,7 @@ public class RunVisualizer implements IRunVisualizer {
 	 */
 	@Override
 	public boolean addVisualizing(Composite parent, String inputFilePath, String fileExtension) {
-		if(!fileExtension.equals(".graph"))
+		if(!fileExtension.equals(de.unisiegen.informatik.bs.alvis.graph.Activator.getDefault().getFileExtension()))
 			return false;
 		
 		if (parent == null | inputFilePath == null) {

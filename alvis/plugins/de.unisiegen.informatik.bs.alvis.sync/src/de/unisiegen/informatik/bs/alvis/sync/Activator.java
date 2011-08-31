@@ -46,5 +46,13 @@ public class Activator extends AbstractUIPlugin {
 	public static Activator getDefault() {
 		return plugin;
 	}
+	
+	/**
+	 * Returns the file extension of example files provided by this plugin
+	 * @return
+	 */
+	public String getFileExtension(){
+		return ".sync";
+	}
 
 }
