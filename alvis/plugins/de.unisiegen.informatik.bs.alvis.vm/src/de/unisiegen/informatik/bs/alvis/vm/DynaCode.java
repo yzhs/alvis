@@ -25,10 +25,14 @@ import de.unisiegen.informatik.bs.alvis.io.logger.Logger;
 
 public final class DynaCode {
 
+	// Every datatype needed to compile for the current algorithm must
+	// be on the compileClasspath. Especially the path to the VM-plugin
+	// itself must be on it, since it contains tools.jar
 	private String compileClasspath;
 
 	private ClassLoader parentClassLoader;
-
+	
+	// This array contains every directory, where dynamic code is located
 	private ArrayList<SourceDir> sourceDirs = new ArrayList<SourceDir>();
 
 	TreeSet<String> dynamicallyReferencedPackagesNeededToCompile; // what a long
@@ -178,6 +182,11 @@ public final class DynaCode {
 		return null;
 	}
 
+	/**
+	 * If a class is changed, the old version must be deleted
+	 * from the list of loaded classes.
+	 * @param src
+	 */
 	private void unload(SourceDir src) {
 		// clear loaded classes
 		synchronized (loadedClasses) {
@@ -195,7 +204,11 @@ public final class DynaCode {
 	}
 
 	/**
-	 * Class to handle the directories relevant for compiling
+	 * Class to handle the directories relevant for compiling.
+	 * This class is responsible for setting the right parameters
+	 * of the compiler. This specifically includes the classpath,
+	 * make sure tools.jar is on the classpath (compileClasspath),
+	 * otherwise things in Javac will go horribly wrong.
 	 */
 	private class SourceDir {
 		File srcDir;
@@ -233,6 +246,14 @@ public final class DynaCode {
 		}
 
 	}
+	
+	/**
+	 *  A wrapper around a class-Object.
+	 *  Always knows the last time it was changed and the complete path to file
+	 *  it was compiled from (srcDir).
+	 *  The constructor automatically triggers the compiler, so make sure every
+	 *  parameters are set, before creating a file of this type. 
+	 */
 
 	private static class LoadedClass {
 		String className;
@@ -262,6 +283,12 @@ public final class DynaCode {
 			return srcFile.lastModified() != lastModified;
 		}
 
+		
+		/**
+		 * Compiles and loads the given class, if necessary.
+		 * Typical scnenario of a ClassNotFoundException is a wrong 
+		 * classloader in DynaCode's constructor.
+		 */
 		void compileAndLoadClass() {
 
 			Logger.getInstance().log("de.~.vm.DynaCode.compileAndLoadClass()", Logger.DEBUG, "Begin of function");
@@ -292,10 +319,6 @@ public final class DynaCode {
 						+ srcFile.getAbsolutePath());
 			}
 		}
-		
-		public URLClassLoader getClassLoader(){
-			return srcDir.classLoader;
-		}
 	}
 
 	/**
@@ -319,9 +342,4 @@ public final class DynaCode {
 
 		return buf.toString();
 	}
-	
-	public URLClassLoader getClassLoader(String classname){
-		return this.loadedClasses.get(classname).getClassLoader();
-	}
-
 }

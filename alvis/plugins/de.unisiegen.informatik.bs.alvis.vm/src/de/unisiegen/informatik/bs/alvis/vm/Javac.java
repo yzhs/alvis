@@ -23,7 +23,9 @@ import de.unisiegen.informatik.bs.alvis.io.logger.Logger;
 /**
  * A wrapper to ease the use of ToolProvider.getSystemJavaCompiler();
  * Uses com.sun.tools.javac.Main as fallback, if the ToolProvider does
- * not provide a compiler 
+ * not provide a compiler.
+ * As mentioned in the developers documentation: The call to compile(String srcFiles[])
+ * will simply stop, if tools.jar is not on the path.
  * 
  * @author Sebastian Schmitz
  */
@@ -50,6 +52,13 @@ public final class Javac {
 		Javac.outputdir = outputdir;
 	}
 
+	
+	/**
+	 * Compiles the source code using the systems java
+	 * compiler
+	 * @param source
+	 * @return true -> compiling worked flawlessly
+	 */
 	private static boolean compile(JavaFileObject... source) {
 		final ArrayList<String> options = new ArrayList<String>();
 		if (classpath != null) {
@@ -93,7 +102,9 @@ public final class Javac {
 	}
 
 	/**
-	 * Compile the given source files.
+	 * Final preparations for the system's compiler, if 
+	 * it could be fetched. If not, compiling is down
+	 * by the compiler from com.sun.tools.javac.Main
 	 * 
 	 * @param srcFiles
 	 * @return null if success; or compilation errors
@@ -107,7 +118,10 @@ public final class Javac {
 
 		String args[] = buildJavacArgs(srcFiles);
 
+		// Fetch the systems JavaCompiler. Fails, if Eclipse is startet
+		// with the VM from JRE. Works with JDK.
 		compiler = ToolProvider.getSystemJavaCompiler();
+		
 		if (compiler != null) {
 			String algorithmAsSourceCode = readfile(args[args.length - 1]);
 			
@@ -116,6 +130,8 @@ public final class Javac {
 					.split("/").length - 1];
 
 			boolean result = false;
+			
+			// Create a new AlvisFileObject containing the source code and let the compiler compile it
 			try {
 				result = compile(new AlvisFileObject(algorithmName,
 						algorithmAsSourceCode));
@@ -205,6 +221,12 @@ public final class Javac {
 
 		return compile(paths);
 	}
+	
+	/**
+	 * Assembles the given arguments into compiler options
+	 * @param srcFiles
+	 * @return array of compiler options
+	 */
 
 	private String[] buildJavacArgs(String srcFiles[]) {
 		ArrayList<String> args = new ArrayList<String>();
