@@ -38,11 +38,12 @@ import de.unisiegen.informatik.bs.alvis.editors.AlgorithmEditor;
 import de.unisiegen.informatik.bs.alvis.tools.IO;
 
 /**
-package de.unisiegen.informatik.bs.alvis.views;
-
-import java.beans.PropertyChangeEvent;
-
-/**
+ * package de.unisiegen.informatik.bs.alvis.views;
+ * 
+ * import java.beans.PropertyChangeEvent;
+ * 
+ * /**
+ * 
  * @author simon
  * 
  */
@@ -74,54 +75,61 @@ public class RunAlgorithm extends ViewPart implements PropertyChangeListener {
 		/** ENDOF Getting IFile */
 		IEditorDescriptor editorDescriptor = PlatformUI.getWorkbench()
 				.getEditorRegistry().getDefaultEditor(iFile.getName());
-		try {
-			/** open Editor with received File */
-			IEditorPart editor = page.openEditor(new FileEditorInput(iFile),
-					editorDescriptor.getId());
-
-			/** get StyledText from Widget if it's an AlgorithmEditor */
-			if (editor.getClass().getSimpleName().equals("AlgorithmEditor")) {
-				AlgorithmEditor algorithmEditor = (AlgorithmEditor) editor;
-				RowLayout rowLayout = new RowLayout();
-				rowLayout.type = SWT.VERTICAL;
-				parent.setLayout(new GridLayout(1, false));
-
-				text = new StyledText(parent, SWT.MULTI | SWT.BORDER
-						| SWT.V_SCROLL | SWT.H_SCROLL);
-				StyledText editorText = algorithmEditor.getTextWidget();
-
-				/** start copy styled Text */
-				text.setText(editorText.getText());
-				text.setStyleRanges(editorText.getStyleRanges());
-				/** ENDOF copy styled Text */
-
-				/** close Editor */
-				PlatformUI.getWorkbench().getActiveWorkbenchWindow()
-						.getActivePage().closeEditor(editor, false);
-				/** minimize Editor Area */
-
-
-				text.setParent(parent);
-				text.setEditable(false);
-				text.setFont(new Font(null, "Courier New", 12, SWT.NORMAL));
-				text.setBackground(new Color(null, 255, 255, 255));
-
-				Activator.getDefault().getAlgorithmContainer()
-				.addPropertyChangeListener(this);
-				
-				GridData gridData = new GridData();
-				gridData.horizontalAlignment = SWT.FILL;
-				gridData.verticalAlignment = SWT.FILL;
-				gridData.grabExcessHorizontalSpace = true;
-				gridData.grabExcessVerticalSpace = true;
-				text.setLayoutData(gridData);
-
-			}
-		} catch (PartInitException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		
+		
+		String extension = Activator.getDefault().getActiveRun()
+				.getAlgorithmFile();
+		extension = extension.split("\\.")[extension.split("\\.").length - 1];
+		// If the algorithm is of type "java", we don't provide a algorithm view
+		// TODO: @Second Alvis group: Find a way to display an algorithm, if a java-Algorithm is given.
+		if (!extension.equals("java"))
+			try {
+				/** open Editor with received File */
+				IEditorPart editor = page.openEditor(
+						new FileEditorInput(iFile), editorDescriptor.getId());
+
+				/** get StyledText from Widget if it's an AlgorithmEditor */
+				if (editor.getClass().getSimpleName().equals("AlgorithmEditor")) {
+					AlgorithmEditor algorithmEditor = (AlgorithmEditor) editor;
+					RowLayout rowLayout = new RowLayout();
+					rowLayout.type = SWT.VERTICAL;
+					parent.setLayout(new GridLayout(1, false));
+
+					text = new StyledText(parent, SWT.MULTI | SWT.BORDER
+							| SWT.V_SCROLL | SWT.H_SCROLL);
+					StyledText editorText = algorithmEditor.getTextWidget();
+
+					/** start copy styled Text */
+					text.setText(editorText.getText());
+					text.setStyleRanges(editorText.getStyleRanges());
+					/** ENDOF copy styled Text */
+
+					/** close Editor */
+					PlatformUI.getWorkbench().getActiveWorkbenchWindow()
+							.getActivePage().closeEditor(editor, false);
+					/** minimize Editor Area */
+
+					text.setParent(parent);
+					text.setEditable(false);
+					text.setFont(new Font(null, "Courier New", 12, SWT.NORMAL));
+					text.setBackground(new Color(null, 255, 255, 255));
+
+					Activator.getDefault().getAlgorithmContainer()
+							.addPropertyChangeListener(this);
+
+					GridData gridData = new GridData();
+					gridData.horizontalAlignment = SWT.FILL;
+					gridData.verticalAlignment = SWT.FILL;
+					gridData.grabExcessHorizontalSpace = true;
+					gridData.grabExcessVerticalSpace = true;
+					text.setLayoutData(gridData);
+
+				}
+			} catch (PartInitException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		// TODO correct this please , it's just temporary nothing better
 		// found
 		PartPane currentEditorPartPane = ((PartSite) PlatformUI.getWorkbench()
@@ -328,9 +336,9 @@ public class RunAlgorithm extends ViewPart implements PropertyChangeListener {
 			if (event.getPropertyName().equals("ADD_DP"))
 				text.getDisplay().syncExec(new Runnable() {
 					public void run() {
-						if(text.getLineCount() > (Integer) event.getNewValue())
-							text.setLineBackground((Integer) event.getNewValue(),
-								1, yellow);
+						if (text.getLineCount() > (Integer) event.getNewValue())
+							text.setLineBackground(
+									(Integer) event.getNewValue(), 1, yellow);
 					}
 				});
 
