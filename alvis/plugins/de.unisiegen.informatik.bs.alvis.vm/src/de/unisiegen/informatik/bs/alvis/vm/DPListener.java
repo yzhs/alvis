@@ -15,5 +15,6 @@ public interface DPListener {
 	 * @param DPNr to identify Decision Point
 	 * @param toSort, on which SortableCollection should we act
 	 */
+	@SuppressWarnings("rawtypes")
 	void onDecisionPoint(int DPNr,PCObject from, SortableCollection toSort);
 }

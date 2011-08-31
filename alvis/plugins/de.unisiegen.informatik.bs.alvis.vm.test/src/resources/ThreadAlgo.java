@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.HashMap;
 
@@ -10,12 +11,14 @@ import de.unisiegen.informatik.bs.alvis.vm.DPListener;
 
 public class ThreadAlgo implements AbstractAlgo {
 
+	private int localbp;
 	private PCInteger counter;
 	private boolean onBreak;
 	private BPListener bplisten;
 	
 	@Override
 	public void run() {
+		this.reachedBreakPoint(0);
 		counter = new PCInteger(0);
 		this.reachedBreakPoint(1);
 		counter = counter.add(new PCInteger(1));
@@ -36,18 +39,25 @@ public class ThreadAlgo implements AbstractAlgo {
 	 *            current thread
 	 */
 	private void reachedBreakPoint(int BPNr) {
-		onBreak = true;
-		if (bplisten != null) {
-			bplisten.onBreakPoint(BPNr);
-		}
+		localbp = BPNr;
+		Thread thr = new Thread(new Runnable() {
+			public void run() {
+				if (bplisten != null) {
+					bplisten.onBreakPoint(localbp);
+				}
+			}
+		});
+		thr.start();
+		
 		synchronized (this) {
-			while (onBreak) {
+			onBreak = true;
+			do {
 				try {
 					wait();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-			}
+			} while(onBreak);
 		}
 	}
 
@@ -57,16 +67,15 @@ public class ThreadAlgo implements AbstractAlgo {
 		result.add(counter);
 		return result;
 	}
-
 	@Override
-	public HashMap<PCObject, String> getParameterTypes() {
-		HashMap<PCObject, String> result = new HashMap<PCObject, String>();
-		result.put(PCInteger.getNull(), "counter");
+	public Map<String, PCObject> getParameterTypes() {
+		HashMap<String, PCObject> result = new HashMap<String, PCObject>();
+		result.put("counter", PCInteger.getNull());
 		return result;
 	}
 
 	@Override
-	public void setParameters(ArrayList<PCObject> paras) {
+	public void setParameters(Map<String, PCObject> paras) {
 	}
 
 	@Override
@@ -88,5 +97,9 @@ public class ThreadAlgo implements AbstractAlgo {
 	
 	@Override
 	public void setLock(Lock toLockOn) {
+	}
+	
+	@Override
+	public void kill() {
 	}
 }

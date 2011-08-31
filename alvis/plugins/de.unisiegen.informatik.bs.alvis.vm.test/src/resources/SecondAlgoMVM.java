@@ -1,18 +1,22 @@
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.HashMap;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.vm.AbstractAlgo;
+import de.unisiegen.informatik.bs.alvis.vm.KillThreadException;
 import de.unisiegen.informatik.bs.alvis.vm.BPListener;
 import de.unisiegen.informatik.bs.alvis.vm.DPListener;
 
 public class SecondAlgoMVM implements AbstractAlgo {
 
+	private int localbp;
 	private Lock lock;
 	private PCInteger counter;
 	private boolean onBreak;
+	private boolean toKill = false;
 	private BPListener bplisten;
 
 	public SecondAlgoMVM() {
@@ -21,33 +25,46 @@ public class SecondAlgoMVM implements AbstractAlgo {
 
 	@Override
 	public void run() {
-		this.reachedBreakPoint(1);
-		lock.lock();
 		try {
-			counter.inc();
-		}
-		finally {
-			lock.unlock();
-		}
-		this.reachedBreakPoint(2);
-		
-		lock.lock();
-		try {
-			counter.inc();
-		}
-		finally {
-			lock.unlock();
-		}
-		this.reachedBreakPoint(3);
-		
-		lock.lock();
-		try {
-			counter.inc();
-		}
-		finally {
-			lock.unlock();
-		}this.reachedBreakPoint(4);
+			this.reachedBreakPoint(0);
+			if (toKill)
+				throw new KillThreadException();
 
+			lock.lock();
+			try {
+				counter.inc();
+			} finally {
+				lock.unlock();
+			}
+
+			this.reachedBreakPoint(2);
+			if (toKill)
+				throw new KillThreadException();
+
+			lock.lock();
+			try {
+				counter.inc();
+			} finally {
+				lock.unlock();
+			}
+
+			this.reachedBreakPoint(3);
+			if (toKill)
+				throw new KillThreadException();
+
+			lock.lock();
+			try {
+				counter.inc();
+			} finally {
+				lock.unlock();
+			}
+
+			this.reachedBreakPoint(4);
+			if (toKill)
+				throw new KillThreadException();
+		} catch (KillThreadException e) {
+			return;
+		}
 	}
 
 	@Override
@@ -58,13 +75,13 @@ public class SecondAlgoMVM implements AbstractAlgo {
 	}
 
 	@Override
-	public HashMap<PCObject, String> getParameterTypes() {
+	public Map<String, PCObject> getParameterTypes() {
 		return null;
 	}
 
 	@Override
-	public void setParameters(ArrayList<PCObject> paras) {
-		counter = (PCInteger) paras.get(0);
+	public void setParameters(Map<String, PCObject> paras) {
+		counter = (PCInteger) paras.get("C");
 	}
 
 	@Override
@@ -92,24 +109,37 @@ public class SecondAlgoMVM implements AbstractAlgo {
 	 *            current thread
 	 */
 	private void reachedBreakPoint(int BPNr) {
-		if (bplisten != null) {
-			bplisten.onBreakPoint(BPNr);
-		}
+		localbp = BPNr;
+		Thread thr = new Thread(new Runnable() {
+			public void run() {
+				if (bplisten != null) {
+					bplisten.onBreakPoint(localbp);
+				}
+			}
+		});
+		thr.start();
+
 		synchronized (this) {
 			onBreak = true;
-			while (onBreak) {
+			do {
 				try {
-					wait(100);
+					wait();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-			}
+			} while(onBreak);
 		}
 	}
 
 	@Override
 	public void setLock(Lock toLockOn) {
 		lock = toLockOn;
-		
+	}
+
+	@Override
+	public void kill() {
+		toKill = true;
+		bplisten = null;
+		stopBreak();
 	}
 }

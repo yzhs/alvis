@@ -96,4 +96,8 @@ public class Algo implements AbstractAlgo {
 	@Override
 	public void setLock(Lock toLockOn) {
 	}
+	
+	@Override
+	public void kill() {
+	}
 }

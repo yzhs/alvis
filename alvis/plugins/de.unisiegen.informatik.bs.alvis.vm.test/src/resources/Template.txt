@@ -1,4 +1,6 @@
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.concurrent.locks.Lock;
 import java.util.HashMap;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
@@ -10,6 +12,7 @@ import de.unisiegen.informatik.bs.alvis.vm.DPListener;
 
 public class G implements AbstractAlgo {
 
+	private int localbp;
 	private PCInteger counter;
 	private boolean onBreak;
 	private BPListener bplisten;
@@ -35,18 +38,25 @@ public class G implements AbstractAlgo {
 	 *            current thread
 	 */
 	private void reachedBreakPoint(int BPNr) {
-		onBreak = true;
-		if (bplisten != null) {
-			bplisten.onBreakPoint(BPNr);
-		}
+		localbp = BPNr;
+		Thread thr = new Thread(new Runnable() {
+			public void run() {
+				if (bplisten != null) {
+					bplisten.onBreakPoint(localbp);
+				}
+			}
+		});
+		thr.start();
+		
 		synchronized (this) {
-			while (onBreak) {
+			onBreak = true;
+			do {
 				try {
 					wait();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-			}
+			} while(onBreak);
 		}
 	}
 
@@ -58,12 +68,12 @@ public class G implements AbstractAlgo {
 	}
 
 	@Override
-	public HashMap<PCObject, String> getParameterTypes() {
+	public Map<String, PCObject> getParameterTypes() {
 		return null;
 	}
 
 	@Override
-	public void setParameters(ArrayList<PCObject> paras) {
+	public void setParameters(Map<String, PCObject> paras) {
 	}
 
 	@Override
@@ -85,5 +95,9 @@ public class G implements AbstractAlgo {
 	
 	@Override
 	public void setLock(Lock setToLock) {
+	}
+	
+	@Override
+	public void kill() {
 	}
 }

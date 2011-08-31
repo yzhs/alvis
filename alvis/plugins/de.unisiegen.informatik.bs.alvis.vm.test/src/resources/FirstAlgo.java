@@ -1,5 +1,6 @@
 // package resources;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.HashMap;
 
@@ -22,12 +23,12 @@ public class FirstAlgo implements AbstractAlgo {
 	}
 
 	@Override
-	public HashMap<PCObject, String> getParameterTypes() {
+	public Map<String, PCObject> getParameterTypes() {
 		return null;
 	}
 
 	@Override
-	public void setParameters(ArrayList<PCObject> paras) {
+	public void setParameters(Map<String, PCObject> paras) {
 	}
 
 	@Override
@@ -44,5 +45,9 @@ public class FirstAlgo implements AbstractAlgo {
 	
 	@Override
 	public void setLock(Lock toLockOn) {
+	}
+	
+	@Override
+	public void kill() {
 	}
 }

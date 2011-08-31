@@ -56,6 +56,9 @@ public class AlgoThread {
 	// helper to decide if we are currently on break, or moving backwards
 	private boolean onBreak;
 
+	// helper to check if this is the startline
+	private boolean isFirstBP;
+
 	// reference to dplistener
 	private DPListener dpListen;
 	private HashMap<Integer, Queue<SortableCollection>> dPoints;
@@ -214,6 +217,7 @@ public class AlgoThread {
 	public void startAlgo() {
 		if (parameters == null)
 			return;
+		isFirstBP = true;
 		onBreak = false;
 		algoInst.addBPListener(new BPListener() {
 			/**
@@ -221,6 +225,16 @@ public class AlgoThread {
 			 */
 			@Override
 			public void onBreakPoint(int BPNr) {
+				do{
+				try {
+					synchronized (this) {
+						wait(1);
+					}
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				}while(!algoThread.getState().equals(Thread.State.WAITING));
+
 				if (lineCounter.containsKey(new Integer(BPNr))) {
 					int tmp = lineCounter.get(new Integer(BPNr)).intValue();
 					tmp++;
@@ -233,8 +247,10 @@ public class AlgoThread {
 				}
 				onBreak = true;
 				// inform all registered breakpoint listeners
-				for (BPListener toInform : bpListeners) {
-					toInform.onBreakPoint(BPNr);
+				if (!isFirstBP) {
+					for (BPListener toInform : bpListeners) {
+						toInform.onBreakPoint(BPNr);
+					}
 				}
 			}
 		});
@@ -253,6 +269,8 @@ public class AlgoThread {
 			}
 		});
 		algoThread.start();
+		this.waitForBreakpoint();
+		isFirstBP = false;
 	}
 
 	/**
@@ -270,7 +288,10 @@ public class AlgoThread {
 	 * stops running thread with creating new one
 	 */
 	public void stopAlgo() {
-		createThread();
+		synchronized (algoThread) {
+			algoInst.kill();
+			algoThread.notify();
+		}
 	}
 
 	/**
@@ -292,13 +313,13 @@ public class AlgoThread {
 	 */
 	public void waitForBreakpoint() {
 		synchronized (this) {
-			while (onBreak == false) {
+			do {
 				try {
-					this.wait(100);
+					this.wait(10);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-			}
+			} while (onBreak == false);
 		}
 	}
 

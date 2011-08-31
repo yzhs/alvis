@@ -304,13 +304,13 @@ public class Activator extends AbstractUIPlugin {
 		}
 
 		try {
-			if (!vm.addAlgoToVM("algo", pathToFile, fileName, //$NON-NLS-1$
-					dynamicallyReferencedPackagesNeededToCompile))
-				throw new VirtualMachineException(
-						"Adding the algorithm to the Virtual Machine failed."); //$NON-NLS-1$
+			vm.addAlgoToVM("algo", pathToFile, fileName,
+					dynamicallyReferencedPackagesNeededToCompile);
+
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new VirtualMachineException(
+					"Adding the algorithm to the Virtual Machine failed.");
 		}
 
 		//			return vm.addAlgoToVM("first", pathToAlgoInJava); //$NON-NLS-1$

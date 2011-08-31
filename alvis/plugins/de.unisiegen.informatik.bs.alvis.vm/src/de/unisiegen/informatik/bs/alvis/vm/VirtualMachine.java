@@ -78,6 +78,8 @@ public class VirtualMachine {
 	 * @return thread status
 	 */
 	public Thread.State getThreadState(String key) {
+		if(algos.size() == 0)
+			return Thread.State.TERMINATED;
 		return algos.get(key).getCurrentThreadState();
 	}
 
@@ -323,9 +325,12 @@ public class VirtualMachine {
 	}
 
 	/**
-	 * removes all refernces to algos and threads, to clean up
+	 * removes all references to algos and threads, to clean up
 	 */
 	public void clear() {
+		for(AlgoThread algo : algos.values()) {
+			algo.stopAlgo();
+		}
 		algos.clear();
 	}
 

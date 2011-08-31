@@ -60,4 +60,9 @@ public interface AbstractAlgo extends Runnable {
 	 * lock handled on all threads
 	 */
 	public void setLock(Lock toLockOn);
+	
+	/**
+	 * should be used to signalize a Thread to leave it's run method
+	 */
+	public void kill();
 }
