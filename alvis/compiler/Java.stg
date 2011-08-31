@@ -129,6 +129,7 @@ public Map\<String, PCObject\> getParameterTypes() {
 
 public void run() {
     try {
+        reachedBreakPoint(0);
         <code>
     } catch (KillThreadException e) {
         return;
