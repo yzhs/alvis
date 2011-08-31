@@ -9,8 +9,10 @@ import java.util.concurrent.locks.Lock;
 import de.unisiegen.informatik.bs.alvis.vm.*;
 
 public class #ALGORITHM_NAME# implements AbstractAlgo {
+    private int localbp;
     private Lock lock;
     private boolean onBreak;
+    private boolean stopThread;
     private boolean onDecision;
     private BPListener bplisten;
     private DPListener dplisten;
@@ -40,61 +42,69 @@ public class #ALGORITHM_NAME# implements AbstractAlgo {
 
     /**
      * static code
-     * 
+     *
      * @param BPNr
      *            set breakpoint field, inform breakpoint listener, sleeps
      *            current thread
      */
     private void reachedBreakPoint(int BPNr) {
-        onBreak = true;
-        if (bplisten != null) {
-                bplisten.onBreakPoint(BPNr);
-        }
+        localbp = BPNr;
+        Thread thr = new Thread(new Runnable() {
+            public void run() {
+                if (bplisten != null) {
+                    bplisten.onBreakPoint(localbp);
+                }
+            }
+        });
+        thr.start();
+
         synchronized (this) {
-            while (onBreak) {
+            onBreak = true;
+            do {
                 try {
-                    wait(10);
+                    wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-            }
+            } while(onBreak);
         }
     }
-    
+
     public List\<PCObject\> getVariableReferences() {
         return null;
     }
-    
+
     @Override
     public void addBPListener(BPListener wantToListen) {
         bplisten = wantToListen;
     }
-    
+
     public void addDPListener(DPListener wantToListen) {
         dplisten = wantToListen;
     }
-    
+
+    public void kill() {
+        stopThread = true;
+        bplisten = null;
+        stopBreak();
+    }
+
     @Override
     public void stopBreak() {
-        onBreak = false;
         synchronized (this) {
+            onBreak = false;
             this.notify();
         }
     }
-    
+
+    @Override
     public void setLock(Lock toLockOn) {
         lock = toLockOn;
     }
 
-    private boolean stopThread = false;
-
-    public void stopThread() {
-        stopThread = true;
-    }
-
-    private void stop() /*throws AlgorithmStopException*/ {
+    private void stop() throws KillThreadException {
         if (stopThread)
-            /*throw new AlgorithmStopException()*/;
+            throw new KillThreadException();
     }
 }
 >>
@@ -117,13 +127,16 @@ public Map\<String, PCObject\> getParameterTypes() {
     return result;
 }
 
-public void run() /*throws AlgorithmStopException*/ {
-    stop();
-    <code>
+public void run() {
+    try {
+        <code>
+    } catch (KillThreadException e) {
+        return;
+    }
 }
 >>
 function(name, type, params, code) ::= <<
-private <type> <name>(<params; separator=", ">) /*throws AlgorithmStopException*/ {
+private <type> <name>(<params; separator=", ">) throws KillThreadException {
     stop();
     <code>
 }
