@@ -51,7 +51,7 @@ public abstract class AbstractTParser extends Parser {
 			while (fstream.ready())
 				tmp.add(fstream.readLine());
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			// This should not happen unless the jar containing the compiler was not generated correctly.
 			e.printStackTrace();
 		}
 

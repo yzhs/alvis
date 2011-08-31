@@ -20,7 +20,6 @@ tokens {
 	 * specific types, as well as the builtin ones.
 	 */
 	protected void allTokens() {
-		// TODO discuss, is there a nicer way to get all tokens?
 		tokenText = new ArrayList<String>();
         
         tokenText.addAll(allKeywords());
@@ -204,8 +203,8 @@ ESC_SEQ : '\\' ('b'|'t'|'n'|'f'|'r'|'\"'|'\''|'\\') ;
  * can not be used in the resulting Java code.
  */
 JAVAKEYWORD :
-   ( 'abstract' | 'assert' | 'boolean' | 'byte' | 'catch' | 'class' | 'const' | 'default'
-   | 'double' | 'enum' | 'extends' | 'final' | 'finally' | 'float' | 'goto' | 'implements'
+   ( 'abstract' | 'assert' | 'boolean' | 'break' | 'byte' | 'catch' | 'class' | 'const' | 'continue'
+   | 'default' | 'double' | 'enum' | 'extends' | 'final' | 'finally' | 'float' | 'goto' | 'implements'
    | 'import' | 'int' | 'instanceof' | 'interface' | 'long' | 'native' | 'new' | 'package'
    | 'private' | 'protected' | 'public' | 'return' | 'short' | 'static' | 'strictfp' | 'super'
    | 'synchronized' | 'this' | 'throw' | 'transient' | 'try' | 'void' | 'volatile' ) ;

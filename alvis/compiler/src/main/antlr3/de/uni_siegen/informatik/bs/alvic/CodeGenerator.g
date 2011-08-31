@@ -66,7 +66,7 @@ statement options {k = 3;}
         -> arrayAssign(lhs={%index(array={$postfixExpr.st}, index={$i.st})}, rhs={$rhs.st})
     | ^(RETURN expr)               -> return(expr={$expr.st})
     | RETURN                       -> return()
-    | SEMICOLON                    -> breakpoint(lineNumber={$SEMICOLON.line})
+    | SEMICOLON                    -> breakpoint(lineNumber={$SEMICOLON.line-1})
     | ^(BLOCK (s+=statement)*)     -> block(statements={$s})
     | ^(IF expr block=ifStatementHelper) -> if(cond={$expr.st}, then={$block.st})
     | ^(IF_ELSE expr s1=ifStatementHelper s2=ifStatementHelper) -> ifElse(cond={$expr.st}, then={$s1.st}, otherwise={$s2.st}) //'else' does not work as a template parameter
