@@ -126,6 +126,45 @@ public class AlvisGraphUndos {
 	}
 
 	/**
+	 * creates new AlvisUndoMoveNodes and doesn't push it to undos, returns it
+	 * instead because the concerning node is not moved yet
+	 * 
+	 * @param wasDirty
+	 *            if editor was dirty before this action
+	 * @param gn
+	 *            the affected node
+	 * @return according undo for when and if the "move node" action takes place
+	 */
+	public AlvisUndoMoveNodes preparePushMoveNode(boolean wasDirty,
+			AlvisGraphNode gn) {
+
+		ArrayList<AlvisGraphNode> gns = new ArrayList<AlvisGraphNode>();
+		gns.add(gn);
+
+		return preparePushMoveNodes(wasDirty, gns);
+
+	}
+
+	/**
+	 * creates new AlvisUndoMoveNodes and pushes it to undos, clears redos
+	 * 
+	 * @param wasDirty
+	 *            if editor was dirty before this action
+	 * @param gns
+	 *            all affected nodes
+	 */
+	public void pushMoveNodes(boolean wasDirty, ArrayList<AlvisGraphNode> gns) {
+
+		if (gns == null)
+			gns = new ArrayList<AlvisGraphNode>();
+
+		AlvisGraphUndo undo = new AlvisUndoMoveNodes(wasDirty, gns);
+		undos.add(undo);
+		clearRedos();
+
+	}
+
+	/**
 	 * creates new AlvisUndoAddSubGraph and pushes it to undos, clears redos
 	 * 
 	 * @param wasDirty
@@ -176,19 +215,39 @@ public class AlvisGraphUndos {
 	/**
 	 * creates new AlvisUndoMoveNodes and pushes it to undos, clears redos
 	 * 
+	 * @param undo
+	 *            the undo to push when nodes are finally getting moved, undo
+	 *            was created by preparePushMoveNodes()
+	 */
+	public void pushMoveNodes(AlvisUndoMoveNodes undo) {
+
+		if (undo == null)
+			return;
+
+		undos.add(undo);
+		clearRedos();
+
+	}
+
+	/**
+	 * creates new AlvisUndoMoveNodes and doesn't push it to undos, returns it
+	 * instead because the concerning nodes are not moved yet
+	 * 
 	 * @param wasDirty
 	 *            if editor was dirty before this action
 	 * @param gns
 	 *            all affected nodes
+	 * @return according undo for when and if the "move nodes" action takes
+	 *         place
 	 */
-	public void pushMoveNodes(boolean wasDirty, ArrayList<AlvisGraphNode> gns) {
+	public AlvisUndoMoveNodes preparePushMoveNodes(boolean wasDirty,
+			ArrayList<AlvisGraphNode> gns) {
 
-		if (gns == null)
-			gns = new ArrayList<AlvisGraphNode>();
+		if (gns == null || gns.isEmpty())
+			return null;
 
-		AlvisGraphUndo undo = new AlvisUndoMoveNodes(wasDirty, gns);
-		undos.add(undo);
-		clearRedos();
+		AlvisUndoMoveNodes undo = new AlvisUndoMoveNodes(wasDirty, gns);
+		return undo;
 
 	}
 
@@ -221,9 +280,9 @@ public class AlvisGraphUndos {
 		undo.execute(editor.myGraph);
 		redos.push(undo.invert());
 
-//		editor.setDirty(undo.willBeDirty());//does not work like it should
+		// editor.setDirty(undo.willBeDirty());//does not work like it should
 		editor.setDirty(true);
-		
+
 	}
 
 	/**

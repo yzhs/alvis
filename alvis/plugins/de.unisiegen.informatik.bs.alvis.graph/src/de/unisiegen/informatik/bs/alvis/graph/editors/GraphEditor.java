@@ -31,7 +31,9 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Set;
 
 import javax.imageio.ImageIO;
@@ -77,6 +79,7 @@ import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGrap
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSave;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSerialize;
 import de.unisiegen.informatik.bs.alvis.graph.undo.AlvisGraphUndos;
+import de.unisiegen.informatik.bs.alvis.graph.undo.AlvisUndoMoveNodes;
 
 public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		IExportItem {
@@ -112,7 +115,8 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	private boolean nodesAreMarked;
 
 	private boolean dirty = false;
-	private boolean tmpDirty = true;
+	private AlvisUndoMoveNodes moveUndo = null;
+
 	private AlvisGraphUndos undoAdmin;
 
 	/**
@@ -547,7 +551,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 			@Override
 			public void mouseDown(MouseEvent e) {
-				tmpDirty = isDirty();
 				if (e.button != 1) {
 					setGraphModus(MODUS_STANDARD);
 					return;
@@ -560,7 +563,13 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 					setGraphModus(MODUS_MOVE);
 				}
 
-				nodesAreMarked = !myGraph.getHighlightedNodes().isEmpty();
+				ArrayList<AlvisGraphNode> gns = myGraph.getHighlightedNodes();
+				nodesAreMarked = !gns.isEmpty();
+
+				if(nodesAreMarked){
+					moveUndo = undoAdmin.preparePushMoveNodes(isDirty(), gns);
+				}
+				
 			}
 
 			@Override
@@ -583,7 +592,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 						// clickEndNode(actNode);
 					} else if (graphModusIs(MODUS_DELETE)) {
 						clickRemove();
-						if (shiftPressed == false){
+						if (shiftPressed == false) {
 							setGraphModus(MODUS_STANDARD);
 						}
 					} else if (graphModusIs(MODUS_CONNECTION)) {
@@ -600,8 +609,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 									markNodesInFrame(e);
 
 								} else {
-									undoAdmin.pushMoveNodes(tmpDirty,
-											myGraph.getHighlightedNodes());
+									undoAdmin.pushMoveNodes(moveUndo);
 									setDirty(true);
 								}
 							}
@@ -650,7 +658,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 			return;
 
 		Set<AlvisGraphNode> gns = myGraph.getAllNodes();
-		GraphItem[] gnsa = new GraphItem[gns.size()];
+		AlvisGraphNode[] gnsa = new AlvisGraphNode[gns.size()];
 		int i = 0;
 		int xMin = Math.min(e.x, remMousePos.x)
 				+ myGraph.getHorizontalBar().getSelection();
@@ -667,10 +675,19 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 						&& gn.getLocation().x < xMax
 						&& (gn.getLocation().y + gn.getSize().height) > yMin
 						&& gn.getLocation().y < yMax)
-					gnsa[i] = (GraphItem) gn;
+					gnsa[i] = gn;
 				i++;
 			}
 			myGraph.setSelection(gnsa);
+//			ArrayList<AlvisGraphNode> gnsal = myGraph.getHighlightedNodes();
+//			System.out.println(gnsal + "\n" + gnsal.size());//TODO weg
+//			nodesAreMarked = !gnsal.isEmpty();
+//
+//			if(nodesAreMarked){
+//				moveUndo = undoAdmin.preparePushMoveNodes(isDirty(), gns);
+//			}
+			
+
 		} catch (ClassCastException cce) {
 		}
 	}
