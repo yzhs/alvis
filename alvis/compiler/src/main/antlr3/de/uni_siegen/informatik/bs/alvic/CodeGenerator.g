@@ -87,7 +87,7 @@ statement options {k = 3;}
     | ^(BLOCK (s+=statement)*)     -> block(statements={$s})
     | ^(IF expr block=ifStatementHelper) -> if(cond={$expr.st}, then={$block.st})
     | ^(IF_ELSE expr s1=ifStatementHelper s2=ifStatementHelper) -> ifElse(cond={$expr.st}, then={$s1.st}, otherwise={$s2.st}) //'else' does not work as a template parameter
-    | ^(FOR lhs=param rhs=expr body=statement) -> for(lhs={$lhs.st}, line={$rhs.start.getLine()}, obj={$rhs.obj}, type={$rhs.start.getVarType().getJavaType()}, rhs={$rhs.st}, body={$body.st})
+    | ^(FOR lhs=param rhs=expr body=statement) -> for(lhs={$lhs.st}, line={$rhs.start.getLine()-1}, obj={$rhs.obj}, type={$rhs.start.getVarType().getJavaType()}, rhs={$rhs.st}, body={$body.st})
     | ^(WHILE expr body=statement)             -> while(cond={$expr.st}, body={$body.st})
     ;
 
