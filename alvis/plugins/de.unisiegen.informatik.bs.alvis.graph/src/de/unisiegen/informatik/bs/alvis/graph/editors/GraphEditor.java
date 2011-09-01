@@ -1,3 +1,20 @@
+/*
+ * Copyright (c) 2011 Frank Weiler
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use, 
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
+ * Software, and to permit persons to whom the Software is furnished to do so, 
+ * subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all 
+ * copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package de.unisiegen.informatik.bs.alvis.graph.editors;
 
 import java.awt.Font;
@@ -95,6 +112,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	private boolean nodesAreMarked;
 
 	private boolean dirty = false;
+	private boolean tmpDirty = true;
 	private AlvisGraphUndos undoAdmin;
 
 	/**
@@ -529,6 +547,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 			@Override
 			public void mouseDown(MouseEvent e) {
+				tmpDirty = isDirty();
 				if (e.button != 1) {
 					setGraphModus(MODUS_STANDARD);
 					return;
@@ -552,8 +571,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 					actNode = myGraph.getHighlightedNode();
 					actCon = myGraph.getHighlightedConnection();
 
-					if (graphModusIs(MODUS_MOVE)
-							|| (graphModusIs(MODUS_DELETE) && shiftPressed == false)) {
+					if (graphModusIs(MODUS_MOVE)) {
 						setGraphModus(MODUS_STANDARD);
 					} else if (graphModusIs(MODUS_NODE)) {
 						if (actNode == null) {
@@ -565,6 +583,9 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 						// clickEndNode(actNode);
 					} else if (graphModusIs(MODUS_DELETE)) {
 						clickRemove();
+						if (shiftPressed == false){
+							setGraphModus(MODUS_STANDARD);
+						}
 					} else if (graphModusIs(MODUS_CONNECTION)) {
 						clickNewConnection(actNode);
 					}
@@ -579,7 +600,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 									markNodesInFrame(e);
 
 								} else {
-									undoAdmin.pushMoveNodes(isDirty(),
+									undoAdmin.pushMoveNodes(tmpDirty,
 											myGraph.getHighlightedNodes());
 									setDirty(true);
 								}
@@ -944,6 +965,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 				}
 			}
 			undoAdmin.pushAddSubGraph(isDirty(), gns, gcs);
+			setDirty(true);
 		}
 
 		setLayout();
@@ -994,6 +1016,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 			gns.add(alvisGraphNode);
 		}
 		undoAdmin.pushMoveNodes(isDirty(), gns);
+		setDirty(true);
 
 		myGraph.placeNodes();
 		checkDirty();
@@ -1006,6 +1029,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 			gns.add(alvisGraphNode);
 		}
 		undoAdmin.pushMoveNodes(isDirty(), gns);
+		setDirty(true);
 
 		myGraph.fitToPage(millis);
 	}
@@ -1171,6 +1195,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	 */
 	public void setZoomUndo(boolean zoomIn, Point mousePos) {
 		undoAdmin.pushZoom(isDirty(), zoomIn, mousePos);
+		setDirty(true);
 	}
 
 	public int getGraphModus() {
