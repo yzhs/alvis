@@ -7,16 +7,16 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-public class NewActorWizardPage extends WizardPage {
+public class NewThreadWizardPage extends WizardPage {
 
 	private Text name;
 	private Label lName;
 	private Composite container;
 
-	public NewActorWizardPage() {
-		super(Messages.NewActorWizardPage_addActorWizardPageTitle);
-		setTitle("Add an actor"); //$NON-NLS-1$
-		setDescription(Messages.NewActorWizardPage_addActorWizardPageDescription);
+	public NewThreadWizardPage() {
+		super(Messages.NewThreadWizardPage_addThreadWizardPageTitle);
+		setTitle(Messages.NewThreadWizardPage_addThreadWizardPageTitle);
+		setDescription(Messages.NewThreadWizardPage_addThreadWizardPageDescription);
 	}
 
 	@Override
@@ -26,7 +26,7 @@ public class NewActorWizardPage extends WizardPage {
 		container.setLayout(layout);
 		layout.numColumns = 2;
 		lName = new Label(container, SWT.NULL);
-		lName.setText(Messages.NewActorWizardPage_actorName);
+		lName.setText(Messages.NewThreadWizardPage_ThreadName);
 		name = new Text(container, SWT.BORDER | SWT.SINGLE);
 		setControl(container);
 	}

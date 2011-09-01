@@ -12,7 +12,7 @@ public class DatatypeList implements IDatatypeList {
 		ArrayList<PCObject> usedDatatypes = new ArrayList<PCObject>();
 		usedDatatypes.add(new PCSemaphore());
 		usedDatatypes.add(new PCCondition());
-		usedDatatypes.add(new PCActor());
+		usedDatatypes.add(new PCThread());
 		usedDatatypes.add(new PCScenario());
 		usedDatatypes.add(new PCBuffer());
 		return usedDatatypes;

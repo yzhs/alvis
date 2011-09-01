@@ -16,7 +16,7 @@ public class NewSemaphoreWizardPage extends WizardPage {
 
 	public NewSemaphoreWizardPage() {
 		super(Messages.NewSemaphoreWizardPage_addSemaphorePageTitle);
-		setTitle("Add a semaphore"); //$NON-NLS-1$
+		setTitle(Messages.NewSemaphoreWizardPage_addSemaphorePageTitle);
 		setDescription(Messages.NewSemaphoreWizardPage_semaphoreWizardPageDescription);
 	}
 

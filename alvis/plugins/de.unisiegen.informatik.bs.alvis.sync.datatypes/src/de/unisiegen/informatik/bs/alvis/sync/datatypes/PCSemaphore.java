@@ -52,7 +52,7 @@ public class PCSemaphore extends PCObject {
 	 * Decrease semaphore, thread will possibly lock
 	 * @param a Actor who calls this
 	 */
-	public synchronized void P(PCActor a) {
+	public synchronized void P(PCThread a) {
 		try {
 			counter--;
 			if (counter == 0) {

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class AlvisSave {
 
 	private ArrayList<AlvisPrimitive> primitives;
-	private ArrayList<AlvisActor> actors;
+	private ArrayList<AlvisThread> threads;
 	private ArrayList<AlvisSemaphore> semaphores;
 	private ArrayList<AlvisCondition> conditions;
 	private AlvisBuffer buffer;
@@ -14,7 +14,7 @@ public class AlvisSave {
 
 	public AlvisSave() {
 		primitives = new ArrayList<AlvisPrimitive>();
-		actors = new ArrayList<AlvisActor>();
+		threads = new ArrayList<AlvisThread>();
 		semaphores = new ArrayList<AlvisSemaphore>();
 		conditions = new ArrayList<AlvisCondition>();
 		buffer = null;
@@ -66,13 +66,13 @@ public class AlvisSave {
 		}
 		scenario.setConditionsList(conditions);
 
-		int actorsCount = seri.getActorNames().length;
-		for (int i = 0; i < actorsCount; i++) {
-			AlvisActor a = new AlvisActor(scenario, seri.getActorNames()[i],
-					seri.getActorStatus()[i], seri.getActorIds()[i]);
-			actors.add(a);
+		int threadsCount = seri.getThreadNames().length;
+		for (int i = 0; i < threadsCount; i++) {
+			AlvisThread a = new AlvisThread(scenario, seri.getThreadNames()[i],
+					seri.getThreadStatus()[i], seri.getThreadIds()[i]);
+			threads.add(a);
 		}
-		scenario.setActorsList(actors);
+		scenario.setThreadsList(threads);
 
 		if (seri.getHasBuffer()) {
 			AlvisBuffer b = new AlvisBuffer(scenario, seri.getBufferCapacity(),
@@ -112,12 +112,12 @@ public class AlvisSave {
 		this.primitives = primitives;
 	}
 
-	public ArrayList<AlvisActor> getActors() {
-		return actors;
+	public ArrayList<AlvisThread> getThreads() {
+		return threads;
 	}
 
-	public void setActors(ArrayList<AlvisActor> actors) {
-		this.actors = actors;
+	public void setThreads(ArrayList<AlvisThread> threads) {
+		this.threads = threads;
 	}
 
 	public ArrayList<AlvisSemaphore> getSemaphores() {
@@ -160,12 +160,12 @@ public class AlvisSave {
 		primitives.remove(p);
 	}
 
-	public void addActor(AlvisActor a) {
-		actors.add(a);
+	public void addThread(AlvisThread a) {
+		threads.add(a);
 	}
 
-	public void removeActor(AlvisActor a) {
-		actors.remove(a);
+	public void removeThread(AlvisThread a) {
+		threads.remove(a);
 	}
 
 	public void addBuffer(AlvisBuffer b) {
@@ -202,7 +202,7 @@ public class AlvisSave {
 
 	public AlvisSerialize serialize() {
 		AlvisSerialize seri = new AlvisSerialize(globalId, output, buffer,
-				primitives, actors, semaphores, conditions);
+				primitives, threads, semaphores, conditions);
 		return seri;
 	}
 

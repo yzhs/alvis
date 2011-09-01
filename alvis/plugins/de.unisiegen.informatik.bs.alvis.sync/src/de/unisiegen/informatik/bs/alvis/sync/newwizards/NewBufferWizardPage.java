@@ -15,7 +15,7 @@ public class NewBufferWizardPage extends WizardPage {
 
 	public NewBufferWizardPage() {
 		super(Messages.NewBufferWizardPage_newBufferWizardPageTitle);
-		setTitle("Add a buffer"); //$NON-NLS-1$
+		setTitle(Messages.NewBufferWizardPage_newBufferWizardPageTitle);
 		setDescription(Messages.NewBufferWizardPage_newBufferWizardPageDescription);
 	}
 

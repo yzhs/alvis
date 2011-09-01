@@ -47,7 +47,7 @@ public class ScenarioEditor extends EditorPart implements
 //	private static IEditorInput myInput;
 //	private String myInputFilePath;
 	public static List primitivesList, semaphoresList, conditionsList,
-			actorsList;
+			threadsList;
 	private boolean dirty = false;
 	public static ScenarioEditor edit;
 

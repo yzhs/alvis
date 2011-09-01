@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.jface.window.ApplicationWindow;
 import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Button;
@@ -15,8 +16,12 @@ import org.eclipse.swt.widgets.Listener;
 
 import de.unisiegen.informatik.bs.alvis.sync.Activator;
 import de.unisiegen.informatik.bs.alvis.sync.datatypes.GraphicalRepresentationScenario;
+import de.unisiegen.informatik.bs.alvis.sync.dialogs.DeleteConditionDialog;
+import de.unisiegen.informatik.bs.alvis.sync.dialogs.DeletePrimitiveDialog;
+import de.unisiegen.informatik.bs.alvis.sync.dialogs.DeleteSemaphoreDialog;
+import de.unisiegen.informatik.bs.alvis.sync.dialogs.DeleteThreadDialog;
 import de.unisiegen.informatik.bs.alvis.sync.editors.ScenarioEditor;
-import de.unisiegen.informatik.bs.alvis.sync.newwizards.NewActorWizard;
+import de.unisiegen.informatik.bs.alvis.sync.newwizards.NewThreadWizard;
 import de.unisiegen.informatik.bs.alvis.sync.newwizards.NewBufferWizard;
 import de.unisiegen.informatik.bs.alvis.sync.newwizards.NewConditionWizard;
 import de.unisiegen.informatik.bs.alvis.sync.newwizards.NewPrimitiveWizard;
@@ -33,12 +38,12 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 	private ArrayList<AlvisPrimitive> primitivesList;
 	private ArrayList<AlvisSemaphore> semaphoresList;
 	private ArrayList<AlvisCondition> conditionsList;
-	private ArrayList<AlvisActor> actorsList;
+	private ArrayList<AlvisThread> threadsList;
 	private AlvisBuffer buffer;
 	private AlvisOutput output;
 	public static AlvisScenario scenario;
 	private ScrolledComposite primitivesScroll, semaphoresScroll,
-			conditionsScroll, actorsScroll;
+			conditionsScroll, threadsScroll;
 	private AlvisSave admin;
 
 	public AlvisScenario(Composite parent) {
@@ -46,7 +51,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		primitivesList = new ArrayList<AlvisPrimitive>();
 		semaphoresList = new ArrayList<AlvisSemaphore>();
 		conditionsList = new ArrayList<AlvisCondition>();
-		actorsList = new ArrayList<AlvisActor>();
+		threadsList = new ArrayList<AlvisThread>();
 		buffer = null;
 		output = null;
 		scenario = this;
@@ -92,6 +97,13 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		Button primDel = new Button(primitives, SWT.NONE);
 		primDel.setBounds(106, 266, 82, 26);
 		primDel.setText(Messages.AlvisScenario_delete);
+		primDel.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
+				ApplicationWindow window = new DeletePrimitiveDialog(null);
+			    window.setBlockOnOpen(true);
+			    window.open();
+			}
+		});
 
 		Group semaphores = new Group(container, SWT.NONE);
 		semaphores.setBounds(202, 5, 194, 294);
@@ -104,7 +116,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		semaphoresScroll.setExpandVertical(true);
 
 		Button semaAdd = new Button(semaphores, SWT.NONE);
-		semaAdd.setText("Add"); //$NON-NLS-1$
+		semaAdd.setText(Messages.AlvisScenario_delete);
 		semaAdd.setBounds(12, 266, 90, 26);
 		semaAdd.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
@@ -127,8 +139,15 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		});
 
 		Button semaDel = new Button(semaphores, SWT.NONE);
-		semaDel.setText("Delete"); //$NON-NLS-1$
+		semaDel.setText(Messages.AlvisScenario_delete);
 		semaDel.setBounds(108, 266, 82, 26);
+		semaDel.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
+				ApplicationWindow window = new DeleteSemaphoreDialog(null);
+			    window.setBlockOnOpen(true);
+			    window.open();
+			}
+		});
 
 		Group conditions = new Group(container, SWT.NONE);
 		conditions.setBounds(401, 5, 194, 294);
@@ -141,7 +160,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		conditionsScroll.setExpandVertical(true);
 
 		Button condAdd = new Button(conditions, SWT.NONE);
-		condAdd.setText("Add"); //$NON-NLS-1$
+		condAdd.setText(Messages.AlvisScenario_add);
 		condAdd.setBounds(10, 266, 90, 26);
 		condAdd.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
@@ -164,26 +183,33 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		});
 
 		Button condDel = new Button(conditions, SWT.NONE);
-		condDel.setText("Delete"); //$NON-NLS-1$
+		condDel.setText(Messages.AlvisScenario_delete);
 		condDel.setBounds(106, 266, 82, 26);
-
-		Group actors = new Group(container, SWT.NONE);
-		actors.setBounds(604, 5, 190, 294);
-		actors.setText(Messages.AlvisScenario_actors);
-
-		actorsScroll = new ScrolledComposite(actors, SWT.BORDER | SWT.H_SCROLL
-				| SWT.V_SCROLL);
-		actorsScroll.setLocation(10, 30);
-		actorsScroll.setSize(178, 230);
-		actorsScroll.setExpandHorizontal(true);
-		actorsScroll.setExpandVertical(true);
-
-		Button actAdd = new Button(actors, SWT.NONE);
-		actAdd.setText("Add"); //$NON-NLS-1$
-		actAdd.setBounds(10, 266, 90, 26);
-		actAdd.addListener(SWT.Selection, new Listener() {
+		condDel.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
-				NewActorWizard w = new NewActorWizard();
+				ApplicationWindow window = new DeleteConditionDialog(null);
+			    window.setBlockOnOpen(true);
+			    window.open();
+			}
+		});
+
+		Group threads = new Group(container, SWT.NONE);
+		threads.setBounds(604, 5, 190, 294);
+		threads.setText(Messages.AlvisScenario_threads);
+
+		threadsScroll = new ScrolledComposite(threads, SWT.BORDER | SWT.H_SCROLL
+				| SWT.V_SCROLL);
+		threadsScroll.setLocation(10, 30);
+		threadsScroll.setSize(178, 230);
+		threadsScroll.setExpandHorizontal(true);
+		threadsScroll.setExpandVertical(true);
+
+		Button threadAdd = new Button(threads, SWT.NONE);
+		threadAdd.setText(Messages.AlvisScenario_add);
+		threadAdd.setBounds(10, 266, 90, 26);
+		threadAdd.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
+				NewThreadWizard w = new NewThreadWizard();
 				WizardDialog d = new WizardDialog(Activator.getDefault()
 						.getWorkbench().getActiveWorkbenchWindow().getShell(),
 						w);
@@ -201,9 +227,16 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 			}
 		});
 
-		Button actDel = new Button(actors, SWT.NONE);
-		actDel.setText("Delete"); //$NON-NLS-1$
-		actDel.setBounds(106, 266, 82, 26);
+		Button threadDel = new Button(threads, SWT.NONE);
+		threadDel.setText(Messages.AlvisScenario_add);
+		threadDel.setBounds(106, 266, 82, 26);
+		threadDel.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
+				ApplicationWindow window = new DeleteThreadDialog(null);
+			    window.setBlockOnOpen(true);
+			    window.open();
+			}
+		});
 
 		final Button needBuffer = new Button(container, SWT.CHECK);
 		needBuffer.setBounds(15, 322, 164, 23);
@@ -264,178 +297,6 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 				grpOutput.setVisible(needOutput.getSelection());
 			}
 		});
-		// myDisplay = myParent.getDisplay();
-		// GridLayout layout = new GridLayout();
-		// myParent.setLayout(layout);
-		// layout.numColumns = 2;
-		// FillLayout fillSema = new FillLayout(SWT.VERTICAL);
-		// FillLayout fillCond = new FillLayout(SWT.VERTICAL);
-		// FillLayout fillAct = new FillLayout(SWT.VERTICAL);
-		// Group primitives = new Group(container, SWT.NULL);
-		// primitives.setText(Messages.ScenarioEditor_Primitives);
-		// Group semaphores = new Group(container, SWT.NULL);
-		// semaphores.setText(Messages.ScenarioEditor_Semaphores);
-		// Group conditions = new Group(container, SWT.NULL);
-		// conditions.setText(Messages.ScenarioEditor_Conditions);
-		// Group actors = new Group(container, SWT.NULL);
-		// actors.setText(Messages.ScenarioEditor_Actors);
-		// semaphores.setLayout(fillSema);
-		// conditions.setLayout(fillCond);
-		// actors.setLayout(fillAct);
-		// semaphoresList = new List(semaphores, SWT.MULTI | SWT.V_SCROLL);
-		// conditionsList = new List(conditions, SWT.MULTI | SWT.V_SCROLL);
-		// actorsList = new List(actors, SWT.MULTI | SWT.V_SCROLL);
-		// for (int i = 0; i < 5; i++) {
-		// primitivesList.add("                                        ");
-		// }
-		// for (int i = 0; i < 5; i++) {
-		// semaphoresList.add("                                        ");
-		// }
-		// for (int i = 0; i < 5; i++) {
-		// conditionsList.add("                                        ");
-		// }
-		// for (int i = 0; i < 5; i++) {
-		// actorsList.add("                                        ");
-		// }
-		// Composite primitivesButtons = new Composite(primitives, SWT.NULL);
-		// Composite semaphoresButtons = new Composite(semaphores, SWT.NULL);
-		// Composite conditionsButtons = new Composite(conditions, SWT.NULL);
-		// Composite actorsButtons = new Composite(actors, SWT.NULL);
-		// FillLayout fillButtonsPrim = new FillLayout(SWT.HORIZONTAL);
-		// FillLayout fillButtonsSema = new FillLayout(SWT.HORIZONTAL);
-		// FillLayout fillButtonsCond = new FillLayout(SWT.HORIZONTAL);
-		// FillLayout fillButtonsAct = new FillLayout(SWT.HORIZONTAL);
-		// primitivesButtons.setLayout(fillButtonsPrim);
-		// semaphoresButtons.setLayout(fillButtonsSema);
-		// conditionsButtons.setLayout(fillButtonsCond);
-		// actorsButtons.setLayout(fillButtonsAct);
-		//
-		// Button addPrimitive = new Button(semaphoresButtons, SWT.PUSH);
-		// addPrimitive.setText(Messages.ScenarioEditor_Add);
-		// Button delPrimitive = new Button(semaphoresButtons, SWT.PUSH);
-		// delPrimitive.setText(Messages.ScenarioEditor_Delete);
-		//
-		// Button addSemaphore = new Button(semaphoresButtons, SWT.PUSH);
-		// addSemaphore.setText(Messages.ScenarioEditor_Add);
-		// Button delSemaphore = new Button(semaphoresButtons, SWT.PUSH);
-		// delSemaphore.setText(Messages.ScenarioEditor_Delete);
-		//
-		// Button addCondition = new Button(conditionsButtons, SWT.PUSH);
-		// addCondition.setText(Messages.ScenarioEditor_Add);
-		// Button delCondition = new Button(conditionsButtons, SWT.PUSH);
-		// delCondition.setText(Messages.ScenarioEditor_Delete);
-		//
-		// Button addActor = new Button(actorsButtons, SWT.PUSH);
-		// addActor.setText(Messages.ScenarioEditor_Add);
-		// Button delActor = new Button(actorsButtons, SWT.PUSH);
-		// delActor.setText(Messages.ScenarioEditor_Delete);
-		//
-		// Button hasBuffer = new Button(myParent, SWT.CHECK);
-		// hasBuffer.setText(Messages.ScenarioEditor_Buffer);
-		//
-		// Button hasOutput = new Button(myParent, SWT.CHECK);
-		// hasOutput.setText(Messages.ScenarioEditor_Output);
-		//
-		// addPrimitive.addListener(SWT.Selection, new Listener() {
-		// public void handleEvent(Event e) {
-		// NewPrimitiveWizard w = new NewPrimitiveWizard();
-		// WizardDialog d = new WizardDialog(Activator.getDefault()
-		// .getWorkbench().getActiveWorkbenchWindow().getShell(),
-		// w);
-		// IWorkbench workbench = Activator.getDefault().getWorkbench();
-		// ISelection selection = Activator.getDefault().getWorkbench()
-		// .getActiveWorkbenchWindow().getSelectionService()
-		// .getSelection();
-		// if (selection instanceof IStructuredSelection) {
-		// w.init(workbench, (IStructuredSelection) selection);
-		// } else {
-		// w.init(workbench, null);
-		// }
-		// d.open();
-		// // checkDirty();
-		// }
-		// });
-		// delSemaphore.addListener(SWT.Selection, new Listener() {
-		// public void handleEvent(Event e) {
-		// int selected[] = semaphoresList.getSelectionIndices();
-		// for (int i = 0; i < selected.length; i++) {
-		// semaphoresList.remove(selected[i]);
-		// // TODO: Remove semaphore from scenario
-		// }
-		// }
-		// });
-		//
-		// addSemaphore.addListener(SWT.Selection, new Listener() {
-		// public void handleEvent(Event e) {
-		// NewSemaphoreWizard w = new NewSemaphoreWizard();
-		// WizardDialog d = new WizardDialog(Activator.getDefault()
-		// .getWorkbench().getActiveWorkbenchWindow().getShell(),
-		// w);
-		// IWorkbench workbench = Activator.getDefault().getWorkbench();
-		// ISelection selection = Activator.getDefault().getWorkbench()
-		// .getActiveWorkbenchWindow().getSelectionService()
-		// .getSelection();
-		// if (selection instanceof IStructuredSelection) {
-		// w.init(workbench, (IStructuredSelection) selection);
-		// } else {
-		// w.init(workbench, null);
-		// }
-		// d.open();
-		// // checkDirty();
-		// }
-		// });
-		// delSemaphore.addListener(SWT.Selection, new Listener() {
-		// public void handleEvent(Event e) {
-		// int selected[] = semaphoresList.getSelectionIndices();
-		// for (int i = 0; i < selected.length; i++) {
-		// semaphoresList.remove(selected[i]);
-		// // TODO: Remove semaphore from scenario
-		// }
-		// }
-		// });
-		//
-		// addCondition.addListener(SWT.Selection, new Listener() {
-		// public void handleEvent(Event e) {
-		// NewConditionWizard w = new NewConditionWizard();
-		// WizardDialog d = new WizardDialog(Activator.getDefault()
-		// .getWorkbench().getActiveWorkbenchWindow().getShell(),
-		// w);
-		// IWorkbench workbench = Activator.getDefault().getWorkbench();
-		// ISelection selection = Activator.getDefault().getWorkbench()
-		// .getActiveWorkbenchWindow().getSelectionService()
-		// .getSelection();
-		// if (selection instanceof IStructuredSelection) {
-		// w.init(workbench, (IStructuredSelection) selection);
-		// } else {
-		// w.init(workbench, null);
-		// }
-		// d.open();
-		// }
-		// });
-		// delCondition.addListener(SWT.Selection, new Listener() {
-		// public void handleEvent(Event e) {
-		// int selected[] = conditionsList.getSelectionIndices();
-		// for (int i = 0; i < selected.length; i++) {
-		// conditionsList.remove(selected[i]);
-		// // TODO: Remove condition from scenario
-		// }
-		// }
-		// });
-		//
-		// delActor.addListener(SWT.Selection, new Listener() {
-		// public void handleEvent(Event e) {
-		// int selected[] = actorsList.getSelectionIndices();
-		// for (int i = 0; i < selected.length; i++) {
-		// actorsList.remove(selected[i]);
-		// // TODO: Remove actor from scenario
-		// }
-		// }
-		// });
-		// parent.pack();
-		// primitivesList.removeAll();
-		// semaphoresList.removeAll();
-		// conditionsList.removeAll();
-		// actorsList.removeAll();
 	}
 
 	public AlvisSave getAdmin() {
@@ -470,12 +331,12 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		this.conditionsList = conditionsList;
 	}
 
-	public ArrayList<AlvisActor> getActorsList() {
-		return actorsList;
+	public ArrayList<AlvisThread> getThreadsList() {
+		return threadsList;
 	}
 
-	public void setActorsList(ArrayList<AlvisActor> actorsList) {
-		this.actorsList = actorsList;
+	public void setThreadsList(ArrayList<AlvisThread> threadsList) {
+		this.threadsList = threadsList;
 	}
 
 	public Display getMyDisplay() {
@@ -510,12 +371,12 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		this.conditionsScroll = conditionsScroll;
 	}
 
-	public ScrolledComposite getActorsScroll() {
-		return actorsScroll;
+	public ScrolledComposite getThreadsScroll() {
+		return threadsScroll;
 	}
 
-	public void setActorsScroll(ScrolledComposite actorsScroll) {
-		this.actorsScroll = actorsScroll;
+	public void setThreadsScroll(ScrolledComposite threadsScroll) {
+		this.threadsScroll = threadsScroll;
 	}
 
 	public AlvisBuffer getBuffer() {
@@ -570,20 +431,20 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		c.getLabel().dispose();
 	}
 	
-	public void addActor(AlvisActor a) {
-		actorsList.add(a);
-		admin.addActor(a);
-		a.getlName().setParent(actorsScroll);
+	public void addThread(AlvisThread a) {
+		threadsList.add(a);
+		admin.addThread(a);
+		a.getlName().setParent(threadsScroll);
 	}
 	
-	public void removeActor(AlvisActor a) {
-		actorsList.remove(a);
-		admin.removeActor(a);
+	public void removeThread(AlvisThread a) {
+		threadsList.remove(a);
+		admin.removeThread(a);
 		a.getlName().dispose();
 	}
 
 	public void resetContent() {
-		ScenarioEditor.actorsList.removeAll();
+		ScenarioEditor.threadsList.removeAll();
 		ScenarioEditor.semaphoresList.removeAll();
 		ScenarioEditor.conditionsList.removeAll();
 		ScenarioEditor.primitivesList.removeAll();

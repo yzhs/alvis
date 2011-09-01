@@ -21,9 +21,9 @@ public class AlvisSerialize {
 	private int[] primitiveIntValues;
 	private boolean[] primitiveBooleanValues;
 
-	private int[] actorIds;
-	private String[] actorNames;
-	private boolean[] actorStatus;
+	private int[] threadIds;
+	private String[] threadNames;
+	private boolean[] threadStatus;
 
 	private int[] semaphoreIds;
 	private String[] semaphoreNames;
@@ -35,7 +35,7 @@ public class AlvisSerialize {
 	private int[] conditionWaiting;
 
 	public AlvisSerialize(int globalId, AlvisOutput output, AlvisBuffer buf,
-			ArrayList<AlvisPrimitive> primitives, ArrayList<AlvisActor> actors,
+			ArrayList<AlvisPrimitive> primitives, ArrayList<AlvisThread> threads,
 			ArrayList<AlvisSemaphore> semaphores,
 			ArrayList<AlvisCondition> conditions) {
 
@@ -77,15 +77,15 @@ public class AlvisSerialize {
 			primitiveBooleanValues[i] = p.getBoolValue();
 		}
 
-		int actorsCount = actors.size();
-		actorIds = new int[actorsCount];
-		this.actorNames = new String[actorsCount];
-		this.actorStatus = new boolean[actorsCount];
-		for (int i = 0; i < actorsCount; i++) {
-			AlvisActor a = actors.get(i);
-			actorIds[i] = a.getId();
-			this.actorNames[i] = a.getName();
-			this.actorStatus[i] = a.isBlocked();
+		int threadsCount = threads.size();
+		threadIds = new int[threadsCount];
+		this.threadNames = new String[threadsCount];
+		this.threadStatus = new boolean[threadsCount];
+		for (int i = 0; i < threadsCount; i++) {
+			AlvisThread a = threads.get(i);
+			threadIds[i] = a.getId();
+			this.threadNames[i] = a.getName();
+			this.threadStatus[i] = a.isBlocked();
 		}
 
 		int semaphoreCount = semaphores.size();
@@ -193,20 +193,20 @@ public class AlvisSerialize {
 		this.primitiveBooleanValues = primitiveBooleanValues;
 	}
 
-	public String[] getActorNames() {
-		return actorNames;
+	public String[] getThreadNames() {
+		return threadNames;
 	}
 
-	public void setActorNames(String[] actorNames) {
-		this.actorNames = actorNames;
+	public void setThreadNames(String[] threadNames) {
+		this.threadNames = threadNames;
 	}
 
-	public boolean[] getActorStatus() {
-		return actorStatus;
+	public boolean[] getThreadStatus() {
+		return threadStatus;
 	}
 
-	public void setActorStatus(boolean[] actorStatus) {
-		this.actorStatus = actorStatus;
+	public void setThreadStatus(boolean[] threadStatus) {
+		this.threadStatus = threadStatus;
 	}
 
 	public String[] getSemaphoreNames() {
@@ -273,12 +273,12 @@ public class AlvisSerialize {
 		this.primitiveIds = primitiveIds;
 	}
 
-	public int[] getActorIds() {
-		return actorIds;
+	public int[] getThreadIds() {
+		return threadIds;
 	}
 
-	public void setActorIds(int[] actorIds) {
-		this.actorIds = actorIds;
+	public void setThreadIds(int[] threadIds) {
+		this.threadIds = threadIds;
 	}
 
 	public int[] getSemaphoreIds() {

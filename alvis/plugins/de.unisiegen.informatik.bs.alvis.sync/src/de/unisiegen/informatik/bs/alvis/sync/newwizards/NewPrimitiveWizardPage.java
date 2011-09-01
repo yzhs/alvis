@@ -17,7 +17,7 @@ public class NewPrimitiveWizardPage extends WizardPage {
 
 	public NewPrimitiveWizardPage() {
 		super(Messages.NewPrimitiveWizardPage_addPrimitiveWizardPageTitle);
-		setTitle("Add a primitive"); //$NON-NLS-1$
+		setTitle(Messages.NewPrimitiveWizardPage_addPrimitiveWizardPageTitle);
 		setDescription(Messages.NewPrimitiveWizardPage_addPrimitiveWizardPageDescription);
 	}
 

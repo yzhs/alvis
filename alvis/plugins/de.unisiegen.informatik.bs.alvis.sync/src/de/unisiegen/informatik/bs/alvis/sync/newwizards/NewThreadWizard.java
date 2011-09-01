@@ -5,16 +5,16 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 
-import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisActor;
+import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisThread;
 import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisScenario;
 
-public class NewActorWizard extends Wizard implements INewWizard {
+public class NewThreadWizard extends Wizard implements INewWizard {
 
-	private NewActorWizardPage page;
+	private NewThreadWizardPage page;
 	private AlvisScenario myScenario;
 	
-	public NewActorWizard() {
-		setWindowTitle(Messages.NewActorWizard_newActorWizard);
+	public NewThreadWizard() {
+		setWindowTitle(Messages.NewThreadWizard_newThreadWizard);
 	}
 
 	@Override
@@ -24,15 +24,15 @@ public class NewActorWizard extends Wizard implements INewWizard {
 	
 	@Override
 	public void addPages() {
-		page = new NewActorWizardPage();
+		page = new NewThreadWizardPage();
 		addPage(page);
 	}
 
 	@Override
 	public boolean performFinish() {
 		String name = page.getName();
-		AlvisActor a = new AlvisActor(myScenario, name, false);
-		myScenario.addActor(a);
+		AlvisThread a = new AlvisThread(myScenario, name, false);
+		myScenario.addThread(a);
 		return true;
 	}
 

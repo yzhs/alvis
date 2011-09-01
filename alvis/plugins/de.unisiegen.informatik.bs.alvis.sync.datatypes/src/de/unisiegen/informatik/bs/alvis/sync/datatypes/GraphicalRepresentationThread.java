@@ -4,7 +4,7 @@ import org.eclipse.swt.graphics.Color;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
 
-public interface GraphicalRepresentationActor extends GraphicalRepresentation {
+public interface GraphicalRepresentationThread extends GraphicalRepresentation {
 	
 	public final static Color HIGHLIGHT = new Color(null, 0x55, 0xFF, 0xFF);
 	public final static Color SEMA = new Color(null, 0xFF, 0x00, 0x00);

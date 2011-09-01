@@ -4,10 +4,10 @@ import org.eclipse.osgi.util.NLS;
 
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "de.unisiegen.informatik.bs.alvis.sync.newwizards.messages"; //$NON-NLS-1$
-	public static String NewActorWizard_newActorWizard;
-	public static String NewActorWizardPage_actorName;
-	public static String NewActorWizardPage_addActorWizardPageDescription;
-	public static String NewActorWizardPage_addActorWizardPageTitle;
+	public static String NewThreadWizard_newThreadWizard;
+	public static String NewThreadWizardPage_ThreadName;
+	public static String NewThreadWizardPage_addThreadWizardPageDescription;
+	public static String NewThreadWizardPage_addThreadWizardPageTitle;
 	public static String NewBufferWizard_createNewBufferWizardTitle;
 	public static String NewBufferWizard_inputError;
 	public static String NewBufferWizard_notInteger;

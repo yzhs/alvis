@@ -1,69 +1,71 @@
 package de.unisiegen.informatik.bs.alvis.sync.datatypes;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
 public class PCScenario extends PCObject {
-	
+
 	private static final String TYPENAME = "Scenario";
 
-	private ArrayList<PCActor> actors;
-	private ArrayList<PCActor> actorsRunnable;
-	private ArrayList<PCActor> actorsBlocked;
+	private ArrayList<PCThread> threads;
+	private ArrayList<PCThread> threadsRunnable;
+	private ArrayList<PCThread> threadsBlocked;
 
 	private Random rndGen;
 
-	private int currentActor;
+	private int currentThread;
 
 	private int strategy;
 
 	private boolean deadlocked;
 
 	public PCScenario() {
-		actors = new ArrayList<PCActor>();
-		actorsRunnable = new ArrayList<PCActor>();
-		actorsBlocked = new ArrayList<PCActor>();
+		threads = new ArrayList<PCThread>();
+		threadsRunnable = new ArrayList<PCThread>();
+		threadsBlocked = new ArrayList<PCThread>();
 		rndGen = new Random(new Date().getTime());
-		currentActor = 0;
+		currentThread = 0;
 		deadlocked = false;
 	}
 
-	public PCScenario(ArrayList<GraphicalRepresentationActor> actors,
+	public PCScenario(ArrayList<GraphicalRepresentationThread> threads,
 			ArrayList<GraphicalRepresentationBuffer> buffer,
 			ArrayList<GraphicalRepresentationCondition> conditions,
 			ArrayList<GraphicalRepresentationSemaphore> semaphores) {
-		
+
 	}
-	
+
 	public static String getTypename() {
 		return TYPENAME;
 	}
 
-	public ArrayList<PCActor> getActors() {
-		return actors;
+	public ArrayList<PCThread> getThreads() {
+		return threads;
 	}
 
-	public void setActors(ArrayList<PCActor> actors) {
-		this.actors = actors;
+	public void setThreads(ArrayList<PCThread> threads) {
+		this.threads = threads;
 	}
 
-	public ArrayList<PCActor> getActorsRunnable() {
-		return actorsRunnable;
+	public ArrayList<PCThread> getThreadsRunnable() {
+		return threadsRunnable;
 	}
 
-	public void setActorsRunnable(ArrayList<PCActor> actorsRunnable) {
-		this.actorsRunnable = actorsRunnable;
+	public void setThreadsRunnable(ArrayList<PCThread> threadsRunnable) {
+		this.threadsRunnable = threadsRunnable;
 	}
 
-	public ArrayList<PCActor> getActorsBlocked() {
-		return actorsBlocked;
+	public ArrayList<PCThread> getThreadsBlocked() {
+		return threadsBlocked;
 	}
 
-	public void setActorsBlocked(ArrayList<PCActor> actorsBlocked) {
-		this.actorsBlocked = actorsBlocked;
+	public void setThreadsBlocked(ArrayList<PCThread> threadsBlocked) {
+		this.threadsBlocked = threadsBlocked;
 	}
 
 	public Random getRndGen() {
@@ -74,12 +76,12 @@ public class PCScenario extends PCObject {
 		this.rndGen = rndGen;
 	}
 
-	public int getCurrentActor() {
-		return currentActor;
+	public int getCurrentThread() {
+		return currentThread;
 	}
 
-	public void setCurrentActor(int currentActor) {
-		this.currentActor = currentActor;
+	public void setCurrentThread(int currentThread) {
+		this.currentThread = currentThread;
 	}
 
 	public int getStrategy() {
@@ -98,9 +100,9 @@ public class PCScenario extends PCObject {
 		this.deadlocked = deadlocked;
 	}
 
-	public void addActor(PCActor a) {
-		actors.add(a);
-		actorsRunnable.add(a);
+	public void addThread(PCThread a) {
+		threads.add(a);
+		threadsRunnable.add(a);
 	}
 
 	public void doGlobalStep() {
@@ -108,9 +110,9 @@ public class PCScenario extends PCObject {
 		int i, j = 0;
 		switch (strategy) {
 		case 0: // Random
-			PCActor[] running = new PCActor[actors.size()];
+			PCThread[] running = new PCThread[threads.size()];
 			for (i = 0; i < running.length; i++) {
-				PCActor a = actors.get(i);
+				PCThread a = threads.get(i);
 				if (!a.isBlocked()) {
 					running[j++] = a;
 				}
@@ -122,46 +124,46 @@ public class PCScenario extends PCObject {
 			break;
 
 		case 1: // Round Robin
-			// Check if a former blocked actor can run now
-			for (PCActor a : actorsBlocked) {
+			// Check if a former blocked thread can run now
+			for (PCThread a : threadsBlocked) {
 				if (!a.isBlocked()) {
-					actorsBlocked.remove(a);
-					actorsRunnable.add(a);
+					threadsBlocked.remove(a);
+					threadsRunnable.add(a);
 				}
 			}
-			// Check if a former runnable actor is blocked now
-			for (PCActor a : actorsRunnable) {
+			// Check if a former runnable thread is blocked now
+			for (PCThread a : threadsRunnable) {
 				if (a.isBlocked()) {
-					actorsRunnable.remove(a);
-					actorsBlocked.add(a);
+					threadsRunnable.remove(a);
+					threadsBlocked.add(a);
 				}
 			}
-			// Get first runnable actor, do step and move to end of list
-			if (!actorsRunnable.isEmpty()) {
-				PCActor a = actorsRunnable.get(0);
-				actorsRunnable.remove(0);
+			// Get first runnable thread, do step and move to end of list
+			if (!threadsRunnable.isEmpty()) {
+				PCThread a = threadsRunnable.get(0);
+				threadsRunnable.remove(0);
 				a.step();
-				actorsRunnable.add(a);
+				threadsRunnable.add(a);
 				deadlocked = false;
 			}
 			break;
 
 		case 2: // FIFO
-			for (i = 0; i < actors.size(); i++) {
-				j = (currentActor + 1) % actors.size();
-				PCActor a = actors.get(j);
+			for (i = 0; i < threads.size(); i++) {
+				j = (currentThread + 1) % threads.size();
+				PCThread a = threads.get(j);
 				if (!a.isBlocked()) {
 					a.step();
 					deadlocked = false;
 					break;
 				}
 			}
-			currentActor = j;
+			currentThread = j;
 			break;
 
 		case 3: // Prio
-			for (i = 0; i < actors.size(); i++) {
-				PCActor a = actors.get(i);
+			for (i = 0; i < threads.size(); i++) {
+				PCThread a = threads.get(i);
 				if (!a.isBlocked()) {
 					a.step();
 					deadlocked = false;
@@ -171,8 +173,8 @@ public class PCScenario extends PCObject {
 			break;
 
 		case 4: // rev. Prio
-			for (i = actors.size() - 1; i >= 0; i--) {
-				PCActor a = actors.get(i);
+			for (i = threads.size() - 1; i >= 0; i--) {
+				PCThread a = threads.get(i);
 				if (!a.isBlocked()) {
 					a.step();
 					deadlocked = false;
@@ -202,6 +204,13 @@ public class PCScenario extends PCObject {
 	public boolean equals(PCObject toCheckAgainst) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public List<String> getMembers() {
+		String[] members = { "threads", "semaphores", "conditions", "buffer",
+				"primitives" };
+		return Arrays.asList(members);
 	}
 
 }

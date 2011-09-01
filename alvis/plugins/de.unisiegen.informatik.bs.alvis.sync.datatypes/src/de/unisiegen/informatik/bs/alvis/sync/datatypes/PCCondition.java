@@ -63,7 +63,7 @@ public class PCCondition extends PCObject {
 	 * Wait for condition
 	 * @param a Actor who has to wait
 	 */
-	public void wait(PCActor a) {
+	public void wait(PCThread a) {
 		synchronized (this) {
 			sema.V();
 			try {

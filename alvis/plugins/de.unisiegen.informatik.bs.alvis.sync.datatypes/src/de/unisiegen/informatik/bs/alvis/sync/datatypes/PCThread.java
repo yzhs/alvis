@@ -6,13 +6,13 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
 /**
- * Pseudo code implementation of an actor
+ * Pseudo code implementation of a thread
  * 
  * @author Jan Bauerdick
  * 
  */
 
-public class PCActor extends PCObject implements Runnable {
+public class PCThread extends PCObject implements Runnable {
 
 	protected static final String TYPENAME = "Actor";
 	
@@ -20,13 +20,13 @@ public class PCActor extends PCObject implements Runnable {
 	private boolean isBlocked;
 	private int currentLine;
 
-	public PCActor() {
+	public PCThread() {
 		doStep = false;
 		isBlocked = false;
 		currentLine = 0;
 	}
 
-	public PCActor(GraphicalRepresentationActor gr) {
+	public PCThread(GraphicalRepresentationThread gr) {
 		allGr.add(gr);
 		doStep = false;
 		isBlocked = false;
@@ -113,8 +113,8 @@ public class PCActor extends PCObject implements Runnable {
 
 	@Override
 	public boolean equals(PCObject toCheckAgainst) {
-		if (toCheckAgainst instanceof PCActor) {
-			PCActor a = (PCActor) toCheckAgainst;
+		if (toCheckAgainst instanceof PCThread) {
+			PCThread a = (PCThread) toCheckAgainst;
 			if (a.isBlocked() == isBlocked() && a.isDoStep() == isDoStep()
 					&& a.getCurrentLine() == getCurrentLine()) {
 				return true;

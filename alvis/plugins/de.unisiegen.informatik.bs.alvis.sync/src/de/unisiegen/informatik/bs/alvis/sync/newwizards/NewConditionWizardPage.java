@@ -16,7 +16,7 @@ public class NewConditionWizardPage extends WizardPage {
 
 	public NewConditionWizardPage() {
 		super(Messages.NewConditionWizardPage_addConditionWizardPageTitle);
-		setTitle("Add a condition"); //$NON-NLS-1$
+		setTitle(Messages.NewConditionWizardPage_addConditionWizardPageTitle);
 		setDescription(Messages.NewConditionWizardPage_addConditionWizardPageDescription);
 	}
 
