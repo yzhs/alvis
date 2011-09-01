@@ -1,3 +1,20 @@
+/*
+ * Copyright (c) 2011 Frank Weiler
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use, 
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
+ * Software, and to permit persons to whom the Software is furnished to do so, 
+ * subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all 
+ * copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
 package de.unisiegen.informatik.bs.alvis.export;
 
 import java.io.FileNotFoundException;
@@ -12,12 +29,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyleRange;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
 import org.eclipse.swt.graphics.RGB;
-import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
@@ -48,7 +63,8 @@ public class PdfExport extends Document {
 			Font.BOLD);
 	// private static Font catFont = FontFactory.getFont("Calibri", 18,
 	// Font.BOLD);
-	private static Font subFont = FontFactory.getFont("Calibri", 16, Font.BOLD);
+	// private static Font subFont = FontFactory.getFont("Calibri", 16,
+	// Font.BOLD);
 	private static Font smallBold = FontFactory.getFont("Calibri", 12,
 			Font.BOLD);
 
@@ -148,7 +164,7 @@ public class PdfExport extends Document {
 		final ArrayList<Image> images = new ArrayList<Image>();
 
 		if (exportItem.isRun()) { // export run
-		// Image image;
+			// Image image;
 
 			Thread thr = new Thread(new Runnable() {
 				@Override
@@ -164,6 +180,7 @@ public class PdfExport extends Document {
 					vm.waitForBreakPoint();
 
 					image = exportItem.getImage();
+
 					if (image != null)
 						images.add(image);
 
@@ -186,8 +203,9 @@ public class PdfExport extends Document {
 
 									ExportShell exportShell = new ExportShell(
 											Display.getDefault(), images);
-									// images = exportShell.getWantedImages();
-									for (Image img : images) {
+									ArrayList<Image> imgs = exportShell
+											.getWantedImages();
+									for (Image img : imgs) {
 										try {
 											paragraph = toParagraph(img);
 										} catch (DocumentException e) {
@@ -206,6 +224,7 @@ public class PdfExport extends Document {
 
 					Activator.getDefault().shutUpForExport(false);
 					return;
+
 				}
 			});
 
@@ -272,8 +291,7 @@ public class PdfExport extends Document {
 																// gehighlighteten
 																// Code
 
-		Paragraph paragraph = new Paragraph(Messages.getLabel("sourceCode")
-				+ ":\n", subFont);
+		Paragraph paragraph = new Paragraph();
 
 		if (content != null) {
 			content = indentCode(content); // rückt den Code ein
@@ -315,7 +333,7 @@ public class PdfExport extends Document {
 		String path = Messages.getLabel("tmpAlvisImage") + ".png";
 		com.itextpdf.text.Image pdfImage;
 
-		Paragraph paragraph = new Paragraph(Messages.getLabel("image"), subFont);
+		Paragraph paragraph = new Paragraph();
 
 		ImageLoader loader = new ImageLoader();
 		loader.data = new ImageData[] { image.getImageData() };
