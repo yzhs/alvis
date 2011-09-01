@@ -36,26 +36,32 @@ Wir wünschen viel Spaß bei der Weiterentwicklung von Alvis.
 \subsection{Eclipse}
 Alvis als RCP Projekt kann am besten mit Eclipse weiterentwickelt werden, wir haben mit mindestens der Version 3.6 gearbeitet.
 
-Es besteht die Möglichkeit bei eclipse.org das Paket ,,Eclipse for RCP and RAP Developers'' herunterzuladen, dies ist ein komplett vorkonfiguriertes und mit allen Abhängigkeiten bestücktes Eclipse.
+Es besteht die Möglichkeit bei \href{http://eclipse.org}{eclipse.org} das Paket ,,Eclipse for RCP and RAP Developers'' herunterzuladen, dies ist ein komplett vorkonfiguriertes und mit allen Abhängigkeiten bestücktes Eclipse.
 
 Falls ein bereits vorhandenes Eclipse für die Entwicklung von Alvis benutzt werden soll, kann man die benötigten Plug-ins auch über die Update Funktion von Eclipse beziehen.
 
-\subsection{SVN}
+\subsection{Subversion}
 Für die Versionskontrolle und zur zentralen Ablage benutzen wir ein zur Verfügung gestelltes SVN. Entsprechendes Plugins und Programme sind für Eclipse und jedes Betriebssystem verfügbar. 
+
+\subsection{ANTLR}
+Zum generieren von großen Teilen des Compilers benutzen wir den Compiler-Generator ANTLR 3 (\url{http://www.antlr.org}). Auch hierzu gibt es Eclipse-Plug-ins.
 
 \section{Kenntnisse}
 Für das (Weiter-)Entwickeln der Plug-ins für Alvis sind Kenntnisse im Umgang mit RCP erforderlich. Diese sollte man sich aneignen, bevor man mit der Entwicklung von einem Plug-in beginnt. Dabei waren folgende Quellen für uns hilfreich.
 
 \begin{itemize}
-\item Vogella.de - Sehr zu empfehlen für Einsteiger. \\
+\item Vogella.de -- Sehr zu empfehlen für Einsteiger. \\
 Lars Vogels Tutorial für Eclipse RCP bietet einen guten Einstieg in die Welt von RCP. Anfänger sollten hier beginnen.\\
 \url{http://www.vogella.de/articles/EclipseRCP/article.html}
-\item RalfEbert.de - RCP Buch für fortgeschrittene. \\
+\item RalfEbert.de -- RCP Buch für fortgeschrittene. \\
 Ralf Ebert hat ein Buch über RCP in Form einer Webseite veröffentlicht. In diesem Buch werden in jedem Kapitel andere Konzepte von RCP erklärt. \\
 \url{http://www.ralfebert.de/eclipse\_rcp/}
-\item Einstieg in Eclipse 3.5 - Künneth, Thomas \\
+\item Einstieg in Eclipse 3.5 -- Künneth, Thomas \\
 Wer lieber etwas in der Hand hat, der ist mit diesem Buch gut bedient. Hier wird Eclipse RCP gut erläutert. \\
 Verfügbar in der Uni-Bibliothek, ISBN: 978-3-8362-1428-5
+\item The Definitive ANTLR Reference: Building Domain-Specific Languages -- Terence Parr \\
+In diesem Buch ist praktisch alles erklärt, was man zur Benutzung von ANTLR~3 braucht.
+ISBN: 978-0-9787-3925-6.
 \end{itemize}
 
 
@@ -64,9 +70,9 @@ Verfügbar in der Uni-Bibliothek, ISBN: 978-3-8362-1428-5
 \section{Übersicht über die Komponenten}
 Bei den einzelnen Komponenten wird die Bezeichnung ,,Plug-in'' vielfältig eingesetzt. Wir sprechen von einem Plug-in für Alvis, wenn wir eine neue Algorithmen Art hinzufügen, oder das Hauptplug-in um andere Funktionalitäten erweitern. Dabei ist Alvis selbst auch nur ein Plug-in.
 
-Alle Plug-ins befinden sich im SVN - Ordner ,,trunk/alvis''.
+Alle Plug-ins befinden sich im SVN -- Ordner ,,trunk/alvis''.
 \subsection{Das Alvis Plug-in}
-,,de.unisiegen.informatik.bs.alvis'' - Das Haupt Plug-in, welches die graphische Oberfläche beinhaltet.
+,,de.unisiegen.informatik.bs.alvis'' -- Das Haupt Plug-in, welches die graphische Oberfläche beinhaltet.
 \subsubsection{Extension Points}
 \begin{itemize}
  \item ,,de.unisiegen.informatik.bs.alvis.extensions.runpreferences''\\
@@ -91,15 +97,15 @@ Die Plug-ins befinden sich im Ordner ,,trunk/alvis/plugins''.
 \\ \\
 \textbf{nicht optionale Plug-ins:}
 \begin{itemize}
-\item ,,de.unisiegen.informatik.bs.alvis.primitive'' - Primitive.
-\item ,,de.unisiegen.informatik.bs.alvis.primitive.datatypes'' - Primitive Datentypen.
-\item ,,de.unisiegen.informatik.bs.alvis.ui.navigator'' - Navigator (Package Explorer).
-\item ,,de.unisiegen.informatik.bs.alvis.vm'' - Virtuelle Maschine.
+\item ,,de.unisiegen.informatik.bs.alvis.primitive'' -- Primitive.
+\item ,,de.unisiegen.informatik.bs.alvis.primitive.datatypes'' -- Primitive Datentypen.
+\item ,,de.unisiegen.informatik.bs.alvis.ui.navigator'' -- Navigator (Package Explorer).
+\item ,,de.unisiegen.informatik.bs.alvis.vm'' -- Virtuelle Maschine.
 \end{itemize}
 \textbf{Optionale Plug-ins:}
 \begin{itemize}
-\item ,,de.unisiegen.informatik.bs.alvis.vm.test'' - Tests der virtuellen Maschine.
-\item ,,de.unisiegen.informatik.bs.alvis.editors.xml'' - XML Editor.
+\item ,,de.unisiegen.informatik.bs.alvis.vm.test'' -- Tests der virtuellen Maschine.
+\item ,,de.unisiegen.informatik.bs.alvis.editors.xml'' -- XML Editor.
 \item ,,de.unisiegen.informatik.bs.alvis.help''
 \item ,,de.unisiegen.informatik.bs.alvis.graph.help''
 \item ,,de.unisiegen.informatik.bs.alvis.sync.help''
@@ -107,8 +113,8 @@ Die Plug-ins befinden sich im Ordner ,,trunk/alvis/plugins''.
 \subsection{Graph Plug-in}
 Das Graph Plug-in erweitert Alvis um die Datentypen Graph, Knoten und Kante.
 \begin{itemize}
-\item ,,de.unisiegen.informatik.bs.alvis.graph'' - Graph Plug-in.
-\item ,,de.unisiegen.informatik.bs.alvis.graph.datatypes'' - Graph Datentypen.
+\item ,,de.unisiegen.informatik.bs.alvis.graph'' -- Graph Plug-in.
+\item ,,de.unisiegen.informatik.bs.alvis.graph.datatypes'' -- Graph Datentypen.
 \end{itemize}
 \subsection{Betriebssysteme Plug-in}
 
@@ -162,9 +168,81 @@ Die Help-Plug-ins sind dazu da, dem User Hilfestellung zu leisten. Man erreicht 
 Der Aufbau gestaltet sich wie folgt:\\
 Plug-ins müssen den Extension Point org.eclipse.help.toc implementieren und dort eine Help Table of Contens bereitstellen.
 Der Pfad zu dieser TOC muss \$nl\$/NameDerTOC.xml lauten, damit die Hilfe in mehreren Sprachen zur Verfügung gestellt werden kann.
-Die deutschen Hilfeseiten - und somit auch die deutsche Table of Contents - befinden sich alle im Ordner nl/de, die 
+Die deutschen Hilfeseiten -- und somit auch die deutsche Table of Contents -- befinden sich alle im Ordner nl/de, die 
 standardmäßig angezeigte, englische direkt im Plug-in. Konvention ist, für HTML-Seiten einen Unterordner html anzulegen,
 um die Übersicht zu bewahren.
+
+\subsection{Der Pseudocode-nach-Java-Compiler}
+Der Compiler besteht aus fünf verschiedenen ANTLR-Grammatiken (zu finden in \linebreak,,alvis/compiler/src/main/antlr3/de/uni\_siegen/informatik/bs/alvic''):
+\begin{itemize}
+  \item TLexer.g\\
+    Enthält, wie der Name schon vermuten lässt, die Definition des Lexers. Zusätzlich zu dem üblichen Inhalt einer Lexer-Grammatik sind noch einige Funktionen enthalten, die für Tests und Autovervollständigung Zugriff auf Tokens bieten.
+  \item TParser.g\\
+    Enthält die Definition des Parser. Dieser erzeugt aus dem Eingabe-Token-Strom einen abstrakten Syntaxbaum (AST), der anschließend an FunctionPass weitergereicht wird.
+  \item FunctionPass.g\\
+    Durchläuft den von TParser erzeugten AST und erstellt eine Liste aller Funktionen und ihrer Typen. Diese Funktionalität separat vom eigentlichen Type-Checker zu haben ermöglicht es uns, Funktionen in beliebiger Reihenfolge zuzulassen.
+  \item TypeChecker.g\\
+    Hier wird überprüft, ob das Programm wohltypisiert ist um böse Überraschungen beim Compilieren des später erzeugten Java-Quelltextes oder gar zur Laufzeit zu verhindern. An einigen Stellen werden zusätzlich noch Typen an Knoten im AST geschrieben, die dann vom Cod-Generator verwendet werden.
+  \item CodeGenerator.g\\
+    Erzeugt mit Hilfe von ANTLRs StringTemplate-Bibliothek je nach Auswahl der Templates LaTeX-Code aus dem Eingabecode, oder den Java-Code, der später compiliert und ausgeführt werden kann.
+    Die Template-Definitionen befinden sich in den Dateien ,,Java.stg'' (fur die Erzeugung von Java-Code) bzw. ,,LaTeX.stg'' (für die Erzeugung von schön formattiertem \LaTeX-Code).
+\end{itemize}
+
+Hinzu kommen einige Java-Klassen in \\,,alvis/compiler/src/main/java/de/uni\_siegen/informatik/bs/alvic'':
+\begin{itemize}
+  \item AbstractTLexer\\
+    Enthält Hilfsmethoden für TLexer.g, unter anderem solche, die dem Lexer mitteilen, hinter welchen Zeichenketten sich Typen verbergen. Die restlichen Methoden sind im Wesentlichen wie die in TLexer.g für Tests und Autovervollständigung gedacht.
+  \item AbstractTParser\\
+    Enthält eine Methode um ANTLRs interne Tokennummern in Tokennamen zu übersetzen und um für einen gegebenen Tokentyp anzugeben, welche Typen als nächstes kommen könnten (für die Autovervollständigung).
+  \item AbstractTreeParser\\
+    Oberklasse von AbstractTypeChecker und FunctionPass, enhält gemeinsame Hilfsmethoden.
+  \item AbstractTypeChecker\\
+    Oberklasse von TypeChecker einhaltet viele Methoden, die von TypeChecker.g benutzt werden. Die meisten dienen dazu Typen zu überprüfen und gegebenenfalls entdeckte Fehler zu melden.
+  \item TypedTree, TypedTreeAdaptor, TypedErrorNode\\
+    Abgeleitet von den entsprechenden Common*-Klassen. Diese Klassen werden benötigt um die Typen von Ausdrücken vom TypeChecker an den CodeGenerator weiterzureichen.
+  \item Compiler\\
+    Die Hauptklasse des Compilers und die Verbindung zur Außenwelt. Wichtig für die Verwendung von außen sind die drei \texttt{compile}-Methoden, die tatsächlich übersetzen wenn keine Fehler auftreten, sowie die \texttt{check}-Methode, die ausschließlich überprüft, aber nie Code erzeugt. Ebenfalls wichtig ist die \linebreak\texttt{getExceptions}-Methode, die eine Liste aller während des Compilierens erzeugten Exceptions liefert.
+  \item Type, SimpleType, FunctionType, ArrayType\\
+    Klassen, die vom TypeChecker benutzt werden, um die Typen von Ausdrücken, Attributen und Methoden zu beschreiben.
+    Type ist die abstrakte Oberklasse der drei anderen. ArrayType beschreibt Arrays, FunctionType Funktionen/Methoden und SimpleType Typen mit Vererbung, die etwa Typen von Attributen und lokalen Variablen sind. SimpleType wird auch verwendet, um Container-Typen mit Typ-Parameter für den Elementtyp zu beschreiben, etwa \texttt{Vertex Queue}. In Java-Syntax wäre das etwa \texttt{Queue<Vertex>}.
+   
+    SimpleType enthält eine große Menge des Codes, der verwendet wird, um aus Objekten eines Typs eine Beschreibung dieses Typs zu erstellen. Dazu werden mittels Reflection Typen von Attributen und Methoden ausgelesen.
+  \item Member\\
+    Hilfsklasse für die Verwaltung der Typen von Attributen und Methoden. Jedes Attribut und jede Methode eines SimpleTypes wird durch ein Member-Objekt beschrieben. Ein solches Objekt speichert Namen und Typ eines Attributs bzw. einer Methode. Methoden unterscheiden sich von Attributen dadurch, dass bei ihnen als Typ ein FunctionType auftritt.
+  \item *Exception\\
+    TypeException ist die Oberklasse der anderen Exceptions. TypeException ist abgeleitet von ANTLRs RecognitionException um im ANTLR-generierten Compiler all diese Exceptions verwenden zu können.
+    InvalidAssignmentException und InvalidStatementException beschreiben Syntaxfehler, werden also von TParser geworfen, die restlichen Exceptions beschreiben Typfehler und werden daher von FunctionPass und TypeChecker geworfen.
+\end{itemize}
+
+Weiter Informationen zu diesen Klassen sind als JavaDoc verfügbar.
+
+\subsubsection{Einschränkungen}
+\begin{itemize}
+  \item Der Compiler kann nicht mit Attributen umgehen, die als einen generischen Typ, d.h. einen Typ-Parameter haben, wie etwa \texttt{Stack<String>}.
+    Trifft der Compiler auf ein solches Attribut, so behandelt er es genauso, wie er \texttt{Stack} behandeln würde.
+    Insbesondere würde der Compiler davon ausgehen, dass \texttt{Stack.pop()} den Rückgabetyp \texttt{Object} hat.
+  \item An dieser Stelle kommt die zweite Einschränkung ins Spiel: Alvis unterstützt keinerlei Typecasts. wenn also \texttt{pop()} ein \texttt{Object} zurückliefert, so kann man dies nur dann wieder als etwas anderes, als ein \texttt{Object} verwenden, wenn es in einer in einem Plug-in definierten Methode explizit auf einen anderen Typ gecastet wird.
+
+    Dies ist keine echte Einschränkung, wie etwa Haskell und ML zeigen, die ebenfalls ohne Typecasts auskommen.
+    Es ergibt sich dadurch auch ein Vorteil: es kann kaum passieren, dass im Algorithmus eine ClassCastException auftritt.
+  \item Es gibt weder ein \texttt{break}- noch ein \texttt{continue}-Konstrukt.
+    Dies nachträglich einzubauen erfordert zwar alle Grammatiken des Compilers zu bearbeiten und vermutich die Template-Definitionen zu erweitern, dürfte aber nicht schwer sein.
+
+    In TLexer.g muss man etwa \texttt{break} aus den Alternativen in JAVAKEYWORD entfernen und ein eigenes Token daraus machen.
+    Im Parser wird man sicherstellen müssen, dass \texttt{break} nur im Körper von Schleifen verwendet werden darf.
+    Dazu empfiehlt sich der Einsatz eines ,,Gated Sematic Predicate''.
+    Die beiden Typechecker-Phasen müssen die neuen Tokens nur weiterleiten, mit Typen haben ja weder \texttt{break} noch \texttt{continue} etwas zu tun.
+    Im Codegenerator muss dann aus den Tokens per Template schlicht der richtige Java-Code (und wenn man den Quelltext nachher noch nach \LaTeX exportieren können möchte auch der richtige \LaTeX-Code) erzeugt werden.
+
+   \item Um die Sprache einfach zu halten haben wir uns auf die nötigsten Operatoren beschränkt. So gibt es keine kombinierten Zuweisungsoperatoren wie $+=$ oder $*=$.
+     Weiterhin gibt es keine bitweisen Operatoren wie etwa Shift-Operatoren, bitweises Und, bitweises Oder, bitweises Nicht oder XOR.
+
+     Das ließe sich aber ebenfalls mit verhältnismäßig geringem Aufwand nachrüsten.
+     Möchte man die Funktionalität der Operatoren nutzen, diese aber nicht in die Sprache einbauen, so kann man natürich ohne weiteres Methoden dafür benutzen.
+     Diese Methoden würde man sowieso benötigen, wenn man die Operatoren, wie die bereits eingebauten, überladbar implementieren wollte.
+\end{itemize}
+
+
 
 \newpage
 \chapter{Export}
@@ -214,7 +292,7 @@ Das vorläufige Ergebnis sieht folgendermaßen aus.
 Mit einem Klick auf ,,Set as Target Platform'' lässt sich diese Konfiguration einstellen. 
 Danach wird der Workspace neu gebaut. Die Projekte sollten keine Fehler aufweisen. Sollten Fehler bezüglich nicht aufzufindender Imports sein ist dies ein Indiz für fehlende Plug-ins in der Target Platform. Über den Button ,,Edit'' lassen sich benötigte Plug-ins aus der Update Seite für Helios holen.
 \\ \\
-Zum Zeitpunkt des Verfassens wurde Alvis unter Eclipse 3.6 entwickelt. Sollte Alvis inzwischen mit einer neueren Version von Eclipse entwickelt werden, so ist es möglicherweise notwendig auch die Target Platform aufzufrischen. Eine genauere Anleitung findet man im RCP-Buch von Ralf Ebert im Kapitel 16 - Export und Verteilung von RCP-Anwendungen\footnote{\url{http://www.ralfebert.de/eclipse\_rcp/distribution\/}}. Noch genauer geht Ebert in seinem Blog\footnote{\url{http://www.ralfebert.de/blog/eclipsercp/rcp\_builds\/}} auf die Problematik ein. Es muss, in dem Fenster wo wir uns die Plug-ins aus der Update Seite holen, unbedingt ein Haken bei ,,Include all environments'' gesetzt sein.
+Zum Zeitpunkt des Verfassens wurde Alvis unter Eclipse 3.6 entwickelt. Sollte Alvis inzwischen mit einer neueren Version von Eclipse entwickelt werden, so ist es möglicherweise notwendig auch die Target Platform aufzufrischen. Eine genauere Anleitung findet man im RCP-Buch von Ralf Ebert im Kapitel 16 -- Export und Verteilung von RCP-Anwendungen\footnote{\url{http://www.ralfebert.de/eclipse\_rcp/distribution\/}}. Noch genauer geht Ebert in seinem Blog\footnote{\url{http://www.ralfebert.de/blog/eclipsercp/rcp\_builds\/}} auf die Problematik ein. Es muss, in dem Fenster wo wir uns die Plug-ins aus der Update Seite holen, unbedingt ein Haken bei ,,Include all environments'' gesetzt sein.
 \\ \\
 
 Nachdem die Target Platform übernommen wurde und wir die Korrektheit des Programms überprüft haben können wir das Projekt exportieren. 
