@@ -116,7 +116,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		semaphoresScroll.setExpandVertical(true);
 
 		Button semaAdd = new Button(semaphores, SWT.NONE);
-		semaAdd.setText(Messages.AlvisScenario_delete);
+		semaAdd.setText(Messages.AlvisScenario_add);
 		semaAdd.setBounds(12, 266, 90, 26);
 		semaAdd.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
@@ -228,7 +228,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		});
 
 		Button threadDel = new Button(threads, SWT.NONE);
-		threadDel.setText(Messages.AlvisScenario_add);
+		threadDel.setText(Messages.AlvisScenario_delete);
 		threadDel.setBounds(106, 266, 82, 26);
 		threadDel.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {

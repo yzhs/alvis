@@ -10,8 +10,6 @@ import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 
 import de.unisiegen.informatik.bs.alvis.sync.Activator;
-import de.unisiegen.informatik.bs.alvis.sync.datatypes.PCSemaphore;
-import de.unisiegen.informatik.bs.alvis.sync.editors.ScenarioEditor;
 import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisScenario;
 import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisSemaphore;
 

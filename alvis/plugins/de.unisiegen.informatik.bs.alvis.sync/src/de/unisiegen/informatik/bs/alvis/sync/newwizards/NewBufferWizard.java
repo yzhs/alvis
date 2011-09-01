@@ -10,9 +10,7 @@ import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 
 import de.unisiegen.informatik.bs.alvis.sync.Activator;
-import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisThread;
 import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisBuffer;
-import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisPrimitive;
 import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisScenario;
 
 public class NewBufferWizard extends Wizard implements INewWizard {
