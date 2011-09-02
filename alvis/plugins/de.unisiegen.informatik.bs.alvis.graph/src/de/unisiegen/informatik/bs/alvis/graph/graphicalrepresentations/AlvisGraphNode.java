@@ -89,7 +89,7 @@ public class AlvisGraphNode extends GraphNode implements
 		connections = new ArrayList<AlvisGraphConnection>();
 
 		if (id == -1) {
-			this.id = graph.requestId();
+			this.id = graph.requestNodeId();
 		} else {
 			this.id = id;
 		}

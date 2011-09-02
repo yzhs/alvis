@@ -33,28 +33,35 @@ public class AlvisSerialize {
 	private int[] nodeId, nodeX, nodeY;
 	private String[] nodeText;
 	private int startId, endId;
-	private int globalId;
+	private int globalNodeId;
+	private int globalConId;
 	private int zoomCounter;
 
 	private int[] conId, conStyle, conNode1, conNode2, conColor;
+	private String[] conText;
 
 	/**
 	 * the constructor
 	 * 
-	 * @param remPos map of nodes 
-	 * @param allConnections list of connections
-	 * @param startNode start node of graph, null of none
-	 * @param endNode  end node of graph, null of none
-	 * @param globalId the id counter
-	 * @param zoomCounter to remember how far graph is zoomed
+	 * @param remPos
+	 *            map of nodes
+	 * @param allConnections
+	 *            list of connections
+	 * @param startNode
+	 *            start node of graph, null of none
+	 * @param endNode
+	 *            end node of graph, null of none
+	 * @param globalNodeId
+	 *            the node id counter
+	 * @param globalConId
+	 *            the con id counter
+	 * @param zoomCounter
+	 *            to remember how far graph is zoomed
 	 */
-	public AlvisSerialize(
-			HashMap<AlvisGraphNode, Point> remPos,
+	public AlvisSerialize(HashMap<AlvisGraphNode, Point> remPos,
 			ArrayList<AlvisGraphConnection> allConnections,
-			AlvisGraphNode startNode, 
-			AlvisGraphNode endNode, 
-			int globalId,
-			int zoomCounter) {
+			AlvisGraphNode startNode, AlvisGraphNode endNode, int globalNodeId,
+			int globalConId, int zoomCounter) {
 
 		nodeId = new int[remPos.size()];
 		nodeX = new int[remPos.size()];
@@ -66,6 +73,7 @@ public class AlvisSerialize {
 		conNode1 = new int[allConnections.size()];
 		conNode2 = new int[allConnections.size()];
 		conColor = new int[allConnections.size()];
+		conText = new String[allConnections.size()];
 
 		int i = 0;
 		for (AlvisGraphNode gn : remPos.keySet()) {
@@ -83,6 +91,7 @@ public class AlvisSerialize {
 			conNode1[i] = gc.getFirstNode().getId();
 			conNode2[i] = gc.getSecondNode().getId();
 			conColor[i] = gc.getConnectionColor();
+			conText[i] = gc.getText();
 			i++;
 		}
 
@@ -91,7 +100,8 @@ public class AlvisSerialize {
 		if (endNode != null)
 			endId = endNode.getId();
 
-		this.globalId = globalId;
+		this.globalNodeId = globalNodeId;
+		this.globalConId = globalConId;
 		this.zoomCounter = zoomCounter;
 
 	}
@@ -136,8 +146,12 @@ public class AlvisSerialize {
 		return conNode2;
 	}
 
-	public int getGlobalId() {
-		return globalId;
+	public int getGlobalNodeId() {
+		return globalNodeId;
+	}
+
+	public int getGlobalConId() {
+		return globalConId;
 	}
 
 	public int[] getConColor() {
@@ -146,5 +160,9 @@ public class AlvisSerialize {
 
 	public int getZoomCounter() {
 		return zoomCounter;
+	}
+
+	public String[] getConText() {
+		return conText;
 	}
 }

@@ -76,7 +76,8 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		super(parent, style);
 		setLayoutAlgorithm(null, false);
 		setForeground(new Color(null, 128, 128, 128));
-
+		setBackground(new Color(null, 255, 255, 240));
+		
 		admin = new AlvisSave();
 		middleFactor = 0;
 		keyPressed = 0;
@@ -157,7 +158,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	public AlvisGraphNode makeGraphNode(String name) {
 
 		if (name.equals(""))
-			name = Integer.toString(getAdmin().getId());
+			name = Integer.toString(getNodeId());
 
 		final AlvisGraphNode gn = new AlvisGraphNode(this, name, null);
 		int fontSize = 4 + (int) (6 * Math.pow(2, getZoomCounter()));
@@ -194,22 +195,20 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	public AlvisGraphConnection makeGraphConnection(AlvisGraphNode node1,
 			AlvisGraphNode node2) {
 
-		if (node1.equals(node2)) {
-			// no self connection
-			return null;
-		}
+		if (node1.equals(node2))
+			return null; // no self connection
+		
 		if (AlvisGraphConnection.wouldContain(node1, node2,
-				admin.getAllConnections())) {
-			// no double connections
-			return null;
-		} else {
-			AlvisGraphConnection result = new AlvisGraphConnection(this,
-					ZestStyles.CONNECTIONS_DOT, node1, node2);
-			result.setLineWidth((getZoomCounter() <= 0) ? 1 : (int) Math.pow(
-					admin.getZoomFactor(), getZoomCounter() + 1));
-			admin.addConnection(result);
-			return result;
-		}
+				admin.getAllConnections())) 
+			return null; // no double connections
+		
+		AlvisGraphConnection result = new AlvisGraphConnection(this,
+				ZestStyles.CONNECTIONS_DOT, node1, node2);
+		result.setLineWidth((getZoomCounter() <= 0) ? 1 : (int) Math.pow(
+				admin.getZoomFactor(), getZoomCounter() + 1));
+		admin.addConnection(result);
+		return result;
+		
 	}
 
 	/**
@@ -489,7 +488,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	 * @return nodes that are currently marked
 	 */
 	public ArrayList<AlvisGraphNode> getHighlightedNodes() {
-
+		
 		ArrayList<AlvisGraphNode> selectedItems = new ArrayList<AlvisGraphNode>();
 
 		for (Object object : getSelection()) {
@@ -509,6 +508,17 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	 */
 	public ArrayList<AlvisGraphConnection> getHighlightedConnections() {
 
+		for (Object object : getSelection()) {
+			try {
+				if(object instanceof AlvisGraphConnection){
+					ArrayList<AlvisGraphConnection> oneCon = new ArrayList<AlvisGraphConnection>();
+					oneCon.add((AlvisGraphConnection)object);
+					return oneCon;
+				}
+			} catch (Exception e) {
+			}
+		}
+		
 		ArrayList<AlvisGraphNode> gns = getHighlightedNodes();
 		ArrayList<AlvisGraphConnection> selectedConnections = new ArrayList<AlvisGraphConnection>();
 
@@ -772,7 +782,6 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 			if (getStartNode() != null) {
 				getStartNode().unmarkAsStartOrEndNode();
 			}
-			// setStartNode(gn);
 		} else
 			makeGraphConnection(gn, parent);
 
@@ -954,9 +963,9 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		admin.removeNode(node);
 	}
 
-	private void removeConnection(int i) {
-		admin.removeConnection(i);
-	}
+//	private void removeConnection(int i) {
+//		admin.removeConnection(i);
+//	}
 
 	private boolean removeConnection(AlvisGraphConnection gcC) {
 		return admin.removeConnection(gcC);
@@ -1010,16 +1019,24 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		return admin;
 	}
 
-	int requestId() {
-		return admin.requestId();
+	protected int requestNodeId() {
+		return admin.requestNodeId();
+	}
+
+	protected int requestConId() {
+		return admin.requestConId();
 	}
 
 	public boolean removeTree(ArrayList<AlvisGraphNode> tree) {
 		return admin.removeTree(tree);
 	}
 
-	public int getId() {
-		return admin.getId();
+	public int getNodeId() {
+		return admin.getNodeId();
+	}
+
+	public int getConId() {
+		return admin.getConId();
 	}
 
 	@Override

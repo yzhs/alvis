@@ -36,7 +36,8 @@ public class AlvisSave {
 	private HashMap<AlvisGraphNode, Point> remPos;
 	private ArrayList<AlvisGraphConnection> allConnections;
 	private ArrayList<ArrayList<AlvisGraphNode>> circles, trees;
-	private int globalId;
+	private int globalNodeId;
+	private int globalConId;
 	/**
 	 * amount of circles in graph
 	 */
@@ -72,7 +73,8 @@ public class AlvisSave {
 		connectNode = null;
 		limiter = 0.8;
 		zoomFactor = 1.4;
-		globalId = 0;
+		globalNodeId = 0;
+		globalConId = 0;
 		connectionColor = 1;
 		zoomCounter = 1;
 		circles = new ArrayList<ArrayList<AlvisGraphNode>>();
@@ -94,7 +96,9 @@ public class AlvisSave {
 		// This replaces the current admin with the new one
 		graph.admin = this;
 
-		this.globalId = seri.getGlobalId();
+		this.globalNodeId = seri.getGlobalNodeId();
+		this.globalConId = seri.getGlobalConId();
+
 		this.zoomCounter = seri.getZoomCounter();
 
 		int fontSize = 4 + (int) (6 * Math.pow(2, zoomCounter));
@@ -132,11 +136,12 @@ public class AlvisSave {
 		for (int i = 0; i < seri.getConId().length; i++) {
 			int id = seri.getConId()[i];
 			int style = seri.getConStyle()[i];
+			String text = seri.getConText()[i];
 			AlvisGraphNode node1 = getNode(seri.getConNode1()[i]);
 			AlvisGraphNode node2 = getNode(seri.getConNode2()[i]);
 
 			AlvisGraphConnection gc = new AlvisGraphConnection(graph, style,
-					node1, node2, id);
+					node1, node2, id, text);
 			gc.setConnectionColor(seri.getConColor()[i]);
 			gc.setFont(gcFont);
 			gc.setLineWidth((this.zoomCounter <= 0) ? 1 : (int) Math.pow(
@@ -146,13 +151,13 @@ public class AlvisSave {
 
 	}
 
-	public int requestId() {
-		globalId++;
-		return globalId;
+	public int getNodeId() {
+		return (globalNodeId + 1);
 	}
+	
 
-	public int getId() {
-		return (globalId + 1);
+	public int getConId() {
+		return (globalConId + 1);
 	}
 
 	public int getAmountOfGraphs() {
@@ -342,7 +347,8 @@ public class AlvisSave {
 		AlvisSave dolly = new AlvisSave();
 
 		dolly.limiter = this.getLimiter();
-		dolly.globalId = this.globalId;
+		dolly.globalNodeId = this.globalNodeId;
+		dolly.globalConId = this.globalConId;
 		dolly.zoomCounter = this.zoomCounter;
 
 		int fontSize = 4 + (int) (6 * Math.pow(2, zoomCounter));
@@ -387,7 +393,7 @@ public class AlvisSave {
 				}
 				if (n1 != null && n2 != null) {
 					newGc = new AlvisGraphConnection(parent, gc.getStyle(), n1,
-							n2, gc.getId());
+							n2, gc.getId(), gc.getText());
 					newGc.setFont(gcFont);
 					dolly.addConnection(newGc);
 					break;
@@ -400,7 +406,7 @@ public class AlvisSave {
 
 	public AlvisSerialize serialize() {
 		AlvisSerialize seri = new AlvisSerialize(remPos, allConnections,
-				startNode, endNode, globalId, zoomCounter);
+				startNode, endNode, globalNodeId, globalConId, zoomCounter);
 		return seri;
 	}
 
@@ -426,6 +432,16 @@ public class AlvisSave {
 
 	public void setZoomFactor(double zoomFactor) {
 		this.zoomFactor = zoomFactor;
+	}
+
+	public int requestNodeId() {
+		globalNodeId++;
+		return globalNodeId;
+	}
+
+	public int requestConId() {
+		globalConId++;
+		return globalConId;
 	}
 
 }

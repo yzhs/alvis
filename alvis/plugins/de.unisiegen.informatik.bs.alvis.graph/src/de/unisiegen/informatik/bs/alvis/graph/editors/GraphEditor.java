@@ -31,9 +31,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Set;
 
 import javax.imageio.ImageIO;
@@ -66,7 +64,6 @@ import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.EditorPart;
 import org.eclipse.ui.part.FileEditorInput;
-import org.eclipse.zest.core.widgets.GraphItem;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -592,9 +589,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 						// clickEndNode(actNode);
 					} else if (graphModusIs(MODUS_DELETE)) {
 						clickRemove();
-						if (shiftPressed == false) {
-							setGraphModus(MODUS_STANDARD);
-						}
 					} else if (graphModusIs(MODUS_CONNECTION)) {
 						clickNewConnection(actNode);
 					}
@@ -679,14 +673,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 				i++;
 			}
 			myGraph.setSelection(gnsa);
-//			ArrayList<AlvisGraphNode> gnsal = myGraph.getHighlightedNodes();
-//			System.out.println(gnsal + "\n" + gnsal.size());//TODO weg
-//			nodesAreMarked = !gnsal.isEmpty();
-//
-//			if(nodesAreMarked){
-//				moveUndo = undoAdmin.preparePushMoveNodes(isDirty(), gns);
-//			}
-			
 
 		} catch (ClassCastException cce) {
 		}
@@ -753,14 +739,19 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 	/**
 	 * Removes a node
+	 * 
+	 * @return if something has been removed
 	 */
-	protected void clickRemove() {
+	protected boolean clickRemove() {
 
-		if (removeHighlightedItems()) {
+		boolean removed = removeHighlightedItems();
+		if (removed) {
 			if (!shiftPressed) {
 				setGraphModus(MODUS_STANDARD);
 			}
 		}
+		
+		return removed;
 
 	}
 
@@ -880,7 +871,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	 */
 	protected void clickNewNode(int x, int y) {
 		AlvisGraphNode gn = myGraph.makeGraphNode("" //$NON-NLS-1$
-				+ myGraph.getAdmin().getId());
+				+ myGraph.getAdmin().getNodeId());
 
 		gn.setLocation(x - gn.getSize().width / 2, y - gn.getSize().height / 2);
 		undoAdmin.pushAddNode(isDirty(), gn);
@@ -939,6 +930,9 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 		case (MODUS_STANDARD):
 		default:
+			if(pressed != CTRL){
+				this.pressed = MODUS_STANDARD;
+			}
 			cursor = new Cursor(Display.getCurrent(),
 					loadImageData("icons/editor/graph_hand.png"), 8, 8); //$NON-NLS-1$
 			myGraph.setCursor(cursor);
@@ -965,7 +959,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 		ArrayList<AlvisGraphNode> gns = null;
 		if (width == 0) {
-			System.out.println(result + " " + width + " " + depth);
 			if (depth > 2) {
 				gns = myGraph.createCircle(depth);
 			}
@@ -1109,7 +1102,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		setPartName(input.getName());
 		myInput = input;
 		myInputFilePath = ((FileEditorInput) input).getPath().toString();
-		// TODO Backinto plugin
 
 	}
 

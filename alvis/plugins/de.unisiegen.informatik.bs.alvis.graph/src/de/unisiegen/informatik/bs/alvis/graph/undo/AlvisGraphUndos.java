@@ -23,7 +23,6 @@ import java.util.Stack;
 import org.eclipse.swt.graphics.Point;
 
 import de.unisiegen.informatik.bs.alvis.graph.editors.GraphEditor;
-import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraph;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraphConnection;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraphNode;
 

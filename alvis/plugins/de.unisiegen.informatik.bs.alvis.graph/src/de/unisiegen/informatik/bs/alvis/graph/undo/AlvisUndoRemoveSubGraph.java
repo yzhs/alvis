@@ -39,7 +39,7 @@ public class AlvisUndoRemoveSubGraph implements AlvisGraphUndo {
 	private ArrayList<AlvisGraphConnection> renewCons;
 
 	private int[] nodeId, nodeX, nodeY;
-	private String[] nodeText;
+	private String[] nodeText, conText;
 
 	private int[] conId, conStyle, conNode1, conNode2;
 
@@ -59,6 +59,7 @@ public class AlvisUndoRemoveSubGraph implements AlvisGraphUndo {
 		conStyle = new int[gcs.size()];
 		conNode1 = new int[gcs.size()];
 		conNode2 = new int[gcs.size()];
+		conText = new String[gcs.size()];
 
 		for (int i = 0; i < gns.size(); i++) {
 			nodeId[i] = gns.get(i).getId();
@@ -72,6 +73,7 @@ public class AlvisUndoRemoveSubGraph implements AlvisGraphUndo {
 			conStyle[i] = gcs.get(i).getStyle();
 			conNode1[i] = gcs.get(i).getFirstNode().getId();
 			conNode2[i] = gcs.get(i).getSecondNode().getId();
+			conText[i] = gcs.get(i).getSecondNode().getText();
 		}
 
 	}
@@ -104,7 +106,7 @@ public class AlvisUndoRemoveSubGraph implements AlvisGraphUndo {
 			AlvisGraphNode node1 = graph.getAdmin().getNode(conNode1[i]);
 			AlvisGraphNode node2 = graph.getAdmin().getNode(conNode2[i]);
 			AlvisGraphConnection gc = new AlvisGraphConnection(graph,
-					conStyle[i], node1, node2, conId[i]);
+					conStyle[i], node1, node2, conId[i], conText[i]);
 			gc.setFont(gcFont);
 			gc.setLineWidth((this.zoomCounter <= 0) ? 1 : (int) Math.pow(graph
 					.getAdmin().getZoomFactor(), this.zoomCounter + 2));

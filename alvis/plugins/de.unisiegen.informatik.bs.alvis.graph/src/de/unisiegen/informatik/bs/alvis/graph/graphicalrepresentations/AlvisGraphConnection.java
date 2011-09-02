@@ -59,7 +59,7 @@ public class AlvisGraphConnection extends GraphConnection implements
 	 */
 	public AlvisGraphConnection(AlvisGraph graph, int style,
 			AlvisGraphNode node1, AlvisGraphNode node2) {
-		this(graph, style, node1, node2, -1);
+		this(graph, style, node1, node2, -1, null);
 	}
 
 	/**
@@ -76,19 +76,29 @@ public class AlvisGraphConnection extends GraphConnection implements
 	 *            second node
 	 * @param id
 	 *            the id
+	 * @param conText
+	 *            the connection text(e.g. weight)
+	 * @param conText 
 	 */
 	public AlvisGraphConnection(AlvisGraph graph, int style,
-			AlvisGraphNode node1, AlvisGraphNode node2, int id) {
+			AlvisGraphNode node1, AlvisGraphNode node2, int id, String conText) {
 
 		super(graph, style, node1, node2);
-
+		
+		if(conText != null){
+			setText(conText);
+		}
+		
 		this.style = style;
 
 		if (id == -1) {
-			this.id = graph.requestId();
+			this.id = graph.requestConId();
 		} else {
 			this.id = id;
 		}
+		
+		setText("" + this.id);//TODO weg
+		
 		connectionColor = 0;
 		myText = "";
 
