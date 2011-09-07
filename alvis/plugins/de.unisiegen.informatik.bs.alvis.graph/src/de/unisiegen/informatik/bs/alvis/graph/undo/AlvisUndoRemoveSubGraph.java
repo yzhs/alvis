@@ -18,7 +18,6 @@
 package de.unisiegen.informatik.bs.alvis.graph.undo;
 
 import java.awt.Point;
-import java.util.ArrayList;
 
 import org.eclipse.swt.graphics.Font;
 
@@ -35,46 +34,30 @@ import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGrap
 public class AlvisUndoRemoveSubGraph implements AlvisGraphUndo {
 
 	private boolean dirty;
-	private ArrayList<AlvisGraphNode> renewNodes;
-	private ArrayList<AlvisGraphConnection> renewCons;
 
-	private int[] nodeId, nodeX, nodeY;
-	private String[] nodeText, conText;
+	private int[] nodeId, nodeX, nodeY, conWeight;
+	private String[] nodeText;
 
 	private int[] conId, conStyle, conNode1, conNode2;
 
 	private int zoomCounter;
 
-	public AlvisUndoRemoveSubGraph(boolean wasDirty,
-			ArrayList<AlvisGraphNode> gns, ArrayList<AlvisGraphConnection> gcs) {
+	public AlvisUndoRemoveSubGraph(boolean wasDirty, int[] nodeId, int[] nodeX,
+			int[] nodeY, String[] nodeText, int[] conId, int[] conStyle,
+			int[] conNode1, int[] conNode2, int[] conWeight) {
 
 		dirty = wasDirty;
 
-		nodeId = new int[gns.size()];
-		nodeX = new int[gns.size()];
-		nodeY = new int[gns.size()];
-		nodeText = new String[gns.size()];
+		this.nodeId = nodeId;
+		this.nodeX = nodeX;
+		this.nodeY = nodeY;
+		this.nodeText = nodeText;
 
-		conId = new int[gcs.size()];
-		conStyle = new int[gcs.size()];
-		conNode1 = new int[gcs.size()];
-		conNode2 = new int[gcs.size()];
-		conText = new String[gcs.size()];
-
-		for (int i = 0; i < gns.size(); i++) {
-			nodeId[i] = gns.get(i).getId();
-			nodeX[i] = gns.get(i).getLocation().x;
-			nodeY[i] = gns.get(i).getLocation().y;
-			nodeText[i] = gns.get(i).getMyText();
-		}
-
-		for (int i = 0; i < gcs.size(); i++) {
-			conId[i] = gcs.get(i).getId();
-			conStyle[i] = gcs.get(i).getStyle();
-			conNode1[i] = gcs.get(i).getFirstNode().getId();
-			conNode2[i] = gcs.get(i).getSecondNode().getId();
-			conText[i] = gcs.get(i).getSecondNode().getText();
-		}
+		this.conId = conId;
+		this.conStyle = conStyle;
+		this.conNode1 = conNode1;
+		this.conNode2 = conNode2;
+		this.conWeight = conWeight;
 
 	}
 
@@ -82,14 +65,11 @@ public class AlvisUndoRemoveSubGraph implements AlvisGraphUndo {
 	public void execute(AlvisGraph graph) {
 
 		this.zoomCounter = graph.getZoomCounter();
-		renewNodes = new ArrayList<AlvisGraphNode>();
-		renewCons = new ArrayList<AlvisGraphConnection>();
 
 		int fontSize = 4 + (int) (6 * Math.pow(2, zoomCounter));
 		int gcFontSize = Math.min(48, fontSize);
 		Font gnFont = new Font(null, "gn", fontSize, 1);
 		Font gcFont = new Font(null, "gc", gcFontSize, 1);
-
 
 		for (int i = 0; i < nodeId.length; i++) {
 			Point point = new Point(nodeX[i], nodeY[i]);
@@ -98,7 +78,6 @@ public class AlvisUndoRemoveSubGraph implements AlvisGraphUndo {
 					nodeId[i]);
 			gn.setLocation(point.x, point.y);
 			gn.setFont(gnFont);
-			renewNodes.add(gn);
 			graph.getAdmin().addNode(gn, point);
 		}
 
@@ -106,11 +85,11 @@ public class AlvisUndoRemoveSubGraph implements AlvisGraphUndo {
 			AlvisGraphNode node1 = graph.getAdmin().getNode(conNode1[i]);
 			AlvisGraphNode node2 = graph.getAdmin().getNode(conNode2[i]);
 			AlvisGraphConnection gc = new AlvisGraphConnection(graph,
-					conStyle[i], node1, node2, conId[i], conText[i]);
+					conStyle[i], node1, node2, conId[i], conWeight[i]);
 			gc.setFont(gcFont);
 			gc.setLineWidth((this.zoomCounter <= 0) ? 1 : (int) Math.pow(graph
 					.getAdmin().getZoomFactor(), this.zoomCounter + 2));
-			renewCons.add(gc);
+			gc.setAlvisWeight(conWeight[i]);
 			graph.getAdmin().addConnection(gc);
 		}
 
@@ -118,7 +97,10 @@ public class AlvisUndoRemoveSubGraph implements AlvisGraphUndo {
 
 	@Override
 	public AlvisGraphUndo invert() {
-		AlvisGraphUndo invertion= new AlvisUndoAddSubGraph(dirty, renewNodes, renewCons);
+		AlvisGraphUndo invertion = new AlvisUndoAddSubGraph(dirty, nodeId,
+				nodeX, nodeY, nodeText, conId, conStyle, conNode1, conNode2,
+				conWeight);
+
 		return invertion;
 	}
 

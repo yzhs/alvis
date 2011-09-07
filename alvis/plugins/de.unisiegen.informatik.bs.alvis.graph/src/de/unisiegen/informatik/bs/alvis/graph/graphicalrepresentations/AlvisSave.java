@@ -136,12 +136,12 @@ public class AlvisSave {
 		for (int i = 0; i < seri.getConId().length; i++) {
 			int id = seri.getConId()[i];
 			int style = seri.getConStyle()[i];
-			String text = seri.getConText()[i];
+			int weight = seri.getConWeight()[i];
 			AlvisGraphNode node1 = getNode(seri.getConNode1()[i]);
 			AlvisGraphNode node2 = getNode(seri.getConNode2()[i]);
 
 			AlvisGraphConnection gc = new AlvisGraphConnection(graph, style,
-					node1, node2, id, text);
+					node1, node2, id, weight);
 			gc.setConnectionColor(seri.getConColor()[i]);
 			gc.setFont(gcFont);
 			gc.setLineWidth((this.zoomCounter <= 0) ? 1 : (int) Math.pow(
@@ -322,6 +322,14 @@ public class AlvisSave {
 		return remPos.keySet();
 	}
 
+	public AlvisGraphConnection getConnection(int id) {
+		for (AlvisGraphConnection gc : getAllConnections()) {
+			if (id == gc.getId())
+				return gc;
+		}
+		return null;
+	}
+	
 	public AlvisGraphNode getNode(int id) {
 		for (AlvisGraphNode gn : getAllNodes()) {
 			if (id == gn.getId())
@@ -393,7 +401,7 @@ public class AlvisSave {
 				}
 				if (n1 != null && n2 != null) {
 					newGc = new AlvisGraphConnection(parent, gc.getStyle(), n1,
-							n2, gc.getId(), gc.getText());
+							n2, gc.getId(), gc.getAlvisWeight());
 					newGc.setFont(gcFont);
 					dolly.addConnection(newGc);
 					break;

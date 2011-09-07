@@ -66,7 +66,7 @@ public class AddTreeWindow extends TitleAreaDialog {
 		choose.setLayoutData(gd);
 
 		setTitle(Messages.AddTreeWindow_autoFill);
-		setMessage(Messages.AddTreeWindow_chooseOptions + ":", SWT.ERROR); //$NON-NLS-2$
+		setMessage(Messages.AddTreeWindow_chooseOptions + ":", SWT.ERROR); 
 
 		lDepth = new Label(choose, SWT.NONE);
 		lDepth.setText(Messages.AddTreeWindow_chooseOptions);

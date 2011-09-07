@@ -32,20 +32,53 @@ import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGrap
 public class AlvisUndoAddSubGraph implements AlvisGraphUndo {
 
 	private boolean dirty;
-	private ArrayList<AlvisGraphNode> gns;
-	private ArrayList<AlvisGraphConnection> gcs;
-	
-	public AlvisUndoAddSubGraph(boolean wasDirty,
-			ArrayList<AlvisGraphNode> gns, ArrayList<AlvisGraphConnection> gcs) {
+
+	private int[] nodeId, nodeX, nodeY, conWeight;
+	private String[] nodeText;
+
+	private int[] conId, conStyle, conNode1, conNode2;
+
+	public AlvisUndoAddSubGraph(boolean wasDirty, int[] nodeId, int[] nodeX,
+			int[] nodeY, String[] nodeText, int[] conId, int[] conStyle,
+			int[] conNode1, int[] conNode2, int[] conWeight) {
 
 		dirty = wasDirty;
-		this.gns = gns;
-		this.gcs = gcs;
+
+		this.nodeId = nodeId;
+		this.nodeX = nodeX;
+		this.nodeY = nodeY;
+		this.nodeText = nodeText;
+
+		this.conId = conId;
+		this.conStyle = conStyle;
+		this.conNode1 = conNode1;
+		this.conNode2 = conNode2;
+		this.conWeight = conWeight;
 
 	}
 
 	@Override
 	public void execute(AlvisGraph graph) {
+
+		ArrayList<AlvisGraphNode> gns = new ArrayList<AlvisGraphNode>();
+		for (AlvisGraphNode gn : graph.getAllNodes()) {
+			int id = gn.getId();
+			for (int i = 0; i < nodeId.length; i++) {
+				if (id == nodeId[i]) {
+					gns.add(gn);
+				}
+			}
+		}
+
+		ArrayList<AlvisGraphConnection> gcs = new ArrayList<AlvisGraphConnection>();
+		for (AlvisGraphConnection gc : graph.getAllConnections()) {
+			int id = gc.getId();
+			for (int i = 0; i < conId.length; i++) {
+				if (id == conId[i]) {
+					gcs.add(gc);
+				}
+			}
+		}
 
 		graph.removeConnectionsAndNodes(gcs, gns);
 
@@ -53,7 +86,9 @@ public class AlvisUndoAddSubGraph implements AlvisGraphUndo {
 
 	@Override
 	public AlvisGraphUndo invert() {
-		AlvisGraphUndo invertion = new AlvisUndoRemoveSubGraph(dirty, gns, gcs);
+		AlvisGraphUndo invertion = new AlvisUndoRemoveSubGraph(dirty, nodeId,
+				nodeX, nodeY, nodeText, conId, conStyle, conNode1, conNode2,
+				conWeight);
 		return invertion;
 	}
 

@@ -37,8 +37,7 @@ public class AlvisSerialize {
 	private int globalConId;
 	private int zoomCounter;
 
-	private int[] conId, conStyle, conNode1, conNode2, conColor;
-	private String[] conText;
+	private int[] conId, conStyle, conNode1, conNode2, conColor, conWeight;
 
 	/**
 	 * the constructor
@@ -73,7 +72,7 @@ public class AlvisSerialize {
 		conNode1 = new int[allConnections.size()];
 		conNode2 = new int[allConnections.size()];
 		conColor = new int[allConnections.size()];
-		conText = new String[allConnections.size()];
+		conWeight = new int[allConnections.size()];
 
 		int i = 0;
 		for (AlvisGraphNode gn : remPos.keySet()) {
@@ -91,7 +90,7 @@ public class AlvisSerialize {
 			conNode1[i] = gc.getFirstNode().getId();
 			conNode2[i] = gc.getSecondNode().getId();
 			conColor[i] = gc.getConnectionColor();
-			conText[i] = gc.getText();
+			conWeight[i] = gc.getAlvisWeight();
 			i++;
 		}
 
@@ -162,7 +161,7 @@ public class AlvisSerialize {
 		return zoomCounter;
 	}
 
-	public String[] getConText() {
-		return conText;
+	public int[] getConWeight() {
+		return conWeight;
 	}
 }

@@ -181,7 +181,35 @@ public class AlvisGraphUndos {
 		if (gcs == null)
 			gcs = new ArrayList<AlvisGraphConnection>();
 
-		AlvisGraphUndo undo = new AlvisUndoAddSubGraph(wasDirty, gns, gcs);
+		int[] nodeId = new int[gns.size()];
+		int[] nodeX = new int[gns.size()];
+		int[] nodeY = new int[gns.size()];
+		String[] nodeText = new String[gns.size()];
+
+		int[] conId = new int[gcs.size()];
+		int[] conStyle = new int[gcs.size()];
+		int[] conNode1 = new int[gcs.size()];
+		int[] conNode2 = new int[gcs.size()];
+		int[] conWeight = new int[gcs.size()];
+
+		for (int i = 0; i < gns.size(); i++) {
+			nodeId[i] = gns.get(i).getId();
+			nodeX[i] = gns.get(i).getLocation().x;
+			nodeY[i] = gns.get(i).getLocation().y;
+			nodeText[i] = gns.get(i).getMyText();
+		}
+
+		for (int i = 0; i < gcs.size(); i++) {
+			conId[i] = gcs.get(i).getId();
+			conStyle[i] = gcs.get(i).getStyle();
+			conNode1[i] = gcs.get(i).getFirstNode().getId();
+			conNode2[i] = gcs.get(i).getSecondNode().getId();
+			conWeight[i] = gcs.get(i).getAlvisWeight();
+		}
+		
+		AlvisGraphUndo undo = new AlvisUndoAddSubGraph(wasDirty, nodeId,
+				nodeX, nodeY, nodeText, conId, conStyle, conNode1, conNode2,
+				conWeight);
 		undos.add(undo);
 		clearRedos();
 
@@ -205,7 +233,35 @@ public class AlvisGraphUndos {
 		if (gcs == null)
 			gcs = new ArrayList<AlvisGraphConnection>();
 
-		AlvisGraphUndo undo = new AlvisUndoRemoveSubGraph(wasDirty, gns, gcs);
+		int[] nodeId = new int[gns.size()];
+		int[] nodeX = new int[gns.size()];
+		int[] nodeY = new int[gns.size()];
+		String[] nodeText = new String[gns.size()];
+
+		int[] conId = new int[gcs.size()];
+		int[] conStyle = new int[gcs.size()];
+		int[] conNode1 = new int[gcs.size()];
+		int[] conNode2 = new int[gcs.size()];
+		int[] conWeight = new int[gcs.size()];
+
+		for (int i = 0; i < gns.size(); i++) {
+			nodeId[i] = gns.get(i).getId();
+			nodeX[i] = gns.get(i).getLocation().x;
+			nodeY[i] = gns.get(i).getLocation().y;
+			nodeText[i] = gns.get(i).getMyText();
+		}
+
+		for (int i = 0; i < gcs.size(); i++) {
+			conId[i] = gcs.get(i).getId();
+			conStyle[i] = gcs.get(i).getStyle();
+			conNode1[i] = gcs.get(i).getFirstNode().getId();
+			conNode2[i] = gcs.get(i).getSecondNode().getId();
+			conWeight[i] = gcs.get(i).getAlvisWeight();
+		}
+
+		AlvisGraphUndo undo = new AlvisUndoRemoveSubGraph(wasDirty, nodeId,
+				nodeX, nodeY, nodeText, conId, conStyle, conNode1, conNode2,
+				conWeight);
 		undos.add(undo);
 		clearRedos();
 
@@ -263,6 +319,26 @@ public class AlvisGraphUndos {
 	public void pushZoom(boolean wasDirty, boolean zoomIn, Point mousePos) {
 
 		AlvisGraphUndo undo = new AlvisUndoZoom(wasDirty, zoomIn, mousePos);
+		undos.add(undo);
+		clearRedos();
+
+	}
+
+	/**
+	 * creates new AlvisUndoRenameConnection and pushes it to undos, clears
+	 * redos
+	 * 
+	 * @param wasDirty
+	 *            if editor was dirty before this action
+	 * @param gc
+	 *            the graph connection which was renamed
+	 */
+	public void pushRenameConnection(boolean wasDirty, AlvisGraphConnection gc) {
+
+		int id = gc.getId();
+		int oldWeight = gc.getAlvisWeight();
+		AlvisGraphUndo undo = new AlvisUndoRenameConnection(wasDirty, id,
+				oldWeight);
 		undos.add(undo);
 		clearRedos();
 

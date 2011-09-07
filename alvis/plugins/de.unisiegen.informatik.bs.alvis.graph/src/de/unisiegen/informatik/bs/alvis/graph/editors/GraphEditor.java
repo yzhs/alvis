@@ -42,9 +42,14 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.events.MenuDetectEvent;
+import org.eclipse.swt.events.MenuDetectListener;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.MouseMoveListener;
+import org.eclipse.swt.events.MouseWheelListener;
+import org.eclipse.swt.events.TraverseEvent;
+import org.eclipse.swt.events.TraverseListener;
 import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
@@ -52,12 +57,14 @@ import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.ImageLoader;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Spinner;
+import org.eclipse.swt.widgets.ToolBar;
+import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
@@ -90,8 +97,13 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	public static final int MODUS_UNDO = 122;// SWT -> z
 	public static final int MODUS_REDO = 121;// SWT -> y
 	public static final int MODUS_DELETE = SWT.DEL;// SWT -> delete
+	public static final int MODUS_RENAME = 2;// for changing weight of
+												// connection
 	public static final int CTRL = SWT.CTRL;// SWT -> ctrl
 	public static final int SHIFT = SWT.SHIFT;// SWT -> shift
+	public static final int RETURN = 13;// SWT -> return
+	public static final int NUM_RETURN = 16777296;// SWT -> num return/enter
+	public static final int ESCAPE = SWT.ESC;// SWT -> esc
 	private int pressed;
 	private boolean shiftPressed;
 
@@ -104,9 +116,10 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	private Composite myParent;
 	private static IEditorInput myInput;
 	private String myInputFilePath;
-	private boolean rename;
 	AlvisGraphNode actNode;
 	AlvisGraphConnection actCon;
+	Composite rightClick;
+	Cursor oldCoursor;
 
 	private Point remMousePos;
 	private boolean nodesAreMarked;
@@ -128,6 +141,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	private void createGraph(Composite parent, IEditorInput input) {
 
 		myGraph = new AlvisGraph(parent, SWT.NONE);
+		oldCoursor = myGraph.getCursor();
 		undoAdmin = new AlvisGraphUndos(this);
 
 		// Get the absolute Path to the InstanceLocation
@@ -140,10 +154,10 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 			if (seri != null)
 				new AlvisSave(myGraph, seri);
 		}
-		rename = false;
 		nodesAreMarked = false;
 		pressed = 0;
 		shiftPressed = false;
+		actCon = null;
 
 		doSave(null);
 
@@ -214,8 +228,8 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 		// Activator.getDefault().registerExport(this);
 
-		RowLayout rowLayout = new RowLayout();
-		rowLayout.type = SWT.VERTICAL;
+		// RowLayout rowLayout = new RowLayout();
+		// rowLayout.type = SWT.VERTICAL;
 		parent.setLayout(new FillLayout());
 
 		// GridData gdGraph = new GridData();
@@ -398,56 +412,24 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 			@Override
 			public void keyPressed(KeyEvent e) {
 
-				if (!rename) { // default key actions
-					if (graphModusIs(e.keyCode)) {
-						setGraphModus(MODUS_STANDARD);
-					} else if (e.keyCode == MODUS_DELETE) {
-						if (graphModusIs(CTRL)) {
-							clearGraph();
-						} else {
-							removeHighlightedItems();
-						}
-					} else if (e.keyCode == MODUS_UNDO) {
-						if (graphModusIs(CTRL)) {
-							undoAdmin.undo();
-						}
-					} else if (e.keyCode == MODUS_REDO) {
-						if (graphModusIs(CTRL)) {
-							undoAdmin.redo();
-						}
+				if (graphModusIs(e.keyCode)) {
+					setGraphModus(MODUS_STANDARD);
+				} else if (e.keyCode == MODUS_DELETE) {
+					if (graphModusIs(CTRL)) {
+						clearGraph();
 					} else {
-						setGraphModus(e.keyCode);
+						removeHighlightedItems();
 					}
-				} else { // rename, not used in code yet
-					if (e.keyCode == 27) { // escape
-						if (actNode != null) {
-							actNode.setText(actNode.getMyText());
-						} else if (actNode != null) {
-							actCon.setText(actCon.getMyText());
-						}
-						myGraph.setRedraw(true);
-						rename = false;
-					} else if (e.keyCode == 13) { // return
-						if (actNode != null) {
-							actNode.setMyText(actNode.getText());
-						} else if (actNode != null) {
-							actCon.setMyText(actCon.getText());
-						}
-						myGraph.setRedraw(true);
-						rename = false;
-					} else if (e.keyCode == 8) { // backspace
-						if (actNode != null) {
-							// to implement
-						} else if (actNode != null) {
-							// to implement
-						}
-					} else {
-						if (actNode != null) {
-							actNode.setText(actNode.getText() + e.character);
-						} else if (actNode != null) {
-							actCon.setText(actCon.getText() + e.character);
-						}
+				} else if (e.keyCode == MODUS_UNDO) {
+					if (graphModusIs(CTRL)) {
+						undoAdmin.undo();
 					}
+				} else if (e.keyCode == MODUS_REDO) {
+					if (graphModusIs(CTRL)) {
+						undoAdmin.redo();
+					}
+				} else {
+					setGraphModus(e.keyCode);
 				}
 
 			}
@@ -465,21 +447,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 			}
 		});
 
-		// Listener zoomer = new Listener() {
-		// @Override
-		// public void handleEvent(Event event) {
-		// if (event.widget.equals(bZoomIn)) {
-		// if(myGraph.zoomIn())
-		// checkDirty();
-		// } else if (event.widget.equals(bZoomOut)) {
-		// if(myGraph.zoomOut())
-		// checkDirty();
-		// }
-		// }
-		// };
-		//
-		// bZoomIn.addListener(SWT.Selection, zoomer);
-		// bZoomOut.addListener(SWT.Selection, zoomer);
 		//
 		// Listener listener = new Listener() {
 		// @Override
@@ -548,10 +515,14 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 			@Override
 			public void mouseDown(MouseEvent e) {
+
 				if (e.button != 1) {
+					disposeQuickMenu(false);
 					setGraphModus(MODUS_STANDARD);
 					return;
 				}
+
+				disposeQuickMenu(true);
 
 				// point for drawing frame / checking if node gets moved
 				remMousePos = new Point(e.x, e.y);
@@ -563,81 +534,234 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 				ArrayList<AlvisGraphNode> gns = myGraph.getHighlightedNodes();
 				nodesAreMarked = !gns.isEmpty();
 
-				if(nodesAreMarked){
+				if (nodesAreMarked) {
 					moveUndo = undoAdmin.preparePushMoveNodes(isDirty(), gns);
 				}
-				
+
 			}
 
 			@Override
 			public void mouseUp(MouseEvent e) {
 
-				if (!rename) {
+				if (e.button != 1) {
+					showRightClickMenu(e);
+				}
 
-					actNode = myGraph.getHighlightedNode();
-					actCon = myGraph.getHighlightedConnection();
+				actNode = myGraph.getHighlightedNode();
+				actCon = myGraph.getHighlightedConnection();
 
-					if (graphModusIs(MODUS_MOVE)) {
-						setGraphModus(MODUS_STANDARD);
-					} else if (graphModusIs(MODUS_NODE)) {
-						if (actNode == null) {
-							clickNewNode(e.x, e.y);
-						}
-						// } else if (graphModusIs( MODUS_START)) {
-						// clickStartNode(actNode);
-						// } else if (graphModusIs(MODUS_END)) {
-						// clickEndNode(actNode);
-					} else if (graphModusIs(MODUS_DELETE)) {
-						clickRemove();
-					} else if (graphModusIs(MODUS_CONNECTION)) {
-						clickNewConnection(actNode);
+				if (graphModusIs(MODUS_MOVE)) {
+					setGraphModus(MODUS_STANDARD);
+				} else if (graphModusIs(MODUS_NODE)) {
+					if (actNode == null) {
+						clickNewNode(e.x, e.y);
 					}
+					// } else if (graphModusIs( MODUS_START)) {
+					// clickStartNode(actNode);
+					// } else if (graphModusIs(MODUS_END)) {
+					// clickEndNode(actNode);
+				} else if (graphModusIs(MODUS_DELETE)) {
+					clickRemove();
+				} else if (graphModusIs(MODUS_CONNECTION)) {
+					clickNewConnection(actNode);
+				}
 
-					// check if node gets moved:
-					if (remMousePos != null) {
-						if (remMousePos.x != e.x && remMousePos.y != e.y) {
-							if (graphModusIs(MODUS_MOVE)
-									|| graphModusIs(MODUS_STANDARD)) {
-								if (myGraph.getHighlightedNodes().isEmpty()) {
+				// check if node gets moved:
+				if (remMousePos != null) {
+					if (remMousePos.x != e.x && remMousePos.y != e.y) {
+						if (graphModusIs(MODUS_MOVE)
+								|| graphModusIs(MODUS_STANDARD)) {
+							if (myGraph.getHighlightedNodes().isEmpty()) {
 
-									markNodesInFrame(e);
+								markNodesInFrame(e);
 
-								} else {
-									undoAdmin.pushMoveNodes(moveUndo);
-									setDirty(true);
-								}
+							} else {
+								undoAdmin.pushMoveNodes(moveUndo);
+								setDirty(true);
 							}
 						}
 					}
-
-					remMousePos = null;
-					myGraph.redraw();
-				} else {
-					// implement rename
 				}
+
+				remMousePos = null;
+				myGraph.redraw();
 
 			}
 
 			@Override
 			public void mouseDoubleClick(MouseEvent e) {
-				// actNode = myGraph.getHighlightedNode();
-				// actCon = myGraph.getHighlightedConnection();
-				// if (actNode != null || actCon != null) {
-				// rename = true;
-				// setGraphModus(MODUS_STANDARD);
-				// if (actNode != null) {
-				// actNode.setHighlightColor(AlvisGraphNode.RENAME_COLOR);//
-				// // doenst
-				// // work
-				// // jet
-				// } else if (actCon != null) {
-				// // TODO implement
-				// }
-				// myGraph.setRedraw(false);
-				// }
+
+				actCon = myGraph.getHighlightedConnection();
+				if (actCon != null) {
+					showConnectionWeightMenu(e);
+				}
 			}
 		});
 
+	}
+
+	/**
+	 * creates and shows menu for editing graph connection weights live within
+	 * the graph editor
+	 * 
+	 * @param e
+	 *            the mouse event the get the mouse location from
+	 */
+	private void showConnectionWeightMenu(MouseEvent e) {
+		if (rightClick != null && !rightClick.isDisposed()) {
+			rightClick.dispose();
+		}
+		setGraphModus(MODUS_RENAME);
+		rightClick = new Spinner(myGraph, SWT.BORDER);
+		rightClick.setFont(actCon.getFont());
+		((Spinner) rightClick).setSelection(1);
+		((Spinner) rightClick).setMinimum(-1);
+
+		rightClick.pack();
+		int x = e.x, y = e.y;
+		if (x + rightClick.getSize().x > myGraph.getSize().x) {
+			x = myGraph.getSize().x - rightClick.getSize().x;
+		}
+		if (y + rightClick.getSize().y > myGraph.getSize().y) {
+			y = myGraph.getSize().y - rightClick.getSize().y;
+		}
+		rightClick.setLocation(x, y);
+		rightClick.setFocus();
+		rightClick.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyReleased(KeyEvent e) {
+				if (e.keyCode == RETURN || e.keyCode == NUM_RETURN)
+					disposeQuickMenu(true);
+				else if (e.keyCode == ESCAPE)
+					disposeQuickMenu(false);
+			}
+
+			@Override
+			public void keyPressed(KeyEvent e) {
+			}
+		});
+		rightClick.addMouseWheelListener(new MouseWheelListener() {
+
+			@Override
+			public void mouseScrolled(MouseEvent e) {
+				try {
+					if (e.count > 0) {// mouse wheel up
+						((Spinner) rightClick).setSelection(Integer
+								.parseInt(((Spinner) rightClick).getText()) + 1);
+					} else {
+						((Spinner) rightClick).setSelection(Integer
+								.parseInt(((Spinner) rightClick).getText()) - 1);
+					}
+				} catch (Exception exc) {
+				}
+			}
+		});
+	}
+
+	/**
+	 * shows right click menu with icons for editing graph
+	 * 
+	 * @param e
+	 *            the mouse event the get the mouse location from
+	 */
+	private void showRightClickMenu(MouseEvent e) {
+		if (rightClick != null && !rightClick.isDisposed()) {
+			rightClick.dispose();
+		}
+		rightClick = new ToolBar(myGraph, SWT.FLAT | SWT.BORDER);
+		final ToolItem[] items = new ToolItem[4];
+
+		items[0] = new ToolItem((ToolBar) rightClick, SWT.PUSH);
+		items[0].setImage(new Image(null,
+				loadImageData("icons/editor/graph_move.png")));
+		items[1] = new ToolItem((ToolBar) rightClick, SWT.PUSH);
+		items[1].setImage(new Image(null,
+				loadImageData("icons/editor/graph_add.png")));
+
+		items[2] = new ToolItem((ToolBar) rightClick, SWT.PUSH);
+		items[2].setImage(new Image(null,
+				loadImageData("icons/editor/graph_connection.png")));
+
+		items[3] = new ToolItem((ToolBar) rightClick, SWT.PUSH);
+		items[3].setImage(new Image(null,
+				loadImageData("icons/editor/graph_delete.png")));
+
+		rightClick.pack();
+		rightClick.setLocation(e.x - (rightClick.getSize().x / 2) + 3, e.y
+				- (rightClick.getSize().y / 2));
+
+		rightClick.addMouseListener(new MouseListener() {
+
+			@Override
+			public void mouseUp(MouseEvent e) {
+
+				ToolItem item = ((ToolBar) rightClick).getItem(new Point(e.x,
+						e.y));
+
+				disposeQuickMenu(false);
+
+				if (e.button != 1 || item == null) {
+					return;
+				} else if (item.equals(items[0])) {
+					setGraphModus(MODUS_STANDARD);
+				} else if (item.equals(items[1])) {
+					setGraphModus(MODUS_NODE);
+				} else if (item.equals(items[2])) {
+					setGraphModus(MODUS_CONNECTION);
+				} else if (item.equals(items[3])) {
+					setGraphModus(MODUS_DELETE);
+				}
+
+			}
+
+			@Override
+			public void mouseDown(MouseEvent e) {
+			}
+
+			@Override
+			public void mouseDoubleClick(MouseEvent e) {
+			}
+		});
+
+	}
+
+	/**
+	 * disposes quick menu (which e.g. opens on double clicking on a graph node)
+	 * if it is opened, and returns to standard graph modus.
+	 * 
+	 * @param applyChanges
+	 *            true if new value shall be applied (false if or canceled)
+	 */
+	private void disposeQuickMenu(boolean applyChanges) {
+		if (rightClick != null && !rightClick.isDisposed()) {
+
+			if (rightClick instanceof Spinner) {
+				int newWeight;
+
+				try {
+					newWeight = Integer.parseInt(((Spinner) rightClick)
+							.getText());
+				} catch (NumberFormatException nfe) {
+					newWeight = 0;
+				}
+
+				if (actCon != null) {
+
+					if (applyChanges) {
+						undoAdmin.pushRenameConnection(isDirty(), actCon);
+						actCon.setAlvisWeight(newWeight);
+						setDirty(true);
+					}
+
+				}
+
+			}
+
+			rightClick.dispose();
+			rightClick = null;
+			setGraphModus(MODUS_STANDARD);
+		}
 	}
 
 	/**
@@ -750,7 +874,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 				setGraphModus(MODUS_STANDARD);
 			}
 		}
-		
+
 		return removed;
 
 	}
@@ -764,6 +888,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	@Override
 	public Image getImage() {
 
+		disposeQuickMenu(false);
 		boolean isDirty = isDirty();
 		savePositions();
 		fitToPage(200);
@@ -927,10 +1052,12 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 		case (SHIFT):
 			shiftPressed = true;
 			break;
-
+		case (MODUS_RENAME):
+			myGraph.setCursor(oldCoursor);
+			break;
 		case (MODUS_STANDARD):
 		default:
-			if(pressed != CTRL){
+			if (pressed != CTRL) {
 				this.pressed = MODUS_STANDARD;
 			}
 			cursor = new Cursor(Display.getCurrent(),

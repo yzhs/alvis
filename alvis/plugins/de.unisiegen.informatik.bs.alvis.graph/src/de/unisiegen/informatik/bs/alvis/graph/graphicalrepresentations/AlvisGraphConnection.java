@@ -36,7 +36,7 @@ public class AlvisGraphConnection extends GraphConnection implements
 
 	private AlvisGraphNode node1, node2;
 
-	private String myText;
+	private int weight;
 	private int connectionColor;
 	private int style;
 	/**
@@ -45,29 +45,25 @@ public class AlvisGraphConnection extends GraphConnection implements
 	private final int id;
 
 	/**
-	 * constructor finds circles and trees in graph and adds them to
-	 * circles,trees from graph
 	 * 
 	 * @param graph
-	 *            the graph
+	 *            the graph in which graph connection is shown
 	 * @param style
 	 *            the style
 	 * @param node1
-	 *            first node
+	 *            first node to connect
 	 * @param node2
-	 *            second node
+	 *            second node to connect
 	 */
 	public AlvisGraphConnection(AlvisGraph graph, int style,
 			AlvisGraphNode node1, AlvisGraphNode node2) {
-		this(graph, style, node1, node2, -1, null);
+		this(graph, style, node1, node2, -1, -1);
 	}
 
 	/**
-	 * constructor finds circles and trees in graph and adds them to
-	 * circles,trees from graph
 	 * 
 	 * @param graph
-	 *            the graph
+	 *            the graph in which graph connection is shown
 	 * @param style
 	 *            the style
 	 * @param node1
@@ -78,15 +74,17 @@ public class AlvisGraphConnection extends GraphConnection implements
 	 *            the id
 	 * @param conText
 	 *            the connection text(e.g. weight)
-	 * @param conText 
+	 * @param weight
+	 *            the weight of the connection
 	 */
 	public AlvisGraphConnection(AlvisGraph graph, int style,
-			AlvisGraphNode node1, AlvisGraphNode node2, int id, String conText) {
+			AlvisGraphNode node1, AlvisGraphNode node2, int id, int weight) {
 
 		super(graph, style, node1, node2);
-		
-		if(conText != null){
-			setText(conText);
+
+		this.weight = weight;
+		if (weight != -1) {
+			setText("" + weight);
 		}
 		
 		this.style = style;
@@ -97,10 +95,7 @@ public class AlvisGraphConnection extends GraphConnection implements
 			this.id = id;
 		}
 		
-		setText("" + this.id);//TODO weg
-		
 		connectionColor = 0;
-		myText = "";
 
 		this.graph = graph;
 
@@ -190,12 +185,27 @@ public class AlvisGraphConnection extends GraphConnection implements
 		return node1.toString() + "<->" + node2.toString();
 	}
 
-	public String getMyText() {
-		return myText;
+	public int getAlvisWeight() {
+		if(weight != -1){
+			setText("" + weight);
+		}
+		return weight;
 	}
 
-	public void setMyText(String myText) {
-		this.myText = myText;
+	/**
+	 * sets weight of graph connection and writes weight on it (for user to see
+	 * in alvis gui)
+	 * 
+	 * @param weight
+	 *            the weight
+	 */
+	public void setAlvisWeight(int weight) {
+		this.weight = weight;
+		if(weight != -1){
+			setText("" + weight);
+		} else {
+			setText("");
+		}
 	}
 
 	@Override

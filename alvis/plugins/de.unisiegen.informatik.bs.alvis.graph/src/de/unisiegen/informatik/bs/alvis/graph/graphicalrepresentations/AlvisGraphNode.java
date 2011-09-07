@@ -99,7 +99,8 @@ public class AlvisGraphNode extends GraphNode implements
 	public void markAsStartNode() {
 		this.getDisplay().syncExec(
 				  new Runnable() {
-				    public void run(){
+				    @Override
+					public void run(){
 						setBackgroundColor(S_COLOR);
 						setText(START);
 				    }
@@ -110,7 +111,8 @@ public class AlvisGraphNode extends GraphNode implements
 	public void markAsEndNode() {
 		this.getDisplay().syncExec(
 				  new Runnable() {
-				    public void run(){
+				    @Override
+					public void run(){
 						setBackgroundColor(E_COLOR);
 						setText(END);
 				    }
@@ -123,7 +125,8 @@ public class AlvisGraphNode extends GraphNode implements
 	public void unmarkAsStartOrEndNode() {
 		this.getDisplay().syncExec(
 				  new Runnable() {
-				    public void run(){
+				    @Override
+					public void run(){
 						setBackgroundColor(DEFAULT_COLOR);
 						setText(myText);
 				    }
@@ -300,7 +303,8 @@ public class AlvisGraphNode extends GraphNode implements
 //		Animation.markBegin();
 		this.getDisplay().syncExec(
 				  new Runnable() {
-				    public void run(){
+				    @Override
+					public void run(){
 				    	Animation.markBegin();
 				    	setBackgroundColor(AlvisColor.getAlvisColor(color).color());
 				    	Animation.run(0);
@@ -322,7 +326,8 @@ public class AlvisGraphNode extends GraphNode implements
 	public void setLabel(final String label) {
 		this.getDisplay().syncExec(
 				  new Runnable() {
-				    public void run(){
+				    @Override
+					public void run(){
 						setText(label);
 				    }
 				  });

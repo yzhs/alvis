@@ -1157,6 +1157,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 
 		final ArrayList<Image> screenshot = new ArrayList<Image>();
 		this.getDisplay().syncExec(new Runnable() {
+			@Override
 			public void run() {
 				GC gc = new GC(AlvisGraph.this);
 				int width = getSize().x;
