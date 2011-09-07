@@ -229,4 +229,14 @@ public class AlvisGraphConnection extends GraphConnection implements
 		return style;
 	}
 
+	@Override
+	public int getWeight() {
+		return getAlvisWeight();
+	}
+
+	@Override
+	public void setWeight(int newValue) {
+		setAlvisWeight(newValue);
+	}
+
 }
