@@ -199,6 +199,7 @@ public class PdfExport extends Document {
 					}
 					Activator.getDefault().getWorkbench().getDisplay()
 							.syncExec(new Runnable() {
+								@Override
 								public void run() {
 
 									ExportShell exportShell = new ExportShell(
