@@ -23,4 +23,18 @@ public interface GraphicalRepresentationEdge extends GraphicalRepresentation {
 	 * @return destination node
 	 */
 	GraphicalRepresentationVertex getDestinationVertex();
+	
+	/**
+	 * Currently the weight will be the same as a caption
+	 * 
+	 * @return the weight of the edge
+	 */
+	int getWeight();
+	
+	/**
+	 * Currently the weight will be the same as a caption
+	 *
+	 * @param newValue to set as weight
+	 */
+	void setWeight(int newValue);
 }
