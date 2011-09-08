@@ -147,10 +147,17 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 		if (memberName.equals("label")) {
 			return this.getLabel();
 		}
+		if(memberName.equals("edges")) {
+			return this.getEdges();
+		}
 
 		return null;
 	}
 
+	public PCList<PCEdge> getEdges() {
+		return edges;
+	}
+	
 	public PCObject getLabel() {
 		return label;
 	}
@@ -193,7 +200,7 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 
 	@Override
 	public List<String> getMembers() {
-		String[] attributes = { "color", "distance", "parentId", "adjacents" };
+		String[] attributes = { "color", "distance", "parentId", "adjacents", "edges" };
 		return Arrays.asList(attributes);
 	}
 

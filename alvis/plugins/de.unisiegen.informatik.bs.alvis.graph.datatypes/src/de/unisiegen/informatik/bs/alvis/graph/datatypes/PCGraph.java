@@ -1,7 +1,6 @@
 package de.unisiegen.informatik.bs.alvis.graph.datatypes;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
@@ -125,6 +124,9 @@ public class PCGraph extends PCObject {
 		if (memberName.equals("vertices")) {
 			return this.vertices;
 		}
+		if(memberName.equals("edges")) {
+			return this.edges;
+		}
 		return null;
 	}
 
@@ -132,6 +134,7 @@ public class PCGraph extends PCObject {
 	public List<String> getMembers() {
 		List<String> result = new ArrayList<String>();
 		result.add("vertices");
+		result.add("edges");
 		return result;
 	}
 
