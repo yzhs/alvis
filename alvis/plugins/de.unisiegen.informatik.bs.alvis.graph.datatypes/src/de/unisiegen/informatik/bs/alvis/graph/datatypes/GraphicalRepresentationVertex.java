@@ -32,7 +32,7 @@ public interface GraphicalRepresentationVertex extends GraphicalRepresentation {
 	/**
 	 * Vertex body color
 	 * 
-	 * @return String color, no localisation but case independent
+	 * @return String color, no localization but case independent
 	 */
 	public String getColorText();
 

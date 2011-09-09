@@ -28,6 +28,21 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentat
  */
 
 public interface GraphicalRepresentationEdge extends GraphicalRepresentation {
+	
+	/**
+	 * Edge color
+	 * 
+	 * @return String color, no localization but case independent
+	 */
+	public String getColor();
+
+	/**
+	 * Edge color
+	 * 
+	 * @param new color as case independent string
+	 */
+	public void setColor(String color);
+	
 	/**
 	 * Edge connects two Nodes, getSource returns first of them
 	 * 
