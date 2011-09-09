@@ -11,12 +11,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Display;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -29,16 +25,12 @@ import de.unisiegen.informatik.bs.alvis.graph.datatypes.GraphicalRepresentationV
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.PCEdge;
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.PCGraph;
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.PCVertex;
-import de.unisiegen.informatik.bs.alvis.graph.extension.FileExtension;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraph;
-import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraphConnection;
-import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisGraphNode;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSave;
 import de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations.AlvisSerialize;
-import de.unisiegen.informatik.bs.alvis.io.dialogs.*;
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCList;
+import de.unisiegen.informatik.bs.alvis.io.dialogs.AskMeAgain;
+import de.unisiegen.informatik.bs.alvis.io.dialogs.CheckDialog;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.SortableCollection;
 
 /**
  * @author simon
@@ -50,6 +42,10 @@ public class RunVisualizer implements IRunVisualizer {
 	private Composite myParent;
 	private String myInputFilePath;
 	private PCGraph codeGraph;
+	
+	// this 'random' number makes sure, the algorithm
+	// does not get the same parameter twice
+	int randomNumber = 0;
 
 	/**
 	 * Adds the content of input to the parent
@@ -151,7 +147,7 @@ public class RunVisualizer implements IRunVisualizer {
 	@Override
 	public ArrayList<PCObject> chooseVariable(PCObject typ, String bezeichner) {
 		ArrayList<PCObject> result = new ArrayList<PCObject>();
-
+		
 		// Temporär
 		// if (typ == null && bezeichner.equals("G")) {
 		// typ = new PCGraph();
@@ -173,8 +169,10 @@ public class RunVisualizer implements IRunVisualizer {
 			if (result.size() == 1
 					|| Activator.getDefault().getActiveRun().getOnStartPoint()
 							.equals(EStartPoint.RAND)) {
-				// Just return the first
-				result.add(allPCVertex.get(0));
+				if(randomNumber >= allPCVertex.size())
+					randomNumber = 0; // if we are out of bounds, reset the 'random' number
+				// Return a node that has not already been chosen
+				result.add(allPCVertex.get(randomNumber++));
 			} else {
 				// TODO SORT LIST HERE
 				AskMeAgain ask = new AskMeAgain(true);
