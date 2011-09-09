@@ -1077,23 +1077,37 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	public void autoFill() {
 
 		AddTreeWindow adw = new AddTreeWindow(new Shell());
-		int result = adw.open();
-		if (result == -1)
-			return;
+		int returnCode = adw.open();
 
-		int depth = result % 65536 /* (2^16) */;
-		int width = result / 65536;
+		if (returnCode == 1)
+			return;// window got closed by canceling
+
+		boolean exactWidths = adw.isExactWidths();
+		boolean exactWeights = adw.isExactWeights();
+
+		int depth = adw.getDepth();
+		int width = adw.getWidth();
+		int weight = adw.getWeight();
 
 		ArrayList<AlvisGraphNode> gns = null;
-		if (width == 0) {
-			if (depth > 2) {
-				gns = myGraph.createCircle(depth);
-			}
-		} else {
-			gns = myGraph.createTree(depth, width, null);
+
+		if (returnCode == 1001) { // create tree
+
+			depth = depth < 2 ? 2 : depth > 7 ? 7 : depth;
+			width = width < 2 ? 2 : width > 3 ? 3 : width;
+
+			gns = myGraph.createTree(depth, width, exactWidths, weight, exactWeights, null);
+
+		} else { // create circle
+
+			depth = depth < 3 ? 3 : depth > 300 ? 300 : depth;
+			weight = weight < -1 ? -1 : weight;
+			gns = myGraph.createCircle(depth, weight, exactWeights);
+
 		}
 
-		if (gns != null) {
+		if (gns != null) { // if something gets added to graph editor, push it
+							// to undo's and so further
 			ArrayList<AlvisGraphConnection> gcs = new ArrayList<AlvisGraphConnection>();
 			for (AlvisGraphNode gn : gns) {
 				for (AlvisGraphConnection gc : gn.getConnections()) {

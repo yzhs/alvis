@@ -21,6 +21,10 @@ import org.eclipse.osgi.util.NLS;
 
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "de.unisiegen.informatik.bs.alvis.graph.editors.messages"; //$NON-NLS-1$
+
+	public static String AddTreeWindow_exactWidhts;
+	public static String AddTreeWindow_exactWeights;
+	public static String AddTreeWindow_conWidths;
 	public static String AddTreeWindow_amountOfNodes;
 	public static String AddTreeWindow_autoFill;
 	public static String AddTreeWindow_averageWidth;

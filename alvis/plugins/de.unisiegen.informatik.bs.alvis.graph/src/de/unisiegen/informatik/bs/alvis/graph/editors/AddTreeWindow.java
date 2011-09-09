@@ -24,25 +24,38 @@ import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Spinner;
 
 public class AddTreeWindow extends TitleAreaDialog {
 
-	private Text tDepth, tWidth;
-	private Label lDepth, lWidth;
+	private Label lDepth, lWidth, lConWidth;
+	private Spinner sConWeight, sDepth, sWidth;
 	private Combo cAutoFill;
 	private Group choose;
+	private Group conWeightGroup;
+	private Button bExactWidths, bExactWeights;
 	private GridData gd;
+
+	private boolean exactWeights, exactWidths;
+	private boolean setConnectionWidhts;
+	private int depth, width, weight;
 
 	protected AddTreeWindow(Shell parentShell) {
 		super(parentShell);
 
+		exactWeights = false;
+		exactWidths = false;
+		setConnectionWidhts = false;
+		depth = 4;
+		width = 2;
+		weight = -1;
 	}
 
 	@Override
@@ -60,23 +73,40 @@ public class AddTreeWindow extends TitleAreaDialog {
 		cAutoFill.add(Messages.AddTreeWindow_tree);
 		cAutoFill.add(Messages.AddTreeWindow_circle);
 		cAutoFill.select(0);
-		
+
 		choose = new Group(composite, SWT.NONE);
 		choose.setLayout(new GridLayout(2, false));
 		choose.setLayoutData(gd);
 
 		setTitle(Messages.AddTreeWindow_autoFill);
-		setMessage(Messages.AddTreeWindow_chooseOptions + ":", SWT.ERROR); 
+		setMessage(Messages.AddTreeWindow_chooseOptions + ":", SWT.ERROR);
 
 		lDepth = new Label(choose, SWT.NONE);
-		lDepth.setText(Messages.AddTreeWindow_chooseOptions);
-		tDepth = new Text(choose, SWT.NONE);
-		tDepth.setText("4"); //$NON-NLS-1$
+		lDepth.setText(Messages.AddTreeWindow_depth);
+		sDepth = new Spinner(choose, SWT.NONE);
+		sDepth.setMinimum(2);
+		sDepth.setSelection(width);
 
 		lWidth = new Label(choose, SWT.NONE);
 		lWidth.setText(Messages.AddTreeWindow_averageWidth);
-		tWidth = new Text(choose, SWT.NONE);
-		tWidth.setText("2"); //$NON-NLS-1$
+		sWidth = new Spinner(choose, SWT.NONE);
+		sWidth.setMinimum(2);
+		sWidth.setSelection(width);
+
+		bExactWidths = new Button(choose, SWT.CHECK);
+		bExactWidths.setText(Messages.AddTreeWindow_exactWidhts);
+
+		conWeightGroup = new Group(composite, SWT.NONE);
+		conWeightGroup.setLayout(new GridLayout(2, false));
+
+		lConWidth = new Label(conWeightGroup, SWT.NONE);
+		lConWidth.setText(Messages.AddTreeWindow_conWidths);
+		sConWeight = new Spinner(conWeightGroup, SWT.NONE);
+		sConWeight.setMinimum(weight);
+		sConWeight.setSelection(weight);
+
+		bExactWeights = new Button(conWeightGroup, SWT.CHECK);
+		bExactWeights.setText(Messages.AddTreeWindow_exactWeights);
 
 		cAutoFill.addSelectionListener(new SelectionListener() {
 
@@ -87,21 +117,26 @@ public class AddTreeWindow extends TitleAreaDialog {
 				switch (treeOrCircle) {
 				case 0: // tree
 					lDepth.setText(Messages.AddTreeWindow_depth);
-					tDepth.setText("4"); //$NON-NLS-1$
+					sDepth.setMinimum(2); //$NON-NLS-1$
+					sDepth.setSelection(4);
 
+					lWidth.setEnabled(true);
 					lWidth.setText(Messages.AddTreeWindow_averageWidth);
-					tWidth.setEnabled(true);
-					tWidth.setText("2"); //$NON-NLS-1$
+					sWidth.setEnabled(true);
+					bExactWidths.setEnabled(true);
 					break;
 				case 1: // circle
 					lDepth.setText(Messages.AddTreeWindow_amountOfNodes);
-					tDepth.setText("10"); //$NON-NLS-1$
+					sDepth.setMinimum(3); //$NON-NLS-1$
+					sDepth.setMaximum(300);
+					sDepth.setSelection(10);
 
-					lWidth.setText(""); //$NON-NLS-1$
-					lWidth.setSize(0, 0);
-					tWidth.setText(""); //$NON-NLS-1$
-					tWidth.setSize(0, 0);
-					tWidth.setEnabled(false);
+					//					lWidth.setText(""); //$NON-NLS-1$
+					// lWidth.setSize(0, 0);
+					// sWidth.setSize(0, 0);
+					lWidth.setEnabled(false);
+					sWidth.setEnabled(false);
+					bExactWidths.setEnabled(false);
 					break;
 				}
 				choose.pack();
@@ -112,13 +147,15 @@ public class AddTreeWindow extends TitleAreaDialog {
 			}
 		});
 
+		composite.pack();
+
 		return composite;
 
 	}
 
 	@Override
 	protected Point getInitialSize() {
-		return new Point(400, 300);
+		return new Point(400, 350);
 	}
 
 	@Override
@@ -127,58 +164,54 @@ public class AddTreeWindow extends TitleAreaDialog {
 		newShell.setText(Messages.AddTreeWindow_NewRandomGraphWizard);
 	}
 
+	/**
+	 * closes add-tree-window after setting variables for further access in
+	 * graph editor
+	 */
 	@Override
 	protected void okPressed() {
-		concatReturnCode();
+
+		boolean isTree = bExactWidths.getEnabled();
+		exactWidths = isTree ? bExactWidths.getSelection() : false;
+
+		depth = sDepth.getSelection();
+		width = isTree ? sWidth.getSelection() : 0;
+		weight = sConWeight.getSelection();
+		exactWeights = (weight == -1) ? true : bExactWeights.getSelection();
+
+		setReturnCode(isTree ? 1001 : 1002);
+
 		close();
-	}
-
-	/**
-	 * parses text field to integers and concats them to one int, because window
-	 * only returns one int
-	 */
-	private void concatReturnCode() {
-
-		int width = 0, depth = 0, result;
-		if (tWidth.isEnabled()) { // tree
-			try {
-				width = Integer.parseInt(tWidth.getText());
-				if (width < 1 || width > 4)
-					width = 4;
-			} catch (NumberFormatException nfe) {
-				width = 4;
-			}
-			try {
-				depth = Integer.parseInt(tDepth.getText());
-				if (depth < 1)
-					depth = 5;
-				else if (depth > 8)
-					depth = 8;
-			} catch (NumberFormatException nfe) {
-				width = 5;
-			}
-		} else { // circle
-			width = 0;// circle has no width
-			try {
-				depth = Integer.parseInt(tDepth.getText());
-				if (depth < 1)
-					depth = 16;
-				else if (depth > 200)
-					depth = 200;
-			} catch (NumberFormatException nfe) {
-				depth = 16;
-			}
-		}
-
-		result = depth + (width * 65536/* (2^16) */);
-		setReturnCode(result);
-
 	}
 
 	@Override
 	protected void cancelPressed() {
-		setReturnCode(-1);
+		setReturnCode(1);
 		close();
+	}
+
+	public boolean isExactWeights() {
+		return exactWeights;
+	}
+
+	public boolean isSetConnectionWidhts() {
+		return setConnectionWidhts;
+	}
+
+	public int getDepth() {
+		return depth;
+	}
+
+	public int getWidth() {
+		return width;
+	}
+
+	public int getWeight() {
+		return weight;
+	}
+
+	public boolean isExactWidths() {
+		return exactWidths;
 	}
 
 }

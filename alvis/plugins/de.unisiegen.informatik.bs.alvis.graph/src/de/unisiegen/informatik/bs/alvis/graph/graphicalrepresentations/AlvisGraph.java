@@ -77,7 +77,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		setLayoutAlgorithm(null, false);
 		setForeground(new Color(null, 128, 128, 128));
 		setBackground(new Color(null, 255, 255, 240));
-		
+
 		admin = new AlvisSave();
 		middleFactor = 0;
 		keyPressed = 0;
@@ -197,18 +197,18 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 
 		if (node1.equals(node2))
 			return null; // no self connection
-		
+
 		if (AlvisGraphConnection.wouldContain(node1, node2,
-				admin.getAllConnections())) 
+				admin.getAllConnections()))
 			return null; // no double connections
-		
+
 		AlvisGraphConnection result = new AlvisGraphConnection(this,
 				ZestStyles.CONNECTIONS_DOT, node1, node2);
 		result.setLineWidth((getZoomCounter() <= 0) ? 1 : (int) Math.pow(
 				admin.getZoomFactor(), getZoomCounter() + 1));
 		admin.addConnection(result);
 		return result;
-		
+
 	}
 
 	/**
@@ -488,7 +488,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	 * @return nodes that are currently marked
 	 */
 	public ArrayList<AlvisGraphNode> getHighlightedNodes() {
-		
+
 		ArrayList<AlvisGraphNode> selectedItems = new ArrayList<AlvisGraphNode>();
 
 		for (Object object : getSelection()) {
@@ -510,15 +510,15 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 
 		for (Object object : getSelection()) {
 			try {
-				if(object instanceof AlvisGraphConnection){
+				if (object instanceof AlvisGraphConnection) {
 					ArrayList<AlvisGraphConnection> oneCon = new ArrayList<AlvisGraphConnection>();
-					oneCon.add((AlvisGraphConnection)object);
+					oneCon.add((AlvisGraphConnection) object);
 					return oneCon;
 				}
 			} catch (Exception e) {
 			}
 		}
-		
+
 		ArrayList<AlvisGraphNode> gns = getHighlightedNodes();
 		ArrayList<AlvisGraphConnection> selectedConnections = new ArrayList<AlvisGraphConnection>();
 
@@ -754,20 +754,34 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	}
 
 	/**
-	 * creates tree with depth = parameter 'depth' and average amount of child
-	 * nodes = width
+	 * creates tree with depth = parameter 'depth' and amount of child nodes =
+	 * width
 	 * 
 	 * @param depth
 	 *            the depth of ne generated graph
 	 * @param width
-	 *            average amount of child nodes
+	 *            amount of child nodes
+	 * @param exactWidths
+	 *            whether to set amount of child nodes exactly as width or vary
+	 *            randomly
+	 * @param connectionWeight
+	 *            the connection weights, -1 if none
+	 * @param exactWeights
+	 *            whether to set connection weights exactly as connectionWeight
+	 *            or vary randomly
 	 * @param parent
 	 *            the parent node
+	 * 
+	 * @return list of new nodes
 	 */
 	public ArrayList<AlvisGraphNode> createTree(int depth, int width,
+			boolean exactWidths, int connectionWeight, boolean exactWeights,
 			AlvisGraphNode parent) {
 
 		ArrayList<AlvisGraphNode> result = new ArrayList<AlvisGraphNode>();
+
+		int myWidth = width;
+		int myWeight = connectionWeight;
 
 		if (depth <= 0)
 			return null; // anchor
@@ -782,11 +796,20 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 			if (getStartNode() != null) {
 				getStartNode().unmarkAsStartOrEndNode();
 			}
-		} else
-			makeGraphConnection(gn, parent);
+		} else {
+			if (!exactWeights) {
+				myWeight = myRandom(connectionWeight);
+			}
+			AlvisGraphConnection gc = makeGraphConnection(gn, parent);
+			gc.setAlvisWeight(myWeight);
+		}
 
-		for (int i = 0; i < myRandom(width); i++) {
-			ArrayList<AlvisGraphNode> gnRec = createTree(depth - 1, width, gn);
+		if (!exactWidths) {
+			myWidth = myRandom(width);
+		}
+		for (int i = 0; i < myWidth; i++) {
+			ArrayList<AlvisGraphNode> gnRec = createTree(depth - 1, width,
+					exactWidths, connectionWeight, exactWeights, gn);
 
 			if (gnRec != null) {
 				for (AlvisGraphNode alvisGraphNode : gnRec) {
@@ -801,14 +824,32 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	}
 
 	/**
-	 * creates random number for width for createTree
+	 * creates random number for createTree() or createCircle()
 	 * 
-	 * @param width
-	 * @return random number between 1 and (2*width)
+	 * @param average
+	 *            the average value to differ from
+	 * @return pseudo random number between 1 and (2*average)
 	 */
-	private int myRandom(int width) {
-		int result = ((int) (Math.random() * 1000)) % (2 * width - 1);
+	private int myRandom(int average) {
+		if (average <= 0) {
+			return 1; // for modulo operation on negative numbers doesn't work
+						// exactly in java... just return 1, just don't call
+						// this method with negative numbers
+		}
+
+		int factor = 100;
+
+		for (int i = 0; i < 10; i++) {
+
+			factor *= 10;
+			if (factor > average)
+				break;
+
+		}
+
+		int result = ((int) (Math.random() * factor)) % (2 * average - 1);
 		result += 1;
+
 		return result;
 	}
 
@@ -817,11 +858,19 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	 * 
 	 * @param amountOfNodes
 	 *            the amount of nodes in circle
+	 * @param connectionWeight
+	 *            the connection weights, -1 if none
+	 * @param exactWeights
+	 *            whether to set connection weights exactly as connectionWeight
+	 *            or vary randomly
 	 * @return list of new nodes
 	 */
-	public ArrayList<AlvisGraphNode> createCircle(int amountOfNodes) {
+	public ArrayList<AlvisGraphNode> createCircle(int amountOfNodes,
+			int connectionWeight, boolean exactWeights) {
 
 		ArrayList<AlvisGraphNode> result = new ArrayList<AlvisGraphNode>();
+
+		int weight = connectionWeight;
 
 		if (amountOfNodes > 300)
 			amountOfNodes = 300; // too many
@@ -835,10 +884,20 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		for (int i = 1; i < amountOfNodes; i++) {
 			two = makeGraphNode("");
 			result.add(two);
-			makeGraphConnection(one, two);
+
+			if (!exactWeights) {
+				weight = myRandom(connectionWeight);
+			}
+			AlvisGraphConnection gc = makeGraphConnection(one, two);
+			gc.setAlvisWeight(weight);
 			one = two;
 		}
-		makeGraphConnection(one, start);
+		
+		if (!exactWeights) {
+			weight = myRandom(connectionWeight);
+		}
+		AlvisGraphConnection gc = makeGraphConnection(one, start);
+		gc.setAlvisWeight(weight);
 
 		return result;
 
@@ -963,9 +1022,9 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 		admin.removeNode(node);
 	}
 
-//	private void removeConnection(int i) {
-//		admin.removeConnection(i);
-//	}
+	// private void removeConnection(int i) {
+	// admin.removeConnection(i);
+	// }
 
 	private boolean removeConnection(AlvisGraphConnection gcC) {
 		return admin.removeConnection(gcC);
