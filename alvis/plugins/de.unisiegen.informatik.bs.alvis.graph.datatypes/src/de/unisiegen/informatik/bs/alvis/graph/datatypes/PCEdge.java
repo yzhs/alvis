@@ -16,7 +16,7 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
  * 
  */
 
-public class PCEdge extends PCObject {
+public class PCEdge extends PCObject implements Comparable<PCEdge> {
 
 	protected static final String TYPENAME = "Edge";
 
@@ -126,17 +126,17 @@ public class PCEdge extends PCObject {
 	
 	public void setWeight(PCInteger weight) {
 		this.weight = weight;
+		if (!this.isInBatchRun)
+			for (GraphicalRepresentation gredge : allGr) {
+				((GraphicalRepresentationEdge) gredge)
+						.setWeight(((PCInteger) weight).getLiteralValue());
+			}
 	}
 	
 	@Override
 	public PCObject set(String memberName, PCObject value) {
 		if (memberName.equals("weight")) {
-			weight = (PCInteger) value;
-			if (!this.isInBatchRun)
-				for (GraphicalRepresentation gredge : allGr) {
-					((GraphicalRepresentationEdge) gredge)
-							.setWeight(((PCInteger) value).getLiteralValue());
-				}
+			this.setWeight((PCInteger) value);
 		}
 		return value;
 	}
@@ -168,12 +168,22 @@ public class PCEdge extends PCObject {
 	@Override
 	protected void runDelayedCommands() {
 		for (GraphicalRepresentation gr : allGr) {
-			if (!this.commandsforGr.get(0).isEmpty()) {
+			if (commandsforGr.get(0) != null && !commandsforGr.get(0).isEmpty()) {
 				((GraphicalRepresentationEdge) gr)
 						.setWeight(((PCInteger) this.commandsforGr.get(0).pop())
 								.getLiteralValue());
 			}
 		}
 		this.commandsforGr.get(0).clear();
+	}
+	
+	public static PCEdge getNull() {
+		return new PCEdge();
+	}
+
+	@Override
+	public int compareTo(PCEdge arg0) {
+		// checking just based on cost
+		return this.weight.getLiteralValue() - arg0.weight.getLiteralValue();
 	}
 }

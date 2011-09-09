@@ -86,7 +86,7 @@ public class AlvisGraphConnection extends GraphConnection implements
 		if (weight != -1) {
 			setText("" + weight);
 		}
-		
+
 		this.style = style;
 
 		if (id == -1) {
@@ -94,7 +94,7 @@ public class AlvisGraphConnection extends GraphConnection implements
 		} else {
 			this.id = id;
 		}
-		
+
 		connectionColor = 0;
 
 		this.graph = graph;
@@ -186,7 +186,7 @@ public class AlvisGraphConnection extends GraphConnection implements
 	}
 
 	public int getAlvisWeight() {
-		if(weight != -1){
+		if (weight != -1) {
 			setText("" + weight);
 		}
 		return weight;
@@ -201,11 +201,18 @@ public class AlvisGraphConnection extends GraphConnection implements
 	 */
 	public void setAlvisWeight(int weight) {
 		this.weight = weight;
-		if(weight != -1){
-			setText("" + weight);
-		} else {
-			setText("");
-		}
+		final int value = weight;
+		this.getDisplay().syncExec(new Runnable() {
+			@Override
+			public void run() {
+				if (value != -1) {
+					setText("" + value);
+				} else {
+					setText("");
+				}
+			}
+		});
+
 	}
 
 	@Override
