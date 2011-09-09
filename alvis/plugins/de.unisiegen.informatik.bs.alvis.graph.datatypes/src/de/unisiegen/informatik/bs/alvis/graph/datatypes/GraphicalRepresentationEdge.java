@@ -34,7 +34,7 @@ public interface GraphicalRepresentationEdge extends GraphicalRepresentation {
 	 * 
 	 * @return String color, no localization but case independent
 	 */
-	public String getColor();
+	public String getColorText();
 
 	/**
 	 * Edge color
