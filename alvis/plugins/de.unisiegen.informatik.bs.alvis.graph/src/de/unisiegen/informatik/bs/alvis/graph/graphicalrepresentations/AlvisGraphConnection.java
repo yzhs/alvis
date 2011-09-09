@@ -19,6 +19,7 @@ package de.unisiegen.informatik.bs.alvis.graph.graphicalrepresentations;
 
 import java.util.ArrayList;
 
+import org.eclipse.draw2d.Animation;
 import org.eclipse.zest.core.widgets.GraphConnection;
 
 import de.unisiegen.informatik.bs.alvis.graph.datatypes.GraphicalRepresentationEdge;
@@ -186,9 +187,6 @@ public class AlvisGraphConnection extends GraphConnection implements
 	}
 
 	public int getAlvisWeight() {
-		if (weight != -1) {
-			setText("" + weight);
-		}
 		return weight;
 	}
 
@@ -244,6 +242,25 @@ public class AlvisGraphConnection extends GraphConnection implements
 	@Override
 	public void setWeight(int newValue) {
 		setAlvisWeight(newValue);
+	}
+
+	@Override
+	public void setColor(final String color) {
+		this.getDisplay().syncExec(
+				  new Runnable() {
+				    @Override
+					public void run(){
+				    	Animation.markBegin();
+
+						setLineColor(AlvisColor.getAlvisColor(color).color());
+				    	Animation.run(0);
+				    }
+				  });
+	}
+
+	@Override
+	public String getColorText() {
+		return AlvisColor.getAlvisColor(getLineColor());
 	}
 
 }

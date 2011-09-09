@@ -593,7 +593,7 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 
 				actCon = myGraph.getHighlightedConnection();
 				if (actCon != null) {
-					showConnectionWeightMenu(e);
+					showConnectionWeightMenu(e, actCon);
 				}
 			}
 		});
@@ -606,15 +606,18 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	 * 
 	 * @param e
 	 *            the mouse event the get the mouse location from
+	 * @param actualConnection
+	 *            the actual connection to change weight from
 	 */
-	private void showConnectionWeightMenu(MouseEvent e) {
+	private void showConnectionWeightMenu(MouseEvent e,
+			AlvisGraphConnection actualConnection) {
 		if (rightClick != null && !rightClick.isDisposed()) {
 			rightClick.dispose();
 		}
 		setGraphModus(MODUS_RENAME);
 		rightClick = new Spinner(myGraph, SWT.BORDER);
 		rightClick.setFont(actCon.getFont());
-		((Spinner) rightClick).setSelection(1);
+		((Spinner) rightClick).setSelection(actualConnection.getAlvisWeight());
 		((Spinner) rightClick).setMinimum(-1);
 
 		rightClick.pack();
@@ -1096,7 +1099,8 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 			depth = depth < 2 ? 2 : depth > 7 ? 7 : depth;
 			width = width < 2 ? 2 : width > 3 ? 3 : width;
 
-			gns = myGraph.createTree(depth, width, exactWidths, weight, exactWeights, null);
+			gns = myGraph.createTree(depth, width, exactWidths, weight,
+					exactWeights, null);
 
 		} else { // create circle
 
