@@ -1,3 +1,21 @@
+/*
+ * Copyright (c) 2011 Dominik Dingel
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use, 
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
+ * Software, and to permit persons to whom the Software is furnished to do so, 
+ * subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all 
+ * copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package de.unisiegen.informatik.bs.alvis.graph.datatypes;
 
 import java.util.ArrayList;
@@ -20,6 +38,8 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 
 	protected static final String TYPENAME = "Vertex";
 
+	private PCGraph graph;
+
 	private PCList<PCEdge> edges;
 	private PCList<PCVertex> adjacents;
 
@@ -27,6 +47,10 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 	private PCString color;
 	private PCVertex parentId;
 	private PCString label;
+
+	public void setGraph(PCGraph graph) {
+		this.graph = graph;
+	}
 
 	/**
 	 * 
@@ -147,7 +171,7 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 		if (memberName.equals("label")) {
 			return this.getLabel();
 		}
-		if(memberName.equals("edges")) {
+		if (memberName.equals("edges")) {
 			return this.getEdges();
 		}
 
@@ -157,7 +181,7 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 	public PCList<PCEdge> getEdges() {
 		return edges;
 	}
-	
+
 	public PCObject getLabel() {
 		return label;
 	}
@@ -200,14 +224,21 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 
 	@Override
 	public List<String> getMembers() {
-		String[] attributes = { "color", "distance", "parentId", "adjacents", "edges" };
+		String[] attributes = { "color", "distance", "parentId", "adjacents",
+				"edges" };
 		return Arrays.asList(attributes);
 	}
 
 	@Override
 	public List<String> getMethods() {
-		String[] attributes = { "equal", "notEqual" };
+		String[] attributes = { "equal", "notEqual", "connectTo" };
 		return Arrays.asList(attributes);
+	}
+
+	public PCEdge connectTo(PCVertex toConnect) {
+		PCEdge ed = new PCEdge(this, toConnect);
+		graph.getEdges().add(ed);
+		return ed;
 	}
 
 	public static PCVertex getNull() {
@@ -231,11 +262,11 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 		// return string
 		return this.label.toString().compareTo(arg0.label.toString());
 	}
-	
+
 	public PCBoolean equal(PCVertex other) {
 		return new PCBoolean(this.equals(other));
 	}
-	
+
 	public PCBoolean notEqual(PCVertex other) {
 		return this.equal(other).not();
 	}

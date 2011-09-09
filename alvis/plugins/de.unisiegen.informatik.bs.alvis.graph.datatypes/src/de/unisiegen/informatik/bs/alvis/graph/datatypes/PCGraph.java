@@ -1,3 +1,21 @@
+/*
+ * Copyright (c) 2011 Dominik Dingel
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use, 
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
+ * Software, and to permit persons to whom the Software is furnished to do so, 
+ * subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all 
+ * copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package de.unisiegen.informatik.bs.alvis.graph.datatypes;
 
 import java.util.ArrayList;
@@ -11,15 +29,13 @@ public class PCGraph extends PCObject {
 	private PCList<PCEdge> edges;
 	private PCList<PCVertex> vertices;
 
-	
 	/**
 	 * Creates new Graph from PseudoCodeLists
 	 * 
 	 * @param vertices
 	 * @param edges
 	 */
-	public PCGraph(PCList<PCVertex> vertices,
-			PCList<PCEdge> edges) {
+	public PCGraph(PCList<PCVertex> vertices, PCList<PCEdge> edges) {
 		this.edges = edges;
 		this.vertices = vertices;
 	}
@@ -47,6 +63,9 @@ public class PCGraph extends PCObject {
 		for (GraphicalRepresentationVertex node : allgNodes) {
 			vertices.add(new PCVertex(node));
 		}
+		for (PCVertex v : vertices) {
+			v.setGraph(this);
+		}
 		for (GraphicalRepresentationEdge conn : allgConnections) {
 			edges.add(new PCEdge(this.getVertexFromGraphic((conn)
 					.getSourceVertex()), this.getVertexFromGraphic((conn)
@@ -60,8 +79,7 @@ public class PCGraph extends PCObject {
 	 * @param node
 	 * @return Vertex
 	 */
-	public PCVertex getVertexFromGraphic(
-			GraphicalRepresentationVertex node) {
+	public PCVertex getVertexFromGraphic(GraphicalRepresentationVertex node) {
 		if (node == null) {
 			return null;
 		}
@@ -75,21 +93,22 @@ public class PCGraph extends PCObject {
 
 	/**
 	 * returns Edge from its GraphicalRepresentation
-	 *
+	 * 
 	 * @param edge
 	 * @return Edge
 	 */
 	public PCEdge getEdgeFromGraphic(GraphicalRepresentationEdge edge) {
-			if (edge == null) {
-				return null;
-			}
-			for (PCEdge vedge : edges) {
-				if (vedge.isGraphical(edge)) {
-					return vedge;
-				}
-			}
+		if (edge == null) {
 			return null;
+		}
+		for (PCEdge vedge : edges) {
+			if (vedge.isGraphical(edge)) {
+				return vedge;
+			}
+		}
+		return null;
 	}
+
 	/**
 	 * 
 	 * @return the saved vertices as PseudoCodeList
@@ -124,7 +143,7 @@ public class PCGraph extends PCObject {
 		if (memberName.equals("vertices")) {
 			return this.vertices;
 		}
-		if(memberName.equals("edges")) {
+		if (memberName.equals("edges")) {
 			return this.edges;
 		}
 		return null;
@@ -147,7 +166,7 @@ public class PCGraph extends PCObject {
 	public static String getTypeName() {
 		return PCGraph.TYPENAME;
 	}
-	
+
 	/**
 	 * Enable/Disable the batch Modification every Change on the
 	 * GraphicalRepresentation will be delayed and only the last one will be
@@ -160,15 +179,16 @@ public class PCGraph extends PCObject {
 		// leaving batch mode, run all delayed commands
 		if (isInBatchRun == true && setBatchModification == false) {
 			runDelayedCommands();
-			for(PCVertex v : vertices) {
-				v.runDelayedCommands();	
+			for (PCVertex v : vertices) {
+				v.runDelayedCommands();
 			}
 		}
 		isInBatchRun = setBatchModification;
-		for(PCVertex v : vertices) {
+		for (PCVertex v : vertices) {
 			v.batchModification(setBatchModification);
 		}
 	}
+
 	public static PCGraph getNull() {
 		return new PCGraph();
 	}

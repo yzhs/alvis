@@ -1,3 +1,21 @@
+/*
+ * Copyright (c) 2011 Dominik Dingel
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use, 
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
+ * Software, and to permit persons to whom the Software is furnished to do so, 
+ * subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all 
+ * copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package de.unisiegen.informatik.bs.alvis.graph.datatypes;
 
 import java.util.Arrays;
@@ -5,6 +23,7 @@ import java.util.List;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCList;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
 
@@ -12,7 +31,7 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
  * 
  * @author Dominik Dingel
  * 
- * @description implementing the Edge class TODO: add labels and weights
+ * @description implementing the Edge class
  * 
  */
 
@@ -109,7 +128,8 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 
 	@Override
 	public List<String> getMembers() {
-		String[] attributes = { "weight" };
+		String[] attributes = { "weight", "vertices", "startVertex",
+				"endVertex" };
 		return Arrays.asList(attributes);
 	}
 
@@ -117,13 +137,31 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 	public PCObject get(String memberName) {
 		if (memberName.equals("weight"))
 			return this.getWeight();
+		if (memberName.equals("vertices")) {
+			return this.getVertices();
+		}
+		if (memberName.equals("startVertex"))
+			return this.getStartVertex();
+		if (memberName.equals("endVertex"))
+			return this.getEndVertex();
+
 		return null;
 	}
 
+	public PCVertex getStartVertex() {
+		// TODO is not necessary v1
+		return this.v1;
+	}
+	
+	public PCVertex getEndVertex() {
+		// TODO is not necessary v1
+		return this.v2;
+	}
+	
 	public PCInteger getWeight() {
 		return this.weight;
 	}
-	
+
 	public void setWeight(PCInteger weight) {
 		this.weight = weight;
 		if (!this.isInBatchRun)
@@ -132,7 +170,7 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 						.setWeight(((PCInteger) weight).getLiteralValue());
 			}
 	}
-	
+
 	@Override
 	public PCObject set(String memberName, PCObject value) {
 		if (memberName.equals("weight")) {
@@ -164,7 +202,7 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 		}
 		return false;
 	}
-
+	
 	@Override
 	protected void runDelayedCommands() {
 		for (GraphicalRepresentation gr : allGr) {
@@ -176,9 +214,16 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 		}
 		this.commandsforGr.get(0).clear();
 	}
-	
+
 	public static PCEdge getNull() {
 		return new PCEdge();
+	}
+
+	public PCList<PCVertex> getVertices() {
+		PCList<PCVertex> vert = new PCList<PCVertex>();
+		vert.add(v1);
+		vert.add(v2);
+		return vert;
 	}
 
 	@Override
