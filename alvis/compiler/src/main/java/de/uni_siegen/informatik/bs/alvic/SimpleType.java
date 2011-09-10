@@ -1,19 +1,19 @@
-/*                                                                                                                                                                                                                                            
+/*
  * Copyright (c) 2011 Colin Benner
- * Permission is hereby granted, free of charge, to any person obtaining a copy of                                                                                                                                                            
- * this software and associated documentation files (the "Software"), to deal in the                                                                                                                                                          
- * Software without restriction, including without limitation the rights to use,                                                                                                                                                              
- * copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the                                                                                                                                                            
- * Software, and to permit persons to whom the Software is furnished to do so,                                                                                                                                                                
- * subject to the following conditions:                                                                                                                                                                                                       
- * The above copyright notice and this permission notice shall be included in all                                                                                                                                                             
- * copies or substantial portions of the Software.                                                                                                                                                                                            
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,                                                                                                                                                        
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A                                                                                                                                                              
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT                                                                                                                                                         
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION                                                                                                                                                          
- * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE                                                                                                                                                             
- * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                                                                                                                                                                                     
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+ * Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package de.uni_siegen.informatik.bs.alvic;
 
@@ -76,10 +76,10 @@ public class SimpleType implements Type {
 
 	/**
 	 * @param name
-	 *            the name of the type
+	 *	    the name of the type
 	 * @param argument
-	 *            the Java generics type argument if there is one, null
-	 *            otherwise
+	 *	    the Java generics type argument if there is one, null
+	 *	    otherwise
 	 */
 	private SimpleType(String name, Type argument) {
 		this.name = name;
@@ -90,7 +90,7 @@ public class SimpleType implements Type {
 	 * Create non-generic type with the given name.
 	 * 
 	 * @param name
-	 *            The name of the type that is to be created.
+	 *	    The name of the type that is to be created.
 	 * @return SimpleType object representing the type with that name.
 	 */
 	public static SimpleType create(String name) {
@@ -102,9 +102,9 @@ public class SimpleType implements Type {
 	 * there is one.
 	 * 
 	 * @param name
-	 *            the type name
+	 *	    the type name
 	 * @param typeArgument
-	 *            the generics argument
+	 *	    the generics argument
 	 * @return a SimpleType object representing 'name<typeArgument>'
 	 */
 	public static SimpleType create(String name, Type typeArgument) {
@@ -128,7 +128,7 @@ public class SimpleType implements Type {
 	 * has.
 	 * 
 	 * @param t
-	 *            the type that is initialized.
+	 *	    the type that is initialized.
 	 */
 	@SuppressWarnings("unchecked")
 	private static void setMembers(SimpleType t) {
@@ -144,6 +144,12 @@ public class SimpleType implements Type {
 			Collection<String> methods = (Collection<String>) c.getMethod(
 					"getMethods").invoke(obj);
 
+			/*
+			 * FIXME This might need to be changed to allow using members in alvis for which there
+			 * is no corresponding member in the corresponding Javaa class.
+			 * In that case you will have to check whether the correct getters/setters exist and
+			 * use their types to find out what type the attribute has.
+			 */
 			for (Field field : c.getDeclaredFields())
 				if (attributes.contains(field.getName()))
 					t.members.add(Member.attribute(t, obj, field));
@@ -179,7 +185,7 @@ public class SimpleType implements Type {
 
 	/**
 	 * @return the type this was derived from if this is not PCObject, null
-	 *         otherwise.
+	 *	 otherwise.
 	 */
 	public SimpleType getParent() {
 		return parent;
@@ -190,7 +196,7 @@ public class SimpleType implements Type {
 	 * member with the given name;
 	 * 
 	 * @param name
-	 *            The name that is supposed to be checked.
+	 *	    The name that is supposed to be checked.
 	 * @return whether there is a member of this name.
 	 */
 	public boolean hasMember(String name) {
@@ -201,7 +207,7 @@ public class SimpleType implements Type {
 	 * Return the type of a member.
 	 * 
 	 * @param name
-	 *            The name of the member.
+	 *	    The name of the member.
 	 * @return the type of the member
 	 */
 	public List<Type> getMember(String name) {
@@ -226,7 +232,7 @@ public class SimpleType implements Type {
 	 * used where something of a given type is expected.
 	 * 
 	 * @param other
-	 *            the expected type
+	 *          the expected type
 	 * @return whether this type is a subtype of other
 	 */
 	public boolean matches(Type other) {
