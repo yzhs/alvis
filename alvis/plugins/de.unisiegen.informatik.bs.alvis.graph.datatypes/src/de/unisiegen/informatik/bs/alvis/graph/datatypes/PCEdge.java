@@ -43,8 +43,8 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 	protected static final String TYPENAME = "Edge";
 
 	// the used members
-	private PCVertex v1;
-	private PCVertex v2;
+	private PCVertex startVertex;
+	private PCVertex endVertex;
 	private PCBoolean isDirected;
 	private PCInteger weight;
 	private PCString color;
@@ -53,8 +53,8 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 	 * Default Constructor: not directed and 0 weight
 	 */
 	public PCEdge() {
-		v1 = new PCVertex();
-		v2 = new PCVertex();
+		startVertex = new PCVertex();
+		endVertex = new PCVertex();
 		isDirected = new PCBoolean(false);
 		weight = new PCInteger(0);
 		color = new PCString("");
@@ -72,8 +72,8 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 	 */
 	public PCEdge(PCVertex v1, PCVertex v2, GraphicalRepresentationEdge edge) {
 		this.allGr.add(edge);
-		this.v1 = v1;
-		this.v2 = v2;
+		this.startVertex = v1;
+		this.endVertex = v2;
 		isDirected = new PCBoolean(false);
 		notifyVertices();
 		weight = new PCInteger(edge.getWeight());
@@ -91,8 +91,8 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 	 * @param v2
 	 */
 	public PCEdge(PCVertex v1, PCVertex v2) {
-		this.v1 = v1;
-		this.v2 = v2;
+		this.startVertex = v1;
+		this.endVertex = v2;
 		isDirected = new PCBoolean(false);
 		notifyVertices();
 		weight = new PCInteger(0);
@@ -111,8 +111,8 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 	 * @param isDirected
 	 */
 	public PCEdge(PCVertex v1, PCVertex v2, boolean isDirected) {
-		this.v1 = v1;
-		this.v2 = v2;
+		this.startVertex = v1;
+		this.endVertex = v2;
 		this.isDirected = new PCBoolean(false);
 		notifyVertices();
 		weight = new PCInteger(0);
@@ -127,14 +127,14 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 	 */
 	private void notifyVertices() {
 		if (!isDirected.getLiteralValue()) {
-			v2.addEdge(this, v1);
+			endVertex.addEdge(this, startVertex);
 		}
-		v1.addEdge(this, v2);
+		startVertex.addEdge(this, endVertex);
 	}
 
 	@Override
 	public String toString() {
-		String result = v1.toString();
+		String result = startVertex.toString();
 		if (isDirected.getLiteralValue()) {
 			result += " - ";
 			result += weight.toString();
@@ -144,7 +144,7 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 			result += weight.toString();
 			result += " -> ";
 		}
-		result += v2.toString();
+		result += endVertex.toString();
 		return result;
 	}
 
@@ -157,17 +157,22 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 
 	@Override
 	public PCObject get(String memberName) {
-		if (memberName.equals("weight"))
+		if (memberName.equals("weight")) {
 			return this.getWeight();
+		}
+		
 		if (memberName.equals("vertices")) {
 			return this.getVertices();
 		}
+		
 		if (memberName.equals("startVertex")) {
 			return this.getStartVertex();
 		}
+		
 		if (memberName.equals("endVertex")) {
 			return this.getEndVertex();
 		}
+		
 		if (memberName.equals("color")) {
 			return this.getColor();
 		}
@@ -181,12 +186,12 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 
 	public PCVertex getStartVertex() {
 		// TODO is not necessary v1
-		return this.v1;
+		return this.startVertex;
 	}
 
 	public PCVertex getEndVertex() {
 		// TODO is not necessary v1
-		return this.v2;
+		return this.endVertex;
 	}
 
 	public PCInteger getWeight() {
@@ -228,8 +233,8 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 
 	@Override
 	public boolean equals(PCObject toCheckAgainst) {
-		if (((PCEdge) toCheckAgainst).v1.equals(this.v1)
-				&& ((PCEdge) toCheckAgainst).v2.equals(this.v2)
+		if (((PCEdge) toCheckAgainst).startVertex.equals(this.startVertex)
+				&& ((PCEdge) toCheckAgainst).endVertex.equals(this.endVertex)
 				&& ((PCEdge) toCheckAgainst).isDirected.equals(this.isDirected)) {
 			return true;
 		}
@@ -275,8 +280,8 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 
 	public PCList<PCVertex> getVertices() {
 		PCList<PCVertex> vert = new PCList<PCVertex>();
-		vert.add(v1);
-		vert.add(v2);
+		vert.add(startVertex);
+		vert.add(endVertex);
 		return vert;
 	}
 
