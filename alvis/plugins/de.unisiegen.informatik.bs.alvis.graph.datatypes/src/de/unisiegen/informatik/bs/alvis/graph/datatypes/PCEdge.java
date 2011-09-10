@@ -48,6 +48,11 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 	private PCBoolean isDirected;
 	private PCInteger weight;
 	private PCString color;
+	
+	// unused members to make compiler happy
+	@SuppressWarnings("unused")
+	final private PCList<PCVertex> vertices = null;
+	
 
 	/**
 	 * Default Constructor: not directed and 0 weight

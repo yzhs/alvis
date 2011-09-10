@@ -1,0 +1,5 @@
+TODOs:
+
+- make edges directed
+- allow looping edges
+- expose more functionality trough the members and methods of the PCObjects
