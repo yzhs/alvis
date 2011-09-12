@@ -71,8 +71,15 @@ public class PCGraph extends PCObject {
 					.getSourceVertex()), this.getVertexFromGraphic((conn)
 					.getDestinationVertex()), (conn)));
 		}
+		for (PCEdge e : edges) {
+			e.setGraph(this);
+		}
 	}
 
+	public void removeEdge(PCEdge toRemove) {
+		edges.remove(toRemove);
+	}
+	
 	/**
 	 * returns Vertex from its GraphicalRepresentation
 	 * 
@@ -182,10 +189,16 @@ public class PCGraph extends PCObject {
 			for (PCVertex v : vertices) {
 				v.runDelayedCommands();
 			}
+			for (PCEdge e : edges) {
+				e.runDelayedCommands();
+			}
 		}
 		isInBatchRun = setBatchModification;
 		for (PCVertex v : vertices) {
 			v.batchModification(setBatchModification);
+		}
+		for (PCEdge e : edges) {
+			e.batchModification(setBatchModification);
 		}
 	}
 

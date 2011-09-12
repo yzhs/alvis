@@ -71,4 +71,7 @@ public interface GraphicalRepresentationEdge extends GraphicalRepresentation {
 	 *            to set as weight
 	 */
 	void setWeight(int newValue);
+	
+	// TODO implement method to remove edge
+	// void remove();
 }

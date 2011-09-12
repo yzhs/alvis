@@ -48,6 +48,8 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 	private PCBoolean isDirected;
 	private PCInteger weight;
 	private PCString color;
+	private PCGraph graph;
+	
 	
 	// unused members to make compiler happy
 	@SuppressWarnings("unused")
@@ -136,7 +138,26 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 		}
 		startVertex.addEdge(this, endVertex);
 	}
+	
+	@Override
+	public List<String> getMethods() {
+		String[] attributes = { "remove" };
+		return Arrays.asList(attributes);
+	}
 
+	public void remove() {
+		startVertex.removeEdge(this);
+		endVertex.removeEdge(this);
+		graph.removeEdge(this);
+		
+		// TODO graphical call to remove	
+		
+	}
+	
+	public void setGraph(PCGraph toSet) {
+		graph = toSet;
+	}
+	
 	@Override
 	public String toString() {
 		String result = startVertex.toString();
@@ -212,7 +233,7 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 
 			}
 		} else {
-			commandsforGr.get(1).push(weight);
+			commandsforGr.get(1).push(color);
 		}
 	}
 

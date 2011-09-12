@@ -240,6 +240,11 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 		graph.getEdges().add(ed);
 		return ed;
 	}
+	
+	public void removeEdge(PCEdge toRemove) {
+		edges.remove(toRemove);
+	}
+	
 
 	public static PCVertex getNull() {
 		return new PCVertex(null);
