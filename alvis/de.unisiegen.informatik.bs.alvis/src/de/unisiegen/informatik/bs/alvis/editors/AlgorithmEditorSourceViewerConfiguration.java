@@ -114,8 +114,6 @@ public class AlgorithmEditorSourceViewerConfiguration extends
 		DefaultDamagerRepairer dr = new DefaultDamagerRepairer(getScanner());
 		reconciler.setDamager(dr, IDocument.DEFAULT_CONTENT_TYPE);
 		reconciler.setRepairer(dr, IDocument.DEFAULT_CONTENT_TYPE);
-		reconciler.setDamager(dr, AlgorithmPartitionScanner.BEGIN_END);
-		reconciler.setRepairer(dr, AlgorithmPartitionScanner.BEGIN_END);
 
 		/** setting color for the Multiline_comment parts */
 		NonRuleBasedDamagerRepairer ndr = new NonRuleBasedDamagerRepairer(
@@ -143,8 +141,7 @@ public class AlgorithmEditorSourceViewerConfiguration extends
 	public String[] getConfiguredContentTypes(ISourceViewer sourceViewer) {
 		return new String[] { IDocument.DEFAULT_CONTENT_TYPE,
 				AlgorithmPartitionScanner.MULTILINE_COMMENT,
-				AlgorithmPartitionScanner.SINGLELINE_COMMENT,
-				AlgorithmPartitionScanner.BEGIN_END };
+				AlgorithmPartitionScanner.SINGLELINE_COMMENT };
 	}
 	@Override
 	public ITextHover getTextHover(ISourceViewer sourceViewer, String

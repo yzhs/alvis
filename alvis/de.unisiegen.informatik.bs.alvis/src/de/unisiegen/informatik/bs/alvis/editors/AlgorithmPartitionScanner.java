@@ -41,14 +41,12 @@ public class AlgorithmPartitionScanner extends RuleBasedPartitionScanner {
 
 	public final static String MULTILINE_COMMENT = "multiline_comment"; //$NON-NLS-1$
 	public final static String SINGLELINE_COMMENT = "singleline_comment"; //$NON-NLS-1$
-	public final static String BEGIN_END = "begin_end"; //$NON-NLS-1$
 	public final static String[] PARTITION_TYPES = new String[] {
-			MULTILINE_COMMENT, SINGLELINE_COMMENT, BEGIN_END };
+			MULTILINE_COMMENT, SINGLELINE_COMMENT};
 
 	public AlgorithmPartitionScanner() {
 		IToken multilineComment = new Token(MULTILINE_COMMENT);
 		IToken singlelineComment = new Token(SINGLELINE_COMMENT);
-		IToken beginEnd = new Token(BEGIN_END);
 
 		ArrayList<IPredicateRule> rules = new ArrayList<IPredicateRule>();
 
@@ -57,9 +55,6 @@ public class AlgorithmPartitionScanner extends RuleBasedPartitionScanner {
 		// Add rule for Multiline Comment
 		rules.add(new MultiLineRule("/*", "*/", multilineComment, (char) 0, //$NON-NLS-1$ //$NON-NLS-2$
 				true));
-
-		// Add rule for begin and end sequence
-		rules.add(new MultiLineRule("begin", "end", beginEnd)); //$NON-NLS-1$ //$NON-NLS-2$
 
 		IPredicateRule[] result = new IPredicateRule[rules.size()];
 		for (int i = 0; i < rules.size(); i++) {
