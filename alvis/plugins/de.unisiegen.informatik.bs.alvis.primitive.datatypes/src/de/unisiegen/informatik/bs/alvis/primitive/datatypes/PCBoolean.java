@@ -96,13 +96,7 @@ public class PCBoolean extends PCObject {
 
 	@Override
 	public String toString() {
-		String result = new String();
-		if (this.value) {
-			result += "true";
-		} else {
-			result += "false";
-		}
-		return result;
+		return value ? "true" : "false";
 	}
 
 	@Override
