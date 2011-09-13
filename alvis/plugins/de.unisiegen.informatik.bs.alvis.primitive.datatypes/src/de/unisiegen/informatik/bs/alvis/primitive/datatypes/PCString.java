@@ -83,6 +83,10 @@ public class PCString extends PCObject {
 		return new PCString(this.getLiteralValue() + other.getLiteralValue());
 	}
 
+	public PCString add(PCObject other) {
+		return new PCString(this.getLiteralValue() + other.toString());
+	}
+
 	public PCBoolean equal(PCString other) {
 		return new PCBoolean(this.equals(other));
 	}
