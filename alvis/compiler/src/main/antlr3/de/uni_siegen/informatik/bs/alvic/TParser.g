@@ -1,19 +1,19 @@
-/*                                                                                                                                                                                                                                            
+/*
  * Copyright (c) 2011 Colin Benner
- * Permission is hereby granted, free of charge, to any person obtaining a copy of                                                                                                                                                            
- * this software and associated documentation files (the "Software"), to deal in the                                                                                                                                                          
- * Software without restriction, including without limitation the rights to use,                                                                                                                                                              
- * copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the                                                                                                                                                            
- * Software, and to permit persons to whom the Software is furnished to do so,                                                                                                                                                                
- * subject to the following conditions:                                                                                                                                                                                                       
- * The above copyright notice and this permission notice shall be included in all                                                                                                                                                             
- * copies or substantial portions of the Software.                                                                                                                                                                                            
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,                                                                                                                                                        
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A                                                                                                                                                              
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT                                                                                                                                                         
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION                                                                                                                                                          
- * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE                                                                                                                                                             
- * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.                                                                                                                                                                                     
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use,
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+ * Software, and to permit persons to whom the Software is furnished to do so,
+ * subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 parser grammar TParser;
 
@@ -128,7 +128,7 @@ type
 typeHelper : type ;
 
 statement
-    : declaration terminator
+    : declaration terminator -> terminator? declaration
     | blockStatement
     ;
 
@@ -137,13 +137,10 @@ blockStatement
     // Java does not allow "variable" or "variable[index]" as statements, so we have to forbid those as well
     { if (!$postfixExpr.isFunctionCall)
         reportError(new InvalidStatementException($postfixExpr.text, $postfixExpr.tree)); }
-    | assignment terminator
+        -> terminator? postfixExpr
+    | assignment terminator -> terminator? assignment
 
-    /* There is no nice way to generate a breakpoint after a return statement.
-     * As there are only a few cases (when 'expr' has side effects) where this
-     * makes a difference, we simply ignore a semicolon after a return statement.
-     */
-    | RETURN^ expr? terminator!
+    | RETURN expr? terminator -> terminator? ^(RETURN expr?)
     | IF expr COLON t=blockStatement
         ((ELSE)=> ELSE e=blockStatement -> ^(IF_ELSE[$IF, "IF_ELSE"] expr ^(STAT $t) ^(STAT $e))
         | -> ^(IF expr ^(STAT $t))
