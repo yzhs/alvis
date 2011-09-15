@@ -3,6 +3,6 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Nl_de
 Bundle-SymbolicName: de.unisiegen.informatik.bs.alvis.ui.navigator.nl_de
 Bundle-Version: 1.0.0.qualifier
-Fragment-Host: de.unisiegen.informatik.bs.alvis.ui.navigator;bundle-version="1.0.1.qualifier"
+Fragment-Host: de.unisiegen.informatik.bs.alvis.ui.navigator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-Localization: bundle
