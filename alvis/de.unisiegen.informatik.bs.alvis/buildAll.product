@@ -22,6 +22,8 @@ Frank Weiler
    </configIni>
 
    <launcherArgs>
+      <programArgs>-data
+@user.home/alvis_workspace</programArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
@@ -47,7 +49,6 @@ Frank Weiler
 
    <vm>
    </vm>
-
 
    <plugins>
       <plugin id="com.ibm.icu"/>
