@@ -5,4 +5,4 @@ Bundle-SymbolicName: de.unisiegen.informatik.bs.alvis.ui.navigator.nl_de
 Bundle-Version: 1.0.0.qualifier
 Fragment-Host: de.unisiegen.informatik.bs.alvis.ui.navigator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Bundle-Localization: bundle
+Bundle-Localization: OSGI-INF/l10n/bundle
