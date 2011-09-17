@@ -43,9 +43,10 @@ public class RunVisualizer implements IRunVisualizer {
 	private String myInputFilePath;
 	private PCGraph codeGraph;
 	
-	// this 'random' number makes sure, the algorithm
+	// these 'random' numbers make sure, the algorithm
 	// does not get the same parameter twice
-	int randomNumber = 0;
+	int randomNumberVertex = 0;
+	int randomNumberEdge = 0;
 
 	/**
 	 * Adds the content of input to the parent
@@ -169,26 +170,32 @@ public class RunVisualizer implements IRunVisualizer {
 			if (result.size() == 1
 					|| Activator.getDefault().getActiveRun().getOnStartPoint()
 							.equals(EStartPoint.RAND)) {
-				if(randomNumber >= allPCVertex.size())
-					randomNumber = 0; // if we are out of bounds, reset the 'random' number
+				if(randomNumberVertex >= allPCVertex.size())
+					randomNumberVertex = 0; // if we are out of bounds, reset the 'random' number
 				// Return a node that has not already been chosen
-				result.add(allPCVertex.get(randomNumber++));
+				result.add(allPCVertex.get(randomNumberVertex++));
 			} else {
-				// TODO SORT LIST HERE
-				AskMeAgain ask = new AskMeAgain(true);
-				CheckDialog getVertex = new CheckDialog(myParent.getShell(),
-						allPCVertex, // From
-						result, // To
-						ask, 1, // How much
-						"Choose \"" + bezeichner + "\"", // window title
-						"Choose parameter", // Title
-						"Choose one parameter for \"" + bezeichner + "\""); //
-				getVertex.open();
-				if (ask.getAsk() == false) {
-					Activator.getDefault().getActiveRun()
-							.setOnStartPoint(EStartPoint.RAND);
+				while(result.isEmpty()){
+					// TODO SORT LIST HERE
+					AskMeAgain ask = new AskMeAgain(true);
+					CheckDialog getVertex = new CheckDialog(myParent.getShell(),
+							allPCVertex, // From
+							result, // To
+							ask, 1, // How much
+							"Choose \"" + bezeichner + "\"", // window title
+							"Choose parameter", // Title
+							"Choose one parameter for \"" + bezeichner + "\""); //
+					getVertex.open();
+					if (ask.getAsk() == false) {
+						Activator.getDefault().getActiveRun()
+								.setOnStartPoint(EStartPoint.RAND);
+					}
 				}
 			}
+
+			
+			
+			
 		}
 		if (typ instanceof PCEdge) {
 			ArrayList<PCEdge> allPCEdge = new ArrayList<PCEdge>();
@@ -198,21 +205,27 @@ public class RunVisualizer implements IRunVisualizer {
 			if (result.size() == 1
 					|| Activator.getDefault().getActiveRun().getOnStartPoint()
 							.equals(EStartPoint.RAND)) {
+				if(randomNumberEdge >= allPCEdge.size())
+					randomNumberEdge = 0; // if we are out of bounds, reset the 'random' number
+				// Return a node that has not already been chosen
+				result.add(allPCEdge.get(randomNumberEdge++));
 				// Just return the first
 				result.add(allPCEdge.get(0));
 			} else {
-				AskMeAgain ask = new AskMeAgain(true);
-				CheckDialog getEdge = new CheckDialog(myParent.getShell(),
-						allPCEdge, // From
-						result, // To
-						ask, 1, // How much
-						"Choose \"" + bezeichner + "\"", // window title
-						"Choose parameter", // Title
-						"Choose one parameter for \"" + bezeichner + "\""); //
-				getEdge.open();
-				if (ask.getAsk() == false) {
-					Activator.getDefault().getActiveRun()
-							.setOnStartPoint(EStartPoint.RAND);
+				while(result.isEmpty()){
+					AskMeAgain ask = new AskMeAgain(true);
+					CheckDialog getEdge = new CheckDialog(myParent.getShell(),
+							allPCEdge, // From
+							result, // To
+							ask, 1, // How much
+							"Choose \"" + bezeichner + "\"", // window title
+							"Choose parameter", // Title
+							"Choose one parameter for \"" + bezeichner + "\""); //
+					getEdge.open();
+					if (ask.getAsk() == false) {
+						Activator.getDefault().getActiveRun()
+								.setOnStartPoint(EStartPoint.RAND);
+					}
 				}
 			}
 		}

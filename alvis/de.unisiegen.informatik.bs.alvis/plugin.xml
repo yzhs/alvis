@@ -357,10 +357,12 @@
             </command>
             <command
                   commandId="org.eclipselabs.p2.rcpupdate.update"
+                  label="%help.checkforupdates"
                   style="push">
             </command>
             <command
                   commandId="org.eclipselabs.p2.rcpupdate.install"
+                  label="%help.installnew"
                   style="push">
             </command>
             <command
