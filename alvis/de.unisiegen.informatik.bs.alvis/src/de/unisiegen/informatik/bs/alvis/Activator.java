@@ -550,5 +550,9 @@ public class Activator extends AbstractUIPlugin {
 	public void setActiveRunAlgorithm(RunAlgorithm runAlgorithm) {
 		this.algorithmRunPerspective = runAlgorithm;		
 	}
+	
+	public RunAlgorithm getActiveRunAlgorithm(){
+		return this.algorithmRunPerspective;
+	}
 
 }
