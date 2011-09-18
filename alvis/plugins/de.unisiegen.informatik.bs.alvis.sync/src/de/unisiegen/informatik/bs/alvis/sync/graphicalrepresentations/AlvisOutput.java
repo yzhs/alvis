@@ -1,7 +1,5 @@
 package de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations;
 
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 

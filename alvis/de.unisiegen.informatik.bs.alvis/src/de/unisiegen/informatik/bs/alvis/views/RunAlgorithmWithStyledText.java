@@ -120,7 +120,7 @@ public class RunAlgorithmWithStyledText extends ViewPart implements PropertyChan
 			}
 		} catch (PartInitException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 		//
 		// RowLayout rowLayout = new RowLayout();

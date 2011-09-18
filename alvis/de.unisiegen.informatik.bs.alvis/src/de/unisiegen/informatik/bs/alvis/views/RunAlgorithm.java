@@ -58,6 +58,7 @@ public class RunAlgorithm extends ViewPart implements PropertyChangeListener {
 	 */
 	public RunAlgorithm() {
 		myAlgorithm = new AlgorithmContainer();
+		Activator.getDefault().setActiveRunAlgorithm(this);
 	}
 
 	@Override
@@ -367,6 +368,10 @@ public class RunAlgorithm extends ViewPart implements PropertyChangeListener {
 		// System.out.println(event.getPropertyName());
 		// System.out.println(event.getNewValue());
 		// System.out.println(event.getOldValue());
+	}
+	
+	public StyledText getStyledText(){
+		return RunAlgorithm.text;
 	}
 
 }

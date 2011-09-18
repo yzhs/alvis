@@ -4,22 +4,13 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.FileLocator;
-import org.eclipse.core.runtime.IConfigurationElement;
-import org.eclipse.core.runtime.IExtension;
-import org.eclipse.core.runtime.IExtensionPoint;
-import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.VerifyEvent;
@@ -32,10 +23,8 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IEditorInput;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.dialogs.ElementTreeSelectionDialog;
@@ -51,8 +40,6 @@ import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.Run;
 import de.unisiegen.informatik.bs.alvis.commands.RunCompile;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
-import de.unisiegen.informatik.bs.alvis.extensionpoints.IRunPreferences;
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.tools.IO;
 import org.eclipse.swt.widgets.ExpandBar;
 import org.eclipse.swt.widgets.ExpandItem;
@@ -133,7 +120,7 @@ public class RunEditor extends EditorPart implements IExportItem {
 	 */
 	@Override
 	public void init(IEditorSite site, IEditorInput input)
-			throws PartInitException {
+			{
 		setSite(site);
 		setInput(input);
 		setPartName(input.getName());
@@ -184,9 +171,6 @@ public class RunEditor extends EditorPart implements IExportItem {
 		firePropertyChange(PROP_DIRTY);
 	}
 
-	// TODO diese Arraylist wird durch den button Preferences mit datentypen für
-	// die VM gefüllt. nachschauen, was damit passieren kann.
-	private ArrayList<PCObject> pseudoCodeObjects;
 
 	private EStartPoint myStartPoint = EStartPoint.RAND;
 	private EDecisionPoint myDecisionPoint = EDecisionPoint.RAND;
@@ -246,7 +230,7 @@ public class RunEditor extends EditorPart implements IExportItem {
 						.getEditorRegistry().getDefaultEditor(file.getName());
 				try {
 					System.out.println(iFile.getFullPath());
-					IEditorPart editor = page.openEditor(new FileEditorInput(
+					page.openEditor(new FileEditorInput(
 							iFile), desc.getId());
 				} catch (PartInitException e1) {
 					// TODO Auto-generated catch block
@@ -330,7 +314,7 @@ public class RunEditor extends EditorPart implements IExportItem {
 						.getEditorRegistry().getDefaultEditor(file.getName());
 				try {
 					System.out.println(iFile.getFullPath());
-					IEditorPart editor = page.openEditor(new FileEditorInput(
+					page.openEditor(new FileEditorInput(
 							iFile), desc.getId());
 				} catch (PartInitException e1) {
 					// TODO Auto-generated catch block
@@ -432,7 +416,6 @@ public class RunEditor extends EditorPart implements IExportItem {
 		/*
 		 * This section asks the plugins for parameters to add to the run.
 		 */
-		pseudoCodeObjects = new ArrayList<PCObject>();
 		grpRun.setLayout(new GridLayout(3, false));
 
 		Label lblNewLabel = new Label(grpRun, SWT.NONE);

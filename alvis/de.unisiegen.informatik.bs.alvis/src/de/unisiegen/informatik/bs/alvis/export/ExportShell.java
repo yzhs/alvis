@@ -44,7 +44,6 @@ public class ExportShell extends Shell {
 
 	private Button bOk, bCancel;
 	private ArrayList<Button> checkButtons;
-	private Composite composite;
 	private ArrayList<Image> images;
 
 	@Override

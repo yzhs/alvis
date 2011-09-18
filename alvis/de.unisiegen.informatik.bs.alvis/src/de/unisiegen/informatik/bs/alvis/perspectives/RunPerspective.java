@@ -1,12 +1,9 @@
 package de.unisiegen.informatik.bs.alvis.perspectives;
 
-import org.eclipse.swt.custom.StyledText;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IFolderLayout;
 import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
 
-import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
 import de.unisiegen.informatik.bs.alvis.views.RunAlgorithm;
 import de.unisiegen.informatik.bs.alvis.views.RunGraph;
 

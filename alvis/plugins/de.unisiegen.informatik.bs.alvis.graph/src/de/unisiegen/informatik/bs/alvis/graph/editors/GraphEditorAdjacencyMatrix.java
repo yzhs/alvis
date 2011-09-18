@@ -9,7 +9,6 @@ import org.eclipse.jface.viewers.ArrayContentProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.TableViewerColumn;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
@@ -118,7 +117,6 @@ public class GraphEditorAdjacencyMatrix extends EditorPart implements
 		
 		// Iterate over all Nodes
 		for (y = 0; y < mySeri.getNodeId().length; y++) {
-			String title = "";
 			if(y == 0) {
 				tableViewerColumns[y] = new TableViewerColumn(tableViewer, SWT.NONE);
 				tblclmns[y] = tableViewerColumns[y].getColumn();

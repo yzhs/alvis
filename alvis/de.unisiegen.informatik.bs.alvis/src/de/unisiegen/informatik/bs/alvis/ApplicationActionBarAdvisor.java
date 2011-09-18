@@ -16,6 +16,7 @@ import org.eclipse.ui.internal.registry.IActionSetDescriptor;
  * the actions added to a workbench window. Each window will be populated with
  * new actions.
  */
+@SuppressWarnings("restriction")
 public class ApplicationActionBarAdvisor extends ActionBarAdvisor {
 
 	// Actions - important to allocate these only in makeActions, and then use

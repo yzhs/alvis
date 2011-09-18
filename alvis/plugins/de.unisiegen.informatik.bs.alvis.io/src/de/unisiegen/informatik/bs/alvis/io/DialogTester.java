@@ -12,8 +12,6 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.widgets.Label;
-
 import de.unisiegen.informatik.bs.alvis.io.dialogs.AskMeAgain;
 import de.unisiegen.informatik.bs.alvis.io.dialogs.CheckDialog;
 import de.unisiegen.informatik.bs.alvis.io.dialogs.OrderDialog;
@@ -60,7 +58,7 @@ public class DialogTester {
 						askMeAgain,
 						"Einstellungen",
 						"Festlegen der Reihenfolge",
-						"Wählen Sie eine Reihenfolge für die Elemente.\n"
+						"Wï¿½hlen Sie eine Reihenfolge fï¿½r die Elemente.\n"
 								+ "Das oberste Element wird als erstes verarbeitet.");
 				// if(OrderDialog.DoNotAsk == diaSet2.open()) {
 				// System.out.println("Do not ask.");;

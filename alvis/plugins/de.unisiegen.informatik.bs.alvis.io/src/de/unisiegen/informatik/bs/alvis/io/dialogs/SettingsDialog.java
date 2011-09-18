@@ -1,11 +1,8 @@
 package de.unisiegen.informatik.bs.alvis.io.dialogs;
 
-import java.util.ArrayList;
-
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
-import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
@@ -20,8 +17,8 @@ public class SettingsDialog extends TitleAreaDialog {
 	}
 	protected Control createDialogArea(Composite parent) {
 		Composite composite = (Composite) super.createDialogArea(parent);		
-		setTitle("Bitte wählen!");
-		setMessage("Wählen Sie bitte einen dieser Knoten als Startknoten.", SWT.ERROR);
+		setTitle("Bitte wï¿½hlen!");
+		setMessage("Wï¿½hlen Sie bitte einen dieser Knoten als Startknoten.", SWT.ERROR);
 		
 //		AlvisGraph graph = new AlvisGraph(composite, SWT.NONE);
 //		graph.setLayoutData(new GridData(GridData.FILL_BOTH));

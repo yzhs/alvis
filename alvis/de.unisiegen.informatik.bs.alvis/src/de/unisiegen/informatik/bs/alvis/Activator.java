@@ -14,16 +14,9 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.osgi.util.NLS;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
-import org.eclipse.ui.IPerspectiveDescriptor;
 import org.eclipse.ui.IViewPart;
-import org.eclipse.ui.IViewReference;
-import org.eclipse.ui.IWorkbench;
-import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
-import org.eclipse.ui.IWorkbenchPartReference;
-import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
@@ -44,6 +37,7 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCString;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCVoid;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.SortableCollection;
 import de.unisiegen.informatik.bs.alvis.views.AlgorithmContainer;
+import de.unisiegen.informatik.bs.alvis.views.RunAlgorithm;
 import de.unisiegen.informatik.bs.alvis.vm.BPListener;
 import de.unisiegen.informatik.bs.alvis.vm.DPListener;
 import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
@@ -73,6 +67,8 @@ public class Activator extends AbstractUIPlugin {
 	private AlgorithmPartitionScanner fPartitionsScanner;
 
 	private boolean shutUpForExport;
+	
+	private RunAlgorithm algorithmRunPerspective;
 
 	// private Export myExport = new Export();
 
@@ -549,6 +545,10 @@ public class Activator extends AbstractUIPlugin {
 
 	public void shutUpForExport(boolean shutUpForExport) {
 		this.shutUpForExport = shutUpForExport;
+	}
+
+	public void setActiveRunAlgorithm(RunAlgorithm runAlgorithm) {
+		this.algorithmRunPerspective = runAlgorithm;		
 	}
 
 }

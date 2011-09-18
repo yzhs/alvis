@@ -34,7 +34,7 @@ public class StartEndNodeDialog extends Dialog {
 	private String myInputFilePath;
 	protected StartEndNodeDialog(Shell parentShell) {
 		super(parentShell);
-	       Composite composite = (Composite) super.createDialogArea(parentShell);
+	    super.createDialogArea(parentShell);
 	}
 
 	public StartEndNodeDialog(Shell shell, String myInputFilePath) {
