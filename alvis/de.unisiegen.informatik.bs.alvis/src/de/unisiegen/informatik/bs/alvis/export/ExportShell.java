@@ -121,7 +121,6 @@ public class ExportShell extends Shell {
 			@Override
 			public void mouseUp(MouseEvent e) {
 				for (int i = checkButtons.size() - 1; i >= 0; i--) {
-					System.out.println(checkButtons.get(i).getSelection());//TODO weg
 					if (!checkButtons.get(i).getSelection()) {
 						images.remove(i);
 					}

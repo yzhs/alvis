@@ -26,29 +26,30 @@ import org.eclipse.swt.graphics.Image;
  * 
  * @author Frank Weiler
  * @description the export object interface. every exportable object (i.e.
- *              text-> source code, images-> graph, etc) needs to be implement
- *              this
+ *              text-> source code, images-> graph, etc) needs to implement this
  */
 public interface IExportItem {
 
 	/**
-	 * returns image for export
+	 * returns image for export, null if object does not contain any image
 	 * 
 	 * @return image for export, null if object does not contain any image
 	 */
 	public Image getImage();
 
 	/**
-	 * returns styled text for exporting source code
+	 * returns styled text for exporting source code, null if object does not
+	 * contain any source code
 	 * 
-	 * @return styled text for exporting source code
+	 * @return styled text for exporting source code, null if object does not
+	 *         contain any source code
 	 */
 
 	public Object getSourceCode();
 
 	/**
-	 * returns true if export item is a run, which implies a more complex
-	 * export, false otherwise
+	 * returns true if export item is a run, which implies a more complex export
+	 * (->Alvis/export/PdfExport.java), false otherwise
 	 * 
 	 * @return true if export item is a run, false otherwise
 	 */

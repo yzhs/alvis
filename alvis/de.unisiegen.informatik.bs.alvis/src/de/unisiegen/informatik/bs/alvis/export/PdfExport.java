@@ -209,11 +209,6 @@ public class PdfExport extends Document {
 									for (Image img : imgs) {
 										try {
 											paragraph = toParagraph(img);
-										} catch (DocumentException e) {
-											// TODO Auto-generated catch block
-											e.printStackTrace();
-										}
-										try {
 											add(paragraph);
 										} catch (DocumentException e) {
 											// TODO Auto-generated catch block
