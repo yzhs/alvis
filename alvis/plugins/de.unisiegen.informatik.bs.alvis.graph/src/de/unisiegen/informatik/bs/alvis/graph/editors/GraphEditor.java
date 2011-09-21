@@ -88,8 +88,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	public static final int MODUS_MOVE = 1;// hand
 	public static final int MODUS_NODE = 110;// SWT -> n
 	public static final int MODUS_CONNECTION = 99;// SWT -> c
-	// public static final int MODUS_START = 115;// SWT -> s
-	// public static final int MODUS_END = 101;// SWT -> e
 	public static final int MODUS_UNDO = 122;// SWT -> z
 	public static final int MODUS_REDO = 121;// SWT -> y
 	public static final int MODUS_DELETE = SWT.DEL;// SWT -> delete
@@ -103,9 +101,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	private int pressed;
 	private boolean shiftPressed;
 
-	// private Button bNode, bConnection, bStartNode, bEndNode, bHand, bDelete,
-	// bZoomIn, bZoomOut;
-	// private Button bChangeLayout, bDeleteAll, bScreenShot;
 	public AlvisGraph myGraph;
 	public GC gc;
 
@@ -132,7 +127,6 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	 *            the parent to hang on
 	 * @param input
 	 *            the file that contains the description of the graph
-	 * @return an AlvisGraph
 	 */
 	private void createGraph(Composite parent, IEditorInput input) {
 

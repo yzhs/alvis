@@ -85,7 +85,7 @@ public class AddTreeWindow extends TitleAreaDialog {
 		lDepth.setText(Messages.AddTreeWindow_depth);
 		sDepth = new Spinner(choose, SWT.NONE);
 		sDepth.setMinimum(2);
-		sDepth.setSelection(width);
+		sDepth.setSelection(depth);
 
 		lWidth = new Label(choose, SWT.NONE);
 		lWidth.setText(Messages.AddTreeWindow_averageWidth);
@@ -94,7 +94,8 @@ public class AddTreeWindow extends TitleAreaDialog {
 		sWidth.setSelection(width);
 
 		bExactWidths = new Button(choose, SWT.CHECK);
-		bExactWidths.setText(Messages.AddTreeWindow_exactWidhts);
+		bExactWidths.setText(Messages.AddTreeWindow_randomWidths);
+		bExactWidths.setSelection(true);
 
 		conWeightGroup = new Group(composite, SWT.NONE);
 		conWeightGroup.setLayout(new GridLayout(2, false));
@@ -106,7 +107,8 @@ public class AddTreeWindow extends TitleAreaDialog {
 		sConWeight.setSelection(weight);
 
 		bExactWeights = new Button(conWeightGroup, SWT.CHECK);
-		bExactWeights.setText(Messages.AddTreeWindow_exactWeights);
+		bExactWeights.setText(Messages.AddTreeWindow_randomWeights);
+		bExactWeights.setSelection(true);
 
 		cAutoFill.addSelectionListener(new SelectionListener() {
 
@@ -172,12 +174,12 @@ public class AddTreeWindow extends TitleAreaDialog {
 	protected void okPressed() {
 
 		boolean isTree = bExactWidths.getEnabled();
-		exactWidths = isTree ? bExactWidths.getSelection() : false;
+		exactWidths = isTree ? !bExactWidths.getSelection() : false;
 
 		depth = sDepth.getSelection();
 		width = isTree ? sWidth.getSelection() : 0;
 		weight = sConWeight.getSelection();
-		exactWeights = (weight == -1) ? true : bExactWeights.getSelection();
+		exactWeights = (weight == -1) ? true : !bExactWeights.getSelection();
 
 		setReturnCode(isTree ? 1001 : 1002);
 

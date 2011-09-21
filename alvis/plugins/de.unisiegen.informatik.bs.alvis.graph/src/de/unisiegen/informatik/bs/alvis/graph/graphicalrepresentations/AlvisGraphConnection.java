@@ -82,7 +82,7 @@ public class AlvisGraphConnection extends GraphConnection implements
 			AlvisGraphNode node1, AlvisGraphNode node2, int id, int weight) {
 
 		super(graph, style, node1, node2);
-
+				
 		this.weight = weight;
 		if (weight != -1) {
 			setText("" + weight);
