@@ -1,3 +1,21 @@
+/*
+ * Copyright (c) 2011 Dominik Dingel
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of
+ * this software and associated documentation files (the "Software"), to deal in the
+ * Software without restriction, including without limitation the rights to use, 
+ * copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
+ * Software, and to permit persons to whom the Software is furnished to do so, 
+ * subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all 
+ * copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
+ * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+ * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
+ * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
+ * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+ */
+
 package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
 
 import java.util.ArrayList;
@@ -12,7 +30,7 @@ import java.util.ListIterator;
  * @author Dominik Dingel
  * 
  * @param <E>
- *            Type Parameter of the stored Es
+ *            Type Parameter of the stored items
  */
 public class PCList<E> extends PCObject implements SortableCollection<E> {
 	protected static final String TYPENAME = "List";
@@ -41,9 +59,17 @@ public class PCList<E> extends PCObject implements SortableCollection<E> {
 	public E get(int index) {
 		return items.get(index);
 	}
+	
+	public E getItem(PCInteger index) {
+		return items.get(index.getLiteralValue());
+	}
 
 	public boolean isEmtpy() {
 		return items.isEmpty();
+	}
+	
+	public PCBoolean isNotFilled() {
+		return new PCBoolean(this.isEmpty());
 	}
 
 	public int size() {
@@ -85,6 +111,10 @@ public class PCList<E> extends PCObject implements SortableCollection<E> {
 	@Override
 	public boolean add(E e) {
 		return items.add(e);
+	}
+	
+	public PCBoolean addItem(E e) {
+		return new PCBoolean(this.add(e));
 	}
 
 	@Override
@@ -191,7 +221,7 @@ public class PCList<E> extends PCObject implements SortableCollection<E> {
 	}
 
 	@Override
-	public void sortOn(SortableCollection toSortFrom) {
+	public void sortOn(@SuppressWarnings("rawtypes") SortableCollection toSortFrom) {
 		// TODO Auto-generated method stub
 	}
 
@@ -208,7 +238,19 @@ public class PCList<E> extends PCObject implements SortableCollection<E> {
 		}
 
 	}
+	
+	@Override
+	public List<String> getMethods() {
+		List<String> result = new ArrayList<String>();
+		result.add("clear");
+		result.add("isNotFilled");
+		result.add("getItem");
+		result.add("addItem");
+		return result;
+	}
+	
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public SortableCollection storeInformation() {
 		// TODO Auto-generated method stub
