@@ -139,7 +139,7 @@ public class ParserTest {
 		String algorithm = "main() begin end\n"; //$NON-NLS-1$
 		String stringTree = test(algorithm);
 		printAndAssert(stringTree,
-				stringTree.equals("(PROG (FUNC main PARAMS BLOCK))")); //$NON-NLS-1$
+				stringTree.startsWith("(PROG (FUNC main PARAMS (BLOCK")); //$NON-NLS-1$
 	}
 
 	@Test

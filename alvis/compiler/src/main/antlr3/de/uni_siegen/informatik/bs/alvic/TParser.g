@@ -72,7 +72,7 @@ program
     ;
 
 functionDefinition
-    : ID LPAREN formalParams? RPAREN (COLON type)? block
+    : ID LPAREN formalParams? RPAREN (COLON type)? block[false]
         -> ^(FUNC[$ID, "FUNC"] ID ^(RET type?) ^(PARAMS formalParams?) block)
     ;
 
@@ -83,7 +83,7 @@ functionDefinition
  * Treating the main-function seperately makes code generation.
  */
 mainFunction
-    : MAIN LPAREN formalParams? RPAREN block
+    : MAIN LPAREN formalParams? RPAREN block[true]
         -> ^(FUNC[$MAIN, "FUNC"] MAIN ^(PARAMS formalParams?) block)
     ;
 
@@ -110,8 +110,9 @@ param
  *   {end
  * as well as the obvious combinations "begin ... end" and "{ ... }".
  */
-block
-    : SCOPEL statement* SCOPER -> ^(BLOCK[$SCOPEL, "BLOCK"] statement*)
+block[boolean insertBreakpointAtEnd]
+    : SCOPEL statement* SCOPER -> {insertBreakpointAtEnd}? ^(BLOCK[$SCOPEL, "BLOCK"] statement* SEMICOLON[$SCOPER])
+                               ->                          ^(BLOCK[$SCOPEL, "BLOCK"] statement*)
     ;
 
 type
@@ -147,7 +148,7 @@ blockStatement
         )
     | FOR^ param IN! expr COLON! blockStatement
     | WHILE^ expr COLON! blockStatement
-    | block
+    | block[false]
     ;
 
 declaration
