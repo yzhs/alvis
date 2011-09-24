@@ -435,43 +435,6 @@ public class CompilerAccess {
 	}
 
 	/**
-	 * This method copies the Dummy Algorithm file next to the PCAlgorithm file
-	 * that is written by the user. To get the path of the created file see
-	 * getAlgorithmPath().
-	 * 
-	 * @param pathToAlgorithm
-	 *            relative to Alvis-workspace e.g.: "project/src/Algorithm.algo"
-	 * @return Name of the Java Algorithm file
-	 */
-	public File compileThisDummy(String pathToAlgorithm) {
-		String SLASH = File.separator;
-
-		// the path were the translated java file is.
-		String pathWhereTheJavaIs = "";
-		try {
-			pathWhereTheJavaIs = FileLocator
-					.getBundleFile(Activator.getDefault().getBundle())
-					.getCanonicalPath().toString();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		// The compiled algorithm
-		File source = new File(pathWhereTheJavaIs + SLASH + "Algorithm.java");
-
-		// Get the path to algorithm and separate path and filename
-		String algoWorkSpacePath = new File(pathToAlgorithm).getParent();
-		algorithmPath = currentPath() + algoWorkSpacePath + SLASH;
-		File destination = new File(algorithmPath + "Algorithm.java");
-
-		// Copy compiled file into the workspace
-		FileCopy fileCopy = new FileCopy();
-		fileCopy.copy(source, destination);
-
-		return destination;
-	}
-
-	/**
 	 * @return a list of all type names available for the user.
 	 */
 	public Collection<String> getDatatypes() {
