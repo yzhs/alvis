@@ -134,14 +134,14 @@ options { backtrack = true; }
     : declaration
     | expr[any]
     | assignment
-    | ^(RETURN expr[any/*((FunctionType)getTypeByName(currentFunction)).getReturnType()*/]?) {
+    | ^(RETURN expr[any]?) {
       Type tmp = ((FunctionType)getTypeByName(currentFunction)).getReturnType();
       if (tmp.equals(Void) && $expr.text != null)
           reportError(new InvalidReturnException(tmp, $expr.t, currentFunction,
               $expr.tree.treeToString(parser), $expr.tree));
-      else if (!tmp.equals(Void) && $expr.text == null){
+      else if (!tmp.equals(Void) && $expr.text == null)
           reportError(new InvalidReturnException(tmp, null, currentFunction,
-          null, $RETURN));}
+          null, $RETURN));
       else if ($expr.tree != null && !tmp.equals($expr.t))
           reportError(new InvalidReturnException(tmp, $expr.t, currentFunction,
               $expr.tree.treeToString(parser), $expr.tree));
