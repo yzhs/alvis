@@ -103,7 +103,7 @@ public class RunCompile extends AbstractHandler {
 	
 					// if fails
 					if (null == javaCode) // compile with dummy
-						throw new Exception();// TODO throw a meaningful exception
+						throw new Exception("Compilation failed");// TODO throw a meaningful exception
 				}
 				else{
 					javaCode = new File(Platform.getInstanceLocation().getURL().getPath() + seri.getAlgorithmFile());
