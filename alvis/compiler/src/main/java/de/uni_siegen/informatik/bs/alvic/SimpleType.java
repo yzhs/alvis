@@ -271,6 +271,6 @@ public class SimpleType implements Type {
 	 * @return the name of the class that actually provides this type.
 	 */
 	public String getJavaType() {
-		return "PC" + name;
+		return "PC" + (null == argument ? name : name + "<" + argument.getJavaType() + ">");
 	}
 }
