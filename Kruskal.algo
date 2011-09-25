@@ -52,9 +52,9 @@ main(Graph G) begin
      			newList.add(firstVertex),
      			newList.add(secondVertex),
      			partialGraphs.add(newList),
-     			firstVertex.color = "markus";
-     			secondVertex.color = "markus",
-     			cheapest.color = "markus",
+     			firstVertex.color = "green";
+     			secondVertex.color = "green",
+     			cheapest.color = "green",
      	end
      	// Färben der ersten Kante ENDE
      	
@@ -83,57 +83,38 @@ main(Graph G) begin
      		Boolean positionFound = false,	// Abbruchparameter
      		Vertex List toRemove,			// zu löschenender Teilgraph
      		
-     		for Vertex List list in partialGraphs: begin	// durchlaufe alle Teilgraphen
-     			if ! positionFound: begin					// Abbruchbedingung
-     				if list.contains(firstVertex) && (! list.contains(secondVertex)): begin
-     					// FALL 2 ODER 4
+     		for Vertex List list in partialGraphs: begin // durchlaufe alle Teilgraphen
+     			if ! positionFound:	// Abbruchbedingung
+     				if list.contains(firstVertex) && list.contains(secondVertex): begin
+     					// FALL 3
+     					positionFound = true,
+     					cheapest.color = "red",
+     				end
+     			if ! positionFound: begin					
+     				if list.contains(firstVertex) || list.contains(secondVertex): begin
+     					Vertex notYetFound = firstVertex,
+     					if list.contains(firstVertex):
+     						notYetFound = secondVertex,
+     					// FALL 2 ODER 4   					
      					for Vertex List innerList in partialGraphs: begin
-     						if innerList.contains(secondVertex): begin
+     						if innerList.contains(notYetFound): begin
      							// FALL 4
      							positionFound = true,
-     							
      							// Kopiere den einen Teilgraphen in den anderen... 
      							for Vertex vert in innerList: begin
      								list.add(vert),
      							end
      							// ... und markiere ihn zum Löschen.
      							toRemove = innerList;
-     							cheapest.color = "markus",
+     							cheapest.color = "green",
      						end
      					end
      					if ! positionFound: begin
      						// FALL 2
-     						list.add(secondVertex),
-     						secondVertex.color = "markus",
-     						cheapest.color = "markus";
+     						list.add(notYetFound),
+     						notYetFound.color = "green",
+     						cheapest.color = "green";
      						positionFound = true,
-     					end
-     				end
-     				if (! list.contains(firstVertex)) && list.contains(secondVertex): begin
-     					// FALL 2 ODER 4
-     					for Vertex List innerList in partialGraphs: begin
-     						if innerList.contains(firstVertex): begin
-     							// FALL 4
-     							positionFound = true,
-     							for Vertex vert in innerList: begin
-     								list.add(vert),
-     							end
-     							toRemove = innerList;
-     							cheapest.color = "markus",
-     						end
-     					end
-     					if ! positionFound: begin
-     						list.add(firstVertex),
-     						firstVertex.color = "markus",
-     						cheapest.color = "markus";
-     						positionFound = true,
-     					end
-     				end
-     				if ! positionFound: begin
-     					if list.contains(firstVertex) && list.contains(secondVertex): begin
-     						// FALL 3
-     						positionFound = true,
-     						cheapest.color = "red",
      					end
      				end
      			end     			
@@ -144,9 +125,9 @@ main(Graph G) begin
      			newList.add(firstVertex),
      			newList.add(secondVertex),
      			partialGraphs.add(newList),
-     			secondVertex.color = "markus",
-     			firstVertex.color = "markus",
-     			cheapest.color = "markus";
+     			secondVertex.color = "green",
+     			firstVertex.color = "green",
+     			cheapest.color = "green";
      			positionFound = true,
      		end
      		
