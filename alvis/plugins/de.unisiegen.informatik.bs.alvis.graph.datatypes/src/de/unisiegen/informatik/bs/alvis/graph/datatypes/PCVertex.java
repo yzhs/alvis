@@ -272,7 +272,7 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 		return new PCBoolean(this.equals(other));
 	}
 
-	public PCBoolean notEqual(PCVertex other) {
+	public PCBoolean notEqual(PCObject other) {
 		return this.equal(other).not();
 	}
 }
