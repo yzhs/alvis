@@ -42,7 +42,7 @@ public class PCStack<T extends PCObject> extends PCObject {
 	 * 
 	 * @param obj
 	 */
-	public void push(T obj) {
+	public void _push_(T obj) {
 		objects.add(obj);
 	}
 
@@ -50,7 +50,7 @@ public class PCStack<T extends PCObject> extends PCObject {
 	 * 
 	 * @return last item from the stack
 	 */
-	public T pop() {
+	public T _pop_() {
 		if (objects.isEmpty()) {
 			return null;
 		} else {
@@ -62,7 +62,7 @@ public class PCStack<T extends PCObject> extends PCObject {
 	 * 
 	 * @return boolean value if is empty
 	 */
-	public PCBoolean isEmpty() {
+	public PCBoolean _isEmpty_() {
 		return new PCBoolean(this.objects.isEmpty());
 	}
 
@@ -73,7 +73,7 @@ public class PCStack<T extends PCObject> extends PCObject {
 	}
 
 	@Override
-	public boolean equals(PCObject toCheckAgainst) {
+	public boolean _equals_(PCObject toCheckAgainst) {
 		// TODO Auto-generated method stub
 		return false;
 	}

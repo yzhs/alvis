@@ -60,7 +60,7 @@ public class PCList<E extends PCObject> extends PCObject implements SortableColl
 		return items.get(index);
 	}
 	
-	public E getItem(PCInteger index) {
+	public E _get_(PCInteger index) {
 		return items.get(index.getLiteralValue());
 	}
 
@@ -68,7 +68,7 @@ public class PCList<E extends PCObject> extends PCObject implements SortableColl
 		return items.isEmpty();
 	}
 	
-	public PCBoolean isNotFilled() {
+	public PCBoolean _isEmpty_() {
 		return new PCBoolean(this.isEmpty());
 	}
 
@@ -93,7 +93,7 @@ public class PCList<E extends PCObject> extends PCObject implements SortableColl
 	}
 
 	@Override
-	public boolean equals(PCObject toCheckAgainst) {
+	public boolean _equals_(PCObject toCheckAgainst) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -107,7 +107,7 @@ public class PCList<E extends PCObject> extends PCObject implements SortableColl
 		return items.add(e);
 	}
 	
-	public PCBoolean addItem(E e) {
+	public PCBoolean _add_(E e) {
 		return new PCBoolean(this.add(e));
 	}
 
@@ -145,7 +145,7 @@ public class PCList<E extends PCObject> extends PCObject implements SortableColl
 		return items.contains(o);
 	}
 	
-	public PCBoolean containsItem(PCObject o) {	
+	public PCBoolean _contains_(PCObject o) {	
 		if (items.contains(o))
 			return new PCBoolean(true);
 		return new PCBoolean(false);
@@ -186,7 +186,7 @@ public class PCList<E extends PCObject> extends PCObject implements SortableColl
 		return items.remove(o);
 	}
 	
-	public PCBoolean removeItem(PCObject o) {
+	public PCBoolean _remove_(PCObject o) {
 		if (items.remove(o))
 			return new PCBoolean(true);
 		return new PCBoolean(false);
@@ -250,11 +250,11 @@ public class PCList<E extends PCObject> extends PCObject implements SortableColl
 	public List<String> getMethods() {
 		List<String> result = new ArrayList<String>();
 		result.add("clear");
-		result.add("isNotFilled");
-		result.add("getItem");
-		result.add("addItem");
-		result.add("removeItem");
-		result.add("containsItem");
+		result.add("isEmpty");
+		result.add("get");
+		result.add("add");
+		result.add("remove");
+		result.add("contains");
 		return result;
 	}
 	

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2011 Dominik Dingel
+ * Copyright (c) 2011 Dominik Dingel, Colin Benner
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in the
  * Software without restriction, including without limitation the rights to use, 
@@ -40,7 +40,7 @@ public class PCVoid extends PCObject {
 	}
 
 	@Override
-	public boolean equals(PCObject toCheckAgainst) {
+	public boolean _equals_(PCObject toCheckAgainst) {
 		try {
 			@SuppressWarnings("unused")
 			PCVoid x = (PCVoid) toCheckAgainst;

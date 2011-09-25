@@ -127,7 +127,7 @@ public class PCBoolean extends PCObject {
 	}
 
 	@Override
-	public boolean equals(PCObject toCheckAgainst) {
+	public boolean _equals_(PCObject toCheckAgainst) {
 		try {
 			return (((PCBoolean) toCheckAgainst).getLiteralValue() == this.value && ((toCheckAgainst != localNull) || (toCheckAgainst == localNull && this == localNull)));
 		} catch (ClassCastException e) {
@@ -139,24 +139,24 @@ public class PCBoolean extends PCObject {
 		return PCBoolean.TYPENAME;
 	}
 
-	public PCBoolean and(PCBoolean other) {
+	public PCBoolean _and_(PCBoolean other) {
 		return new PCBoolean(this.getLiteralValue() && other.getLiteralValue());
 	}
 
-	public PCBoolean or(PCBoolean other) {
+	public PCBoolean _or_(PCBoolean other) {
 		return new PCBoolean(this.getLiteralValue() || other.getLiteralValue());
 	}
 
-	public PCBoolean not() {
+	public PCBoolean _not_() {
 		return new PCBoolean(!this.getLiteralValue());
 	}
 
-	public PCBoolean equal(PCBoolean other) {
+	public PCBoolean _equal_(PCBoolean other) {
 		return new PCBoolean(this.getLiteralValue() == other.getLiteralValue());
 	}
 
-	public PCBoolean notEqual(PCBoolean other) {
-		return this.equal(other).not();
+	public PCBoolean _notEqual_(PCBoolean other) {
+		return this._equal_(other)._not_();
 	}
 
 	@Override

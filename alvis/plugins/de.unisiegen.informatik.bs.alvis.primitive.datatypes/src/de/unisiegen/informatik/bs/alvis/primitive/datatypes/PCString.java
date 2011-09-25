@@ -70,7 +70,7 @@ public class PCString extends PCObject {
 	}
 
 	@Override
-	public boolean equals(PCObject toCheckAgainst) {
+	public boolean _equals_(PCObject toCheckAgainst) {
 		if (null == toCheckAgainst)
 			return false;
 
@@ -86,20 +86,20 @@ public class PCString extends PCObject {
 		return PCString.TYPENAME;
 	}
 
-	public PCString add(PCString other) {
+	public PCString _add_(PCString other) {
 		return new PCString(this.getLiteralValue() + other.getLiteralValue());
 	}
 
-	public PCString add(PCObject other) {
+	public PCString _add_(PCObject other) {
 		return new PCString(this.getLiteralValue() + other.toString());
 	}
 
-	public PCBoolean equal(PCString other) {
+	public PCBoolean _equal_(PCString other) {
 		return new PCBoolean(this.equals(other));
 	}
 
-	public PCBoolean notEqual(PCString other) {
-		return this.equal(other).not();
+	public PCBoolean _notEqual_(PCString other) {
+		return this._equal_(other)._not_();
 	}
 	
 	public List<String> getMethods() {

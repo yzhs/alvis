@@ -45,7 +45,7 @@ public class PCQueue<T extends PCObject> extends PCObject {
 	 * @param enqueue
 	 *            obj
 	 */
-	public void enqueue(T obj) {
+	public void _enqueue_(T obj) {
 		objects.add(obj);
 	}
 
@@ -53,7 +53,7 @@ public class PCQueue<T extends PCObject> extends PCObject {
 	 * 
 	 * @return first item from the queue
 	 */
-	public T dequeue() {
+	public T _dequeue_() {
 		if (objects.isEmpty()) {
 			return null;
 		} else {
@@ -65,7 +65,7 @@ public class PCQueue<T extends PCObject> extends PCObject {
 	 * 
 	 * @return boolean value if is empty
 	 */
-	public PCBoolean isEmpty() {
+	public PCBoolean _isEmpty_() {
 		return new PCBoolean(this.objects.isEmpty());
 	}
 
@@ -76,7 +76,7 @@ public class PCQueue<T extends PCObject> extends PCObject {
 	}
 
 	@Override
-	public boolean equals(PCObject toCheckAgainst) {
+	public boolean _equals_(PCObject toCheckAgainst) {
 		// TODO Auto-generated method stub
 		return false;
 	}

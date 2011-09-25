@@ -36,11 +36,11 @@ public class PCInteger extends PCObject {
 
 	private int value;
 
-	synchronized public void inc() {
+	synchronized public void _inc_() {
 		value++;
 	}
 
-	synchronized public void dec() {
+	synchronized public void _dec_() {
 		value--;
 	}
 
@@ -89,7 +89,7 @@ public class PCInteger extends PCObject {
 	}
 
 	@Override
-	public boolean equals(PCObject toCheckAgainst) {
+	public boolean _equals_(PCObject toCheckAgainst) {
 		try {
 			return ((PCInteger) toCheckAgainst).getLiteralValue() == this.value;
 		} catch (ClassCastException e) {
@@ -101,55 +101,55 @@ public class PCInteger extends PCObject {
 		return PCInteger.TYPENAME;
 	}
 
-	public PCInteger add(PCInteger other) {
+	public PCInteger _add_(PCInteger other) {
 		return new PCInteger(this.getLiteralValue() + other.getLiteralValue());
 	}
 
-	public PCString add(PCString other) {
+	public PCString _add_(PCString other) {
 		return new PCString(this.getLiteralValue() + other.getLiteralValue());
 	}
 
-	public PCInteger sub(PCInteger other) {
+	public PCInteger _sub_(PCInteger other) {
 		return new PCInteger(this.getLiteralValue() - other.getLiteralValue());
 	}
 
-	public PCInteger mul(PCInteger other) {
+	public PCInteger _mul_(PCInteger other) {
 		return new PCInteger(this.getLiteralValue() * other.getLiteralValue());
 	}
 
-	public PCInteger div(PCInteger other) {
+	public PCInteger _div_(PCInteger other) {
 		return new PCInteger(this.getLiteralValue() / other.getLiteralValue());
 	}
 
-	public PCInteger mod(PCInteger other) {
+	public PCInteger _mod_(PCInteger other) {
 		return new PCInteger(this.getLiteralValue() % other.getLiteralValue());
 	}
 
-	public PCBoolean equal(PCInteger other) {
+	public PCBoolean _equal_(PCInteger other) {
 		return new PCBoolean(this.getLiteralValue() == other.getLiteralValue());
 	}
 
-	public PCBoolean notEqual(PCInteger other) {
-		return this.equal(other).not();
+	public PCBoolean _notEqual_(PCInteger other) {
+		return this._equal_(other)._not_();
 	}
 
-	public PCBoolean less(PCInteger other) {
+	public PCBoolean _less_(PCInteger other) {
 		return new PCBoolean(this.getLiteralValue() < other.getLiteralValue());
 	}
 
-	public PCBoolean greater(PCInteger other) {
+	public PCBoolean _greater_(PCInteger other) {
 		return new PCBoolean(this.getLiteralValue() > other.getLiteralValue());
 	}
 
-	public PCBoolean lessOrEqual(PCInteger other) {
+	public PCBoolean _lessOrEqual_(PCInteger other) {
 		return new PCBoolean(this.getLiteralValue() <= other.getLiteralValue());
 	}
 
-	public PCBoolean greaterOrEqual(PCInteger other) {
+	public PCBoolean _greaterOrEqual_(PCInteger other) {
 		return new PCBoolean(this.getLiteralValue() >= other.getLiteralValue());
 	}
 
-	public PCInteger negate() {
+	public PCInteger _negate_() {
 		return new PCInteger(-this.getLiteralValue());
 	}
 

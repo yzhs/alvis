@@ -147,7 +147,7 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 		return result;
 	}
 
-	public void remove() {
+	public void _remove_() {
 		startVertex.removeEdge(this);
 		endVertex.removeEdge(this);
 		graph.removeEdge(this);
@@ -183,31 +183,31 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 		return Arrays.asList(attributes);
 	}
 
-	public PCString getColor() {
+	public PCString _getColor_() {
 		return this.color;
 	}
 
-	public PCVertex getStartVertex() {
+	public PCVertex _getStartVertex_() {
 		// TODO is not necessary v1
 		return this.startVertex;
 	}
 
-	public PCVertex getEndVertex() {
+	public PCVertex _getEndVertex_() {
 		// TODO is not necessary v1
 		return this.endVertex;
 	}
 
-	public PCInteger getWeight() {
+	public PCInteger _getWeight_() {
 		return this.weight;
 	}
 	
-	public PCVertex getCorrespondingVertex(PCVertex vert){
+	public PCVertex _getCorrespondingVertex_(PCVertex vert){
 		if (vert.equals(this.startVertex))
 			return this.endVertex;
 		return this.startVertex;
 	}
 
-	public void setColor(PCString color) {
+	public void _setColor_(PCString color) {
 		this.color = color;
 		if (!this.isInBatchRun) {
 			for (GraphicalRepresentation gredge : allGr) {
@@ -220,7 +220,7 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 		}
 	}
 
-	public void setWeight(PCInteger weight) {
+	public void _setWeight_(PCInteger weight) {
 		this.weight = weight;
 		if (!this.isInBatchRun) {
 			for (GraphicalRepresentation gredge : allGr) {
@@ -233,7 +233,7 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 	}
 
 	@Override
-	public boolean equals(PCObject toCheckAgainst) {
+	public boolean _equals_(PCObject toCheckAgainst) {
 		if (((PCEdge) toCheckAgainst).startVertex.equals(this.startVertex)
 				&& ((PCEdge) toCheckAgainst).endVertex.equals(this.endVertex)
 				&& ((PCEdge) toCheckAgainst).isDirected.equals(this.isDirected)) {

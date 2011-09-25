@@ -120,7 +120,7 @@ public class PCGraph extends PCObject {
 	 * 
 	 * @return the saved vertices as PseudoCodeList
 	 */
-	public PCList<PCVertex> getVertices() {
+	public PCList<PCVertex> _getVertices_() {
 		return this.vertices;
 	}
 
@@ -128,7 +128,7 @@ public class PCGraph extends PCObject {
 	 * 
 	 * @return the saved edges as PseudoCode
 	 */
-	public PCList<PCEdge> getEdges() {
+	public PCList<PCEdge> _getEdges_() {
 		return this.edges;
 	}
 
@@ -148,7 +148,7 @@ public class PCGraph extends PCObject {
 
 	@Override
 	// TODO implement by comparing edges and vertices
-	public boolean equals(PCObject toCheckAgainst) {
+	public boolean _equals_(PCObject toCheckAgainst) {
 		return false;
 	}
 

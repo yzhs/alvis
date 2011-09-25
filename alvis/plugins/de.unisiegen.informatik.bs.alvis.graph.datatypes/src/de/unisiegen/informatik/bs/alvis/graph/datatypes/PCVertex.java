@@ -66,19 +66,19 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 		return false;
 	}
 
-	public PCList<PCVertex> getAdjacents() {
+	public PCList<PCVertex> _getAdjacents_() {
 		return this.adjacents;
 	}
 
-	public void setParentId(PCVertex parentId) {
+	public void _setParentId_(PCVertex parentId) {
 		this.parentId = parentId;
 	}
 
-	public void setDistance(PCInteger distance) {
+	public void _setDistance_(PCInteger distance) {
 		this.distance = distance;
 	}
 
-	public void setColor(PCString color) {
+	public void _setColor_(PCString color) {
 		this.color.setLiteralValue(color.getLiteralValue());
 		if (this.isInBatchRun) {
 			commandsforGr.get(0).push(color);
@@ -129,36 +129,36 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 	public String toConsole() {
 		String result;
 		result = this.label.getLiteralValue() + ", color: "
-				+ this.getColor().toConsole();
+				+ this._getColor_().toConsole();
 		return result;
 	}
 
-	public void setLabel(PCString value) {
+	public void _setLabel_(PCString value) {
 		this.label = value;
 	}
 
-	public PCList<PCEdge> getEdges() {
+	public PCList<PCEdge> _getEdges_() {
 		return edges;
 	}
 
-	public PCObject getLabel() {
+	public PCObject _getLabel_() {
 		return label;
 	}
 
-	public PCVertex getParentId() {
+	public PCVertex _getParentId_() {
 		return parentId;
 	}
 
-	public PCInteger getDistance() {
+	public PCInteger _getDistance_() {
 		return distance;
 	}
 
-	public PCString getColor() {
+	public PCString _getColor_() {
 		return color;
 	}
 
 	@Override
-	public boolean equals(PCObject toCheckAgainst) {
+	public boolean _equals_(PCObject toCheckAgainst) {
 		if (this == localNull)
 			return toCheckAgainst == PCObject.getNull();
 		if (null == toCheckAgainst || !(toCheckAgainst instanceof PCVertex))
@@ -198,9 +198,9 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 		return Arrays.asList(attributes);
 	}
 
-	public PCEdge connectTo(PCVertex toConnect) {
+	public PCEdge _connectTo_(PCVertex toConnect) {
 		PCEdge ed = new PCEdge(this, toConnect);
-		graph.getEdges().add(ed);
+		graph._getEdges_().add(ed);
 		return ed;
 	}
 	
@@ -231,11 +231,11 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 		return this.label.toString().compareTo(arg0.label.toString());
 	}
 
-	public PCBoolean equal(PCObject other) {
+	public PCBoolean _equal_(PCObject other) {
 		return new PCBoolean(this.equals(other));
 	}
 
-	public PCBoolean notEqual(PCObject other) {
-		return this.equal(other).not();
+	public PCBoolean _notEqual_(PCObject other) {
+		return this._equal_(other)._not_();
 	}
 }
