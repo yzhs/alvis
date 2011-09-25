@@ -1,10 +1,10 @@
 main(Graph G, Vertex s) begin
 	// Initialisieren, alles orange machen
     for Edge edge in G.edges: begin
-        edge.color = "asdiagsd",
+        edge.color = "basti",
     end
     for Vertex vertex in G.vertices: begin
-        vertex.color = "bastij",
+        vertex.color = "basti",
     end
 	
 	// Hole alle Knoten im Graphen in eine Liste, um mit dieser zu arbeiten
