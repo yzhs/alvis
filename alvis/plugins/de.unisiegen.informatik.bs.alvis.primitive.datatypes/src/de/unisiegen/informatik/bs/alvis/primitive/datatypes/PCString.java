@@ -70,16 +70,16 @@ public class PCString extends PCObject {
 	}
 
 	@Override
-	public boolean _equals_(PCObject toCheckAgainst) {
+	public boolean equals(PCObject toCheckAgainst) {
 		if (null == toCheckAgainst)
 			return false;
-
-		try {
-			PCString s = (PCString) toCheckAgainst;
-			return (value == null) ? s.value == null : s.value.equals(value);
-		} catch (ClassCastException e) {
+		if (this == localNull
+				&& (toCheckAgainst == localNull || toCheckAgainst == PCObject.getNull()))
+			return true;
+		if (!(toCheckAgainst instanceof PCString))
 			return false;
-		}
+		PCString other = (PCString) toCheckAgainst;
+		return (value == null) ? other.value == null : other.value.equals(value);
 	}
 
 	public static String getTypeName() {

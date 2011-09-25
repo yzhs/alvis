@@ -166,7 +166,7 @@ public abstract class PCObject {
 	 * @return boolean if the object to checkAgainst is equals the current
 	 *         object
 	 */
-	public abstract boolean _equals_(PCObject toCheckAgainst);
+	public abstract boolean equals(PCObject toCheckAgainst);
 	
 	public static boolean isGenericType() {
 		return false;

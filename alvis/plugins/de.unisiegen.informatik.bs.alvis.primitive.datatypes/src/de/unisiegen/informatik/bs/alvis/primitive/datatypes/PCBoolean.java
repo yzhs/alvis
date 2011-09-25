@@ -127,12 +127,16 @@ public class PCBoolean extends PCObject {
 	}
 
 	@Override
-	public boolean _equals_(PCObject toCheckAgainst) {
-		try {
-			return (((PCBoolean) toCheckAgainst).getLiteralValue() == this.value && ((toCheckAgainst != localNull) || (toCheckAgainst == localNull && this == localNull)));
-		} catch (ClassCastException e) {
+	public boolean equals(PCObject toCheckAgainst) {
+		if (null == toCheckAgainst)
 			return false;
-		}
+		if (this == localNull
+				&& (toCheckAgainst == localNull || toCheckAgainst == PCObject.getNull()))
+			return true;
+		if (!(toCheckAgainst instanceof PCBoolean))
+			return false;
+		PCBoolean other = (PCBoolean) toCheckAgainst;
+		return other != localNull && other.getLiteralValue() == this.value;
 	}
 
 	public static String getTypeName() {

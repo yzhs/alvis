@@ -76,9 +76,17 @@ public class PCQueue<T extends PCObject> extends PCObject {
 	}
 
 	@Override
-	public boolean _equals_(PCObject toCheckAgainst) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean equals(PCObject toCheckAgainst) {
+		if (null == toCheckAgainst)
+			return false;
+		if (this == localNull
+				&& (toCheckAgainst == localNull || toCheckAgainst == PCObject.getNull()))
+			return true;
+		if (!(toCheckAgainst instanceof PCQueue))
+			return false;
+		@SuppressWarnings("rawtypes")
+		PCQueue other = (PCQueue) toCheckAgainst;
+		return objects.equals(other.objects);
 	}
 	
 	public static String getTypeName() {

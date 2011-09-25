@@ -148,8 +148,11 @@ public class PCGraph extends PCObject {
 
 	@Override
 	// TODO implement by comparing edges and vertices
-	public boolean _equals_(PCObject toCheckAgainst) {
-		return false;
+	public boolean equals(PCObject toCheckAgainst) {
+		if (null == toCheckAgainst || !(toCheckAgainst instanceof PCGraph))
+			return false;
+		PCGraph other = (PCGraph) toCheckAgainst;
+		return vertices.equals(other.vertices) && edges.equals(other.edges);
 	}
 
 	public static String getTypeName() {

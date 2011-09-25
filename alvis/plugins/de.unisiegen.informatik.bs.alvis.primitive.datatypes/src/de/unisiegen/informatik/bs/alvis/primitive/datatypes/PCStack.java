@@ -73,9 +73,17 @@ public class PCStack<T extends PCObject> extends PCObject {
 	}
 
 	@Override
-	public boolean _equals_(PCObject toCheckAgainst) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean equals(PCObject toCheckAgainst) {
+		if (null == toCheckAgainst)
+			return false;
+		if (this == localNull
+				&& (toCheckAgainst == localNull || toCheckAgainst == PCObject.getNull()))
+			return true;
+		if (!(toCheckAgainst instanceof PCStack))
+			return false;
+		@SuppressWarnings("rawtypes")
+		PCStack other = (PCStack) toCheckAgainst;
+		return objects.equals(other.objects);
 	}
 
 	@Override

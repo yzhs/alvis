@@ -89,12 +89,15 @@ public class PCInteger extends PCObject {
 	}
 
 	@Override
-	public boolean _equals_(PCObject toCheckAgainst) {
-		try {
-			return ((PCInteger) toCheckAgainst).getLiteralValue() == this.value;
-		} catch (ClassCastException e) {
+	public boolean equals(PCObject toCheckAgainst) {
+		if (null == toCheckAgainst)
 			return false;
-		}
+		if (this == localNull
+				&& (toCheckAgainst == localNull || toCheckAgainst == PCObject.getNull()))
+			return true;
+		if (!(toCheckAgainst instanceof PCInteger))
+			return false;
+		return ((PCInteger) toCheckAgainst).getLiteralValue() == this.value;
 	}
 
 	public static String getTypeName() {

@@ -233,7 +233,7 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 	}
 
 	@Override
-	public boolean _equals_(PCObject toCheckAgainst) {
+	public boolean equals(PCObject toCheckAgainst) {
 		if (((PCEdge) toCheckAgainst).startVertex.equals(this.startVertex)
 				&& ((PCEdge) toCheckAgainst).endVertex.equals(this.endVertex)
 				&& ((PCEdge) toCheckAgainst).isDirected.equals(this.isDirected)) {

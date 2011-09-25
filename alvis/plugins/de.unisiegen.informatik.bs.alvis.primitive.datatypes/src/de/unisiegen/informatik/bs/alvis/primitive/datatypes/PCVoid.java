@@ -40,14 +40,7 @@ public class PCVoid extends PCObject {
 	}
 
 	@Override
-	public boolean _equals_(PCObject toCheckAgainst) {
-		try {
-			@SuppressWarnings("unused")
-			PCVoid x = (PCVoid) toCheckAgainst;
-			return true;
-		} catch (ClassCastException e) {
-			return false;
-		}
+	public boolean equals(PCObject toCheckAgainst) {
+		return toCheckAgainst instanceof PCVoid;
 	}
-
 }

@@ -93,12 +93,20 @@ public class PCList<E extends PCObject> extends PCObject implements SortableColl
 	}
 
 	@Override
-	public boolean _equals_(PCObject toCheckAgainst) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean equals(PCObject toCheckAgainst) {
+		if (null == toCheckAgainst)
+			return false;
+		if (this == localNull
+				&& (toCheckAgainst == localNull || toCheckAgainst == PCObject.getNull()))
+			return true;
+		if (!(toCheckAgainst instanceof PCInteger))
+			return false;
+		@SuppressWarnings("rawtypes")
+		PCList other = (PCList) toCheckAgainst;
+		return items.equals(other.items);
 	}
 
-	public static String getTypeName() {
+	public static String _getTypeName_() {
 		return PCList.TYPENAME;
 	}
 
