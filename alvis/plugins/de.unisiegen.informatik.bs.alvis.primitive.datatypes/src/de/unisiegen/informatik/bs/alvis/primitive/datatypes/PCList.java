@@ -32,7 +32,7 @@ import java.util.ListIterator;
  * @param <E>
  *            Type Parameter of the stored items
  */
-public class PCList<E> extends PCObject implements SortableCollection<E> {
+public class PCList<E extends PCObject> extends PCObject implements SortableCollection<E> {
 	protected static final String TYPENAME = "List";
 	private List<E> items;
 
@@ -134,6 +134,7 @@ public class PCList<E> extends PCObject implements SortableCollection<E> {
 		return result;
 	}
 
+	
 	@Override
 	public boolean addAll(int index, Collection<? extends E> c) {
 		// TODO Auto-generated method stub
@@ -148,6 +149,12 @@ public class PCList<E> extends PCObject implements SortableCollection<E> {
 	@Override
 	public boolean contains(Object o) {
 		return items.contains(o);
+	}
+	
+	public PCBoolean containsItem(PCObject o) {	
+		if (items.contains(o))
+			return new PCBoolean(true);
+		return new PCBoolean(false);
 	}
 
 	@Override
@@ -183,6 +190,12 @@ public class PCList<E> extends PCObject implements SortableCollection<E> {
 	@Override
 	public boolean remove(Object o) {
 		return items.remove(o);
+	}
+	
+	public PCBoolean removeItem(PCObject o) {
+		if (items.remove(o))
+			return new PCBoolean(true);
+		return new PCBoolean(false);
 	}
 
 	@Override
@@ -246,6 +259,8 @@ public class PCList<E> extends PCObject implements SortableCollection<E> {
 		result.add("isNotFilled");
 		result.add("getItem");
 		result.add("addItem");
+		result.add("removeItem");
+		result.add("containsItem");
 		return result;
 	}
 	

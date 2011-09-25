@@ -27,7 +27,7 @@ import java.util.Iterator;
  * @param <E> Type used for stored Objects in the List
  */
 
-public class PCListIterator<E> implements Iterator<E> {
+public class PCListIterator<E extends PCObject> implements Iterator<E> {
 	// reference to Object on which we are currently working
 	private PCList<E> parent;
 	// index pointer with in the list
