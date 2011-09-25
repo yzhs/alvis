@@ -1,0 +1,65 @@
+main(Graph G, Vertex s) begin
+
+	// Initialisieren, alles orange machen
+    for Edge edge in G.edges: begin
+        edge.color = "basti",
+    end
+    for Vertex vertex in G.vertices: begin
+        vertex.color = "basti",
+    end
+	
+	// Hole alle Knoten im Graphen in eine Liste, um mit dieser zu arbeiten
+	Vertex List vertices,
+	for Vertex vert in G.vertices: begin
+		vertices.addItem(vert),
+	end
+	
+	// Füge die Kanten des Startknotens s zu den Möglichkeiten hinzu
+	Edge List possibleEdges, 
+	for Edge e in s.edges: begin
+		possibleEdges.addItem(e),
+	end
+	
+	// Der minimale Spannbaum besteht zuerst nur aus dem Startknoten
+	Vertex List spanningTree,
+	spanningTree.addItem(s),
+	s.color = "basti";
+	
+	while ! vertices.isNotFilled(): begin	// Solange es noch unbesuchte Knoten gibt
+		Edge cheapest = getEdgeWithLowestWeight(possibleEdges),	// Hole die günstigste Kante
+		Vertex nextNode,
+		if ! (spanningTree.containsItem(cheapest.startVertex)): begin	// Schaue, ob der Startknoten im Spannbaum ist
+			nextNode = cheapest.startVertex,	// Wenn nicht, füge ihn hinzu
+		end
+		else begin
+			nextNode = cheapest.endVertex,		// Wenn doch, kann der Endknoten noch nicht drin sein
+		end
+		spanningTree.addItem(nextNode), // Füge den gefundenen Knoten hinzu
+		nextNode.color = "markus",
+		cheapest.color = "markus";
+		for Edge edge in nextNode.edges: begin	// Füge alle Kanten zu den möglichen hinzu, die noch nicht dabei sind
+			if ! possibleEdges.containsItem(edge): begin
+				possibleEdges.addItem(edge),
+			end
+		end
+		
+		// Entferne Knoten und Kante aus den Arbeitslisten
+		possibleEdges.removeItem(cheapest),
+		vertices.removeItem(nextNode),
+	end
+end
+
+
+// Methode, um die günstigste Kante aus einer Liste zu finden
+getEdgeWithLowestWeight(Edge List listToCheck) : Edge begin
+	Edge tmp = null,
+	if ! listToCheck.isNotFilled(): begin
+		tmp = listToCheck.getItem(0),
+	end
+	for Edge next in listToCheck: begin
+		if next.weight < tmp.weight: begin
+			tmp = next,
+		end
+	end
+	return tmp,	
+end
