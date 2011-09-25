@@ -138,7 +138,8 @@ expr returns [String obj]
 
 postfixExpr[boolean local, boolean isMethodCall] returns [String obj]
     : ident {$obj = $ident.st.toString();} -> {local || isMethodCall ? $ident.st : %makeGetter(ident={capitalize($ident.st.toString())})}
-    | ^(CALL func=postfixExpr[false, true] (args+=expr)*) {$obj = $func.obj;}  -> call(function={$func.st}, args={$args})
+    | ^(CALL func=postfixExpr[false, true] (args+=expr)*) {$obj = $func.obj;} -> {local}? call(function={$func.st}, args={$args})
+                                                                              ->          callMethod(function={$func.st}, args={$args})
     | ^(DOT l=postfixExpr[local, isMethodCall] r=postfixExpr[false, isMethodCall]) {$obj = $l.obj;} -> dot(left={$l.st}, right={$r.st})
     | ^(INDEX array=postfixExpr[local, isMethodCall] expr)          {$obj = $array.obj;} -> index(array={$array.st}, index={$expr.st})
     ;
