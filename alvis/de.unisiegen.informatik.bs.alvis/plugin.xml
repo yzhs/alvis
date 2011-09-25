@@ -366,11 +366,6 @@
                   style="push">
             </command>
             <command
-                  commandId="org.eclipse.ui.help.tipsAndTricksAction"
-                  label="%help.tipsandtricks"
-                  style="push">
-            </command>
-            <command
                   commandId="org.eclipse.ui.help.helpContents"
                   label="%help.helpcontents"
                   style="push">

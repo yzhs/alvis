@@ -23,29 +23,36 @@ main(Graph G, Vertex s) begin
 	// Der minimale Spannbaum besteht zuerst nur aus dem Startknoten
 	Vertex List spanningTree,
 	spanningTree.addItem(s),
-	s.color = "basti";
+	s.color = "markus";
+	
+	vertices.removeItem(s),
 	
 	while ! vertices.isNotFilled(): begin	// Solange es noch unbesuchte Knoten gibt
 		Edge cheapest = getEdgeWithLowestWeight(possibleEdges),	// Hole die günstigste Kante
-		Vertex nextNode,
-		if ! (spanningTree.containsItem(cheapest.startVertex)): begin	// Schaue, ob der Startknoten im Spannbaum ist
+		Vertex nextNode = null,
+		if ! spanningTree.containsItem(cheapest.startVertex): begin	// Schaue, ob der Startknoten im Spannbaum ist
 			nextNode = cheapest.startVertex,	// Wenn nicht, füge ihn hinzu
 		end
-		else begin
-			nextNode = cheapest.endVertex,		// Wenn doch, kann der Endknoten noch nicht drin sein
+		else begin 
+				nextNode = cheapest.endVertex,		// Wenn doch, kann der Endknoten noch nicht drin sein
+
 		end
-		spanningTree.addItem(nextNode), // Füge den gefundenen Knoten hinzu
-		nextNode.color = "markus",
-		cheapest.color = "markus";
-		for Edge edge in nextNode.edges: begin	// Füge alle Kanten zu den möglichen hinzu, die noch nicht dabei sind
-			if ! possibleEdges.containsItem(edge): begin
-				possibleEdges.addItem(edge),
+		if ! spanningTree.containsItem(nextNode): begin
+			spanningTree.addItem(nextNode), // Füge den gefundenen Knoten hinzu
+			nextNode.color = "markus",
+			cheapest.color = "markus";
+			for Edge edge in nextNode.edges: begin	// Füge alle Kanten zu den möglichen hinzu, die noch nicht dabei sind
+				if ! possibleEdges.containsItem(edge): begin
+					if ! spanningTree.containsItem(edge.getCorrespondingVertex(nextNode)): begin
+						possibleEdges.addItem(edge),
+					end
+				end 
 			end
-		end
 		
-		// Entferne Knoten und Kante aus den Arbeitslisten
-		possibleEdges.removeItem(cheapest),
-		vertices.removeItem(nextNode),
+			// Entferne Knoten und Kante aus den Arbeitslisten
+			vertices.removeItem(nextNode),
+		end
+		possibleEdges.removeItem(cheapest);
 	end
 end
 
