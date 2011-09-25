@@ -253,7 +253,7 @@ public abstract class AbstractTypeChecker extends AbstractTreeParser {
 			FunctionType tmp = (FunctionType) t;
 			List<Type> args = tmp.getArgumentTypes();
 
-			if (args.size() != 1 || !right.matches(args.get(0)))
+			if (args.size() != 1 || !args.get(0).matches(right))
 				continue;
 
 			return tmp.getReturnType();

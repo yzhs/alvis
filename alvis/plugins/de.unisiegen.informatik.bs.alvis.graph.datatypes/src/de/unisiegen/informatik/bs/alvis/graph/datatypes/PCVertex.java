@@ -200,7 +200,7 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 
 	@Override
 	public boolean equals(PCObject toCheckAgainst) {
-		if (((PCVertex) toCheckAgainst).label.equals(this.label)) {
+		if (toCheckAgainst instanceof PCVertex && ((PCVertex) toCheckAgainst).label.equals(this.label)) {
 			return true;
 		}
 		return false;
@@ -268,7 +268,7 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 		return this.label.toString().compareTo(arg0.label.toString());
 	}
 
-	public PCBoolean equal(PCVertex other) {
+	public PCBoolean equal(PCObject other) {
 		return new PCBoolean(this.equals(other));
 	}
 
