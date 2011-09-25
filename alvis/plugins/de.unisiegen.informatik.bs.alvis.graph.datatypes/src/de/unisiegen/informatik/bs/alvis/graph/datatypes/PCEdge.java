@@ -201,7 +201,7 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 		return this.weight;
 	}
 	
-	public PCVertex _get_correspondingVertex_(PCVertex vert){
+	public PCVertex _getCorrespondingVertex_(PCVertex vert) {
 		if (vert.equals(this.startVertex))
 			return this.endVertex;
 		return this.startVertex;
