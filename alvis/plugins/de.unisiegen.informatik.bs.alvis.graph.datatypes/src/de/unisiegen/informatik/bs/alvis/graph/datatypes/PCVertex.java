@@ -66,19 +66,19 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 		return false;
 	}
 
-	public PCList<PCVertex> _getAdjacents_() {
+	public PCList<PCVertex> _get_adjacents_() {
 		return this.adjacents;
 	}
 
-	public void _setParentId_(PCVertex parentId) {
+	public void _set_parentId_(PCVertex parentId) {
 		this.parentId = parentId;
 	}
 
-	public void _setDistance_(PCInteger distance) {
+	public void _set_distance_(PCInteger distance) {
 		this.distance = distance;
 	}
 
-	public void _setColor_(PCString color) {
+	public void _set_color_(PCString color) {
 		this.color.setLiteralValue(color.getLiteralValue());
 		if (this.isInBatchRun) {
 			commandsforGr.get(0).push(color);
@@ -129,31 +129,31 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 	public String toConsole() {
 		String result;
 		result = this.label.getLiteralValue() + ", color: "
-				+ this._getColor_().toConsole();
+				+ this._get_color_().toConsole();
 		return result;
 	}
 
-	public void _setLabel_(PCString value) {
+	public void _set_label_(PCString value) {
 		this.label = value;
 	}
 
-	public PCList<PCEdge> _getEdges_() {
+	public PCList<PCEdge> _get_edges_() {
 		return edges;
 	}
 
-	public PCObject _getLabel_() {
+	public PCObject _get_label_() {
 		return label;
 	}
 
-	public PCVertex _getParentId_() {
+	public PCVertex _get_parentId_() {
 		return parentId;
 	}
 
-	public PCInteger _getDistance_() {
+	public PCInteger _get_distance_() {
 		return distance;
 	}
 
-	public PCString _getColor_() {
+	public PCString _get_color_() {
 		return color;
 	}
 
@@ -200,7 +200,7 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 
 	public PCEdge _connectTo_(PCVertex toConnect) {
 		PCEdge ed = new PCEdge(this, toConnect);
-		graph._getEdges_().add(ed);
+		graph._get_edges_().add(ed);
 		return ed;
 	}
 	

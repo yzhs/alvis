@@ -183,31 +183,31 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 		return Arrays.asList(attributes);
 	}
 
-	public PCString _getColor_() {
+	public PCString _get_color_() {
 		return this.color;
 	}
 
-	public PCVertex _getStartVertex_() {
+	public PCVertex _get_startVertex_() {
 		// TODO is not necessary v1
 		return this.startVertex;
 	}
 
-	public PCVertex _getEndVertex_() {
+	public PCVertex _get_endVertex_() {
 		// TODO is not necessary v1
 		return this.endVertex;
 	}
 
-	public PCInteger _getWeight_() {
+	public PCInteger _get_weight_() {
 		return this.weight;
 	}
 	
-	public PCVertex _getCorrespondingVertex_(PCVertex vert){
+	public PCVertex _get_correspondingVertex_(PCVertex vert){
 		if (vert.equals(this.startVertex))
 			return this.endVertex;
 		return this.startVertex;
 	}
 
-	public void _setColor_(PCString color) {
+	public void _set_color_(PCString color) {
 		this.color = color;
 		if (!this.isInBatchRun) {
 			for (GraphicalRepresentation gredge : allGr) {
@@ -220,7 +220,7 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 		}
 	}
 
-	public void _setWeight_(PCInteger weight) {
+	public void _set_weight_(PCInteger weight) {
 		this.weight = weight;
 		if (!this.isInBatchRun) {
 			for (GraphicalRepresentation gredge : allGr) {
@@ -279,7 +279,7 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 		return new PCEdge();
 	}
 
-	public PCList<PCVertex> getVertices() {
+	public PCList<PCVertex> _get_vertices_() {
 		PCList<PCVertex> vert = new PCList<PCVertex>();
 		vert.add(startVertex);
 		vert.add(endVertex);

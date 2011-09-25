@@ -120,7 +120,7 @@ public class PCGraph extends PCObject {
 	 * 
 	 * @return the saved vertices as PseudoCodeList
 	 */
-	public PCList<PCVertex> _getVertices_() {
+	public PCList<PCVertex> _get_vertices_() {
 		return this.vertices;
 	}
 
@@ -128,7 +128,7 @@ public class PCGraph extends PCObject {
 	 * 
 	 * @return the saved edges as PseudoCode
 	 */
-	public PCList<PCEdge> _getEdges_() {
+	public PCList<PCEdge> _get_edges_() {
 		return this.edges;
 	}
 
