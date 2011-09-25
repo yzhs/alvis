@@ -77,7 +77,7 @@ public final class Javac {
 	 * @param source
 	 * @return true -> compiling worked flawlessly
 	 */
-	private static boolean compile(JavaFileObject... source) {
+	private static String compile(JavaFileObject... source) {
 		final ArrayList<String> options = new ArrayList<String>();
 		if (classpath != null) {
 			options.add("-classpath");
@@ -106,17 +106,22 @@ public final class Javac {
 				stdFileManager, diagnostics, options, null,
 				Arrays.asList(source));
 		boolean result = task.call();
+		String error = null;
 
-		if (!result)
-			for (@SuppressWarnings("rawtypes") Diagnostic diagnostic : diagnostics.getDiagnostics())
-				System.out.format("Error on line %d in %s",
-						diagnostic.getLineNumber(), diagnostic);
+		if (!result){
+			error = "Compilation failed, see log for details";
+			for (@SuppressWarnings("rawtypes") Diagnostic diagnostic : diagnostics.getDiagnostics()){
+				Logger.getInstance().log("de.~.vm.Javac.compile(JavaFileObject...)", Logger.DEBUG,
+						"Error on line %d in %s" + 
+								diagnostic.getLineNumber()+ diagnostic);
+			}
+		}
 		try {
 			stdFileManager.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return result;
+		return error;
 	}
 
 	/**
@@ -147,12 +152,14 @@ public final class Javac {
 			String algorithmName = args[args.length - 1].split("/")[args[args.length - 1]
 					.split("/").length - 1];
 
-			boolean result = false;
+			String error = null;
 			
 			// Create a new AlvisFileObject containing the source code and let the compiler compile it
 			try {
-				result = compile(new AlvisFileObject(algorithmName,
+
+				error = compile(new AlvisFileObject(algorithmName,
 						algorithmAsSourceCode));
+
 			} catch (URISyntaxException e) {
 				e.printStackTrace();
 			}
@@ -163,7 +170,7 @@ public final class Javac {
 			 Logger.getInstance().log("de.~.vm.Javac.compile(String)", Logger.DEBUG,
 			 "Error? " + err.toString());
 
-			return result ? null : err.toString();
+			return error;
 		}
 
 		else {

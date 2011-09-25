@@ -1,58 +1,52 @@
 main(Graph G, Vertex s) begin
-
 	// Initialisieren, alles orange machen
     for Edge edge in G.edges: begin
-        edge.color = "basti",
+        edge.color = "asdiagsd",
     end
     for Vertex vertex in G.vertices: begin
-        vertex.color = "basti",
+        vertex.color = "bastij",
     end
 	
 	// Hole alle Knoten im Graphen in eine Liste, um mit dieser zu arbeiten
 	Vertex List vertices,
 	for Vertex vert in G.vertices: begin
-		vertices.addItem(vert),
-	end
+		vertices.add(vert),
+	end 
 	
 	// Füge die Kanten des Startknotens s zu den Möglichkeiten hinzu
-	Edge List possibleEdges, 
-	for Edge e in s.edges: begin
-		possibleEdges.addItem(e),
+	Edge List possibleEdges,
+	for Edge e in s.edges: begin 
+		possibleEdges.add(e),
 	end
-	
-	// Der minimale Spannbaum besteht zuerst nur aus dem Startknoten
+	 
+	// Der minimale Spannbaum besteht zuerst nur aus dem Startknoten,
+	// die Liste der unbesuchten Knoten aus dem Rest ohne den Startknoten
 	Vertex List spanningTree,
-	spanningTree.addItem(s),
+	spanningTree.add(s),
 	s.color = "markus";
+	vertices.remove(s),
 	
-	vertices.removeItem(s),
-	
-	while ! vertices.isNotFilled(): begin	// Solange es noch unbesuchte Knoten gibt
+	while ! vertices.isEmpty(): begin	// Solange es noch unbesuchte Knoten gibt
 		Edge cheapest = getEdgeWithLowestWeight(possibleEdges),	// Hole die günstigste Kante
-		Vertex nextNode = null,
-		if ! spanningTree.containsItem(cheapest.startVertex): begin	// Schaue, ob der Startknoten im Spannbaum ist
+		Vertex nextNode = cheapest.endVertex,
+		if ! spanningTree.contains(cheapest.startVertex): begin	// Schaue, ob der Startknoten im Spannbaum ist
 			nextNode = cheapest.startVertex,	// Wenn nicht, füge ihn hinzu
 		end
-		else begin 
-				nextNode = cheapest.endVertex,		// Wenn doch, kann der Endknoten noch nicht drin sein
-
-		end
-		if ! spanningTree.containsItem(nextNode): begin
-			spanningTree.addItem(nextNode), // Füge den gefundenen Knoten hinzu
+		if ! spanningTree.contains(nextNode): begin // Wenn dieser Knoten noch nicht besucht wurde
+			spanningTree.add(nextNode), // Füge den gefundenen Knoten hinzu
 			nextNode.color = "markus",
 			cheapest.color = "markus";
 			for Edge edge in nextNode.edges: begin	// Füge alle Kanten zu den möglichen hinzu, die noch nicht dabei sind
-				if ! possibleEdges.containsItem(edge): begin
-					if ! spanningTree.containsItem(edge.getCorrespondingVertex(nextNode)): begin
-						possibleEdges.addItem(edge),
+				if ! possibleEdges.contains(edge): begin
+					if ! spanningTree.contains(edge.getCorrespondingVertex(nextNode)): begin
+						possibleEdges.add(edge), 
 					end
 				end 
 			end
-		
 			// Entferne Knoten und Kante aus den Arbeitslisten
-			vertices.removeItem(nextNode),
+			vertices.remove(nextNode),
 		end
-		possibleEdges.removeItem(cheapest);
+		possibleEdges.remove(cheapest),
 	end
 end
 
@@ -60,8 +54,8 @@ end
 // Methode, um die günstigste Kante aus einer Liste zu finden
 getEdgeWithLowestWeight(Edge List listToCheck) : Edge begin
 	Edge tmp = null,
-	if ! listToCheck.isNotFilled(): begin
-		tmp = listToCheck.getItem(0),
+	if ! listToCheck.isEmpty(): begin
+		tmp = listToCheck.get(0),
 	end
 	for Edge next in listToCheck: begin
 		if next.weight < tmp.weight: begin
