@@ -141,8 +141,10 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 	
 	@Override
 	public List<String> getMethods() {
-		String[] attributes = { "remove" };
-		return Arrays.asList(attributes);
+		List<String> result = new ArrayList<String>();
+		result.add("getCorrespondingVertex");
+		result.add("remove");
+		return result;
 	}
 
 	public void remove() {
@@ -222,6 +224,12 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 
 	public PCInteger getWeight() {
 		return this.weight;
+	}
+	
+	public PCVertex getCorrespondingVertex(PCVertex vert){
+		if (vert.equals(this.startVertex))
+			return this.endVertex;
+		return this.startVertex;
 	}
 
 	public void setColor(PCString color) {
