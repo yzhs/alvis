@@ -133,49 +133,8 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 		return result;
 	}
 
-	@Override
-	public PCObject set(String memberName, PCObject value) {
-		if (memberName.equals("color")) {
-			this.setColor((PCString) value);
-		}
-		if (memberName.equals("pi")) {
-			this.setParentId((PCVertex) value);
-		}
-		if (memberName.equals("distance")) {
-			this.setDistance((PCInteger) value);
-		}
-		if (memberName.equals("label")) {
-			this.setLabel((PCString) value);
-		}
-		return null;
-	}
-
-	private void setLabel(PCString value) {
+	public void setLabel(PCString value) {
 		this.label = value;
-	}
-
-	@Override
-	public PCObject get(String memberName) {
-		if (memberName.equals("color")) {
-			return this.getColor();
-		}
-		if (memberName.equals("distance")) {
-			return this.getDistance();
-		}
-		if (memberName.equals("pi")) {
-			return this.getParentId();
-		}
-		if (memberName.equals("adjacents")) {
-			return this.getAdjacents();
-		}
-		if (memberName.equals("label")) {
-			return this.getLabel();
-		}
-		if (memberName.equals("edges")) {
-			return this.getEdges();
-		}
-
-		return null;
 	}
 
 	public PCList<PCEdge> getEdges() {
@@ -202,10 +161,12 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 	public boolean equals(PCObject toCheckAgainst) {
 		if (this == localNull)
 			return toCheckAgainst == PCObject.getNull();
-		if (toCheckAgainst instanceof PCVertex && ((PCVertex) toCheckAgainst).label.equals(this.label)) {
-			return true;
-		}
-		return false;
+		if (null == toCheckAgainst || !(toCheckAgainst instanceof PCVertex))
+			return false;
+		PCVertex other = (PCVertex) toCheckAgainst;
+		if (null == label)
+			return null == other.label;
+		return label.equals(other.label);
 	}
 
 	@Override

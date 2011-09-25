@@ -93,8 +93,8 @@ public class PCThread extends PCObject implements Runnable {
 		return TYPENAME;
 	}
 
-	@Override
 	public PCObject set(String memberName, PCObject value) {
+		// TODO remove this method
 		if (memberName.equals("doStep")) {
 			PCBoolean b = (PCBoolean) value;
 			doStep = b.getLiteralValue();

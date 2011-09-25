@@ -235,7 +235,7 @@ public class SimpleType implements Type {
 	 *          the expected type
 	 * @return whether this type is a subtype of other
 	 */
-	public boolean matches(Type other) {
+	public boolean isSubtypeOf(Type other) {
 		if (!(other instanceof SimpleType))
 			return false;
 

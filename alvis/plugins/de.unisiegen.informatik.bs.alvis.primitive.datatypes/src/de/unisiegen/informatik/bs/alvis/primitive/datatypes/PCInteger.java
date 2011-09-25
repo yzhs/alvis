@@ -89,18 +89,6 @@ public class PCInteger extends PCObject {
 	}
 
 	@Override
-	public PCObject set(String memberName, PCObject valueToGetFrom) {
-		if (memberName.isEmpty()) {
-			this.setValue((PCInteger) valueToGetFrom);
-		}
-		if (memberName.equals("+")) {
-			this.addTo((PCInteger) valueToGetFrom);
-			return this;
-		}
-		return null;
-	}
-
-	@Override
 	public boolean equals(PCObject toCheckAgainst) {
 		try {
 			return ((PCInteger) toCheckAgainst).getLiteralValue() == this.value;

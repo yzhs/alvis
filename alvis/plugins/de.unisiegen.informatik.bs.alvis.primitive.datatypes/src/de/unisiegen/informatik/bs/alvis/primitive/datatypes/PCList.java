@@ -93,12 +93,6 @@ public class PCList<E extends PCObject> extends PCObject implements SortableColl
 	}
 
 	@Override
-	public PCObject set(String memberName, PCObject value) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean equals(PCObject toCheckAgainst) {
 		// TODO Auto-generated method stub
 		return false;

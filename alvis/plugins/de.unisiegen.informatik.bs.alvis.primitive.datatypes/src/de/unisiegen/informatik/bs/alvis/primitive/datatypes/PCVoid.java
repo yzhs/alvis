@@ -40,18 +40,6 @@ public class PCVoid extends PCObject {
 	}
 
 	@Override
-	public PCObject set(String memberName, PCObject value) {
-		// Nothing to set
-		return null;
-	}
-
-	@Override
-	public PCObject get(String memberName) {
-		// Nothing to get
-		return null;
-	}
-
-	@Override
 	public boolean equals(PCObject toCheckAgainst) {
 		try {
 			@SuppressWarnings("unused")

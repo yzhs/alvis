@@ -84,8 +84,8 @@ public class PCSemaphore extends PCObject {
 		return TYPENAME;
 	}
 
-	@Override
 	public PCObject set(String memberName, PCObject value) {
+		// TODO remove this method
 		if (memberName.equals("counter")) {
 			counter = ((PCInteger) value).getLiteralValue();
 			return this;
@@ -108,8 +108,8 @@ public class PCSemaphore extends PCObject {
 		}
 	}
 
-	@Override
 	public PCObject get(String memberName) {
+		// TODO remove this method
 		if (memberName.equals("counter")) {
 			return new PCInteger(counter);
 		} else {

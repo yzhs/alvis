@@ -70,14 +70,6 @@ public class PCString extends PCObject {
 	}
 
 	@Override
-	public PCObject set(String memberName, PCObject value) {
-		if (memberName.isEmpty()) {
-			this.setValue((PCString) value);
-		}
-		return null;
-	}
-
-	@Override
 	public boolean equals(PCObject toCheckAgainst) {
 		if (null == toCheckAgainst)
 			return false;

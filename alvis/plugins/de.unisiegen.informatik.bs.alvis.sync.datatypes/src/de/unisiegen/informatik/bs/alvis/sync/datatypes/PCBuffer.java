@@ -77,8 +77,8 @@ public class PCBuffer extends PCObject {
 		return TYPENAME + ": capacity=" + capacity + ", in use=" + used; 
 	}
 
-	@Override
 	public PCObject set(String memberName, PCObject value) {
+		// TODO remove this method
 		if (memberName.equals("capacity")) {
 			capacity = ((PCInteger) value).getLiteralValue();
 			return this;
@@ -90,8 +90,8 @@ public class PCBuffer extends PCObject {
 		}
 	}
 	
-	@Override
 	public PCObject get(String memberName) {
+		// TODO remove this method
 		if (memberName.equals("capacity")) {
 			return new PCInteger(capacity);
 		} else if (memberName.equals("used")) {

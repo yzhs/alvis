@@ -93,8 +93,8 @@ public class PCCondition extends PCObject {
 		notifyAll();
 	}
 
-	@Override
 	public PCObject get(String memberName) {
+		// TODO remove this method
 		if (memberName.equals("semaphore")) {
 			return sema;
 		} else if (memberName.equals("waiting")) {
@@ -115,8 +115,8 @@ public class PCCondition extends PCObject {
 		return TYPENAME;
 	}
 
-	@Override
 	public PCObject set(String memberName, PCObject value) {
+		// TODO remove this method
 		if (memberName.equals("semaphore")) {
 			PCSemaphore s = (PCSemaphore) value;
 			sema = s;

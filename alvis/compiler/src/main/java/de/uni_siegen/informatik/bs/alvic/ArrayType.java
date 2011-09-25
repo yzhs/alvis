@@ -91,9 +91,9 @@ public class ArrayType implements Type {
 	 *            The type to compare this to
 	 * @return true if and only if this can be treated as a subtype of other
 	 */
-	public boolean matches(Type other) {
+	public boolean isSubtypeOf(Type other) {
 		return other instanceof ArrayType
-				&& elementType.matches(((ArrayType) other).getTypeArgument());
+				&& elementType.isSubtypeOf(((ArrayType) other).getTypeArgument());
 	}
 
 	public boolean equals(Type other) {

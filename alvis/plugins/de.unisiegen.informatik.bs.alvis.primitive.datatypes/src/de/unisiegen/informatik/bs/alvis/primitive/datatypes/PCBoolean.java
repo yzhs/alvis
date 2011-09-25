@@ -118,14 +118,6 @@ public class PCBoolean extends PCObject {
 	}
 
 	@Override
-	public PCObject set(String memberName, PCObject value) {
-		if (memberName.isEmpty()) {
-			this.setValue((PCBoolean) value);
-		}
-		return null;
-	}
-
-	@Override
 	protected void runDelayedCommands() {
 		for (GraphicalRepresentation gr : allGr) {
 			((GRBoolean) gr).set(((Boolean) this.commandsforGr.get(0).pop())

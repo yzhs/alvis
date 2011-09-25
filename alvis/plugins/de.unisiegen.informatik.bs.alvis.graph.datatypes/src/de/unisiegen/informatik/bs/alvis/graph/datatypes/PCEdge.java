@@ -183,31 +183,6 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 		return Arrays.asList(attributes);
 	}
 
-	@Override
-	public PCObject get(String memberName) {
-		if (memberName.equals("weight")) {
-			return this.getWeight();
-		}
-		
-		if (memberName.equals("vertices")) {
-			return this.getVertices();
-		}
-		
-		if (memberName.equals("startVertex")) {
-			return this.getStartVertex();
-		}
-		
-		if (memberName.equals("endVertex")) {
-			return this.getEndVertex();
-		}
-		
-		if (memberName.equals("color")) {
-			return this.getColor();
-		}
-
-		return null;
-	}
-
 	public PCString getColor() {
 		return this.color;
 	}
@@ -255,14 +230,6 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 		} else {
 			commandsforGr.get(0).push(weight);
 		}
-	}
-
-	@Override
-	public PCObject set(String memberName, PCObject value) {
-		if (memberName.equals("weight")) {
-			this.setWeight((PCInteger) value);
-		}
-		return value;
 	}
 
 	@Override

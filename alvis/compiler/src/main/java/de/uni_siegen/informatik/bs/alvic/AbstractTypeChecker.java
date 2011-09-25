@@ -137,7 +137,7 @@ public abstract class AbstractTypeChecker extends AbstractTreeParser {
 		}
 
 		for (Type t : ((FunctionType) functionType).getArgumentTypes())
-			if (!arguments.get(i++).matches(t))
+			if (!arguments.get(i++).isSubtypeOf(t))
 				reportError(new ArgumentTypeException(name, t, i,
 						arguments.get(i - 1), tree));
 	}
@@ -163,7 +163,7 @@ public abstract class AbstractTypeChecker extends AbstractTreeParser {
 		}
 
 		for (Type t : object.getMember(member))
-			if (t.matches(expected))
+			if (t.isSubtypeOf(expected))
 				return t;
 
 		reportError(new TypeMismatchException(expected, object, member, tree));
@@ -188,7 +188,7 @@ public abstract class AbstractTypeChecker extends AbstractTreeParser {
 	 */
 	protected void checkTypes(Type expected, Type actual, String expr,
 			TypedTree tree) {
-		if (actual == null || !actual.matches(expected))
+		if (actual == null || !actual.isSubtypeOf(expected))
 			reportError(new TypeMismatchException(expected, actual, expr, tree));
 	}
 
@@ -253,7 +253,7 @@ public abstract class AbstractTypeChecker extends AbstractTreeParser {
 			FunctionType tmp = (FunctionType) t;
 			List<Type> args = tmp.getArgumentTypes();
 
-			if (args.size() != 1 || !args.get(0).matches(right))
+			if (args.size() != 1 || !right.isSubtypeOf(args.get(0)))
 				continue;
 
 			return tmp.getReturnType();

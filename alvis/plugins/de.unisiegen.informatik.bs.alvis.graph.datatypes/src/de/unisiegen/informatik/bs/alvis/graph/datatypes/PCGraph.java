@@ -139,24 +139,6 @@ public class PCGraph extends PCObject {
 	}
 
 	@Override
-	public PCObject set(String memberName, PCObject value) {
-		// TODO check possible member access
-		return null;
-	}
-
-	@Override
-	public PCObject get(String memberName) {
-		// TODO check possible member access
-		if (memberName.equals("vertices")) {
-			return this.vertices;
-		}
-		if (memberName.equals("edges")) {
-			return this.edges;
-		}
-		return null;
-	}
-
-	@Override
 	public List<String> getMembers() {
 		List<String> result = new ArrayList<String>();
 		result.add("vertices");

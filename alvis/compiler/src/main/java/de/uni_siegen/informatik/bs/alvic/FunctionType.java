@@ -111,7 +111,7 @@ public class FunctionType implements Type {
 	 *            the type to compare this to
 	 * @return true if and only if 'this' can be used where 'other' is expected
 	 */
-	public boolean matches(Type other) {
+	public boolean isSubtypeOf(Type other) {
 		if (!(other instanceof FunctionType))
 			return false;
 
@@ -127,10 +127,10 @@ public class FunctionType implements Type {
 
 		int i = 0;
 		for (Type t : tmp.getArgumentTypes())
-			if (!argumentTypes.get(i++).matches(t))
+			if (!argumentTypes.get(i++).isSubtypeOf(t))
 				return false;
 
-		return tmp.getReturnType().matches(returnType);
+		return tmp.getReturnType().isSubtypeOf(returnType);
 	}
 
 	/**

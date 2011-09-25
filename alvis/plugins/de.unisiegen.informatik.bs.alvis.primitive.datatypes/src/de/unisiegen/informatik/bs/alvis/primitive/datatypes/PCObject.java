@@ -137,35 +137,7 @@ public abstract class PCObject {
 	public static String getTypeName() {
 		return TYPENAME;
 	}
-	
-	/**
-	 * Generic set-method used for the compiler
-	 * 
-	 * @param memberName
-	 *            to set
-	 * @param value
-	 *            value to set
-	 * @return result of set-method (+) could return summed up value useful for
-	 *         constructs like v = u.distance + 1;
-	 * 
-	 */
-	public abstract PCObject set(String memberName,
-			PCObject value);
 
-	/**
-	 * Generic get-method used for the compiler
-	 * 
-	 * @param memberName
-	 *            to get if empty returns itself
-	 * @return value
-	 */
-	public PCObject get(String memberName) {
-		if (memberName.isEmpty()) {
-			return this;
-		}
-		return null;
-	}
-	
 	/**
 	 * Returns the Members used for the compiler.
 	 * 
