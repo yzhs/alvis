@@ -151,29 +151,20 @@ public class SimpleType implements Type {
 			 * In that case you will have to check whether the correct getters/setters exist and
 			 * use their types to find out what type the attribute has.
 			 */
-			{
-				List<Field> fields = Arrays.asList(c.getDeclaredFields());
-				for (String name : attributes) {
-					int i = fields.indexOf("_" + name + "_");
-					if (-1 != i)
-						t.members.add(Member.attribute(t, obj, fields.get(i)));
-				}
-			}
+			for (Field field : c.getDeclaredFields())
+				if (attributes.contains(field.getName()))
+					t.members.add(Member.attribute(t, obj, field, field.getName()));
 
-			{
-				List<Method> fields = Arrays.asList(c.getMethods());
-				for (String name : methods) {
-					int i = fields.indexOf("_" + name + "_");
-					if (-1 != i)
-						t.members.add(Member.method(t, fields.get(i)));
-				}
+			for (Method m : c.getMethods())
+				if (methods.contains(removeUnderscores(m.getName())))
+					t.members.add(Member.method(t, m,
+							removeUnderscores(m.getName())));
 
-				if (!c.getName().replaceAll(".*\\.PC", "").equals("Object"))
-					t.parent = SimpleType.create(c.getSuperclass().getName());
-				else
-					t.parent = null;
-				// TODO decide on what to do with the exceptions
-			}
+			if (!c.getName().replaceAll(".*\\.PC", "").equals("Object"))
+				t.parent = SimpleType.create(c.getSuperclass().getName());
+			else
+				t.parent = null;
+			// TODO decide on what to do with the exceptions
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
@@ -185,6 +176,10 @@ public class SimpleType implements Type {
 		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private static String removeUnderscores(String internalName) {
+		return internalName.substring(1, internalName.length() - 1);
 	}
 
 	/**

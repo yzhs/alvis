@@ -33,9 +33,6 @@ package de.uni_siegen.informatik.bs.alvic;
 	private String translate(String type) {
 		return "PC" + type;
 	}
-	private String capitalize(String ident) {
-		return ident.substring(0,1).toUpperCase() + ident.substring(1);
-	}
 }
 
 prog: ^(PROG (f+=function)+) -> program(functions={$f})
@@ -78,7 +75,7 @@ statement options {k = 3;}
     | ^(DECL_INIT type ident expr) -> declInit(type={$type.st}, ident={$ident.st}, rhs={$expr.st})
     | ^(ASSIGN ident expr)         -> assign(lhs={$ident.st}, rhs={$expr.st})
     | ^(ASSIGN ^(DOT postfixExpr[true, false] ident) expr)
-        -> attributeAssign(obj={$postfixExpr.st}, lhs={capitalize($ident.st.toString())}, rhs={$expr.st})
+        -> attributeAssign(obj={$postfixExpr.st}, lhs={$ident.st.toString()}, rhs={$expr.st})
     | ^(ASSIGN ^(INDEX postfixExpr[true, false] i=expr) rhs=expr)
         -> arrayAssign(lhs={%index(array={$postfixExpr.st}, index={$i.st})}, rhs={$rhs.st})
     | ^(RETURN expr)               -> return(expr={$expr.st})
@@ -137,7 +134,7 @@ expr returns [String obj]
     ;
 
 postfixExpr[boolean local, boolean isMethodCall] returns [String obj]
-    : ident {$obj = $ident.st.toString();} -> {local || isMethodCall ? $ident.st : %makeGetter(ident={capitalize($ident.st.toString())})}
+    : ident {$obj = $ident.st.toString();} -> {local || isMethodCall ? $ident.st : %makeGetter(ident={$ident.st.toString()})}
     | ^(CALL func=postfixExpr[false, true] (args+=expr)*) {$obj = $func.obj;} -> {local}? call(function={$func.st}, args={$args})
                                                                               ->          callMethod(function={$func.st}, args={$args})
     | ^(DOT l=postfixExpr[local, isMethodCall] r=postfixExpr[false, isMethodCall]) {$obj = $l.obj;} -> dot(left={$l.st}, right={$r.st})

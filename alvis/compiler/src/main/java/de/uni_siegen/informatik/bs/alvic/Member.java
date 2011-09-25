@@ -84,7 +84,7 @@ public class Member {
 	 *            the Method object used to represent the function
 	 * @return a Member representing that function.
 	 */
-	public static Member method(SimpleType type, Method method) {
+	public static Member method(SimpleType type, Method method, String name) {
 		Type returnType;
 		List<Type> argumentTypes = new ArrayList<Type>();
 
@@ -106,7 +106,7 @@ public class Member {
 				// this only works with classes that only have one type argument
 				argumentTypes.add(type.getTypeArgument());
 
-		return new Member(method.getName(), FunctionType.create(argumentTypes,
+		return new Member(name, FunctionType.create(argumentTypes,
 				returnType));
 	}
 
@@ -122,9 +122,8 @@ public class Member {
 	 *            the attribute given given as a Java Field
 	 * @return the Member representing this attribute
 	 */
-	public static Member attribute(SimpleType type, Object repr, Field field) {
+	public static Member attribute(SimpleType type, Object repr, Field field, String name) {
 		String typeName = field.getType().getName();
-		String name = field.getName();
 
 		if (type.getTypeArgument() == null) {
 			if (typeName
