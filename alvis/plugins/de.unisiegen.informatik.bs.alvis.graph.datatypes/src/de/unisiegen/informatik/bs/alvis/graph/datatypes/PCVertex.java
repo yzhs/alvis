@@ -200,6 +200,8 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 
 	@Override
 	public boolean equals(PCObject toCheckAgainst) {
+		if (this == localNull)
+			return toCheckAgainst == PCObject.getNull();
 		if (toCheckAgainst instanceof PCVertex && ((PCVertex) toCheckAgainst).label.equals(this.label)) {
 			return true;
 		}
