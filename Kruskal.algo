@@ -1,0 +1,156 @@
+main(Graph G) begin
+
+        Edge Queue edges,
+		List List partialGraphs,
+		Integer count = 0,
+        
+        // Initialisierung BEGINN
+        for Edge edge in G.edges: begin
+                edge.color = "red",
+                edges.enqueue(edge),
+                count  = count + 1,
+                
+        end
+        for Vertex vertex in G.vertices: begin
+                vertex.color = "red",
+        end
+        // Initialisierung ENDE
+        
+        // Sortieren der Queue nach Gewicht der Kanten BEGINN       
+        Edge tmp = null,
+        Edge tmp2 = null,        
+		Boolean changed = true;
+     	while changed: begin
+     		changed = false,
+    	 	Integer a = 0,
+    	 	tmp2 = edges.dequeue(),
+    	 	a = a + 1,
+     		while a < count: begin
+     			tmp = edges.dequeue(),
+     			a = a + 1,
+     			if tmp2.weight > tmp.weight: begin
+     				changed = true,
+     				edges.enqueue(tmp),
+     			end else begin
+     				edges.enqueue(tmp2),
+     				tmp2 = tmp,
+     			end
+     		end
+     		edges.enqueue(tmp2),
+     		tmp2 = null,
+     	end
+     	// Sortierung ENDE
+     	
+     	
+     	// Färben der ersten Kante BEGINN
+     	if ! edges.isEmpty(): begin
+     	     	Edge cheapest = edges.dequeue(),
+     			cheapest.color = "yellow",
+     			Vertex firstVertex = cheapest.startVertex;
+     			Vertex secondVertex = cheapest.endVertex,
+     	     	Vertex List newList,
+     			newList.add(firstVertex),
+     			newList.add(secondVertex),
+     			partialGraphs.add(newList),
+     			firstVertex.color = "markus";
+     			secondVertex.color = "markus",
+     			cheapest.color = "markus",
+     	end
+     	// Färben der ersten Kante ENDE
+     	
+     	/*	In jedem Durchlauf der while-Schleife wird die nächst günstigste Kante
+     		betrachtet. Sie und ihre noch nicht im Spannbaum enthaltenen Knoten werden
+     		zu einem Teilgraphen hinzugefügt, wenn sie keinen Kreis erzeugt (Fall 3).
+     		Wenn alle Kanten abgearbeitet sind, erhalten wir einen minimalen Spannbaum
+     		aus den zusammengefügten Teilgraphen.
+     	
+     	Es gibt genau vier verschiedene Fälle, die auf eine Kante zutreffen:
+     	
+     	1. Fall:		Kein Knoten der Kante liegt in der bisher erstellten Teilgraphen.
+     					Es wird ein neuer Teilgraphen (List) mit diesen Knoten erzeugt.
+     	2. Fall:		Ein Knoten befindet sich schon in einem Teilgraph, der andere in keinem.
+     					Der andere Knoten wird zum Graph, in dem auch der erste ist, hinzugefügt.
+     	3. Fall:		Beide Knoten liegen in der gleichen Liste.
+     					Dieser Fall wird ignoriert, die Kante würde einen Kreis erzeugen
+     	4. Fall:		Beide Knoten liegen in verschiedenen Teilgraphen.
+     					Füge diese Teilgraphen zusammen.
+     	*/
+     	while ! edges.isEmpty(): begin
+     		Edge cheapest = edges.dequeue(),	// Hole die billigste Kante
+     		cheapest.color = "yellow",			// Markiere sie als "möglich"
+     		Vertex firstVertex = cheapest.startVertex;
+     		Vertex secondVertex = cheapest.endVertex,
+     		Boolean positionFound = false,	// Abbruchparameter
+     		Vertex List toRemove,			// zu löschenender Teilgraph
+     		
+     		for Vertex List list in partialGraphs: begin	// durchlaufe alle Teilgraphen
+     			if ! positionFound: begin					// Abbruchbedingung
+     				if list.contains(firstVertex) && (! list.contains(secondVertex)): begin
+     					// FALL 2 ODER 4
+     					for Vertex List innerList in partialGraphs: begin
+     						if innerList.contains(secondVertex): begin
+     							// FALL 4
+     							positionFound = true,
+     							
+     							// Kopiere den einen Teilgraphen in den anderen... 
+     							for Vertex vert in innerList: begin
+     								list.add(vert),
+     							end
+     							// ... und markiere ihn zum Löschen.
+     							toRemove = innerList;
+     							cheapest.color = "markus",
+     						end
+     					end
+     					if ! positionFound: begin
+     						// FALL 2
+     						list.add(secondVertex),
+     						secondVertex.color = "markus",
+     						cheapest.color = "markus";
+     						positionFound = true,
+     					end
+     				end
+     				if (! list.contains(firstVertex)) && list.contains(secondVertex): begin
+     					// FALL 2 ODER 4
+     					for Vertex List innerList in partialGraphs: begin
+     						if innerList.contains(firstVertex): begin
+     							// FALL 4
+     							positionFound = true,
+     							for Vertex vert in innerList: begin
+     								list.add(vert),
+     							end
+     							toRemove = innerList;
+     							cheapest.color = "markus",
+     						end
+     					end
+     					if ! positionFound: begin
+     						list.add(firstVertex),
+     						firstVertex.color = "markus",
+     						cheapest.color = "markus";
+     						positionFound = true,
+     					end
+     				end
+     				if ! positionFound: begin
+     					if list.contains(firstVertex) && list.contains(secondVertex): begin
+     						// FALL 3
+     						positionFound = true,
+     						cheapest.color = "red",
+     					end
+     				end
+     			end     			
+     		end   
+     		if ! positionFound: begin
+     			// FALL 1
+     			Vertex List newList,
+     			newList.add(firstVertex),
+     			newList.add(secondVertex),
+     			partialGraphs.add(newList),
+     			secondVertex.color = "markus",
+     			firstVertex.color = "markus",
+     			cheapest.color = "markus";
+     			positionFound = true,
+     		end
+     		
+     		// Lösche in Fall 4 kopierten Graphen
+     		partialGraphs.remove(toRemove),
+     	end
+end
