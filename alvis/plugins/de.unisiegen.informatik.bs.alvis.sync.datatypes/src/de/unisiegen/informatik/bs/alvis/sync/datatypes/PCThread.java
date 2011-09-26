@@ -1,5 +1,7 @@
 package de.unisiegen.informatik.bs.alvis.sync.datatypes;
 
+import java.util.HashMap;
+
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
@@ -135,6 +137,12 @@ public class PCThread extends PCObject implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public HashMap<String, String> getHelp() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

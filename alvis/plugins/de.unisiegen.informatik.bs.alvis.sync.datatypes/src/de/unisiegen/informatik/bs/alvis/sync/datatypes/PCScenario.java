@@ -3,6 +3,7 @@ package de.unisiegen.informatik.bs.alvis.sync.datatypes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -205,6 +206,18 @@ public class PCScenario extends PCObject {
 		String[] members = { "threads", "semaphores", "conditions", "buffer",
 				"primitives" };
 		return Arrays.asList(members);
+	}
+
+	@Override
+	public HashMap<String, String> getHelp() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PCObject set(String memberName, PCObject value) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

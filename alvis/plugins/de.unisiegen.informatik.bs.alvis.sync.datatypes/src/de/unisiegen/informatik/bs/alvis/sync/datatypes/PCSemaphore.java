@@ -1,6 +1,7 @@
 package de.unisiegen.informatik.bs.alvis.sync.datatypes;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
@@ -126,6 +127,12 @@ public class PCSemaphore extends PCObject {
 	@Override
 	public void updateGR(GraphicalRepresentation gr) {
 
+	}
+
+	@Override
+	public HashMap<String, String> getHelp() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
