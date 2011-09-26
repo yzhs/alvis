@@ -20,6 +20,7 @@ package de.unisiegen.informatik.bs.alvis.export;
 import java.util.ArrayList;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.graphics.GC;
@@ -45,6 +46,7 @@ public class ExportShell extends Shell {
 	private Button bOk, bCancel;
 	private ArrayList<Button> checkButtons;
 	private ArrayList<Image> images;
+	private ArrayList<StyledText> sourceCode;
 
 	@Override
 	protected void checkSubclass() {
@@ -58,9 +60,14 @@ public class ExportShell extends Shell {
 	 *            the display to display the shell on
 	 * @param imgs
 	 *            the images of the example of the run
+	 * @param sourceCodeParts
+	 *            the source code parts which cause the change in the example,
+	 *            each source code part must belong to the according image, i.e.
+	 *            sourceCodeParts.get(i) fits to imgs.get(i)
 	 */
 	@SuppressWarnings("unchecked")
-	public ExportShell(Display display, ArrayList<Image> imgs) {
+	public ExportShell(Display display, ArrayList<Image> imgs,
+			ArrayList<StyledText> sourceCodeParts) {
 
 		super(display);
 
@@ -68,6 +75,7 @@ public class ExportShell extends Shell {
 		int maxPreviewHeight = (maxPreviewWidth * 7) / 10;
 
 		images = (ArrayList<Image>) imgs.clone();
+		sourceCode = (ArrayList<StyledText>) sourceCodeParts.clone();
 		checkButtons = new ArrayList<Button>();
 
 		setLayout(new RowLayout());
@@ -81,9 +89,9 @@ public class ExportShell extends Shell {
 
 		for (int i = 0; i < images.size(); i++) {
 
-//			Canvas imgAndRadio = new Canvas(imageContainer, SWT.BORDER);
-//			// resizing image and adding to composite
-//			Label label = new Label(imgAndRadio, SWT.NONE);
+			// Canvas imgAndRadio = new Canvas(imageContainer, SWT.BORDER);
+			// // resizing image and adding to composite
+			// Label label = new Label(imgAndRadio, SWT.NONE);
 			Label label = new Label(imageContainer, SWT.NONE);
 			int width = images.get(i).getBounds().width;
 			int height = images.get(i).getBounds().height;
@@ -99,7 +107,7 @@ public class ExportShell extends Shell {
 			gc.drawImage(images.get(i), 0, 0, width, height, 0, 0, newWidth,
 					newHeight);
 			label.setImage(myImage);
-//			Button check = new Button(imgAndRadio, SWT.CHECK);
+			// Button check = new Button(imgAndRadio, SWT.CHECK);
 			Button check = new Button(imageContainer, SWT.CHECK);
 			check.setText(Messages.getLabel("exportImage") + " " + i);
 			checkButtons.add(check);
@@ -123,6 +131,7 @@ public class ExportShell extends Shell {
 				for (int i = checkButtons.size() - 1; i >= 0; i--) {
 					if (!checkButtons.get(i).getSelection()) {
 						images.remove(i);
+						sourceCode.remove(i);
 					}
 				}
 				dispose();
@@ -164,14 +173,19 @@ public class ExportShell extends Shell {
 	}
 
 	/**
-	 * 
-	 * opens shell for selecting export content for alvis run
-	 * 
 	 * @return array list of images which shall be exported
 	 */
 	public ArrayList<Image> getWantedImages() {
 
 		return images;
 
+	}
+
+	/**
+	 * @return array list of styled texts according to getWantedImages() which
+	 *         shall be exported
+	 */
+	public ArrayList<StyledText> getWantedSourceCodeParts() {
+		return sourceCode;
 	}
 }

@@ -69,6 +69,9 @@ public class PdfExport extends Document {
 	private static Font smallBold = FontFactory.getFont("Calibri", 12,
 			Font.BOLD);
 
+	private ArrayList<Image> wantedImages;
+	private ArrayList<StyledText> wantedStyledTexts;
+
 	// private Anchor anchor;
 	// private Chapter chapter;
 	private Paragraph paragraph;
@@ -93,6 +96,7 @@ public class PdfExport extends Document {
 		}
 
 		final ArrayList<Image> images = new ArrayList<Image>();
+		final ArrayList<StyledText> sourceCodeParts = new ArrayList<StyledText>();
 
 		if (exportItem.isRun()) { // export run
 			VirtualMachine vm = VirtualMachine.getInstance();
@@ -101,60 +105,80 @@ public class PdfExport extends Document {
 				@Override
 				public void onBreakPoint(int BreakPointNumber) {
 					Image image = exportItem.getImage();
-					if (image != null)
+					StyledText code = Activator.getDefault()
+							.getActiveRunAlgorithm().getStyledText();
+					if (image != null) {
 						images.add(image);
+						sourceCodeParts.add(code);
+					}
 					VirtualMachine.getInstance().stepAlgoForward();
 				}
 			};
 
-			Activator.getDefault().runStart();
 			Activator.getDefault().shutUpForExport(true);
+			Activator.getDefault().runStart();
 			vm.addBPListener(listen);
 		}
 
 		try {
 			MyFileDialog saveDialog = new MyFileDialog(0);
 			String path = saveDialog.open();
+			if (path == null)
+				return; // file chooser canceled
+
 			PdfWriter.getInstance(this, new FileOutputStream(path));
-			open();
-			addMetaData();
-			addTitle();
-			// export single editor
-			if (!exportItem.isRun()) {
+
+			if (!exportItem.isRun()) { // export single editor
 				Image image = exportItem.getImage();
 				if (image != null)
 					images.add(image);
-				
-				paragraph = toParagraph(images.get(0));
-				add(paragraph);
 
-				// adding source code:
 				StyledText sourceCode = (StyledText) exportItem.getSourceCode();
-				paragraph = toParagraph(sourceCode);
-				add(paragraph);
-			}
-			// export run, saving images taken earlier
-			else {
-			Activator.getDefault().getWorkbench().getDisplay()
-					.syncExec(new Runnable() {
-						@Override
-						public void run() {
+				if (sourceCode != null) {
+					sourceCodeParts.add(sourceCode);
+				}
+			} else { // export run, saving images taken earlier
+				Activator.getDefault().getWorkbench().getDisplay()
+						.syncExec(new Runnable() {
+							@Override
+							public void run() {
 
-							ExportShell exportShell = new ExportShell(Display
-									.getDefault(), images);
-							ArrayList<Image> imgs = exportShell
-									.getWantedImages();
-							for (Image img : imgs) {
-								try {
-									paragraph = toParagraph(img);
-									add(paragraph);
-								} catch (DocumentException e) {
-									e.printStackTrace();
-								}
+								ExportShell exportShell = new ExportShell(
+										Display.getDefault(), images,
+										sourceCodeParts);
+								wantedImages = exportShell.getWantedImages();
+								wantedStyledTexts = exportShell
+										.getWantedSourceCodeParts();
 							}
-						}
-					});
+						});
 			}
+
+			open();
+			addMetaData();
+			addTitle();
+
+			if (!exportItem.isRun()) { // add editor content to pdf
+				if (!sourceCodeParts.isEmpty()) {
+					paragraph = toParagraph(sourceCodeParts.get(0));
+					add(paragraph);
+				}
+				if (!images.isEmpty()) {
+					paragraph = toParagraph(images.get(0));
+					add(paragraph);
+				}
+			} else { // add run content to pdf
+				for (int i = 0; i < wantedImages.size(); i++) {
+					try {
+						paragraph = toParagraph(wantedStyledTexts.get(i));
+						add(paragraph);
+						paragraph = toParagraph(wantedImages.get(i));
+						add(paragraph);
+					} catch (DocumentException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+
 		} catch (NullPointerException npe) {
 			npe.printStackTrace();
 		} catch (FileNotFoundException fnfe) {
