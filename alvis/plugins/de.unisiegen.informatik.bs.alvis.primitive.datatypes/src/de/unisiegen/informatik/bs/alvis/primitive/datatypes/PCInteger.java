@@ -19,6 +19,7 @@
 package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -162,5 +163,17 @@ public class PCInteger extends PCObject {
 				"notEqual", "less", "greater", "lessOrEqual", "greaterOrEqual",
 				"negate" };
 		return Arrays.asList(methods);
+	}
+
+	@Override
+	public HashMap<String, String> getHelp() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PCObject set(String memberName, PCObject value) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

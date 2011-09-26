@@ -19,6 +19,7 @@
 package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -105,5 +106,17 @@ public class PCStack<T extends PCObject> extends PCObject {
 	
 	public static boolean isGenericType() {
 		return true;
+	}
+
+	@Override
+	public HashMap<String, String> getHelp() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PCObject set(String memberName, PCObject value) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

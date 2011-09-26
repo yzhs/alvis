@@ -21,6 +21,7 @@ package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -270,6 +271,18 @@ public class PCList<E extends PCObject> extends PCObject implements SortableColl
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public SortableCollection storeInformation() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public HashMap<String, String> getHelp() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PCObject set(String memberName, PCObject value) {
 		// TODO Auto-generated method stub
 		return null;
 	}

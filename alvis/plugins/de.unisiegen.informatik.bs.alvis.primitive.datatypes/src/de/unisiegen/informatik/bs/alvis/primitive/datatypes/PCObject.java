@@ -1,24 +1,10 @@
-/*
- * Copyright (c) 2011 Dominik Dingel
- * Permission is hereby granted, free of charge, to any person obtaining a copy of
- * this software and associated documentation files (the "Software"), to deal in the
- * Software without restriction, including without limitation the rights to use, 
- * copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the 
- * Software, and to permit persons to whom the Software is furnished to do so, 
- * subject to the following conditions:
- * The above copyright notice and this permission notice shall be included in all 
- * copies or substantial portions of the Software.
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
- * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A 
- * PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
- * HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION 
- * OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE 
- * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+/**
+ * 
  */
-
 package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
 
@@ -39,26 +25,26 @@ public abstract class PCObject {
 
 	protected boolean isInBatchRun;
 	protected List<Stack<Object>> commandsforGr;
-	
+
 	/**
 	 * if not initialized will set localNull and localInfty
+	 * 
 	 * @return null object
 	 */
 	public static PCObject getNull() {
 		// will be from PCObject always be null
 		return localNull;
 	}
-	
+
 	/**
 	 * if not initialized will set localInfty and localNull
+	 * 
 	 * @return null object
 	 */
 	public static PCObject getInfty() {
 		// will be from PCObject always be null
 		return localInfty;
 	}
-	
-	
 
 	/**
 	 * Enable/Disable the batch Modification every Change on the
@@ -103,13 +89,14 @@ public abstract class PCObject {
 	}
 
 	/**
-	 * Will update graphical representation after maybe adding it to the pc object
+	 * Will update graphical representation after maybe adding it to the pc
+	 * object
 	 * 
 	 */
 	protected void updateGR(GraphicalRepresentation gr) {
 		// do nothing
 	}
-	
+
 	/**
 	 * String representation for the Console
 	 * 
@@ -136,6 +123,33 @@ public abstract class PCObject {
 	 */
 	public static String getTypeName() {
 		return TYPENAME;
+	}
+
+	/**
+	 * Generic set-method used for the compiler
+	 * 
+	 * @param memberName
+	 *            to set
+	 * @param value
+	 *            value to set
+	 * @return result of set-method (+) could return summed up value useful for
+	 *         constructs like v = u.distance + 1;
+	 * 
+	 */
+	public abstract PCObject set(String memberName, PCObject value);
+
+	/**
+	 * Generic get-method used for the compiler
+	 * 
+	 * @param memberName
+	 *            to get if empty returns itself
+	 * @return value
+	 */
+	public PCObject get(String memberName) {
+		if (memberName.isEmpty()) {
+			return this;
+		}
+		return null;
 	}
 
 	/**
@@ -167,8 +181,16 @@ public abstract class PCObject {
 	 *         object
 	 */
 	public abstract boolean equals(PCObject toCheckAgainst);
-	
+
 	public static boolean isGenericType() {
 		return false;
 	}
+
+	/**
+	 * Returns hash map filled with help texts for algorithm editor. Must be
+	 * implemented in sub classes.
+	 * 
+	 * @return hash map filled with help texts for algorithm editor
+	 */
+	public abstract HashMap<String, String> getHelp();
 }

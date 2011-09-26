@@ -19,6 +19,7 @@
 package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Stack;
@@ -167,5 +168,17 @@ public class PCBoolean extends PCObject {
 	public List<String> getMethods() {
 		String[] methods = { "and", "or", "not", "equal", "notEqual" };
 		return Arrays.asList(methods);
+	}
+
+	@Override
+	public HashMap<String, String> getHelp() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PCObject set(String memberName, PCObject value) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
