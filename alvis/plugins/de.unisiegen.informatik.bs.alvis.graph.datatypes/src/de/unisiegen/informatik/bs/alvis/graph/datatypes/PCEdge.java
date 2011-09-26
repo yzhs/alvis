@@ -20,6 +20,7 @@ package de.unisiegen.informatik.bs.alvis.graph.datatypes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
 
@@ -290,5 +291,31 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 	public int compareTo(PCEdge arg0) {
 		// checking just based on cost
 		return this.weight.getLiteralValue() - arg0.weight.getLiteralValue();
+	}
+
+	@Override
+	public HashMap<String, String> getHelp() {
+//		HashMap<String, String> help = new HashMap<String, String>();
+//		help.put("edge_weight", Messages.edge_weight_explain + "\n"
+//				+ Messages.edge_weight_example);
+//		help.put("edge_vertices", Messages.edge_vertices_explain + "\n"
+//				+ Messages.edge_vertices_example);
+//		help.put("edge_startVertex", Messages.edge_startVertex_explain + "\n"
+//				+ Messages.edge_startVertex_example);
+//		help.put("edge_endVertex", Messages.edge_endVertex_explain + "\n"
+//				+ Messages.edge_endVertex_example);
+//		help.put("edge_color", Messages.edge_color_explain + "\n"
+//				+ Messages.edge_color_example);
+//		help.put("edge_remove", Messages.edge_remove_explain + "\n"
+//				+ Messages.edge_remove_example);
+//		
+//		return help;
+		return null;
+	}
+
+	@Override
+	public PCObject set(String memberName, PCObject value) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -20,6 +20,7 @@ package de.unisiegen.informatik.bs.alvis.graph.datatypes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
 
@@ -203,11 +204,10 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 		graph._get_edges_().add(ed);
 		return ed;
 	}
-	
+
 	public void removeEdge(PCEdge toRemove) {
 		edges.remove(toRemove);
 	}
-	
 
 	public static PCVertex getNull() {
 		return new PCVertex(null);
@@ -238,4 +238,35 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 	public PCBoolean _notEqual_(PCObject other) {
 		return this._equal_(other)._not_();
 	}
+
+	@Override
+	public HashMap<String, String> getHelp() {
+//		HashMap<String, String> help = new HashMap<String, String>();
+//		help.put("vertex_color", Messages.vertex_color_explain + "\n"
+//				+ Messages.vertex_color_example);
+//		help.put("vertex_distance", Messages.vertex_distance_explain + "\n"
+//				+ Messages.vertex_distance_example);
+//		help.put("vertex_parentId", Messages.vertex_parentId_explain + "\n"
+//				+ Messages.vertex_parentId_example);
+//		help.put("vertex_adjacents", Messages.vertex_adjacents_explain + "\n"
+//				+ Messages.vertex_adjacents_example);
+//		help.put("vertex_edges", Messages.vertex_edges_explain + "\n"
+//				+ Messages.vertex_edges_example);
+//		help.put("vertex_equal", Messages.vertex_equal_explain + "\n"
+//				+ Messages.vertex_equal_example);
+//		help.put("vertex_notEqual", Messages.vertex_notEqual_explain + "\n"
+//				+ Messages.vertex_notEqual_example);
+//		help.put("vertex_connectTo", Messages.vertex_connectTo_explain + "\n"
+//				+ Messages.vertex_connectTo_example);
+//
+//		return help;
+		return null;
+	}
+
+	@Override
+	public PCObject set(String memberName, PCObject value) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

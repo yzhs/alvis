@@ -19,6 +19,7 @@
 package de.unisiegen.informatik.bs.alvis.graph.datatypes;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
@@ -189,5 +190,24 @@ public class PCGraph extends PCObject {
 
 	public static PCGraph getNull() {
 		return new PCGraph();
+	}
+
+	@Override
+	public HashMap<String, String> getHelp() {
+//		HashMap<String, String> help = new HashMap<String, String>();
+//		help.put("graph_vertices", Messages.graph_vertices_explain + "\n"
+//				+ Messages.graph_vertices_example);
+//		help.put("graph_edges", Messages.graph_edges_explain + "\n"
+//				+ Messages.graph_edges_example);
+//
+//		
+//		return help;
+		return null;
+	}
+
+	@Override
+	public PCObject set(String memberName, PCObject value) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
