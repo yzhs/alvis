@@ -50,6 +50,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import de.unisiegen.informatik.bs.alvis.Activator;
 import de.unisiegen.informatik.bs.alvis.editors.Messages;
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IExportItem;
+import de.unisiegen.informatik.bs.alvis.vm.BPListener;
 import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
 
 /**
@@ -68,8 +69,6 @@ public class PdfExport extends Document {
 	private static Font smallBold = FontFactory.getFont("Calibri", 12,
 			Font.BOLD);
 
-	private Thread thr;
-
 	// private Anchor anchor;
 	// private Chapter chapter;
 	private Paragraph paragraph;
@@ -82,23 +81,80 @@ public class PdfExport extends Document {
 	 * @throws IOException
 	 */
 	public PdfExport() throws DocumentException, IOException {
+		final IExportItem exportItem = Activator.getDefault()
+				.getActivePartToExport();
+
+		if (exportItem == null) {
+			MessageBox sure = new MessageBox(new Shell(), SWT.ICON_WARNING
+					| SWT.OK);
+			sure.setMessage(Messages.getLabel("nothingToExport"));
+			sure.open();
+			return;
+		}
+
+		final ArrayList<Image> images = new ArrayList<Image>();
+
+		if (exportItem.isRun()) { // export run
+			VirtualMachine vm = VirtualMachine.getInstance();
+
+			BPListener listen = new BPListener() {
+				@Override
+				public void onBreakPoint(int BreakPointNumber) {
+					Image image = exportItem.getImage();
+					if (image != null)
+						images.add(image);
+					VirtualMachine.getInstance().stepAlgoForward();
+				}
+			};
+
+			Activator.getDefault().runStart();
+			Activator.getDefault().shutUpForExport(true);
+			vm.addBPListener(listen);
+		}
 
 		try {
-
 			MyFileDialog saveDialog = new MyFileDialog(0);
 			String path = saveDialog.open();
 			PdfWriter.getInstance(this, new FileOutputStream(path));
-
 			open();
-
 			addMetaData();
 			addTitle();
+			// export single editor
+			if (!exportItem.isRun()) {
+				Image image = exportItem.getImage();
+				if (image != null)
+					images.add(image);
+				
+				paragraph = toParagraph(images.get(0));
+				add(paragraph);
 
-			addContent();
-			thr.join();
+				// adding source code:
+				StyledText sourceCode = (StyledText) exportItem.getSourceCode();
+				paragraph = toParagraph(sourceCode);
+				add(paragraph);
+			}
+			// export run, saving images taken earlier
+			else {
+			Activator.getDefault().getWorkbench().getDisplay()
+					.syncExec(new Runnable() {
+						@Override
+						public void run() {
 
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+							ExportShell exportShell = new ExportShell(Display
+									.getDefault(), images);
+							ArrayList<Image> imgs = exportShell
+									.getWantedImages();
+							for (Image img : imgs) {
+								try {
+									paragraph = toParagraph(img);
+									add(paragraph);
+								} catch (DocumentException e) {
+									e.printStackTrace();
+								}
+							}
+						}
+					});
+			}
 		} catch (NullPointerException npe) {
 			npe.printStackTrace();
 		} catch (FileNotFoundException fnfe) {
@@ -106,12 +162,9 @@ public class PdfExport extends Document {
 					| SWT.OK);
 			sure.setMessage(Messages.getLabel("FileProbablyopened"));
 			sure.open();
-		} catch (NothingToExportException e) {
-			MessageBox sure = new MessageBox(new Shell(), SWT.ICON_WARNING
-					| SWT.OK);
-			sure.setMessage(Messages.getLabel("nothingToExport"));
-			sure.open();
 		} finally {
+			Activator.getDefault().shutUpForExport(false);
+			VirtualMachine.getInstance().removeAllBPListener();
 			close();
 		}
 	}
@@ -146,105 +199,6 @@ public class PdfExport extends Document {
 
 		add(title);
 
-	}
-
-	private void addContent() throws DocumentException,
-			NothingToExportException {
-
-		// anchor = new Anchor("anchor", catFont);
-		// anchor.setName("anchor");
-
-		final IExportItem exportItem;
-		exportItem = Activator.getDefault().getActivePartToExport();
-
-		// chapter = new Chapter(new Paragraph(anchor), 1);
-
-		if (exportItem == null)
-			throw new NothingToExportException(); // nothing to export
-
-		final ArrayList<Image> images = new ArrayList<Image>();
-
-		if (exportItem.isRun()) { // export run
-			// Image image;
-
-			thr = new Thread(new Runnable() {
-				@Override
-				public void run() {
-					Image image = exportItem.getImage();
-					if (image != null)
-						images.add(image);
-
-					Activator.getDefault().shutUpForExport(true);
-					VirtualMachine vm = VirtualMachine.getInstance();
-
-					Activator.getDefault().runStart();
-					vm.waitForBreakPoint();
-
-					image = exportItem.getImage();
-
-					if (image != null)
-						images.add(image);
-
-					int maxAmountOfPicturesToShow = 15;
-					for (int i = 0; i < maxAmountOfPicturesToShow; i++) {
-						vm.stepAlgoForward();
-						vm.waitForBreakPoint();
-						if (!vm.runningThreads())
-							break;
-
-						image = exportItem.getImage();
-						if (image != null)
-							images.add(image);
-
-					}
-					Activator.getDefault().getWorkbench().getDisplay()
-							.syncExec(new Runnable() {
-								@Override
-								public void run() {
-
-									ExportShell exportShell = new ExportShell(
-											Display.getDefault(), images);
-									ArrayList<Image> imgs = exportShell
-											.getWantedImages();
-									for (Image img : imgs) {
-										try {
-											paragraph = toParagraph(img);
-											add(paragraph);
-										} catch (DocumentException e) {
-											// TODO Auto-generated catch block
-											e.printStackTrace();
-										}
-									}
-								}
-							});
-
-					Activator.getDefault().shutUpForExport(false);
-					return;
-
-				}
-			});
-
-			thr.start();
-
-		} else { // export single editor
-
-			// adding image:
-			Image image = exportItem.getImage();
-			if (image != null) {
-				paragraph = toParagraph(image);
-				add(paragraph);
-			}
-			// adding source code:
-			try {
-				StyledText sourceCode = (StyledText) exportItem.getSourceCode();
-				paragraph = toParagraph(sourceCode);
-				add(paragraph);
-			} catch (ClassCastException cce) {
-			} catch (DocumentException de) {
-			} catch (NullPointerException npe) {
-			}
-
-		}
 	}
 
 	/**

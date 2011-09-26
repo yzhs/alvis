@@ -66,8 +66,8 @@ public class Activator extends AbstractUIPlugin {
 
 	private AlgorithmPartitionScanner fPartitionsScanner;
 
-	private boolean shutUpForExport;
-	
+	private static boolean shutUpForExport;
+
 	private RunAlgorithm algorithmRunPerspective;
 
 	// private Export myExport = new Export();
@@ -180,17 +180,18 @@ public class Activator extends AbstractUIPlugin {
 	public PCObject from;
 
 	public void runStart() {
-
-		shutUpForExport = false;
-		vm.removeAllBPListener();
+		if (!shutUpForExport) {
+			vm.removeAllBPListener();
+		}
 		vm.stopAlgos();
-		vm.setParameter("algo", paraMap); 
+		vm.setParameter("algo", paraMap);
 		vm.addBPListener(new BPListener() {
 			@Override
 			public void onBreakPoint(int BreakPointNumber) {
-				
+
 				if (shutUpForExport)
-					return; // this deactivates the listener when run export works
+					return; // this deactivates the listener when run export
+							// works
 
 				Activator.getDefault().algorithmContainer
 						.removeAllCurrentLine();
@@ -198,14 +199,15 @@ public class Activator extends AbstractUIPlugin {
 						.addCurrentBP(BreakPointNumber);
 			}
 		});
-		
+
 		vm.addDPListener(new DPListener() {
 			@Override
 			public void onDecisionPoint(int DPNr, PCObject from,
 					@SuppressWarnings("rawtypes") SortableCollection toSort) {
 
 				if (shutUpForExport)
-					return; // this deactivates the listener when run export works
+					return; // this deactivates the listener when run export
+							// works
 
 				// Check if the user wants to order the decisions
 				if (activeRun.getOnDecisionPoint().equals(EDecisionPoint.RAND))
@@ -548,10 +550,10 @@ public class Activator extends AbstractUIPlugin {
 	}
 
 	public void setActiveRunAlgorithm(RunAlgorithm runAlgorithm) {
-		this.algorithmRunPerspective = runAlgorithm;		
+		this.algorithmRunPerspective = runAlgorithm;
 	}
-	
-	public RunAlgorithm getActiveRunAlgorithm(){
+
+	public RunAlgorithm getActiveRunAlgorithm() {
 		return this.algorithmRunPerspective;
 	}
 

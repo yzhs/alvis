@@ -182,6 +182,17 @@ public class VirtualMachine {
 	}
 
 	/**
+	 * Remove listener from algo
+	 * 
+	 * @param listener
+	 */
+	public void removeBPListener(BPListener listener) {
+		for(AlgoThread algo : algos.values()) {
+			algo.removeBPListener(listener);
+		}
+	}
+	
+	/**
 	 * Remove alll listener of a given string including the string itself
 	 * 
 	 * @param algo
