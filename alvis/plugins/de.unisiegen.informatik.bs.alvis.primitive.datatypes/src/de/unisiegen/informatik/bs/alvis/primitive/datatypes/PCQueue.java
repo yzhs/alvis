@@ -31,7 +31,7 @@ import java.util.List;
  */
 
 public class PCQueue<T extends PCObject> extends PCObject {
-	protected static final String TYPENAME = "Queue";
+	public static final String TYPENAME = "Queue";
 	private ArrayList<T> objects;
 
 	/**
@@ -90,10 +90,10 @@ public class PCQueue<T extends PCObject> extends PCObject {
 		return objects.equals(other.objects);
 	}
 	
-	public static String getTypeName() {
+	public String getTypeName() {
 		String result = PCQueue.TYPENAME;
 		result.concat("<");
-		result.concat(PCObject.getTypeName());
+		result.concat(PCObject.TYPENAME);
 		result.concat(">");
 		return result;
 	}

@@ -41,7 +41,7 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCString;
 
 public class PCEdge extends PCObject implements Comparable<PCEdge> {
 
-	protected static final String TYPENAME = "Edge";
+	public static final String TYPENAME = "Edge";
 
 	// the used members
 	private PCVertex startVertex;
@@ -244,10 +244,6 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 		return false;
 	}
 
-	public static String getTypeName() {
-		return PCEdge.TYPENAME;
-	}
-
 	public boolean isGraphical(GraphicalRepresentationEdge edge) {
 		for (GraphicalRepresentation gr : this.allGr) {
 			if (gr == edge) {
@@ -295,22 +291,21 @@ public class PCEdge extends PCObject implements Comparable<PCEdge> {
 
 	@Override
 	public HashMap<String, String> getHelp() {
-//		HashMap<String, String> help = new HashMap<String, String>();
-//		help.put("edge_weight", Messages.edge_weight_explain + "\n"
-//				+ Messages.edge_weight_example);
-//		help.put("edge_vertices", Messages.edge_vertices_explain + "\n"
-//				+ Messages.edge_vertices_example);
-//		help.put("edge_startVertex", Messages.edge_startVertex_explain + "\n"
-//				+ Messages.edge_startVertex_example);
-//		help.put("edge_endVertex", Messages.edge_endVertex_explain + "\n"
-//				+ Messages.edge_endVertex_example);
-//		help.put("edge_color", Messages.edge_color_explain + "\n"
-//				+ Messages.edge_color_example);
-//		help.put("edge_remove", Messages.edge_remove_explain + "\n"
-//				+ Messages.edge_remove_example);
-//		
-//		return help;
-		return null;
+		HashMap<String, String> help = new HashMap<String, String>();
+		help.put("weight", Messages.edge_weight_explain + "\n"
+				+ Messages.edge_weight_example);
+		help.put("vertices", Messages.edge_vertices_explain + "\n"
+				+ Messages.edge_vertices_example);
+		help.put("startVertex", Messages.edge_startVertex_explain + "\n"
+				+ Messages.edge_startVertex_example);
+		help.put("endVertex", Messages.edge_endVertex_explain + "\n"
+				+ Messages.edge_endVertex_example);
+		help.put("color", Messages.edge_color_explain + "\n"
+				+ Messages.edge_color_example);
+		help.put("remove", Messages.edge_remove_explain + "\n"
+				+ Messages.edge_remove_example);
+		//TODO Frank add information for the Edge class
+		return help;
 	}
 
 	@Override

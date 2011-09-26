@@ -21,7 +21,7 @@ package de.unisiegen.informatik.bs.alvis.primitive.datatypes;
 import java.util.HashMap;
 
 public class PCVoid extends PCObject {
-	protected static final String TYPENAME = "Void";
+	public static final String TYPENAME = "Void";
 	
 	@Override
 	public String toConsole() {
@@ -35,10 +35,6 @@ public class PCVoid extends PCObject {
 		// no value in get String representation
 		String result = new String("");
 		return result;
-	}
-
-	public static String getTypeName() {
-		return PCVoid.TYPENAME;
 	}
 
 	@Override

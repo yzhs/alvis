@@ -32,7 +32,7 @@ import java.util.Stack;
  */
 
 public class PCBoolean extends PCObject {
-	protected static final String TYPENAME = "Boolean";
+	public static final String TYPENAME = "Boolean";
 
 	protected static PCObject localNull = new PCBoolean();
 
@@ -138,10 +138,6 @@ public class PCBoolean extends PCObject {
 			return false;
 		PCBoolean other = (PCBoolean) toCheckAgainst;
 		return other != localNull && other.getLiteralValue() == this.value;
-	}
-
-	public static String getTypeName() {
-		return PCBoolean.TYPENAME;
 	}
 
 	public PCBoolean _and_(PCBoolean other) {

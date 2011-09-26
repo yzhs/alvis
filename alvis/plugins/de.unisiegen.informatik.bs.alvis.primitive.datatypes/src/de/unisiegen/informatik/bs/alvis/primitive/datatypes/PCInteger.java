@@ -30,7 +30,7 @@ import java.util.List;
  */
 
 public class PCInteger extends PCObject {
-	protected static final String TYPENAME = "Integer";
+	public static final String TYPENAME = "Integer";
 
 	protected static PCInteger localNull;
 	protected static PCInteger localInfty;
@@ -99,10 +99,6 @@ public class PCInteger extends PCObject {
 		if (!(toCheckAgainst instanceof PCInteger))
 			return false;
 		return ((PCInteger) toCheckAgainst).getLiteralValue() == this.value;
-	}
-
-	public static String getTypeName() {
-		return PCInteger.TYPENAME;
 	}
 
 	public PCInteger _add_(PCInteger other) {

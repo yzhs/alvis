@@ -17,15 +17,14 @@ import java.util.Stack;
 
 public abstract class PCObject {
 
-	protected final static String TYPENAME = "Object";
+	public static String TYPENAME = "Object";
 	protected static PCObject localInfty;
 	protected static PCObject localNull;
-
 	protected List<GraphicalRepresentation> allGr = new ArrayList<GraphicalRepresentation>();
-
 	protected boolean isInBatchRun;
 	protected List<Stack<Object>> commandsforGr;
-
+	
+	
 	/**
 	 * if not initialized will set localNull and localInfty
 	 * 
@@ -121,8 +120,20 @@ public abstract class PCObject {
 	 * 
 	 * @return the used Pseudocode Typename
 	 */
-	public static String getTypeName() {
-		return TYPENAME;
+	public String getTypeName() {
+		String className = "";
+		try {
+			className = (String) this.getClass().getField("TYPENAME").get(this);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (NoSuchFieldException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		}
+		return className;
 	}
 
 	/**
@@ -173,6 +184,11 @@ public abstract class PCObject {
 	public List<String> getMethods() {
 		return new ArrayList<String>();
 	}
+	/**
+	 * @author Eduard Boos
+	 * 
+	 * @return
+	 */
 
 	/**
 	 * 

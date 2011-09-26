@@ -31,6 +31,7 @@ public class CompletionInformation {
 	private int line;
 	private int charPositionInLine;
 	private int replacementLength;
+	private String informationText;
 
 	/**
 	 * Creates a basic CompletionInformaion Object needed for Code-Completion.
@@ -50,6 +51,30 @@ public class CompletionInformation {
 		this.line = line;
 		this.charPositionInLine = charPositionInLine;
 		this.replacementLength = replacementLength;
+		this.informationText = "";
+	}
+
+	/**
+	 * Creates a basic CompletionInformaion Object needed for Code-Completion.
+	 * 
+	 * @param replacementString
+	 *            the String
+	 * @param line
+	 *            the line where this proposal should be inserted.
+	 * @param charPositionInLine
+	 *            the offset in the line.
+	 * @param replacementLength
+	 *            usually the length of the proposal that was already written.
+	 * @param informationText
+	 *            the Sting containing additional information for the
+	 *            Code-Completion
+	 */
+	public CompletionInformation(String replacementString, int line,
+			int charPositionInLine, int replacementLength,
+			String informationText) {
+		this(replacementString, line, charPositionInLine, replacementLength);
+		informationText = informationText == null ? "" : informationText;
+		this.informationText = informationText;
 	}
 
 	/**
@@ -110,6 +135,21 @@ public class CompletionInformation {
 	 */
 	public void setCharPositionInLine(int charPositionInLine) {
 		this.charPositionInLine = charPositionInLine;
+	}
+
+	/**
+	 * @return the informationText
+	 */
+	public String getInformationText() {
+		return informationText;
+	}
+
+	/**
+	 * @param informationText
+	 *            the informationText to set
+	 */
+	public void setInformationText(String informationText) {
+		this.informationText = informationText;
 	}
 
 }

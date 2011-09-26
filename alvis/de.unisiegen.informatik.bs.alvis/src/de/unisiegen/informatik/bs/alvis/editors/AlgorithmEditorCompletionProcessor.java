@@ -25,7 +25,6 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.TextPresentation;
 import org.eclipse.jface.text.contentassist.CompletionProposal;
-import org.eclipse.jface.text.contentassist.ContextInformation;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContextInformation;
@@ -117,25 +116,23 @@ public class AlgorithmEditorCompletionProcessor implements
 
 			CompletionInformation currentProposal = availableProposals.get(i);
 			if (currentProposal != null) {
-				
-				ContextInformation contextInfo = new ContextInformation(
-						currentProposal.getReplacementString(),
-						Messages.AlgorithmEditorCompletionProcessor_contextInformationFor + " "
-								+ currentProposal.getReplacementString());
-				
+//				TODO if needed add Context Information here
+//				ContextInformation contextInfo = new ContextInformation(
+//						currentProposal.getReplacementString(),
+//						Messages.AlgorithmEditorCompletionProcessor_contextInformationFor + " "
+//								+ currentProposal.getReplacementString());
 				int replacementOffset = viewer.getTextWidget().getOffsetAtLine((
 						currentProposal.getLine()-1))
 						+ currentProposal.getCharPositionInLine();
-				
 				CompletionProposal completionProposal = new CompletionProposal(
 						currentProposal.getReplacementString(),
 						replacementOffset,
 						currentProposal.getReplacementLength(), currentProposal
 								.getReplacementString().length(), null,
-						currentProposal.getReplacementString(), contextInfo,
+						currentProposal.getReplacementString(), null,
 						Messages.AlgorithmEditorCompletionProcessor_additionalInformationFor + " "
 								+ currentProposal.getReplacementString()
-								+ Messages.AlgorithmEditorCompletionProcessor_newLineSomeInfo);
+								+ "\n" + currentProposal.getInformationText());
 				resultList.add(completionProposal);
 			}
 		}

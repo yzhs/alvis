@@ -37,7 +37,7 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCString;
 
 public class PCVertex extends PCObject implements Comparable<PCVertex> {
 
-	protected static final String TYPENAME = "Vertex";
+	public static final String TYPENAME = "Vertex";
 
 	private PCGraph graph;
 
@@ -181,11 +181,6 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 		}
 		this.commandsforGr.get(0).clear();
 	}
-
-	public static String getTypeName() {
-		return PCVertex.TYPENAME;
-	}
-
 	@Override
 	public List<String> getMembers() {
 		String[] attributes = { "color", "distance", "parentId", "adjacents",
@@ -241,26 +236,25 @@ public class PCVertex extends PCObject implements Comparable<PCVertex> {
 
 	@Override
 	public HashMap<String, String> getHelp() {
-//		HashMap<String, String> help = new HashMap<String, String>();
-//		help.put("vertex_color", Messages.vertex_color_explain + "\n"
-//				+ Messages.vertex_color_example);
-//		help.put("vertex_distance", Messages.vertex_distance_explain + "\n"
-//				+ Messages.vertex_distance_example);
-//		help.put("vertex_parentId", Messages.vertex_parentId_explain + "\n"
-//				+ Messages.vertex_parentId_example);
-//		help.put("vertex_adjacents", Messages.vertex_adjacents_explain + "\n"
-//				+ Messages.vertex_adjacents_example);
-//		help.put("vertex_edges", Messages.vertex_edges_explain + "\n"
-//				+ Messages.vertex_edges_example);
-//		help.put("vertex_equal", Messages.vertex_equal_explain + "\n"
-//				+ Messages.vertex_equal_example);
-//		help.put("vertex_notEqual", Messages.vertex_notEqual_explain + "\n"
-//				+ Messages.vertex_notEqual_example);
-//		help.put("vertex_connectTo", Messages.vertex_connectTo_explain + "\n"
-//				+ Messages.vertex_connectTo_example);
-//
-//		return help;
-		return null;
+		HashMap<String, String> help = new HashMap<String, String>();
+		help.put("color", Messages.vertex_color_explain + "\n"
+				+ Messages.vertex_color_example);
+		help.put("distance", Messages.vertex_distance_explain + "\n"
+				+ Messages.vertex_distance_example);
+		help.put("parentId", Messages.vertex_parentId_explain + "\n"
+				+ Messages.vertex_parentId_example);
+		help.put("adjacents", Messages.vertex_adjacents_explain + "\n"
+				+ Messages.vertex_adjacents_example);
+		help.put("edges", Messages.vertex_edges_explain + "\n"
+				+ Messages.vertex_edges_example);
+		help.put("equal", Messages.vertex_equal_explain + "\n"
+				+ Messages.vertex_equal_example);
+		help.put("notEqual", Messages.vertex_notEqual_explain + "\n"
+				+ Messages.vertex_notEqual_example);
+		help.put("connectTo", Messages.vertex_connectTo_explain + "\n"
+				+ Messages.vertex_connectTo_example);
+		//TODO Frank add Information for The Vertex Class
+		return help;
 	}
 
 	@Override

@@ -25,28 +25,25 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Stack;
 
 import org.antlr.runtime.RecognitionException;
 import org.antlr.runtime.Token;
-import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Platform;
 
 import de.uni_siegen.informatik.bs.alvic.AbstractTLexer;
 import de.uni_siegen.informatik.bs.alvic.Compiler;
 import de.uni_siegen.informatik.bs.alvic.TParser;
-import de.unisiegen.informatik.bs.alvis.io.files.FileCopy;
 import de.unisiegen.informatik.bs.alvis.io.logger.Logger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
 /**
- * @author mays
  * @author Colin Benner
  * @author Eduard Boos
  * 
@@ -83,7 +80,7 @@ public class CompilerAccess {
 	/**
 	 * This is used to translate token names to the corresponding characters.
 	 */
-	private static Map<String, List<String>> translateCompletion = null;
+	private static Map<String, HashMap<String, String>> translateCompletion = null;
 
 	/**
 	 * Add possible results for a given key.
@@ -94,14 +91,22 @@ public class CompilerAccess {
 	 *            The possible characters.
 	 */
 	private static void add(String key, String... arg) {
-		translateCompletion.put(key, Arrays.asList(arg));
+		HashMap<String, String> hashmap = new HashMap<String, String>();
+		for (String string : arg) {
+			hashmap.put(string, "");
+		}
+		translateCompletion.put(key, hashmap);
+	}
+
+	private static void add(String key, HashMap<String, String> arg) {
+		translateCompletion.put(key, arg);
 	}
 
 	/**
 	 * Fill the translateCompletion map.
 	 */
 	private void loadTranslation() {
-		translateCompletion = new HashMap<String, List<String>>();
+		translateCompletion = new HashMap<String, HashMap<String, String>>();
 		add("MAIN", "main ");
 		add("IF", "if (");
 		add("FOR", "for ");
@@ -144,8 +149,7 @@ public class CompilerAccess {
 		add("BOOL", "false", "true");
 		add("INFTY", "infty");
 
-		translateCompletion.put("TYPE",
-				new ArrayList<String>(AbstractTLexer.getTypes()));
+		add("TYPE", getAllTypeCompletionInformation());
 	}
 
 	public static CompilerAccess getDefault() {
@@ -254,7 +258,7 @@ public class CompilerAccess {
 		loadTranslation();
 		return javaCode = compiler.compile(code);
 	}
-	
+
 	public String generateLatex(String code) throws IOException {
 		compiler = new Compiler(types, packages);
 		return compiler.compile(code, "LaTeX.stg");
@@ -316,16 +320,15 @@ public class CompilerAccess {
 	 *            the token to translate
 	 * @return the List of translated Strings.
 	 */
-	private List<String> translateAutocompletionString(
+	private HashMap<String, String> translateAutocompletionString(
 			List<String> possibleTokens) {
-		ArrayList<String> translatedCompletions = new ArrayList<String>();
+		HashMap<String, String> translatedCompletions = new HashMap<String, String>();
 		for (String toTranslate : possibleTokens) {
-			List<String> translations = translateCompletion.get(toTranslate);
-			if (null == translations)
-				translatedCompletions.add(toTranslate);
-			else
-				for (String t : translations)
-					translatedCompletions.add(t);
+			HashMap<String, String> translations = translateCompletion
+					.get(toTranslate);
+			if (null != translations) {
+				translatedCompletions.putAll(translations);
+			}
 		}
 
 		return translatedCompletions;
@@ -424,6 +427,28 @@ public class CompilerAccess {
 			}
 		}
 		return variables;
+	}
+
+	/**
+	 * This Method provides the Completion-Information for all registered
+	 * datatypes.
+	 * 
+	 * @return HashMap<String, String> with Type->CompletionInformation e.g.
+	 *         Key="Graph" Value="Information provides for the Graph Class"
+	 */
+	HashMap<String, String> getAllTypeCompletionInformation() {
+		HashMap<String, String> completionList = new HashMap<String, String>();
+		for (String type : AbstractTLexer.getTypes()) {
+			String typeInformation = "";
+			for (PCObject dataType : this.types) {
+				if (dataType.getTypeName().equals(type)
+						&& dataType.getHelp() != null) {
+					typeInformation = dataType.getHelp().get(type);
+				}
+			}
+			completionList.put(type, typeInformation);
+		}
+		return completionList;
 	}
 
 	/**
@@ -534,11 +559,12 @@ public class CompilerAccess {
 			}
 			if (!containsMain) {
 				prefixLength = charPositionInLine;
-				if(tokenToComplete!=null)
-				{
-					prefix = tokenToComplete.getText().substring(0, prefixLength);
+				if (tokenToComplete != null) {
+					prefix = tokenToComplete.getText().substring(0,
+							prefixLength);
 					line = tokenToComplete.getLine();
-					charPositionInLine = tokenToComplete.getCharPositionInLine();					
+					charPositionInLine = tokenToComplete
+							.getCharPositionInLine();
 				}
 				availableProposals.add(new CompletionInformation("main", line,
 						charPositionInLine, prefixLength));
@@ -554,7 +580,10 @@ public class CompilerAccess {
 			/* Remove the tokens which should not be completed */
 			possibleTokens.remove("DOT");
 
-			List<String> viableCompletionStrings = translateAutocompletionString(possibleTokens);
+			HashMap<String, String> viableCompletionList = new HashMap<String, String>();
+			viableCompletionList
+					.putAll(translateAutocompletionString(possibleTokens));
+
 			/* Some cases have to be handled separately */
 
 			/* Handle SEMICOLON Token */
@@ -567,10 +596,11 @@ public class CompilerAccess {
 				while (iterator.hasNext()) {
 					String[] varSet = iterator.next();
 					if (varSet.length == 2) {
-						viableCompletionStrings.add(varSet[0]);
+						viableCompletionList.put(varSet[0],
+								"Type of Variable is: \"" + varSet[1] + "\".");
 					}
 				}
-				viableCompletionStrings.addAll(AbstractTLexer.getTypes());
+				viableCompletionList.putAll(getAllTypeCompletionInformation());
 			}
 			/* EndOf Handle SEMICOLON token */
 
@@ -616,21 +646,35 @@ public class CompilerAccess {
 							if (getTokenName(varType.getType()).equals("TYPE")) {
 								for (PCObject dataType : this.types) {
 									try {
-										String type = (dataType.getClass())
-												.getMethod("getTypeName", null)
-												.invoke(null, null).toString();
-										if (type.equals(varType.getText())) {
-											viableCompletionStrings
-													.addAll(dataType
-															.getMembers());
+										if (dataType.getTypeName().equals(
+												varType.getText())) {
+											for (String attribute : dataType
+													.getMembers()) {
+												String completionInformation = "";
+												if (dataType.getHelp() != null) {
+													completionInformation = dataType
+															.getHelp().get(
+																	attribute);
+												}
+												viableCompletionList.put(
+														attribute,
+														completionInformation);
+											}
 											/*
 											 * add () to mark methods as methods
 											 */
 											List<String> methods = dataType
 													.getMethods();
 											for (String method : methods) {
-												viableCompletionStrings
-														.add(method + "()");
+												String completionInformation = "";
+												if (dataType.getHelp() != null) {
+													completionInformation = dataType
+															.getHelp().get(
+																	method);
+												}
+												viableCompletionList.put(method
+														+ "()",
+														completionInformation);
 											}
 										}
 									} catch (IllegalArgumentException e) {
@@ -643,25 +687,7 @@ public class CompilerAccess {
 										Logger.getInstance()
 												.log("alvis.compiler->CompilerAccess",
 														Logger.ERROR,
-														"IlligelArgumentException in tryAutoCompletion : "
-																+ e.getMessage());
-									} catch (IllegalAccessException e) {
-										Logger.getInstance()
-												.log("alvis.compiler->CompilerAccess",
-														Logger.ERROR,
-														"IlligelArgumentException in tryAutoCompletion : "
-																+ e.getMessage());
-									} catch (InvocationTargetException e) {
-										Logger.getInstance()
-												.log("alvis.compiler->CompilerAccess",
-														Logger.ERROR,
-														"IlligelArgumentException in tryAutoCompletion : "
-																+ e.getMessage());
-									} catch (NoSuchMethodException e) {
-										Logger.getInstance()
-												.log("alvis.compiler->CompilerAccess",
-														Logger.ERROR,
-														"IlligelArgumentException in tryAutoCompletion : "
+														"SecurityException in tryAutoCompletion : "
 																+ e.getMessage());
 									}
 								}
@@ -670,17 +696,19 @@ public class CompilerAccess {
 					}
 				}
 			}
+
 			/* EndOF Handle ID */
 
 			/*
 			 * create a CompletionInformation Object if prefix fits the
 			 * viableCompletionString
 			 */
-			for (String completionString : viableCompletionStrings) {
-				if (completionString.startsWith(prefix)) {
+			for (Entry<String, String> completionSet : viableCompletionList
+					.entrySet()) {
+				if (completionSet.getKey().startsWith(prefix)) {
 					CompletionInformation completionInfomation = new CompletionInformation(
-							completionString, line, charPositionInLine,
-							prefixLength);
+							completionSet.getKey(), line, charPositionInLine,
+							prefixLength, completionSet.getValue());
 					availableProposals.add(completionInfomation);
 				}
 			}

@@ -34,7 +34,7 @@ import java.util.ListIterator;
  *            Type Parameter of the stored items
  */
 public class PCList<E extends PCObject> extends PCObject implements SortableCollection<E> {
-	protected static final String TYPENAME = "List";
+	public static final String TYPENAME = "List";
 	private List<E> items;
 
 	/**
@@ -106,11 +106,6 @@ public class PCList<E extends PCObject> extends PCObject implements SortableColl
 		PCList other = (PCList) toCheckAgainst;
 		return items.equals(other.items);
 	}
-
-	public static String _getTypeName_() {
-		return PCList.TYPENAME;
-	}
-
 	@Override
 	public boolean add(E e) {
 		return items.add(e);

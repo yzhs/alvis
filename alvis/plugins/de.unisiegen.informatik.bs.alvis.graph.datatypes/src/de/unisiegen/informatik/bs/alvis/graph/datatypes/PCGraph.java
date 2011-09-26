@@ -22,11 +22,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCList;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
 public class PCGraph extends PCObject {
-	protected static final String TYPENAME = "Graph";
+	public static final String TYPENAME = "Graph";
 	private PCList<PCEdge> edges;
 	private PCList<PCVertex> vertices;
 
@@ -155,11 +155,6 @@ public class PCGraph extends PCObject {
 		PCGraph other = (PCGraph) toCheckAgainst;
 		return vertices.equals(other.vertices) && edges.equals(other.edges);
 	}
-
-	public static String getTypeName() {
-		return PCGraph.TYPENAME;
-	}
-
 	/**
 	 * Enable/Disable the batch Modification every Change on the
 	 * GraphicalRepresentation will be delayed and only the last one will be
@@ -194,15 +189,16 @@ public class PCGraph extends PCObject {
 
 	@Override
 	public HashMap<String, String> getHelp() {
-//		HashMap<String, String> help = new HashMap<String, String>();
-//		help.put("graph_vertices", Messages.graph_vertices_explain + "\n"
-//				+ Messages.graph_vertices_example);
-//		help.put("graph_edges", Messages.graph_edges_explain + "\n"
-//				+ Messages.graph_edges_example);
-//
-//		
-//		return help;
-		return null;
+		HashMap<String, String> help = new HashMap<String, String>();
+		help.put("vertices", Messages.graph_vertices_explain + "\n"
+				+ Messages.graph_vertices_example);
+		help.put("edges", Messages.graph_edges_explain + "\n"
+				+ Messages.graph_edges_example);
+		help.put("Graph", "Information for the Grahp datatype should be provided here");
+
+		
+		return help;
+//		return null;
 	}
 
 	@Override

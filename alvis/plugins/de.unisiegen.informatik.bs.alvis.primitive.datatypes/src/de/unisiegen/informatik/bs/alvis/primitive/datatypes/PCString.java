@@ -29,7 +29,7 @@ import java.util.List;
  */
 
 public class PCString extends PCObject {
-	protected static final String TYPENAME = "String";
+	public static final String TYPENAME = "String";
 
 	private String value;
 
@@ -81,10 +81,6 @@ public class PCString extends PCObject {
 			return false;
 		PCString other = (PCString) toCheckAgainst;
 		return (value == null) ? other.value == null : other.value.equals(value);
-	}
-
-	public static String getTypeName() {
-		return PCString.TYPENAME;
 	}
 
 	public PCString _add_(PCString other) {

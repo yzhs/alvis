@@ -29,7 +29,7 @@ import java.util.List;
  */
 
 public class PCStack<T extends PCObject> extends PCObject {
-	protected static final String TYPENAME = "Stack";
+	public static final String TYPENAME = "Stack";
 	private ArrayList<T> objects;
 
 	/**
@@ -96,10 +96,10 @@ public class PCStack<T extends PCObject> extends PCObject {
 		return result;
 	}
 
-	public static String getTypeName() {
+	public String getTypeName() {
 		String result = PCStack.TYPENAME;
 		result.concat("<");
-		result.concat(PCObject.getTypeName());
+		result.concat(PCObject.TYPENAME);
 		result.concat(">");
 		return result;
 	}
