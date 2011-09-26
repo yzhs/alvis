@@ -68,6 +68,8 @@ public class PdfExport extends Document {
 	private static Font smallBold = FontFactory.getFont("Calibri", 12,
 			Font.BOLD);
 
+	private Thread thr;
+
 	// private Anchor anchor;
 	// private Chapter chapter;
 	private Paragraph paragraph;
@@ -91,9 +93,14 @@ public class PdfExport extends Document {
 
 			addMetaData();
 			addTitle();
-			addContent();
 
+			addContent();
+			thr.join();
+
+		} catch (InterruptedException e) {
+			e.printStackTrace();
 		} catch (NullPointerException npe) {
+			npe.printStackTrace();
 		} catch (FileNotFoundException fnfe) {
 			MessageBox sure = new MessageBox(new Shell(), SWT.ICON_WARNING
 					| SWT.OK);
@@ -152,12 +159,6 @@ public class PdfExport extends Document {
 
 		// chapter = new Chapter(new Paragraph(anchor), 1);
 
-		try {
-			Thread.sleep(200);// wait for gui to potentially open editor and
-								// dispose file dialog
-		} catch (InterruptedException e) {
-		}
-
 		if (exportItem == null)
 			throw new NothingToExportException(); // nothing to export
 
@@ -166,7 +167,7 @@ public class PdfExport extends Document {
 		if (exportItem.isRun()) { // export run
 			// Image image;
 
-			Thread thr = new Thread(new Runnable() {
+			thr = new Thread(new Runnable() {
 				@Override
 				public void run() {
 					Image image = exportItem.getImage();
@@ -186,16 +187,15 @@ public class PdfExport extends Document {
 
 					int maxAmountOfPicturesToShow = 15;
 					for (int i = 0; i < maxAmountOfPicturesToShow; i++) {
-
+						vm.stepAlgoForward();
+						vm.waitForBreakPoint();
 						if (!vm.runningThreads())
-							return;
+							break;
 
 						image = exportItem.getImage();
 						if (image != null)
 							images.add(image);
 
-						vm.waitForBreakPoint();
-						vm.stepAlgoForward();
 					}
 					Activator.getDefault().getWorkbench().getDisplay()
 							.syncExec(new Runnable() {
@@ -225,22 +225,6 @@ public class PdfExport extends Document {
 			});
 
 			thr.start();
-
-			// while(thr.isAlive()) {
-			// try {
-			// Thread.sleep(1000);
-			//
-			// } catch (InterruptedException e) {
-			// e.printStackTrace();
-			// }
-			// }
-
-			// try {
-			// thr.join();
-			// } catch (InterruptedException e) {
-			// e.printStackTrace();
-			// }
-			//
 
 		} else { // export single editor
 
