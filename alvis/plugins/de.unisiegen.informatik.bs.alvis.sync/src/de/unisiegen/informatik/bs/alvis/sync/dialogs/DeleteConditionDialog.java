@@ -60,11 +60,6 @@ public class DeleteConditionDialog extends ApplicationWindow {
 			public void handleEvent(Event e) {
 				int[] selection = list.getSelectionIndices();
 				for (int i = 0; i < selection.length; i++) {
-					System.err
-							.println("SIZE " //$NON-NLS-1$
-									+ AlvisScenario.scenario
-											.getConditionsList().size());
-					System.err.println("SEL " + selection[i]); //$NON-NLS-1$
 					AlvisCondition c = AlvisScenario.scenario
 							.getConditionsList().get(selection[i]);
 					AlvisScenario.scenario.removeCondition(c);

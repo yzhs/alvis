@@ -31,7 +31,7 @@ public class AlvisThread implements GraphicalRepresentationThread {
 		id = scenario.getAdmin().requestId();
 		this.name = name;
 		blocked = status;
-		lName = new Label(myScenario.getThreadsScroll(), SWT.NONE);
+		lName = new Label(myScenario.getThreadsGroup(), SWT.NONE);
 		lName.setText(name);
 		lName.setBackground(status ? BLOCKED : NORMAL);
 	}
@@ -42,7 +42,7 @@ public class AlvisThread implements GraphicalRepresentationThread {
 		this.id = id;
 		this.name = name;
 		blocked = status;
-		lName = new Label(myScenario.getThreadsScroll(), SWT.NONE);
+		lName = new Label(myScenario.getThreadsGroup(), SWT.NONE);
 		lName.setText(name);
 		lName.setBackground(status ? BLOCKED : NORMAL);
 	}
@@ -130,6 +130,10 @@ public class AlvisThread implements GraphicalRepresentationThread {
 		} else {
 			return (a.getId() == id);
 		}
+	}
+	
+	public String toString() {
+		return name + " " + (blocked ? "" : "not ") + "blocked";
 	}
 
 }

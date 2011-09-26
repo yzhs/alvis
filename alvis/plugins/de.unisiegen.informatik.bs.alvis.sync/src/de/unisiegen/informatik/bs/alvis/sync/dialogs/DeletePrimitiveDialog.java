@@ -60,11 +60,6 @@ public class DeletePrimitiveDialog extends ApplicationWindow {
 			public void handleEvent(Event e) {
 				int[] selection = list.getSelectionIndices();
 				for (int i = 0; i < selection.length; i++) {
-					System.err
-							.println("SIZE " //$NON-NLS-1$
-									+ AlvisScenario.scenario
-											.getPrimitivesList().size());
-					System.err.println("SEL " + selection[i]); //$NON-NLS-1$
 					AlvisPrimitive p = AlvisScenario.scenario
 							.getPrimitivesList().get(selection[i]);
 					AlvisScenario.scenario.removePrimitive(p);

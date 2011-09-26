@@ -1,5 +1,8 @@
 package de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 
@@ -26,8 +29,9 @@ public class AlvisBuffer implements GraphicalRepresentationBuffer {
 		this.capacity = capacity;
 		usage = new Label[capacity];
 		for (int i = 0; i < capacity; i++) {
-//			usage[i] = new Label(scenario, SWT.NONE);
-//			usage[i].setBackground(EMPTY);
+			usage[i] = new Label(myScenario.bufferGroup, SWT.NONE);
+			usage[i].setBounds(8, 20 + i * 25, 180, 20);
+			usage[i].setBackground(AlvisColor.green.color());
 		}
 		lastFilled = 0;
 	}
@@ -39,8 +43,9 @@ public class AlvisBuffer implements GraphicalRepresentationBuffer {
 		this.capacity = capacity;
 		usage = new Label[capacity];
 		for (int i = 0; i < capacity; i++) {
-//			usage[i] = new Label(scenario, SWT.NONE);
-//			usage[i].setBackground(EMPTY);
+			usage[i] = new Label(myScenario.bufferGroup, SWT.NONE);
+			usage[i].setBounds(8, 20 + i * 25, 180, 20);
+			usage[i].setBackground(AlvisColor.green.color());
 		}
 		lastFilled = 0;
 	}
@@ -99,5 +104,14 @@ public class AlvisBuffer implements GraphicalRepresentationBuffer {
 			return (b.getId() == id);
 		}
 	}
+	
+	public Label[] getLabels() {
+		return usage;
+	}	
 
+	public void remove() {
+		for (int i = 0; i < usage.length; i++) {
+			usage[i].dispose();
+		}
+	}
 }

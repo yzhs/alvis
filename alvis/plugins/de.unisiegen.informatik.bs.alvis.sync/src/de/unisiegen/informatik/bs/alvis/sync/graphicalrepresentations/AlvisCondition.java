@@ -27,7 +27,7 @@ public class AlvisCondition implements GraphicalRepresentationCondition {
 		this.name = name;
 		sema = new AlvisSemaphore(scenario, name + "_sema", 1); //$NON-NLS-1$
 		semaName = sema.getName();
-		label = new Label(scenario.getConditionsScroll(), SWT.NONE);
+		label = new Label(scenario.getConditionsGroup(), SWT.NONE);
 		setState(0);
 	}
 	
@@ -37,7 +37,7 @@ public class AlvisCondition implements GraphicalRepresentationCondition {
 		this.name = name;
 		sema = new AlvisSemaphore(scenario, name + "_sema", 1); //$NON-NLS-1$
 		semaName = sema.getName();
-		label = new Label(scenario.getConditionsScroll(), SWT.NONE);
+		label = new Label(scenario.getConditionsGroup(), SWT.NONE);
 		setState(0);
 	}
 
@@ -110,6 +110,10 @@ public class AlvisCondition implements GraphicalRepresentationCondition {
 		} else {
 			return (c.getId() == id);
 		}
+	}
+	
+	public String toString() {
+		return name + " (" + waiting + ")";
 	}
 
 }

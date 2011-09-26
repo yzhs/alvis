@@ -22,7 +22,7 @@ public class AlvisPrimitive implements GraphicalRepresentation {
 		type = true;
 		this.name = name;
 		intValue = value;
-		label = new Label(scenario.getPrimitivesScroll(), SWT.NONE);
+		label = new Label(scenario.getPrimitivesGroup(), SWT.NONE);
 		label.setText("int " + name + " = " + intValue); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
@@ -32,7 +32,7 @@ public class AlvisPrimitive implements GraphicalRepresentation {
 		type = true;
 		this.name = name;
 		intValue = value;
-		label = new Label(scenario.getPrimitivesScroll(), SWT.NONE);
+		label = new Label(scenario.getPrimitivesGroup(), SWT.NONE);
 		label.setText("int " + name + " = " + intValue); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 	
@@ -42,7 +42,7 @@ public class AlvisPrimitive implements GraphicalRepresentation {
 		type = false;
 		this.name = name;
 		boolValue = value;
-		label = new Label(scenario.getPrimitivesScroll(), SWT.NONE);
+		label = new Label(scenario.getPrimitivesGroup(), SWT.NONE);
 		label.setText("boolean " + name + " = " + (value ? "true" : "false")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		
 	}
@@ -53,7 +53,7 @@ public class AlvisPrimitive implements GraphicalRepresentation {
 		type = false;
 		this.name = name;
 		boolValue = value;
-		label = new Label(scenario.getPrimitivesScroll(), SWT.NONE);
+		label = new Label(scenario.getPrimitivesGroup(), SWT.NONE);
 		label.setText("boolean " + name + " = " + (value ? "true" : "false")); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$ //$NON-NLS-4$
 		
 	}
@@ -142,6 +142,10 @@ public class AlvisPrimitive implements GraphicalRepresentation {
 		} else {
 			return (p.getId() == id);
 		}
+	}
+	
+	public String toString() {
+		return (type ? "int" : "bool") + " " + name + " = " + (type ? intValue : boolValue);
 	}
 
 }

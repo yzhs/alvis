@@ -39,7 +39,7 @@ public class NewBufferWizard extends Wizard implements INewWizard {
 			int capacity = Integer.parseInt(page.getCapacity());
 			AlvisBuffer b = new AlvisBuffer(myScenario, capacity);
 			myScenario.setBuffer(b);
-			myScenario.getAdmin().addBuffer(b);
+			myScenario.addBuffer(b);
 			return true;
 		} catch (NumberFormatException e) {
 			Shell s = Activator.getDefault().getWorkbench().getActiveWorkbenchWindow().getShell();

@@ -33,6 +33,7 @@ public class NewPrimitiveWizardPage extends WizardPage {
 		String[] typeValues = {"Integer", "Boolean"}; //$NON-NLS-1$ //$NON-NLS-2$
 		
 		type.setItems(typeValues);
+		type.select(0);
 		lName = new Label(container, SWT.NULL);
 		lName.setText(Messages.NewPrimitiveWizardPage_primitiveName);
 		name = new Text(container, SWT.BORDER | SWT.SINGLE);
