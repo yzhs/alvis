@@ -91,10 +91,6 @@ public class PCThread extends PCObject implements Runnable {
 				+ currentLine;
 	}
 
-	public static String getTypeName() {
-		return TYPENAME;
-	}
-
 	public PCObject set(String memberName, PCObject value) {
 		// TODO remove this method
 		if (memberName.equals("doStep")) {

@@ -111,11 +111,6 @@ public class PCCondition extends PCObject {
 		return TYPENAME + ": " + waiting + " waiting, monitor "
 				+ (i <= 0 ? "locked." : "unlocked.");
 	}
-
-	public static String getTypeName() {
-		return TYPENAME;
-	}
-
 	public PCObject set(String memberName, PCObject value) {
 		// TODO remove this method
 		if (memberName.equals("semaphore")) {
