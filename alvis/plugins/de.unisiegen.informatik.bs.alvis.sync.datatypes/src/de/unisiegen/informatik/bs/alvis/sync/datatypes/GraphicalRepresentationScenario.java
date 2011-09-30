@@ -4,10 +4,4 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentat
 
 public interface GraphicalRepresentationScenario extends GraphicalRepresentation {
 	
-	public void hasVariables();
-	
-	public void hasBuffer();
-	
-	public void hasOutput();
-
 }

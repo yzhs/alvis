@@ -4,6 +4,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
 import de.unisiegen.informatik.bs.alvis.sync.datatypes.GraphicalRepresentationSemaphore;
 import de.unisiegen.informatik.bs.alvis.sync.datatypes.PCSemaphore;
 
@@ -26,7 +27,7 @@ public class AlvisSemaphore implements GraphicalRepresentationSemaphore {
 		d = scenario.getMyDisplay();
 		id = scenario.getAdmin().requestId();
 		this.name = name;
-		sema = new PCSemaphore(counter);
+		sema = new PCSemaphore(new PCInteger(counter));
 		label = new Label(scenario.getSemaphoresGroup(), SWT.NULL);
 		sema.addGraphicalRepresentation(this);
 		this.setState(counter);
@@ -37,7 +38,7 @@ public class AlvisSemaphore implements GraphicalRepresentationSemaphore {
 		d = scenario.getMyDisplay();
 		this.id = id;
 		this.name = name;
-		sema = new PCSemaphore(counter);
+		sema = new PCSemaphore(new PCInteger(counter));
 		label = new Label(scenario.getSemaphoresGroup(), SWT.NULL);
 		sema.addGraphicalRepresentation(this);
 		this.setState(counter);
@@ -53,13 +54,13 @@ public class AlvisSemaphore implements GraphicalRepresentationSemaphore {
 		d.syncExec(new Runnable() {
 			public void run() {
 				if (label.isDisposed()) return;
-				if (count > 0) {
-					label.setBackground(FREE);
-				} else if (count == 0) {
-					label.setBackground(ZERO);
-				} else {
-					label.setBackground(WAIT);
-				}
+//				if (count > 0) {
+//					label.setBackground(FREE);
+//				} else if (count == 0) {
+//					label.setBackground(ZERO);
+//				} else {
+//					label.setBackground(WAIT);
+//				}
 				label.setText("Semaphore " + name + ": " + count); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 		});
@@ -103,6 +104,11 @@ public class AlvisSemaphore implements GraphicalRepresentationSemaphore {
 		} else {
 			return (this.id == s.getId());
 		}
+	}
+
+	@Override
+	public int getState() {
+		return count;
 	}
 
 }

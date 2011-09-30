@@ -1,8 +1,6 @@
 package de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 
@@ -57,7 +55,7 @@ public class AlvisBuffer implements GraphicalRepresentationBuffer {
 	public void setFull() {
 		d.syncExec(new Runnable() {
 			public void run() {
-				usage[lastFilled++].setBackground(FULL);
+				usage[lastFilled++].setBackground(AlvisColor.orange.color());
 			}
 		});
 	}
@@ -69,7 +67,7 @@ public class AlvisBuffer implements GraphicalRepresentationBuffer {
 	public void setEmpty() {
 		d.syncExec(new Runnable() {
 			public void run() {
-				usage[--lastFilled].setBackground(EMPTY);
+				usage[--lastFilled].setBackground(AlvisColor.green.color());
 			}
 		});
 	}
@@ -113,5 +111,10 @@ public class AlvisBuffer implements GraphicalRepresentationBuffer {
 		for (int i = 0; i < usage.length; i++) {
 			usage[i].dispose();
 		}
+	}
+
+	@Override
+	public int getUsage() {
+		return lastFilled;
 	}
 }

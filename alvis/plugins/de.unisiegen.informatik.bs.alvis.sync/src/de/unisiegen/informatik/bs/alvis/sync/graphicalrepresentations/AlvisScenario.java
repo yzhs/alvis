@@ -440,21 +440,4 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 
 	}
 
-	@Override
-	public void hasVariables() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void hasBuffer() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void hasOutput() {
-		// TODO Auto-generated method stub
-
-	}
 }

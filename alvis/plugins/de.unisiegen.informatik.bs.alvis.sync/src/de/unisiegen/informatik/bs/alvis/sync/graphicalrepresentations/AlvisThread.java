@@ -1,7 +1,6 @@
 package de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 
@@ -20,7 +19,7 @@ public class AlvisThread implements GraphicalRepresentationThread {
 	private Label lName;
 	private int currentLine;
 	private boolean blocked;
-	private PCThread a;
+	private PCThread thread;
 	private Display d;
 	private AlvisScenario myScenario;
 	private final int id;
@@ -33,7 +32,7 @@ public class AlvisThread implements GraphicalRepresentationThread {
 		blocked = status;
 		lName = new Label(myScenario.getThreadsGroup(), SWT.NONE);
 		lName.setText(name);
-		lName.setBackground(status ? BLOCKED : NORMAL);
+		lName.setBackground(status ? AlvisColor.red.color() : AlvisColor.green.color());
 	}
 	
 	public AlvisThread(AlvisScenario scenario, String name, boolean status, int id) {
@@ -44,48 +43,7 @@ public class AlvisThread implements GraphicalRepresentationThread {
 		blocked = status;
 		lName = new Label(myScenario.getThreadsGroup(), SWT.NONE);
 		lName.setText(name);
-		lName.setBackground(status ? BLOCKED : NORMAL);
-	}
-
-	@Override
-	/**
-	 * Set a new line to highlight
-	 * @param newLine line to highlight
-	 */
-	public void setLine(final int newLine) {
-		if (currentLine != newLine) {
-			
-		}
-	}
-
-	@Override
-	/**
-	 * Set the thread as blocked or normal, enable/disable nextStep-button
-	 * @param blocked True if thread is now blocked, false if not
-	 * @param bySemaphore Color of blocking differs between semaphore or condition, true if blocked by semaphore, false if blocked by condition
-	 */
-	public void setBlocked(final boolean blocked, final boolean bySemaphore) {
-		this.blocked = blocked;
-		d.syncExec(new Runnable() {
-			public void run() {
-				Color c;
-				if (blocked) {
-					c = (bySemaphore ? SEMA : BLOCKED);
-				} else {
-					c = HIGHLIGHT;
-				}
-				lName.setBackground(c);
-			}
-		});
-	}
-
-	@Override
-	/**
-	 * Get thread's current status
-	 * @return Thread's current status
-	 */
-	public boolean isBlocked() {
-		return blocked;
+		lName.setBackground(status ? AlvisColor.red.color() : AlvisColor.green.color());
 	}
 
 	public String getName() {
@@ -104,12 +62,12 @@ public class AlvisThread implements GraphicalRepresentationThread {
 		this.currentLine = currentLine;
 	}
 
-	public PCThread getA() {
-		return a;
+	public PCThread getThread() {
+		return thread;
 	}
 
-	public void setA(PCThread a) {
-		this.a = a;
+	public void setThread(PCThread thread) {
+		this.thread = thread;
 	}
 
 	public int getId() {
@@ -124,16 +82,31 @@ public class AlvisThread implements GraphicalRepresentationThread {
 		this.lName = lName;
 	}
 
-	public boolean equals(AlvisThread a) {
-		if (a == null) {
+	public boolean equals(AlvisThread t) {
+		if (t == null) {
 			return false;
 		} else {
-			return (a.getId() == id);
+			return (t.getId() == id);
 		}
 	}
 	
 	public String toString() {
 		return name + " " + (blocked ? "" : "not ") + "blocked";
+	}
+
+	@Override
+	public void setBlocked(final boolean newStatus) {
+		this.blocked = newStatus;
+		d.syncExec(new Runnable() {
+			public void run() {
+				lName.setBackground(newStatus ? AlvisColor.red.color() : AlvisColor.green.color());
+			}
+		});
+	}
+
+	@Override
+	public boolean getBlocked() {
+		return blocked;
 	}
 
 }

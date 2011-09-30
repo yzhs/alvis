@@ -82,10 +82,10 @@ public class AlvisSerialize {
 		this.threadNames = new String[threadsCount];
 		this.threadStatus = new boolean[threadsCount];
 		for (int i = 0; i < threadsCount; i++) {
-			AlvisThread a = threads.get(i);
-			threadIds[i] = a.getId();
-			this.threadNames[i] = a.getName();
-			this.threadStatus[i] = a.isBlocked();
+			AlvisThread t = threads.get(i);
+			threadIds[i] = t.getId();
+			this.threadNames[i] = t.getName();
+			this.threadStatus[i] = t.getBlocked();
 		}
 
 		int semaphoreCount = semaphores.size();

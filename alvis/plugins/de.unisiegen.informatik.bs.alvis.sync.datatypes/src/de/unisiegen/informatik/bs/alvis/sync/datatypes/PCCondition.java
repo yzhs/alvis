@@ -1,10 +1,13 @@
 package de.unisiegen.informatik.bs.alvis.sync.datatypes;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Stack;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCBoolean;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
@@ -17,24 +20,31 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 public class PCCondition extends PCObject {
 
 	protected static final String TYPENAME = "Condition";
-	
+
+	private PCScenario scenario;
+	private PCThread thread;
+
 	/**
 	 * Semaphore which locks the monitor & number of waiting threads
 	 */
 	private PCSemaphore sema;
-	private int waiting;
+	private PCInteger waiting;
 
 	public PCCondition() {
 		sema = new PCSemaphore();
-		waiting = 0;
+		waiting = new PCInteger(0);
+		commandsforGr = new ArrayList<Stack<Object>>();
+		commandsforGr.add(new Stack<Object>());
 	}
 
-	public PCCondition(int waiting, PCSemaphore sema) {
+	public PCCondition(PCInteger waiting, PCSemaphore sema) {
 		this.waiting = waiting;
 		this.sema = sema;
+		commandsforGr = new ArrayList<Stack<Object>>();
+		commandsforGr.add(new Stack<Object>());
 	}
 
-	public PCCondition(int waiting, PCSemaphore sema,
+	public PCCondition(PCInteger waiting, PCSemaphore sema,
 			GraphicalRepresentationCondition gr) {
 		this(waiting, sema);
 		allGr.add(gr);
@@ -48,11 +58,11 @@ public class PCCondition extends PCObject {
 		this.sema = sema;
 	}
 
-	public int getWaiting() {
+	public PCInteger getWaiting() {
 		return waiting;
 	}
 
-	public void setWaiting(int waiting) {
+	public void setWaiting(PCInteger waiting) {
 		this.waiting = waiting;
 	}
 
@@ -60,24 +70,46 @@ public class PCCondition extends PCObject {
 		return TYPENAME;
 	}
 
+	@Override
+	protected void runDelayedCommands() {
+		for (GraphicalRepresentation gr : allGr) {
+			if (!this.commandsforGr.get(0).isEmpty()) {
+				((GraphicalRepresentationCondition) gr).setState(waiting
+						.getLiteralValue());
+			}
+		}
+		this.commandsforGr.get(0).clear();
+	}
+
+	public boolean isGraphical(GraphicalRepresentationCondition c) {
+		for (GraphicalRepresentation gr : this.allGr) {
+			if (gr == c) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	/**
 	 * Wait for condition
-	 * @param a Actor who has to wait
+	 * 
+	 * @param a
+	 *            Actor who has to wait
 	 */
-	public void wait(PCThread a) {
+	public void wait(PCThread t) {
 		synchronized (this) {
 			sema.V();
 			try {
-				waiting++;
-				a.setBlocked(true);
+				waiting._inc_();
+				t.setBlocked(new PCBoolean(true));
 				wait();
 			} catch (InterruptedException e) {
 
 			}
-			waiting--;
-			a.setBlocked(false);
+			waiting._dec_();
+			t.setBlocked(new PCBoolean(false));
 		}
-		sema.P(a);
+		sema.P(t);
 	}
 
 	/**
@@ -88,7 +120,7 @@ public class PCCondition extends PCObject {
 	}
 
 	/**
-	 * Signals that condtion is free to all waiting threads
+	 * Signals that condition is free to all waiting threads
 	 */
 	public void signalAll() {
 		notifyAll();
@@ -99,7 +131,7 @@ public class PCCondition extends PCObject {
 		if (memberName.equals("semaphore")) {
 			return sema;
 		} else if (memberName.equals("waiting")) {
-			return new PCInteger(waiting);
+			return waiting;
 		} else {
 			return null;
 		}
@@ -111,6 +143,7 @@ public class PCCondition extends PCObject {
 		return TYPENAME + ": " + waiting + " waiting, monitor "
 				+ (i <= 0 ? "locked." : "unlocked.");
 	}
+
 	public PCObject set(String memberName, PCObject value) {
 		// TODO remove this method
 		if (memberName.equals("semaphore")) {
@@ -119,7 +152,7 @@ public class PCCondition extends PCObject {
 			return this;
 		} else if (memberName.equals("waiting")) {
 			PCInteger i = (PCInteger) value;
-			waiting = i.getLiteralValue();
+			waiting = i;
 			return this;
 		}
 		return null;
@@ -138,7 +171,7 @@ public class PCCondition extends PCObject {
 			return false;
 		}
 	}
-	
+
 	@Override
 	public List<String> getMethods() {
 		String[] methods = { "wait", "signal", "signalAll" };
@@ -146,8 +179,9 @@ public class PCCondition extends PCObject {
 	}
 
 	@Override
-	public void updateGR(GraphicalRepresentation gr) {
-
+	public List<String> getMembers() {
+		String[] members = { "sema", "waiting" };
+		return Arrays.asList(members);
 	}
 
 	@Override

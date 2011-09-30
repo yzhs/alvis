@@ -1,8 +1,10 @@
 package de.unisiegen.informatik.bs.alvis.sync.datatypes;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Stack;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCInteger;
@@ -22,32 +24,44 @@ public class PCBuffer extends PCObject {
 	/**
 	 * Capacity of the buffer & uses spaces
 	 */
-	private int capacity;
-	private int used;
+	private PCInteger capacity;
+	private PCInteger used;
 	
 	public PCBuffer() {
-		capacity = 0;
-		used = 0;
+		capacity = new PCInteger(0);
+		used = new PCInteger(0);
+		commandsforGr = new ArrayList<Stack<Object>>();
+		commandsforGr.add(new Stack<Object>());
 	}
 	
-	public PCBuffer(int capacity) {
+	public PCBuffer(PCInteger capacity) {
 		this.capacity = capacity;
-		used = 0;
+		used = new PCInteger(0);
+		commandsforGr = new ArrayList<Stack<Object>>();
+		commandsforGr.add(new Stack<Object>());
 	}
 	
-	public int getCapacity() {
+	public PCBuffer(PCInteger capacity, GraphicalRepresentationBuffer gr) {
+		this.capacity = capacity;
+		used = new PCInteger(0);
+		commandsforGr = new ArrayList<Stack<Object>>();
+		commandsforGr.add(new Stack<Object>());
+		allGr.add(gr);
+	}
+	
+	public PCInteger getCapacity() {
 		return capacity;
 	}
 
-	public void setCapacity(int capacity) {
+	public void setCapacity(PCInteger capacity) {
 		this.capacity = capacity;
 	}
 
-	public int getUsed() {
+	public PCInteger getUsed() {
 		return used;
 	}
 
-	public void setUsed(int used) {
+	public void setUsed(PCInteger used) {
 		this.used = used;
 	}
 	
@@ -55,12 +69,21 @@ public class PCBuffer extends PCObject {
 		return TYPENAME;
 	}
 	
+	public boolean isGraphical(GraphicalRepresentationBuffer b) {
+		for (GraphicalRepresentation gr : this.allGr) {
+			if (gr == b) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	/**
 	 * Insert an item/use a free space
 	 */
 	public void insert() {
-		if (used < (capacity - 1)) {
-			used++;
+		if (used._less_(new PCInteger(capacity.getLiteralValue() - 1)).getLiteralValue()) {
+			used._inc_();
 		}
 	}
 	
@@ -68,8 +91,8 @@ public class PCBuffer extends PCObject {
 	 * Remove an item/free a used space
 	 */
 	public void remove() {
-		if (used > 0) {
-			used--;
+		if (used._greater_(new PCInteger(0)).getLiteralValue()) {
+			used._dec_();
 		}
 	}
 
@@ -81,10 +104,10 @@ public class PCBuffer extends PCObject {
 	public PCObject set(String memberName, PCObject value) {
 		// TODO remove this method
 		if (memberName.equals("capacity")) {
-			capacity = ((PCInteger) value).getLiteralValue();
+			capacity = (PCInteger) value;
 			return this;
 		} else if (memberName.equals("used")) {
-			used = ((PCInteger) value).getLiteralValue();
+			used = (PCInteger) value;
 			return this;
 		} else {
 			return null;
@@ -94,9 +117,9 @@ public class PCBuffer extends PCObject {
 	public PCObject get(String memberName) {
 		// TODO remove this method
 		if (memberName.equals("capacity")) {
-			return new PCInteger(capacity);
+			return capacity;
 		} else if (memberName.equals("used")) {
-			return new PCInteger(used);
+			return used;
 		} else {
 			return null;
 		}
@@ -123,10 +146,24 @@ public class PCBuffer extends PCObject {
 	}
 	
 	@Override
-	public void updateGR(GraphicalRepresentation gr) {
-		
+	protected void runDelayedCommands() {
+		for (GraphicalRepresentation gr : allGr) {
+			if (!this.commandsforGr.get(0).isEmpty()) {
+				GraphicalRepresentationBuffer grb = (GraphicalRepresentationBuffer) gr;
+				for (int i = 0; i < grb.getUsage(); i++) {
+					grb.setFull();
+				}
+			}
+		}
+		this.commandsforGr.get(0).clear();
 	}
-
+	
+	@Override
+	public List<String> getMembers() {
+		String[] members = {"used", "capacity"};
+		return Arrays.asList(members);
+	}
+	
 	@Override
 	public HashMap<String, String> getHelp() {
 		// TODO Auto-generated method stub

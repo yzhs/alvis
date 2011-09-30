@@ -41,25 +41,6 @@ public class AlvisCondition implements GraphicalRepresentationCondition {
 		setState(0);
 	}
 
-	@Override
-	/**
-	 * Set a new state
-	 * @param waiting Number of threads waiting for condition
-	 */
-	public void setState(final int waiting) {
-		this.waiting = waiting;
-		d.syncExec(new Runnable() {
-			public void run() {
-				if (waiting == 0) {
-					label.setBackground(FREE);
-				} else {
-					label.setBackground(WAIT);
-				}
-				label.setText("Condition " + name + Messages.AlvisCondition_conditionWaiting + waiting); //$NON-NLS-1$
-			}
-		});
-	}
-	
 	public int getWaiting() {
 		return waiting;
 	}
@@ -114,6 +95,29 @@ public class AlvisCondition implements GraphicalRepresentationCondition {
 	
 	public String toString() {
 		return name + " (" + waiting + ")";
+	}
+
+	@Override
+	public int getState() {
+		return waiting;
+	}
+
+	@Override
+	public void setState(final int wait) {
+		d.asyncExec(new Runnable() {
+			public void run() {
+
+				if (wait > 0) {
+					label.setBackground(AlvisColor.green.color());
+				} else if (wait == 0) {
+					label.setBackground(AlvisColor.orange.color());
+				} else {
+					label.setBackground(AlvisColor.red.color());
+				}
+				waiting = wait;
+				label.setText("Condition " + name + Messages.AlvisCondition_conditionWaiting + wait); //$NON-NLS-1$
+			}
+		});
 	}
 
 }
