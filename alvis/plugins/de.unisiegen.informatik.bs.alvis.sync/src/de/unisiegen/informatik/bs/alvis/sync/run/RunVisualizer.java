@@ -13,11 +13,19 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 import de.unisiegen.informatik.bs.alvis.extensionpoints.IRunVisualizer;
+import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
+import de.unisiegen.informatik.bs.alvis.sync.datatypes.GraphicalRepresentationCondition;
+import de.unisiegen.informatik.bs.alvis.sync.datatypes.GraphicalRepresentationSemaphore;
+import de.unisiegen.informatik.bs.alvis.sync.datatypes.GraphicalRepresentationThread;
 import de.unisiegen.informatik.bs.alvis.sync.datatypes.PCScenario;
+import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisCondition;
+import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisPrimitive;
 import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisSave;
 import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisScenario;
+import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisSemaphore;
 import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisSerialize;
+import de.unisiegen.informatik.bs.alvis.sync.graphicalrepresentations.AlvisThread;
 
 public class RunVisualizer implements IRunVisualizer {
 
@@ -93,7 +101,23 @@ public class RunVisualizer implements IRunVisualizer {
 			AlvisSerialize seri = (AlvisSerialize) deserialize(myInputFilePath);
 			myScenario = new AlvisScenario(myParent);
 			new AlvisSave(myScenario, seri);
-			codeScenario = new PCScenario();
+			ArrayList<GraphicalRepresentation> primitives = new ArrayList<GraphicalRepresentation>();
+			ArrayList<GraphicalRepresentationThread> threads = new ArrayList<GraphicalRepresentationThread>();
+			ArrayList<GraphicalRepresentationSemaphore> semas = new ArrayList<GraphicalRepresentationSemaphore>();
+			ArrayList<GraphicalRepresentationCondition> conds = new ArrayList<GraphicalRepresentationCondition>();
+			for (AlvisPrimitive p : myScenario.getPrimitivesList()) {
+				primitives.add(p);
+			}
+			for (AlvisThread t : myScenario.getThreadsList()) {
+				threads.add(t);
+			}
+			for (AlvisSemaphore s : myScenario.getSemaphoresList()) {
+				semas.add(s);
+			}
+			for (AlvisCondition c : myScenario.getConditionsList()) {
+				conds.add(c);
+			}
+			codeScenario = new PCScenario(threads, primitives, semas, conds, myScenario.getBuffer());
 			res = true;
 		} catch (ClassCastException e) {
 			return false;
