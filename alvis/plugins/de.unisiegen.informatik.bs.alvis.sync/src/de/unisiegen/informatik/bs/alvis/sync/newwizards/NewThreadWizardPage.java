@@ -11,6 +11,8 @@ public class NewThreadWizardPage extends WizardPage {
 
 	private Text name;
 	private Label lName;
+	private Text method;
+	private Label lMethod;
 	private Composite container;
 
 	public NewThreadWizardPage() {
@@ -28,11 +30,18 @@ public class NewThreadWizardPage extends WizardPage {
 		lName = new Label(container, SWT.NULL);
 		lName.setText(Messages.NewThreadWizardPage_ThreadName);
 		name = new Text(container, SWT.BORDER | SWT.SINGLE);
+		lMethod = new Label(container, SWT.NULL);
+		lMethod.setText(Messages.NewThreadWizardPage_MethodName);
+		method = new Text(container, SWT.BORDER | SWT.SINGLE);
 		setControl(container);
 	}
 
 	public String getName() {
 		return name.getText();
+	}
+	
+	public String getMethod() {
+		return method.getText();
 	}
 
 }

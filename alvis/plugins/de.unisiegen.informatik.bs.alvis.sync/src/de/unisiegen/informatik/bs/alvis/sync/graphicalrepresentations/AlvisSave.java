@@ -69,7 +69,8 @@ public class AlvisSave {
 		int threadsCount = seri.getThreadNames().length;
 		for (int i = 0; i < threadsCount; i++) {
 			AlvisThread a = new AlvisThread(scenario, seri.getThreadNames()[i],
-					seri.getThreadStatus()[i], seri.getThreadIds()[i]);
+					seri.getThreadMethods()[i], seri.getThreadStatus()[i],
+					seri.getThreadIds()[i]);
 			threads.add(a);
 		}
 		scenario.setThreadsList(threads);

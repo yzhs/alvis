@@ -31,7 +31,8 @@ public class NewThreadWizard extends Wizard implements INewWizard {
 	@Override
 	public boolean performFinish() {
 		String name = page.getName();
-		AlvisThread a = new AlvisThread(myScenario, name, false);
+		String method = page.getMethod();
+		AlvisThread a = new AlvisThread(myScenario, name, method, false);
 		myScenario.addThread(a);
 		return true;
 	}

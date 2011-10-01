@@ -23,6 +23,7 @@ public class AlvisSerialize {
 
 	private int[] threadIds;
 	private String[] threadNames;
+	private String[] threadMethods;
 	private boolean[] threadStatus;
 
 	private int[] semaphoreIds;
@@ -80,11 +81,13 @@ public class AlvisSerialize {
 		int threadsCount = threads.size();
 		threadIds = new int[threadsCount];
 		this.threadNames = new String[threadsCount];
+		this.threadMethods = new String[threadsCount];
 		this.threadStatus = new boolean[threadsCount];
 		for (int i = 0; i < threadsCount; i++) {
 			AlvisThread t = threads.get(i);
 			threadIds[i] = t.getId();
 			this.threadNames[i] = t.getName();
+			this.threadMethods[i] = t.getMethod();
 			this.threadStatus[i] = t.getBlocked();
 		}
 
@@ -199,6 +202,14 @@ public class AlvisSerialize {
 
 	public void setThreadNames(String[] threadNames) {
 		this.threadNames = threadNames;
+	}
+	
+	public String[] getThreadMethods() {
+		return threadMethods;
+	}
+	
+	public void setThreadMethods(String[] threadMethods) {
+		this.threadMethods = threadMethods;
 	}
 
 	public boolean[] getThreadStatus() {

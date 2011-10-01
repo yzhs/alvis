@@ -385,7 +385,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 	
 	public void addPrimitive(AlvisPrimitive p) {
 		admin.addPrimitive(p);
-		p.getLabel().setBounds(5, 10 + primitivesList.size() * 15, 180, 15);
+		p.getLabel().setBounds(5, 15 + primitivesList.size() * 15, 180, 15);
 	}
 	
 	public void removePrimitive(AlvisPrimitive p) {
@@ -395,8 +395,14 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 	
 	public void addSemaphore(AlvisSemaphore s) {
 		admin.addSemaphore(s);
-		s.getLabel().setBounds(5, 10 + semaphoresList.size() * 15, 180, 15);
-		s.getLabel().setBackground(AlvisColor.green.color());
+		s.getLabel().setBounds(5, 20 + semaphoresList.size() * 15, 180, 15);
+		if (s.getState() > 0) {
+			s.getLabel().setBackground(AlvisColor.green.color());
+		} else {
+			s.getLabel().setBackground(AlvisColor.red.color());
+		}
+		
+		s.setState(s.getState());
 	}
 	
 	public void removeSemaphore(AlvisSemaphore s) {
@@ -406,7 +412,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 	
 	public void addCondition(AlvisCondition c) {
 		admin.addCondition(c);
-		c.getLabel().setBounds(5, 10 + conditionsList.size() * 15, 180, 15);
+		c.getLabel().setBounds(5, 20 + conditionsList.size() * 15, 180, 15);
 		c.getLabel().setBackground(AlvisColor.green.color());
 	}
 	
@@ -417,7 +423,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 	
 	public void addThread(AlvisThread a) {
 		admin.addThread(a);
-		a.getlName().setBounds(5, 10 + threadsList.size() + 15, 180, 15);
+		a.getlName().setBounds(5, 20 + threadsList.size() * 15, 180, 15);
 		a.getlName().setBackground(AlvisColor.green.color());
 	}
 	

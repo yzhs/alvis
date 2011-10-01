@@ -23,26 +23,29 @@ public class AlvisThread implements GraphicalRepresentationThread {
 	private Display d;
 	private AlvisScenario myScenario;
 	private final int id;
+	private String method;
 	
-	public AlvisThread(AlvisScenario scenario, String name, boolean status) {
+	public AlvisThread(AlvisScenario scenario, String name, String method, boolean status) {
 		myScenario = scenario;
 		d = scenario.getMyDisplay();
 		id = scenario.getAdmin().requestId();
 		this.name = name;
+		this.method = method;
 		blocked = status;
 		lName = new Label(myScenario.getThreadsGroup(), SWT.NONE);
-		lName.setText(name);
+		lName.setText(name + " (" + method + "())");
 		lName.setBackground(status ? AlvisColor.red.color() : AlvisColor.green.color());
 	}
 	
-	public AlvisThread(AlvisScenario scenario, String name, boolean status, int id) {
+	public AlvisThread(AlvisScenario scenario, String name, String method, boolean status, int id) {
 		myScenario = scenario;
 		d = scenario.getMyDisplay();
 		this.id = id;
 		this.name = name;
+		this.method = method;
 		blocked = status;
 		lName = new Label(myScenario.getThreadsGroup(), SWT.NONE);
-		lName.setText(name);
+		lName.setText(name + " (" + method + "())");
 		lName.setBackground(status ? AlvisColor.red.color() : AlvisColor.green.color());
 	}
 
@@ -52,6 +55,14 @@ public class AlvisThread implements GraphicalRepresentationThread {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getMethod() {
+		return method;
+	}
+	
+	public void setMethod(String method) {
+		this.method = method;
 	}
 
 	public int getCurrentLine() {

@@ -6,6 +6,7 @@ public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "de.unisiegen.informatik.bs.alvis.sync.newwizards.messages"; //$NON-NLS-1$
 	public static String NewThreadWizard_newThreadWizard;
 	public static String NewThreadWizardPage_ThreadName;
+	public static String NewThreadWizardPage_MethodName;
 	public static String NewThreadWizardPage_addThreadWizardPageDescription;
 	public static String NewThreadWizardPage_addThreadWizardPageTitle;
 	public static String NewBufferWizard_createNewBufferWizardTitle;
