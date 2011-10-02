@@ -290,6 +290,9 @@ public class Activator extends AbstractUIPlugin {
 			else
 				dynamicallyReferencedPackagesNeededToCompile.add(path + "src/"); //$NON-NLS-1$
 		}
+		
+		// add the path to the plugin org.eclipse.osgi.util
+		dynamicallyReferencedPackagesNeededToCompile.add(Messages.class.getSuperclass().getProtectionDomain().getCodeSource().getLocation().toString());
 
 		try {
 			vm.addAlgoToVM("algo", pathToFile, fileName,
