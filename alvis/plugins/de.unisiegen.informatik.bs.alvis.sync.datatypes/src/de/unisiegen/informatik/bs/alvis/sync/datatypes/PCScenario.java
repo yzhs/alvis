@@ -155,6 +155,9 @@ public class PCScenario extends PCObject {
 		return null;
 	}
 	
+	public static PCScenario getNull() {
+		return new PCScenario();
+	}
 
 	public static String getTypename() {
 		return TYPENAME;
