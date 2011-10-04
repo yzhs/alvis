@@ -58,7 +58,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		container.setLayout(null);
 
 		primitives = new Group(container, SWT.NONE);
-		primitives.setBounds(5, 5, 192, 294);
+		primitives.setBounds(5, 5, 192, 307);
 		primitives.setText(Messages.AlvisScenario_primitives);
 
 		Button primAdd = new Button(primitives, SWT.NONE);
@@ -98,7 +98,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		});
 
 		semaphores = new Group(container, SWT.NONE);
-		semaphores.setBounds(202, 5, 194, 294);
+		semaphores.setBounds(202, 5, 194, 307);
 		semaphores.setText(Messages.AlvisScenario_semaphores);
 
 		Button semaAdd = new Button(semaphores, SWT.NONE);
@@ -137,7 +137,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		});
 
 		conditions = new Group(container, SWT.NONE);
-		conditions.setBounds(401, 5, 194, 294);
+		conditions.setBounds(401, 5, 194, 307);
 		conditions.setText(Messages.AlvisScenario_conditions);
 
 		Button condAdd = new Button(conditions, SWT.NONE);
@@ -176,7 +176,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		});
 
 		threads = new Group(container, SWT.NONE);
-		threads.setBounds(604, 5, 194, 294);
+		threads.setBounds(604, 5, 194, 307);
 		threads.setText(Messages.AlvisScenario_threads);
 
 		Button threadAdd = new Button(threads, SWT.NONE);
@@ -223,13 +223,13 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		needOutput.setText(Messages.AlvisScenario_needOutput);
 
 		bufferGroup = new Group(container, SWT.NONE);
-		bufferGroup.setBounds(202, 305, 198, 244);
+		bufferGroup.setBounds(198, 318, 198, 244);
 		bufferGroup.setText(Messages.AlvisScenario_buffer);
 		bufferGroup.setVisible(false);
 
 		final Group grpOutput = new Group(container, SWT.NONE);
 		grpOutput.setText(Messages.AlvisScenario_output);
-		grpOutput.setBounds(411, 305, 184, 244);
+		grpOutput.setBounds(413, 318, 184, 244);
 		grpOutput.setVisible(false);
 
 		needBuffer.addListener(SWT.Selection, new Listener() {
