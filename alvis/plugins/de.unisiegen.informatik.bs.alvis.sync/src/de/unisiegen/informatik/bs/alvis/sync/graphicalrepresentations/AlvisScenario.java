@@ -62,7 +62,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		primitives.setText(Messages.AlvisScenario_primitives);
 
 		Button primAdd = new Button(primitives, SWT.NONE);
-		primAdd.setBounds(10, 266, 90, 26);
+		primAdd.setBounds(10, 258, 90, 26);
 		primAdd.setText(Messages.AlvisScenario_add);
 		primAdd.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
@@ -85,7 +85,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		});
 
 		Button primDel = new Button(primitives, SWT.NONE);
-		primDel.setBounds(106, 266, 82, 26);
+		primDel.setBounds(100, 258, 82, 26);
 		primDel.setText(Messages.AlvisScenario_delete);
 		
 		primDel.addListener(SWT.Selection, new Listener() {
@@ -103,7 +103,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 
 		Button semaAdd = new Button(semaphores, SWT.NONE);
 		semaAdd.setText(Messages.AlvisScenario_add);
-		semaAdd.setBounds(12, 266, 90, 26);
+		semaAdd.setBounds(10, 258, 90, 26);
 		semaAdd.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				NewSemaphoreWizard w = new NewSemaphoreWizard();
@@ -126,7 +126,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 
 		Button semaDel = new Button(semaphores, SWT.NONE);
 		semaDel.setText(Messages.AlvisScenario_delete);
-		semaDel.setBounds(108, 266, 82, 26);
+		semaDel.setBounds(102, 258, 82, 26);
 		
 		semaDel.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
@@ -142,7 +142,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 
 		Button condAdd = new Button(conditions, SWT.NONE);
 		condAdd.setText(Messages.AlvisScenario_add);
-		condAdd.setBounds(10, 266, 90, 26);
+		condAdd.setBounds(10, 258, 90, 26);
 		condAdd.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				NewConditionWizard w = new NewConditionWizard();
@@ -165,7 +165,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 
 		Button condDel = new Button(conditions, SWT.NONE);
 		condDel.setText(Messages.AlvisScenario_delete);
-		condDel.setBounds(106, 266, 82, 26);
+		condDel.setBounds(102, 258, 82, 26);
 		
 		condDel.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
@@ -176,12 +176,12 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 		});
 
 		threads = new Group(container, SWT.NONE);
-		threads.setBounds(604, 5, 190, 294);
+		threads.setBounds(604, 5, 194, 294);
 		threads.setText(Messages.AlvisScenario_threads);
 
 		Button threadAdd = new Button(threads, SWT.NONE);
 		threadAdd.setText(Messages.AlvisScenario_add);
-		threadAdd.setBounds(10, 266, 90, 26);
+		threadAdd.setBounds(10, 258, 90, 26);
 		threadAdd.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
 				NewThreadWizard w = new NewThreadWizard();
@@ -204,7 +204,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 
 		Button threadDel = new Button(threads, SWT.NONE);
 		threadDel.setText(Messages.AlvisScenario_delete);
-		threadDel.setBounds(106, 266, 82, 26);
+		threadDel.setBounds(102, 258, 82, 26);
 		
 		threadDel.addListener(SWT.Selection, new Listener() {
 			public void handleEvent(Event e) {
