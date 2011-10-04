@@ -311,7 +311,7 @@ public class PCScenario extends PCObject {
 		threadsRunnable.add(a);
 	}
 
-	public void doGlobalStep() {
+	public void _step_() {
 		deadlocked = true;
 		int i, j = 0;
 		switch (strategy) {

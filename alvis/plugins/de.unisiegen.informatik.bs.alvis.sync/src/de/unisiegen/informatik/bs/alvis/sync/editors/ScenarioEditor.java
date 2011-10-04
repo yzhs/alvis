@@ -52,7 +52,7 @@ public class ScenarioEditor extends EditorPart implements
 	public static ScenarioEditor edit;
 
 	private void createScenario(Composite parent, IEditorInput input) {
-		scenario = new AlvisScenario(parent);
+		scenario = new AlvisScenario(parent, false);
 
 		if (myInput instanceof FileEditorInput) {
 			FileEditorInput fileInput = (FileEditorInput) myInput;

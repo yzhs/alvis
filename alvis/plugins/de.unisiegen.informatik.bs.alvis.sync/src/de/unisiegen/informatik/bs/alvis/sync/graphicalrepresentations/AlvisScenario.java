@@ -43,7 +43,7 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 	public Group primitives, semaphores, conditions, threads, bufferGroup, outputGroup;
 	private AlvisSave admin;
 
-	public AlvisScenario(Composite parent) {
+	public AlvisScenario(Composite parent, boolean isRun) {
 		admin = new AlvisSave();
 		primitivesList = new ArrayList<AlvisPrimitive>();
 		semaphoresList = new ArrayList<AlvisSemaphore>();
@@ -273,6 +273,19 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 				grpOutput.setVisible(needOutput.getSelection());
 			}
 		});
+		
+		if (isRun) {
+			primAdd.setEnabled(false);
+			primDel.setEnabled(false);
+			semaAdd.setEnabled(false);
+			semaDel.setEnabled(false);
+			condAdd.setEnabled(false);
+			condDel.setEnabled(false);
+			threadAdd.setEnabled(false);
+			threadDel.setEnabled(false);
+			needBuffer.setEnabled(false);
+			needOutput.setEnabled(false);
+		}
 	}
 
 	public AlvisSave getAdmin() {
@@ -380,6 +393,9 @@ public class AlvisScenario implements GraphicalRepresentationScenario, Listener 
 	public void removeBuffer(AlvisBuffer b) {
 		admin.removeBuffer();
 		b.remove();
+		for (int i = 0; i < b.getCapacity(); i++) {
+			b.getLabels()[i].dispose();
+		}
 //		b.getBuffer().dispose();
 	}
 	

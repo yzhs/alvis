@@ -68,10 +68,13 @@ public class RunVisualizer implements IRunVisualizer {
 	}
 
 	@Override
-	public boolean addVisualizing(Composite parent, String inputFile, String fileExtension) {
-		if(!fileExtension.equals(de.unisiegen.informatik.bs.alvis.sync.Activator.getDefault().getFileExtension()))
+	public boolean addVisualizing(Composite parent, String inputFile,
+			String fileExtension) {
+		if (!fileExtension
+				.equals(de.unisiegen.informatik.bs.alvis.sync.Activator
+						.getDefault().getFileExtension()))
 			return false;
-		
+
 		if (parent == null | inputFile == null) {
 			return false;
 		}
@@ -99,7 +102,7 @@ public class RunVisualizer implements IRunVisualizer {
 		boolean res = false;
 		try {
 			AlvisSerialize seri = (AlvisSerialize) deserialize(myInputFilePath);
-			myScenario = new AlvisScenario(myParent);
+			myScenario = new AlvisScenario(myParent, true);
 			new AlvisSave(myScenario, seri);
 			ArrayList<GraphicalRepresentation> primitives = new ArrayList<GraphicalRepresentation>();
 			ArrayList<GraphicalRepresentationThread> threads = new ArrayList<GraphicalRepresentationThread>();
@@ -117,7 +120,8 @@ public class RunVisualizer implements IRunVisualizer {
 			for (AlvisCondition c : myScenario.getConditionsList()) {
 				conds.add(c);
 			}
-			codeScenario = new PCScenario(threads, primitives, semas, conds, myScenario.getBuffer());
+			codeScenario = new PCScenario(threads, primitives, semas, conds,
+					myScenario.getBuffer());
 			res = true;
 		} catch (ClassCastException e) {
 			return false;
