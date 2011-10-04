@@ -3,5 +3,5 @@ Bundle-ManifestVersion: 2
 Bundle-Name: sync.Help
 Bundle-SymbolicName: de.unisiegen.informatik.bs.alvis.sync.help;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Require-Bundle: org.eclipse.help.ui;bundle-version="3.5.3",
- org.eclipse.help.webapp;bundle-version="3.6.0"
+Require-Bundle: org.eclipse.help.ui,
+ org.eclipse.help.webapp
