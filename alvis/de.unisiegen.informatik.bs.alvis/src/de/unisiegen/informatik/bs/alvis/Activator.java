@@ -292,7 +292,7 @@ public class Activator extends AbstractUIPlugin {
 		}
 		
 		// add the path to the plugin org.eclipse.osgi.util
-		dynamicallyReferencedPackagesNeededToCompile.add(Messages.class.getSuperclass().getProtectionDomain().getCodeSource().getLocation().toString());
+		dynamicallyReferencedPackagesNeededToCompile.add(Messages.class.getSuperclass().getProtectionDomain().getCodeSource().getLocation().getPath());
 
 		try {
 			vm.addAlgoToVM("algo", pathToFile, fileName,
