@@ -134,7 +134,8 @@ statement
     ;
 
 blockStatement
-    : terminator // empty statement
+    : COMMA -> ^(BLOCK)
+    | SEMICOLON // empty statement
     | postfixExpr terminator
     // Java does not allow "variable" or "variable[index]" as statements, so we have to forbid those as well
     { if (!$postfixExpr.isFunctionCall)
