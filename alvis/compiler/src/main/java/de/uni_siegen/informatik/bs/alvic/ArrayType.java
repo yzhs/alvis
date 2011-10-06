@@ -45,7 +45,12 @@ public class ArrayType implements Type {
 		members.add(Member.method("get", elementType,
 				SimpleType.create("Integer")));
 		members.add(Member.method("add", SimpleType.create("Void"), elementType));
+		members.add(Member.method("remove", SimpleType.create("Void"), SimpleType.create("Integer")));
+		members.add(Member.method("isEmpty", SimpleType.create("Boolean")));
 		members.add(Member.method("size", SimpleType.create("Integer")));
+		members.add(Member.method("clear", SimpleType.create("Void")));
+		members.add(Member.method("contains", SimpleType.create("Boolean"), elementType));
+		// TODO handle ArrayType using SimpleType to allow using all methods from PCList when using the "ClassName[]" notation
 	}
 
 	/**
