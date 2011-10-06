@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <site>
    <feature url="features/de.unisiegen.informatik.bs.alvis.app_1.0.4.jar" id="de.unisiegen.informatik.bs.alvis.app" version="1.0.4"/>
-   <feature url="features/de.unisiegen.informatik.bs.alvis.graph.app_1.0.0.qualifier.jar" id="de.unisiegen.informatik.bs.alvis.graph.app" version="1.0.0.qualifier"/>
-   <feature url="features/de.unisiegen.informatik.bs.alvis.sync.app_1.0.0.qualifier.jar" id="de.unisiegen.informatik.bs.alvis.sync.app" version="1.0.0.qualifier"/>
+   <feature url="features/de.unisiegen.informatik.bs.alvis.graph.app_1.0.0.201110060857.jar" id="de.unisiegen.informatik.bs.alvis.graph.app" version="1.0.0.201110060857"/>
+   <feature url="features/de.unisiegen.informatik.bs.alvis.sync.app_1.0.0.201110060857.jar" id="de.unisiegen.informatik.bs.alvis.sync.app" version="1.0.0.201110060857"/>
 </site>
