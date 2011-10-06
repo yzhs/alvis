@@ -20,7 +20,7 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
 public class PCSemaphore extends PCObject {
 
-	protected static final String TYPENAME = "Semaphore";
+	public static final String TYPENAME = "Semaphore";
 
 	/**
 	 * Semaphore's counter. Semaphore will lock when 0

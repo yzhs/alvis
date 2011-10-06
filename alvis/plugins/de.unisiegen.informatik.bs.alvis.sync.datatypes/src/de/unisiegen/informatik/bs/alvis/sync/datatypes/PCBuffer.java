@@ -19,7 +19,7 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
 public class PCBuffer extends PCObject {
 	
-	protected static final String TYPENAME = "Buffer";
+	public static final String TYPENAME = "Buffer";
 	
 	/**
 	 * Capacity of the buffer & uses spaces

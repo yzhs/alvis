@@ -16,7 +16,7 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCString;
 
 public class PCScenario extends PCObject {
 
-	private static final String TYPENAME = "Scenario";
+	public static final String TYPENAME = "Scenario";
 
 	private PCList<PCThread> threads;
 	private PCList<PCThread> threadsRunnable;

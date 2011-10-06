@@ -21,7 +21,7 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 
 public class PCThread extends PCObject implements Runnable {
 
-	protected static final String TYPENAME = "Thread";
+	public static final String TYPENAME = "Thread";
 
 	private PCScenario scenario;
 	private PCList<PCSemaphore> semas;

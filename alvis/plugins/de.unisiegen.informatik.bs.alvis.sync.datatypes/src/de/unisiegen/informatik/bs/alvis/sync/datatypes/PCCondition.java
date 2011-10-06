@@ -19,7 +19,7 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
  */
 public class PCCondition extends PCObject {
 
-	protected static final String TYPENAME = "Condition";
+	public static final String TYPENAME = "Condition";
 
 	private PCScenario scenario;
 	private PCThread thread;
