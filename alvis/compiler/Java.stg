@@ -146,7 +146,7 @@ private <type> <name>(<params; separator=", ">) throws KillThreadException {
 >>
 
 type(name) ::= "<name>"
-array(base) ::= "HashMap\<Object,<base>\>"
+array(base) ::= "PCList\<<base>\>"
 ident(name) ::= "<name>"
 
 block(statements) ::= <<{
@@ -159,8 +159,8 @@ param(type, ident) ::= "<type> <ident>"
 decl(type, ident) ::= "<type> <ident> = new <type>();"
 declInit(type, ident, rhs) ::= "<type> <ident> = <rhs>;"
 assign(lhs, rhs) ::= "<lhs> = <rhs>;"
-arrayAssign(lhs, index, rhs) ::= "<lhs>.set(<index>, <rhs>);"
-attributeAssign(obj, lhs, rhs) ::= "<obj>.set<lhs>(<rhs>);"
+arrayAssign(lhs, index, rhs) ::= "<lhs>._set_(<index>, <rhs>);"
+attributeAssign(obj, lhs, rhs) ::= "<obj>._set_<lhs>_(<rhs>);"
 return(expr) ::= "return <expr>;"
 
 if(cond, then) ::= <<if ((<cond>).getLiteralValue())
@@ -212,6 +212,7 @@ null(type) ::= "<type>.getNull()"
 infty(type) ::= "<type>.getInfty()"
 
 makeGetter(ident) ::= "_get_<ident>_()"
+makeMethod(ident) ::= "_<ident>_"
 literal(text) ::= "<text>"
 generic(container, element) ::= "<container>\<<element>\>"
 
@@ -220,7 +221,7 @@ callMethod(function, args) ::= "_<function>_(<args; separator=\", \">)"
 
 dot(left, right) ::= "<left>.<right>"
 
-index(array, index) ::= "<array>[<index>]"
+index(array, index) ::= "<array>"
 
 semicolon(stat) ::= "<stat>;"
 breakBlock(stat, lineNumber) ::= <<{

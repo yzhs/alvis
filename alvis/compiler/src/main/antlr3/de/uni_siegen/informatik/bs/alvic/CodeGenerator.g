@@ -77,7 +77,7 @@ statement options {k = 3;}
     | ^(ASSIGN ^(DOT postfixExpr[true, false] ident) expr)
         -> attributeAssign(obj={$postfixExpr.st}, lhs={$ident.st.toString()}, rhs={$expr.st})
     | ^(ASSIGN ^(INDEX postfixExpr[true, false] i=expr) rhs=expr)
-        -> arrayAssign(lhs={%index(array={$postfixExpr.st}, index={$i.st})}, rhs={$rhs.st})
+        -> arrayAssign(lhs={$postfixExpr.st}, index={$i.st}, rhs={$rhs.st})
     | ^(RETURN expr)               -> return(expr={$expr.st})
     | RETURN                       -> return()
     | SEMICOLON                    -> breakpoint(lineNumber={$SEMICOLON.line-1})

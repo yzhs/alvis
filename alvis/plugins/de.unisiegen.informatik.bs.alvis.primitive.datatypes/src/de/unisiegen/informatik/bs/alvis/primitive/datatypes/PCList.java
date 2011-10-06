@@ -216,6 +216,10 @@ public class PCList<E extends PCObject> extends PCObject implements SortableColl
 		return items.set(index, element);
 	}
 
+	public void _set_(PCInteger index, E value) {
+		set(index.getLiteralValue(), value);
+	}
+
 	@Override
 	public List<E> subList(int fromIndex, int toIndex) {
 		return items.subList(fromIndex, toIndex);
