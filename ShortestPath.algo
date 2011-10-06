@@ -1,11 +1,11 @@
-paintPath(Vertex Queue Q, Vertex U, Vertex S) {
-	U.color = "orange";
-	while !Q.isEmpty():
-		Q.dequeue(),
-	U = U.parentId;
-	while U != S: {
-		U.color = "green",
-		U = U.parentId;
+paintPath(Vertex Queue Q, Vertex u, Vertex s) {
+	u.color = "orange";
+	while !Q.isEmpty():	Q.dequeue(),
+
+	u = u.parentId;
+	while u != s: {
+		u.color = "green",
+		u = u.parentId;
 	}
 }
 
