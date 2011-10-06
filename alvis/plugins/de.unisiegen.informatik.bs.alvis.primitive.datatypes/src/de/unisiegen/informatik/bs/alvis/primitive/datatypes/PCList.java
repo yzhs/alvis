@@ -77,6 +77,10 @@ public class PCList<E extends PCObject> extends PCObject implements SortableColl
 		return items.size();
 	}
 
+	public PCInteger _size_() {
+		return new PCInteger(size());
+	}
+
 	@Override
 	public Iterator<E> iterator() {
 		PCListIterator<E> it = new PCListIterator<E>(this);
@@ -142,6 +146,10 @@ public class PCList<E extends PCObject> extends PCObject implements SortableColl
 	@Override
 	public void clear() {
 		items.clear();
+	}
+
+	public void _clear_() {
+		clear();
 	}
 
 	@Override
@@ -263,6 +271,7 @@ public class PCList<E extends PCObject> extends PCObject implements SortableColl
 		result.add("add");
 		result.add("remove");
 		result.add("contains");
+		result.add("size");
 		return result;
 	}
 	
