@@ -17,7 +17,6 @@
  */
 package de.uni_siegen.informatik.bs.alvic;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Map;
 import java.util.HashMap;
@@ -146,8 +145,8 @@ public class SimpleType implements Type {
 					"getMethods").invoke(obj);
 
 			/*
-			 * FIXME This might need to be changed to allow using members in alvis for which there
-			 * is no corresponding member in the corresponding Javaa class.
+			 * FIXME This might need to be changed to allow using members in Alvis for which there
+			 * is no corresponding member in the corresponding Java class.
 			 * In that case you will have to check whether the correct getters/setters exist and
 			 * use their types to find out what type the attribute has.
 			 */
@@ -164,7 +163,7 @@ public class SimpleType implements Type {
 				t.parent = SimpleType.create(c.getSuperclass().getName());
 			else
 				t.parent = null;
-			// TODO decide on what to do with the exceptions
+			// The following exceptions can only occur when using improperly written plug-ins.
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		} catch (IllegalArgumentException e) {
