@@ -86,10 +86,18 @@ scope Symbols;
     ;
 
 functionDefinition
+scope Symbols;
+@init {
+    $Symbols::symbols = new HashMap<String, Type>();
+}
     : ^(FUNC ident ^(RET type?) ^(PARAMS p=formalParams?) { currentFunction = $ident.text; } block { currentFunction = null; })
     ;
 
 mainFunction
+scope Symbols;
+@init {
+    $Symbols::symbols = new HashMap<String, Type>();
+}
     : ^(FUNC MAIN ^(PARAMS formalParams?) { currentFunction = "main"; } block { currentFunction = null; })
     ;
 
