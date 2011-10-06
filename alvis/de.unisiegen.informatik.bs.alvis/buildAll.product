@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="%product.name" id="de.unisiegen.informatik.bs.alvis.product" application="de.unisiegen.informatik.bs.alvis.application" version="1.0.4" useFeatures="true" includeLaunchers="true">
+<product name="%product.name" id="de.unisiegen.informatik.bs.alvis.buildAll" application="de.unisiegen.informatik.bs.alvis.application" version="1.0.4" useFeatures="false" includeLaunchers="true">
 
    <aboutInfo>
       <image path="about.png"/>
@@ -100,18 +100,13 @@ Frank Weiler
       <plugin id="org.eclipse.core.filesystem.hpux.ia64_32" fragment="true"/>
       <plugin id="org.eclipse.core.filesystem.hpux.ia64_32.nl_de" fragment=""/>
       <plugin id="org.eclipse.core.filesystem.linux.x86" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.linux.x86.nl_de" fragment=""/>
       <plugin id="org.eclipse.core.filesystem.linux.x86_64" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.linux.x86_64.nl_de" fragment=""/>
       <plugin id="org.eclipse.core.filesystem.macosx" fragment="true"/>
       <plugin id="org.eclipse.core.filesystem.macosx.nl_de" fragment=""/>
       <plugin id="org.eclipse.core.filesystem.nl_de" fragment=""/>
       <plugin id="org.eclipse.core.filesystem.solaris.sparc" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.solaris.sparc.nl_de" fragment=""/>
       <plugin id="org.eclipse.core.filesystem.win32.x86" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.win32.x86.nl_de" fragment=""/>
       <plugin id="org.eclipse.core.filesystem.win32.x86_64" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.win32.x86_64.nl_de" fragment=""/>
       <plugin id="org.eclipse.core.jobs"/>
       <plugin id="org.eclipse.core.jobs.nl_de" fragment="true"/>
       <plugin id="org.eclipse.core.net"/>
@@ -289,6 +284,8 @@ Frank Weiler
       <plugin id="org.eclipse.ui.workbench.nl_de" fragment="true"/>
       <plugin id="org.eclipse.ui.workbench.texteditor"/>
       <plugin id="org.eclipse.ui.workbench.texteditor.nl_de" fragment="true"/>
+      <plugin id="org.eclipse.update.configurator"/>
+      <plugin id="org.eclipse.update.configurator.nl_de" fragment="true"/>
       <plugin id="org.eclipse.zest.core"/>
       <plugin id="org.eclipse.zest.layouts"/>
       <plugin id="org.eclipselabs.p2.rcpupdate.utils"/>
@@ -303,6 +300,7 @@ Frank Weiler
       <feature id="org.eclipse.rcp.nl_de"/>
       <feature id="de.unisiegen.informatik.bs.alvis.graph.app" version="1.0.0.qualifier"/>
       <feature id="de.unisiegen.informatik.bs.alvis.languages.nl_de" version="1.0.0.qualifier"/>
+      <feature id="de.unisiegen.informatik.bs.alvis.sync.app" version="1.0.0.qualifier"/>
    </features>
 
 

@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Primitive.Datatypes
-Bundle-SymbolicName: de.unisiegen.informatik.bs.alvis.primitive.datatypes; singleton:=true
+Bundle-SymbolicName: de.unisiegen.informatik.bs.alvis.primitive.datatypes;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: de.unisiegen.informatik.bs.alvis.primitive.datatypes.Activator
 Require-Bundle: org.eclipse.core.runtime

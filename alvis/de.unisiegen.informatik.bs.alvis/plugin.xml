@@ -617,6 +617,14 @@
                name="startupMessageRect"
                value="15,220,400,20">
          </property>
+         <property
+               name="appName"
+               value="%product.name">
+         </property>
+         <property
+               name="preferenceCustomization"
+               value="plugin_customization.ini">
+         </property>
       </product>
    </extension>
    <extension
