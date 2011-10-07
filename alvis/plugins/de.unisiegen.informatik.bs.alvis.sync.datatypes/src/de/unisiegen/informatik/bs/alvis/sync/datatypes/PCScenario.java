@@ -21,10 +21,10 @@ public class PCScenario extends PCObject {
 	private PCList<PCThread> threads;
 	private PCList<PCThread> threadsRunnable;
 	private PCList<PCThread> threadsBlocked;
-	private PCList<PCSemaphore> semas;
-	private PCList<PCInteger> ints;
-	private PCList<PCBoolean> bools;
-	private PCList<PCCondition> conds;
+	private PCList<PCSemaphore> semaphores;
+	private PCList<PCInteger> integers;
+	private PCList<PCBoolean> booleans;
+	private PCList<PCCondition> conditions;
 	private PCBuffer buffer;
 	private PCString output;
 
@@ -40,23 +40,25 @@ public class PCScenario extends PCObject {
 		threads = new PCList<PCThread>();
 		threadsRunnable = new PCList<PCThread>();
 		threadsBlocked = new PCList<PCThread>();
-		semas = new PCList<PCSemaphore>();
-		ints = new PCList<PCInteger>();
-		bools = new PCList<PCBoolean>();
-		conds = new PCList<PCCondition>();
+		semaphores = new PCList<PCSemaphore>();
+		integers = new PCList<PCInteger>();
+		booleans = new PCList<PCBoolean>();
+		conditions = new PCList<PCCondition>();
 		buffer = new PCBuffer();
 		output = new PCString("");
 		rndGen = new Random(new Date().getTime());
 		currentThread = 0;
 		deadlocked = false;
 	}
-	
-	public PCScenario(PCList<PCThread> threads, PCList<PCSemaphore> semas, PCList<PCInteger> ints, PCList<PCBoolean> bools, PCList<PCCondition> conds, PCBoolean buffer, PCBoolean output) {
+
+	public PCScenario(PCList<PCThread> threads, PCList<PCSemaphore> semas,
+			PCList<PCInteger> ints, PCList<PCBoolean> bools,
+			PCList<PCCondition> conds, PCBoolean buffer, PCBoolean output) {
 		this.threads = threads;
-		this.semas = semas;
-		this.ints = ints;
-		this.bools = bools;
-		this.conds = conds;
+		this.semaphores = semas;
+		this.integers = ints;
+		this.booleans = bools;
+		this.conditions = conds;
 		if (buffer.getLiteralValue()) {
 			this.buffer = new PCBuffer();
 		} else {
@@ -75,24 +77,66 @@ public class PCScenario extends PCObject {
 			ArrayList<GraphicalRepresentationCondition> conditions,
 			GraphicalRepresentationBuffer buffer) {
 		for (GraphicalRepresentationThread grt : threads) {
-			PCThread t = new PCThread(grt);
+			PCThread t = new PCThread(grt.getName(), grt);
 			this.threads.add(t);
 		}
 		for (GraphicalRepresentation gr : primitives) {
-			
+
 		}
 		for (GraphicalRepresentationSemaphore grs : semaphores) {
-			PCSemaphore s = new PCSemaphore(new PCInteger(grs.getState()), grs);
-			this.semas.add(s);
+			PCSemaphore s = new PCSemaphore(grs.getName(), new PCInteger(grs.getState()), grs);
+			this.semaphores.add(s);
 		}
-		PCSemaphore monitor = new PCSemaphore(new PCInteger(1));
+		PCSemaphore monitor = new PCSemaphore("Monitor", new PCInteger(1));
 		for (GraphicalRepresentationCondition grc : conditions) {
-			PCCondition c = new PCCondition(new PCInteger(grc.getState()), monitor, grc);
-			this.conds.add(c);
+			PCCondition c = new PCCondition(grc.getName(), new PCInteger(grc.getState()),
+					monitor, grc);
+			this.conditions.add(c);
 		}
 		if (buffer != null) {
+
+		}
+	}
+
+	public PCThread _getThreadByName_(String name) {
+		for (PCThread t : threads) {
+			if (t.getName().equals(name)) {
+				return t;
+			}
+		}
+		return null;
+	}
+
+	public PCSemaphore _getSemaphoreByName_(String name) {
+		for (PCSemaphore s : semaphores) {
+			if (s.getName().equals(name)) {
+				return s;
+			}
+		}
+		return null;
+	}
+	
+	public PCCondition _getConditionByName_(String name) {
+		for (PCCondition c : conditions) {
+			if (c.getName().equals(name)) {
+				return c;
+			}
+		}
+		return null;
+	}
+	
+	public PCInteger _getIntegerByName_(String name) {
+		for (PCInteger i : integers) {
 			
 		}
+		return null;
+	}
+	
+	public PCBoolean _getBooleanByName_(String name) {
+		for (PCBoolean b : booleans) {
+			
+		}
+		return null;
 	}
 
 	public PCThread getThreadFromGraphic(GraphicalRepresentationThread t) {
@@ -106,55 +150,57 @@ public class PCScenario extends PCObject {
 		}
 		return null;
 	}
-	
-	public PCCondition getConditionFromGraphic(GraphicalRepresentationCondition c) {
+
+	public PCCondition getConditionFromGraphic(
+			GraphicalRepresentationCondition c) {
 		if (c == null) {
 			return null;
 		}
-		for (PCCondition c2 : conds) {
+		for (PCCondition c2 : conditions) {
 			if (c2.isGraphical(c)) {
 				return c2;
 			}
 		}
 		return null;
 	}
-	
-	public PCSemaphore getSemaphoreFromGraphic(GraphicalRepresentationSemaphore s) {
+
+	public PCSemaphore getSemaphoreFromGraphic(
+			GraphicalRepresentationSemaphore s) {
 		if (s == null) {
 			return null;
 		}
-		for (PCSemaphore s2 : semas) {
+		for (PCSemaphore s2 : semaphores) {
 			if (s2.isGraphical(s)) {
 				return s2;
 			}
 		}
 		return null;
 	}
-	
+
 	public PCInteger getIntegerFromGraphic(GraphicalRepresentation i) {
 		if (i == null) {
 			return null;
 		}
-		for (PCInteger i2 : ints) {
-//			if (i2.isGraphical(i)) {
-//				return i2;
-//			}
+		for (PCInteger i2 : integers) {
+			// if (i2.isGraphical(i)) {
+			// return i2;
+			// }
 		}
 		return null;
 	}
-	
+
 	public PCBoolean getBooleanFromGraphic(GraphicalRepresentation b) {
 		if (b == null) {
 			return null;
 		}
-		for (PCBoolean b2 : bools) {
-//			if (b2.isGraphical(b)) {
-//				return b2;
-//			}
+		for (PCBoolean b2 : booleans) {
+			// if (b2.isGraphical(b)) {
+			// return b2;
+			// }
 		}
 		return null;
 	}
-	
+
 	public static PCScenario getNull() {
 		return new PCScenario();
 	}
@@ -187,36 +233,36 @@ public class PCScenario extends PCObject {
 		this.threadsBlocked = threadsBlocked;
 	}
 
-	public PCList<PCSemaphore> getSemas() {
-		return semas;
+	public PCList<PCSemaphore> getSemaphores() {
+		return semaphores;
 	}
 
-	public void setSemas(PCList<PCSemaphore> semas) {
-		this.semas = semas;
+	public void setSemaphores(PCList<PCSemaphore> semas) {
+		this.semaphores = semas;
 	}
 
 	public PCList<PCInteger> getInts() {
-		return ints;
+		return integers;
 	}
 
 	public void setInts(PCList<PCInteger> ints) {
-		this.ints = ints;
+		this.integers = ints;
 	}
 
 	public PCList<PCBoolean> getBools() {
-		return bools;
+		return booleans;
 	}
 
 	public void setBools(PCList<PCBoolean> bools) {
-		this.bools = bools;
+		this.booleans = bools;
 	}
 
-	public PCList<PCCondition> getConds() {
-		return conds;
+	public PCList<PCCondition> getConditions() {
+		return conditions;
 	}
 
-	public void setConds(PCList<PCCondition> conds) {
-		this.conds = conds;
+	public void setConditions(PCList<PCCondition> conds) {
+		this.conditions = conds;
 	}
 
 	public PCBuffer getBuffer() {
@@ -275,33 +321,33 @@ public class PCScenario extends PCObject {
 			for (PCThread t : threads) {
 				t.runDelayedCommands();
 			}
-			for (PCSemaphore s : semas) {
+			for (PCSemaphore s : semaphores) {
 				s.runDelayedCommands();
 			}
-			for (PCCondition c : conds) {
+			for (PCCondition c : conditions) {
 				c.runDelayedCommands();
 			}
-			for (PCInteger i : ints) {
-				
+			for (PCInteger i : integers) {
+
 			}
-			for (PCBoolean b : bools) {
-				
+			for (PCBoolean b : booleans) {
+
 			}
 		}
 		isInBatchRun = setBatchModification;
 		for (PCThread t : threads) {
 			t.batchModification(setBatchModification);
 		}
-		for (PCSemaphore s : semas) {
+		for (PCSemaphore s : semaphores) {
 			s.batchModification(setBatchModification);
 		}
-		for (PCCondition c : conds) {
+		for (PCCondition c : conditions) {
 			c.batchModification(setBatchModification);
 		}
-		for (PCInteger i : ints) {
+		for (PCInteger i : integers) {
 			i.batchModification(setBatchModification);
 		}
-		for (PCBoolean b : bools) {
+		for (PCBoolean b : booleans) {
 			b.batchModification(setBatchModification);
 		}
 	}
@@ -409,7 +455,7 @@ public class PCScenario extends PCObject {
 	@Override
 	public List<String> getMembers() {
 		String[] members = { "threads", "semaphores", "conditions", "buffer",
-				"primitives" };
+				"integers", "booleans", "buffer" };
 		return Arrays.asList(members);
 	}
 
@@ -424,9 +470,10 @@ public class PCScenario extends PCObject {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	public List<String> getMethods() {
-		String[] methods = {"step"};
+		String[] methods = { "step", "getThreadByName", "getSemaphoreByName",
+				"getConditionByName", "getPrimitiveByName" };
 		return Arrays.asList(methods);
 	}
 

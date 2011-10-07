@@ -49,6 +49,7 @@ public class AlvisCondition implements GraphicalRepresentationCondition {
 		waiting = value;
 	}
 	
+	@Override
 	public String getName() {
 		return name;
 	}

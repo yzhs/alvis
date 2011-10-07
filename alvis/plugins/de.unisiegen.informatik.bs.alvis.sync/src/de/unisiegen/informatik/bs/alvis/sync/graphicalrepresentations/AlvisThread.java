@@ -49,6 +49,7 @@ public class AlvisThread implements GraphicalRepresentationThread {
 		lName.setBackground(status ? AlvisColor.red.color() : AlvisColor.green.color());
 	}
 
+	@Override
 	public String getName() {
 		return name;
 	}

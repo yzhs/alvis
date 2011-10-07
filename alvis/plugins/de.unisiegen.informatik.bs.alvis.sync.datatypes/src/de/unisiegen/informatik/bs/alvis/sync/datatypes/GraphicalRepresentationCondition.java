@@ -6,7 +6,8 @@ public interface GraphicalRepresentationCondition extends
 		GraphicalRepresentation {
 	
 	public void setState(int waiting);
-	
 	public int getState();
+	
+	public String getName();
 
 }

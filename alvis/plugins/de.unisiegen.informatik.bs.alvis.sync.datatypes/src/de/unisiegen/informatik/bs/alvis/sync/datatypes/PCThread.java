@@ -22,6 +22,8 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 public class PCThread extends PCObject implements Runnable {
 
 	public static final String TYPENAME = "Thread";
+	
+	private String name;
 
 	private PCScenario scenario;
 	private PCList<PCSemaphore> semas;
@@ -34,6 +36,20 @@ public class PCThread extends PCObject implements Runnable {
 	private PCInteger currentLine;
 
 	public PCThread() {
+		name = "";
+		semas = new PCList<PCSemaphore>();
+		conds = new PCList<PCCondition>();
+		ints = new PCList<PCInteger>();
+		bools = new PCList<PCBoolean>();
+		doStep = new PCBoolean(false);
+		isBlocked = new PCBoolean(false);
+		currentLine = new PCInteger(0);
+		commandsforGr = new ArrayList<Stack<Object>>();
+		commandsforGr.add(new Stack<Object>());
+	}
+	
+	public PCThread(String name) {
+		this.name = name;
 		semas = new PCList<PCSemaphore>();
 		conds = new PCList<PCCondition>();
 		ints = new PCList<PCInteger>();
@@ -45,11 +61,12 @@ public class PCThread extends PCObject implements Runnable {
 		commandsforGr.add(new Stack<Object>());
 	}
 
-	public PCThread(GraphicalRepresentationThread gr) {
+	public PCThread(String name, GraphicalRepresentationThread gr) {
 		allGr.add(gr);
 		if (gr != null) {
 			isBlocked = new PCBoolean(gr.getBlocked());
 		}
+		this.name = name;
 		semas = new PCList<PCSemaphore>();
 		conds = new PCList<PCCondition>();
 		ints = new PCList<PCInteger>();
@@ -59,6 +76,10 @@ public class PCThread extends PCObject implements Runnable {
 		currentLine = new PCInteger(0);
 		commandsforGr = new ArrayList<Stack<Object>>();
 		commandsforGr.add(new Stack<Object>());
+	}
+	
+	public String getName() {
+		return name;
 	}
 
 	public void setScenario(PCScenario scenario) {
@@ -152,7 +173,7 @@ public class PCThread extends PCObject implements Runnable {
 	}
 	
 	public List<String> getMethods() {
-		String[] methods = {"run", "equal", "notEqual"};
+		String[] methods = {"run", "equal", "notEqual", "start", "join", "yield"};
 		return Arrays.asList(methods);
 	}
 

@@ -21,6 +21,8 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 public class PCSemaphore extends PCObject {
 
 	public static final String TYPENAME = "Semaphore";
+	
+	private String name;
 
 	/**
 	 * Semaphore's counter. Semaphore will lock when 0
@@ -28,18 +30,28 @@ public class PCSemaphore extends PCObject {
 	private PCInteger counter;
 
 	public PCSemaphore() {
+		name = "";
+		counter = new PCInteger(1); //mutex
+		commandsforGr = new ArrayList<Stack<Object>>();
+		commandsforGr.add(new Stack<Object>());
+	}
+	
+	public PCSemaphore(String name) {
+		this.name = name;
 		counter = new PCInteger(1); //mutex
 		commandsforGr = new ArrayList<Stack<Object>>();
 		commandsforGr.add(new Stack<Object>());
 	}
 
-	public PCSemaphore(PCInteger counter) {
+	public PCSemaphore(String name, PCInteger counter) {
+		this.name = name;
 		this.counter = counter;
 		commandsforGr = new ArrayList<Stack<Object>>();
 		commandsforGr.add(new Stack<Object>());
 	}
 
-	public PCSemaphore(PCInteger counter, GraphicalRepresentationSemaphore gr) {
+	public PCSemaphore(String name, PCInteger counter, GraphicalRepresentationSemaphore gr) {
+		this.name = name;
 		allGr.add(gr);
 		this.counter = counter;
 		commandsforGr = new ArrayList<Stack<Object>>();
@@ -66,12 +78,16 @@ public class PCSemaphore extends PCObject {
 		}
 		return false;
 	}
+	
+	public String getName() {
+		return name;
+	}
 
 	/**
 	 * Decrease semaphore, thread will possibly lock
 	 * @param t Actor who calls this
 	 */
-	public synchronized void P(PCThread t) {
+	public synchronized void _P_(PCThread t) {
 		try {
 			counter._dec_();
 			if (counter._equal_(new PCInteger(0)).getLiteralValue()) {
@@ -89,7 +105,7 @@ public class PCSemaphore extends PCObject {
 	/**
 	 * Increase semaphore, if counter > 0 a thread will be unlocked
 	 */
-	public synchronized void V() {
+	public synchronized void _V_() {
 		counter._inc_();
 		notify();
 	}

@@ -20,6 +20,8 @@ import de.unisiegen.informatik.bs.alvis.primitive.datatypes.PCObject;
 public class PCCondition extends PCObject {
 
 	public static final String TYPENAME = "Condition";
+	
+	private String name;
 
 	private PCScenario scenario;
 	private PCThread thread;
@@ -31,22 +33,24 @@ public class PCCondition extends PCObject {
 	private PCInteger waiting;
 
 	public PCCondition() {
+		name = "";
 		sema = new PCSemaphore();
 		waiting = new PCInteger(0);
 		commandsforGr = new ArrayList<Stack<Object>>();
 		commandsforGr.add(new Stack<Object>());
 	}
 
-	public PCCondition(PCInteger waiting, PCSemaphore sema) {
+	public PCCondition(String name, PCInteger waiting, PCSemaphore sema) {
+		this.name = name;
 		this.waiting = waiting;
 		this.sema = sema;
 		commandsforGr = new ArrayList<Stack<Object>>();
 		commandsforGr.add(new Stack<Object>());
 	}
 
-	public PCCondition(PCInteger waiting, PCSemaphore sema,
+	public PCCondition(String name, PCInteger waiting, PCSemaphore sema,
 			GraphicalRepresentationCondition gr) {
-		this(waiting, sema);
+		this(name, waiting, sema);
 		allGr.add(gr);
 	}
 
@@ -89,6 +93,10 @@ public class PCCondition extends PCObject {
 		}
 		return false;
 	}
+	
+	public String getName() {
+		return name;
+	}
 
 	/**
 	 * Wait for condition
@@ -96,9 +104,9 @@ public class PCCondition extends PCObject {
 	 * @param a
 	 *            Actor who has to wait
 	 */
-	public void wait(PCThread t) {
+	public void _wait_(PCThread t) {
 		synchronized (this) {
-			sema.V();
+			sema._V_();
 			try {
 				waiting._inc_();
 				t.setBlocked(new PCBoolean(true));
@@ -109,20 +117,20 @@ public class PCCondition extends PCObject {
 			waiting._dec_();
 			t.setBlocked(new PCBoolean(false));
 		}
-		sema.P(t);
+		sema._P_(t);
 	}
 
 	/**
 	 * Signals that condition is free
 	 */
-	public synchronized void signal() {
+	public synchronized void _signal_() {
 		notify();
 	}
 
 	/**
 	 * Signals that condition is free to all waiting threads
 	 */
-	public void signalAll() {
+	public void _signalAll_() {
 		notifyAll();
 	}
 

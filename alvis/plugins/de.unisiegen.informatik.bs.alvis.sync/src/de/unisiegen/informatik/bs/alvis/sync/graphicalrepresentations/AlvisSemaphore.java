@@ -27,7 +27,7 @@ public class AlvisSemaphore implements GraphicalRepresentationSemaphore {
 		d = scenario.getMyDisplay();
 		id = scenario.getAdmin().requestId();
 		this.name = name;
-		sema = new PCSemaphore(new PCInteger(counter));
+		sema = new PCSemaphore(name, new PCInteger(counter));
 		label = new Label(scenario.getSemaphoresGroup(), SWT.NULL);
 		sema.addGraphicalRepresentation(this);
 		this.setState(counter);
@@ -38,7 +38,7 @@ public class AlvisSemaphore implements GraphicalRepresentationSemaphore {
 		d = scenario.getMyDisplay();
 		this.id = id;
 		this.name = name;
-		sema = new PCSemaphore(new PCInteger(counter));
+		sema = new PCSemaphore(name, new PCInteger(counter));
 		label = new Label(scenario.getSemaphoresGroup(), SWT.NULL);
 		sema.addGraphicalRepresentation(this);
 		this.setState(counter);
@@ -74,6 +74,7 @@ public class AlvisSemaphore implements GraphicalRepresentationSemaphore {
 		count = value;
 	}
 	
+	@Override
 	public String getName() {
 		return name;
 	}

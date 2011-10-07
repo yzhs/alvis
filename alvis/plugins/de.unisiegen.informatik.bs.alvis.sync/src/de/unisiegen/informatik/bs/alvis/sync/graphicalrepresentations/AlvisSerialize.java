@@ -74,8 +74,8 @@ public class AlvisSerialize {
 			primitiveIds[i] = p.getId();
 			primitiveNames[i] = p.getName();
 			primitiveTypes[i] = p.getType();
-			primitiveIntValues[i] = p.getIntValue();
-			primitiveBooleanValues[i] = p.getBoolValue();
+			primitiveIntValues[i] = p.getInt();
+			primitiveBooleanValues[i] = p.getBool();
 		}
 
 		int threadsCount = threads.size();

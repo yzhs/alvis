@@ -5,8 +5,9 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 
 import de.unisiegen.informatik.bs.alvis.primitive.datatypes.GraphicalRepresentation;
+import de.unisiegen.informatik.bs.alvis.sync.datatypes.GraphicalRepresentationPrimitive;
 
-public class AlvisPrimitive implements GraphicalRepresentation {
+public class AlvisPrimitive implements GraphicalRepresentationPrimitive {
 	
 	private String name;
 	private boolean type;
@@ -58,7 +59,8 @@ public class AlvisPrimitive implements GraphicalRepresentation {
 		
 	}
 	
-	public void update(final int i) {
+	@Override
+	public void setValue(final int i) {
 		intValue = i;
 		d.syncExec(new Runnable() {
 			public void run() {
@@ -67,7 +69,8 @@ public class AlvisPrimitive implements GraphicalRepresentation {
 		});
 	}
 	
-	public void update(final boolean b) {
+	@Override
+	public void setValue(final boolean b) {
 		boolValue = b;
 		d.syncExec(new Runnable() {
 			public void run() {
@@ -76,6 +79,7 @@ public class AlvisPrimitive implements GraphicalRepresentation {
 		});
 	}
 	
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -92,7 +96,8 @@ public class AlvisPrimitive implements GraphicalRepresentation {
 		type = value;
 	}
 	
-	public int getIntValue() {
+	@Override
+	public int getInt() {
 		if (type) {
 			return intValue;
 		} else {
@@ -108,7 +113,8 @@ public class AlvisPrimitive implements GraphicalRepresentation {
 		}
 	}
 	
-	public boolean getBoolValue() {
+	@Override
+	public boolean getBool() {
 		if (!type) {
 			return boolValue;
 		} else {

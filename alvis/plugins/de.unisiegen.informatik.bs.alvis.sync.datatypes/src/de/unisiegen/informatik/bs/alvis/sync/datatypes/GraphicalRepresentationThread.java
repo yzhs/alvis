@@ -6,5 +6,7 @@ public interface GraphicalRepresentationThread extends GraphicalRepresentation {
 	
 	public void setBlocked(boolean newStatus);
 	public boolean getBlocked();
+	
+	public String getName();
 
 }
