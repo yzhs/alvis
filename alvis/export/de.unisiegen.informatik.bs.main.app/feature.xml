@@ -17,10 +17,6 @@
    </license>
 
    <includes
-         id="org.eclipse.rcp"
-         version="0.0.0"/>
-
-   <includes
          id="org.eclipselabs.p2.rcpupdate"
          version="0.0.0"/>
 

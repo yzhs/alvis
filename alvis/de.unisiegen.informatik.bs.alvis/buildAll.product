@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="%product.name" id="de.unisiegen.informatik.bs.alvis.buildAll" application="de.unisiegen.informatik.bs.alvis.application" version="1.0.4" useFeatures="true" includeLaunchers="true">
+<product name="%product.name" uid="de.unisiegen.informatik.bs.alvis.product.test" id="de.unisiegen.informatik.bs.alvis.product" application="de.unisiegen.informatik.bs.alvis.application" version="1.0.4" useFeatures="true" includeLaunchers="true">
 
    <aboutInfo>
       <image path="about.png"/>
@@ -47,8 +47,10 @@ Frank Weiler
       </win>
    </launcher>
 
+
    <vm>
    </vm>
+
 
    <plugins>
       <plugin id="com.ibm.icu"/>
