@@ -63,24 +63,16 @@ public class AlvisLineBreakpointAdapter implements IToggleBreakpointsTarget {
 						String lineText = sym.getTextWidget().getLine(
 								lineNumber);
 						if (lineText.endsWith(";")) {
+							int offset = sym.getTextWidget().getOffsetAtLine(lineNumber);
 							String newLine = lineText.substring(0,
 									lineText.length() - 1);
 							newLine = newLine.concat(new String(","));
-							int chars = 0;
-							for (int n = 0; n <= sym.getTextWidget()
-									.getLineCount(); n++) {
-								if (lineText.equals(sym.getTextWidget()
-										.getLine(n)))
-									break;
-								chars += sym.getTextWidget().getLine(n)
-										.length() + 1;
-							}
-							sym.getTextWidget().replaceTextRange(chars,
+							sym.getTextWidget().replaceTextRange(offset,
 									newLine.length(), newLine);
-							// remove
-							breakpoint.delete();
-							return; // done with toggle -- removed it
 						}
+						// remove
+						breakpoint.delete();
+						return; // done with toggle -- removed it
 					}
 				}
 			}
@@ -90,13 +82,8 @@ public class AlvisLineBreakpointAdapter implements IToggleBreakpointsTarget {
 			if (lineText.endsWith(",")) {
 				String newLine = lineText.substring(0, lineText.length() - 1);
 				newLine = newLine.concat(new String(";"));
-				int chars = 0;
-				for (int n = 0; n <= sym.getTextWidget().getLineCount(); n++) {
-					if (lineText.equals(sym.getTextWidget().getLine(n)))
-						break;
-					chars += sym.getTextWidget().getLine(n).length() + 1;
-				}
-				sym.getTextWidget().replaceTextRange(chars, newLine.length(),
+				int offset = sym.getTextWidget().getOffsetAtLine(lineNumber);
+				sym.getTextWidget().replaceTextRange(offset, newLine.length(),
 						newLine);
 
 				// didn't remove one, so we must be adding one
