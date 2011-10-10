@@ -5,6 +5,8 @@ import java.util.ResourceBundle;
 
 import org.eclipse.osgi.util.NLS;
 
+import com.itextpdf.text.Element;
+
 public class Messages extends NLS {
 
 	private static ResourceBundle labels;
@@ -113,27 +115,33 @@ public class Messages extends NLS {
 	public static String RunEditor_btnO_1_text;
 	public static String RunEditor_btnOpenExample_toolTipText;
 	public static String RunEditor_btnOpenEditorAlgorithm_toolTipText;
+	public static String exportShellTag;
+	public static String exportShellStart;
+	public static String exportShellStep;
+	public static String exportShellOk;
+	public static String exportShellCancel;
+	public static String FileProbablyopened;
+	public static String allFiles;
+	public static String saveExport;
+	public static String alvisExport_;
+	public static String alreadyExists;
+	public static String nothingToExport;
+	public static String alvisExport;
+	public static String generatedBy;
+	public static String noSourceCodeAdded;
+	public static String tmpAlvisImage;
+	public static String errorAddingImage;
+	public static String exportShellChooseImages;
+	public static String exportShellSelectAll;
+	public static String exportShellSelectRange;
+	
+	
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
 	}
 
 	private Messages() {
-	}
-
-	public static String getLabel(String key) {
-		String res;
-		if (currentLanguage == null) {
-			Locale.setDefault(Locale.ENGLISH); // default language: English
-			currentLanguage = Locale.getDefault();
-		}
-		try {
-			labels = ResourceBundle.getBundle(BUNDLE_NAME, currentLanguage);
-			res = labels.getString(key);
-		} catch (Exception e) {
-			res = "#err";
-		}
-		return res;
 	}
 
 	public static Locale getCurrentLanguage() {

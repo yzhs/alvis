@@ -20,19 +20,27 @@ package de.unisiegen.informatik.bs.alvis.export;
 import java.util.ArrayList;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.layout.FillLayout;
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
 
 import de.unisiegen.informatik.bs.alvis.editors.Messages;
 
@@ -43,10 +51,12 @@ import de.unisiegen.informatik.bs.alvis.editors.Messages;
  */
 public class ExportShell extends Shell {
 
-	private Button bOk, bCancel;
-	private ArrayList<Button> checkButtons;
+	private final ArrayList<Button> checkButtons;
 	private ArrayList<Image> images;
 	private ArrayList<StyledText> sourceCode;
+	private final Color grey, blue;
+	private Button bCheckAll, bCheckRange;
+	private Text edit;
 
 	@Override
 	protected void checkSubclass() {
@@ -78,21 +88,42 @@ public class ExportShell extends Shell {
 		sourceCode = (ArrayList<StyledText>) sourceCodeParts.clone();
 		checkButtons = new ArrayList<Button>();
 
-		setLayout(new RowLayout());
-		setText(Messages.getLabel("exportShellTag"));
+		grey = new Color(null, new RGB(240, 240, 240));
+		blue = new Color(null, new RGB(96, 96, 255));
 
-		Canvas composite = new Canvas(this, SWT.NONE);
-		composite.setLayout(new GridLayout(1, false));
+		this.setLayout(new GridLayout(1, false));
+		this.setText(Messages.exportShellTag);
 
-		Composite imageContainer = new Composite(composite, SWT.BORDER);
-		imageContainer.setLayout(new GridLayout(10, false));
+		// info texts:
+		Composite info = new Composite(this, SWT.NONE);
+		info.setLayout(new FillLayout());
+		Label infoText = new Label(info, SWT.NONE);
+		infoText.setFont(new Font(null, "calibri", 14, SWT.BOLD));
+		infoText.setText(Messages.exportShellChooseImages + ":");
+
+		// images in scrolled composite:
+		Composite scrollContainer = new Composite(this, SWT.BORDER);
+		FillLayout filly = new FillLayout(SWT.VERTICAL);
+		scrollContainer.setLayout(filly);
+		scrollContainer.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, true,
+				true));
+
+		ScrolledComposite scroll = new ScrolledComposite(scrollContainer,
+				SWT.V_SCROLL);
+		scroll.setLayout(new GridLayout(1, true));
+
+		Composite imageContainer = new Composite(scroll, SWT.NONE);
+		imageContainer.setLayout(new GridLayout(5, true));
+		scroll.setContent(imageContainer);
 
 		for (int i = 0; i < images.size(); i++) {
 
-			// Canvas imgAndRadio = new Canvas(imageContainer, SWT.BORDER);
-			// // resizing image and adding to composite
-			// Label label = new Label(imgAndRadio, SWT.NONE);
-			Label label = new Label(imageContainer, SWT.NONE);
+			Composite imgFrame = new Composite(imageContainer, SWT.BORDER);
+			imgFrame.setLayout(new GridLayout(1, false));
+			imgFrame.setBackground(grey);
+
+			// resizing image and adding to composite
+			Label label = new Label(imgFrame, SWT.NONE);
 			int width = images.get(i).getBounds().width;
 			int height = images.get(i).getBounds().height;
 			int newWidth = maxPreviewWidth;
@@ -107,24 +138,115 @@ public class ExportShell extends Shell {
 			gc.drawImage(images.get(i), 0, 0, width, height, 0, 0, newWidth,
 					newHeight);
 			label.setImage(myImage);
-			// Button check = new Button(imgAndRadio, SWT.CHECK);
-			Button check = new Button(imageContainer, SWT.CHECK);
-			check.setText(Messages.getLabel("exportImage") + " " + i);
-			checkButtons.add(check);
+			label.setSize(myImage.getBounds().width, myImage.getBounds().height);
+
 			gc.dispose();
 
+			Button check = new Button(imgFrame, SWT.CHECK);
+			String text = (i == 0) ? Messages.exportShellStart
+					: Messages.exportShellStep + " " + i;
+			check.setText(text);
+			checkButtons.add(check);
+
+			imgFrame.addMouseListener(new MouseListener() {
+				@Override
+				public void mouseUp(MouseEvent e) {
+					Composite c = (Composite) (e.getSource());
+					Button check = (Button) c.getChildren()[1];
+					switchImageSelection(check, !check.getSelection());
+				}
+
+				@Override
+				public void mouseDown(MouseEvent e) {
+				}
+
+				@Override
+				public void mouseDoubleClick(MouseEvent e) {
+				}
+			});
+
+			label.addMouseListener(new MouseListener() {
+				@Override
+				public void mouseUp(MouseEvent e) {
+					Label caller = (Label) (e.getSource());
+					Composite c = caller.getParent();
+					Button check = (Button) c.getChildren()[1];
+					switchImageSelection(check, !check.getSelection());
+				}
+
+				@Override
+				public void mouseDown(MouseEvent e) {
+				}
+
+				@Override
+				public void mouseDoubleClick(MouseEvent e) {
+				}
+			});
+
+			check.addSelectionListener(new SelectionListener() {
+
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					Button check = (Button) e.getSource();
+					switchImageSelection(check, check.getSelection());
+				}
+
+				@Override
+				public void widgetDefaultSelected(SelectionEvent e) {
+				}
+			});
 		}
 
-		Composite buttonContainer = new Composite(composite, SWT.NONE);
-		buttonContainer.setLayout(new GridLayout(2, false));
+		imageContainer.pack();
 
-		bOk = new Button(buttonContainer, SWT.PUSH);
-		bOk.setText(Messages.getLabel("buttonOk"));
-		bOk.setSize(100, 20);
-		bCancel = new Button(buttonContainer, SWT.PUSH);
-		bCancel.setText(Messages.getLabel("buttonCancel"));
-		bCancel.setSize(100, 20);
+		// button and options:
+		Group optionGroup = new Group(this, SWT.NONE);
+		GridLayout griddy = new GridLayout(3, false);
+		optionGroup.setLayout(griddy);
 
+		bCheckAll = new Button(optionGroup, SWT.TOGGLE);
+		bCheckAll.setText(Messages.exportShellSelectAll);
+		bCheckAll.addSelectionListener(new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				Boolean isSelected = ((Button) e.getSource()).getSelection();
+				for (Button check : checkButtons) {
+					switchImageSelection(check, isSelected);
+				}
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+		});
+
+		bCheckRange = new Button(optionGroup, SWT.TOGGLE);
+		bCheckRange.setText(Messages.exportShellSelectRange + ":");
+
+		edit = new Text(optionGroup, SWT.SINGLE | SWT.BORDER);
+		edit.setSize(100, 16);
+		edit.setText(" 1 - 3 , 4                     ");
+
+		bCheckRange.addSelectionListener(new SelectionListener() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				ArrayList<Integer> indices = computeTextField();
+				for (int i = 0; i < checkButtons.size(); i++) {
+					if (indices.contains(i)) {
+						switchImageSelection(checkButtons.get(i), true);
+					} else {
+						switchImageSelection(checkButtons.get(i), false);
+					}
+				}
+			}
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent e) {
+			}
+		});
+
+		Button bOk = new Button(this, SWT.PUSH);
+		bOk.setText(Messages.exportShellOk);
 		bOk.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseUp(MouseEvent e) {
@@ -145,40 +267,130 @@ public class ExportShell extends Shell {
 			public void mouseDoubleClick(MouseEvent e) {
 			}
 		});
-		bCancel.addMouseListener(new MouseListener() {
-			@Override
-			public void mouseUp(MouseEvent e) {
-				images.clear();
-				dispose();
-			}
 
-			@Override
-			public void mouseDown(MouseEvent e) {
-			}
+		// Button bCancel = new Button(optionGroup, SWT.PUSH);
+		// bCancel.setText(Messages.exportShellCancel);
+		// bCancel.setSize(100, 20);
+		// bCancel.addMouseListener(new MouseListener() {
+		// @Override
+		// public void mouseUp(MouseEvent e) {
+		// images.clear();
+		// sourceCode.clear();
+		// dispose();
+		// }
+		//
+		// @Override
+		// public void mouseDown(MouseEvent e) {
+		// }
+		//
+		// @Override
+		// public void mouseDoubleClick(MouseEvent e) {
+		// }
+		// });
 
-			@Override
-			public void mouseDoubleClick(MouseEvent e) {
-			}
-		});
-
-		pack();
-		open();
-		while (!isDisposed()) {
-			if (!getDisplay().readAndDispatch())
-				getDisplay().sleep();
+		this.pack();
+		this.setSize(this.getSize().x, 600);
+		this.open();
+		while (!this.isDisposed()) {
+			if (!this.getDisplay().readAndDispatch())
+				this.getDisplay().sleep();
 		}
 
-		System.out.println(images);
+	}
 
+	/**
+	 * interprets text field "edit"
+	 * 
+	 * @return array list with indices of images to be selected
+	 */
+	protected ArrayList<Integer> computeTextField() {
+		ArrayList<Integer> result = new ArrayList<Integer>();
+
+		String textToEdit = edit.getText();
+		textToEdit = textToEdit.replace(";", ",");
+		textToEdit = textToEdit.replace("+", ",");
+		textToEdit = textToEdit.replace(Messages.exportShellStart, "0");
+		textToEdit = textToEdit.replace(Messages.exportShellStep, "");
+		String[] chars = textToEdit.split("");
+		textToEdit = "";
+		for (String c : chars) {
+			if (!c.equals("0") && !c.equals("1") && !c.equals("2")
+					&& !c.equals("3") && !c.equals("4") && !c.equals("5")
+					&& !c.equals("6") && !c.equals("7") && !c.equals("8")
+					&& !c.equals("9") && !c.equals(" ") && !c.equals(",")
+					&& !c.equals("-")) {
+				c = "";
+			}
+			textToEdit += c;
+		}
+		edit.setText(textToEdit);
+
+		String[] parts = textToEdit.split(",");
+		for (String subPart : parts) {
+			try {
+				subPart = subPart.replace(" ", "");
+				String[] subSubParts = subPart.split("-");
+				if (subSubParts.length == 1) { // without "-"
+					int index = Integer.parseInt(subSubParts[0]);
+					if (index >= 0) {
+						if (!result.contains(index)
+								&& checkButtons.size() > index) {
+							result.add(index);
+						}
+					}
+				} else if (subSubParts.length == 2) { // with "-"
+					int from = Integer.parseInt(subSubParts[0]);
+					int to = Integer.parseInt(subSubParts[1]);
+					if (from > to){
+						int tmp = from;
+						from = to;
+						to = tmp;
+					}
+					
+					if (from >= 0 && from != to) {
+						for (int index = from; index <= to; index++) {
+							if (!result.contains(index)
+									&& checkButtons.size() > index) {
+								result.add(index);
+							}
+						}
+					}
+				}
+			} catch (NumberFormatException nfe) {
+			}
+		}
+
+		return result;
+	}
+
+	/**
+	 * switches selection and surrounding background color of given check box
+	 * 
+	 * @param check
+	 *            check box to switch
+	 * @param selectIt
+	 *            whether to select or deselect the check box
+	 */
+	protected void switchImageSelection(Button check, boolean selectIt) {
+
+		Composite c = check.getParent();
+		check.setSelection(selectIt);
+		if (selectIt) {
+			c.setBackground(blue);
+			check.setBackground(blue);
+		} else {
+			bCheckAll.setSelection(false);
+			bCheckRange.setSelection(false);
+			c.setBackground(grey);
+			check.setBackground(grey);
+		}
 	}
 
 	/**
 	 * @return array list of images which shall be exported
 	 */
 	public ArrayList<Image> getWantedImages() {
-
 		return images;
-
 	}
 
 	/**
@@ -187,5 +399,48 @@ public class ExportShell extends Shell {
 	 */
 	public ArrayList<StyledText> getWantedSourceCodeParts() {
 		return sourceCode;
+	}
+
+	// TODO remove main method
+	public static void main(String args[]) {
+
+		Display d = new Display();
+		Image img;
+		GC gc = new GC(d);
+		img = new Image(Display.getCurrent(), 200, 200);
+		gc.copyArea(img, 0, 0);
+		gc.dispose();
+
+		ArrayList<Image> imgs = new ArrayList<Image>();
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		imgs.add(img);
+		ArrayList<StyledText> sourceCodeParts = new ArrayList<StyledText>();
+		sourceCodeParts.add(null);
+		new ExportShell(d, imgs, sourceCodeParts);
 	}
 }

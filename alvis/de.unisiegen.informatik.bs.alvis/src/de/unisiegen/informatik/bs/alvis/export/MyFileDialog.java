@@ -38,7 +38,7 @@ import de.unisiegen.informatik.bs.alvis.editors.Messages;
 public class MyFileDialog extends FileDialog {
 
 	private int fileEnding;
-	
+
 	/**
 	 * creates file chooser for exporting alvis to pdf or whatever
 	 * 
@@ -55,12 +55,11 @@ public class MyFileDialog extends FileDialog {
 		String[] extensions = null;
 		String defaultEnding = ".pdf";
 		if (exportToWhat == 0) {
-			fileNames = new String[] { "PDF (*.pdf)",
-					Messages.getLabel("allFiles") };
+			fileNames = new String[] { "PDF (*.pdf)", Messages.allFiles };
 			extensions = new String[] { "*.pdf", "*.*" };
 		} else if (exportToWhat == 1) {
 			fileNames = new String[] { "PNG (*.png)", "JPG (*.jpg)",
-					Messages.getLabel("allFiles") };
+					Messages.allFiles };
 
 			extensions = new String[] { "*.png", "*.jpg", "*.*" };
 			defaultEnding = ".png";
@@ -68,7 +67,7 @@ public class MyFileDialog extends FileDialog {
 			return;
 		}
 
-		setText(Messages.getLabel("saveExport"));
+		setText(Messages.saveExport);
 		setFilterNames(fileNames);
 		setFilterExtensions(extensions);
 		try {
@@ -77,7 +76,7 @@ public class MyFileDialog extends FileDialog {
 		} catch (IOException e) {
 		}
 
-		setFileName(Messages.getLabel("alvisExport_")
+		setFileName(Messages.alvisExport_
 				+ ((System.currentTimeMillis() / 1000) % 1000) + defaultEnding);
 	}
 
@@ -85,7 +84,6 @@ public class MyFileDialog extends FileDialog {
 	protected void checkSubclass() {
 		// important, without this (empty) method subclassing is not allowed
 	}
-
 
 	@Override
 	/**
@@ -101,15 +99,15 @@ public class MyFileDialog extends FileDialog {
 		if (new File(path).exists()) {
 			MessageBox mb = new MessageBox(getParent(), SWT.ICON_WARNING
 					| SWT.YES | SWT.NO);
-			mb.setMessage(path + Messages.getLabel("alreadyExists"));
+			mb.setMessage(path + Messages.alreadyExists);
 			if (mb.open() == SWT.NO) {
 				return open();
 			}
 		}
-		
-		if(path.toLowerCase().endsWith("png")){
+
+		if (path.toLowerCase().endsWith("png")) {
 			setFileEnding(SWT.IMAGE_PNG);
-		} else if(path.toLowerCase().endsWith("jpg")){
+		} else if (path.toLowerCase().endsWith("jpg")) {
 			setFileEnding(SWT.IMAGE_JPEG);
 		} else {
 			setFileEnding(SWT.IMAGE_UNDEFINED);

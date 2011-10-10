@@ -60,7 +60,7 @@ public class ImageExport {
 		} catch (FileNotFoundException fnfe) {
 			MessageBox sure = new MessageBox(new Shell(), SWT.ICON_WARNING
 					| SWT.OK);
-			sure.setMessage(Messages.getLabel("FileProbablyopened"));
+			sure.setMessage(Messages.FileProbablyopened);
 			sure.open();
 		}
 	}

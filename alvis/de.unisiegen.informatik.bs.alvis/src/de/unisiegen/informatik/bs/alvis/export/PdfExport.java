@@ -90,7 +90,7 @@ public class PdfExport extends Document {
 		if (exportItem == null) {
 			MessageBox sure = new MessageBox(new Shell(), SWT.ICON_WARNING
 					| SWT.OK);
-			sure.setMessage(Messages.getLabel("nothingToExport"));
+			sure.setMessage(Messages.nothingToExport);
 			sure.open();
 			return;
 		}
@@ -138,19 +138,26 @@ public class PdfExport extends Document {
 					sourceCodeParts.add(sourceCode);
 				}
 			} else { // export run, saving images taken earlier
-				Activator.getDefault().getWorkbench().getDisplay()
-						.syncExec(new Runnable() {
-							@Override
-							public void run() {
 
-								ExportShell exportShell = new ExportShell(
-										Display.getDefault(), images,
-										sourceCodeParts);
-								wantedImages = exportShell.getWantedImages();
-								wantedStyledTexts = exportShell
-										.getWantedSourceCodeParts();
-							}
-						});
+//				while(VirtualMachine.getInstance().runningThreads());
+				ExportShell exportShell = new ExportShell(Display.getDefault(),
+						images, sourceCodeParts);
+				wantedImages = exportShell.getWantedImages();
+				wantedStyledTexts = exportShell.getWantedSourceCodeParts();
+
+				// Activator.getDefault().getWorkbench().getDisplay()
+				// .syncExec(new Runnable() {
+				// @Override
+				// public void run() {
+				//
+				// ExportShell exportShell = new ExportShell(
+				// Display.getDefault(), images,
+				// sourceCodeParts);
+				// wantedImages = exportShell.getWantedImages();
+				// wantedStyledTexts = exportShell
+				// .getWantedSourceCodeParts();
+				// }
+				// });
 			}
 
 			open();
@@ -184,7 +191,7 @@ public class PdfExport extends Document {
 		} catch (FileNotFoundException fnfe) {
 			MessageBox sure = new MessageBox(new Shell(), SWT.ICON_WARNING
 					| SWT.OK);
-			sure.setMessage(Messages.getLabel("FileProbablyopened"));
+			sure.setMessage(Messages.FileProbablyopened);
 			sure.open();
 		} finally {
 			Activator.getDefault().shutUpForExport(false);
@@ -197,8 +204,8 @@ public class PdfExport extends Document {
 	 * adds meta data to this document
 	 */
 	private void addMetaData() {
-		addTitle(Messages.getLabel("alvisExport"));
-		addSubject(Messages.getLabel("alvisExport"));
+		addTitle(Messages.alvisExport);
+		addSubject(Messages.alvisExport);
 		addKeywords("Alvis, Java, PDF");
 		addAuthor("AlvisPg2011");
 		addCreator("Alvis");
@@ -213,11 +220,11 @@ public class PdfExport extends Document {
 		Paragraph title = new Paragraph();
 		addEmptyLine(title, 1);
 
-		title.add(new Paragraph(Messages.getLabel("alvisExport"), titleFont));
+		title.add(new Paragraph(Messages.alvisExport, titleFont));
 
 		addEmptyLine(title, 1);
 
-		title.add(new Paragraph(Messages.getLabel("generatedBy") + ": "
+		title.add(new Paragraph(Messages.generatedBy + ": "
 				+ System.getProperty("user.name") + ", " + new Date(),
 				smallBold));
 
@@ -267,7 +274,7 @@ public class PdfExport extends Document {
 					paragraph.add(elem);
 				}
 			} catch (IOException e) {
-				paragraph.add(Messages.getLabel("noSourceCodeAdded"));
+				paragraph.add(Messages.noSourceCodeAdded);
 			}
 		}
 
@@ -288,7 +295,7 @@ public class PdfExport extends Document {
 		if (image == null)
 			return null;
 
-		String path = Messages.getLabel("tmpAlvisImage") + ".png";
+		String path = Messages.tmpAlvisImage + ".png";
 		com.itextpdf.text.Image pdfImage;
 
 		Paragraph paragraph = new Paragraph();
@@ -313,7 +320,7 @@ public class PdfExport extends Document {
 			paragraph.add(pdfImage);
 		} catch (Exception e) {
 			e.printStackTrace();
-			System.err.println(Messages.getLabel("errorAddingImage"));
+			System.err.println(Messages.errorAddingImage);
 		}
 		addEmptyLine(paragraph, 2);
 
