@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="%product.name" id="de.unisiegen.informatik.bs.alvis.buildAll" application="de.unisiegen.informatik.bs.alvis.application" version="1.0.4" useFeatures="false" includeLaunchers="true">
+<product name="%product.name" id="de.unisiegen.informatik.bs.alvis.buildAll" application="de.unisiegen.informatik.bs.alvis.application" version="1.0.4" useFeatures="true" includeLaunchers="true">
 
    <aboutInfo>
       <image path="about.png"/>
@@ -47,10 +47,8 @@ Frank Weiler
       </win>
    </launcher>
 
-
    <vm>
    </vm>
-
 
    <plugins>
       <plugin id="com.ibm.icu"/>
@@ -102,8 +100,6 @@ Frank Weiler
       <plugin id="org.eclipse.core.filesystem.linux.x86" fragment="true"/>
       <plugin id="org.eclipse.core.filesystem.linux.x86_64" fragment="true"/>
       <plugin id="org.eclipse.core.filesystem.macosx" fragment="true"/>
-      <plugin id="org.eclipse.core.filesystem.macosx.nl_de" fragment=""/>
-      <plugin id="org.eclipse.core.filesystem.nl_de" fragment=""/>
       <plugin id="org.eclipse.core.filesystem.solaris.sparc" fragment="true"/>
       <plugin id="org.eclipse.core.filesystem.win32.x86" fragment="true"/>
       <plugin id="org.eclipse.core.filesystem.win32.x86_64" fragment="true"/>
@@ -111,10 +107,14 @@ Frank Weiler
       <plugin id="org.eclipse.core.jobs.nl_de" fragment="true"/>
       <plugin id="org.eclipse.core.net"/>
       <plugin id="org.eclipse.core.net.linux.x86" fragment="true"/>
+      <plugin id="org.eclipse.core.net.linux.x86.nl_de" fragment="true"/>
       <plugin id="org.eclipse.core.net.linux.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.core.net.linux.x86_64.nl_de" fragment="true"/>
       <plugin id="org.eclipse.core.net.nl_de" fragment="true"/>
       <plugin id="org.eclipse.core.net.win32.x86" fragment="true"/>
+      <plugin id="org.eclipse.core.net.win32.x86.nl_de" fragment="true"/>
       <plugin id="org.eclipse.core.net.win32.x86_64" fragment="true"/>
+      <plugin id="org.eclipse.core.net.win32.x86_64.nl_de" fragment="true"/>
       <plugin id="org.eclipse.core.resources"/>
       <plugin id="org.eclipse.core.resources.nl_de" fragment="true"/>
       <plugin id="org.eclipse.core.resources.win32.x86" fragment="true"/>
@@ -122,6 +122,7 @@ Frank Weiler
       <plugin id="org.eclipse.core.runtime.compatibility.auth"/>
       <plugin id="org.eclipse.core.runtime.compatibility.auth.nl_de" fragment="true"/>
       <plugin id="org.eclipse.core.runtime.compatibility.registry" fragment="true"/>
+      <plugin id="org.eclipse.core.runtime.compatibility.registry.nl_de" fragment="true"/>
       <plugin id="org.eclipse.core.runtime.nl_de" fragment="true"/>
       <plugin id="org.eclipse.core.variables"/>
       <plugin id="org.eclipse.core.variables.nl_de" fragment="true"/>
@@ -132,16 +133,10 @@ Frank Weiler
       <plugin id="org.eclipse.draw2d"/>
       <plugin id="org.eclipse.ecf"/>
       <plugin id="org.eclipse.ecf.filetransfer"/>
-      <plugin id="org.eclipse.ecf.filetransfer.nl_de" fragment=""/>
       <plugin id="org.eclipse.ecf.identity"/>
-      <plugin id="org.eclipse.ecf.identity.nl_de" fragment=""/>
-      <plugin id="org.eclipse.ecf.nl_de" fragment=""/>
       <plugin id="org.eclipse.ecf.provider.filetransfer"/>
-      <plugin id="org.eclipse.ecf.provider.filetransfer.nl_de" fragment=""/>
       <plugin id="org.eclipse.ecf.provider.filetransfer.ssl" fragment="true"/>
-      <plugin id="org.eclipse.ecf.provider.filetransfer.ssl.nl_de" fragment=""/>
       <plugin id="org.eclipse.ecf.ssl" fragment="true"/>
-      <plugin id="org.eclipse.ecf.ssl.nl_de" fragment=""/>
       <plugin id="org.eclipse.equinox.app"/>
       <plugin id="org.eclipse.equinox.app.nl_de" fragment="true"/>
       <plugin id="org.eclipse.equinox.common"/>
@@ -172,14 +167,9 @@ Frank Weiler
       <plugin id="org.eclipse.equinox.registry.nl_de" fragment="true"/>
       <plugin id="org.eclipse.equinox.security"/>
       <plugin id="org.eclipse.equinox.security.macosx" fragment="true"/>
-      <plugin id="org.eclipse.equinox.security.macosx.nl_de" fragment=""/>
-      <plugin id="org.eclipse.equinox.security.nl_de" fragment=""/>
       <plugin id="org.eclipse.equinox.security.ui"/>
-      <plugin id="org.eclipse.equinox.security.ui.nl_de" fragment=""/>
       <plugin id="org.eclipse.equinox.security.win32.x86" fragment="true"/>
-      <plugin id="org.eclipse.equinox.security.win32.x86.nl_de" fragment=""/>
       <plugin id="org.eclipse.equinox.security.win32.x86_64" fragment="true"/>
-      <plugin id="org.eclipse.equinox.security.win32.x86_64.nl_de" fragment=""/>
       <plugin id="org.eclipse.equinox.simpleconfigurator"/>
       <plugin id="org.eclipse.help"/>
       <plugin id="org.eclipse.help.base"/>
@@ -194,7 +184,6 @@ Frank Weiler
       <plugin id="org.eclipse.jdt.core.manipulation.nl_de" fragment="true"/>
       <plugin id="org.eclipse.jdt.core.nl_de" fragment="true"/>
       <plugin id="org.eclipse.jdt.debug"/>
-      <plugin id="org.eclipse.jdt.debug.core" fragment=""/>
       <plugin id="org.eclipse.jdt.debug.nl_de" fragment="true"/>
       <plugin id="org.eclipse.jdt.debug.ui"/>
       <plugin id="org.eclipse.jdt.debug.ui.nl_de" fragment="true"/>
@@ -220,36 +209,21 @@ Frank Weiler
       <plugin id="org.eclipse.search.nl_de" fragment="true"/>
       <plugin id="org.eclipse.swt"/>
       <plugin id="org.eclipse.swt.carbon.macosx" fragment="true"/>
-      <plugin id="org.eclipse.swt.carbon.macosx.nl_de" fragment=""/>
       <plugin id="org.eclipse.swt.cocoa.macosx" fragment="true"/>
-      <plugin id="org.eclipse.swt.cocoa.macosx.nl_de" fragment=""/>
       <plugin id="org.eclipse.swt.cocoa.macosx.x86_64" fragment="true"/>
-      <plugin id="org.eclipse.swt.cocoa.macosx.x86_64.nl_de" fragment=""/>
       <plugin id="org.eclipse.swt.gtk.aix.ppc" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.aix.ppc.nl_de" fragment=""/>
       <plugin id="org.eclipse.swt.gtk.aix.ppc64" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.aix.ppc64.nl_de" fragment=""/>
       <plugin id="org.eclipse.swt.gtk.hpux.ia64_32" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.hpux.ia64_32.nl_de" fragment=""/>
       <plugin id="org.eclipse.swt.gtk.linux.ppc64" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.ppc64.nl_de" fragment=""/>
       <plugin id="org.eclipse.swt.gtk.linux.s390" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.s390.nl_de" fragment=""/>
       <plugin id="org.eclipse.swt.gtk.linux.s390x" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.s390x.nl_de" fragment=""/>
       <plugin id="org.eclipse.swt.gtk.linux.x86" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.x86.nl_de" fragment=""/>
       <plugin id="org.eclipse.swt.gtk.linux.x86_64" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.linux.x86_64.nl_de" fragment=""/>
       <plugin id="org.eclipse.swt.gtk.solaris.sparc" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.solaris.sparc.nl_de" fragment=""/>
       <plugin id="org.eclipse.swt.gtk.solaris.x86" fragment="true"/>
-      <plugin id="org.eclipse.swt.gtk.solaris.x86.nl_de" fragment=""/>
       <plugin id="org.eclipse.swt.nl_de" fragment="true"/>
       <plugin id="org.eclipse.swt.win32.win32.x86" fragment="true"/>
-      <plugin id="org.eclipse.swt.win32.win32.x86.nl_de" fragment=""/>
       <plugin id="org.eclipse.swt.win32.win32.x86_64" fragment="true"/>
-      <plugin id="org.eclipse.swt.win32.win32.x86_64.nl_de" fragment=""/>
       <plugin id="org.eclipse.team.core"/>
       <plugin id="org.eclipse.team.core.nl_de" fragment="true"/>
       <plugin id="org.eclipse.team.ui"/>
@@ -258,9 +232,7 @@ Frank Weiler
       <plugin id="org.eclipse.text.nl_de" fragment="true"/>
       <plugin id="org.eclipse.ui"/>
       <plugin id="org.eclipse.ui.carbon" fragment="true"/>
-      <plugin id="org.eclipse.ui.carbon.nl_de" fragment=""/>
       <plugin id="org.eclipse.ui.cocoa" fragment="true"/>
-      <plugin id="org.eclipse.ui.cocoa.nl_de" fragment=""/>
       <plugin id="org.eclipse.ui.console"/>
       <plugin id="org.eclipse.ui.console.nl_de" fragment="true"/>
       <plugin id="org.eclipse.ui.editors"/>
@@ -279,7 +251,6 @@ Frank Weiler
       <plugin id="org.eclipse.ui.views.properties.tabbed"/>
       <plugin id="org.eclipse.ui.views.properties.tabbed.nl_de" fragment="true"/>
       <plugin id="org.eclipse.ui.win32" fragment="true"/>
-      <plugin id="org.eclipse.ui.win32.nl_de" fragment=""/>
       <plugin id="org.eclipse.ui.workbench"/>
       <plugin id="org.eclipse.ui.workbench.nl_de" fragment="true"/>
       <plugin id="org.eclipse.ui.workbench.texteditor"/>
