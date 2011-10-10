@@ -73,6 +73,10 @@ public class PCCondition extends PCObject {
 	public static String getTypename() {
 		return TYPENAME;
 	}
+	
+	public static PCCondition getNull() {
+		return new PCCondition();
+	}
 
 	@Override
 	protected void runDelayedCommands() {

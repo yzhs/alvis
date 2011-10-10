@@ -145,6 +145,10 @@ public class PCThread extends PCObject implements Runnable {
 	public void setCurrentLine(PCInteger currentLine) {
 		this.currentLine = currentLine;
 	}
+	
+	public static PCThread getNull() {
+		return new PCThread();
+	}
 
 	@Override
 	protected void runDelayedCommands() {

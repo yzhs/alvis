@@ -69,6 +69,10 @@ public class PCBuffer extends PCObject {
 		return TYPENAME;
 	}
 	
+	public static PCBuffer getNull() {
+		return new PCBuffer();
+	}
+	
 	public boolean isGraphical(GraphicalRepresentationBuffer b) {
 		for (GraphicalRepresentation gr : this.allGr) {
 			if (gr == b) {

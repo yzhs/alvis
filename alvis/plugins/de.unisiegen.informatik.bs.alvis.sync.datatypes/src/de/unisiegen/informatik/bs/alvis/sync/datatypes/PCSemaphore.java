@@ -70,6 +70,10 @@ public class PCSemaphore extends PCObject {
 		return TYPENAME;
 	}
 	
+	public static PCSemaphore getNull() {
+		return new PCSemaphore();
+	}
+	
 	public boolean isGraphical(GraphicalRepresentationSemaphore s) {
 		for (GraphicalRepresentation gr : this.allGr) {
 			if (gr == s) {

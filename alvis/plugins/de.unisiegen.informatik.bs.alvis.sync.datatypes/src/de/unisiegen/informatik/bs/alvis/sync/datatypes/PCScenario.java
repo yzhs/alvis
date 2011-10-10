@@ -35,6 +35,8 @@ public class PCScenario extends PCObject {
 	private int strategy;
 
 	private boolean deadlocked;
+	
+	private PCString run;
 
 	public PCScenario() {
 		threads = new PCList<PCThread>();
@@ -49,6 +51,7 @@ public class PCScenario extends PCObject {
 		rndGen = new Random(new Date().getTime());
 		currentThread = 0;
 		deadlocked = false;
+		run = new PCString("");
 	}
 
 	public PCScenario(PCList<PCThread> threads, PCList<PCSemaphore> semas,
@@ -76,6 +79,13 @@ public class PCScenario extends PCObject {
 			ArrayList<GraphicalRepresentationSemaphore> semaphores,
 			ArrayList<GraphicalRepresentationCondition> conditions,
 			GraphicalRepresentationBuffer buffer) {
+		this.threads = new PCList<PCThread>();
+		this.threadsRunnable = new PCList<PCThread>();
+		this.threadsBlocked = new PCList<PCThread>();
+		this.semaphores = new PCList<PCSemaphore>();
+		this.integers = new PCList<PCInteger>();
+		this.booleans = new PCList<PCBoolean>();
+		this.conditions = new PCList<PCCondition>();
 		for (GraphicalRepresentationThread grt : threads) {
 			PCThread t = new PCThread(grt.getName(), grt);
 			this.threads.add(t);
@@ -209,11 +219,11 @@ public class PCScenario extends PCObject {
 		return TYPENAME;
 	}
 
-	public PCList<PCThread> getThreads() {
+	public PCList<PCThread> _get_Threads_() {
 		return threads;
 	}
 
-	public void setThreads(PCList<PCThread> threads) {
+	public void _set_Threads_(PCList<PCThread> threads) {
 		this.threads = threads;
 	}
 
@@ -233,51 +243,35 @@ public class PCScenario extends PCObject {
 		this.threadsBlocked = threadsBlocked;
 	}
 
-	public PCList<PCSemaphore> getSemaphores() {
+	public PCList<PCSemaphore> _get_Semaphores_() {
 		return semaphores;
 	}
 
-	public void setSemaphores(PCList<PCSemaphore> semas) {
+	public void _set_Semaphores_(PCList<PCSemaphore> semas) {
 		this.semaphores = semas;
 	}
 
-	public PCList<PCInteger> getInts() {
-		return integers;
-	}
-
-	public void setInts(PCList<PCInteger> ints) {
-		this.integers = ints;
-	}
-
-	public PCList<PCBoolean> getBools() {
-		return booleans;
-	}
-
-	public void setBools(PCList<PCBoolean> bools) {
-		this.booleans = bools;
-	}
-
-	public PCList<PCCondition> getConditions() {
+	public PCList<PCCondition> _get_Conditions_() {
 		return conditions;
 	}
 
-	public void setConditions(PCList<PCCondition> conds) {
+	public void _set_Conditions_(PCList<PCCondition> conds) {
 		this.conditions = conds;
 	}
 
-	public PCBuffer getBuffer() {
+	public PCBuffer _get_Buffer_() {
 		return buffer;
 	}
 
-	public void setBuffer(PCBuffer buffer) {
+	public void _set_Buffer_(PCBuffer buffer) {
 		this.buffer = buffer;
 	}
 
-	public PCString getOutput() {
+	public PCString _get_Output_() {
 		return output;
 	}
 
-	public void setOutput(PCString output) {
+	public void _set_Output_(PCString output) {
 		this.output = output;
 	}
 
@@ -311,6 +305,30 @@ public class PCScenario extends PCObject {
 
 	public void setDeadlocked(boolean deadlocked) {
 		this.deadlocked = deadlocked;
+	}
+	
+	public PCList<PCInteger> _get_Integers_() {
+		return integers;
+	}
+
+	public void _set_Integers_(PCList<PCInteger> integers) {
+		this.integers = integers;
+	}
+
+	public PCList<PCBoolean> _get_Booleans_() {
+		return booleans;
+	}
+
+	public void _set_Booleans_(PCList<PCBoolean> booleans) {
+		this.booleans = booleans;
+	}
+
+	public PCString _get_Run_() {
+		return run;
+	}
+
+	public void _set_Run_(PCString run) {
+		this.run = run;
 	}
 
 	@Override
