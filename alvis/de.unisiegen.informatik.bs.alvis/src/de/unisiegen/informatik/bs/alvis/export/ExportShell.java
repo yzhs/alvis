@@ -53,7 +53,8 @@ public class ExportShell extends Shell {
 
 	private final ArrayList<Button> checkButtons;
 	private ArrayList<Image> images;
-	private ArrayList<StyledText> sourceCode;
+	private ArrayList<Integer> sourceCodeLines;
+	private ArrayList<StyledText> sourceCodes;
 	private final Color grey, blue;
 	private Button bCheckAll, bCheckRange;
 	private Text edit;
@@ -74,10 +75,16 @@ public class ExportShell extends Shell {
 	 *            the source code parts which cause the change in the example,
 	 *            each source code part must belong to the according image, i.e.
 	 *            sourceCodeParts.get(i) fits to imgs.get(i)
+	 * @param sourceCodeLineIndices
+	 *            the source code line numbers which cause the change in the
+	 *            example, each source code line number must belong to the
+	 *            according image, i.e. sourceCodeLineIndices.get(i) fits to
+	 *            imgs.get(i)
 	 */
 	@SuppressWarnings("unchecked")
 	public ExportShell(Display display, ArrayList<Image> imgs,
-			ArrayList<StyledText> sourceCodeParts) {
+			ArrayList<StyledText> sourceCodeParts,
+			ArrayList<Integer> sourceCodeLineIndices) {
 
 		super(display);
 
@@ -85,7 +92,8 @@ public class ExportShell extends Shell {
 		int maxPreviewHeight = (maxPreviewWidth * 7) / 10;
 
 		images = (ArrayList<Image>) imgs.clone();
-		sourceCode = (ArrayList<StyledText>) sourceCodeParts.clone();
+		sourceCodeLines = (ArrayList<Integer>) sourceCodeLineIndices.clone();
+		sourceCodes = (ArrayList<StyledText>) sourceCodeParts.clone();
 		checkButtons = new ArrayList<Button>();
 
 		grey = new Color(null, new RGB(240, 240, 240));
@@ -253,7 +261,8 @@ public class ExportShell extends Shell {
 				for (int i = checkButtons.size() - 1; i >= 0; i--) {
 					if (!checkButtons.get(i).getSelection()) {
 						images.remove(i);
-						sourceCode.remove(i);
+						sourceCodeLines.remove(i);
+						sourceCodes.remove(i);
 					}
 				}
 				dispose();
@@ -341,12 +350,12 @@ public class ExportShell extends Shell {
 				} else if (subSubParts.length == 2) { // with "-"
 					int from = Integer.parseInt(subSubParts[0]);
 					int to = Integer.parseInt(subSubParts[1]);
-					if (from > to){
+					if (from > to) {
 						int tmp = from;
 						from = to;
 						to = tmp;
 					}
-					
+
 					if (from >= 0 && from != to) {
 						for (int index = from; index <= to; index++) {
 							if (!result.contains(index)
@@ -394,11 +403,19 @@ public class ExportShell extends Shell {
 	}
 
 	/**
-	 * @return array list of styled texts according to getWantedImages() which
+	 * @return array list of line indices according to getWantedImages() which
 	 *         shall be exported
 	 */
+	public ArrayList<Integer> getWantedSourceCodeLineIndices() {
+		return sourceCodeLines;
+	}
+
+	/**
+	 * @return array list of source code parts according to getWantedImages()
+	 *         which shall be exported
+	 */
 	public ArrayList<StyledText> getWantedSourceCodeParts() {
-		return sourceCode;
+		return sourceCodes;
 	}
 
 	// TODO remove main method
@@ -439,8 +456,10 @@ public class ExportShell extends Shell {
 		imgs.add(img);
 		imgs.add(img);
 		imgs.add(img);
-		ArrayList<StyledText> sourceCodeParts = new ArrayList<StyledText>();
-		sourceCodeParts.add(null);
-		new ExportShell(d, imgs, sourceCodeParts);
+		ArrayList<Integer> indices = new ArrayList<Integer>();
+		indices.add(1);
+		ArrayList<StyledText> code = new ArrayList<StyledText>();
+		code.add(null);
+		new ExportShell(d, imgs, code, indices);
 	}
 }

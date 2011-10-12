@@ -48,7 +48,7 @@ public class ImageExport {
 
 		try {
 
-			MyFileDialog saveDialog = new MyFileDialog(1);
+			MyFileDialog saveDialog = new MyFileDialog(MyFileDialog.EXPORT_TO_IMAGE);
 			String path = saveDialog.open();
 			int fileEnding = saveDialog.getFileEnding();
 

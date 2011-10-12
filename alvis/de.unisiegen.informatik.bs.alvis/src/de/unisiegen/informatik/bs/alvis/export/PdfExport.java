@@ -60,17 +60,19 @@ import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
  */
 public class PdfExport extends Document {
 
+	private static final int EXPORT_WHOLE_SOURCE_CODE = -1;
 	private static Font titleFont = FontFactory.getFont("Calibri", 32,
 			Font.BOLD);
-	// private static Font catFont = FontFactory.getFont("Calibri", 18,
-	// Font.BOLD);
+	private static Font catFont = FontFactory.getFont("Calibri", 18, Font.BOLD);
 	// private static Font subFont = FontFactory.getFont("Calibri", 16,
 	// Font.BOLD);
 	private static Font smallBold = FontFactory.getFont("Calibri", 12,
 			Font.BOLD);
 
-	private ArrayList<Image> wantedImages;
-	private ArrayList<StyledText> wantedStyledTexts;
+	private ArrayList<StyledText> styledTexts, wantedStyledTexts;
+	private ArrayList<Integer> sourceCodeLineIndices,
+			wantedSourceCodeLineIndices;
+	private ArrayList<Image> images, wantedImages;
 
 	// private Anchor anchor;
 	// private Chapter chapter;
@@ -95,8 +97,9 @@ public class PdfExport extends Document {
 			return;
 		}
 
-		final ArrayList<Image> images = new ArrayList<Image>();
-		final ArrayList<StyledText> sourceCodeParts = new ArrayList<StyledText>();
+		images = new ArrayList<Image>();
+		sourceCodeLineIndices = new ArrayList<Integer>();
+		styledTexts = new ArrayList<StyledText>();
 
 		if (exportItem.isRun()) { // export run
 			VirtualMachine vm = VirtualMachine.getInstance();
@@ -105,11 +108,11 @@ public class PdfExport extends Document {
 				@Override
 				public void onBreakPoint(int BreakPointNumber) {
 					Image image = exportItem.getImage();
-					StyledText code = Activator.getDefault()
-							.getActiveRunAlgorithm().getStyledText();
 					if (image != null) {
 						images.add(image);
-						sourceCodeParts.add(code);
+						styledTexts.add(Activator.getDefault()
+								.getActiveRunAlgorithm().getStyledText());
+						sourceCodeLineIndices.add(BreakPointNumber);
 					}
 					VirtualMachine.getInstance().stepAlgoForward();
 				}
@@ -121,7 +124,8 @@ public class PdfExport extends Document {
 		}
 
 		try {
-			MyFileDialog saveDialog = new MyFileDialog(0);
+			MyFileDialog saveDialog = new MyFileDialog(
+					MyFileDialog.EXPORT_TO_PDF);
 			String path = saveDialog.open();
 			if (path == null)
 				return; // file chooser canceled
@@ -135,14 +139,16 @@ public class PdfExport extends Document {
 
 				StyledText sourceCode = (StyledText) exportItem.getSourceCode();
 				if (sourceCode != null) {
-					sourceCodeParts.add(sourceCode);
+					styledTexts.add(sourceCode);
 				}
-			} else { // export run, saving images taken earlier
+			} else { // export run, saving images which were taken earlier
 
-//				while(VirtualMachine.getInstance().runningThreads());
+				// while(VirtualMachine.getInstance().runningThreads());
 				ExportShell exportShell = new ExportShell(Display.getDefault(),
-						images, sourceCodeParts);
+						images, styledTexts, sourceCodeLineIndices);
 				wantedImages = exportShell.getWantedImages();
+				wantedSourceCodeLineIndices = exportShell
+						.getWantedSourceCodeLineIndices();
 				wantedStyledTexts = exportShell.getWantedSourceCodeParts();
 
 				// Activator.getDefault().getWorkbench().getDisplay()
@@ -165,8 +171,8 @@ public class PdfExport extends Document {
 			addTitle();
 
 			if (!exportItem.isRun()) { // add editor content to pdf
-				if (!sourceCodeParts.isEmpty()) {
-					paragraph = toParagraph(sourceCodeParts.get(0));
+				if (!styledTexts.isEmpty()) {
+					paragraph = toParagraph(styledTexts.get(0));
 					add(paragraph);
 				}
 				if (!images.isEmpty()) {
@@ -174,12 +180,28 @@ public class PdfExport extends Document {
 					add(paragraph);
 				}
 			} else { // add run content to pdf
+				
+				paragraph = new Paragraph();
+				paragraph.setFont(catFont);
+				addEmptyLine(paragraph, 2);
+				paragraph.add(Messages.pdfExportSourceCode + ":");
+				add(paragraph);
+				StyledText completeCodeOfThisRun = Activator.getDefault()
+						.getActiveRunAlgorithm().getStyledText();
+				paragraph = toParagraph(completeCodeOfThisRun);
+				add(paragraph);
+				newPage();
+				
 				for (int i = 0; i < wantedImages.size(); i++) {
 					try {
-						paragraph = toParagraph(wantedStyledTexts.get(i));
-						add(paragraph);
+						// adding the image first, then the image:
 						paragraph = toParagraph(wantedImages.get(i));
 						add(paragraph);
+						paragraph = toParagraph(wantedStyledTexts.get(i),
+								wantedSourceCodeLineIndices.get(i));
+						add(paragraph);
+						newPage();
+
 					} catch (DocumentException e) {
 						e.printStackTrace();
 					}
@@ -261,6 +283,53 @@ public class PdfExport extends Document {
 		if (content != null) {
 			content = indentCode(content); // rückt den Code ein
 
+			List<Element> bodyText;
+			StyleSheet styles = new StyleSheet();
+			styles.loadTagStyle("ol", "leading", "16,0");
+			try {
+				bodyText = HTMLWorker.parseToList(new StringReader(content),
+						styles);
+
+				paragraph.setFont(FontFactory.getFont("Courier", 10,
+						Font.NORMAL));
+				for (Element elem : bodyText) {
+					paragraph.add(elem);
+				}
+			} catch (IOException e) {
+				paragraph.add(Messages.noSourceCodeAdded);
+			}
+		}
+
+		return paragraph;
+
+	}
+
+	/**
+	 * adds one line of organized, structured, highlighted source code to new
+	 * paragraph and returns it
+	 * 
+	 * @author Sebastian Schmitz & Frank Weiler
+	 * @param sourceCode
+	 *            the source code as string including html tags for highlighting
+	 *            etc
+	 * @param wantedLineIndex
+	 *            the wanted line number
+	 * @return a paragraph including the source code line
+	 * @throws DocumentException
+	 *             will be thrown when new paragraph could not have been added
+	 */
+	private Paragraph toParagraph(StyledText sourceCode, int wantedLineIndex)
+			throws DocumentException {
+		if (sourceCode == null)
+			return null;
+		if (wantedLineIndex < 0 || wantedLineIndex >= sourceCode.getLineCount())
+			return null;
+
+		String content = highlightStyleTextinHTML(sourceCode, wantedLineIndex);
+
+		Paragraph paragraph = new Paragraph();
+
+		if (content != null) {
 			List<Element> bodyText;
 			StyleSheet styles = new StyleSheet();
 			styles.loadTagStyle("ol", "leading", "16,0");
@@ -438,9 +507,28 @@ public class PdfExport extends Document {
 	 *         containing a file with ".algo"-ending and returns it as String if
 	 *         you use this, checking whether the returned String is null is
 	 *         advised!
+	 * @param style
+	 *            the styled text to highlight
 	 * @return content of the editor
 	 */
 	private String highlightStyleTextinHTML(StyledText style) {
+		return highlightStyleTextinHTML(style, EXPORT_WHOLE_SOURCE_CODE);
+	}
+
+	/**
+	 * @author Sebastian Schmitz this function grabs the content from the editor
+	 *         containing a file with ".algo"-ending and returns it as String if
+	 *         you use this, checking whether the returned String is null is
+	 *         advised!
+	 * @param style
+	 *            the styled text to highlight
+	 * @param wantedLineIndex
+	 *            the wanted line number of the styled text to be highlighted,
+	 *            '-1' if whole styled text is wanted
+	 * @return content of the editor
+	 */
+	private String highlightStyleTextinHTML(StyledText style,
+			int wantedLineIndex) {
 		if (style == null) {
 			info("The style could not be grabbed from the Editor");
 			return null;
@@ -453,6 +541,14 @@ public class PdfExport extends Document {
 		// info("The XTextEditor could not be fetched");
 		// }
 
+		if (wantedLineIndex != EXPORT_WHOLE_SOURCE_CODE) {
+			String wantedRow = style.getLine(wantedLineIndex);
+
+			// this returns wanted line of source code, not highlighted
+			// TODO for alvis 2.0: highlight it!
+			return wantedRow;
+		}
+
 		RGB rgb;
 		RGB black = new RGB(0, 0, 0);
 		String text = style.getText(); // the complete text grabbed from the
@@ -461,8 +557,22 @@ public class PdfExport extends Document {
 													// styles of each part
 													// of the text
 
+		// int start;// start at 0 if whole text shall be highlighted, or at
+		// // wantedLineIndex if only this row shall be highlighted
+		// int length;// end at range.length if whole text shall be highlighted
+		// or
+		// // at wantedLineIndex+1 if only this row shall be
+		// // highlighted
+		// if (wantedLineIndex == -1) {
+		// start = 0;
+		// length = range.length;
+		// } else {
+		// start = wantedLineIndex;
+		// length = start + 1;
+		// }
 		for (StyleRange ran : range) { // cycle through these ranges and
 										// style them using HTML
+
 			String word = "";
 			for (int i = ran.start; i < ran.start + ran.length; i++) {
 				if (text.charAt(i) == '<') // Replace "<" and ">" otherwise

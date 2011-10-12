@@ -134,6 +134,7 @@ public class Messages extends NLS {
 	public static String exportShellChooseImages;
 	public static String exportShellSelectAll;
 	public static String exportShellSelectRange;
+	public static String pdfExportSourceCode;
 	
 	
 	static {

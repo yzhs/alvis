@@ -37,6 +37,15 @@ import de.unisiegen.informatik.bs.alvis.editors.Messages;
  */
 public class MyFileDialog extends FileDialog {
 
+	/**
+	 * value = 0
+	 */
+	public static final int EXPORT_TO_PDF = 0;
+	/**
+	 * value = 1
+	 */
+	public static final int EXPORT_TO_IMAGE = 1;
+	
 	private int fileEnding;
 
 	/**
