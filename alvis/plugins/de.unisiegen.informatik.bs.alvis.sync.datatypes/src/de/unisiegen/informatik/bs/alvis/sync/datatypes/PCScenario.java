@@ -108,41 +108,41 @@ public class PCScenario extends PCObject {
 		}
 	}
 
-	public PCThread _getThreadByName_(String name) {
+	public PCThread _getThreadByName_(PCString name) {
 		for (PCThread t : threads) {
-			if (t.getName().equals(name)) {
+			if (t.getName().equals(name.getLiteralValue())) {
 				return t;
 			}
 		}
 		return null;
 	}
 
-	public PCSemaphore _getSemaphoreByName_(String name) {
+	public PCSemaphore _getSemaphoreByName_(PCString name) {
 		for (PCSemaphore s : semaphores) {
-			if (s.getName().equals(name)) {
+			if (s.getName().equals(name.getLiteralValue())) {
 				return s;
 			}
 		}
 		return null;
 	}
 	
-	public PCCondition _getConditionByName_(String name) {
+	public PCCondition _getConditionByName_(PCString name) {
 		for (PCCondition c : conditions) {
-			if (c.getName().equals(name)) {
+			if (c.getName().equals(name.getLiteralValue())) {
 				return c;
 			}
 		}
 		return null;
 	}
 	
-	public PCInteger _getIntegerByName_(String name) {
+	public PCInteger _getIntegerByName_(PCString name) {
 		for (PCInteger i : integers) {
 			
 		}
 		return null;
 	}
 	
-	public PCBoolean _getBooleanByName_(String name) {
+	public PCBoolean _getBooleanByName_(PCString name) {
 		for (PCBoolean b : booleans) {
 			
 		}
