@@ -36,11 +36,23 @@ public interface GraphicalRepresentationGraph extends GraphicalRepresentation {
 	public ArrayList<GraphicalRepresentationVertex> getVertex();
 
 	/**
+	 * currently unused method to allow manipulation of the complete graph
+	 * object
+	 * 
+	 * if the pseudocode would modify the list of vertices it could be replaced
+	 * by vertToSet
+	 * 
 	 * @param vertToSet
 	 */
 	public void setVertices(ArrayList<GraphicalRepresentationVertex> vertToSet);
 
 	/**
+	 * currently unused method to allow manipulation of the complete graph
+	 * object
+	 * 
+	 * if the pseudocode would modify the list of edges (remove, add) the pc
+	 * graoh could communicate this information by replacing the currently saved
+	 * list of graph with edgeToSet
 	 * 
 	 * @param edgeToSet
 	 */
