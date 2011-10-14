@@ -1357,5 +1357,19 @@ public class GraphEditor extends EditorPart implements PropertyChangeListener,
 	private boolean graphModusIs(int modus) {
 		return pressed == modus;
 	}
+	
+	/**
+	 * undoes last action
+	 */
+	public void undo(){
+		undoAdmin.undo();
+	}
+	
+	/**
+	 * redoes last undone action
+	 */
+	public void redo(){
+		undoAdmin.redo();
+	}
 
 }

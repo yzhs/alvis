@@ -157,7 +157,7 @@ public class AddTreeWindow extends TitleAreaDialog {
 
 	@Override
 	protected Point getInitialSize() {
-		return new Point(400, 350);
+		return new Point(420, 350);
 	}
 
 	@Override

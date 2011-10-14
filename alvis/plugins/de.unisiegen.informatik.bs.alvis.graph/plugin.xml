@@ -74,9 +74,23 @@
             <command
                   commandId="de.unisiegen.informatik.bs.alvis.graph.deleteall"
                   icon="icons/graph/graph_delete_all.png"
-                  label="%command.label.deleteall"
+                  label="%command.name.deleteallteall"
                   style="push"
                   tooltip="%command.tooltip.deleteall">
+            </command>
+            <command
+                  commandId="de.unisiegen.informatik.bs.alvis.graph.commands.undo"
+                  icon="icons/graph/graph_undo.png"
+                  label="%command.label.undo"
+                  style="push"
+                  tooltip="%command.label.undo">
+            </command>
+            <command
+                  commandId="de.unisiegen.informatik.bs.alvis.graph.commands.redo"
+                  icon="icons/graph/graph_redo.png"
+                  label="%command.label.redo"
+                  style="push"
+                  tooltip="%command.label.redo">
             </command>
          </toolbar>
       </menuContribution>
@@ -139,6 +153,14 @@
       <command
             id="de.unisiegen.informatik.bs.alvis.graph.commands.fitToPage"
             name="FitToPage">
+      </command>
+      <command
+            id="de.unisiegen.informatik.bs.alvis.graph.commands.undo"
+            name="%command.label.undo">
+      </command>
+      <command
+            id="de.unisiegen.informatik.bs.alvis.graph.commands.redo"
+            name="%command.label.redo">
       </command>
    </extension>
    <extension
@@ -254,6 +276,30 @@
       <handler
             class="de.unisiegen.informatik.bs.alvis.graph.handlers.FitToPage"
             commandId="de.unisiegen.informatik.bs.alvis.graph.commands.fitToPage">
+         <enabledWhen>
+            <with
+                  variable="activeEditorId">
+               <equals
+                     value="de.unisiegen.informatik.bs.alvis.graph.grapheditor">
+               </equals>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="de.unisiegen.informatik.bs.alvis.graph.handlers.Undo"
+            commandId="de.unisiegen.informatik.bs.alvis.graph.commands.undo">
+         <enabledWhen>
+            <with
+                  variable="activeEditorId">
+               <equals
+                     value="de.unisiegen.informatik.bs.alvis.graph.grapheditor">
+               </equals>
+            </with>
+         </enabledWhen>
+      </handler>
+      <handler
+            class="de.unisiegen.informatik.bs.alvis.graph.handlers.Redo"
+            commandId="de.unisiegen.informatik.bs.alvis.graph.commands.redo">
          <enabledWhen>
             <with
                   variable="activeEditorId">
