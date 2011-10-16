@@ -184,7 +184,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	}
 
 	/**
-	 * creates and saves new alvis graph connection in allConnections
+	 * creates new alvis graph connection and saves it in allConnections
 	 * 
 	 * @param node1
 	 *            the source node
@@ -196,23 +196,38 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 			AlvisGraphNode node2) {
 
 		if (node1.equals(node2))
-			return null; // no self connection
+			return null; // no connection to the same node supported yet -> TODO
+							// for alvis 2.0
 
 		if (AlvisGraphConnection.wouldContain(node1, node2,
 				admin.getAllConnections()))
-			return null; // no double connections
+			return null; // no double connections supported yet -> TODO for
+							// alvis 2.0
 
 		AlvisGraphConnection result = new AlvisGraphConnection(this,
-				ZestStyles.CONNECTIONS_DOT, node1, node2);
-		result.setLineWidth((getZoomCounter() <= 0) ? 1 : (int) Math.pow(
-				admin.getZoomFactor(), getZoomCounter() + 1));
+				ZestStyles.CONNECTIONS_DOT, node1, node2); // CONNECTIONS_DOT =
+															// normal line, e.g.
+															// CONNECTIONS_DIRECTED
+															// = arrow
+		int zoomCounter = getZoomCounter();
+		int newWidth = 1;
+		if (zoomCounter > 0) {
+			newWidth = (int) Math.pow(admin.getZoomFactor(), zoomCounter + 2);
+		}
+		int fontSize = 4 + (int) (6 * Math.pow(2, zoomCounter));
+		int gcFontSize = Math.min(48, fontSize);
+		Font gcFont = new Font(null, "gc", gcFontSize, 1);
+		
+		result.setLineWidth(newWidth);
+		result.setFont(gcFont);
 		admin.addConnection(result);
 		return result;
 
 	}
 
 	/**
-	 * places nodes
+	 * places nodes: finds circles in graph, then trees, then single nodes and
+	 * puts them apart
 	 */
 	public void placeNodes() {
 		middleFactor = 0;
@@ -412,7 +427,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	}
 
 	/**
-	 * places nodes from aa tree
+	 * places nodes within a tree
 	 * 
 	 * @param depth
 	 *            the current depth, i.e. how deep node is according to root of
@@ -448,7 +463,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 	}
 
 	/**
-	 * resets, e.g. forgets the content of the graph
+	 * resets, i.e. forgets the content of the graph
 	 */
 	public void resetContent() {
 
@@ -892,7 +907,7 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 			gc.setAlvisWeight(weight);
 			one = two;
 		}
-		
+
 		if (!exactWeights) {
 			weight = myRandom(connectionWeight);
 		}
@@ -973,8 +988,9 @@ public class AlvisGraph extends Graph implements GraphicalRepresentationGraph {
 
 		for (AlvisGraphConnection gc : getAllConnections()) {
 			gc.setFont(gcFont);
-			gc.setLineWidth((getZoomCounter() <= 0) ? 1 : (int) Math.pow(
-					admin.getZoomFactor(), getZoomCounter() + 2));
+			int lineWidth = (getZoomCounter() <= 0) ? 1 : (int) Math.pow(
+					admin.getZoomFactor(), getZoomCounter() + 2);
+			gc.setLineWidth(lineWidth);
 		}
 		Animation.run(200);
 		return true;
