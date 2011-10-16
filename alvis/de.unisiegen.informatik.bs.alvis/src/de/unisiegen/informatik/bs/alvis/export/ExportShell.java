@@ -254,7 +254,7 @@ public class ExportShell extends Shell {
 		});
 
 		Button bOk = new Button(this, SWT.PUSH);
-		bOk.setText(Messages.exportShellOk);
+		bOk.setText("           "+Messages.exportShellOk+"           ");
 		bOk.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseUp(MouseEvent e) {
