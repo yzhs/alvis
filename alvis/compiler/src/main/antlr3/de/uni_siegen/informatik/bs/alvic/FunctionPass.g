@@ -55,6 +55,9 @@ mainFunction
     : ^(FUNC MAIN ^(PARAMS p=formalParams?) {
         checkAndPut(functions, "main", FunctionType.create(null != $p.t ? $p.t : new ArrayList<Type>(), Void), $mainFunction.tree);
     } statement)
+    | ^(FUNC THREAD_MAIN ^(PARAMS p=formalParams?) {
+        checkAndPut(functions, "threadMain", FunctionType.create(null != $p.t ? $p.t : new ArrayList<Type>(), Void), $mainFunction.tree);
+    } statement)
     ;
 
 /**

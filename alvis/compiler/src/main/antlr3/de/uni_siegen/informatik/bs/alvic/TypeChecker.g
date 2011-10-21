@@ -99,6 +99,7 @@ scope Symbols;
     $Symbols::symbols = new HashMap<String, Type>();
 }
     : ^(FUNC MAIN ^(PARAMS formalParams?) { currentFunction = "main"; } block { currentFunction = null; })
+    | ^(FUNC THREAD_MAIN ^(PARAMS formalParams?) { currentFunction = "threadMain"; } block { currentFunction = null; })
     ;
 
 /**

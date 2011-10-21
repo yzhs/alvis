@@ -114,6 +114,35 @@ public class #ALGORITHM_NAME# implements AbstractAlgo {
 mainFunction(params, idents, types, code) ::= <<
 <params : {private <it>;
 }>
+public static final boolean isMasterThread = true;
+public Algorithm() {}
+
+public void setParameters(Map\<String, PCObject\> params) {
+    <idents, types : {id, type | this.<id> = (<type>)params.get("<id>");
+}>
+}
+
+public Map\<String, PCObject\> getParameterTypes() {
+    Map\<String, PCObject\> result = new HashMap\<String, PCObject\>();
+
+    <idents, types : {id, type | result.put("<id>", <type>.getNull());
+}>
+    return result;
+}
+
+public void run() {
+    try {
+        reachedBreakPoint(0);
+        <code>
+    } catch (KillThreadException e) {
+        return;
+    }
+}
+>>
+threadMainFunction(params, idents, types, code) ::= <<
+<params : {private <it>;
+}>
+public static final boolean isMasterThread = false;
 public Algorithm() {}
 
 public void setParameters(Map\<String, PCObject\> params) {

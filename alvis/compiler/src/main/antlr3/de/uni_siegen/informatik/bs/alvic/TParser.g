@@ -85,6 +85,8 @@ functionDefinition
 mainFunction
     : MAIN LPAREN formalParams? RPAREN block[true]
         -> ^(FUNC[$MAIN, "FUNC"] MAIN ^(PARAMS formalParams?) block)
+    | THREAD_MAIN LPAREN formalParams? RPAREN block[true]
+        -> ^(FUNC[$THREAD_MAIN, "FUNC"] THREAD_MAIN ^(PARAMS formalParams?) block)
     ;
 
 /**

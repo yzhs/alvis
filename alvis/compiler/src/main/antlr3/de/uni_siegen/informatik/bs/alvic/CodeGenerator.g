@@ -44,6 +44,8 @@ function options {k = 3;}
 @init { String ret = "void"; }
     : ^(FUNC MAIN ^(PARAMS attributes) s=statement)
             -> mainFunction(params={$attributes.params}, idents={$attributes.idents}, types={$attributes.types}, code={$s.st})
+    | ^(FUNC THREAD_MAIN ^(PARAMS attributes) s=statement)
+            -> threadMainFunction(params={$attributes.params}, idents={$attributes.idents}, types={$attributes.types}, code={$s.st})
     | ^(FUNC ident ^(RET (type {ret=$type.st.toString();})?) ^(PARAMS (p+=param)*) s=statement)
             -> function(name={$ident.st}, type={ret}, params={$p}, code={$s.st})
     ;

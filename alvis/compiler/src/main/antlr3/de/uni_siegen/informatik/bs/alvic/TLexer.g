@@ -192,6 +192,7 @@ SCOPER : 'end'   | '}' ;
 
 // This is used as the name of the main function of an algorithm.
 MAIN: 'main' ;
+THREAD_MAIN: 'threadMain' ;
 
 
 /**
