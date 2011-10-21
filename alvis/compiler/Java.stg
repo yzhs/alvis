@@ -115,7 +115,7 @@ mainFunction(params, idents, types, code) ::= <<
 <params : {private <it>;
 }>
 public static final boolean isMasterThread = true;
-public Algorithm() {}
+public #ALGORITHM_NAME#() {}
 
 public void setParameters(Map\<String, PCObject\> params) {
     <idents, types : {id, type | this.<id> = (<type>)params.get("<id>");
@@ -143,7 +143,7 @@ threadMainFunction(params, idents, types, code) ::= <<
 <params : {private <it>;
 }>
 public static final boolean isMasterThread = false;
-public Algorithm() {}
+public #ALGORITHM_NAME#() {}
 
 public void setParameters(Map\<String, PCObject\> params) {
     <idents, types : {id, type | this.<id> = (<type>)params.get("<id>");

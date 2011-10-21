@@ -108,6 +108,7 @@ public class CompilerAccess {
 	private void loadTranslation() {
 		translateCompletion = new HashMap<String, HashMap<String, String>>();
 		add("MAIN", "main ");
+		add("THREAD_MAIN", "threadMain ");
 		add("IF", "if (");
 		add("FOR", "for ");
 		add("WHILE", "while (");
@@ -212,7 +213,7 @@ public class CompilerAccess {
 		if (null == javaCode)
 			return null;
 
-		return writeJavaCode(getWorkspacePath(algorithmPath), "Algorithm");
+		return writeJavaCode(getWorkspacePath(algorithmPath), algorithmPath.replaceFirst(".*\\/", "").replaceFirst("\\.algo$", ""));
 	}
 
 	/**

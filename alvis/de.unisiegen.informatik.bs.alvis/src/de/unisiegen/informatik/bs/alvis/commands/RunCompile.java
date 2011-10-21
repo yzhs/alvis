@@ -110,17 +110,13 @@ public class RunCompile extends AbstractHandler {
 				}
 				// Kill the extension
 				String fileNameOfTheAlgorithm = javaCode.getCanonicalPath()
-						.replaceAll("\\.java$", ""); //$NON-NLS-1$
+						.replaceAll("\\.java$", "").replaceFirst(".*\\/", ""); //$NON-NLS-1$
 
 				// Get the path where the translated files are saved to.
 				String pathToTheAlgorithm = javaCode.getParentFile()
 						.getCanonicalPath();
 
 				// Register Algorithm to VM
-
-				// TODO Warning, if we change the name of the translated file
-				// this here will crash
-				fileNameOfTheAlgorithm = "Algorithm";
 
 				// setJavaAlgorithmToVM has 2 parameter 1. is the path 2. is the
 				// filename
