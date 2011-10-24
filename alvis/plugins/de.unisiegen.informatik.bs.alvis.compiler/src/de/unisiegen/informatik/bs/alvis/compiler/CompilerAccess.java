@@ -547,28 +547,27 @@ public class CompilerAccess {
 			previousToken = findPreviousToken(line, charPositionInLine);
 		}
 		List<CompletionInformation> availableProposals = new ArrayList<CompletionInformation>();
-
 		if (previousToken == null) {
 			/** current token is first token */
 			List<Token> tokens = compiler.getLexer().getTokens();
 			boolean containsMain = false;
 			for (Token currToken : tokens) {
 				if (getTokenName(currToken.getType()) != null
-						&& getTokenName(currToken.getType()).equals("MAIN")) {
+						&& (getTokenName(currToken.getType()).equals("MAIN") || getTokenName(
+								currToken.getType()).equals("THREAD_MAIN"))) {
 					containsMain = true;
 				}
 			}
 			if (!containsMain) {
-				prefixLength = charPositionInLine;
-				if (tokenToComplete != null) {
-					prefix = tokenToComplete.getText().substring(0,
-							prefixLength);
-					line = tokenToComplete.getLine();
-					charPositionInLine = tokenToComplete
-							.getCharPositionInLine();
+				if ("main".startsWith(prefix)) {
+					availableProposals.add(new CompletionInformation("main",
+							line, charPositionInLine, prefixLength));
+				} 
+				if ("threadMain".startsWith(prefix)) {
+					availableProposals.add(new CompletionInformation(
+							"threadMain", line, charPositionInLine,
+							prefixLength));
 				}
-				availableProposals.add(new CompletionInformation("main", line,
-						charPositionInLine, prefixLength));
 			}
 		} else {
 			/*
