@@ -16,6 +16,10 @@
       [Enter License Description here.]
    </license>
 
+   <includes
+         id="org.eclipselabs.p2.rcpupdate"
+         version="0.0.0"/>
+
    <plugin
          id="org.eclipse.rcp"
          download-size="0"
