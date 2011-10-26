@@ -15,7 +15,7 @@
 \renewcommand{\familydefault}{\sfdefault}
 \usepackage{helvet}
 \makeindex
-\author{Simon Groth}
+\author{Simon Groth, Dominik Dingel}
 \title{Anleitung zur Erstellung eines Plug-ins für Alvis}
 \begin{document}
 
@@ -24,10 +24,11 @@
 \tableofcontents
 
 \section{Einleitung}
-Ein Plug-in dient dazu das Alvis-Programm zur Visualisierung von Algorithmen um weitere Algorithmen-Typen zu erweitern. Die Algorithmen werden von dem Benutzer des Programms definiert. Daher muss das Plug-in die Datentypen, welche für eine bestimmte Algorithmenart benötigt werden liefern. Außerdem die Möglichkeit diese Datentypen zu erstellen und zu visualisieren.
+Alvis, ein Programm zur Visualisierung von Algorithmen, erlaubt dem Benutzer das Anlegen und Ausführen eigener Algorithmen auf vorgegebenen Datentypen. Diese Datentypen werden über Plugins bereitgestellt. So lassen sich dank des Mechanismus verschiedene Algorithmenarten noch nachladen. Im Weiteren soll es dann jetzt darum gehen wie so ein Plugin geschrieben wird.
+
 \section{Vorkenntnisse}
-\begin{list}{-}{Sie sollten über diese Kenntnisse verfügen.}
-\item Entwicklung von Java mit dem Eclipse SDK.
+\begin{list}{-}{Sie sollten über folgende Kenntnisse verfügen.}
+\item Entwicklung von Java mit dem der Eclipse IDE.
 \item Eclipse-RCP und Plug-in Mechanismus
 \footnote{\href{http://www.vogella.de/articles/EclipseRCP/article.html}{http://www.vogella.de/articles/EclipseRCP/article.html}} 
 \item SWT-Kenntnisse

@@ -248,18 +248,21 @@ public class PCList<E extends PCObject> extends PCObject implements SortableColl
 		// TODO Auto-generated method stub
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void sort() {
-		@SuppressWarnings("unchecked")
-		E tmp[] = (E[]) items.toArray();
+		// List.toArray is not working right cause Object is not castable to PCObject...
+		PCObject tmp[] = new PCObject[items.size()];
+		for(int i = 0; i < tmp.length; i++) {
+			tmp[i] = items.get(i);
+		}
 		Arrays.sort(tmp);
 		if (tmp != null) {
 			items = new ArrayList<E>();
 			for (int i = 0; i < tmp.length; i++) {
-				items.add(tmp[i]);
+				items.add((E) tmp[i]);
 			}
 		}
-
 	}
 	
 	@Override
