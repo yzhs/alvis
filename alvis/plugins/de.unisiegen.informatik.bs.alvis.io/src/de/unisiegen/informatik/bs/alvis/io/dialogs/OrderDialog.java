@@ -371,7 +371,7 @@ public class OrderDialog extends TitleAreaDialog {
 
 		Button btnDoNotAsk = new Button(composite, SWT.CHECK);
 		btnDoNotAsk
-				.setToolTipText("Hit this box and for this run Alvis will not bug you anymore with this window.");
+				.setToolTipText(Messages.CheckDialog_DoNotAskAgain_ToolTip);
 		btnDoNotAsk.setLayoutData(new GridData(SWT.RIGHT, SWT.BOTTOM, false,
 				false, 1, 1));
 		btnDoNotAsk.setSelection(!myAsk.getAsk());
@@ -383,7 +383,7 @@ public class OrderDialog extends TitleAreaDialog {
 			}
 
 		});
-		btnDoNotAsk.setText("Do not ask me again.");
+		btnDoNotAsk.setText(Messages.CheckDialog_DoNotAskAgain);
 
 		// Create the TreeItems
 		for (Object orderobj : myOrder) {

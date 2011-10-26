@@ -43,6 +43,7 @@ import de.unisiegen.informatik.bs.alvis.vm.DPListener;
 import de.unisiegen.informatik.bs.alvis.vm.VirtualMachine;
 
 import de.unisiegen.informatik.bs.alvis.io.dialogs.*;
+import de.unisiegen.informatik.bs.alvis.io.logger.Logger;
 
 /* Ein paar Notizen
  * 
@@ -300,6 +301,8 @@ public class Activator extends AbstractUIPlugin {
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
+			Logger.getInstance().log("de.~.Activator", Logger.DEBUG,
+					 e.getMessage());
 			throw new VirtualMachineException(
 					"Adding the algorithm to the Virtual Machine failed.");
 		}

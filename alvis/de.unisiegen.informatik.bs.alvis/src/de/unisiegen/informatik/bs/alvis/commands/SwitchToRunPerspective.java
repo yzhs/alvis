@@ -18,9 +18,11 @@ public class SwitchToRunPerspective extends AbstractHandler {
 		Activator.getDefault().getWorkbench()
 			.showPerspective(RunPerspective.ID, 
 					Activator.getDefault().getWorkbench().getActiveWorkbenchWindow());
-		} catch (WorkbenchException e) {
+		}
+		catch (WorkbenchException e) {
 			e.printStackTrace();
 		}
+		
 		
 		return null;
 	}

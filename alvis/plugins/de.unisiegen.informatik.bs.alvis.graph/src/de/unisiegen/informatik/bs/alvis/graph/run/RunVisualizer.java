@@ -184,9 +184,9 @@ public class RunVisualizer implements IRunVisualizer {
 							allPCVertex, // From
 							result, // To
 							ask, 1, // How much
-							"Choose \"" + bezeichner + "\"", // window title
-							"Choose parameter", // Title
-							"Choose one parameter for \"" + bezeichner + "\""); //
+							Messages.RunVisualizer_Choose1 + bezeichner + "\"", // window title //$NON-NLS-2$
+							Messages.RunVisualizer_Choose2, // Title
+							Messages.RunVisualizer_Choose3 + bezeichner + "\""); // //$NON-NLS-2$
 					getVertex.open();
 					if (ask.getAsk() == false) {
 						Activator.getDefault().getActiveRun()
@@ -220,9 +220,9 @@ public class RunVisualizer implements IRunVisualizer {
 							allPCEdge, // From
 							result, // To
 							ask, 1, // How much
-							"Choose \"" + bezeichner + "\"", // window title
-							"Choose parameter", // Title
-							"Choose one parameter for \"" + bezeichner + "\""); //
+							Messages.RunVisualizer_Choose1 + bezeichner + "\"", // window title //$NON-NLS-2$
+							Messages.RunVisualizer_Choose2, // Title
+							Messages.RunVisualizer_Choose3 + bezeichner + "\""); // //$NON-NLS-2$
 					getEdge.open();
 					if (ask.getAsk() == false) {
 						Activator.getDefault().getActiveRun()

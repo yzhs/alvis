@@ -533,85 +533,85 @@ public class RunEditor extends EditorPart implements IExportItem {
 		Label lblDecideWhat = new Label(grpDecisionPointSettings, SWT.NONE);
 		lblDecideWhat.setText(Messages.RunEditor_59);
 
-		TabItem tbtmBreakPoint = new TabItem(tabFolder, SWT.NONE);
-		tbtmBreakPoint.setText(Messages.RunEditor_60);
+//		TabItem tbtmBreakPoint = new TabItem(tabFolder, SWT.NONE);
+//		tbtmBreakPoint.setText(Messages.RunEditor_60);
 
-		Group grpBreakPoint = new Group(tabFolder, SWT.NONE);
-		tbtmBreakPoint.setControl(grpBreakPoint);
-		grpBreakPoint.setText(Messages.RunEditor_61);
-		grpBreakPoint.setLayout(new GridLayout(2, false));
+//		Group grpBreakPoint = new Group(tabFolder, SWT.NONE);
+//		tbtmBreakPoint.setControl(grpBreakPoint);
+//		grpBreakPoint.setText(Messages.RunEditor_61);
+//		grpBreakPoint.setLayout(new GridLayout(2, false));
+//
+//		Label lblWhatShallHappen = new Label(grpBreakPoint, SWT.NONE);
+//		lblWhatShallHappen.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER,
+//				false, false, 2, 1));
+//		lblWhatShallHappen.setFont(SWTResourceManager.getFont(
+//				"Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
+//		lblWhatShallHappen.setText(Messages.RunEditor_63);
+//
+//		Button btn_breakpoint_stop = new Button(grpBreakPoint, SWT.RADIO);
+//		btn_breakpoint_stop.addSelectionListener(new SelectionAdapter() {
+//			@Override
+//			public void widgetSelected(SelectionEvent e) {
+//				// TODO BREAKPOINT_STOP
+//				myBreakPoint = EBreakPoint.STOP;
+//				myRun.setOnBreakPoint(myBreakPoint);
+//				checkDirty();
+//			}
+//		});
+//		btn_breakpoint_stop.setFont(SWTResourceManager.getFont(
+//				Messages.RunEditor_64, 9, SWT.BOLD));
+//		btn_breakpoint_stop.setText(Messages.RunEditor_65);
+//
+//		Label lblStopOnEvery = new Label(grpBreakPoint, SWT.NONE);
+//		lblStopOnEvery.setText(Messages.RunEditor_66);
+//
+//		Button btn_breakpoint_run = new Button(grpBreakPoint, SWT.RADIO);
+//		btn_breakpoint_run.addSelectionListener(new SelectionAdapter() {
+//			@Override
+//			public void widgetSelected(SelectionEvent e) {
+//				// TODO BREAKPOINT_RUN
+//				myBreakPoint = EBreakPoint.RUN;
+//				myRun.setOnBreakPoint(myBreakPoint);
+//				checkDirty();
+//			}
+//		});
+//		btn_breakpoint_run.setFont(SWTResourceManager.getFont(
+//				"Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
+//		btn_breakpoint_run.setText(Messages.RunEditor_68);
+//
+//		Label lblThroughEvery = new Label(grpBreakPoint, SWT.NONE);
+//		lblThroughEvery.setText(Messages.RunEditor_69);
 
-		Label lblWhatShallHappen = new Label(grpBreakPoint, SWT.NONE);
-		lblWhatShallHappen.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER,
-				false, false, 2, 1));
-		lblWhatShallHappen.setFont(SWTResourceManager.getFont(
-				"Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
-		lblWhatShallHappen.setText(Messages.RunEditor_63);
+//		TabItem tbtmSecurity = new TabItem(tabFolder, SWT.NONE);
+//		tbtmSecurity.setText(Messages.RunEditor_70);
 
-		Button btn_breakpoint_stop = new Button(grpBreakPoint, SWT.RADIO);
-		btn_breakpoint_stop.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				// TODO BREAKPOINT_STOP
-				myBreakPoint = EBreakPoint.STOP;
-				myRun.setOnBreakPoint(myBreakPoint);
-				checkDirty();
-			}
-		});
-		btn_breakpoint_stop.setFont(SWTResourceManager.getFont(
-				Messages.RunEditor_64, 9, SWT.BOLD));
-		btn_breakpoint_stop.setText(Messages.RunEditor_65);
+//		Group grpSecurity = new Group(tabFolder, SWT.NONE);
+//		grpSecurity.setText(Messages.RunEditor_71);
+//		tbtmSecurity.setControl(grpSecurity);
+//		grpSecurity.setLayout(new GridLayout(2, false));
 
-		Label lblStopOnEvery = new Label(grpBreakPoint, SWT.NONE);
-		lblStopOnEvery.setText(Messages.RunEditor_66);
+//		Label lblIfTheAlgorithm = new Label(grpSecurity, SWT.NONE);
+//		lblIfTheAlgorithm.setFont(SWTResourceManager.getFont(
+//				"Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
+//		lblIfTheAlgorithm.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER,
+//				false, false, 2, 1));
+//		lblIfTheAlgorithm.setText(Messages.RunEditor_73);
 
-		Button btn_breakpoint_run = new Button(grpBreakPoint, SWT.RADIO);
-		btn_breakpoint_run.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				// TODO BREAKPOINT_RUN
-				myBreakPoint = EBreakPoint.RUN;
-				myRun.setOnBreakPoint(myBreakPoint);
-				checkDirty();
-			}
-		});
-		btn_breakpoint_run.setFont(SWTResourceManager.getFont(
-				"Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
-		btn_breakpoint_run.setText(Messages.RunEditor_68);
-
-		Label lblThroughEvery = new Label(grpBreakPoint, SWT.NONE);
-		lblThroughEvery.setText(Messages.RunEditor_69);
-
-		TabItem tbtmSecurity = new TabItem(tabFolder, SWT.NONE);
-		tbtmSecurity.setText(Messages.RunEditor_70);
-
-		Group grpSecurity = new Group(tabFolder, SWT.NONE);
-		grpSecurity.setText(Messages.RunEditor_71);
-		tbtmSecurity.setControl(grpSecurity);
-		grpSecurity.setLayout(new GridLayout(2, false));
-
-		Label lblIfTheAlgorithm = new Label(grpSecurity, SWT.NONE);
-		lblIfTheAlgorithm.setFont(SWTResourceManager.getFont(
-				"Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
-		lblIfTheAlgorithm.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER,
-				false, false, 2, 1));
-		lblIfTheAlgorithm.setText(Messages.RunEditor_73);
-
-		Button btnLimitTo = new Button(grpSecurity, SWT.CHECK);
-		btnLimitTo.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				// TODO Limit of Steps
-				myLimitSteps = !myLimitSteps;
-				myRun.setLimitSteps(myLimitSteps);
-				checkDirty();
-			}
-		});
-		btnLimitTo.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
-		btnLimitTo.setText(Messages.RunEditor_75);
-
-		Label lblStepsIn = new Label(grpSecurity, SWT.NONE);
-		lblStepsIn.setText(Messages.RunEditor_76);
+//		Button btnLimitTo = new Button(grpSecurity, SWT.CHECK);
+//		btnLimitTo.addSelectionListener(new SelectionAdapter() {
+//			@Override
+//			public void widgetSelected(SelectionEvent e) {
+//				// TODO Limit of Steps
+//				myLimitSteps = !myLimitSteps;
+//				myRun.setLimitSteps(myLimitSteps);
+//				checkDirty();
+//			}
+//		});
+//		btnLimitTo.setFont(SWTResourceManager.getFont("Segoe UI", 9, SWT.BOLD)); //$NON-NLS-1$
+//		btnLimitTo.setText(Messages.RunEditor_75);
+//
+//		Label lblStepsIn = new Label(grpSecurity, SWT.NONE);
+//		lblStepsIn.setText(Messages.RunEditor_76);
 		xpndtmSettings.setHeight(140);
 
 		ExpandItem xpndtmInformations = new ExpandItem(expandBar, SWT.NONE);
@@ -658,21 +658,21 @@ public class RunEditor extends EditorPart implements IExportItem {
 			btn_decisionpoint_always.setSelection(true);
 			myDecisionPoint = EDecisionPoint.ALWAYS;
 		}
-		if (myRun.getOnBreakPoint().equals(EBreakPoint.STOP)) {
-			btn_breakpoint_stop.setSelection(true);
-			myBreakPoint = EBreakPoint.STOP;
-		}
-		if (myRun.getOnBreakPoint().equals(EBreakPoint.RUN)) {
-			btn_breakpoint_run.setSelection(true);
-			myBreakPoint = EBreakPoint.RUN;
-		}
-		if (myRun.isLimitSteps() == true) {
-			btnLimitTo.setSelection(true);
-			myLimitSteps = true;
-		} else {
-			btnLimitTo.setSelection(false);
-			myLimitSteps = false;
-		}
+//		if (myRun.getOnBreakPoint().equals(EBreakPoint.STOP)) {
+//			btn_breakpoint_stop.setSelection(true);
+//			myBreakPoint = EBreakPoint.STOP;
+//		}
+//		if (myRun.getOnBreakPoint().equals(EBreakPoint.RUN)) {
+//			btn_breakpoint_run.setSelection(true);
+//			myBreakPoint = EBreakPoint.RUN;
+//		}
+//		if (myRun.isLimitSteps() == true) {
+//			btnLimitTo.setSelection(true);
+//			myLimitSteps = true;
+//		} else {
+//			btnLimitTo.setSelection(false);
+//			myLimitSteps = false;
+//		}
 	}
 
 	@Override
