@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
@@ -175,8 +176,14 @@ public class RunVisualizer implements IRunVisualizer {
 				// Return a node that has not already been chosen
 				result.add(allPCVertex.get(randomNumberVertex++));
 			} else {
+				PCVertex[] tmp = new PCVertex[allPCVertex.size()];
+				tmp = (PCVertex[]) allPCVertex.toArray(tmp);
+				Arrays.sort(tmp);
+				allPCVertex = new ArrayList<PCVertex>();
+				for(int i=0; i < tmp.length; i++) {
+					allPCVertex.add(i, tmp[i]);
+				}
 				while(result.isEmpty()){
-					// TODO SORT LIST HERE
 					AskMeAgain ask = new AskMeAgain(true);
 					CheckDialog getVertex = new CheckDialog(myParent.getShell(),
 							allPCVertex, // From
