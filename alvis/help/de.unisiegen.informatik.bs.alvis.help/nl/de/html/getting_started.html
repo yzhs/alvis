@@ -22,26 +22,26 @@ Nun klicken wir doppelt auf algorithm.algo. Es öffnet sich der leere Algorithmu
 <br><br/>
 <pre>
 main(Graph G, Vertex s) begin
-        for Vertex v in G.vertices: begin
-                v.color = "white",
-                v.distance = infty,
-                v.parentId = null,
-        end
-        s.color = "grey";
-        s.distance = 0,
-        Vertex Queue Q,
-        Q.enqueue(s),
-        while ! Q.isEmpty(): begin
-                Vertex u,
-                u = Q.dequeue(),
-                for Vertex v in u.adjacents:
-                        if v.color == "white": begin
-                                v.color = "grey";
-                                v.distance = u.distance + 1,
-                                v.parentId = u,
-                                Q.enqueue(v),
-                        end
-        end
+	for Vertex v in G.vertices: begin
+		v.color = "white",
+		v.distance = infty,
+		v.parentId = null,
+	end
+	s.color = "grey";
+	s.distance = 0,
+	Vertex Queue Q,
+	Q.enqueue(s),
+	while ! Q.isEmpty(): begin
+		Vertex u,
+		u = Q.dequeue(),
+		for Vertex v in u.adjacents:
+			if v.color == "white": begin
+				v.color = "grey";
+				v.distance = u.distance + 1,
+				v.parentId = u,
+				Q.enqueue(v),
+			 end
+	end
 end</pre>
 <br/>
 Wie man sieht, werden alle Schlüsselworte direkt farbig markiert.<br>
